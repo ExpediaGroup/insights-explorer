@@ -1,0 +1,26 @@
+{
+  "name": "@iex/mq",
+  "version": "0.188.0",
+  "description": "Insights Explorer: Message Queue",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf ./dist && rm -f tsconfig.tsbuildinfo",
+    "clean:deep": "rm -rf node_modules && rm -f package-lock.json",
+    "build": "npm run build:tsc",
+    "build:tsc": "tsc --build --incremental",
+    "build:tsc:watch": "tsc --build -w",
+    "-------": "-----------------------------------",
+    "test": "jest --coverage --verbose --detectOpenHandles --passWithNoTests",
+    "test:watch": "npm run test -- --watch",
+    "------": "------------------------------------",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "aws-sdk": "2.1035.0",
+    "sqs-consumer": "5.5.0"
+  }
+}

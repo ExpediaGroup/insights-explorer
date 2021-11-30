@@ -1,0 +1,18 @@
+overwrite: true
+schema: "./packages/backend/schema.gql"
+config:
+  # Prefer undefined over null
+  avoidOptionals: false
+  maybeValue: T
+  preResolveTypes: true
+generates:
+  packages/frontend/src/models/generated/graphql.ts:
+    documents: "./packages/frontend/src/**/!(*.d).{ts,tsx}"
+    plugins:
+      - typescript
+      - typescript-operations
+  packages/frontend/src/introspection.json:
+    plugins:
+      - introspection
+    config:
+      minify: true

@@ -1,0 +1,22 @@
+# Exclude unnecessary files to speed up Docker image building
+.babelrc
+.dockerignore
+.editorconfig
+.eslintrc
+.git
+.npmignore
+.vscode
+**/Dockerfile
+gulpfile.js
+Makefile
+npm-debug.log
+README.md
+
+**/node_modules
+
+# Exclude packages that aren't also dependencies
+./packages/backend
+./packages/convertbot
+./packages/frontend
+
+!./packages/backend/schema.gql

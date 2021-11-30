@@ -1,0 +1,715 @@
+{
+    "@chakra-ui/react@1.6.5": {
+        "licenses": "MIT",
+        "repository": "https://github.com/chakra-ui/chakra-ui",
+        "licenseUrl": "https://github.com/chakra-ui/chakra-ui",
+        "parents": "@iex/frontend"
+    },
+    "@chakra-ui/theme-tools@1.1.8": {
+        "licenses": "MIT",
+        "repository": "https://github.com/chakra-ui/chakra-ui",
+        "licenseUrl": "https://github.com/chakra-ui/chakra-ui",
+        "parents": "@iex/frontend"
+    },
+    "@chakra-ui/theme@1.9.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/chakra-ui/chakra-ui",
+        "licenseUrl": "https://github.com/chakra-ui/chakra-ui",
+        "parents": "@iex/frontend"
+    },
+    "@elastic/elasticsearch@7.13.0": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/elastic/elasticsearch-js",
+        "licenseFile": "node_modules/@elastic/elasticsearch/LICENSE",
+        "licenseUrl": "https://github.com/elastic/elasticsearch-js/raw/master/LICENSE",
+        "parents": "@iex/models"
+    },
+    "@emotion/react@11.4.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/emotion-js/emotion/tree/main/packages/react",
+        "licenseFile": "node_modules/@emotion/react/LICENSE",
+        "licenseUrl": "https://github.com/emotion-js/emotion/tree/main/packages/react/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "@emotion/styled@11.3.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/emotion-js/emotion/tree/main/packages/styled",
+        "licenseFile": "node_modules/@emotion/styled/LICENSE",
+        "licenseUrl": "https://github.com/emotion-js/emotion/tree/main/packages/styled/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "@matejmazur/react-katex@3.1.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/MatejBransky/react-katex",
+        "licenseFile": "node_modules/@matejmazur/react-katex/LICENSE",
+        "licenseUrl": "https://github.com/MatejBransky/react-katex/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "@octokit/graphql@4.6.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/octokit/graphql.js",
+        "licenseFile": "node_modules/@octokit/graphql/LICENSE",
+        "licenseUrl": "https://github.com/octokit/graphql.js/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "@octokit/rest@18.9.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/octokit/rest.js",
+        "licenseFile": "node_modules/@octokit/rest/LICENSE",
+        "licenseUrl": "https://github.com/octokit/rest.js/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "@okta/okta-react@3.0.8": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/okta/okta-react",
+        "licenseFile": "node_modules/@okta/okta-react/LICENSE",
+        "licenseUrl": "https://github.com/okta/okta-react/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "@reduxjs/toolkit@1.6.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/reduxjs/redux-toolkit",
+        "licenseFile": "node_modules/@reduxjs/toolkit/LICENSE",
+        "licenseUrl": "https://github.com/reduxjs/redux-toolkit/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "@slack/bolt@3.5.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/slackapi/bolt",
+        "licenseFile": "node_modules/@slack/bolt/LICENSE",
+        "licenseUrl": "https://github.com/slackapi/bolt/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "@types/turndown@5.0.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+        "licenseFile": "node_modules/@types/turndown/LICENSE",
+        "licenseUrl": "https://github.com/DefinitelyTyped/DefinitelyTyped/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "@urql/core@2.3.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/FormidableLabs/urql",
+        "licenseFile": "node_modules/@urql/core/LICENSE",
+        "licenseUrl": "https://github.com/FormidableLabs/urql/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "@urql/exchange-graphcache@4.3.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/FormidableLabs/urql",
+        "licenseFile": "node_modules/@urql/exchange-graphcache/LICENSE",
+        "licenseUrl": "https://github.com/FormidableLabs/urql/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "@urql/exchange-multipart-fetch@0.1.12": {
+        "licenses": "MIT",
+        "repository": "https://github.com/FormidableLabs/urql",
+        "licenseFile": "node_modules/@urql/exchange-multipart-fetch/LICENSE",
+        "licenseUrl": "https://github.com/FormidableLabs/urql/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "@urql/exchange-retry@0.3.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/FormidableLabs/urql",
+        "licenseFile": "node_modules/@urql/exchange-retry/LICENSE",
+        "licenseUrl": "https://github.com/FormidableLabs/urql/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "ace-builds@1.4.12": {
+        "licenses": "BSD-3-Clause",
+        "repository": "https://github.com/ajaxorg/ace-builds",
+        "licenseFile": "node_modules/ace-builds/LICENSE",
+        "licenseUrl": "https://github.com/ajaxorg/ace-builds/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "apollo-server-express@2.25.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/apollographql/apollo-server",
+        "licenseFile": "node_modules/apollo-server-express/LICENSE",
+        "licenseUrl": "https://github.com/apollographql/apollo-server/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "aws-sdk@2.960.0": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/aws/aws-sdk-js",
+        "licenseFile": "node_modules/aws-sdk/LICENSE.txt",
+        "licenseUrl": "https://github.com/aws/aws-sdk-js/raw/master/LICENSE.txt",
+        "parents": "@iex/shared"
+    },
+    "better-queue@3.8.10": {
+        "licenses": "MIT",
+        "repository": "https://github.com/diamondio/better-queue",
+        "licenseFile": "node_modules/better-queue/LICENSE",
+        "licenseUrl": "https://github.com/diamondio/better-queue/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "chardet@1.3.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/runk/node-chardet",
+        "licenseFile": "node_modules/chardet/LICENSE",
+        "licenseUrl": "https://github.com/runk/node-chardet/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "chart.xkcd-react@0.0.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/obiwankenoobi/chart.xkcd-react",
+        "licenseFile": "node_modules/chart.xkcd-react/LICENCE",
+        "licenseUrl": "https://github.com/obiwankenoobi/chart.xkcd-react/raw/master/LICENCE",
+        "parents": "@iex/frontend"
+    },
+    "chart.xkcd@1.1.13": {
+        "licenses": "MIT",
+        "repository": "https://github.com/timqian/chart.xkcd",
+        "licenseFile": "node_modules/chart.xkcd/LICENSE",
+        "licenseUrl": "https://github.com/timqian/chart.xkcd/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "class-validator@0.13.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/typestack/class-validator",
+        "licenseFile": "node_modules/class-validator/LICENSE",
+        "licenseUrl": "https://github.com/typestack/class-validator/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "cookie-parser@1.4.5": {
+        "licenses": "MIT",
+        "repository": "https://github.com/expressjs/cookie-parser",
+        "licenseFile": "node_modules/cookie-parser/LICENSE",
+        "licenseUrl": "https://github.com/expressjs/cookie-parser/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "cors@2.8.5": {
+        "licenses": "MIT",
+        "repository": "https://github.com/expressjs/cors",
+        "licenseFile": "node_modules/cors/LICENSE",
+        "licenseUrl": "https://github.com/expressjs/cors/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "dataloader@2.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/graphql/dataloader",
+        "licenseFile": "node_modules/dataloader/LICENSE",
+        "licenseUrl": "https://github.com/graphql/dataloader/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "deep-object-diff@1.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/mattphillips/deep-object-diff",
+        "licenseFile": "node_modules/deep-object-diff/LICENSE",
+        "licenseUrl": "https://github.com/mattphillips/deep-object-diff/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "dotenv-flow@3.2.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/kerimdzhanov/dotenv-flow",
+        "licenseFile": "node_modules/dotenv-flow/LICENSE",
+        "licenseUrl": "https://github.com/kerimdzhanov/dotenv-flow/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "express-async-errors@3.1.1": {
+        "licenses": "ISC",
+        "repository": "https://github.com/davidbanham/express-async-errors",
+        "licenseUrl": "https://github.com/davidbanham/express-async-errors",
+        "parents": "@iex/convertbot"
+    },
+    "express@4.17.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/expressjs/express",
+        "licenseFile": "node_modules/express/LICENSE",
+        "licenseUrl": "https://github.com/expressjs/express/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "file-type@16.5.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/sindresorhus/file-type",
+        "licenseFile": "node_modules/file-type/license",
+        "licenseUrl": "https://github.com/sindresorhus/file-type/raw/master/license",
+        "parents": "@iex/backend"
+    },
+    "framer-motion@4.1.17": {
+        "licenses": "MIT",
+        "repository": "https://github.com/framer/motion",
+        "licenseFile": "node_modules/framer-motion/LICENSE.md",
+        "licenseUrl": "https://github.com/framer/motion/raw/master/LICENSE.md",
+        "parents": "@iex/frontend"
+    },
+    "fs-extra@9.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jprichardson/node-fs-extra",
+        "licenseFile": "node_modules/fs-extra/LICENSE",
+        "licenseUrl": "https://github.com/jprichardson/node-fs-extra/raw/master/LICENSE",
+        "parents": "@iex/shared"
+    },
+    "graphql-parse-resolve-info@4.12.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/graphile/graphile-engine",
+        "licenseFile": "node_modules/graphql-parse-resolve-info/LICENSE.md",
+        "licenseUrl": "https://github.com/graphile/graphile-engine/raw/master/LICENSE.md",
+        "parents": "@iex/backend"
+    },
+    "graphql-type-json@0.3.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/taion/graphql-type-json",
+        "licenseFile": "node_modules/graphql-type-json/LICENSE",
+        "licenseUrl": "https://github.com/taion/graphql-type-json/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "graphql-upload@11.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jaydenseric/graphql-upload",
+        "licenseUrl": "https://github.com/jaydenseric/graphql-upload",
+        "parents": "@iex/backend"
+    },
+    "graphql@15.5.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/graphql/graphql-js",
+        "licenseFile": "node_modules/graphql/LICENSE",
+        "licenseUrl": "https://github.com/graphql/graphql-js/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "helmet@4.6.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/helmetjs/helmet",
+        "licenseFile": "node_modules/helmet/LICENSE",
+        "licenseUrl": "https://github.com/helmetjs/helmet/raw/master/LICENSE",
+        "parents": "@iex/convertbot"
+    },
+    "history@5.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/ReactTraining/history",
+        "licenseFile": "node_modules/history/LICENSE",
+        "licenseUrl": "https://github.com/ReactTraining/history/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "http-status-codes@2.1.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/prettymuchbryce/node-http-status",
+        "licenseFile": "node_modules/http-status-codes/LICENSE",
+        "licenseUrl": "https://github.com/prettymuchbryce/node-http-status/raw/master/LICENSE",
+        "parents": "@iex/convertbot"
+    },
+    "immer@9.0.5": {
+        "licenses": "MIT",
+        "repository": "https://github.com/immerjs/immer",
+        "licenseFile": "node_modules/immer/LICENSE",
+        "licenseUrl": "https://github.com/immerjs/immer/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "isomorphic-git@1.9.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/isomorphic-git/isomorphic-git",
+        "licenseFile": "node_modules/isomorphic-git/LICENSE.md",
+        "licenseUrl": "https://github.com/isomorphic-git/isomorphic-git/raw/master/LICENSE.md",
+        "parents": "@iex/backend"
+    },
+    "katex@0.13.13": {
+        "licenses": "MIT",
+        "repository": "https://github.com/KaTeX/KaTeX",
+        "licenseFile": "node_modules/katex/LICENSE",
+        "licenseUrl": "https://github.com/KaTeX/KaTeX/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "knex-migrate-sql-file@1.0.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/ozum/knex-migrate-sql-file",
+        "licenseFile": "node_modules/knex-migrate-sql-file/LICENSE",
+        "licenseUrl": "https://github.com/ozum/knex-migrate-sql-file/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "knex@0.21.19": {
+        "licenses": "MIT",
+        "repository": "https://github.com/knex/knex",
+        "licenseFile": "node_modules/knex/LICENSE",
+        "licenseUrl": "https://github.com/knex/knex/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "luxon@1.28.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/moment/luxon",
+        "licenseFile": "node_modules/luxon/license.md",
+        "licenseUrl": "https://github.com/moment/luxon/raw/master/license.md",
+        "parents": "@iex/frontend"
+    },
+    "module-alias@2.2.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/ilearnio/module-alias",
+        "licenseFile": "node_modules/module-alias/LICENSE",
+        "licenseUrl": "https://github.com/ilearnio/module-alias/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "morgan@1.10.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/expressjs/morgan",
+        "licenseFile": "node_modules/morgan/LICENSE",
+        "licenseUrl": "https://github.com/expressjs/morgan/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "nanoid@3.1.23": {
+        "licenses": "MIT",
+        "repository": "https://github.com/ai/nanoid",
+        "licenseFile": "node_modules/nanoid/LICENSE",
+        "licenseUrl": "https://github.com/ai/nanoid/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "node-cache@5.1.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/node-cache/node-cache",
+        "licenseFile": "node_modules/node-cache/LICENSE",
+        "licenseUrl": "https://github.com/node-cache/node-cache/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "node-emoji@1.10.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/omnidan/node-emoji",
+        "licenseFile": "node_modules/node-emoji/LICENSE",
+        "licenseUrl": "https://github.com/omnidan/node-emoji/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "node-fetch@3.0.0-beta.9": {
+        "licenses": "MIT",
+        "repository": "https://github.com/node-fetch/node-fetch",
+        "licenseFile": "node_modules/node-fetch/LICENSE.md",
+        "licenseUrl": "https://github.com/node-fetch/node-fetch/raw/master/LICENSE.md",
+        "parents": "@iex/slackbot"
+    },
+    "node-html-parser@3.3.6": {
+        "licenses": "MIT",
+        "repository": "https://github.com/taoqf/node-fast-html-parser",
+        "licenseFile": "node_modules/node-html-parser/LICENSE",
+        "licenseUrl": "https://github.com/taoqf/node-fast-html-parser/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "objection@2.2.15": {
+        "licenses": "MIT",
+        "repository": "https://github.com/vincit/objection.js",
+        "licenseFile": "node_modules/objection/LICENSE",
+        "licenseUrl": "https://github.com/vincit/objection.js/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "parsimmon@1.18.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jneen/parsimmon",
+        "licenseFile": "node_modules/parsimmon/LICENSE",
+        "licenseUrl": "https://github.com/jneen/parsimmon/raw/master/LICENSE",
+        "parents": "@iex/shared"
+    },
+    "pg@8.7.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/brianc/node-postgres",
+        "licenseFile": "node_modules/pg/LICENSE",
+        "licenseUrl": "https://github.com/brianc/node-postgres/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "pretty-bytes@5.6.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/sindresorhus/pretty-bytes",
+        "licenseFile": "node_modules/pretty-bytes/license",
+        "licenseUrl": "https://github.com/sindresorhus/pretty-bytes/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "react-ace@9.4.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/securingsincity/react-ace",
+        "licenseFile": "node_modules/react-ace/LICENSE",
+        "licenseUrl": "https://github.com/securingsincity/react-ace/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-confetti@6.0.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/alampros/react-confetti",
+        "licenseFile": "node_modules/react-confetti/LICENSE",
+        "licenseUrl": "https://github.com/alampros/react-confetti/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-container-dimensions@1.4.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/okonet/react-container-dimensions",
+        "licenseFile": "node_modules/react-container-dimensions/LICENSE",
+        "licenseUrl": "https://github.com/okonet/react-container-dimensions/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-datepicker@4.1.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Hacker0x01/react-datepicker",
+        "licenseFile": "node_modules/react-datepicker/LICENSE",
+        "licenseUrl": "https://github.com/Hacker0x01/react-datepicker/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-dom@17.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react",
+        "licenseFile": "node_modules/react-dom/LICENSE",
+        "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-dropzone@11.3.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-dropzone/react-dropzone",
+        "licenseFile": "node_modules/react-dropzone/LICENSE",
+        "licenseUrl": "https://github.com/react-dropzone/react-dropzone/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-error-boundary@3.1.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/bvaughn/react-error-boundary",
+        "licenseFile": "node_modules/react-error-boundary/LICENSE",
+        "licenseUrl": "https://github.com/bvaughn/react-error-boundary/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-ga@3.3.0": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/react-ga/react-ga",
+        "licenseFile": "node_modules/react-ga/LICENSE",
+        "licenseUrl": "https://github.com/react-ga/react-ga/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-helmet@6.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/nfl/react-helmet",
+        "licenseFile": "node_modules/react-helmet/LICENSE",
+        "licenseUrl": "https://github.com/nfl/react-helmet/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-hook-form@7.12.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-hook-form/react-hook-form",
+        "licenseFile": "node_modules/react-hook-form/LICENSE",
+        "licenseUrl": "https://github.com/react-hook-form/react-hook-form/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-icons@4.2.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-icons/react-icons",
+        "licenseFile": "node_modules/react-icons/LICENSE",
+        "licenseUrl": "https://github.com/react-icons/react-icons/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-infinite-scroller@1.2.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/CassetteRocks/react-infinite-scroller",
+        "licenseFile": "node_modules/react-infinite-scroller/LICENSE",
+        "licenseUrl": "https://github.com/CassetteRocks/react-infinite-scroller/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-linkify@1.0.0-alpha": {
+        "licenses": "MIT",
+        "repository": "https://github.com/tasti/react-linkify",
+        "licenseFile": "node_modules/react-linkify/LICENSE",
+        "licenseUrl": "https://github.com/tasti/react-linkify/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-markdown@5.0.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/remarkjs/react-markdown",
+        "licenseFile": "node_modules/react-markdown/license",
+        "licenseUrl": "https://github.com/remarkjs/react-markdown/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "react-redux@7.2.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/reduxjs/react-redux",
+        "licenseFile": "node_modules/react-redux/LICENSE.md",
+        "licenseUrl": "https://github.com/reduxjs/react-redux/raw/master/LICENSE.md",
+        "parents": "@iex/frontend"
+    },
+    "react-router-dom@6.0.0-beta.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/ReactTraining/react-router",
+        "licenseFile": "node_modules/react-router-dom/LICENSE",
+        "licenseUrl": "https://github.com/ReactTraining/react-router/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-select@4.3.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/JedWatson/react-select/tree/master/packages/react-select",
+        "licenseUrl": "https://github.com/JedWatson/react-select/tree/master/packages/react-select",
+        "parents": "@iex/frontend"
+    },
+    "react-syntax-highlighter@15.4.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-syntax-highlighter/react-syntax-highlighter",
+        "licenseFile": "node_modules/react-syntax-highlighter/LICENSE",
+        "licenseUrl": "https://github.com/react-syntax-highlighter/react-syntax-highlighter/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react-vega@7.4.2": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/vega/react-vega",
+        "licenseFile": "node_modules/react-vega/LICENSE",
+        "licenseUrl": "https://github.com/vega/react-vega/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "react@17.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react",
+        "licenseFile": "node_modules/react/LICENSE",
+        "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "redux-persist@6.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/rt2zz/redux-persist",
+        "licenseFile": "node_modules/redux-persist/LICENSE",
+        "licenseUrl": "https://github.com/rt2zz/redux-persist/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "reflect-metadata@0.1.13": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/rbuckton/reflect-metadata",
+        "licenseFile": "node_modules/reflect-metadata/LICENSE",
+        "licenseUrl": "https://github.com/rbuckton/reflect-metadata/raw/master/LICENSE",
+        "parents": "@iex/slackbot"
+    },
+    "remark-directive@1.0.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/remarkjs/remark-directive",
+        "licenseFile": "node_modules/remark-directive/license",
+        "licenseUrl": "https://github.com/remarkjs/remark-directive/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "remark-emoji@2.2.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/rhysd/remark-emoji",
+        "licenseFile": "node_modules/remark-emoji/LICENSE",
+        "licenseUrl": "https://github.com/rhysd/remark-emoji/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "remark-footnotes@3.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/remarkjs/remark-footnotes",
+        "licenseFile": "node_modules/remark-footnotes/license",
+        "licenseUrl": "https://github.com/remarkjs/remark-footnotes/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "remark-gfm@1.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/remarkjs/remark-gfm",
+        "licenseFile": "node_modules/remark-gfm/license",
+        "licenseUrl": "https://github.com/remarkjs/remark-gfm/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "remark-slug@6.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/remarkjs/remark-slug",
+        "licenseFile": "node_modules/remark-slug/license",
+        "licenseUrl": "https://github.com/remarkjs/remark-slug/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "remark-toc@7.2.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/remarkjs/remark-toc",
+        "licenseFile": "node_modules/remark-toc/license",
+        "licenseUrl": "https://github.com/remarkjs/remark-toc/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "sqs-consumer@5.5.0": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/BBC/sqs-consumer",
+        "licenseFile": "node_modules/sqs-consumer/LICENSE",
+        "licenseUrl": "https://github.com/BBC/sqs-consumer/raw/master/LICENSE",
+        "parents": "@iex/mq"
+    },
+    "titleize@2.1.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/sindresorhus/titleize",
+        "licenseFile": "node_modules/titleize/license",
+        "licenseUrl": "https://github.com/sindresorhus/titleize/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "tmp-promise@3.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/benjamingr/tmp-promise",
+        "licenseUrl": "https://github.com/benjamingr/tmp-promise",
+        "parents": "@iex/slackbot"
+    },
+    "turndown-plugin-gfm@1.0.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/domchristie/turndown-plugin-gfm",
+        "licenseFile": "node_modules/turndown-plugin-gfm/LICENSE",
+        "licenseUrl": "https://github.com/domchristie/turndown-plugin-gfm/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "turndown@7.1.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/domchristie/turndown",
+        "licenseFile": "node_modules/turndown/LICENSE",
+        "licenseUrl": "https://github.com/domchristie/turndown/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "tweetnacl-util@0.15.1": {
+        "licenses": "Unlicense",
+        "repository": "https://github.com/dchest/tweetnacl-util-js",
+        "licenseFile": "node_modules/tweetnacl-util/LICENSE",
+        "licenseUrl": "https://github.com/dchest/tweetnacl-util-js/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "tweetnacl@1.0.3": {
+        "licenses": "Unlicense",
+        "repository": "https://github.com/dchest/tweetnacl-js",
+        "licenseFile": "node_modules/tweetnacl/LICENSE",
+        "licenseUrl": "https://github.com/dchest/tweetnacl-js/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "type-graphql@1.1.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/MichalLytek/type-graphql",
+        "licenseUrl": "https://github.com/MichalLytek/type-graphql",
+        "parents": "@iex/backend"
+    },
+    "typedi@0.10.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/pleerock/typedi",
+        "licenseFile": "node_modules/typedi/LICENSE",
+        "licenseUrl": "https://github.com/pleerock/typedi/raw/master/LICENSE",
+        "parents": "@iex/backend"
+    },
+    "unist-util-visit@2.0.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/syntax-tree/unist-util-visit",
+        "licenseFile": "node_modules/unist-util-visit/license",
+        "licenseUrl": "https://github.com/syntax-tree/unist-util-visit/raw/master/license",
+        "parents": "@iex/frontend"
+    },
+    "url-join@4.0.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/jfromaniello/url-join",
+        "licenseFile": "node_modules/url-join/LICENSE",
+        "licenseUrl": "https://github.com/jfromaniello/url-join/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "urql@2.0.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/FormidableLabs/urql",
+        "licenseFile": "node_modules/urql/LICENSE",
+        "licenseUrl": "https://github.com/FormidableLabs/urql/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "use-trace-update@1.3.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/damiangreen/use-trace-update",
+        "licenseFile": "node_modules/use-trace-update/LICENSE",
+        "licenseUrl": "https://github.com/damiangreen/use-trace-update/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "vega-lite@5.0.0": {
+        "licenses": "BSD-3-Clause",
+        "repository": "https://github.com/vega/vega-lite",
+        "licenseFile": "node_modules/vega-lite/LICENSE",
+        "licenseUrl": "https://github.com/vega/vega-lite/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "vega@5.20.2": {
+        "licenses": "BSD-3-Clause",
+        "repository": "https://github.com/vega/vega",
+        "licenseFile": "node_modules/vega/LICENSE",
+        "licenseUrl": "https://github.com/vega/vega/raw/master/LICENSE",
+        "parents": "@iex/frontend"
+    },
+    "winston@3.3.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/winstonjs/winston",
+        "licenseFile": "node_modules/winston/LICENSE",
+        "licenseUrl": "https://github.com/winstonjs/winston/raw/master/LICENSE",
+        "parents": "@iex/shared"
+    }
+}

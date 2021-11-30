@@ -1,0 +1,13 @@
+env:
+  node: true
+settings:
+  import/resolver:
+    typescript:
+      projects:
+        - tsconfig.json
+rules:
+  no-console: ['error']
+  '@typescript-eslint/no-explicit-any': off
+  '@typescript-eslint/no-non-null-assertion': off
+  unicorn/prefer-prototype-methods: off
+  unicorn/no-array-for-each: off

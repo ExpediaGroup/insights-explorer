@@ -1,0 +1,25 @@
+{
+  "name": "@iex/models",
+  "version": "0.188.0",
+  "description": "Insights Explorer Models",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf ./dist && rm -f tsconfig.tsbuildinfo",
+    "clean:deep": "rm -rf node_modules && rm -f package-lock.json",
+    "build": "npm run build:tsc",
+    "build:tsc": "tsc --build --incremental",
+    "build:tsc:watch": "tsc --build -w",
+    "-------": "-----------------------------------",
+    "test": "jest --coverage --verbose --detectOpenHandles --passWithNoTests",
+    "test:watch": "npm run test -- --watch",
+    "------": "------------------------------------",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@elastic/elasticsearch": "7.13.0"
+  }
+}

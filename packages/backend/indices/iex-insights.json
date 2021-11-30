@@ -1,0 +1,220 @@
+{
+  "mappings": {
+    "properties": {
+      "contributors": {
+        "properties": {
+          "userName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "displayName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "email": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          }
+        }
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "description": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "forks": {
+        "type": "integer"
+      },
+      "fullName": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 512,
+            "normalizer": "lowercase_normalizer"
+          }
+        }
+      },
+      "insightId": {
+        "type": "integer"
+      },
+      "itemType": {
+        "type": "keyword"
+      },
+      "syncedAt": {
+        "type": "date"
+      },
+      "updatedAt": {
+        "type": "date"
+      },
+      "metadata": {
+        "properties": {
+          "publishedDate": {
+            "type": "date"
+          },
+          "team": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          }
+        }
+      },
+      "name": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 512,
+            "normalizer": "lowercase_normalizer"
+          }
+        }
+      },
+      "namespace": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 512,
+            "normalizer": "lowercase_normalizer"
+          }
+        }
+      },
+      "readme": {
+        "properties": {
+          "contents": {
+            "type": "text"
+          }
+        }
+      },
+      "repository": {
+        "properties": {
+          "cloneUrl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            }
+          },
+          "defaultBranch": {
+            "type": "keyword"
+          },
+          "externalId": {
+            "type": "keyword"
+          },
+          "externalName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256,
+                "normalizer": "lowercase_normalizer"
+              }
+            }
+          },
+          "isArchived": {
+            "type": "boolean"
+          },
+          "isMissing": {
+            "type": "boolean"
+          },
+          "owner": {
+            "properties": {
+              "avatarUrl": {
+                "type": "keyword"
+              },
+              "externalId": {
+                "type": "keyword"
+              },
+              "ldapDn": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256,
+                    "normalizer": "lowercase_normalizer"
+                  }
+                }
+              },
+              "login": {
+                "type": "keyword"
+              },
+              "type": {
+                "type": "keyword"
+              }
+            }
+          },
+          "type": {
+            "type": "keyword"
+          },
+          "url": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            }
+          }
+        }
+      },
+      "stars": {
+        "type": "integer"
+      },
+      "tags": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256,
+            "normalizer": "lowercase_normalizer"
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "1"
+    },
+    "analysis": {
+      "normalizer": {
+        "lowercase_normalizer": {
+          "type": "custom",
+          "filter": [
+            "lowercase",
+            "trim"
+          ]
+        }
+      }
+    }
+  }
+}

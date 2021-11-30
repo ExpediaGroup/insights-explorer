@@ -1,0 +1,104 @@
+{
+  "mappings": {
+    "properties": {
+      "activityType": {
+        "type": "keyword"
+      },
+      "occurredAt": {
+        "type": "date"
+      },
+      "user": {
+        "properties": {
+          "userName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "displayName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "email": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "userId": {
+            "type": "integer"
+          }
+        }
+      },
+      "details": {
+        "properties": {
+          "insightId": {
+            "type": "integer"
+          },
+          "insightName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512,
+                "normalizer": "lowercase_normalizer"
+              }
+            }
+          },
+          "commitMessage": {
+            "type": "text"
+          },
+          "commentText": {
+            "type": "text"
+          },
+          "isFirstLogin": {
+            "type": "boolean"
+          },
+          "loginCount": {
+            "type": "integer"
+          },
+          "userId": {
+            "type": "integer"
+          },
+          "userName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "1"
+    },
+    "analysis": {
+      "normalizer": {
+        "lowercase_normalizer": {
+          "type": "custom",
+          "filter": [
+            "lowercase",
+            "trim"
+          ]
+        }
+      }
+    }
+  }
+}

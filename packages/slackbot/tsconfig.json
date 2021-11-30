@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": ".",
+    "types": [
+      "node",
+      "@types/jest"
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "./package.json"
+  ],
+  "references": [
+    {
+      "path": "../models"
+    },
+    {
+      "path": "../shared"
+    }
+  ]
+}

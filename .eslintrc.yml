@@ -1,0 +1,57 @@
+root: true
+env:
+  es6: true
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaVersion: 2020
+  sourceType: module
+plugins:
+  - '@typescript-eslint'
+  - unicorn
+extends:
+  - eslint:recommended
+  - plugin:import/errors
+  - plugin:import/typescript
+  - plugin:@typescript-eslint/recommended
+  - plugin:prettier/recommended
+  - plugin:unicorn/recommended
+settings:
+  import/resolver:
+    typescript:
+      alwaysTryTypes: true
+    node:
+      extensions: ['.js', '.jsx', '.ts', '.tsx']
+      moduleDirectory: ['node_modules', 'src/']
+rules:
+  no-console: ['error']
+  '@typescript-eslint/no-explicit-any': off
+  '@typescript-eslint/no-non-null-assertion': off
+  import/newline-after-import: off
+  import/order:
+    - error
+    - groups:
+        - builtin
+        - external
+        - internal
+        - parent
+        - sibling
+        - index
+      alphabetize:
+        order: asc
+        caseInsensitive: true
+      newlines-between: always
+  unicorn/no-array-reduce: off
+  unicorn/no-null: off
+  unicorn/prefer-dom-node-text-content: off
+  unicorn/prefer-module: off
+  unicorn/prefer-node-protocol: off
+  unicorn/prefer-object-from-entries: off
+  unicorn/prevent-abbreviations:
+    - off
+    -
+      checkFilenames: false
+      allowList:
+        req: true
+        res: true
+        process-env: true
+        ProcessEnv: true
