@@ -1,0 +1,22 @@
+name: Test - Node
+on:
+  pull_request_review:
+    types: [submitted]
+    branches:
+      - 'feature/**'
+  workflow_dispatch:
+
+jobs:
+  test-node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.18.1'
+
+      - name: NPM CI Setup
+        run: npm ci && npm run bootstrap
+
+      - name: NPM Build
+        run: npm run build && npm run test && npm run prune:production && npm prune --production

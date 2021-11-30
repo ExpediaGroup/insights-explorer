@@ -1,0 +1,17 @@
+name: Test - Docker
+on:
+  push:
+    branches:
+      - 'feature/**'
+  pull_request_review:
+    types: [submitted]
+    branches:
+      - 'feature/**'
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag insights-explorer:$(date +%s)
