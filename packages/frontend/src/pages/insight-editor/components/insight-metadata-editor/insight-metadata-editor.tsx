@@ -26,7 +26,7 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { Control, Controller, UseFormReturn, useWatch } from 'react-hook-form';
+import { Controller, UseFormReturn, useWatch } from 'react-hook-form';
 import Select from 'react-select';
 import titleize from 'titleize';
 import { gql, useQuery } from 'urql';
