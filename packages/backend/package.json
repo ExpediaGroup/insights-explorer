@@ -43,7 +43,7 @@
     "dotenv-flow": "3.2.0",
     "express": "4.17.1",
     "express-async-errors": "3.1.1",
-    "file-type": "16.5.3",
+    "file-type": "17.0.0",
     "globby": "11.0.4",
     "graphql": "15.5.3",
     "graphql-parse-resolve-info": "4.12.0",
