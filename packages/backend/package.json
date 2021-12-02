@@ -79,7 +79,7 @@
     "winston": "3.3.3"
   },
   "devDependencies": {
-    "@types/better-queue": "3.8.2",
+    "@types/better-queue": "3.8.3",
     "@types/command-line-args": "5.0.1",
     "@types/compression": "1.7.2",
     "@types/cookie-parser": "1.4.2",
