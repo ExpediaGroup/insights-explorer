@@ -24,7 +24,7 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "7.13.0",
+    "@elastic/elasticsearch": "7.15.0",
     "@octokit/graphql": "4.8.0",
     "@octokit/rest": "18.12.0",
     "@types/turndown": "5.0.1",
