@@ -7,7 +7,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   publish-docker:
@@ -15,6 +14,19 @@ jobs:
     permissions:
       contents: read
       packages: write
+
+    strategy:
+      matrix:
+        include:
+          - name: Insights Explorer
+            image: expediagroup/insights-explorer
+            dockerfile: ./Dockerfile
+          - name: Convertbot
+            image: expediagroup/insights-explorer-convertbot
+            dockerfile: ./packages/slackbot/Dockerfile
+          - name: Slackbot
+            image: expediagroup/insights-explorer-slackbot
+            dockerfile: ./packages/convertbot/Dockerfile
 
     steps:
       - name: Checkout
@@ -27,23 +39,25 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Docker meta
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Docker meta - ${{ matrix.name }}
         uses: docker/metadata-action@v3
         id: meta
         with:
           images: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            ${{ env.REGISTRY }}/${{ matrix.image }}
           tags: |
-            type=ref,event=tag
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/v0.') }}
 
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Build the Docker image
+      - name: Docker build - ${{ matrix.name }}
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
+          file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
