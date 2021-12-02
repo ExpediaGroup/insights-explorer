@@ -8,13 +8,8 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  release:
+  test:
     runs-on: ubuntu-latest
-    outputs:
-      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
-      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
-      new_release_major_version: ${{ steps.semantic.outputs.new_release_major_version }}
-      new_release_minor_version: ${{ steps.semantic.outputs.new_release_minor_version }}
 
     steps:
       - uses: actions/checkout@v2
@@ -28,6 +23,22 @@ jobs:
       - run: npm ci && npm run bootstrap
       - run: npm run build
       - run: npm test
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+    outputs:
+      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
+      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
+      new_release_major_version: ${{ steps.semantic.outputs.new_release_major_version }}
+      new_release_minor_version: ${{ steps.semantic.outputs.new_release_minor_version }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
 
       # Release the next version
       - name: Semantic Release
@@ -91,7 +102,7 @@ jobs:
           tags: |
             type=raw,value=${{ needs.release.outputs.new_release_version }}
             type=raw,value=${{ needs.release.outputs.new_release_major_version }}.${{ needs.release.outputs.new_release_minor_version }}
-            type=raw,value=${{ needs.release.outputs.new_release_major_version }},enable=${{ !needs.release.outputs.new_release_major_version == '0' }}
+            type=raw,value=${{ needs.release.outputs.new_release_major_version }},enable=${{ ! needs.release.outputs.new_release_major_version == 0 }}
 
       - name: Docker build - ${{ matrix.name }}
         uses: docker/build-push-action@v2
