@@ -64,7 +64,7 @@
     "node-cache": "5.1.2",
     "node-fetch": "2.6.6",
     "node-html-parser": "3.3.6",
-    "objection": "2.2.15",
+    "objection": "2.2.18",
     "p-map": "4.0.0",
     "parsimmon": "1.18.0",
     "pg": "8.7.1",
