@@ -1,6 +1,6 @@
 {
   "name": "@iex/backend",
-  "version": "0.188.0",
+  "version": "0.0.0",
   "description": "Insights Explorer Backend",
   "main": "src/index.js",
   "private": true,
