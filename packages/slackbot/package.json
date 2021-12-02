@@ -39,7 +39,7 @@
     "@types/jest": "26.0.24",
     "@types/module-alias": "2.0.1",
     "@types/morgan": "1.9.3",
-    "@types/node": "14.17.34",
+    "@types/node": "16.11.11",
     "@types/tmp": "0.2.2",
     "@typescript-eslint/eslint-plugin": "4.26.1",
     "@typescript-eslint/parser": "4.26.1",
