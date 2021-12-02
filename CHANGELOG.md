@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.188.4](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.3...v0.188.4) (2021-12-02)
+
+
+### Bug Fixes
+
+* Refactor release workflow ([2d56c4b](https://github.com/ExpediaGroup/insights-explorer/commit/2d56c4b71677b36aa881517f864808628853e656))
+
 ### [0.188.3](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.2...v0.188.3) (2021-12-02)
 
 
