@@ -7,55 +7,105 @@ version: 2
 updates:
 
   # Maintain dependencies for GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "daily"
+      interval: daily
 
   # Maintain dependencies for npm
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: npm
+    directory: /
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/packages/backend/"
+      interval: daily
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: npm
+    directory: /packages/backend/
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/packages/convertbot/"
+      interval: daily
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: npm
+    directory: /packages/convertbot/
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/packages/frontend/"
+      interval: daily
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: npm
+    directory: /packages/frontend/
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/packages/models/"
+      interval: daily
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: npm
+    directory: /packages/models/
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/packages/mq/"
+      interval: daily
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: npm
+    directory: /packages/mq/
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/packages/shared/"
+      interval: daily
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: npm
+    directory: /packages/shared/
     schedule:
-      interval: "daily"
-  - package-ecosystem: "npm"
-    directory: "/packages/slackbot/"
+      interval: daily
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: npm
+    directory: /packages/slackbot/
     schedule:
-      interval: "daily"
+      interval: daily
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+    open-pull-requests-limit: 30
 
   # Maintain dependencies for docker
-  - package-ecosystem: "docker"
-    directory: "/"
+  - package-ecosystem: docker
+    directory: /
     schedule:
-      interval: "daily"
-  - package-ecosystem: "docker"
-    directory: "/packages/convertbot/"
+      interval: daily
+    commit-message:
+      prefix: fix
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: docker
+    directory: /packages/convertbot/
     schedule:
-      interval: "daily"
-  - package-ecosystem: "docker"
-    directory: "/packages/slackbot/"
+      interval: daily
+    commit-message:
+      prefix: fix
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: docker
+    directory: /packages/slackbot/
     schedule:
-      interval: "daily"
+      interval: daily
+    commit-message:
+      prefix: fix
+    open-pull-requests-limit: 30
