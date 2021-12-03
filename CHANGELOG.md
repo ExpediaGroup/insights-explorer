@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.188.9](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.8...v0.188.9) (2021-12-03)
+
+
+### Bug Fixes
+
+* Fix docker image matrix ([f994365](https://github.com/ExpediaGroup/insights-explorer/commit/f994365c9f6fdffc5df395bda601e79835c3a8d6))
+* Update SCM URL environment variable ([835a252](https://github.com/ExpediaGroup/insights-explorer/commit/835a252ab7a9011cea99dfe7815e5774c688f426))
+
 ### [0.188.8](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.7...v0.188.8) (2021-12-03)
 
 
