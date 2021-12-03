@@ -16,7 +16,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
       - name: Run ESLint
-        run: npm run build:backend && npm run generate && npm run lint
+        run: npm ci && npm run bootstrap && npm run build:backend && npm run generate && npm run lint
       - name: Get commitlint
         run: npm install --save-dev @commitlint/config-conventional @commitlint/cli
       - name: Configure commitlint
