@@ -99,6 +99,8 @@ jobs:
         with:
           images: |
             ${{ env.REGISTRY }}/${{ matrix.image }}
+          flavor: |
+            latest=true
           tags: |
             type=raw,value=${{ needs.release.outputs.new_release_version }}
             type=raw,value=${{ needs.release.outputs.new_release_major_version }}.${{ needs.release.outputs.new_release_minor_version }}
