@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.188.7](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.6...v0.188.7) (2021-12-03)
+
+
+### Bug Fixes
+
+* **lint:** rafix build and add lint on PRs ([5fc70f6](https://github.com/ExpediaGroup/insights-explorer/commit/5fc70f66fa1a840d7b294059cb73f4af311b59a1))
+
 ### [0.188.6](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.5...v0.188.6) (2021-12-03)
 
 
