@@ -71,10 +71,10 @@ jobs:
             dockerfile: ./Dockerfile
           - name: Convertbot
             image: expediagroup/insights-explorer-convertbot
-            dockerfile: ./packages/slackbot/Dockerfile
+            dockerfile: ./packages/convertbot/Dockerfile
           - name: Slackbot
             image: expediagroup/insights-explorer-slackbot
-            dockerfile: ./packages/convertbot/Dockerfile
+            dockerfile: ./packages/slackbot/Dockerfile
 
     steps:
       - name: Checkout
