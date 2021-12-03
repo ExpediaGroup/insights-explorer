@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.188.8](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.7...v0.188.8) (2021-12-03)
+
+
+### Bug Fixes
+
+* **build:** Add latest tag ([53ef844](https://github.com/ExpediaGroup/insights-explorer/commit/53ef84401bb1ebea746063fdcf058ee553709f19))
+
 ### [0.188.7](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.6...v0.188.7) (2021-12-03)
 
 
