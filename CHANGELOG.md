@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.188.5](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.4...v0.188.5) (2021-12-03)
+
+
+### Bug Fixes
+
+* update lint workflow ([76f6782](https://github.com/ExpediaGroup/insights-explorer/commit/76f6782c60637d063d807a05258eac6e372fbdfc))
+
 ### [0.188.4](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.3...v0.188.4) (2021-12-02)
 
 
