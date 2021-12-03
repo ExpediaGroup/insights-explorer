@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.188.6](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.5...v0.188.6) (2021-12-03)
+
+
+### Bug Fixes
+
+* **lint:** generate GraphQL files ([04c5b8b](https://github.com/ExpediaGroup/insights-explorer/commit/04c5b8bef0f22571b887c11b84dcf45e8e9cbe4d))
+
 ### [0.188.5](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.4...v0.188.5) (2021-12-03)
 
 
