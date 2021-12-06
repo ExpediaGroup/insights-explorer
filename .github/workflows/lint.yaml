@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
           node-version-file: '.nvmrc'
@@ -15,13 +17,4 @@ jobs:
           cache-dependency-path: '**/package-lock.json'
       - name: Run ESLint
         run: npm ci && npm run bootstrap && npm run build:backend && npm run generate && npm run lint
-      - name: Get commitlint
-        run: npm install --save-dev @commitlint/config-conventional @commitlint/cli
-      - name: Configure commitlint
-        run: |
-          echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
-      - name: Check commit message
-        env:
-          COMMIT_MESSAGE: ${{ github.event.commits[0].message }}
-        run: |
-            echo "$COMMIT_MESSAGE" | npx commitlint -V
+      - uses: wagoid/commitlint-github-action@v4
