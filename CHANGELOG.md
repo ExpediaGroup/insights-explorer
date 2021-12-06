@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [0.188.12](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.11...v0.188.12) (2021-12-06)
+
+
+### Bug Fixes
+
+* add commitlint action ([8e4510a](https://github.com/ExpediaGroup/insights-explorer/commit/8e4510a30ca0aa497c9143948dc733d202bbdcaf))
+
 ### [0.188.11](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.10...v0.188.11) (2021-12-06)
 
 
