@@ -19,8 +19,8 @@
     "test": "jest --coverage --verbose --detectOpenHandles --passWithNoTests",
     "test:watch": "npm run test -- --watch",
     "------": "------------------------------------",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint --cache .",
+    "lint:fix": "eslint --cache . --fix"
   },
   "dependencies": {
     "compression": "1.7.4",
