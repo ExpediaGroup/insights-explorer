@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "1.6.10",
-    "@chakra-ui/theme": "1.11.1",
+    "@chakra-ui/theme": "1.12.1",
     "@chakra-ui/theme-tools": "1.2.3",
     "@emotion/react": "11.6.0",
     "@emotion/styled": "11.6.0",
