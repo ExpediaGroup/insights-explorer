@@ -5,7 +5,7 @@
   "license": "TBD",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "1.6.10",
+    "@chakra-ui/react": "1.7.2",
     "@chakra-ui/theme": "1.11.1",
     "@chakra-ui/theme-tools": "1.2.3",
     "@emotion/react": "11.6.0",
