@@ -8,6 +8,10 @@ concurrency: release
 
 env:
   REGISTRY: ghcr.io
+  GIT_AUTHOR_NAME: eg-oss-ci
+  GIT_AUTHOR_EMAIL: oss@expediagroup.com
+  GIT_COMMITTER_NAME: eg-oss-ci
+  GIT_COMMITTER_EMAIL: oss@expediagroup.com
 
 jobs:
   test:
