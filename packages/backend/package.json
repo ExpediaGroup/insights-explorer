@@ -80,7 +80,7 @@
   },
   "devDependencies": {
     "@types/better-queue": "3.8.3",
-    "@types/command-line-args": "5.0.1",
+    "@types/command-line-args": "5.2.0",
     "@types/compression": "1.7.2",
     "@types/cookie-parser": "1.4.2",
     "@types/dotenv-flow": "3.2.0",
