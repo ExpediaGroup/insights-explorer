@@ -91,7 +91,7 @@
     "@types/jest": "26.0.24",
     "@types/js-yaml": "4.0.5",
     "@types/jsonfile": "6.0.0",
-    "@types/lodash": "4.14.176",
+    "@types/lodash": "4.14.178",
     "@types/luxon": "2.0.7",
     "@types/mime": "2.0.3",
     "@types/module-alias": "2.0.1",
