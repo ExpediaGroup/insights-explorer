@@ -66,7 +66,7 @@
     "vega-lite": "5.0.0"
   },
   "devDependencies": {
-    "@axe-core/react": "4.2.2",
+    "@axe-core/react": "4.3.2",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "9.5.0",
     "@testing-library/user-event": "13.5.0",
