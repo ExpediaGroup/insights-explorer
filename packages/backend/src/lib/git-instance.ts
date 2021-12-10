@@ -22,7 +22,7 @@ import logger from '@iex/shared/logger';
 import globby from 'globby';
 import git from 'isomorphic-git';
 import http from 'isomorphic-git/http/node';
-import * as yaml from 'js-yaml';
+import yaml from 'js-yaml';
 import * as tmp from 'tmp-promise';
 
 import { InsightYaml } from '../models/insight-yaml';
@@ -197,7 +197,7 @@ export class GitInstance {
   async retrieveInsightYaml(): Promise<InsightYaml> {
     const contents = await this.retrieveFileUtf8(INSIGHT_YAML_FILE);
     if (contents !== null) {
-      const insightYaml = yaml.safeLoad(contents);
+      const insightYaml = yaml.load(contents) as InsightYaml;
 
       if (insightYaml != null && typeof insightYaml !== 'string') {
         return insightYaml;
