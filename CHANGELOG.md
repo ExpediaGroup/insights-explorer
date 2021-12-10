@@ -7,15 +7,10 @@ All notable changes to this project will be documented in this file. See [Conven
 
 ### Bug Fixes
 
-* **deps:** bump aws-sdk from 2.1035.0 to 2.1044.0 ([e6f0614](https://github.com/ExpediaGroup/insights-explorer/commit/e6f0614a5b88050462f9bc001cff8481ebb19c4b))
+* **deps:** bump js-yaml from 3.14.1 to 4.1.0 ([e6f0614](https://github.com/ExpediaGroup/insights-explorer/commit/e6f0614a5b88050462f9bc001cff8481ebb19c4b))
 * migrate to js-yaml 4.x ([2d5836c](https://github.com/ExpediaGroup/insights-explorer/commit/2d5836c6d84c5dd0a118bc287807b8be67343430))
 
 ## [1.0.0](https://github.com/ExpediaGroup/insights-explorer/compare/v0.188.0...v1.0.0) (2021-12-08)
-
-
-### ⚠ BREAKING CHANGES
-
-* **docs:** Update README for initial 1.0.0 release
 
 ### Bug Fixes
 
