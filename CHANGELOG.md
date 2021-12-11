@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.0.2](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.1...v1.0.2) (2021-12-11)
+
+
+### Bug Fixes
+
+* **deps:** bump aws-sdk from 2.1044.0 to 2.1046.0 in /packages/backend ([3fe4efb](https://github.com/ExpediaGroup/insights-explorer/commit/3fe4efbcea01f18586ff811bafdde1c5cf2aa468))
+* **deps:** bump aws-sdk from 2.1044.0 to 2.1046.0 in /packages/mq ([839e396](https://github.com/ExpediaGroup/insights-explorer/commit/839e3967f49c482a5c04c1ec9b7540cd0dd85236))
+* **deps:** bump aws-sdk from 2.1044.0 to 2.1046.0 in /packages/shared ([aced68e](https://github.com/ExpediaGroup/insights-explorer/commit/aced68e1135385b18a3d27f14cac6d41f1afbe9e))
+* **deps:** bump isomorphic-git in /packages/backend ([b2d8f66](https://github.com/ExpediaGroup/insights-explorer/commit/b2d8f66b2f498b583b7707db0c8d794a31b77525))
+
 ### [1.0.1](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.0...v1.0.1) (2021-12-10)
 
 
