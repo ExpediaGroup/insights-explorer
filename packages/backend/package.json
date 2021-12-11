@@ -51,7 +51,7 @@
     "graphql-upload": "11.0.0",
     "helmet": "4.6.0",
     "http-status-codes": "2.1.4",
-    "isomorphic-git": "1.10.1",
+    "isomorphic-git": "1.10.2",
     "js-yaml": "4.1.0",
     "knex": "0.21.19",
     "knex-migrate-sql-file": "1.0.3",
