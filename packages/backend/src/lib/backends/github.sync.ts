@@ -42,6 +42,26 @@ const THUMBNAIL_LOCATIONS = ['thumbnail', '.iex/thumbnail'].flatMap((prefix) =>
 
 const READONLY_FILES = new Set(['insight.yml']);
 
+const INDEXABLE_MIME_TYPES = new Set([
+  'application/x-ipynb+json',
+  'application/javascript',
+  'application/json',
+  'application/x-sh',
+  'application/x-sql',
+  'application/x-typescript',
+  'application/xml',
+  'text/html',
+  'text/markdown',
+  'text/plain',
+  'text/x-clojure',
+  'text/x-groovy',
+  'text/x-java-source',
+  'text/x-python',
+  'text/x-ruby',
+  'text/x-scala',
+  'text/yaml'
+]);
+
 export class GitHubRepositorySync extends BaseSync {
   async sync(insightSyncTask: InsightSyncTask): Promise<IndexedInsight | null> {
     // Check for previously-synced Insight
@@ -348,8 +368,12 @@ const syncFiles = async (
         mimeType: await getTypeAsync({ fileName: wf.name, buffer: contents }),
         hash: wf.hash,
         readonly: READONLY_FILES.has(wf.path)
-        //contents: contents!
       };
+
+      // Include the contents of text-based files
+      if (INDEXABLE_MIME_TYPES.has(file.mimeType) || file.mimeType.startsWith('text/')) {
+        file.contents = contents?.toString('utf-8');
+      }
 
       file.conversions = getConversions(file);
 
