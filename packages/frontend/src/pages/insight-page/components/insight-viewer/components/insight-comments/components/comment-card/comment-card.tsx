@@ -120,7 +120,7 @@ export const CommentCard = ({
           </Text>
         </Link>
         <Text color="polar.600" fontSize="sm">
-          {formatDateIntl((comment.createdAt as unknown) as string, DateTime.DATETIME_MED)}
+          {formatDateIntl(comment.createdAt as unknown as string, DateTime.DATETIME_MED)}
           {comment.isEdited && (
             <Tooltip label="This comment was edited" aria-label="This comment was edited">
               {' (edited)'}

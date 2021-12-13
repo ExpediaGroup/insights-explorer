@@ -27,17 +27,19 @@ import { userSlice } from './store/user.slice';
 
 let store: { dispatch: any } | null = null;
 
-const errorExchange = ({ forward }) => (ops$: Source<Operation>): Source<OperationResult> => {
-  return pipe(
-    forward(ops$),
-    tap((result) => {
-      if (store && result.error?.response?.status === 401) {
-        console.log('[ERROR EXCHANGE] Logging out...');
-        store?.dispatch(userSlice.actions.logout());
-      }
-    })
-  );
-};
+const errorExchange =
+  ({ forward }) =>
+  (ops$: Source<Operation>): Source<OperationResult> => {
+    return pipe(
+      forward(ops$),
+      tap((result) => {
+        if (store && result.error?.response?.status === 401) {
+          console.log('[ERROR EXCHANGE] Logging out...');
+          store?.dispatch(userSlice.actions.logout());
+        }
+      })
+    );
+  };
 
 /**
  * Creates a global GraphQL client.  This instance is shared
@@ -55,7 +57,7 @@ export const urqlClient = createClient({
         AutocompleteResults: () => null,
         ChatSettings: () => null,
         CommentActivityDetails: () => null,
-        Draft: (((draft: Draft) => draft.draftKey) as unknown) as KeyGenerator,
+        Draft: ((draft: Draft) => draft.draftKey) as unknown as KeyGenerator,
         GitHubSettings: () => null,
         InsightActivityDetails: () => null,
         InsightCollaboratorActivityDetails: () => null,

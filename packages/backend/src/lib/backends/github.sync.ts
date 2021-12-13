@@ -77,32 +77,15 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
   logger.debug('[GITHUB] Retrieved Contributor details from GitHub API ' + repository.nameWithOwner);
 
   const userServices = new UserService(new ActivityService());
-  const contributors = await pMap(
-    contributorsResult,
-    async ({ author }: any): Promise<IndexedInsightUser> => {
-      const user = await userServices.getUserByGitHubLogin(author.login);
-      if (user === null) {
-        // This means we detected a GitHub user who isn't an IEX user.
-        // Make do with what we have
-        return {
-          userName: author.login,
-          displayName: author.login,
-          email: 'unknown',
-          gitHubUser: {
-            login: author.login,
-            type: PersonType.USER,
-            avatarUrl: author.avatar_url,
-            externalId: author.node_id
-          }
-        };
-      }
-
+  const contributors = await pMap(contributorsResult, async ({ author }: any): Promise<IndexedInsightUser> => {
+    const user = await userServices.getUserByGitHubLogin(author.login);
+    if (user === null) {
+      // This means we detected a GitHub user who isn't an IEX user.
+      // Make do with what we have
       return {
-        userId: user.userId,
-        userName: user.userName,
-        email: user.email,
-        displayName: user.displayName,
-        avatar: user.avatar,
+        userName: author.login,
+        displayName: author.login,
+        email: 'unknown',
         gitHubUser: {
           login: author.login,
           type: PersonType.USER,
@@ -111,7 +94,21 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
         }
       };
     }
-  );
+
+    return {
+      userId: user.userId,
+      userName: user.userName,
+      email: user.email,
+      displayName: user.displayName,
+      avatar: user.avatar,
+      gitHubUser: {
+        login: author.login,
+        type: PersonType.USER,
+        avatarUrl: author.avatar_url,
+        externalId: author.node_id
+      }
+    };
+  });
 
   const insight: IndexedInsight = {
     itemType: ItemType.INSIGHT,
@@ -135,7 +132,7 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
       url: repository.url,
       cloneUrl: repository.cloneUrl,
       owner: {
-        type: (repository.owner.__typename! as string) as PersonType,
+        type: repository.owner.__typename! as string as PersonType,
         login: repository.owner.login,
         externalId: repository.owner.id,
         avatarUrl: repository.owner.avatarUrl!

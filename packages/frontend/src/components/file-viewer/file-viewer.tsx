@@ -151,7 +151,11 @@ export const FileViewer = ({
   const unpause = () => paused && setPaused(false);
   const pause = () => !paused && setPaused(true);
 
-  const { fetching, data: fetchedContents, error: fetchedError } = useFetch({
+  const {
+    fetching,
+    data: fetchedContents,
+    error: fetchedError
+  } = useFetch({
     url: fileUrl ?? '',
     contents,
     method: paused ? 'HEAD' : 'GET'

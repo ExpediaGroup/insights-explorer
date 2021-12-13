@@ -192,10 +192,10 @@ export class InsightResolver {
       insight.contributors.map((contributor) => {
         return contributor.userId
           ? this.userService.getUser(contributor.userId)
-          : (({
+          : ({
               ...contributor,
               userId: `unknown:${contributor.userName}`
-            } as unknown) as User);
+            } as unknown as User);
       })
     );
 
@@ -230,7 +230,7 @@ export class InsightResolver {
             // This means we detected a GitHub user who isn't an IEX user.
             // Make do with what we have
             return {
-              user: ({
+              user: {
                 userId: `unknown:${node.login}`,
                 userName: node.login,
                 displayName: node.login,
@@ -240,7 +240,7 @@ export class InsightResolver {
                   type: PersonType.USER,
                   externalId: node.id
                 }
-              } as unknown) as User,
+              } as unknown as User,
               permission: permission as RepositoryPermission
             };
           }

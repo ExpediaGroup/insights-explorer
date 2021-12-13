@@ -178,7 +178,7 @@ export const UserDrafts = ({ user }: Props) => {
                       >
                         <Box flexGrow={2}>
                           <ListIcon as={iconFactory('edit')} />
-                          {draft.draftKey} (last modified {formatRelativeIntl((draft.updatedAt as unknown) as string)})
+                          {draft.draftKey} (last modified {formatRelativeIntl(draft.updatedAt as unknown as string)})
                         </Box>
 
                         <Link

@@ -42,12 +42,10 @@ export const InsightPage = ({ isExport = false }) => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const [
-    { data, fetching, error },
-    { cloneInsight, deleteInsight, likeInsight, refreshInsight, viewInsight }
-  ] = useInsight({
-    fullName: `${owner}/${name}`
-  });
+  const [{ data, fetching, error }, { cloneInsight, deleteInsight, likeInsight, refreshInsight, viewInsight }] =
+    useInsight({
+      fullName: `${owner}/${name}`
+    });
 
   const [logView, setLogView] = useState(false);
 

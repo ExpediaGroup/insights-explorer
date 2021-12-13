@@ -63,7 +63,11 @@ const determineEffectiveFile = (file: InsightFile): InsightFile => {
 };
 
 const FetchAndRender = ({ url, contents, renderer }) => {
-  const { fetching, data: fetchedContents, error: fetchedError } = useFetch({
+  const {
+    fetching,
+    data: fetchedContents,
+    error: fetchedError
+  } = useFetch({
     url,
     contents
   });

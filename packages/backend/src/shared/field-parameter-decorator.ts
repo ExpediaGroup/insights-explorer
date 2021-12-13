@@ -19,15 +19,13 @@ import { createParamDecorator } from 'type-graphql';
 
 // Source: https://github.com/MichalLytek/type-graphql/issues/10
 export function Fields(): ParameterDecorator {
-  return createParamDecorator(
-    ({ info }): FieldsByTypeName => {
-      const parsedResolveInfoFragment = parseResolveInfo(info);
+  return createParamDecorator(({ info }): FieldsByTypeName => {
+    const parsedResolveInfoFragment = parseResolveInfo(info);
 
-      if (!parsedResolveInfoFragment) {
-        throw new Error('Failed to parse resolve info.');
-      }
-
-      return parsedResolveInfoFragment.fieldsByTypeName as FieldsByTypeName;
+    if (!parsedResolveInfoFragment) {
+      throw new Error('Failed to parse resolve info.');
     }
-  );
+
+    return parsedResolveInfoFragment.fieldsByTypeName as FieldsByTypeName;
+  });
 }
