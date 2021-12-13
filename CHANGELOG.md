@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.0.3](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.2...v1.0.3) (2021-12-13)
+
+
+### Bug Fixes
+
+* **deps:** Bump sqs-consumer from 5.5.0 to 5.6.0 ([bab4c48](https://github.com/ExpediaGroup/insights-explorer/commit/bab4c4885b55f45c1ec068f858dd56492ce9cd97))
+
 ### [1.0.2](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.1...v1.0.2) (2021-12-11)
 
 
