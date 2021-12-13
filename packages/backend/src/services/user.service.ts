@@ -234,18 +234,15 @@ export class UserService {
       .whereNull('insight.deletedAt')
       .orderBy('updatedAt', 'desc');
 
-    const likedInsights: Insight[] = (await getInsights(likedUserInsights.map((i) => i.insightId))).filter(
-      (i) => i !== null
-    ) as Insight[];
+    const likedInsights = (await getInsights(likedUserInsights.map((i) => i.insightId))) as Insight[];
+    const currentLikedInsights = likedInsights.filter((i) => i !== null);
 
     return {
       pageInfo: {
-        total: likedInsights.length
+        total: currentLikedInsights.length
       },
-      edges: likedInsights.map((insight) => ({ cursor: 'TODO', node: insight }))
+      edges: currentLikedInsights.map((insight) => ({ cursor: 'TODO', node: insight }))
     };
-
-    return { edges: [] };
   }
 
   /**

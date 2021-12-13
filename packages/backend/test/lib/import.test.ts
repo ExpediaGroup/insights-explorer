@@ -34,7 +34,7 @@ This is amazing!`;
     });
 
     test('Unicode non-breaking space', () => {
-      const html = '<h1>Hello</h1><p>This is' + String.fromCharCode(160) + 'amazing!</p>';
+      const html = '<h1>Hello</h1><p>This is' + String.fromCodePoint(160) + 'amazing!</p>';
       const expected = `<!-- This file was automatically converted from html to markdown. -->
 <!-- Please review it for any conversion errors. -->
 
