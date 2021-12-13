@@ -426,9 +426,11 @@ describe('file-tree', () => {
         tree.updateItemById(updatedItem);
 
         expect(
-          ((tree.getFiles().find((f) => f.path === 'subfolder') as InsightFolder).tree.find(
-            (f) => f.id === 'c'
-          ) as InsightFile).contents
+          (
+            (tree.getFiles().find((f) => f.path === 'subfolder') as InsightFolder).tree.find(
+              (f) => f.id === 'c'
+            ) as InsightFile
+          ).contents
         ).toEqual(updatedItem.contents);
       });
       it('should rename a file', () => {

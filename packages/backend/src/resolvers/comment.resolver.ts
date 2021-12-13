@@ -77,7 +77,7 @@ export class CommentResolver {
   async insight(@Root() comment: Comment): Promise<Insight> {
     const insight = this.insightService.getInsight(comment.insightId);
 
-    return (insight as unknown) as Insight;
+    return insight as unknown as Insight;
   }
 
   @FieldResolver()

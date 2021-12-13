@@ -73,7 +73,7 @@ export class ActivityResolver {
   @FieldResolver(() => Insight, { nullable: true })
   async insight(@Root() activity: Activity): Promise<Insight | undefined> {
     if (activity.details && 'insightId' in activity.details) {
-      return (this.insightService.getInsight(activity.details.insightId) as unknown) as Insight;
+      return this.insightService.getInsight(activity.details.insightId) as unknown as Insight;
     }
   }
 

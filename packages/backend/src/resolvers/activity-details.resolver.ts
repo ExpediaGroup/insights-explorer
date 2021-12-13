@@ -62,7 +62,7 @@ export class CommentActivityDetailsResolver {
   @FieldResolver(() => Insight, { nullable: true })
   async comment(@Root() activityDetails: IndexedCommentActivityDetails): Promise<Comment | undefined> {
     if (activityDetails && 'commentId' in activityDetails) {
-      return (this.commentService.getComment(activityDetails.commentId) as unknown) as Comment;
+      return this.commentService.getComment(activityDetails.commentId) as unknown as Comment;
     }
   }
 }
@@ -75,7 +75,7 @@ export class InsightActivityDetailsResolver {
   @FieldResolver(() => Insight, { nullable: true })
   async insight(@Root() activityDetails: IndexedInsightActivityDetails): Promise<Insight | undefined> {
     if (activityDetails && 'insightId' in activityDetails) {
-      return (this.insightService.getInsight(activityDetails.insightId) as unknown) as Insight;
+      return this.insightService.getInsight(activityDetails.insightId) as unknown as Insight;
     }
   }
 
@@ -93,14 +93,14 @@ export class InsightCollaboratorActivityDetailsResolver {
   @FieldResolver(() => Insight, { nullable: true })
   async insight(@Root() activityDetails: IndexedCollaboratorActivityDetails): Promise<Insight | undefined> {
     if (activityDetails && 'insightId' in activityDetails) {
-      return (this.insightService.getInsight(activityDetails.insightId) as unknown) as Insight;
+      return this.insightService.getInsight(activityDetails.insightId) as unknown as Insight;
     }
   }
 
   @FieldResolver(() => User, { nullable: true })
   async user(@Root() activityDetails: IndexedUserActivityDetails): Promise<User | undefined> {
     if (activityDetails && 'userId' in activityDetails) {
-      return (this.userService.getUser(activityDetails.userId) as unknown) as User;
+      return this.userService.getUser(activityDetails.userId) as unknown as User;
     }
   }
 }
@@ -113,7 +113,7 @@ export class NewsActivityDetailsResolver {
   @FieldResolver(() => News, { nullable: true })
   async news(@Root() activityDetails: IndexedNewsActivityDetails): Promise<News | undefined> {
     if (activityDetails && 'newsId' in activityDetails) {
-      return (this.newsService.getNews(activityDetails.newsId) as unknown) as News;
+      return this.newsService.getNews(activityDetails.newsId) as unknown as News;
     }
   }
 }
@@ -126,7 +126,7 @@ export class UserActivityDetailsResolver {
   @FieldResolver(() => User, { nullable: true })
   async user(@Root() activityDetails: IndexedUserActivityDetails): Promise<User | undefined> {
     if (activityDetails && 'userId' in activityDetails) {
-      return (this.userService.getUser(activityDetails.userId) as unknown) as User;
+      return this.userService.getUser(activityDetails.userId) as unknown as User;
     }
   }
 }
