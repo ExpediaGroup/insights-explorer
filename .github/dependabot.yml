@@ -12,7 +12,7 @@ updates:
     schedule:
       interval: daily
     commit-message:
-      prefix: fix(deps)
+      prefix: chore(actions)
 
   # Maintain dependencies for npm
   - package-ecosystem: npm
