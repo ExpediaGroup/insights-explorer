@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.0.4](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.3...v1.0.4) (2021-12-14)
+
+
+### Bug Fixes
+
+* **deps:** bump cycjimmy/semantic-release-action from 2.6.0 to 2.7.0 ([bbd1b05](https://github.com/ExpediaGroup/insights-explorer/commit/bbd1b05ee48391b381fe42d407725431a4b0bf8c))
+* **deps:** bump luxon from 2.1.1 to 2.2.0 ([1972358](https://github.com/ExpediaGroup/insights-explorer/commit/19723581b3d3fe4b9c67a25727b7263f2177cc24))
+* **deps:** bump react-router-dom from 6.0.2 to 6.1.1 ([14aff64](https://github.com/ExpediaGroup/insights-explorer/commit/14aff6422440ab9266c551fc7626dd8e86360b18))
+
 ### [1.0.3](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.2...v1.0.3) (2021-12-13)
 
 
