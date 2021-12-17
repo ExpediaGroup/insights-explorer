@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.0.5](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.4...v1.0.5) (2021-12-17)
+
+
+### Bug Fixes
+
+* **deps:** bump @urql/core from 2.3.5 to 2.3.6 ([cfbcdda](https://github.com/ExpediaGroup/insights-explorer/commit/cfbcdda78fec84dcce962f8d004549820c049a13))
+
 ### [1.0.4](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.3...v1.0.4) (2021-12-14)
 
 
