@@ -1,5 +1,5 @@
 # Build Stage
-FROM node:14.18.1-buster as build
+FROM node:16.13.1-buster as build
 
 RUN git config --global url."https://".insteadOf ssh://
 RUN npm set progress=false && npm set loglevel warn
@@ -17,7 +17,7 @@ RUN npm run build && \
 RUN find . -name ".npmrc" -type f -delete
 
 # Production Stage
-FROM node:14.18.1-alpine
+FROM node:16.13.1-alpine
 
 WORKDIR /opt/iex
 COPY --from=build /opt/iex .

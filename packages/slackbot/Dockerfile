@@ -1,5 +1,5 @@
 # Build Stage
-FROM node:14.18.1-buster as build
+FROM node:16.13.1-buster as build
 
 WORKDIR /opt/iex
 COPY . /opt/iex
@@ -16,7 +16,7 @@ RUN npm run build --prefix packages/slackbot && \
 RUN find . -name ".npmrc" -type f -delete
 
 # Production Stage
-FROM node:14.18.1-alpine
+FROM node:16.13.1-alpine
 
 WORKDIR /opt/iex
 COPY --from=build /opt/iex .
