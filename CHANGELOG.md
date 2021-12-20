@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.2](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.1...v1.1.2) (2021-12-20)
+
+
+### Bug Fixes
+
+* **deps:** bump express from 4.17.1 to 4.17.2 ([aedb619](https://github.com/ExpediaGroup/insights-explorer/commit/aedb6199f7177bef6b418adb8cb612ddf0d375e6))
+
 ### [1.1.1](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.0...v1.1.1) (2021-12-20)
 
 
