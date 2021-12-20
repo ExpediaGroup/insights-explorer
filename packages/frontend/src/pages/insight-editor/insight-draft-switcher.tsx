@@ -93,7 +93,7 @@ const DELETE_DRAFT_MUTATION = gql`
 export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
   const toast = useToast();
   const location = useLocation();
-  const state: { clonedFrom?: Insight; itemType?: string } | null = location.state;
+  const state: { clonedFrom?: Insight; itemType?: string } | null = location.state as any;
 
   const navigate = useNavigate();
   const { '*': draftKey } = useParams();
