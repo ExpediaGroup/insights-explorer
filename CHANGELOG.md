@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.0](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.5...v1.1.0) (2021-12-20)
+
+
+### Features
+
+* Index text-based files in an Insight ([8efe02b](https://github.com/ExpediaGroup/insights-explorer/commit/8efe02b207c0c8a8b139b718ffdd0d979e1371af))
+
 ### [1.0.5](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.4...v1.0.5) (2021-12-17)
 
 
