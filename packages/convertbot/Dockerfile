@@ -5,8 +5,7 @@ WORKDIR /opt/iex
 COPY . /opt/iex
 
 RUN npm set progress=false && npm set loglevel warn
-RUN npm ci && \
-  npm run bootstrap
+RUN npm ci
 
 RUN npm run build --prefix packages/convertbot && \
   npm run test --prefix packages/convertbot && \

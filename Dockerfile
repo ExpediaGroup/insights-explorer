@@ -2,13 +2,12 @@
 FROM node:16.13.1-buster as build
 
 RUN git config --global url."https://".insteadOf ssh://
-RUN npm set progress=false && npm set loglevel warn
 
 WORKDIR /opt/iex
 COPY . /opt/iex
 
-RUN npm ci && \
-  npm run bootstrap
+RUN npm set progress=false && npm set loglevel warn
+RUN npm ci
 
 RUN npm run build && \
   npm run test && \

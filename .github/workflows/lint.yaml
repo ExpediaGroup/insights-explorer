@@ -14,4 +14,4 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
       - name: Run ESLint
-        run: npm ci && npm run bootstrap && npm run build:backend && npm run generate && npm run lint
+        run: npm ci && npm run build:backend && npm run generate && npm run lint

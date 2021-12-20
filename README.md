@@ -27,17 +27,17 @@ Insights Explorer requires the following dependencies:
 
 ## Local Development
 
-For contributing features and fixes, IEX can be compiled and run locally.
+For contributing features and fixes, IEX can be built and run locally.
 
 ### Building the Project
 
-This repository is a monorepo with multiple projects inside it. [Lerna](https://lerna.js.org/) is currently used to manage the monorepo.
+This repository is a monorepo using [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces) to manage the contained packages.
 
 🚨 The Node.js version is managed by [nvm](https://github.com/nvm-sh/nvm). Install with `brew install nvm` or follow the installation instructions.
 
 ```sh
 nvm use
-npm install && npm run bootstrap
+npm install
 npm run build
 ```
 
