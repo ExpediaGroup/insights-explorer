@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.1](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.0...v1.1.1) (2021-12-20)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/react from 1.6.10 to 1.7.3 ([f81d989](https://github.com/ExpediaGroup/insights-explorer/commit/f81d989bc53dac5dfd0bb8a71d147c801fe1b638))
+* **deps:** bump @chakra-ui/theme from 1.11.1 to 1.12.2 ([b688d7f](https://github.com/ExpediaGroup/insights-explorer/commit/b688d7f86aaf7cf61e28fa07cababe712082aa03))
+* **deps:** bump @chakra-ui/theme-tools from 1.2.3 to 1.3.1 ([47004d2](https://github.com/ExpediaGroup/insights-explorer/commit/47004d22fef437d9d275b1488882dcddae08e4a5))
+
 ## [1.1.0](https://github.com/ExpediaGroup/insights-explorer/compare/v1.0.5...v1.1.0) (2021-12-20)
 
 
