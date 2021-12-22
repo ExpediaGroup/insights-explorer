@@ -71,7 +71,7 @@
     "--------": "------------------------------------",
     "clean": "npm run clean --workspaces",
     "clean:deep": "npm run clean:deep --workspaces && rm -rf node_modules && rm -f package-lock.json",
-    "build": "run-s build:backend generate lint build:tsc build:frontend:react",
+    "build": "run-s build:backend generate build:tsc build:frontend:react",
     "build:tsc": "tsc --build --incremental --verbose",
     "build:backend": "npm run build --workspace=@iex/backend",
     "build:frontend:react": "npm run build:react --workspace=@iex/frontend",
