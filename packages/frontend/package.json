@@ -16,7 +16,7 @@
     "@urql/core": "2.3.6",
     "@urql/exchange-graphcache": "4.3.5",
     "@urql/exchange-multipart-fetch": "0.1.13",
-    "@urql/exchange-retry": "0.3.0",
+    "@urql/exchange-retry": "0.3.2",
     "ace-builds": "1.4.13",
     "chart.xkcd": "1.1.13",
     "chart.xkcd-react": "0.0.6",
