@@ -240,10 +240,6 @@ export const InsightEditor = memo(
         const { id, ...template }: Insight = data.template;
 
         if (template) {
-          template.tags = template.tags.filter((tag) => {
-            return tag === 'iex-template' ? false : true;
-          });
-
           // Retain name/description/itemType when changing templates
           const { name, description, itemType } = form.getValues();
           const newReadme = {

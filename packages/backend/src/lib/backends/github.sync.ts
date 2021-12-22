@@ -211,12 +211,6 @@ export const githubRepositorySync = async (
     // Format all tags into lowercase, then dedupe using a Set
     insight.tags = [...new Set(insight.tags.map((tag) => tag.toLowerCase()))];
 
-    // Check for special tags
-    // DEPRECATED--will be removed shortly
-    if (insight.tags.includes('iex-template')) {
-      insight.itemType = ItemType.TEMPLATE;
-    }
-
     await syncFiles(gitInstance, insight, previousInsight);
 
     // Determine thumbnail
