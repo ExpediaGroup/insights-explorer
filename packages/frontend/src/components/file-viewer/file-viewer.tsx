@@ -297,7 +297,7 @@ export const FileViewer = ({
 
           {canDownload && (
             <Tooltip placement="bottom" label={downloadTooltip} aria-label={downloadTooltip}>
-              <Link href={downloadUrl} target="_blank">
+              <Link href={downloadUrl} download>
                 <IconButton aria-label={downloadTooltip} size="sm" icon={iconFactoryAs('download')} />
               </Link>
             </Tooltip>
