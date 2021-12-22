@@ -15,7 +15,7 @@
     "name": "Expedia Group",
     "email": "oss@expediagroup.com"
   },
-  "license": "TBD",
+  "license": "Apache-2.0",
   "workspaces": [
     "./packages/*"
   ],
