@@ -55,7 +55,7 @@
     "remark-emoji": "2.2.0",
     "remark-footnotes": "3.0.0",
     "remark-gfm": "1.0.0",
-    "remark-slug": "6.1.0",
+    "remark-slug": "7.0.1",
     "remark-toc": "7.2.0",
     "titleize": "2.1.0",
     "unist-util-visit": "2.0.3",
