@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.3](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.2...v1.1.3) (2021-12-22)
+
+
+### Bug Fixes
+
+* **deps:** bump docker node from 14.18.1 to 16.13.1 ([7442177](https://github.com/ExpediaGroup/insights-explorer/commit/7442177a5d9f52aed887be4b1349b00df5fcc147))
+* **deps:** bump node from 14.18.1 to 16.13.1 ([1ae6ce1](https://github.com/ExpediaGroup/insights-explorer/commit/1ae6ce1b5ea1e704116ac2701d6d95acf45944e1))
+
 ### [1.1.2](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.1...v1.1.2) (2021-12-20)
 
 
