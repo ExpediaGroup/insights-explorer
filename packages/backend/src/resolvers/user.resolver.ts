@@ -39,7 +39,7 @@ export class UserResolver {
   @Query(() => User, { nullable: true })
   async user(@Arg('userName') userName: string, @Ctx() ctx: Context): Promise<User | null> {
     try {
-      const user = await User.query().where('userName', userName).first();
+      const user = await User.query().where('userName', userName.toLowerCase()).first();
 
       // Store this for authorization checks later
       ctx.retrievedUserId = user?.userId;
@@ -116,7 +116,7 @@ export class UserResolver {
 
     // Preferred username is email, but that's not a great user name
     // Default to the first part of their email
-    const userName = userInfo.preferred_username.split('@')[0];
+    const userName = userInfo.preferred_username.split('@')[0].toLowerCase();
 
     // Upsert feature pending: https://github.com/knex/knex/pull/3763
     await User.knex().raw(
