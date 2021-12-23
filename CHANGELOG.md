@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.5](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.4...v1.1.5) (2021-12-23)
+
+
+### Bug Fixes
+
+* Add the download attribute in the FileViewer ([e849a6e](https://github.com/ExpediaGroup/insights-explorer/commit/e849a6ef87f549bf941326c54cdb2a993d22412f))
+* Ensure usernames are lowercase; allow case-insensitive user search ([415156f](https://github.com/ExpediaGroup/insights-explorer/commit/415156f002ac2b435737371995c16a047b13fd50))
+
 ### [1.1.4](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.3...v1.1.4) (2021-12-22)
 
 
