@@ -362,7 +362,8 @@ export class InsightResolver {
         owner: repository.owner.login,
         repo: repository.externalName,
         repositoryType: RepositoryType.GITHUB,
-        refresh: true
+        refresh: true,
+        updated: true
       })) as Insight;
 
       // Log activity

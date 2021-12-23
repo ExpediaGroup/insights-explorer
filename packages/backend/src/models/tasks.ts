@@ -27,4 +27,14 @@ export interface InsightSyncTask {
    * visible after indexing.
    */
   refresh?: boolean;
+
+  /**
+   * Optional flag that indicates the repository was just updated.
+   *
+   * If true, the sync task will use the current time as the `updatedAt` field,
+   * rather than the repository's `updatedAt` field value.
+   *
+   * This avoids any potential sychronization issues with the repository.
+   */
+  updated?: boolean;
 }

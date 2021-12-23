@@ -184,6 +184,13 @@ export const githubRepositorySync = async (
     // Load insight details from GitHub metadata
     const insight = await getInsightFromRepository(item.owner, item.repo);
 
+    if (item.updated) {
+      // If this flag is set, it means an update was just pushed.
+      // Sometimes, the GitHub API hasn't recognized the update yet, so we
+      // need to manually update the updatedAt field to now.
+      insight.updatedAt = insight.syncedAt;
+    }
+
     // Short-circuit if the repository is archived
     if (insight.repository.isArchived) {
       logger.warn(`[GITHUB_SYNC] This repository is archived; stopping sync`);
