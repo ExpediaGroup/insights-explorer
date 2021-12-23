@@ -23,7 +23,7 @@ import { FileViewer } from '../../../../components/file-viewer/file-viewer';
 import { HtmlSplitEditor } from '../../../../components/html-split-editor/html-split-editor';
 import { MarkdownSplitEditor } from '../../../../components/markdown-split-editor/markdown-split-editor';
 import { InsightFile, InsightFileAction } from '../../../../models/file-tree';
-import { Insight, InsightFileInput } from '../../../../models/generated/graphql';
+import { Insight, InsightFileInput, UploadSingleFileMutation } from '../../../../models/generated/graphql';
 import {
   getLanguageForMime,
   getMimeForFileName,
@@ -92,6 +92,7 @@ interface Props {
   onFileChange: (updatedFile: InsightFileInput) => void;
   insight: Insight;
   transformAssetUri: (uri: string) => string;
+  uploadFile: (file: File, name: string) => Promise<UploadSingleFileMutation | undefined>;
 }
 
 export const InsightFileEditor = ({
@@ -101,6 +102,7 @@ export const InsightFileEditor = ({
   onFileChange,
   insight,
   transformAssetUri,
+  uploadFile,
   ...flexProps
 }: Props & FlexProps) => {
   const [cachedFile, setCachedFile] = useState<InsightFile>(file);
@@ -143,6 +145,7 @@ export const InsightFileEditor = ({
               baseAssetUrl={baseAssetUrl}
               baseLinkUrl={baseLinkUrl}
               transformAssetUri={transformAssetUri}
+              uploadFile={uploadFile}
               flexGrow={1}
               overflow="auto"
             />
