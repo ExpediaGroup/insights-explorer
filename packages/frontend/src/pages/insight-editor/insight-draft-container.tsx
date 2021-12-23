@@ -16,11 +16,13 @@
 
 import { useToast } from '@chakra-ui/react';
 import isEqual from 'lodash/isEqual';
+import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { gql, useMutation } from 'urql';
 
 import { Alert } from '../../components/alert/alert';
-import { Insight, UpdatedInsight } from '../../models/generated/graphql';
+import { Insight, UpdatedInsight, UploadSingleFileMutation } from '../../models/generated/graphql';
+import { urqlClient } from '../../urql';
 
 import { InsightEditor } from './insight-editor';
 
@@ -70,6 +72,18 @@ const DRAFT_PUBLISH_MUTATION = gql`
   }
 `;
 
+const UPLOAD_SINGLE_FILE_MUTATION = gql`
+  mutation UploadSingleFile($draftKey: String!, $attachment: InsightFileUploadInput!, $file: Upload!) {
+    uploadSingleFile(draftKey: $draftKey, attachment: $attachment, file: $file) {
+      id
+      name
+      path
+      mimeType
+      size
+    }
+  }
+`;
+
 /**
  * This component is rendered only after the following are available:
  *   - Insight
@@ -87,6 +101,34 @@ export const InsightDraftContainer = ({ insight, draft, draftKey, onRefresh }) =
 
   const [upsertDraftResult, upsertDraft] = useMutation(DRAFT_UPSERT_MUTATION);
   const { error: upsertDraftError, fetching: isSavingDraft } = upsertDraftResult;
+
+  // UploadFile method for pasting images
+  const uploadFile = async (file: File, name: string): Promise<UploadSingleFileMutation | undefined> => {
+    // Upload file to IEX storage
+    const { data, error } = await urqlClient
+      .mutation<UploadSingleFileMutation>(UPLOAD_SINGLE_FILE_MUTATION, {
+        draftKey,
+        attachment: {
+          id: nanoid(),
+          size: file.size,
+          name
+        },
+        file: file
+      })
+      .toPromise();
+
+    if (error || data === undefined) {
+      toast({
+        position: 'bottom-right',
+        title: 'Unable to upload pasted image.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true
+      });
+    }
+
+    return data;
+  };
 
   // Save Drafts periodically, but only on changes
   // Calls to this callback should be throttled to avoid saving too often
@@ -176,6 +218,7 @@ export const InsightDraftContainer = ({ insight, draft, draftKey, onRefresh }) =
         isSavingDraft={isSavingDraft}
         isPublishing={isPublishing}
         onRefresh={onRefresh}
+        uploadFile={uploadFile}
       />
     </>
   );

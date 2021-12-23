@@ -35,7 +35,7 @@ import urljoin from 'url-join';
 import { gql, useMutation, useQuery } from 'urql';
 
 import { FileOrFolder, InsightFileAction } from '../../models/file-tree';
-import { Insight, InsightFileInput } from '../../models/generated/graphql';
+import { Insight, InsightFileInput, UploadSingleFileMutation } from '../../models/generated/graphql';
 import { InsightFileTree, isFile } from '../../shared/file-tree';
 import { isRelativeUrl } from '../../shared/url-utils';
 import { useDebounce } from '../../shared/useDebounce';
@@ -104,6 +104,7 @@ interface Props {
   isPublishing: boolean;
   isSavingDraft: boolean;
   onRefresh: () => void;
+  uploadFile: (file: File, name: string) => Promise<UploadSingleFileMutation | undefined>;
 }
 
 /**
@@ -114,7 +115,7 @@ interface Props {
  * This component should not be rendered until `insight` and `draft` have been loaded.
  */
 export const InsightEditor = memo(
-  ({ insight, draftKey, draft, saveDraft, publish, isSavingDraft, isPublishing, onRefresh }: Props) => {
+  ({ insight, draftKey, draft, saveDraft, publish, isSavingDraft, isPublishing, onRefresh, uploadFile }: Props) => {
     const navigate = useNavigate();
     const toast = useToast();
 
@@ -330,6 +331,16 @@ export const InsightEditor = memo(
       return uri;
     };
 
+    const uploadFileWrapper = async (file: File, name: string): Promise<UploadSingleFileMutation | undefined> => {
+      const data = await uploadFile(file, name);
+      if (data) {
+        fileTree.addItem({ ...data?.uploadSingleFile, action: InsightFileAction.ADD });
+        fileTreeChange(fileTree);
+      }
+
+      return data;
+    };
+
     return (
       <Flex
         as="form"
@@ -408,6 +419,7 @@ export const InsightEditor = memo(
                     baseAssetUrl={`/api/v1/insights/${insight.fullName}/assets`}
                     baseLinkUrl={`/${itemType}/${insight.fullName}/files`}
                     transformAssetUri={transformAssetUri}
+                    uploadFile={uploadFileWrapper}
                     flexGrow={1}
                     overflow="auto"
                   />

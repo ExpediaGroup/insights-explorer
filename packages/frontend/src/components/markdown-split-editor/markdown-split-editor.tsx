@@ -36,6 +36,7 @@ import {
 } from '@chakra-ui/react';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
+import { UploadSingleFileMutation } from '../../models/generated/graphql';
 import { iconFactory, iconFactoryAs } from '../../shared/icon-factory';
 import { useDebounce } from '../../shared/useDebounce';
 import { Link } from '../link/link';
@@ -117,6 +118,7 @@ interface Props {
   showFormattingHelp?: boolean;
   showPreview?: boolean;
   transformAssetUri?: ((uri: string, children?: ReactNode, title?: string, alt?: string) => string) | null;
+  uploadFile?: (file: File, name: string) => Promise<UploadSingleFileMutation | undefined>;
 }
 
 export const MarkdownSplitEditor = ({
@@ -127,6 +129,7 @@ export const MarkdownSplitEditor = ({
   showFormattingHelp = true,
   showPreview = true,
   transformAssetUri,
+  uploadFile,
   ...flexProps
 }: Props & Omit<FlexProps, 'onChange'>) => {
   const [internalValue, setInternalValue] = useState(contents);
@@ -196,7 +199,7 @@ export const MarkdownSplitEditor = ({
           width="100%"
           display={{ base: isPreviewMode ? 'none' : 'block', xl: 'block' }}
         >
-          <MarkdownEditor contents={contents} onContentsChange={setInternalValue} />
+          <MarkdownEditor contents={contents} onContentsChange={setInternalValue} uploadFile={uploadFile} />
         </Box>
         {showPreview && (
           <MarkdownContainer
