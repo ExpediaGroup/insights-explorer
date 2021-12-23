@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.6](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.5...v1.1.6) (2021-12-23)
+
+
+### Bug Fixes
+
+* **deps:** bump isomorphic-git from 1.10.2 to 1.10.3 ([#268](https://github.com/ExpediaGroup/insights-explorer/issues/268)) ([955ed94](https://github.com/ExpediaGroup/insights-explorer/commit/955ed943f3908b5c3bc753b30296001825393e4d))
+
 ### [1.1.5](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.4...v1.1.5) (2021-12-23)
 
 
