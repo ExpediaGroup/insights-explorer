@@ -255,7 +255,7 @@ Images can be included with this syntax: `![alt text](url "title")`.  Alt text a
 
 ![alt text](https://commonmark.org/help/images/favicon.png "Markdown Logo")
 
-The standard Markdown syntax does not provide a means to scale images; the custom [`:image` directive](#images-directive) can be used instead.
+The standard Markdown syntax does not provide any other options e.g. scaling, positioning, etc.  The custom [`:image` directive](#images-directive-iex) can be used for more advanced cases.
 
 ### Relative URLs
 
@@ -753,7 +753,56 @@ Images can be included :image[https://commonmark.org/help/images/favicon.png]{he
 
 Images can be included :image[https://commonmark.org/help/images/favicon.png]{height=1.5rem display=inline alt="Markdown Logo"} inline in text as well
 
-Many attributes are supported, including most CSS properties, including: `alt`, `height`, `width`, `display`, `objectFit`, `objectPosition`, etc.
+Many attributes are supported, including most CSS properties, including: `alt`, `height`, `width`, `display`, `objectFit`, `objectPosition`, `borderRadius`, etc.
+
+The `objectFit` and `objectPosition` attributes can be used to control how images are cropped to smaller sizes:
+
+```md
+<div style="display: flex; justify-content: space-around; max-width: 1000px;">
+
+  :image[https://unsplash.com/photos/5o4WVPa0qGQ/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8N3x8Y29mZmVlJTIwZmxvd2VyfHwwfHx8fDE2NDEyMzI2NjU&force=true&h=480]{height="300px" objectFit="contain" alt="Photo by Maddi Bazzocco"}
+
+  :image[https://unsplash.com/photos/5o4WVPa0qGQ/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8N3x8Y29mZmVlJTIwZmxvd2VyfHwwfHx8fDE2NDEyMzI2NjU&force=true&h=480]{height="300px" width="300px" objectFit="cover" objectPosition="center top" alt="Photo by Maddi Bazzocco"}
+
+  :image[https://unsplash.com/photos/5o4WVPa0qGQ/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8N3x8Y29mZmVlJTIwZmxvd2VyfHwwfHx8fDE2NDEyMzI2NjU&force=true&h=480]{height="300px" width="300px" objectFit="cover" objectPosition="center bottom" alt="Photo by Maddi Bazzocco"}
+
+</div>
+```
+
+<div style="display: flex; justify-content: space-around; max-width: 1000px;">
+
+  :image[https://unsplash.com/photos/5o4WVPa0qGQ/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8N3x8Y29mZmVlJTIwZmxvd2VyfHwwfHx8fDE2NDEyMzI2NjU&force=true&w=300]{height="280px" objectFit="contain" alt="Photo by Maddi Bazzocco"}
+
+  :image[https://unsplash.com/photos/5o4WVPa0qGQ/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8N3x8Y29mZmVlJTIwZmxvd2VyfHwwfHx8fDE2NDEyMzI2NjU&force=true&w=300]{height="280px" width="280px" objectFit="cover" objectPosition="center top" alt="Photo by Maddi Bazzocco"}
+
+  :image[https://unsplash.com/photos/5o4WVPa0qGQ/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8N3x8Y29mZmVlJTIwZmxvd2VyfHwwfHx8fDE2NDEyMzI2NjU&force=true&w=300]{height="280px" width="280px" objectFit="cover" objectPosition="center bottom" alt="Photo by Maddi Bazzocco"}
+
+</div>
+
+The `borderRadius` attribute rounds the image corners, all the way up to a circle:
+
+```md
+<div style="display: flex; justify-content: space-around; max-width: 1000px;">
+
+:image[https://unsplash.com/photos/eCED0MMzpVI/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjQxMjMzNTQx&force=true&w=640]{borderRadius="1rem" height="280px" width="280px" objectFit="cover" alt="Photo by Rafael Hoyos Weht"}
+
+:image[https://unsplash.com/photos/eCED0MMzpVI/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjQxMjMzNTQx&force=true&w=640]{borderRadius="4rem" height="280px" width="280px" objectFit="cover" alt="Photo by Rafael Hoyos Weht"}
+
+:image[https://unsplash.com/photos/eCED0MMzpVI/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjQxMjMzNTQx&force=true&w=640]{borderRadius="full" height="280px" width="280px" objectFit="cover" alt="Photo by Rafael Hoyos Weht"}
+
+</div>
+
+```
+
+<div style="display: flex; justify-content: space-around; max-width: 1000px;">
+
+:image[https://unsplash.com/photos/eCED0MMzpVI/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjQxMjMzNTQx&force=true&w=640]{borderRadius="1rem" height="280px" width="280px" objectFit="cover" alt="Photo by Rafael Hoyos Weht"}
+
+:image[https://unsplash.com/photos/eCED0MMzpVI/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjQxMjMzNTQx&force=true&w=640]{borderRadius="4rem" height="280px" width="280px" objectFit="cover" alt="Photo by Rafael Hoyos Weht"}
+
+:image[https://unsplash.com/photos/eCED0MMzpVI/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjQxMjMzNTQx&force=true&w=640]{borderRadius="full" height="280px" width="280px" objectFit="cover" alt="Photo by Rafael Hoyos Weht"}
+
+</div>
 
 ### Videos :badge[IEX]{variant=frost fontSize=1.2rem}
 
