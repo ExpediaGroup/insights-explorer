@@ -24,7 +24,7 @@
     "@graphql-codegen/introspection": "1.18.2",
     "@graphql-codegen/typescript": "1.23.0",
     "@graphql-codegen/typescript-operations": "1.18.2",
-    "@types/fs-extra": "9.0.11",
+    "@types/fs-extra": "9.0.13",
     "@types/jest": "27.0.3",
     "@types/lodash": "4.14.178",
     "@types/node": "16.11.15",
