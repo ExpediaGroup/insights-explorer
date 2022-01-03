@@ -27,7 +27,7 @@
     "dotenv-flow": "3.2.0",
     "express": "4.17.2",
     "express-async-errors": "3.1.1",
-    "helmet": "4.6.0",
+    "helmet": "5.0.1",
     "http-status-codes": "2.1.4",
     "module-alias": "2.2.2",
     "morgan": "1.10.0",
