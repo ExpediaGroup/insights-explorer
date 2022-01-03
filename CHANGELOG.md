@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.7](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.6...v1.1.7) (2022-01-03)
+
+
+### Bug Fixes
+
+* Ensure `updatedAt` is current when publishing changes ([5ffc660](https://github.com/ExpediaGroup/insights-explorer/commit/5ffc660145e9e6bb8816e121b3a1918e4b4ff90d))
+
 ### [1.1.6](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.5...v1.1.6) (2021-12-23)
 
 
