@@ -25,7 +25,7 @@ interface Props {
   links: HelpSidebarLink[];
 }
 
-const IexBadge = () => <Badge bg="frost.200">IEX</Badge>;
+const IexBadge = () => <Badge variant="frost">IEX</Badge>;
 
 export const HelpSidebar = ({ links, ...props }: Props & BoxProps) => {
   return (

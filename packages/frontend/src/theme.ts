@@ -245,6 +245,13 @@ export const IexTheme = extendTheme({
         };
       }
     },
+    Badge: {
+      variants: {
+        frost: {
+          bg: 'frost.200'
+        }
+      }
+    },
     Button: {
       baseStyle: {
         // This fixes https://github.com/chakra-ui/chakra-ui/issues/4255

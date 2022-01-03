@@ -4,7 +4,7 @@ Markdown is a widely-used markup language which can easily be rendered into HTML
 Markdown for Insight contents (and comments), and this page is intended as a reference guide to the
 particular flavor that IEX supports.
 
-Insights Explorer uses its own Markdown variant, based largely on [GitHub Flavored Markdown (GFM)](https://github.github.com/gfm/).  Any IEX-specific features are denoted with an  :badge[IEX]{bg=frost.200} badge.
+Insights Explorer uses its own Markdown variant, based largely on [GitHub Flavored Markdown (GFM)](https://github.github.com/gfm/).  Any IEX-specific features are denoted with an  :badge[IEX]{variant=frost} badge.
 
 For more details on the origins of Markdown please refer additionally
 to [John Gruber's original spec](https://daringfireball.net/projects/markdown/)
@@ -423,7 +423,7 @@ To display literal characters that would otherwise be interpreted as a format ch
 
 # Advanced Features
 
-## Table of Contents :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+## Table of Contents :badge[IEX]{variant=frost fontSize=1.2rem}
 
 A table of contents can be automatically generated for an entire Markdown document by adding a heading named `# Table of Contents`.
 
@@ -440,7 +440,7 @@ Content cannot be nested under the table of contents heading; any content will b
 This line will be replaced by the generated list.
 
 
-## Footnotes :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+## Footnotes :badge[IEX]{variant=frost fontSize=1.2rem}
 
 Footnotes allow you to add notes and references without cluttering the body of the document. When you create a footnote, a superscript number with a link appears where you added the footnote reference. Readers can click the link to jump to the content of the footnote at the bottom of the page.
 
@@ -464,14 +464,14 @@ Note: The title for the footnote is not set automatically, but feel free to set 
 
 [^long-footnote]: Here’s one with multiple blocks.
 
-    Subsequent paragraphs are indented to show that they belong to the previous footnote. 
- 
+    Subsequent paragraphs are indented to show that they belong to the previous footnote.
+
         { some.code }
 
     The whole paragraph can be indented, or just the first
     line.  In this way, multi-paragraph footnotes work like
     multi-paragraph list items.
-    
+
 [^3]: You can set a title using `## Footnotes` and a divider with `---`
 
 <br/>
@@ -492,14 +492,14 @@ Note: The title for the footnote is not set automatically, but feel free to set 
 
 [^long-footnote]: Here’s one with multiple blocks.
 
-    Subsequent paragraphs are indented to show that they belong to the previous footnote. 
- 
+    Subsequent paragraphs are indented to show that they belong to the previous footnote.
+
         { some.code }
 
     The whole paragraph can be indented, or just the first
     line.  In this way, multi-paragraph footnotes work like
     multi-paragraph list items.
-    
+
 [^3]: This cool title was made using a three hash `### Footnotes Examples` and a divider with `---`
 
 ## Syntax Highlighting
@@ -615,13 +615,13 @@ Insight Explorer provides autocomplete for emojicodes within the Insight Editor.
 
 </details>
 
-## Directives :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+## Directives :badge[IEX]{variant=frost fontSize=1.2rem}
 
 Directives are a Markdown extension that provides a consistent way to extend the syntax to new use cases.  This is not part of the [CommonMark](https://commonmark.org/) spec, but it has been extensively discussed [here](https://talk.commonmark.org/t/generic-directives-plugins-syntax/444).
 
 These features are exclusive to Insights Explorer and will not display correctly elsewhere (e.g. GitHub).
 
-### Badges :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Badges :badge[IEX]{variant=frost fontSize=1.2rem}
 
 Badges are small, inline elements that provide unique styling. They are typically used for labeling, categorizing, providing status, etc.
 
@@ -647,9 +647,9 @@ Badges can be used inline with most content.  If it is too small by default, `fo
 :badge[Big]{colorScheme=yellow fontSize=1.2rem}
 :badge[Bigger]{colorScheme=red fontSize=1.4rem}
 
-### Custom Tables (Directive) :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Custom Tables (Directive) :badge[IEX]{variant=frost fontSize=1.2rem}
 
-Tables have a default style (no border, stripes and width as fit content), but you can set a specific style for tables using the `:::custom_table` directive. 
+Tables have a default style (no border, stripes and width as fit content), but you can set a specific style for tables using the `:::custom_table` directive.
 
 On a custom table you can set `border`, `color` for the stripes, and set the table `width` as full.
 
@@ -735,7 +735,7 @@ Default Values:
 | _variant_  | **striped**       |
 | _size_     | **sm**            |
 
-### Images (Directive) :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Images (Directive) :badge[IEX]{variant=frost fontSize=1.2rem}
 
 The `:image` directive provides additional features beyond what the default image syntax supports.
 
@@ -755,7 +755,7 @@ Images can be included :image[https://commonmark.org/help/images/favicon.png]{he
 
 Many attributes are supported, including most CSS properties, including: `alt`, `height`, `width`, `display`, `objectFit`, `objectPosition`, etc.
 
-### Videos :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Videos :badge[IEX]{variant=frost fontSize=1.2rem}
 
 The `:video` directive lets you embed a video within an Insight.
 
@@ -773,7 +773,7 @@ As with images, relative paths can be used to embed videos which have been uploa
 
 Many [optional attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes) are supported, including `width`, `height`, `autoplay`, `controls`, `loop`, etc.
 
-### Insight :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Insight :badge[IEX]{variant=frost fontSize=1.2rem}
 
 A Insight reference can be included using the `::insight` directive:
 
@@ -795,7 +795,7 @@ The presentation can be configured with an optional `layout` attribute:
 
 Possible `layout` values: `default`, `compact`, `square`.
 
-### Insight Search :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Insight Search :badge[IEX]{variant=frost fontSize=1.2rem}
 
 Search results can be included using the `::insights` directive:
 
@@ -823,7 +823,7 @@ Available options:
 * `showUpdatedAt`: Includes the update date in certain layouts.  Can be set to `true` or `false`
 * `showScores`: Includes the search relevance score.  Can be set to `true` or `false`
 
-### Math (KaTeX) :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Math (KaTeX) :badge[IEX]{variant=frost fontSize=1.2rem}
 
 Math expressions can be added using [KaTeX](https://katex.org/) notation.
 
@@ -872,7 +872,7 @@ x = \begin{pmatrix}
 
 Please refer to KaTeX's [Supported Functions](https://katex.org/docs/supported.html) documentation for additional details on syntax.
 
-### Vega Charts :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Vega Charts :badge[IEX]{variant=frost fontSize=1.2rem}
 
 [Vega](https://vega.github.io/vega/) is a declarative visualization grammar, and [Vega-Lite](https://vega.github.io/vega-lite/) is a higher-level language which makes it easier to create common visualizations. Charts can be generated on-the-fly from a definition embedded directly in Markdown using the `:::vega` directive. To use, provide the Vega or Vega-Lite chart specification between the `:::` fences.
 
@@ -956,7 +956,7 @@ By default, the Vega spec will have the `"width": "container"` attribute set.  H
 
 Additional attributes can be specified between `{}` after the chart type, like this: `:::vega{height=500px}`.
 
-### Xkcd-Style Charts :badge[IEX]{bg=frost.200 fontSize=1.2rem}
+### Xkcd-Style Charts :badge[IEX]{variant=frost fontSize=1.2rem}
 
 xkcd-style charts have a hand-drawn appearance, and their lo-fi nature makes them ideal for presenting rough conclusions.  Charts can be generated on-the-fly from a definition embedded directly in Markdown using the `:::xkcd[]` directive.  To use, provide the chart type as the inline content between square brackets (`[]`), and the chart definition between the `:::` fences.
 
