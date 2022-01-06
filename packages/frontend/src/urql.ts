@@ -15,7 +15,7 @@
  */
 
 import { cacheExchange, KeyGenerator } from '@urql/exchange-graphcache';
-import { IntrospectionData } from '@urql/exchange-graphcache/dist/types/ast';
+import type { IntrospectionData } from '@urql/exchange-graphcache/dist/types/ast/schema';
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch';
 import { retryExchange } from '@urql/exchange-retry';
 import { createClient, dedupExchange, OperationResult, Operation } from 'urql';
