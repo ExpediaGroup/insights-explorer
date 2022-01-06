@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.8](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.7...v1.1.8) (2022-01-06)
+
+
+### Bug Fixes
+
+* **deps:** bump helmet from 4.6.0 to 5.0.1 ([ac8fe2b](https://github.com/ExpediaGroup/insights-explorer/commit/ac8fe2ba08321a1f791a9e971ad2c9e6f50deedb))
+
 ### [1.1.7](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.6...v1.1.7) (2022-01-03)
 
 
