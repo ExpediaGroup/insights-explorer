@@ -48,7 +48,7 @@
     "graphql": "15.5.3",
     "graphql-parse-resolve-info": "4.12.0",
     "graphql-type-json": "0.3.2",
-    "graphql-upload": "11.0.0",
+    "graphql-upload": "13.0.0",
     "helmet": "5.0.1",
     "http-status-codes": "2.1.4",
     "isomorphic-git": "1.10.3",
