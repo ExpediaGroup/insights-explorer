@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.9](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.8...v1.1.9) (2022-01-06)
+
+
+### Bug Fixes
+
+* **deps:** bump graphql-upload from 11.0.0 to 13.0.0 ([27ddae7](https://github.com/ExpediaGroup/insights-explorer/commit/27ddae756ca56e16ca93f2dd67529e5b6bc99e5a))
+
 ### [1.1.8](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.7...v1.1.8) (2022-01-06)
 
 
