@@ -14,17 +14,11 @@
  * limitations under the License.
  */
 
-import http from 'http';
-import https from 'https';
-
-import { createClient, fetchExchange } from '@urql/core';
 import { buildSchemaSync, AuthChecker, ResolverData } from 'type-graphql';
 
 import { GqlErrorInterceptor } from '../middleware/gql-error-interceptor';
 import { Context } from '../models/context';
 import { Permission } from '../models/permission';
-
-global.fetch = require('node-fetch');
 
 const authChecker: AuthChecker<any, Permission> = ({ context }, permissions) => {
   // Must have a valid bearer token
@@ -80,21 +74,4 @@ export const schema = buildSchemaSync({
   globalMiddlewares: [GqlErrorInterceptor],
   resolvers: [__dirname + '/../resolvers/*.resolver.{ts,js}'],
   validate: false
-});
-
-const getAgent = (): http.Agent => {
-  if (process.env.PUBLIC_URL && process.env.PUBLIC_URL.startsWith('https://')) {
-    return new https.Agent({
-      rejectUnauthorized: false
-    });
-  }
-  return new http.Agent();
-};
-
-export const client = createClient({
-  url: `${process.env.PUBLIC_URL}/api/v1/graphql`,
-  exchanges: [fetchExchange],
-  fetchOptions: {
-    agent: getAgent()
-  } as any
 });

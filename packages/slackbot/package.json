@@ -29,7 +29,6 @@
     "express": "4.17.2",
     "module-alias": "2.2.2",
     "morgan": "1.10.0",
-    "node-fetch": "3.0.0-beta.9",
     "reflect-metadata": "0.1.13",
     "tmp-promise": "3.0.3"
   },

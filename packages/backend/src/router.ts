@@ -28,7 +28,6 @@ import * as insightsController from './controllers/insights.v1';
 import * as webhookController from './controllers/webhook.v1';
 import { oktaAuthenticator } from './middleware/okta-authenticator';
 import { requestId } from './middleware/request-id';
-import { requireAuth } from './middleware/require-auth';
 
 export async function createRouter(): Promise<Router> {
   const router = Router();
@@ -56,10 +55,6 @@ export async function createRouter(): Promise<Router> {
     graphQLServer.getMiddleware({ path: '/' })
   );
   v1Router.all('/webhook', webhookController.hook);
-
-  // These routes require authentication
-  v1Router.get('/insights/search', oktaAuthenticator, requireAuth, insightsController.search);
-  v1Router.get('/insights/:namespace/:name', oktaAuthenticator, requireAuth, insightsController.getInsight);
 
   // These routes do not require authentication
   v1Router.get('/avatars/:key', avatarController.getAvatar);
