@@ -20,7 +20,7 @@
     "ace-builds": "1.4.13",
     "chart.xkcd": "1.1.13",
     "chart.xkcd-react": "0.0.6",
-    "framer-motion": "4.1.17",
+    "framer-motion": "5.5.5",
     "graphql": "15.5.3",
     "immer": "9.0.7",
     "katex": "0.15.1",
