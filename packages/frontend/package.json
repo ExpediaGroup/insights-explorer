@@ -102,8 +102,8 @@
     "eject": "react-scripts eject",
     "prune:production": "rm -rf ./node_modules",
     "------": "------------------------------------",
-    "lint": "eslint --cache '*/**/*.{js,ts,tsx}'",
-    "lint:fix": "eslint --cache '*/**/*.{js,ts,tsx}' --fix",
+    "lint": "eslint '*/**/*.{js,ts,tsx}'",
+    "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --fix",
     "-------": "------------------------------------",
     "analyze": "source-map-explorer 'build/static/js/*.js'"
   },

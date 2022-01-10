@@ -13,8 +13,8 @@
     "test": "jest --coverage --verbose --detectOpenHandles --passWithNoTests",
     "test:watch": "npm run test -- --watch",
     "------": "------------------------------------",
-    "lint": "eslint --cache .",
-    "lint:fix": "eslint --cache . --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "files": [
     "dist"
