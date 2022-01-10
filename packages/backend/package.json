@@ -29,7 +29,7 @@
     "@octokit/rest": "18.12.0",
     "@types/turndown": "5.0.1",
     "@urql/core": "2.3.6",
-    "apollo-server-express": "2.25.2",
+    "apollo-server-express": "3.6.1",
     "aws-sdk": "2.1046.0",
     "axios": "0.24.0",
     "better-queue": "3.8.10",
