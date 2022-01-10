@@ -17,7 +17,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { ConvertibleFile, ConvertRequest } from '@iex/models/convertbot/convert-request';
+import type { ConvertibleFile, ConvertRequest } from '@iex/models/convertbot/convert-request';
 import { MessageQueue } from '@iex/mq/message-queue';
 import logger from '@iex/shared/logger';
 import { Storage } from '@iex/shared/storage';

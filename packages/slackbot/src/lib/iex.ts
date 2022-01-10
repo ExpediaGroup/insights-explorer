@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { Client, ClientOptions } from '@elastic/elasticsearch';
-import { SearchBody, SearchResponse } from '@iex/models/elasticsearch';
-import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
+import type { ClientOptions } from '@elastic/elasticsearch';
+import { Client } from '@elastic/elasticsearch';
+import type { SearchBody, SearchResponse } from '@iex/models/elasticsearch';
+import type { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import logger from '@iex/shared/logger';
 
 const defaultOptions: ClientOptions = {

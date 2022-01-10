@@ -29,7 +29,7 @@ for (const packageName of packages) {
 }
 
 import './environment';
-import { Server } from 'http';
+import type { Server } from 'http';
 
 import app from './server';
 import logger from '@iex/shared/logger';

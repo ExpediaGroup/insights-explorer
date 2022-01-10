@@ -20,7 +20,8 @@ import path from 'path';
 
 import logger from '@iex/shared/logger';
 import compression from 'compression';
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import morgan from 'morgan';
 

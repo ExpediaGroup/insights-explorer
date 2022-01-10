@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import { RepositoryType } from '../repository-type';
+import type { RepositoryType } from '../repository-type';
 
-import { IndexedRepositoryPerson } from './indexed-repository-person';
+import type { IndexedRepositoryPerson } from './indexed-repository-person';
 
 export interface IndexedRepository {
   externalId: string;

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { PersonType } from '../person-type';
-import { RepositoryPermission } from '../repository-permission';
+import type { PersonType } from '../person-type';
+import type { RepositoryPermission } from '../repository-permission';
 
 export interface IndexedRepositoryPerson {
   login: string;

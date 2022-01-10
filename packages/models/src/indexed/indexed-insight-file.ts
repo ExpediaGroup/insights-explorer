@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { InsightFileAction } from '../insight-file-action';
+import type { InsightFileAction } from '../insight-file-action';
 
 export interface IndexedInsightFileConversion {
   mimeType: string;

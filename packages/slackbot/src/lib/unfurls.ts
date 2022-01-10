@@ -15,7 +15,7 @@
  */
 
 import logger from '@iex/shared/logger';
-import { MessageAttachment } from '@slack/bolt';
+import type { MessageAttachment } from '@slack/bolt';
 
 import { getInsight } from './iex';
 

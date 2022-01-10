@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { IndexedRepositoryPerson } from './indexed-repository-person';
+import type { IndexedRepositoryPerson } from './indexed-repository-person';
 
 export interface IndexedInsightUser {
   userId?: number;

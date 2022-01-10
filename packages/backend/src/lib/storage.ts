@@ -15,9 +15,10 @@
  */
 
 import logger from '@iex/shared/logger';
-import { AWSError, Request, S3 } from 'aws-sdk';
-import { HeadObjectOutput } from 'aws-sdk/clients/s3';
-import { ReadStream } from 'fs-extra';
+import { S3 } from 'aws-sdk';
+import type { AWSError, Request } from 'aws-sdk';
+import type { HeadObjectOutput } from 'aws-sdk/clients/s3';
+import type { ReadStream } from 'fs-extra';
 
 const defaultOptions: S3.Types.ClientConfiguration = {
   region: process.env.S3_REGION,

@@ -19,7 +19,7 @@
  *
  * Documentation: https://github.com/winstonjs/winston
  */
-import { TransformableInfo } from 'logform';
+import type { TransformableInfo } from 'logform';
 import { createLogger, format, transports } from 'winston';
 
 // Init Logger

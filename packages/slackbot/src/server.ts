@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-import { Server } from 'http';
+import type { Server } from 'http';
 
 import logger from '@iex/shared/logger';
-import express, { Request, Response } from 'express';
+import type { Request, Response } from 'express';
+import express from 'express';
 import morgan from 'morgan';
 
 // Init express

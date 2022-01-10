@@ -7,6 +7,7 @@ settings:
         - tsconfig.json
 rules:
   no-console: ['error']
+  '@typescript-eslint/consistent-type-imports': off
   '@typescript-eslint/no-explicit-any': off
   '@typescript-eslint/no-non-null-assertion': off
   '@typescript-eslint/member-ordering':  [

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { SearchQuery } from '@iex/models/elasticsearch';
+import type { SearchQuery } from '@iex/models/elasticsearch';
 import isArray from 'lodash/isArray';
 import mergeWith from 'lodash/mergeWith';
 import Parsimmon, { optWhitespace } from 'parsimmon';

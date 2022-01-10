@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import { ItemType } from '../item-type';
+import type { ItemType } from '../item-type';
 
-import { IndexedInsightCreation } from './indexed-insight-creation';
-import { IndexedInsightFile } from './indexed-insight-file';
-import { IndexedInsightMetadata } from './indexed-insight-metadata';
-import { IndexedInsightReadme } from './indexed-insight-readme';
-import { IndexedInsightUser } from './indexed-insight-user';
-import { IndexedRepository } from './indexed-repository';
+import type { IndexedInsightCreation } from './indexed-insight-creation';
+import type { IndexedInsightFile } from './indexed-insight-file';
+import type { IndexedInsightMetadata } from './indexed-insight-metadata';
+import type { IndexedInsightReadme } from './indexed-insight-readme';
+import type { IndexedInsightUser } from './indexed-insight-user';
+import type { IndexedRepository } from './indexed-repository';
 
 /**
  * Model for an indexed Insight, rather than the API model.

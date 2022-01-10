@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { Readable } from 'stream';
+import type { Readable } from 'stream';
 
 import { S3 } from 'aws-sdk';
-import { ReadStream } from 'fs-extra';
+import type { ReadStream } from 'fs-extra';
 
 import logger from '@iex/shared/logger';
 

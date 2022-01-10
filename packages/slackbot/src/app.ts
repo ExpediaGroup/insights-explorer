@@ -16,7 +16,8 @@
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import logger from '@iex/shared/logger';
-import { App, LinkUnfurls, LogLevel } from '@slack/bolt';
+import type { LinkUnfurls } from '@slack/bolt';
+import { App, LogLevel } from '@slack/bolt';
 
 import { getUnfurl } from './lib/unfurls';
 

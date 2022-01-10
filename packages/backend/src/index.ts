@@ -29,7 +29,7 @@ for (const packageName of packages) {
 }
 
 import './environment';
-import { Server } from 'http';
+import type { Server } from 'http';
 
 import { bootstrap, defaultKnex } from './lib/db';
 import { deployMappings } from './lib/elasticsearch';

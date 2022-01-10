@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Convertbot } from './lib/convertbot';
+import type { Convertbot } from './lib/convertbot';
 import { exec } from './lib/exec';
 
 export const registerConversionMappings = (convertbot: Convertbot): void => {
