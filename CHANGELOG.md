@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.2.2](https://github.com/ExpediaGroup/insights-explorer/compare/v1.2.1...v1.2.2) (2022-01-11)
+
+
+### Bug Fixes
+
+* **deps:** bump react-vega from 7.4.2 to 7.4.4 ([2959c6b](https://github.com/ExpediaGroup/insights-explorer/commit/2959c6bdcbffdb5d7276d111d130e6fcc2d6e1e9))
+* **deps:** bump vega from 5.20.2 to 5.21.0 ([af4c164](https://github.com/ExpediaGroup/insights-explorer/commit/af4c16437cbd33300b2cdc2eb5ca4eb86deaba41))
+* **deps:** bump vega-lite from 5.0.0 to 5.2.0 ([3cc1374](https://github.com/ExpediaGroup/insights-explorer/commit/3cc1374f2ba8c3fd276657f41e418540302a2614))
+
 ### [1.2.1](https://github.com/ExpediaGroup/insights-explorer/compare/v1.2.0...v1.2.1) (2022-01-11)
 
 
