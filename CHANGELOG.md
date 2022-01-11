@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.0](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.10...v1.2.0) (2022-01-11)
+
+
+### Features
+
+* Migrate to Apollo Server 3.x; use Apollo Sandbox ([8401726](https://github.com/ExpediaGroup/insights-explorer/commit/840172611630ba2932a8cad94c03bfd8d4fb24cb))
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-express from 2.25.2 to 3.6.1 ([66271c8](https://github.com/ExpediaGroup/insights-explorer/commit/66271c800adad340d5e40c6f51b24ed0882a0d81))
+
 ### [1.1.10](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.9...v1.1.10) (2022-01-11)
 
 
