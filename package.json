@@ -36,7 +36,7 @@
     "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-unicorn": "39.0.0",
+    "eslint-plugin-unicorn": "40.0.0",
     "fs-extra": "10.0.0",
     "graphql": "15.5.3",
     "jest": "27.4.7",
