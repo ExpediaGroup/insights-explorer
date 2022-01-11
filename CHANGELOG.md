@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.0.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.0.1...v2.0.2) (2022-01-11)
+
+
+### Bug Fixes
+
+* **deps:** bump isomorphic-git from 1.10.3 to 1.10.4 ([19efba3](https://github.com/ExpediaGroup/insights-explorer/commit/19efba3d9b84d4cd418370bcc1b779359f35bd64))
+* **deps:** bump nanoid from 3.1.30 to 3.1.31 ([bfac1fc](https://github.com/ExpediaGroup/insights-explorer/commit/bfac1fc6a6dea4cdc015156695e9102a966052fb))
+
 ### [2.0.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.0.0...v2.0.1) (2022-01-11)
 
 
