@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.0.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.0.0...v2.0.1) (2022-01-11)
+
+
+### Bug Fixes
+
+* **deps:** bump @reduxjs/toolkit from 1.6.2 to 1.7.1 ([1505414](https://github.com/ExpediaGroup/insights-explorer/commit/15054147001d0b9ac8ff91c02b8f1f92f1c80dd8))
+* **deps:** bump aws-sdk from 2.1046.0 to 2.1055.0 ([44e5495](https://github.com/ExpediaGroup/insights-explorer/commit/44e5495f56a905cbb157da2a04476cd91d7f10c9))
+* **deps:** bump parsimmon from 1.18.0 to 1.18.1 ([ce82c35](https://github.com/ExpediaGroup/insights-explorer/commit/ce82c359242149d5b6020a4170a9854e1925566f))
+* **deps:** bump winston from 3.3.3 to 3.4.0 ([fd25ed7](https://github.com/ExpediaGroup/insights-explorer/commit/fd25ed717ff27d8d54fad120e2b4398a9d37b6a5))
+
 ## [2.0.0](https://github.com/ExpediaGroup/insights-explorer/compare/v1.2.2...v2.0.0) (2022-01-11)
 
 
