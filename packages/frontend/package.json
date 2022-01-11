@@ -51,7 +51,7 @@
     "react-syntax-highlighter": "15.4.5",
     "react-vega": "7.4.4",
     "redux-persist": "6.0.0",
-    "remark-directive": "1.0.1",
+    "remark-directive": "2.0.1",
     "remark-emoji": "2.2.0",
     "remark-footnotes": "3.0.0",
     "remark-gfm": "1.0.0",
