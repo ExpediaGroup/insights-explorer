@@ -97,7 +97,7 @@
     "@types/node": "16.11.15",
     "@types/parsimmon": "1.10.6",
     "@types/supertest": "2.0.11",
-    "@types/tmp": "0.2.2",
+    "@types/tmp": "0.2.3",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "eslint": "7.32.0",
