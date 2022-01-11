@@ -168,7 +168,7 @@ export const DateRange = ({
                   </FormControl>
                 </HStack>
                 <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
-                <Text as="strong" size="sm">
+                <Text as="strong" fontSize="sm">
                   Absolute Dates
                 </Text>
                 <HStack spacing="0.5rem" align="flex-start" className={isLight ? 'light-theme' : 'dark-theme'}>
@@ -176,7 +176,7 @@ export const DateRange = ({
                   <ReactDatePicker selected={endAsDate} onChange={(date) => onChangeEnd(date)} inline />
                 </HStack>
                 <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
-                <Text as="strong" size="sm">
+                <Text as="strong" fontSize="sm">
                   Relative Dates
                 </Text>
                 <Wrap>

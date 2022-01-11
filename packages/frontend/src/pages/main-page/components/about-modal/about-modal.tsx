@@ -125,7 +125,7 @@ export const AboutModal = ({ appSettings }: { appSettings: AppSettings | null })
                   <VStack flexGrow={1}>
                     <Image src="/assets/iex-name.svg" objectFit="contain" />
 
-                    <Text fontWeight="200" size="md" py="0.5rem">
+                    <Text fontWeight="200" fontSize="md" py="0.5rem">
                       Version {appSettings?.version}
                     </Text>
                   </VStack>
