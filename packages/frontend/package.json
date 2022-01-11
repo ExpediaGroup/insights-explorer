@@ -47,7 +47,7 @@
     "react-markdown": "5.0.3",
     "react-redux": "7.2.6",
     "react-router-dom": "6.2.1",
-    "react-select": "4.3.1",
+    "react-select": "5.2.1",
     "react-syntax-highlighter": "15.4.5",
     "react-vega": "7.4.4",
     "redux-persist": "6.0.0",
