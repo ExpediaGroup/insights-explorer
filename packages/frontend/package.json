@@ -49,7 +49,7 @@
     "react-router-dom": "6.2.1",
     "react-select": "4.3.1",
     "react-syntax-highlighter": "15.4.5",
-    "react-vega": "7.4.2",
+    "react-vega": "7.4.4",
     "redux-persist": "6.0.0",
     "remark-directive": "1.0.1",
     "remark-emoji": "2.2.0",
