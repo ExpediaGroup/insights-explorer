@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/ExpediaGroup/insights-explorer/compare/v1.2.2...v2.0.0) (2022-01-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* This change removes two REST API endpoints for searching and retrieving Insights.  Both endpoints were simple wrappers around the GraphQL API, so they are being deprecated in favor of using the GraphQL API directly.
+
+There is no change to the functionality of IEX itself, just consumers of those particular APIs.
+
+### Code Refactoring
+
+* Remove REST endpoints wrapping GraphQL endpoints ([2d65e5e](https://github.com/ExpediaGroup/insights-explorer/commit/2d65e5e905b9e12d8b6063512bade4228608c089))
+
 ### [1.2.2](https://github.com/ExpediaGroup/insights-explorer/compare/v1.2.1...v1.2.2) (2022-01-11)
 
 
