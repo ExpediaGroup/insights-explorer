@@ -33,7 +33,7 @@ import type { Server } from 'http';
 
 import { bootstrap, defaultKnex } from './lib/db';
 import { deployMappings } from './lib/elasticsearch';
-import app from './server';
+import { createServer } from './server';
 import logger from '@iex/shared/logger';
 
 // Safeguard to prevent the application from crashing.
@@ -59,6 +59,7 @@ const startup = async (): Promise<Server> => {
 
   // Start Express server
   logger.debug('[INDEX] Starting Express server');
+  const app = await createServer();
   const server = app.listen(app.get('port'), () => {
     logger.info(`IEX Server started in ${app.get('env')} mode on port: ${app.get('port')}`);
   });

@@ -26,59 +26,61 @@ import { StatusCodes } from 'http-status-codes';
 import morgan from 'morgan';
 
 import { security } from './middleware/security';
-import router from './router';
+import { createRouter } from './router';
 
-// Init express
-const app = express();
+export async function createServer(): Promise<express.Express> {
+  // Init express
+  const app = express();
 
-app.set('port', Number(process.env.PORT || 3000));
-app.set('env', process.env.NODE_ENV);
+  app.set('port', Number(process.env.PORT || 3000));
+  app.set('env', process.env.NODE_ENV);
 
-// Show routes called in console during development
-switch (process.env.NODE_ENV) {
-  case 'development':
-    logger.info('Loading development middleware');
-    app.use(security);
-    break;
-  case 'production':
-    logger.info('Loading production middleware');
-    app.use(security);
-    break;
-  default:
-    logger.info('Actually ' + process.env.NODE_ENV);
-}
+  // Show routes called in console during development
+  switch (process.env.NODE_ENV) {
+    case 'development':
+      logger.info('Loading development middleware');
+      app.use(security);
+      break;
+    case 'production':
+      logger.info('Loading production middleware');
+      app.use(security);
+      break;
+    default:
+      logger.info('Actually ' + process.env.NODE_ENV);
+  }
 
-app.use(compression());
-app.use(express.json({ limit: '20mb' }));
-app.use(express.urlencoded({ extended: true }));
+  app.use(compression());
+  app.use(express.json({ limit: '20mb' }));
+  app.use(express.urlencoded({ extended: true }));
 
-if (process.env.LOG_REQUESTS === 'true') {
-  app.use(morgan('dev'));
-}
+  if (process.env.LOG_REQUESTS === 'true') {
+    app.use(morgan('dev'));
+  }
 
-// Add APIs
-app.use('/', router);
+  // Add APIs
+  const router = await createRouter();
+  app.use('/', router);
 
-// Print API errors
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  logger.error(err.message, err);
-  return res.status(StatusCodes.BAD_REQUEST).json({
-    error: err.message
+  // Print API errors
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    logger.error(err.message, err);
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      error: err.message
+    });
   });
-});
 
-// Serve front-end
-const frontendDir = path.join(__dirname, '../../../frontend/build');
+  // Serve front-end
+  const frontendDir = path.join(__dirname, '../../../frontend/build');
 
-app.use(
-  express.static(frontendDir, {
-    redirect: false
-  })
-);
-app.get(/^(?!\/api).+/, (req: Request, res: Response) => {
-  res.sendFile('index.html', { root: frontendDir });
-});
+  app.use(
+    express.static(frontendDir, {
+      redirect: false
+    })
+  );
+  app.get(/^(?!\/api).+/, (req: Request, res: Response) => {
+    res.sendFile('index.html', { root: frontendDir });
+  });
 
-// Export express instance
-export default app;
+  return app;
+}

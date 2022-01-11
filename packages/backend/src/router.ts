@@ -21,7 +21,7 @@ import { graphqlUploadExpress } from 'graphql-upload';
 import * as assetController from './controllers/assets.v1';
 import * as avatarController from './controllers/avatars.v1';
 import * as draftsController from './controllers/drafts.v1';
-import graphQlController from './controllers/graphql.v1';
+import { graphQLServer } from './controllers/graphql.v1';
 import * as homeController from './controllers/home.v1';
 import * as importController from './controllers/import.v1';
 import * as insightsController from './controllers/insights.v1';
@@ -30,41 +30,46 @@ import { oktaAuthenticator } from './middleware/okta-authenticator';
 import { requestId } from './middleware/request-id';
 import { requireAuth } from './middleware/require-auth';
 
-const router = Router();
-const v1Router = Router();
+export async function createRouter(): Promise<Router> {
+  const router = Router();
+  const v1Router = Router();
 
-/*
- * API routes
- */
+  // Wait for the graphql server to be ready
+  await graphQLServer.start();
 
-router.get('/api/', homeController.getIndex);
-router.use(requestId);
-router.use('/api/v1', v1Router);
+  /*
+   * API routes
+   */
 
-/*
- * API /v1/ Routes
- */
+  router.get('/api/', homeController.getIndex);
+  router.use(requestId);
+  router.use('/api/v1', v1Router);
 
-v1Router.use(
-  '/graphql',
-  oktaAuthenticator,
-  graphqlUploadExpress({ maxFileSize: 104_857_600, maxFiles: 50 }),
-  graphQlController.getMiddleware({ path: '/' })
-);
-v1Router.all('/webhook', webhookController.hook);
+  /*
+   * API /v1/ Routes
+   */
 
-// These routes require authentication
-v1Router.get('/insights/search', oktaAuthenticator, requireAuth, insightsController.search);
-v1Router.get('/insights/:namespace/:name', oktaAuthenticator, requireAuth, insightsController.getInsight);
+  v1Router.use(
+    '/graphql',
+    oktaAuthenticator,
+    graphqlUploadExpress({ maxFileSize: 104_857_600, maxFiles: 50 }),
+    graphQLServer.getMiddleware({ path: '/' })
+  );
+  v1Router.all('/webhook', webhookController.hook);
 
-// These routes do not require authentication
-v1Router.get('/avatars/:key', avatarController.getAvatar);
-v1Router.head('/insights/:namespace/:name/assets/:filepath*', insightsController.headInsightFile);
-v1Router.get('/insights/:namespace/:name/assets/:filepath*', insightsController.getInsightFile);
-v1Router.get('/drafts/:draftKey/assets/:attachmentKey', draftsController.getDraftAttachment);
+  // These routes require authentication
+  v1Router.get('/insights/search', oktaAuthenticator, requireAuth, insightsController.search);
+  v1Router.get('/insights/:namespace/:name', oktaAuthenticator, requireAuth, insightsController.getInsight);
 
-v1Router.get('/changelog', assetController.getChangelog);
-v1Router.get('/markdown', assetController.getMarkdown);
-v1Router.all('/import', cors({ origin: true }), importController.importToDraft);
+  // These routes do not require authentication
+  v1Router.get('/avatars/:key', avatarController.getAvatar);
+  v1Router.head('/insights/:namespace/:name/assets/:filepath*', insightsController.headInsightFile);
+  v1Router.get('/insights/:namespace/:name/assets/:filepath*', insightsController.getInsightFile);
+  v1Router.get('/drafts/:draftKey/assets/:attachmentKey', draftsController.getDraftAttachment);
 
-export default router;
+  v1Router.get('/changelog', assetController.getChangelog);
+  v1Router.get('/markdown', assetController.getMarkdown);
+  v1Router.all('/import', cors({ origin: true }), importController.importToDraft);
+
+  return router;
+}

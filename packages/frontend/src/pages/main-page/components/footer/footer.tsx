@@ -32,11 +32,11 @@ export const Footer = (props) => {
   const bgColor = useColorModeValue('unset', 'gray.700');
   const color = useColorModeValue('gray.700', 'gray.200');
 
-  let graphQlPlaygroundLink;
+  let apolloSandboxLink;
   if (window.location.origin === 'http://localhost:3000') {
-    graphQlPlaygroundLink = 'http://localhost:3001/api/v1/graphql';
+    apolloSandboxLink = 'http://localhost:3001/api/v1/graphql';
   } else {
-    graphQlPlaygroundLink = '/api/v1/graphql';
+    apolloSandboxLink = '/api/v1/graphql';
   }
 
   return (
@@ -64,10 +64,10 @@ export const Footer = (props) => {
           </FooterItem>
         </Link>
       )}
-      <Link href={graphQlPlaygroundLink} isExternal={true}>
+      <Link href={apolloSandboxLink} isExternal={true}>
         <FooterItem>
           <Icon as={iconFactory('graphql')} />
-          <Text>GraphQL Playground</Text>
+          <Text>Apollo Sandbox</Text>
         </FooterItem>
       </Link>
     </HStack>

@@ -21,7 +21,6 @@ import helmet from 'helmet';
  */
 export const security = helmet({
   contentSecurityPolicy: {
-    reportOnly: false,
     directives: {
       'default-src': ["'self'"],
       'base-uri': ["'self'"],
@@ -52,13 +51,12 @@ export const security = helmet({
       'object-src': ["'self'", '*'],
 
       // Unsafe-inline and unsafe-eval are required by React/webpack or something
-      // cdn.jsdelivr.net is used by GraphQL Playground
       'script-src': [
         "'self'",
         "'unsafe-inline'",
         "'unsafe-eval'",
         'https://*.google-analytics.com',
-        'https://cdn.jsdelivr.net',
+        'https://*.cdn.apollographql.com',
         '*'
       ],
       'script-src-attr': ["'none'"],
@@ -66,5 +64,7 @@ export const security = helmet({
       'style-src': ["'self'", 'https:', "'unsafe-inline'"]
     }
   },
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: false,
   frameguard: false
 });

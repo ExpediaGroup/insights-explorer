@@ -15,12 +15,16 @@
  */
 
 import logger from '@iex/shared/logger';
-import { ApolloServer } from 'apollo-server-express';
+import {
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault
+} from 'apollo-server-core';
+import { ApolloServer, ApolloServerExpressConfig } from 'apollo-server-express';
 import { Container } from 'typedi';
 
 import { schema } from '../lib/graphql';
 
-const server = new ApolloServer({
+const apolloConfig: ApolloServerExpressConfig = {
   schema,
   context: ({ req }) => {
     const requestId = req.id;
@@ -41,20 +45,25 @@ const server = new ApolloServer({
 
     return context;
   },
-  // Enables a web UI at http://localhost:3001/api/v1/graphql
-  playground: process.env.GRAPHQL_PLAYGROUND === 'true',
   plugins: [
     {
-      requestDidStart: () => ({
-        willSendResponse(requestContext) {
-          // Remove the request's scoped container
-          logger.silly('[GRAPHQL.V1] Terminating Container ' + requestContext.context.requestId);
-          Container.reset(requestContext.context.requestId);
-        }
-      })
-    }
-  ],
-  uploads: false
-});
+      async requestDidStart() {
+        return {
+          async willSendResponse(requestContext) {
+            // Remove the request's scoped container
+            logger.silly('[GRAPHQL.V1] Terminating Container ' + requestContext.context.requestId);
+            Container.reset(requestContext.context.requestId);
+          }
+        };
+      }
+    },
+    process.env.APOLLO_SANDBOX === 'true'
+      ? // Enables a web UI at http://localhost:3001/api/v1/graphql
+        ApolloServerPluginLandingPageLocalDefault({ footer: false })
+      : ApolloServerPluginLandingPageProductionDefault({ footer: false })
+  ]
+};
 
-export default server;
+const graphQLServer = new ApolloServer(apolloConfig);
+
+export { graphQLServer };
