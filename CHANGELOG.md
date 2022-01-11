@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [1.1.10](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.9...v1.1.10) (2022-01-11)
+
+
+### Bug Fixes
+
+* **deps:** bump http-status-codes from 2.1.4 to 2.2.0 ([aa7b9b2](https://github.com/ExpediaGroup/insights-explorer/commit/aa7b9b2ed6a108f91d08fade8ed8086f227c15cd))
+* **deps:** bump luxon from 2.2.0 to 2.3.0 ([1207705](https://github.com/ExpediaGroup/insights-explorer/commit/1207705d5a50d56dc5edfd3ab2bab639aa9f7a8b))
+* **deps:** bump react-router-dom from 6.1.1 to 6.2.1 ([3d4fe14](https://github.com/ExpediaGroup/insights-explorer/commit/3d4fe14270c1c7fca61b390989c78dd4fba6725d))
+
 ### [1.1.9](https://github.com/ExpediaGroup/insights-explorer/compare/v1.1.8...v1.1.9) (2022-01-06)
 
 
