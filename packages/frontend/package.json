@@ -71,7 +71,7 @@
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
     "@types/jest": "27.4.0",
-    "@types/luxon": "2.0.8",
+    "@types/luxon": "2.0.9",
     "@types/node-emoji": "1.8.1",
     "@types/parsimmon": "1.10.6",
     "@types/react": "17.0.38",
