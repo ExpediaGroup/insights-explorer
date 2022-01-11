@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@types/fs-extra": "9.0.13",
-    "@types/jest": "27.0.3",
+    "@types/jest": "27.4.0",
     "@types/lodash": "4.14.178",
     "@types/node": "16.11.15",
     "@types/parsimmon": "1.10.6",
