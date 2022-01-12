@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.0.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.0.2...v2.0.3) (2022-01-12)
+
+
+### Bug Fixes
+
+* **deps:** bump immer from 9.0.7 to 9.0.12 ([114a6c2](https://github.com/ExpediaGroup/insights-explorer/commit/114a6c298329ab1dccbaa0649f7e3cd900dbcdb5))
+
 ### [2.0.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.0.1...v2.0.2) (2022-01-11)
 
 
