@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-import visit from 'unist-util-visit';
-
-import { hashCode } from '../hash';
+import { visit } from 'unist-util-visit';
 
 import { remarkNodetoText } from './remark-util';
 
@@ -33,122 +31,172 @@ export const remarkIex = (options) => {
   function textDirectives(node) {
     switch (node.name) {
       case 'badge':
-        node.type = 'badge';
+        node.data = {
+          hName: 'badge',
+          hProperties: node.attributes
+        };
         break;
-      case 'image': {
-        node.type = 'image';
-        node.url = node.children[0]?.value ?? node.children[0]?.url;
-        delete node.children;
 
+      case 'image': {
         const { height: h, width: w, ...attributes } = node.attributes;
 
-        node.attributes = {
-          w,
-          h,
-          ...attributes
+        node.data = {
+          hName: 'img',
+          hProperties: {
+            src: node.children[0]?.value ?? node.children[0]?.url,
+            w,
+            h,
+            ...attributes
+          }
         };
 
-        break;
-      }
-      case 'video': {
-        node.type = 'video';
-        node.url = node.children[0]?.value ?? node.children[0]?.url;
         delete node.children;
+        break;
+      }
 
-        const { autoplay, loop, ...attributes } = node.attributes;
+      case 'video': {
+        node.data = {
+          hName: 'video',
+          hProperties: {
+            src: node.children[0]?.value ?? node.children[0]?.url,
+            ...node.attributes
+          }
+        };
 
-        node.attributes = {
-          // Convert from string to boolean
-          autoPlay: autoplay === 'true',
-          loop: loop === 'true',
-          ...attributes
+        delete node.children;
+        break;
+      }
+
+      case 'katex': {
+        node.data = {
+          hName: 'katex',
+          hProperties: {
+            math: remarkNodetoText(node)
+          }
         };
 
         break;
       }
-      case 'katex':
-        node.type = 'inlineMath';
-        node.value = remarkNodetoText(node);
-        break;
+
+      default:
+        node.data = {
+          hName: 'textdirective',
+          hProperties: node
+        };
     }
   }
 
   function leafDirectives(node) {
     switch (node.name) {
-      case 'insight':
-        node.type = 'insight';
-        if (node.children.length > 0) {
-          node.fullName = node.children[0].value;
-        }
+      case 'insight': {
+        node.data = {
+          hName: 'insight',
+          hProperties: {
+            ...node.attributes,
+            fullName: remarkNodetoText(node)
+          }
+        };
+
         break;
-      case 'insights':
-        node.type = 'insights';
-        if (node.children.length > 0) {
-          node.query = node.children[0].value;
-        }
+      }
+
+      case 'insights': {
+        node.data = {
+          hName: 'insights',
+          hProperties: {
+            ...node.attributes,
+            query: remarkNodetoText(node)
+          }
+        };
+
         break;
+      }
+
+      default:
+        node.data = {
+          hName: 'leafdirective',
+          hProperties: node
+        };
     }
   }
 
   function containerDirectives(node) {
     switch (node.name) {
+      case 'table':
       case 'custom_table': {
-        node.type = 'customTable';
-
-        const { width, variant, size, colorScheme, ...attributes } = node.attributes;
+        // Legacy support for older table directive
+        if (node.name === 'custom_table') {
+          // Apply previous defaults
+          node.attributes = {
+            variant: 'striped',
+            ...node.attributes
+          };
+        }
 
         // First child represents the bracket contents
-        // and should have `directiveLabel` set
         // e.g. :::custom_table[no-border]
         // Parse out the contents and remove that child
+
         if (node.children && node.children.length > 0) {
-          if (node.children[0].data?.directiveLabel === true) {
-            node.border = remarkNodetoText(node.children[0]);
-            node.width = width || 'fit-content';
+          if (node.children[0] && node.children[0].data?.directiveLabel === true) {
+            const border = remarkNodetoText(node.children[0]);
+
+            // Legacy support for older table directive
+            if (border === 'border' && node.attributes.border === undefined) {
+              node.attributes.border = 'true';
+            }
+
+            // Remove directive label node
             node.children.shift();
+          }
+
+          if (node.children[0] && node.children[0].type === 'table') {
+            // Apply attributes to nested table node
+            // This directive node will not be rendered
+            node.children[0].data = {
+              hName: 'table',
+              hProperties: node.attributes
+            };
           }
         }
 
-        if (node.children[0] && node.children[0]?.type === 'table') {
-          // Set default attributes if there's no matching incoming attribute
-          node.children[0].attributes = {
-            variant: variant || 'striped',
-            size: size || 'sm',
-            colorScheme: colorScheme || 'gray',
-            ...attributes
-          };
-        }
         break;
       }
-      case 'katex':
-        node.type = 'math';
-        node.value = remarkNodetoText(node);
+
+      case 'katex': {
+        node.data = {
+          hName: 'katex',
+          hProperties: {
+            math: remarkNodetoText(node),
+            block: 'true'
+          }
+        };
+
         break;
+      }
+
       case 'vega': {
-        node.type = 'vegaChart';
-
-        // Extract body of node into text
-        node.config = remarkNodetoText(node);
-
-        // Manually calculate the key to avoid costly redraws
-        // when this node isn't modified
-        node.key = hashCode(node.config);
-
         // Convert height/width if available
         const { height: h, width: w, ...attributes } = node.attributes;
-        node.attributes = {
-          w,
-          h,
-          ...attributes
+
+        node.data = {
+          hName: 'vegachart',
+          hProperties: {
+            // Extract body of node into text
+            config: remarkNodetoText(node),
+            w,
+            h,
+            ...attributes
+          }
         };
 
         delete node.children;
 
         break;
       }
+
       case 'xkcd': {
-        //console.log(node);
-        node.type = 'xkcdChart';
+        let xkcdType = 'line';
 
         // First child represents the bracket contents
         // and should have `directiveLabel` set
@@ -156,30 +204,36 @@ export const remarkIex = (options) => {
         // Parse out the contents and remove that child
         if (node.children && node.children.length > 0) {
           if (node.children[0].data?.directiveLabel === true) {
-            node.xkcdType = remarkNodetoText(node.children[0]);
+            xkcdType = remarkNodetoText(node.children[0]);
             node.children.shift();
           }
         }
 
-        // Extract body of node into text
-        node.config = remarkNodetoText(node);
-
-        // Manually calculate the key to avoid costly redraws
-        // when this node isn't modified
-        node.key = hashCode(node.config);
-
         // Convert height/width if available
         const { height: h, width: w, ...attributes } = node.attributes;
-        node.attributes = {
-          w,
-          h,
-          ...attributes
+
+        node.data = {
+          hName: 'xkcdchart',
+          hProperties: {
+            // Extract body of node into text
+            config: remarkNodetoText(node),
+            xkcdType,
+            w,
+            h,
+            ...attributes
+          }
         };
 
         delete node.children;
 
         break;
       }
+
+      default:
+        node.data = {
+          hName: 'containerdirective',
+          hProperties: node
+        };
     }
   }
 

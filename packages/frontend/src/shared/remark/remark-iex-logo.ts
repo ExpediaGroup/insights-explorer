@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import visit from 'unist-util-visit';
+import { visit } from 'unist-util-visit';
 
 const REGEX_IEX = /:iex:/g;
 
@@ -41,12 +41,14 @@ export const remarkIexLogo = (options) => {
             acc.push({
               type: 'image',
               url: `${window.location.origin}/assets/iex-logo.svg`,
-              attributes: {
-                alt: 'IEX logo',
-                display: 'inline-block',
-                height: '1em',
-                width: '1em',
-                verticalAlign: '-0.1em'
+              data: {
+                hProperties: {
+                  alt: 'IEX logo',
+                  display: 'inline-block',
+                  height: '1em',
+                  width: '1em',
+                  verticalAlign: '-0.1em'
+                }
               }
             });
           }

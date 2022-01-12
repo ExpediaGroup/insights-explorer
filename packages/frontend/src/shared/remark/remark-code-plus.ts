@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import visit from 'unist-util-visit';
+import { visit } from 'unist-util-visit';
 
 import { isAbsoluteUrl, urljoin } from '../url-utils';
 
@@ -43,6 +43,11 @@ interface Props {
 export const remarkCodePlus = ({ baseUrl = '', transformAssetUri }: Props) => {
   return function transformer(tree, file) {
     visit(tree, 'code', (node: any, index, parent) => {
+      node.data = {
+        hName: 'code',
+        hProperties: {}
+      };
+
       // Parse out attributes (if any)
       const attrs = (node.meta || node.lang || '').match(/\{(.*)\}/);
 
@@ -54,20 +59,22 @@ export const remarkCodePlus = ({ baseUrl = '', transformAssetUri }: Props) => {
             switch (attribute.key) {
               case 'file':
                 if (isAbsoluteUrl(attribute.value)) {
-                  node.uri = attribute.value;
+                  node.data.hProperties.uri = attribute.value;
                 } else {
-                  node.uri = transformAssetUri ? transformAssetUri(attribute.value) : urljoin(baseUrl, attribute.value);
+                  node.data.hProperties.uri = transformAssetUri
+                    ? transformAssetUri(attribute.value)
+                    : urljoin(baseUrl, attribute.value);
                 }
                 break;
 
               case 'lines':
-                node.lines = attribute.value;
+                node.data.hProperties.lines = attribute.value;
                 break;
             }
           } else if (attribute instanceof KeyAttribute) {
             switch (attribute.key) {
               case 'collapse':
-                node.collapse = true;
+                node.data.hProperties.collapse = 'true';
                 break;
             }
           }

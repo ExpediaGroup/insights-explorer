@@ -44,15 +44,25 @@
   margin-bottom: 1rem;
 }
 
-.iex-markdown-container > .table-wrapper {
-  margin-top: var(--chakra-space-5);
-  padding: var(--chakra-space-3);
-  border-width: 1px;
-  border-radius: 12px;
-  z-index: 1;
+/* Style the footnotes section. */
+.iex-markdown-container > .footnotes {
+  font-size: smaller;
+  color: #8b949e;
+}
+.iex-markdown-container > .footnotes > ol {
+  padding: 1rem;
 }
 
-.table-wrapper > td {
-  border-left: 1px solid #dfe2e5;
-  padding: 00.5rem;
+/* Place `[` and `]` around footnote calls. */
+.iex-markdown-container .footnote-ref > sup::before {
+  content: '[';
+}
+
+.iex-markdown-container .footnote-ref > sup::after {
+  content: ']';
+}
+.iex-markdown-container .footnote-back {
+  margin-left: 0.5rem;
+  font-family: monospace;
+  font-size: 1rem;
 }

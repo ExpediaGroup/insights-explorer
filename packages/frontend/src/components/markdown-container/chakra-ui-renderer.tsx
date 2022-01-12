@@ -22,10 +22,12 @@ import {
   Divider,
   Heading,
   Image,
+  Input,
   Link as ChakraLink,
   List,
   ListItem,
   Table,
+  TableCaption,
   Tbody,
   Td,
   Text,
@@ -33,9 +35,11 @@ import {
   Thead,
   Tr
 } from '@chakra-ui/react';
-import { ReactFragment } from 'react';
+import { Components } from 'react-markdown';
 
 import { Sort } from '../../models/generated/graphql';
+import { destringObject } from '../../shared/destring';
+import { hashCode } from '../../shared/hash';
 import { getMimeForFileName } from '../../shared/mime-utils';
 import { isHashUrl, isRelativeUrl } from '../../shared/url-utils';
 import { BlockQuote } from '../blockquote/blockquote';
@@ -49,64 +53,102 @@ import { VegaRendererAsync } from '../renderers/vega-renderer/vega-renderer-asyn
 import { VideoRenderer } from '../renderers/video-renderer/video-renderer';
 import { XkcdChartRendererAsync } from '../renderers/xkcd-chart-renderer/xkcd-chart-renderer-async';
 
-import { Renderers } from './markdown-container';
-
 import './markdown-container.css';
 
 export const getCoreProps = (props): any => {
   return props['data-sourcepos'] ? { 'data-sourcepos': props['data-sourcepos'] } : {};
 };
 
-const getHProperties = (data): any => {
-  if (data.hProperties != null) {
-    return data.hProperties;
-  }
+const heading = ({ node, level, children, ...props }) => {
+  const sizes = ['2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
+  const mt = ['2rem', '1.75rem', '1.5rem', '1rem', '1rem', '1rem'];
+
+  return (
+    <Heading
+      mb="0.5rem"
+      mt={mt[level - 1]}
+      as={`h${level}`}
+      size={sizes[level - 1]}
+      borderBottomWidth={level === 1 ? 1 : 0}
+      borderBottomStyle="solid"
+      borderBottomColor="snowstorm.100"
+      {...node.properties}
+    >
+      {children}
+    </Heading>
+  );
 };
 
-export const ChakraUIRenderer = (customRenderers: Renderers = {}, transformAssetUri): Renderers => {
-  const combined: Renderers = {
-    heading: ({ node, level, children, ...props }) => {
-      const sizes = ['2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
-      const mt = ['2rem', '1.75rem', '1.5rem', '1rem', '1rem', '1rem'];
+const getList = ({ node, ...props }) => {
+  const { start, ordered, children, depth } = props;
+  const attrs = getCoreProps(props);
+  if (start !== null && start !== 1 && start !== undefined) {
+    attrs.start = start.toString();
+  }
+  let styleType = 'disc';
+  if (ordered) styleType = 'decimal';
+  if (depth === 1) styleType = 'circle';
+
+  return (
+    <List as={ordered ? 'ol' : 'ul'} styleType={styleType} ml={depth === 0 ? '1rem' : 0} pl="1rem" mb="1rem" {...attrs}>
+      {children}
+    </List>
+  );
+};
+
+export const ChakraUIRenderer = (
+  customRenderers: Components = {},
+  transformAssetUri: (uri: string) => string
+): Components => {
+  const combined: Components = {
+    // Standard HTML elements
+    h1: heading,
+    h2: heading,
+    h3: heading,
+    h4: heading,
+    h5: heading,
+    h6: heading,
+    p: ({ node, children, ...props }) => {
       return (
-        <Heading
-          mb="0.5rem"
-          mt={mt[level - 1]}
-          as={`h${level}`}
-          size={sizes[level - 1]}
-          borderBottomWidth={level === 1 ? 1 : 0}
-          borderBottomStyle="solid"
-          borderBottomColor="snowstorm.100"
-          {...getCoreProps(props)}
-          {...getHProperties(node.data)}
-        >
-          {children}
-        </Heading>
-      );
-    },
-    paragraph: ({ node, children, ...props }) => {
-      return (
-        <Text as={Box} mb="1rem">
+        <Text as={Box} mb="1rem" {...props}>
           {children}
         </Text>
       );
     },
-    emphasis: ({ node, children, ...props }) => {
-      return <Text as="em">{children}</Text>;
+    em: ({ node, children, ...props }) => {
+      return (
+        <Text as="em" {...props}>
+          {children}
+        </Text>
+      );
+    },
+    strong: ({ node, children, ...props }) => {
+      return (
+        <Text as="strong" {...props}>
+          {children}
+        </Text>
+      );
     },
     blockquote: ({ node, children, ...props }) => {
-      return <BlockQuote>{children}</BlockQuote>;
+      return <BlockQuote {...props}>{children}</BlockQuote>;
     },
-    code: ({ node, language, value, ...props }) => {
-      const defaultIsOpen = !(node.collapse === true);
+    code: ({ node, inline, className, collapse, value, children, ...props }: any) => {
+      const defaultIsOpen = !(collapse === 'true');
 
-      if (node.uri) {
+      const languageMatch = /language-(\w+)/.exec(className || '');
+      const language = languageMatch && languageMatch[1];
+
+      if (inline) {
+        return <Code {...getCoreProps(props)}>{children}</Code>;
+      }
+
+      if (props.uri) {
         // Wrap in a component that fetches external file contents before rendering
         // Depends on the remark-code-file plugin to parse the metadata
         return (
           <FetchCodeRenderer
-            url={node.uri}
-            lines={node.lines}
+            url={props.uri}
+            lines={props.lines}
             language={language || ''}
             copyButton={true}
             defaultIsOpen={defaultIsOpen}
@@ -116,7 +158,7 @@ export const ChakraUIRenderer = (customRenderers: Renderers = {}, transformAsset
       } else {
         return (
           <CodeRenderer
-            contents={value || ''}
+            contents={String(children || '').replace(/\n$/, '')}
             language={language || ''}
             copyButton={true}
             defaultIsOpen={defaultIsOpen}
@@ -125,105 +167,105 @@ export const ChakraUIRenderer = (customRenderers: Renderers = {}, transformAsset
         );
       }
     },
-    definition: () => <Text />,
-    delete: ({ node, children, ...props }) => {
-      return <Text as="del">{children}</Text>;
+    del: ({ node, children, ...props }) => {
+      return (
+        <Text as="del" {...props}>
+          {children}
+        </Text>
+      );
     },
-    inlineCode: ({ node, children, ...props }) => {
-      return <Code {...getCoreProps(props)}>{children}</Code>;
-    },
-    thematicBreak: () => {
+    hr: () => {
       return <Divider my="0.5rem" />;
     },
-    link: ({ node, ...props }) => {
-      if (isRelativeUrl(props.href) && !isHashUrl(props.href)) {
+    a: ({ node, ...props }) => {
+      if (props.href && isRelativeUrl(props.href) && !isHashUrl(props.href)) {
         return <Link to={props.href} {...props} color="frost.400" />;
       }
       return <ChakraLink as="a" {...props} color="frost.400" />;
     },
-    linkReference: ({ node, ...props }) => {
-      return <ChakraLink as="a" {...props} color="frost.400" />;
-    },
-    image: ({ node, ...props }) => {
-      return <Image ignoreFallback {...props} {...node.attributes} />;
-    },
-    imageReference: ({ node, ...props }) => {
-      // console.log('imageReference', node, props);
+    img: ({ node, ...props }) => {
       return <Image ignoreFallback {...props} />;
     },
     text: ({ node, children, ...props }) => {
       return <Text as="span">{children}</Text>;
     },
-    list: ({ node, ...props }) => {
-      const { start, ordered, children, depth } = props;
-      const attrs = getCoreProps(props);
-      if (start !== null && start !== 1 && start !== undefined) {
-        attrs.start = start.toString();
-      }
-      let styleType = 'disc';
-      if (ordered) styleType = 'decimal';
-      if (depth === 1) styleType = 'circle';
+    ol: getList,
+    ul: getList,
+    li: ({ node, children, checked, ordered, ...props }) => {
       return (
-        <List
-          as={ordered ? 'ol' : 'ul'}
-          styleType={styleType}
-          ml={depth === 0 ? '1rem' : 0}
-          pl="1rem"
-          mb="1rem"
-          {...attrs}
+        <ListItem
+          {...props}
+          listStyleType={checked !== null ? 'none' : 'inherit'}
+          {...(props.className === 'task-list-item' ? { display: 'flex', align: 'center', ml: '-1rem' } : {})}
         >
           {children}
-        </List>
-      );
-    },
-    listItem: ({ node, children, checked, ...props }) => {
-      let checkbox: ReactFragment | null = null;
-      if (checked !== null && checked !== undefined) {
-        checkbox = (
-          <Checkbox isChecked={checked} isReadOnly>
-            {children}
-          </Checkbox>
-        );
-      }
-      return (
-        <ListItem {...getCoreProps(props)} listStyleType={checked !== null ? 'none' : 'inherit'}>
-          {checkbox || children}
         </ListItem>
       );
     },
-    inlineMath: ({ value }) => {
-      return <KaTeXRendererAsync math={value} />;
+    input: ({ node, children, ...props }) => {
+      if (props.type === 'checkbox') {
+        return <Checkbox isChecked={props.checked} isReadOnly mr="0.5rem" {...(props as any)} />;
+      } else {
+        return <Input {...(props as any)}>{children}</Input>;
+      }
     },
-    math: ({ value }) => <KaTeXRendererAsync math={value} block />,
-    textDirective: ({ node, children, ...props }) => {
-      // Unrecognized text directive
-      return <Text as="span">:{props.name}</Text>;
+    table: ({ node, children, border, caption, width, ...props }: any) => {
+      const defaultProps = { variant: 'simple', size: 'sm' };
+
+      return (
+        <Box
+          width={width || 'fit-content'}
+          overflow="auto"
+          py="0.5rem"
+          mb="1rem"
+          {...(border === 'true'
+            ? { border: '1px solid', borderRadius: 'lg', borderColor: 'snowstorm.300', p: '1rem' }
+            : {})}
+        >
+          <Table {...defaultProps} {...props}>
+            {caption && <TableCaption>{caption}</TableCaption>}
+            {children}
+          </Table>
+        </Box>
+      );
     },
-    leafDirective: ({ node, children, ...props }) => {
-      // Unrecognized leaf directive
-      return <Text as="span">::{props.name}</Text>;
+    thead: ({ children }) => {
+      return <Thead>{children}</Thead>;
     },
-    containerDirective: ({ node, children, ...props }) => {
-      // Unrecognized container directive
-      return <Text as="span">:::{props.name}</Text>;
+    tbody: ({ children }) => {
+      return <Tbody>{children}</Tbody>;
     },
-    badge: ({ node, children, attributes, ...props }) => {
-      return <Badge {...attributes}>{children}</Badge>;
+    tr: ({ children }) => {
+      return <Tr>{children}</Tr>;
     },
-    insight: ({ node, ...props }) => {
+    th: ({ node, children, ...props }) => {
+      return <Th textAlign={props?.style?.textAlign}>{children}</Th>;
+    },
+    td: ({ node, children, ...props }) => {
+      return <Td textAlign={props?.style?.textAlign}>{children}</Td>;
+    },
+
+    // Custom directives
+    badge: ({ node, children, ...props }) => {
+      return <Badge {...props}>{children}</Badge>;
+    },
+    katex: ({ math, block }) => {
+      return <KaTeXRendererAsync math={math} block={block} />;
+    },
+    insight: ({ node, children, ...props }) => {
       return (
         <FetchInsightConnectionCard
           fullName={props.fullName}
-          options={{ ...props.attributes, dispatchSearch: false }}
+          options={{ ...destringObject(props), dispatchSearch: false }}
           mb="1rem"
         />
       );
     },
-    insights: ({ node, attributes, ...props }) => {
-      const direction = attributes.sortDirection?.toLowerCase();
+    insights: ({ node, query, sortDirection, sortField, ...props }) => {
+      const direction = sortDirection?.toLowerCase();
 
       const sort: Sort = {
-        field: attributes.sortField
+        field: sortField
       };
 
       if (direction?.match(/(asc|desc)/)) {
@@ -232,91 +274,53 @@ export const ChakraUIRenderer = (customRenderers: Renderers = {}, transformAsset
 
       return (
         <FetchInsightList
-          query={props.query}
+          query={query}
           sort={sort}
-          options={{ ...attributes, dispatchSearch: false }}
+          options={{ ...destringObject(props), dispatchSearch: false }}
           mb="1rem"
         />
       );
     },
-    vegaChart: ({ node, attributes }) => {
-      return <VegaRendererAsync specString={node.config} transformAssetUri={transformAssetUri} {...attributes} />;
-    },
-    video: ({ node, ...props }) => {
+    vegachart: ({ node, config, ...props }) => {
       return (
-        <VideoRenderer
-          url={props.url}
-          mimeType={getMimeForFileName(props.url)}
+        <VegaRendererAsync
+          key={hashCode(config)}
+          specString={config}
           transformAssetUri={transformAssetUri}
-          {...node.attributes}
+          {...props}
         />
       );
     },
-    xkcdChart: ({ node, attributes }) => {
-      return <XkcdChartRendererAsync type={node.xkcdType} configString={node.config} {...attributes} />;
-    },
-    footnoteReference: ({ node, ...props }) => {
+    video: ({ node, children, src, ...props }) => {
       return (
-        <Text as="sup" id={'reference-' + props.identifier}>
-          <ChakraLink href={'#footnote-' + props.identifier} fontWeight="500" color="frost.400">
-            [{props.label}]
-          </ChakraLink>
-        </Text>
+        <VideoRenderer
+          url={src}
+          mimeType={getMimeForFileName(src)}
+          transformAssetUri={transformAssetUri}
+          {...destringObject(props)}
+        />
       );
     },
-    footnoteDefinition: ({ node, children, ...props }) => {
-      return (
-        <Box pl="1.25rem" fontSize="sm">
-          <ChakraLink
-            id={'footnote-' + props.identifier}
-            href={'#reference-' + props.identifier}
-            fontWeight="500"
-            color="frost.400"
-          >
-            {props.label}
-          </ChakraLink>
-          :{' '}
-          <Box color="polar.500" display={children.length > 1 ? '' : 'inline-block'}>
-            {children}
-          </Box>
-        </Box>
-      );
+    xkcdchart: ({ node, xkcdType, config, ...props }) => {
+      return <XkcdChartRendererAsync key={hashCode(config)} type={xkcdType} configString={config} {...props} />;
     },
-    customTable: ({ node, children }) => {
-      return (
-        <Box
-          className={!node.border || node.border === 'border' ? 'table-wrapper' : ''}
-          width={node.width || 'fit-content'}
-        >
-          {children}
-        </Box>
-      );
+
+    // Fallbacks for unrecognized directives
+    textdirective: ({ node, children, ...props }) => {
+      // Unrecognized text directive
+      return <Text as="span">:{props.name}</Text>;
     },
-    table: ({ node, children }) => {
-      const attributes = node.attributes || { variant: 'striped', width: 'fit-content', size: 'sm' };
-      return (
-        <Box overflow="auto">
-          <Table {...attributes}>{children}</Table>
-        </Box>
-      );
+    leafdirective: ({ node, children, ...props }) => {
+      // Unrecognized leaf directive
+      return <Text as="span">::{props.name}</Text>;
     },
-    tableHead: ({ node, children }) => {
-      return <Thead>{children}</Thead>;
+    containerdirective: ({ node, children, ...props }) => {
+      // Unrecognized container directive
+      return <Text as="span">:::{props.name}</Text>;
     },
-    tableBody: ({ node, children }) => {
-      return <Tbody>{children}</Tbody>;
-    },
-    tableRow: ({ node, children, columnAlignment }) => {
-      return <Tr>{children}</Tr>;
-    },
-    tableCell: ({ node, children, isHeader, align }) => {
-      if (isHeader) {
-        return <Th textAlign={align}>{children}</Th>;
-      }
-      return <Td textAlign={align}>{children}</Td>;
-    },
+
     ...customRenderers
-  };
+  } as Components;
 
   return combined;
 };

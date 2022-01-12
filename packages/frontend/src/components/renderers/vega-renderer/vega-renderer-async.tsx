@@ -19,7 +19,9 @@ import { lazy, Suspense } from 'react';
 
 const VegaRenderer = lazy(() => import(/* webpackChunkName: "vega-renderer" */ './vega-renderer'));
 
-export const VegaRendererAsync = (props: { specString: string } & BoxProps) => {
+export const VegaRendererAsync = (
+  props: { specString: string; transformAssetUri: (uri: string) => string } & BoxProps
+) => {
   return (
     <div>
       <Suspense fallback={<Progress size="xs" isIndeterminate />}>

@@ -80,7 +80,7 @@ const links = [
     hash: 'advanced-features',
     children: [
       { name: 'Table of Contents', hash: 'table-of-contents-iex', iex: true },
-      { name: 'Footnotes', hash: 'footnotes-iex', iex: true },
+      { name: 'Footnotes', hash: 'footnotes' },
       { name: 'Syntax Highlighting', hash: 'syntax-highlighting' },
       { name: 'Tables', hash: 'tables' },
       { name: 'Task List', hash: 'task-list' },
@@ -91,7 +91,7 @@ const links = [
         hash: 'directives-iex',
         children: [
           { name: 'Badges', hash: 'badges-iex', iex: true },
-          { name: 'Custom Tables (Directive)', hash: 'custom-tables-directive-iex', iex: true },
+          { name: 'Tables (Directive)', hash: 'tables-directive-iex', iex: true },
           { name: 'Images (Directive)', hash: 'images-directive-iex', iex: true },
           { name: 'Videos', hash: 'videos-iex', iex: true },
           { name: 'Insight', hash: 'insight-iex', iex: true },

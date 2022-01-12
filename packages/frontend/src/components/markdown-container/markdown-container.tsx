@@ -16,13 +16,15 @@
 
 import { BoxProps, Box } from '@chakra-ui/react';
 import isEqual from 'lodash/isEqual';
-import { memo, ReactElement, ReactNode, useCallback, useState } from 'react';
-import ReactMarkdownWithHtml from 'react-markdown/with-html';
+import { memo, ReactElement, useCallback, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import ReactMarkdown, { Components } from 'react-markdown';
+import { TransformLink } from 'react-markdown/lib/ast-to-react';
+import rehypeRaw from 'rehype-raw';
+import rehypeSlug from 'rehype-slug';
 import remarkDirective from 'remark-directive';
 import remarkEmoji from 'remark-emoji';
-import remarkFootnotes from 'remark-footnotes';
 import remarkGfm from 'remark-gfm';
-import remarkSlug from 'remark-slug';
 import remarkToc from 'remark-toc';
 import urljoin from 'url-join';
 
@@ -31,18 +33,17 @@ import { remarkIex } from '../../shared/remark/remark-iex';
 import { remarkIexLogo } from '../../shared/remark/remark-iex-logo';
 import { isHashUrl, isRelativeUrl } from '../../shared/url-utils';
 import { pick } from '../../shared/utility';
+import { Alert } from '../alert/alert';
 
 import { ChakraUIRenderer } from './chakra-ui-renderer';
-
-export type Renderers = { [nodeType: string]: (props: any) => ReactElement };
 
 interface Props {
   contents: string;
   baseAssetUrl?: string;
   baseLinkUrl?: string;
   transformAssetUri?: ((uri: string) => string) | null;
-  transformLinkUri?: (uri: string, children?: ReactNode, title?: string) => string;
-  renderers?: Renderers;
+  transformLinkUri?: TransformLink;
+  components?: Components;
 }
 
 function areEqual(prevProps, nextProps): boolean {
@@ -52,6 +53,10 @@ function areEqual(prevProps, nextProps): boolean {
   return isEqual(pick(prevProps, keys), pick(nextProps, keys));
 }
 
+const ErrorFallback = ({ error, resetErrorBoundary }) => {
+  return <Alert error={`Error rendering Markdown: ${error}`} />;
+};
+
 export const MarkdownContainer = memo(
   ({
     contents,
@@ -59,7 +64,7 @@ export const MarkdownContainer = memo(
     baseLinkUrl = window.location.pathname,
     transformAssetUri,
     transformLinkUri,
-    renderers = {},
+    components = {},
     ...boxProps
   }: Props & BoxProps): ReactElement => {
     // TODO: Make configurable for draft attachments
@@ -74,7 +79,7 @@ export const MarkdownContainer = memo(
       [baseAssetUrl]
     );
 
-    const defaultTransformLinkUri = useCallback(
+    const defaultTransformLinkUri: TransformLink = useCallback(
       (uri: string) => {
         if (uri !== undefined && isRelativeUrl(uri) && !isHashUrl(uri)) {
           return urljoin(baseLinkUrl, uri);
@@ -84,33 +89,33 @@ export const MarkdownContainer = memo(
       [baseLinkUrl]
     );
 
-    const [rendererCache] = useState<Renderers>(
-      ChakraUIRenderer(renderers, transformAssetUri ?? defaultTransformAssetUri)
+    const [componentsCache] = useState<Components>(
+      ChakraUIRenderer(components, transformAssetUri ?? defaultTransformAssetUri)
     );
 
     return (
       <Box {...boxProps} className="iex-markdown-container">
-        <ReactMarkdownWithHtml
-          children={contents}
-          renderers={rendererCache}
-          allowDangerousHtml={true}
-          plugins={[
-            remarkDirective,
-            remarkGfm,
-            [remarkFootnotes, { inlineNotes: true }],
-            remarkEmoji,
-            remarkIex,
-            remarkIexLogo,
-            remarkSlug,
-            [remarkToc, { tight: true }],
-            [
-              remarkCodePlus,
-              { baseUrl: baseAssetUrl, transformAssetUri: transformAssetUri ?? defaultTransformAssetUri }
-            ]
-          ]}
-          transformLinkUri={transformLinkUri ?? defaultTransformLinkUri}
-          transformImageUri={transformAssetUri ?? defaultTransformAssetUri}
-        />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <ReactMarkdown
+            children={contents}
+            components={componentsCache}
+            remarkPlugins={[
+              remarkDirective,
+              remarkGfm,
+              remarkEmoji,
+              remarkIex,
+              remarkIexLogo,
+              [remarkToc, { tight: true }],
+              [
+                remarkCodePlus,
+                { baseUrl: baseAssetUrl, transformAssetUri: transformAssetUri ?? defaultTransformAssetUri }
+              ]
+            ]}
+            rehypePlugins={[rehypeRaw, rehypeSlug]}
+            transformLinkUri={transformLinkUri ?? defaultTransformLinkUri}
+            transformImageUri={transformAssetUri ?? defaultTransformAssetUri}
+          />
+        </ErrorBoundary>
       </Box>
     );
   },

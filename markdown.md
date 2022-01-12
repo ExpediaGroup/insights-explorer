@@ -337,23 +337,23 @@ WHERE ...
 
 Often it may be beneficial to store code in a separate file rather than in a Markdown document.  It's possible to dynamically include the contents of a file into a code block by adding a `file=URL` attribute to a fenced code block:
 
-    ```sh {file=https://raw.githubusercontent.com/react-icons/react-icons/master/build-script.sh}
+    ```yml {file=https://raw.githubusercontent.com/ExpediaGroup/insights-explorer/main/codegen.yml}
     ```
 
 The contents of the URL are loaded on-demand and displayed in the same manner as other code blocks:
 
-```sh {file=https://raw.githubusercontent.com/react-icons/react-icons/master/build-script.sh}
+```yml {file=https://raw.githubusercontent.com/ExpediaGroup/insights-explorer/main/codegen.yml}
 ```
 
 Within an Insight this URL can be a relative path to a file contained within the Insight.
 
 Additionally, the optional `lines=` attribute supports selecting portions of the included document. The value can be a combination of one or more lines or ranges separated by commas (`,`) or semicolons (`;`).
 
-    ```js {lines=16..23 file="https://raw.githubusercontent.com/chakra-ui/chakra-ui/7b21937aa7aa22cffccdeff36bb4c8bba9ff6080/packages/layout/src/code.tsx"}
+    ```js {lines=43..52 file="https://raw.githubusercontent.com/ExpediaGroup/insights-explorer/v2.0.4/packages/frontend/src/shared/remark/remark-code-plus.ts"}
     ```
 
 
-```js {lines=16..23 file="https://raw.githubusercontent.com/chakra-ui/chakra-ui/7b21937aa7aa22cffccdeff36bb4c8bba9ff6080/packages/layout/src/code.tsx"}
+```js {lines=43..52 file="https://raw.githubusercontent.com/ExpediaGroup/insights-explorer/v2.0.4/packages/frontend/src/shared/remark/remark-code-plus.ts"}
 ```
 
 Numbers by themselves indicate a single line to be included; two numbers separated by two periods (`..`) indicate an inclusive range of lines.
@@ -440,23 +440,21 @@ Content cannot be nested under the table of contents heading; any content will b
 This line will be replaced by the generated list.
 
 
-## Footnotes :badge[IEX]{variant=frost fontSize=1.2rem}
+## Footnotes
 
 Footnotes allow you to add notes and references without cluttering the body of the document. When you create a footnote, a superscript number with a link appears where you added the footnote reference. Readers can click the link to jump to the content of the footnote at the bottom of the page.
 
-To create a footnote reference, add a caret and an identifier inside brackets `[^1]`. Identifiers can be numbers or words, but they can’t contain spaces or tabs. Identifiers only correlate the footnote reference with the footnote itself.
-**Note:** You have the option to arrange the footnotes however you prefer, it won't automatically rearranged the numbered sequentially.
+To create a footnote reference, add a caret and an identifier inside brackets, e.g. `[^1]` or `[^note]`. Identifiers can be numbers or words, but they can’t contain spaces or tabs. Identifiers only correlate the footnote reference with the footnote itself.
 
 Add the footnote using another caret and number inside brackets with a colon and text `[^1]: My footnote.`. You don’t have to put footnotes at the end of the document. You can put them anywhere except inside other elements like lists, block quotes, and tables.
 
+**Note:** Footnotes can be defined in any order, but will be rearranged and numbered sequentially in the order they were referenced.
+
 ```
-Here's an example on how to use footnotes[^1]. You can use a one-liner footnote[^2] or a long paragraph[^long-footnote], just remember to indent the sequential lines so everything is under that long footnote.
+Here's an example on how to use footnotes[^1].
 
-Note: The title for the footnote is not set automatically, but feel free to set a title and divider[^3] like the one's below:
-
----
-
-### Footnotes
+You can use a one-liner footnote[^2] or a long paragraph[^long-footnote],
+just remember to indent the sequential lines so everything is under that long footnote.
 
 [^1]: First footnote example!
 
@@ -472,19 +470,14 @@ Note: The title for the footnote is not set automatically, but feel free to set 
     line.  In this way, multi-paragraph footnotes work like
     multi-paragraph list items.
 
-[^3]: You can set a title using `## Footnotes` and a divider with `---`
-
-<br/>
-
 ```
 
-Here's an example on how to use footnotes[^1]. You can use a one-liner footnote[^2] or a long paragraph[^long-footnote], just remember to indent the sequential lines so everything is under that long footnote.
+Here's an example on how to use footnotes[^1].
 
-Note: The title for the footnote is not set automatically, but feel free to set a title and divider[^3] like the one's below:
-<br/>
+You can use a one-liner footnote[^2] or a long paragraph[^long-footnote],
+just remember to indent the sequential lines so everything is under that long footnote.
 
----
-### Footnotes Example
+_(Footnotes actually appear at the bottom of the page)_
 
 [^1]: First footnote example!
 
@@ -500,7 +493,6 @@ Note: The title for the footnote is not set automatically, but feel free to set 
     line.  In this way, multi-paragraph footnotes work like
     multi-paragraph list items.
 
-[^3]: This cool title was made using a three hash `### Footnotes Examples` and a divider with `---`
 
 ## Syntax Highlighting
 
@@ -647,14 +639,14 @@ Badges can be used inline with most content.  If it is too small by default, `fo
 :badge[Big]{colorScheme=yellow fontSize=1.2rem}
 :badge[Bigger]{colorScheme=red fontSize=1.4rem}
 
-### Custom Tables (Directive) :badge[IEX]{variant=frost fontSize=1.2rem}
+### Tables (Directive) :badge[IEX]{variant=frost fontSize=1.2rem}
 
-Tables have a default style (no border, stripes and width as fit content), but you can set a specific style for tables using the `:::custom_table` directive.
+The `:::table` directive wraps the basic [table](#table) syntax and provides additional, optional attributes.  By default, it looks the same as the unwrapped version.
 
-On a custom table you can set `border`, `color` for the stripes, and set the table `width` as full.
+For example, you can enable a `border`, configure alternating stripes, increase the cell padding, and make the table full-width:
 
 ```md
-:::custom_table[border]{colorScheme=blue width=auto}
+:::table{border=true colorScheme=pink variant=striped size=lg width=auto}
 | Syntax      | Description  | Usage    | Example                                     |
 | ----------- | :----------: | -------- | ------------------------------------------- |
 | Header      | Title        | Markdown | # This is a title                           |
@@ -664,7 +656,7 @@ On a custom table you can set `border`, `color` for the stripes, and set the tab
 :::
 ```
 
-:::custom_table[border]{colorScheme=blue width=auto}
+:::table{border=true colorScheme=pink variant=striped size=lg width=auto}
 | Syntax      | Description  | Usage    | Example                                     |
 | ----------- | :----------: | -------- | ------------------------------------------- |
 | Header      | Title        | Markdown | # This is a title                           |
@@ -673,67 +665,64 @@ On a custom table you can set `border`, `color` for the stripes, and set the tab
 | Bold        | Text         | Markdown | Use double **asterisks** or __underscores__ |
 :::
 
-<br />
-
-You can also exclude the border, set the table size and have a `simple` or `unstyled` table with no stripes
+Captions can be added with the `caption` attribute:
 
 ```md
-:::custom_table[no-border]{variant=unstyled}
+:::table{caption="UN 2018 Population Estimates" colorScheme=blue}
+| City        | County | Population |
+| ----------- | ------ | ---------: |
+| Tōkyō       | Japan  | 37,400,068 |
+| Delhi       | India  | 28,514,000 |
+| Shanghai    | China  | 25,582,000 |
+| São Paulo   | Brazil | 21,650,000 |
+| Mexico City | Mexico | 21,581,000 |
+:::
+```
+
+:::table{caption="UN 2018 Population Estimates" colorScheme=blue}
+| City        | County | Population |
+| ----------- | ------ | ---------: |
+| Tōkyō       | Japan  | 37,400,068 |
+| Delhi       | India  | 28,514,000 |
+| Shanghai    | China  | 25,582,000 |
+| São Paulo   | Brazil | 21,650,000 |
+| Mexico City | Mexico | 21,581,000 |
+:::
+
+Here is an border-less, unstyled table:
+
+```md
+:::table{variant=unstyled}
 | Feature   | Support |
 | :-------- | :------:|
 | tables    | ✔       |
 | alignment | ✔       |
+| borders   | ✔       |
+| stripes   | ✔       |
+| padding   | ✔       |
 :::
 ```
 
-:::custom_table[no-border]{variant=unstyled}
+:::table{variant=unstyled}
 | Feature   | Support |
 | :-------- | :------:|
 | tables    | ✔       |
 | alignment | ✔       |
+| borders   | ✔       |
+| stripes   | ✔       |
+| padding   | ✔       |
 :::
 
-<br />
+#### Attributes
 
-You can create your own custom table with the style you want.
+* `border`: Adds a border around the table.  Can be set to `true` or `false`
+* `width`: Changes the width of the table.  Can be set to `fit-content`, `auto`, or a specific size (eg: 500px, 75%))
+* `variant`: Specifies the table style.  Can be set to `simple`, `striped`, `unstyled`
+* `size`: Sets the amount of cell spacing.  Can be set to `sm`, `md`, `lg`
+* `caption`: Provides a descriptive caption for the table
+* `colorScheme`: Changes the color of the stripes. Can be set to `gray`, `red`, `orange`, `yellow`, `green`, `teal`, `blue`, `cyan`, `purple`, `pink`
 
-```md
-:::custom_table[no-border]{colorScheme=red bg=pink width=500px variant=striped size=md}
-| Tables   |      Are      |  Cool |
-|----------|:-------------:|------:|
-| col 1 is |  left-aligned | $1600 |
-| col 2 is |    centered   |   $12 |
-| col 3 is | right-aligned |    $1 |
-:::
-```
-
-:::custom_table[no-border]{colorScheme=red bg=pink width=500px variant=striped size=md}
-| Tables   |      Are      |  Cool |
-|----------|:-------------:|------:|
-| col 1 is |  left-aligned | $1600 |
-| col 2 is |    centered   |   $12 |
-| col 3 is | right-aligned |    $1 |
-:::
-
-<br />
-
-Available options:
-
-* `width`: Changes the width of the table.  Can be set to `fit-content`, `auto` or a specific size (eg: 500px).
-* `variant`: Specifies the table style.  Can be set to `striped`, `simple`, `unstyled`.
-* `size`: Sets the table size.  Can be set to `sm`, `md`, `lg`.
-* `bg`: Changes the background color of the overall table. Can be set to any color (hex colors also work).
-* `colorScheme`: Changes the color of the stripes. Can be set to `gray`, `red`, `orange`, `yellow`, `green`, `teal`, `blue`, `cyan`, `purple`, `pink`. (Here's a link to the [default CSS theme](https://chakra-ui.com/docs/theming/theme#gray) for more info)
-
-
-Default Values:
-
-| Value Name | Default           |
-| :--------- | :---------------: |
-| _border_   | **no-border**     |
-| _width_    | **fit-content**   |
-| _variant_  | **striped**       |
-| _size_     | **sm**            |
+The default table attributes are `border=false width=fit-content variant=simple size=sm`.
 
 ### Images (Directive) :badge[IEX]{variant=frost fontSize=1.2rem}
 
@@ -817,7 +806,7 @@ The `:video` directive lets you embed a video within an Insight.
 As with images, relative paths can be used to embed videos which have been uploaded to the Insight.
 
 ```md
-:video[/screencast.mov]{width=400px}
+:video[/screencast.mov]{width=400px loop=true}
 ```
 
 Many [optional attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attributes) are supported, including `width`, `height`, `autoplay`, `controls`, `loop`, etc.
@@ -844,6 +833,10 @@ The presentation can be configured with an optional `layout` attribute:
 
 Possible `layout` values: `default`, `compact`, `square`.
 
+#### Attributes
+
+* `layout`: Changes the display layout.  Can be set to `default`, `compact`, `square`
+* `showUpdatedAt`: Includes the update date in certain layouts.  Can be set to `true` or `false`
 ### Insight Search :badge[IEX]{variant=frost fontSize=1.2rem}
 
 Search results can be included using the `::insights` directive:
@@ -864,13 +857,13 @@ The presentation can be configured with optional attributes:
 
 ::insights[markdown #demo]{layout=compact sortField=name sortDirection=asc}
 
-Available options:
+#### Attributes
 
 * `layout`: Changes the display layout.  Can be set to `default`, `compact`, `square`
 * `sortField`: Specifies the sort field.  Can be set to `relevance`, `name`, `relevance`, `createdAt`, `updatedAt`, `publishedDate`
-* `sortDirection`: Specifies the sort direction.  Can be set to `asc` or `desc`.
+* `sortDirection`: Specifies the sort direction.  Can be set to `asc` or `desc`
 * `showUpdatedAt`: Includes the update date in certain layouts.  Can be set to `true` or `false`
-* `showScores`: Includes the search relevance score.  Can be set to `true` or `false`
+* `showScores`: Includes the search relevance score (when sorted by `relevance`).  Can be set to `true` or `false`
 
 ### Math (KaTeX) :badge[IEX]{variant=frost fontSize=1.2rem}
 
