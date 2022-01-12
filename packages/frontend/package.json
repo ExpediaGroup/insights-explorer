@@ -2,7 +2,6 @@
   "name": "@iex/frontend",
   "version": "0.0.0",
   "description": "Insights Explorer Frontend",
-  "license": "TBD",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "1.7.4",
