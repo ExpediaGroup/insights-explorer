@@ -37,11 +37,12 @@ export const FetchCodeRenderer = memo(({ url, lines, ...props }: Props & BoxProp
     return <Progress size="xs" isIndeterminate />;
   }
 
-  const [filteredData, startingLineNumber] = filterContentByLines(data, lines);
+  const [filteredData, startingLineNumber] = filterContentByLines(data || '', lines);
 
-  if (error) {
-    return <Alert error={error} />;
-  } else {
-    return <CodeRenderer contents={filteredData} startingLineNumber={startingLineNumber} {...props} />;
-  }
+  return (
+    <>
+      {error && <Alert error={error} />}
+      {data && <CodeRenderer contents={filteredData} startingLineNumber={startingLineNumber} {...props} />}
+    </>
+  );
 });

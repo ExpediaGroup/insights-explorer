@@ -35,8 +35,8 @@ interface Props {
  */
 export const useFetch = ({ url, contents, method = 'GET', paused = false }: Props) => {
   const [fetching, setFetching] = useState(false);
-  const [data, setData] = useState<string>('');
-  const [error, setError] = useState<any>(null);
+  const [data, setData] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<any>(undefined);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -65,9 +65,10 @@ export const useFetch = ({ url, contents, method = 'GET', paused = false }: Prop
 
         if (!response.ok) {
           setError(response.statusText);
+          setData(undefined);
         } else {
           setData(data);
-          setError(null);
+          setError(undefined);
         }
         setFetching(false);
       } catch (error: any) {

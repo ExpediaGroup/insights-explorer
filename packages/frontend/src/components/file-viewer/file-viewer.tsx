@@ -184,7 +184,7 @@ export const FileViewer = ({
             renderer = (
               <MarkdownContainer
                 p="1rem"
-                contents={fetchedContents}
+                contents={fetchedContents || ''}
                 baseAssetUrl={baseAssetUrl}
                 baseLinkUrl={baseLinkUrl}
                 transformAssetUri={transformAssetUri}
