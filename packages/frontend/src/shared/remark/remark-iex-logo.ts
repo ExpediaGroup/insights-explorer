@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { visit } from 'unist-util-visit';
+import { visit, SKIP } from 'unist-util-visit';
 
 const REGEX_IEX = /:iex:/g;
 
@@ -28,6 +28,11 @@ const REGEX_IEX = /:iex:/g;
 export const remarkIexLogo = (options) => {
   return function transformer(tree) {
     visit(tree, 'text', (node: any, index, parent) => {
+      // Type issue, fixed in later versions of unist-util-visit
+      if (index === null) {
+        return;
+      }
+
       // Text node may contain zero or more :iex: shortcodes
       // Split by the shortcode to extract each piece of surrounding text
       const parts = node.value.split(REGEX_IEX);
@@ -58,7 +63,7 @@ export const remarkIexLogo = (options) => {
 
         // Replace the existing text node with the new set of nodes
         parent.children.splice(index, 1, ...newChildren);
-        return [visit.SKIP, index];
+        return [SKIP, index];
       }
     });
   };
