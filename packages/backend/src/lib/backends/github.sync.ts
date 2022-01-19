@@ -64,6 +64,8 @@ const INDEXABLE_MIME_TYPES = new Set([
 
 export class GitHubRepositorySync extends BaseSync {
   async sync(insightSyncTask: InsightSyncTask): Promise<IndexedInsight | null> {
+    const startTime = process.hrtime.bigint();
+
     // Check for previously-synced Insight
     const previousInsight = await super.getPreviouslySyncedInsight(insightSyncTask);
 
@@ -77,6 +79,10 @@ export class GitHubRepositorySync extends BaseSync {
       await super.updateDatabase(insightSyncTask, insight);
       await super.publishInsight(insight, insightSyncTask.refresh);
     }
+
+    const endTime = process.hrtime.bigint();
+    const elapsedTime = Number(endTime - startTime) / 1e9;
+    logger.info(`[GITHUB_SYNC] Sync for ${insightSyncTask.owner}/${insightSyncTask.repo} took ${elapsedTime} seconds`);
 
     return insight;
   }
@@ -94,7 +100,7 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
     })
   );
 
-  logger.debug('[GITHUB] Retrieved Contributor details from GitHub API ' + repository.nameWithOwner);
+  logger.debug('[GITHUB_SYNC] Retrieved Contributor details from GitHub API ' + repository.nameWithOwner);
 
   const userServices = new UserService(new ActivityService());
   const contributors = await pMap(contributorsResult, async ({ author }: any): Promise<IndexedInsightUser> => {
