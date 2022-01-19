@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.0.4...v2.1.0) (2022-01-19)
+
+
+### Features
+
+* Upgrade Markdown rendering to React-Markdown v8 ([be5275d](https://github.com/ExpediaGroup/insights-explorer/commit/be5275d2b508d44be1f22aae08f005c5010af51e))
+
+
+### Bug Fixes
+
+* Improve `useFetch` hook; prevent memory leak in FetchCodeRenderer ([6149ec7](https://github.com/ExpediaGroup/insights-explorer/commit/6149ec7da8721f437d8dfb1f0a7c8e6f184a2155))
+* Pin `unist-util-visit` to 4.0.0 to fix tcs issue ([a827665](https://github.com/ExpediaGroup/insights-explorer/commit/a8276650875a4ef84a3d58121bd4b54541c54e2e))
+
 ### [2.0.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.0.3...v2.0.4) (2022-01-12)
 
 
