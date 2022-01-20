@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.1.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.1.2...v2.1.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* **deps:** bump katex from 0.15.1 to 0.15.2 ([e8a124b](https://github.com/ExpediaGroup/insights-explorer/commit/e8a124b277cde08394fb2a93590cbba3af3f056d))
+
 ### [2.1.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.1.1...v2.1.2) (2022-01-20)
 
 
