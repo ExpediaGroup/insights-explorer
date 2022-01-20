@@ -112,4 +112,4 @@ npm run license:thirdparty
 
 This project is available under the Apache 2.0 License.
 
-Copyright 2020-2021 Expedia, Inc.
+Copyright 2020-2022 Expedia, Inc.

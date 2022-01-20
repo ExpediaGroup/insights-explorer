@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2022 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,46 +14,12 @@
  * limitations under the License.
  */
 
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  HStack,
-  Icon,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuGroup,
-  MenuItem,
-  MenuList,
-  useDisclosure,
-  useToast,
-  MenuDivider
-} from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
-import { gql, useMutation } from 'urql';
+import { Box, Flex, Heading, HStack, Stack } from '@chakra-ui/react';
 
-import { InsightCollaboratorsModal } from '../../../../../../components/insight-collaborators-modal/insight-collaborators-modal';
 import { ItemTypeIcon } from '../../../../../../components/item-type-icon/item-type-icon';
-import { LikeButton } from '../../../../../../components/like-button/like-button';
-import { LikedByTooltip } from '../../../../../../components/liked-by-tooltip/liked-by-tooltip';
-import { Link } from '../../../../../../components/link/link';
-import { NumberIconButton } from '../../../../../../components/number-icon-button/number-icon-button';
 import { Insight, User } from '../../../../../../models/generated/graphql';
-import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
-import { RootState } from '../../../../../../store/store';
-import { CloneDialog } from '../clone-dialog/clone-dialog';
-import { DeleteDialog } from '../delete-dialog/delete-dialog';
-
-const SYNC_INSIGHT_MUTATION = gql`
-  mutation SyncInsight($insightId: ID!) {
-    syncInsight(insightId: $insightId) {
-      id
-    }
-  }
-`;
+import { ActionBar } from '../action-bar/action-bar';
+import { NavigationButtons } from '../navigation-buttons/navigation-buttons';
 
 interface Props {
   insight: Insight;
@@ -76,190 +42,58 @@ export const InsightHeader = ({
   onFetchLikedBy,
   onLike
 }: Props) => {
-  const { loggedIn } = useSelector((state: RootState) => state.user);
-
-  const toast = useToast();
-  const [, sync] = useMutation(SYNC_INSIGHT_MUTATION);
-
-  // Collaborators modal
-  const { isOpen: isCollaboratorsOpen, onOpen: onCollaboratorsOpen, onClose: onCollaboratorsClose } = useDisclosure();
-
-  // Clone dialog
-  const { isOpen: isCloneOpen, onOpen: onCloneOpen, onClose: onCloneClose } = useDisclosure();
-
-  // Delete dialog
-  const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure();
-
   if (insight == null) {
     return <Box></Box>;
   }
 
-  const syncInsight = async () => {
-    const result = await sync({
-      insightId: insight.id
-    });
-
-    if (result.error) {
-      toast({
-        position: 'bottom-right',
-        title: 'Unable to sync.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true
-      });
-      return;
-    }
-
-    toast({
-      position: 'bottom-right',
-      title: 'Insight synced.',
-      status: 'success',
-      duration: 3000,
-      isClosable: true
-    });
-  };
-
-  // This indicates that the upstream repository is missing
-  // We can still show the cached insight, but with a warning message
-  const isMissing = insight.repository.isMissing;
-
-  // If the resource is missing we can't edit or clone.
-  const canEdit = !isMissing;
-  const canClone = !isMissing;
-
-  const likeLabel = insight.viewerHasLiked ? 'Unlike this Insight' : 'Like this Insight';
-
-  const showPreviousAndNextButtons = previousInsight || nextInsight;
-  const nextInsightLink = nextInsight ? `/${nextInsight?.itemType}/${nextInsight?.fullName}` : '';
-  const previousInsightLink = previousInsight ? `/${previousInsight?.itemType}/${previousInsight?.fullName}` : '';
-
   return (
     <>
       <Flex direction="column" align="stretch" p="0.5rem">
-        <HStack spacing="1rem" align="center">
-          <ItemTypeIcon itemType={insight.itemType} fontSize={{ base: '2rem' }} />
-          <Heading as="h1" size="lg" flexGrow={1}>
-            {insight.name}
-          </Heading>
+        <Stack spacing="0.5rem" align={{ base: 'stretch', md: 'flex-start' }} direction={{ base: 'column', md: 'row' }}>
+          <Box flexGrow={1}>
+            {/* Mobile-only */}
+            {!isExport && (
+              <NavigationButtons
+                insight={insight}
+                nextInsight={nextInsight}
+                previousInsight={previousInsight}
+                display={{ base: 'flex', md: 'none' }}
+                mb="0.5rem"
+              />
+            )}
 
-          <HStack spacing="1rem">
-            {showPreviousAndNextButtons && (
-              <Link to={previousInsightLink}>
-                <IconButton
-                  aria-label="Previous Insight"
-                  size="sm"
-                  icon={iconFactoryAs('previousPage')}
-                  isDisabled={previousInsight == null}
-                />
-              </Link>
-            )}
-            {showPreviousAndNextButtons && (
-              <Link to={nextInsightLink}>
-                <IconButton
-                  aria-label="Next Insight"
-                  size="sm"
-                  icon={iconFactoryAs('nextPage')}
-                  isDisabled={nextInsight == null}
-                />
-              </Link>
-            )}
-          </HStack>
+            <HStack spacing="1rem" flexGrow={1} align="stretch">
+              <ItemTypeIcon itemType={insight.itemType} fontSize={{ base: '2rem' }} />
+              <Heading as="h1" size="lg">
+                {insight.name}
+              </Heading>
+            </HStack>
+          </Box>
 
           {!isExport && (
-            <HStack spacing="0">
-              <RouterLink to={`/${insight.itemType}/${insight.fullName}/discuss`}>
-                <NumberIconButton label="Discussion" icon={iconFactoryAs('comments')} number={insight.commentCount} />
-              </RouterLink>
+            <>
+              {/* Desktop-only */}
+              <NavigationButtons
+                insight={insight}
+                nextInsight={nextInsight}
+                previousInsight={previousInsight}
+                display={{ base: 'none', md: 'flex' }}
+              />
 
-              <LikedByTooltip
-                label={likeLabel}
-                likeCount={insight.likeCount}
-                onFetchLikedBy={() => onFetchLikedBy(insight.id)}
-                placement="left"
-              >
-                <LikeButton
-                  liked={insight.viewerHasLiked}
-                  label={likeLabel}
-                  onLike={onLike}
-                  likeCount={insight.likeCount}
-                />
-              </LikedByTooltip>
-
-              <RouterLink
-                to={`/activities/${encodeURIComponent(`insight:${insight.fullName} activityType:VIEW_INSIGHT`)}`}
-              >
-                <NumberIconButton label="Views" icon={iconFactoryAs('views')} number={insight.viewCount + 1} />
-              </RouterLink>
-
-              <Menu>
-                <MenuButton as={Box} display="inline-block">
-                  <IconButton variant="ghost" aria-label="Additional commands" icon={iconFactoryAs('optionsMenu')} />
-                </MenuButton>
-                <MenuList>
-                  <MenuItem onClick={onCloneOpen} isDisabled={!canClone}>
-                    <Icon as={iconFactory('clone')} mr="0.5rem" />
-                    Clone Insight
-                  </MenuItem>
-
-                  <MenuDivider />
-
-                  <RouterLink to={`/${insight.itemType}/${insight.fullName}/activity`}>
-                    <MenuItem>
-                      <Icon as={iconFactory('activities')} mr="0.5rem" />
-                      Activity
-                    </MenuItem>
-                  </RouterLink>
-                  <RouterLink to={`/${insight.itemType}/${insight.fullName}/json`}>
-                    <MenuItem>
-                      <Icon as={iconFactory('json')} mr="0.5rem" />
-                      View JSON
-                    </MenuItem>
-                  </RouterLink>
-
-                  <MenuDivider />
-
-                  <MenuItem onClick={syncInsight}>
-                    <Icon as={iconFactory('sync')} mr="0.5rem" />
-                    Sync Now
-                  </MenuItem>
-
-                  {loggedIn && (
-                    <>
-                      <MenuDivider />
-                      <MenuGroup title="Admin">
-                        <MenuItem onClick={onCollaboratorsOpen} isDisabled={insight.viewerPermission !== 'ADMIN'}>
-                          <Icon as={iconFactory('permissions')} mr="0.5rem" />
-                          Collaborators
-                        </MenuItem>
-
-                        <MenuItem
-                          onClick={onDeleteOpen}
-                          isDisabled={!insight.repository.isMissing && insight.viewerPermission !== 'ADMIN'}
-                        >
-                          <Icon as={iconFactory('trash')} mr="0.5rem" />
-                          Delete Insight
-                        </MenuItem>
-                      </MenuGroup>
-                    </>
-                  )}
-                </MenuList>
-              </Menu>
-
-              <RouterLink to={`/${insight.itemType}/${insight.fullName}/edit`}>
-                <Button width={{ base: '100%', md: 'unset' }} bg="gray.200" isDisabled={!canEdit}>
-                  Edit
-                </Button>
-              </RouterLink>
-            </HStack>
+              <ActionBar
+                insight={insight}
+                nextInsight={nextInsight}
+                previousInsight={previousInsight}
+                onClone={onClone}
+                onDelete={onDelete}
+                onFetchLikedBy={onFetchLikedBy}
+                onLike={onLike}
+                isExport={isExport}
+              />
+            </>
           )}
-        </HStack>
+        </Stack>
       </Flex>
-
-      <CloneDialog insight={insight} isOpen={isCloneOpen} onClone={onClone} onClose={onCloneClose} />
-
-      <DeleteDialog insight={insight} isOpen={isDeleteOpen} onDelete={onDelete} onClose={onDeleteClose} />
-
-      <InsightCollaboratorsModal insightId={insight.id} isOpen={isCollaboratorsOpen} onClose={onCollaboratorsClose} />
     </>
   );
 };

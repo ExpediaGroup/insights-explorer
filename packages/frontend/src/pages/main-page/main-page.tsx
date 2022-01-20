@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2022 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ export const MainPage = () => {
       <>
         {isPrint !== undefined && <PrintHeader />}
 
-        <Box as="section" p="2rem" pt="1rem" minHeight="100vh" bg={backgroundColor}>
+        <Box as="section" p={{ base: '1rem', md: '2rem' }} pt="1rem" minHeight="100vh" bg={backgroundColor}>
           <SecureRoute>
             <Routes>
               {/* Insight Viewing */}
@@ -72,7 +72,7 @@ export const MainPage = () => {
   return (
     <Flex as="section" direction="column" minHeight="100vh" bg={backgroundColor}>
       <Header />
-      <Flex as="main" flexGrow={1} direction="column" p="2rem" pt={0}>
+      <Flex as="main" flexGrow={1} direction="column" p={{ base: '1rem', md: '2rem' }} pt={0}>
         <Routes>
           {/* Authentication errors can be displayed without being logged in */}
           <Route path={AUTH_ERROR_PATH} element={<AuthErrorPage />} />

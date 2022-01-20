@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2022 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,47 +14,26 @@
  * limitations under the License.
  */
 
-import {
-  Collapse,
-  Flex,
-  IconButton,
-  Tag,
-  TagLabel,
-  Text,
-  useDisclosure,
-  VStack,
-  Wrap,
-  WrapItem
-} from '@chakra-ui/react';
-import { DateTime } from 'luxon';
+import { Flex, VStack } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { Alert } from '../../../../components/alert/alert';
 import { FileViewer } from '../../../../components/file-viewer/file-viewer';
-import { InsightAuthor } from '../../../../components/insight-author/insight-author';
-import { InsightTag } from '../../../../components/insight-tag/insight-tag';
-import { SidebarHeading } from '../../../../components/sidebar-heading/sidebar-heading';
-import { TeamTag } from '../../../../components/team-tag/team-tag';
-import { formatDateIntl, formatRelativeIntl } from '../../../../shared/date-utils';
-import { iconFactoryAs } from '../../../../shared/icon-factory';
 
 import { ExportFooter } from './components/export-footer/export-footer';
 import { ExportHeader } from './components/export-header/export-header';
-import { GitHubButton } from './components/github-button/github-button';
 import { InsightActivity } from './components/insight-activity/insight-activity';
 import { InsightComments } from './components/insight-comments/insight-comments';
 import { InsightFileViewer } from './components/insight-file-viewer/insight-file-viewer';
+import { InsightInfobar } from './components/insight-infobar/insight-infobar';
 import { PageHeader } from './components/page-header/page-header';
-import { ShareMenu } from './components/share-menu/share-menu';
 import { ItemTypeViewerProps } from './item-type-viewer';
 
 /**
  * Main pane of content---shared with normal/export view
  */
 const MainView = ({ insight, isExport, onClone, onDelete, onFetchLikedBy, onLike }: ItemTypeViewerProps) => {
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: false });
-
   return (
     <>
       {insight.repository.isMissing && (
@@ -70,77 +49,6 @@ const MainView = ({ insight, isExport, onClone, onDelete, onFetchLikedBy, onLike
           allowDownload={false}
           borderless={true}
           header={isExport ? 'none' : 'stealth'}
-          headerStyles={{ align: 'flex-start' }}
-          headerContent={
-            <Flex flexDirection="column" align="stretch">
-              <Wrap spacing="0.25rem" shouldWrapChildren={true} align="center">
-                <IconButton
-                  aria-label="Expand/collapse"
-                  icon={isOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown')}
-                  variant="ghost"
-                  size="sm"
-                  onClick={onToggle}
-                  title={isOpen ? 'Collapse this section' : 'Expand this section'}
-                />
-
-                {insight.metadata?.team && <TeamTag team={insight.metadata.team} size="md" />}
-
-                {insight.authors.edges.map(({ node: author }) => (
-                  <InsightAuthor key={author.userName} author={author} size="md" width="100%" />
-                ))}
-
-                {insight.tags?.length > 0 && insight.tags.map((tag) => <InsightTag key={tag} tag={tag} size="md" />)}
-              </Wrap>
-              <Collapse in={isOpen} animateOpacity>
-                <VStack spacing="1rem" ml="2.5rem" align="stretch" mt="1rem">
-                  <Wrap align="center" spacing="0.5rem">
-                    {insight.metadata?.publishedDate != null && (
-                      <WrapItem alignItems="baseline">
-                        <SidebarHeading mr="0.5rem">Published Date</SidebarHeading>
-                        <Text fontSize="md">{formatDateIntl(insight.metadata.publishedDate, DateTime.DATE_MED)}</Text>
-                      </WrapItem>
-                    )}
-
-                    <WrapItem alignItems="baseline">
-                      <SidebarHeading mr="0.5rem">Last Updated</SidebarHeading>
-                      <Text fontSize="md">
-                        {formatDateIntl(insight.updatedAt, DateTime.DATETIME_MED)} (
-                        {formatRelativeIntl(insight.updatedAt)})
-                      </Text>
-                    </WrapItem>
-
-                    <WrapItem alignItems="baseline">
-                      <SidebarHeading mr="0.5rem">Created</SidebarHeading>
-                      <Text fontSize="md">
-                        {formatDateIntl(insight.createdAt, DateTime.DATETIME_MED)} (
-                        {formatRelativeIntl(insight.createdAt)})
-                      </Text>
-                    </WrapItem>
-                  </Wrap>
-                  {insight.files && insight.files.length > 0 && (
-                    <Wrap align="center" spacing="0.5rem" shouldWrapChildren={true}>
-                      <SidebarHeading mr="0.5rem">Files</SidebarHeading>
-                      {insight.files.map((file) => {
-                        return (
-                          <Link to={`/${insight.itemType}/${insight.fullName}/files/${file.path}`} key={file.id}>
-                            <Tag rounded="full">
-                              <TagLabel>{file.path}</TagLabel>
-                            </Tag>
-                          </Link>
-                        );
-                      })}
-                    </Wrap>
-                  )}
-                </VStack>
-              </Collapse>
-            </Flex>
-          }
-          headerRightContent={
-            <>
-              <GitHubButton insight={insight} size="sm" fontSize="1rem" mr="0.5rem" />
-              <ShareMenu insight={insight} size="sm" fontSize="1rem" />
-            </>
-          }
           mime="text/markdown"
           contents={insight.readme?.contents}
           baseAssetUrl={`/api/v1/insights/${insight.fullName}/assets`}
@@ -151,6 +59,9 @@ const MainView = ({ insight, isExport, onClone, onDelete, onFetchLikedBy, onLike
   );
 };
 
+/***
+ * Custom Header for ItemType===Page
+ */
 export const PageViewer = ({
   insight,
   nextInsight,
@@ -187,6 +98,8 @@ export const PageViewer = ({
         />
 
         {isExport && <ExportHeader insight={insight} mt="0.5rem" />}
+
+        {!isExport && <InsightInfobar insight={insight} />}
 
         <VStack spacing="1rem" align="stretch" flexGrow={1} overflow="hidden">
           <Routes>

@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2022 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import { InsightActivity } from './components/insight-activity/insight-activity'
 import { InsightComments } from './components/insight-comments/insight-comments';
 import { InsightFileViewer } from './components/insight-file-viewer/insight-file-viewer';
 import { InsightHeader } from './components/insight-header/insight-header';
+import { InsightInfobar } from './components/insight-infobar/insight-infobar';
 import { InsightSidebar } from './components/insight-sidebar/insight-sidebar';
 import { ItemTypeViewerProps } from './item-type-viewer';
 import { PageViewer } from './page-viewer';
@@ -105,6 +106,9 @@ export const InsightViewer = ({
 
         {isExport && <ExportHeader insight={insight} mt="0.5rem" />}
 
+        {/* Mobile-only */}
+        {!isExport && <InsightInfobar insight={insight} display={{ base: 'flex', md: 'none' }} />}
+
         <Flex direction="row">
           <VStack spacing="1rem" align="stretch" flexGrow={1} overflow="hidden">
             <Routes>
@@ -157,6 +161,7 @@ export const InsightViewer = ({
             {isExport && <ExportFooter insight={insight} mt="0.5rem" />}
           </VStack>
 
+          {/* Desktop-only */}
           {!isExport && (
             <InsightSidebar
               insight={insight}
@@ -165,6 +170,7 @@ export const InsightViewer = ({
               maxWidth={{ base: '16rem', md: '20rem', xl: '22rem' }}
               ml="1rem"
               mt="0.5rem"
+              display={{ base: 'none', md: 'flex' }}
             />
           )}
         </Flex>

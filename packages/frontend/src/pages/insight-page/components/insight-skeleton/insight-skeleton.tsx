@@ -19,20 +19,29 @@ import { Flex, HStack, Skeleton, VStack } from '@chakra-ui/react';
 export const InsightSkeleton = () => {
   return (
     <>
-      <Flex direction="column" justify="stretch" flexGrow={2}>
+      {/* Desktop-only */}
+      <Flex direction="column" justify="stretch" display={{ base: 'none', md: 'flex' }}>
         {/* Header */}
         <Flex direction="column" align="stretch" p="0.5rem">
           <HStack spacing={0} height="40px" align="stretch">
+            {/* Item type icon */}
             <Skeleton boxSize="40px" mr="0.5rem" />
 
+            {/* Item name */}
             <Skeleton size="lg" w="33%" />
 
+            {/* Spacer */}
             <Flex flexGrow={1} />
-            <Skeleton width="60px" mr="0.5rem" />
-            <Skeleton width="60px" mr="0.5rem" />
-            <Skeleton width="40px" mr="0.5rem" />
-            <Skeleton width="40px" mr="0.5rem" />
-            <Skeleton width="60px" mr="0.5rem" />
+
+            <HStack spacing="0.5rem" height="40px" align="stretch">
+              <Skeleton width="40px" />
+              <Skeleton width="40px" />
+              <Skeleton width="65px" />
+              <Skeleton width="65px" />
+              <Skeleton width="65px" />
+              <Skeleton width="40px" />
+              <Skeleton width="60px" />
+            </HStack>
           </HStack>
         </Flex>
 
@@ -72,13 +81,60 @@ export const InsightSkeleton = () => {
             <Skeleton width="30%" height="1.5rem" mt="2rem" />
             <Skeleton height="1.5rem" mt="0.5rem" />
 
-            <HStack spacing="1rem" height="40px" mt="2rem">
-              <Skeleton boxSize="40px" />
-              <Skeleton boxSize="40px" />
+            <HStack spacing="1rem" height="60px" mt="2rem">
+              <Skeleton boxSize="60px" />
+              <Skeleton boxSize="60px" />
             </HStack>
+
+            <Skeleton width="30%" height="1.5rem" mt="2rem" />
+            <Skeleton height="1.5rem" mt="0.5rem" />
+
+            <Skeleton width="30%" height="1.5rem" mt="2rem" />
+            <Skeleton height="1.5rem" mt="0.5rem" />
           </Flex>
         </Flex>
       </Flex>
+
+      {/* Mobile-only */}
+      <VStack align="stretch" justify="stretch" display={{ base: 'flex', md: 'none' }}>
+        {/* Header */}
+        <VStack spacing="0.5rem" align="stretch" flexGrow={1} overflow="hidden" p="0.5rem">
+          <HStack spacing="1rem" height="40px" flexGrow={1}>
+            <Skeleton height="32px" flexGrow={1} />
+            <Skeleton height="32px" flexGrow={1} />
+          </HStack>
+
+          <HStack spacing={0} height="40px" align="stretch">
+            {/* Item type icon */}
+            <Skeleton boxSize="40px" mr="0.5rem" />
+
+            {/* Item name */}
+            <Skeleton size="lg" flexGrow={1} />
+          </HStack>
+
+          <HStack spacing="0.5rem" height="40px" flexGrow={1} justify="space-between">
+            <Skeleton width="65px" height="40px" />
+            <Skeleton width="65px" height="40px" />
+            <Skeleton width="65px" height="40px" />
+            <Skeleton width="40px" height="40px" />
+          </HStack>
+        </VStack>
+
+        {/* Insight */}
+        <VStack spacing="0.5rem" align="stretch" flexGrow={1} overflow="hidden" p="0.5rem" pt="2rem">
+          <Skeleton mt="1rem" height="2rem" width="30%" />
+          <Skeleton height="1.5rem" />
+          <Skeleton height="1.5rem" />
+          <Skeleton height="1.5rem" />
+          <Skeleton height="1.5rem" width="74%" />
+          <Flex h="2rem" />
+          <Skeleton mt="1rem" height="2rem" width="30%" />
+          <Skeleton height="1.5rem" />
+          <Skeleton height="1.5rem" />
+          <Skeleton height="1.5rem" />
+          <Skeleton height="1.5rem" width="60%" />
+        </VStack>
+      </VStack>
     </>
   );
 };
