@@ -36,6 +36,7 @@ import {
   Tr
 } from '@chakra-ui/react';
 import { Components } from 'react-markdown';
+import Zoom from 'react-medium-image-zoom';
 
 import { Sort } from '../../models/generated/graphql';
 import { destringObject } from '../../shared/destring';
@@ -54,6 +55,7 @@ import { VideoRenderer } from '../renderers/video-renderer/video-renderer';
 import { XkcdChartRendererAsync } from '../renderers/xkcd-chart-renderer/xkcd-chart-renderer-async';
 
 import './markdown-container.css';
+import 'react-medium-image-zoom/dist/styles.css';
 
 export const getCoreProps = (props): any => {
   return props['data-sourcepos'] ? { 'data-sourcepos': props['data-sourcepos'] } : {};
@@ -184,7 +186,11 @@ export const ChakraUIRenderer = (
       return <ChakraLink as="a" {...props} color="frost.400" />;
     },
     img: ({ node, ...props }) => {
-      return <Image ignoreFallback {...props} />;
+      return (
+        <Zoom>
+          <Image ignoreFallback {...props} />
+        </Zoom>
+      );
     },
     text: ({ node, children, ...props }) => {
       return <Text as="span">{children}</Text>;
@@ -213,20 +219,22 @@ export const ChakraUIRenderer = (
       const defaultProps = { variant: 'simple', size: 'sm' };
 
       return (
-        <Box
-          width={width || 'fit-content'}
-          overflow="auto"
-          py="0.5rem"
-          mb="1rem"
-          {...(border === 'true'
-            ? { border: '1px solid', borderRadius: 'lg', borderColor: 'snowstorm.300', p: '1rem' }
-            : {})}
-        >
-          <Table {...defaultProps} {...props}>
-            {caption && <TableCaption>{caption}</TableCaption>}
-            {children}
-          </Table>
-        </Box>
+        <Zoom>
+          <Box
+            width={width || 'fit-content'}
+            overflow="auto"
+            py="0.5rem"
+            mb="1rem"
+            {...(border === 'true'
+              ? { border: '1px solid', borderRadius: 'lg', borderColor: 'snowstorm.300', p: '1rem' }
+              : {})}
+          >
+            <Table {...defaultProps} {...props}>
+              {caption && <TableCaption>{caption}</TableCaption>}
+              {children}
+            </Table>
+          </Box>
+        </Zoom>
       );
     },
     thead: ({ children }) => {
@@ -250,7 +258,11 @@ export const ChakraUIRenderer = (
       return <Badge {...props}>{children}</Badge>;
     },
     katex: ({ math, block }) => {
-      return <KaTeXRendererAsync math={math} block={block} />;
+      return (
+        <Zoom>
+          <KaTeXRendererAsync math={math} block={block} />
+        </Zoom>
+      );
     },
     insight: ({ node, children, ...props }) => {
       return (
@@ -282,6 +294,7 @@ export const ChakraUIRenderer = (
       );
     },
     vegachart: ({ node, config, ...props }) => {
+      // TODO: Zoom doesn't work with Vega Charts
       return (
         <VegaRendererAsync
           key={hashCode(config)}
