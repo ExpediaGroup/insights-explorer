@@ -70,7 +70,7 @@
     "generate:watch": "graphql-codegen --watch \"packages/frontend/src/**/*.ts\"",
     "--------": "------------------------------------",
     "clean": "npm run clean --workspaces",
-    "clean:deep": "npm run clean:deep --workspaces && rm -rf node_modules && rm -f package-lock.json",
+    "clean:deep": "npm run clean:deep --workspaces && rm -rf node_modules",
     "build": "run-s build:backend generate build:tsc build:frontend:react",
     "build:tsc": "tsc --build --incremental --verbose",
     "build:backend": "npm run build --workspace=@iex/backend",

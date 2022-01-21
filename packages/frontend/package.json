@@ -92,7 +92,7 @@
   },
   "scripts": {
     "clean": "rm -rf ./build && rm -f tsconfig.tsbuildinfo",
-    "clean:deep": "rm -rf node_modules && rm -f package-lock.json",
+    "clean:deep": "rm -rf node_modules",
     "start": "react-scripts start",
     "build": "tsc --build && npm run build:react",
     "build:react": "react-scripts build",

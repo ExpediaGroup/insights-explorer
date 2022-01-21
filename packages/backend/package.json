@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf ./dist && rm -f tsconfig.tsbuildinfo",
-    "clean:deep": "rm -rf node_modules && rm -f package-lock.json",
+    "clean:deep": "rm -rf node_modules",
     "----------": "---------------------------------------",
     "build": "run-s build:tsc",
     "build:tsc": "tsc --build --incremental --verbose",
