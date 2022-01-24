@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.2.0...v2.3.0) (2022-01-24)
+
+
+### Features
+
+* Add zoom to images from the file viewer ([a90e445](https://github.com/ExpediaGroup/insights-explorer/commit/a90e445e8579a8b47aa556610ea56a6d3f5c5ee6))
+* Add zoom to images, tables and katex renders ([6482ee7](https://github.com/ExpediaGroup/insights-explorer/commit/6482ee7efd3a0a7bdb6c856c445d4a8e343678f9))
+
 ## [2.2.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.1.3...v2.2.0) (2022-01-24)
 
 
