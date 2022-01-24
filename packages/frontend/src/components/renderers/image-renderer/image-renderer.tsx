@@ -15,7 +15,14 @@
  */
 
 import { Image } from '@chakra-ui/react';
+import Zoom from 'react-medium-image-zoom';
+
+import 'react-medium-image-zoom/dist/styles.css';
 
 export const ImageRenderer = ({ url }) => {
-  return <Image src={url} objectFit="contain" />;
+  return (
+    <Zoom>
+      <Image src={url} objectFit="contain" />
+    </Zoom>
+  );
 };
