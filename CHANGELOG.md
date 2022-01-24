@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.1.3...v2.2.0) (2022-01-24)
+
+
+### Features
+
+* Mobile-responsive Insight Viewer ([9bec6f5](https://github.com/ExpediaGroup/insights-explorer/commit/9bec6f5c81bc5617f89ec124269d53b8877b0a63))
+
+
+### Bug Fixes
+
+* Center-align header items ([6533088](https://github.com/ExpediaGroup/insights-explorer/commit/653308850f238cc93dbab7400fea5b0a32899c18))
+
 ### [2.1.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.1.2...v2.1.3) (2022-01-20)
 
 
