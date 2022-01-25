@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.4.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.0...v2.4.1) (2022-01-25)
+
+
+### Bug Fixes
+
+* Fix invalid HTML generation in What's New rendering ([9f4adf2](https://github.com/ExpediaGroup/insights-explorer/commit/9f4adf2d13751fe261c6edfaa8c68efdc076fe50))
+
 ## [2.4.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.3.0...v2.4.0) (2022-01-25)
 
 
