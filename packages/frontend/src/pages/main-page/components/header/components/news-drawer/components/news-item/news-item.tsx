@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { Components } from 'react-markdown';
 
@@ -44,7 +44,7 @@ const customComponents: Components = {
   h6: heading,
   p: ({ node, children, ...props }) => {
     return (
-      <Text mb="1rem" fontSize="sm">
+      <Text as={Box} mb="1rem" fontSize="sm">
         {children}
       </Text>
     );
