@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.3.0...v2.4.0) (2022-01-25)
+
+
+### Features
+
+* Add self-links to headings in Markdown ([aae199d](https://github.com/ExpediaGroup/insights-explorer/commit/aae199d2ce9e0a4f24011f7211624031a7f5be1e))
+
 ## [2.3.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.2.0...v2.3.0) (2022-01-24)
 
 
