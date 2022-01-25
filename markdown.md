@@ -255,6 +255,14 @@ Images can be included with this syntax: `![alt text](url "title")`.  Alt text a
 
 ![alt text](https://commonmark.org/help/images/favicon.png "Markdown Logo")
 
+Spaces in image URLs need special consideration to be parsed correctly. One option is to URL-encode the image path, replacing each space with `%20`.  The other option is to wrap the URL with `<` angle brackets `>`.
+
+```md
+![screen shot.png](screen%20shot.png)
+
+![screen shot.png](<screen shot.png>)
+```
+
 The standard Markdown syntax does not provide any other options e.g. scaling, positioning, etc.  The custom [`:image` directive](#images-directive-iex) can be used for more advanced cases.
 
 ### Relative URLs
