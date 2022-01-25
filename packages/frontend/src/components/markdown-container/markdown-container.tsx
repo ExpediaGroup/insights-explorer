@@ -20,6 +20,7 @@ import { memo, ReactElement, useCallback, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import ReactMarkdown, { Components } from 'react-markdown';
 import { TransformLink } from 'react-markdown/lib/ast-to-react';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import remarkDirective from 'remark-directive';
@@ -111,7 +112,16 @@ export const MarkdownContainer = memo(
                 { baseUrl: baseAssetUrl, transformAssetUri: transformAssetUri ?? defaultTransformAssetUri }
               ]
             ]}
-            rehypePlugins={[rehypeRaw, rehypeSlug]}
+            rehypePlugins={[
+              rehypeRaw,
+              rehypeSlug,
+              [
+                rehypeAutolinkHeadings,
+                {
+                  behavior: 'append'
+                }
+              ]
+            ]}
             transformLinkUri={transformLinkUri ?? defaultTransformLinkUri}
             transformImageUri={transformAssetUri ?? defaultTransformAssetUri}
           />

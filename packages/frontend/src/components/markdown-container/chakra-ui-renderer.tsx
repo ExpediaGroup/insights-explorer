@@ -21,6 +21,7 @@ import {
   Code,
   Divider,
   Heading,
+  Icon,
   Image,
   Input,
   Link as ChakraLink,
@@ -41,6 +42,7 @@ import Zoom from 'react-medium-image-zoom';
 import { Sort } from '../../models/generated/graphql';
 import { destringObject } from '../../shared/destring';
 import { hashCode } from '../../shared/hash';
+import { iconFactory } from '../../shared/icon-factory';
 import { getMimeForFileName } from '../../shared/mime-utils';
 import { isHashUrl, isRelativeUrl } from '../../shared/url-utils';
 import { BlockQuote } from '../blockquote/blockquote';
@@ -67,6 +69,7 @@ const heading = ({ node, level, children, ...props }) => {
 
   return (
     <Heading
+      className="heading"
       mb="0.5rem"
       mt={mt[level - 1]}
       as={`h${level}`}
@@ -74,6 +77,8 @@ const heading = ({ node, level, children, ...props }) => {
       borderBottomWidth={level === 1 ? 1 : 0}
       borderBottomStyle="solid"
       borderBottomColor="snowstorm.100"
+      display="flex"
+      alignItems="center"
       {...node.properties}
     >
       {children}
@@ -120,6 +125,27 @@ export const ChakraUIRenderer = (
     em: ({ node, children, ...props }) => {
       return (
         <Text as="em" {...props}>
+          {children}
+        </Text>
+      );
+    },
+    span: ({ node, children, ...props }) => {
+      // Rehype-autolink-headings
+      if (props.className === 'icon icon-link') {
+        return (
+          <Icon
+            className="heading-auto-link"
+            display="none"
+            as={iconFactory('link')}
+            fontSize="80%"
+            ml="0.5rem"
+            color="frost.400"
+          />
+        );
+      }
+
+      return (
+        <Text as="span" {...props}>
           {children}
         </Text>
       );
