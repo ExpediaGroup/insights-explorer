@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.4.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.1...v2.4.2) (2022-01-25)
+
+
+### Bug Fixes
+
+* **deps:** bump @slack/bolt from 3.8.1 to 3.9.0 ([c49beab](https://github.com/ExpediaGroup/insights-explorer/commit/c49beabaa687e8b899650692bfb284e50bdeabaa))
+* **deps:** bump aws-sdk from 2.1060.0 to 2.1063.0 ([93924f6](https://github.com/ExpediaGroup/insights-explorer/commit/93924f61d3b35f60044e903bbba2c946c815cfd1))
+* **deps:** bump helmet from 5.0.1 to 5.0.2 ([e76a49f](https://github.com/ExpediaGroup/insights-explorer/commit/e76a49fad9f7fa43f939455299546e0bd563e63a))
+* **deps:** bump isomorphic-git from 1.10.4 to 1.11.0 ([aac8e1a](https://github.com/ExpediaGroup/insights-explorer/commit/aac8e1a8998d22a28eee41b453b8833d1eafc61e))
+
 ### [2.4.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.0...v2.4.1) (2022-01-25)
 
 
