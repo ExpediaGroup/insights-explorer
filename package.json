@@ -38,7 +38,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-unicorn": "39.0.0",
     "fs-extra": "10.0.0",
-    "graphql": "15.5.3",
+    "graphql": "16.2.0",
     "jest": "27.4.7",
     "lodash": "4.17.21",
     "npm-license-crawler": "0.2.1",
