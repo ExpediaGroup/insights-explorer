@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.4.6](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.5...v2.4.6) (2022-01-26)
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-express from 3.6.1 to 3.6.2 ([40f9782](https://github.com/ExpediaGroup/insights-explorer/commit/40f9782d709db89b9265b560027de1f148e7acb5))
+* **deps:** install missing apollo-server-core dependency ([520bf57](https://github.com/ExpediaGroup/insights-explorer/commit/520bf576a079a8180e34234b842b2c271f320b97))
+
 ### [2.4.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.4...v2.4.5) (2022-01-26)
 
 
