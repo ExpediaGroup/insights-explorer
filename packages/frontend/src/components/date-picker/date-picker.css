@@ -194,3 +194,7 @@ width: 20px;
 .react-datepicker__close-icon::after:hover {
 color: var(--gray)
 }
+
+.react-datepicker-popper {
+  z-index: 2;
+}
