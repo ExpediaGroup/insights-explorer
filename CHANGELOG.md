@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.4.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.4...v2.4.5) (2022-01-26)
+
+
+### Bug Fixes
+
+* **deps:** bump axios from 0.24.0 to 0.25.0 ([b1917bb](https://github.com/ExpediaGroup/insights-explorer/commit/b1917bb0b4ace6e41f69751e52a9d6dd79b514e9))
+
 ### [2.4.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.3...v2.4.4) (2022-01-26)
 
 
