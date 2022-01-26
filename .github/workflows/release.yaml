@@ -58,7 +58,7 @@ jobs:
         id: semantic
         uses: cycjimmy/semantic-release-action@v2.7.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
         with:
           semantic_version: 18.0.1
           extra_plugins: |
