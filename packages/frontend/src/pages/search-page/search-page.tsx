@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import { Box, Stack, VStack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
@@ -98,7 +98,7 @@ export const SearchPage = () => {
         <VStack spacing="1rem" align="stretch">
           <SearchBar />
 
-          <HStack spacing="1rem" align="stretch">
+          <Stack spacing="1rem" align="stretch" direction={{ base: 'column-reverse', md: 'row' }}>
             <Box flexGrow={1}>
               <InsightList
                 insightConnection={
@@ -124,9 +124,9 @@ export const SearchPage = () => {
               padding="0.5rem"
               flexBasis={{ base: '16rem', md: '20rem', xl: '22rem' }}
               flexShrink={0}
-              maxWidth={{ base: '16rem', md: '20rem', xl: '26rem' }}
+              maxWidth={{ base: 'unset', md: '20rem', xl: '26rem' }}
             />
-          </HStack>
+          </Stack>
         </VStack>
       </VStack>
     </>
