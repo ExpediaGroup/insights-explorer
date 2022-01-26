@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.4.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.2...v2.4.3) (2022-01-26)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/theme-tools from 1.3.1 to 1.3.2 ([ec3e5e9](https://github.com/ExpediaGroup/insights-explorer/commit/ec3e5e9d4f0a818f23c8aab7df5b781a41d323b0))
+* **deps:** bump @urql/exchange-multipart-fetch from 0.1.13 to 0.1.14 ([0f94232](https://github.com/ExpediaGroup/insights-explorer/commit/0f94232e8e4bfa0389fdd9811c7f99dea69adb53))
+* **deps:** bump react-datepicker from 4.1.1 to 4.6.0 ([abbbd00](https://github.com/ExpediaGroup/insights-explorer/commit/abbbd00c59640eca89ea998c8d45fd3618b6befb))
+* **deps:** bump titleize from 2.1.0 to 3.0.0 ([4001d73](https://github.com/ExpediaGroup/insights-explorer/commit/4001d733c8321adb2c40fcd3c1510569c7ae8b39))
+* Fix z-index issue with date-picker ([33438ab](https://github.com/ExpediaGroup/insights-explorer/commit/33438abbb28217040292334c59c4d735e3c38144))
+
 ### [2.4.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.1...v2.4.2) (2022-01-25)
 
 
