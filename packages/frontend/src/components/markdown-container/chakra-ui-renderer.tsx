@@ -278,6 +278,18 @@ export const ChakraUIRenderer = (
     td: ({ node, children, ...props }) => {
       return <Td textAlign={props?.style?.textAlign}>{children}</Td>;
     },
+    section: ({ node, children, ...props }) => {
+      if (props.className === 'footnotes') {
+        return (
+          <Box {...props} fontSize="smaller" color="polar.300">
+            <Divider mt="2rem" mb="1rem" />
+            {children.slice(1)}
+          </Box>
+        );
+      }
+
+      return <section {...props}>{children}</section>;
+    },
 
     // Custom directives
     badge: ({ node, children, ...props }) => {

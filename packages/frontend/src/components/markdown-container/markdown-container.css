@@ -45,25 +45,21 @@
 }
 
 /* Style the footnotes section. */
-.iex-markdown-container > .footnotes {
-  font-size: smaller;
-  color: #8b949e;
-}
 .iex-markdown-container > .footnotes > ol {
   padding: 1rem;
 }
 
 /* Place `[` and `]` around footnote references */
-.iex-markdown-container .footnote-ref > sup::before {
+.iex-markdown-container sup>a::before {
   content: '[';
 }
 
-.iex-markdown-container .footnote-ref > sup::after {
+.iex-markdown-container sup>a::after {
   content: ']';
 }
 
 /* Style the footnote 'back' icon */
-.iex-markdown-container .footnote-back {
+.iex-markdown-container .data-footnote-backref {
   margin-left: 0.5rem;
   font-family: monospace;
   font-size: 1rem;
