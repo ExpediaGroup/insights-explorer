@@ -1,17 +1,30 @@
-name: Lint
+name: Lint & Verify
 on:
   pull_request:
   workflow_dispatch:
 
 jobs:
-  lint-check:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      - name: Validate package.json
+        uses: ExpediaGroup/package-json-validator@v1
+        with:
+          rules: ranges
+          dependency-types: |
+            dependencies
+            devDependencies
+
       - uses: actions/setup-node@v3.6.0
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
+
+      - name: Validate Copyright Headers
+        run: npm ci && npm run verify:headers
+
       - name: Run ESLint
         run: npm ci && npm run build:backend && npm run generate && npm run lint

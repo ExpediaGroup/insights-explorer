@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/namespace */
 /* eslint-disable no-console */
-import * as fs from 'fs-extra';
+/* eslint-disable unicorn/no-process-exit */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import fs from 'fs-extra';
 import _ from 'lodash';
 import { dumpLicenses } from 'npm-license-crawler';
 
