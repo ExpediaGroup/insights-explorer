@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.5.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.1...v2.5.2) (2022-01-27)
+
+
+### Bug Fixes
+
+* Update footnote stylings ([a9d6650](https://github.com/ExpediaGroup/insights-explorer/commit/a9d66506456f80a8b2431fed5198dc6ec450617e))
+
 ### [2.5.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.0...v2.5.1) (2022-01-27)
 
 
