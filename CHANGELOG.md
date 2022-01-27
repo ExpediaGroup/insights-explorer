@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.4.8](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.7...v2.4.8) (2022-01-27)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/react from 1.7.4 to 1.8.1 ([2236ad3](https://github.com/ExpediaGroup/insights-explorer/commit/2236ad3f3fc731915eda74d758855c9d8f69d8af))
+
 ### [2.4.7](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.6...v2.4.7) (2022-01-26)
 
 
