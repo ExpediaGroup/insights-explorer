@@ -36,6 +36,7 @@ jobs:
       - name: Parse release version
         run: |
           VERSION=${GITHUB_REF_NAME#v*}
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
           echo "MAJOR=$(echo $VERSION | cut -d. -f1)" >> $GITHUB_ENV
           echo "MINOR=$(echo $VERSION | cut -d. -f2)" >> $GITHUB_ENV
           echo "PATCH=$(echo $VERSION | cut -d. -f3)" >> $GITHUB_ENV
