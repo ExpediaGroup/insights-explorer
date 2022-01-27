@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.8...v2.5.0) (2022-01-27)
+
+
+### Features
+
+* Implement image pasting on Insight editor with automatic upload ([d4f1ae3](https://github.com/ExpediaGroup/insights-explorer/commit/d4f1ae3edb2c6524501646e949cb7d591913bdd8))
+
 ### [2.4.8](https://github.com/ExpediaGroup/insights-explorer/compare/v2.4.7...v2.4.8) (2022-01-27)
 
 
