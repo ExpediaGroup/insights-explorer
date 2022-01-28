@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.5.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.2...v2.5.3) (2022-01-28)
+
+
+### Bug Fixes
+
+* **deps:** bump ace-builds from 1.4.13 to 1.4.14 ([b3fd16a](https://github.com/ExpediaGroup/insights-explorer/commit/b3fd16af910cddac0f80aca139573e7f6063c4e6))
+* **deps:** bump aws-sdk from 2.1064.0 to 2.1065.0 ([9ce7e7c](https://github.com/ExpediaGroup/insights-explorer/commit/9ce7e7c5ecfebbd218ec1c6cb5db71c0c4ea5f74))
+
 ### [2.5.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.1...v2.5.2) (2022-01-27)
 
 
