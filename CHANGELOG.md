@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.5.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.3...v2.5.4) (2022-01-28)
+
+
+### Bug Fixes
+
+* Center images on File Viewer to fix zoom ([812078f](https://github.com/ExpediaGroup/insights-explorer/commit/812078ff805e05eb2732d4ff92701caa74ca7c2d))
+
 ### [2.5.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.2...v2.5.3) (2022-01-28)
 
 
