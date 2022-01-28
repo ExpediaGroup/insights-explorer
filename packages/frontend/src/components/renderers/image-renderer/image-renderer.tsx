@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Image } from '@chakra-ui/react';
+import { Flex, Image } from '@chakra-ui/react';
 import Zoom from 'react-medium-image-zoom';
 
 import 'react-medium-image-zoom/dist/styles.css';
@@ -22,7 +22,9 @@ import 'react-medium-image-zoom/dist/styles.css';
 export const ImageRenderer = ({ url }) => {
   return (
     <Zoom>
-      <Image src={url} objectFit="contain" />
+      <Flex direction="column" flexGrow={1} overflow="hidden" alignItems="center" justifyContent="center" margin="2rem">
+        <Image src={url} objectFit="contain" />
+      </Flex>
     </Zoom>
   );
 };
