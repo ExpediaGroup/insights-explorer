@@ -61,7 +61,7 @@
     "titleize": "3.0.0",
     "unist-util-visit": "4.0.0",
     "url-join": "4.0.1",
-    "urql": "2.0.6",
+    "urql": "2.1.2",
     "use-trace-update": "1.3.2",
     "vega": "5.21.0",
     "vega-lite": "5.2.0"
