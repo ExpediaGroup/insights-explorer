@@ -24,7 +24,7 @@
     "fs-extra": "10.0.0",
     "lodash": "4.17.21",
     "parsimmon": "1.18.1",
-    "winston": "3.4.0"
+    "winston": "3.5.1"
   },
   "devDependencies": {
     "@types/fs-extra": "9.0.13",
