@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.5.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.4...v2.5.5) (2022-02-02)
+
+
+### Bug Fixes
+
+* Update alert for the ErrorBoundary to be able to reset the error ([e848e2a](https://github.com/ExpediaGroup/insights-explorer/commit/e848e2aa7e7d9901e969179eb0646d142ab7384a))
+
 ### [2.5.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.3...v2.5.4) (2022-01-28)
 
 
