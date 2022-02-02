@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { BoxProps, Box } from '@chakra-ui/react';
+import { Alert as ChakraAlert, AlertIcon, BoxProps, Box, Button, Flex, Text } from '@chakra-ui/react';
 import isEqual from 'lodash/isEqual';
 import { memo, ReactElement, useCallback, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -34,7 +34,6 @@ import { remarkIex } from '../../shared/remark/remark-iex';
 import { remarkIexLogo } from '../../shared/remark/remark-iex-logo';
 import { isHashUrl, isRelativeUrl } from '../../shared/url-utils';
 import { pick } from '../../shared/utility';
-import { Alert } from '../alert/alert';
 
 import { ChakraUIRenderer } from './chakra-ui-renderer';
 
@@ -55,7 +54,22 @@ function areEqual(prevProps, nextProps): boolean {
 }
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
-  return <Alert error={`Error rendering Markdown: ${error}`} />;
+  return (
+    <ChakraAlert status="error" borderRadius="0.25rem" mb="1rem" alignItems="center" wordBreak="break-word">
+      <AlertIcon flexShrink={0} />
+      <Flex wordBreak="break-word" flexGrow={2} align="center">
+        <Text as="strong" mr="0.5rem" flexShrink={0}>
+          Error:
+        </Text>
+        {`Error rendering Markdown: ${error}`}
+      </Flex>
+      {resetErrorBoundary && (
+        <Button size="sm" bg="snowstorm.100" flexShrink={0} onClick={resetErrorBoundary}>
+          Recheck
+        </Button>
+      )}
+    </ChakraAlert>
+  );
 };
 
 export const MarkdownContainer = memo(
