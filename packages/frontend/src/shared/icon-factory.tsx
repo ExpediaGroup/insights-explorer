@@ -79,6 +79,7 @@ import {
   GrUndo
 } from 'react-icons/gr';
 import { MdAdd, MdFileDownload, MdOndemandVideo, MdPrint, MdSchedule, MdShare, MdUpdate } from 'react-icons/md';
+import { RiVipCrownLine } from 'react-icons/ri';
 import {
   VscBriefcase,
   VscCalendar,
@@ -122,6 +123,7 @@ const icons = {
   commit: GoGitCommit,
   converted: AiOutlineSwap,
   createDate: MdSchedule,
+  crown: RiVipCrownLine,
   download: MdFileDownload,
   draft: AiFillEdit,
   edit: AiFillEdit,
