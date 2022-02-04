@@ -49,6 +49,19 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
     return <Box></Box>;
   }
 
+  const authors = insight.authors.edges.reduce((acc, { node: author }) => {
+    const collab = insight.collaborators?.edges.find(({ permission, node: collaborator }) => {
+      return collaborator.id === author.id;
+    });
+
+    if (collab) {
+      acc.push({ ...author, permission: collab.permission });
+    } else {
+      acc.push(author);
+    }
+    return acc;
+  }, [] as any);
+
   return (
     <VStack spacing="1rem" align="stretch" {...props} pt="0.5rem">
       <SidebarStack heading="About">
@@ -102,8 +115,15 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
 
       <SidebarHeading>Authors</SidebarHeading>
       <Stack spacing="0.25rem">
-        {insight.authors.edges.map(({ node: author }) => (
-          <InsightAuthor key={author.userName} author={author} size="lg" width="100%" />
+        {authors.map((author) => (
+          <InsightAuthor
+            key={author.userName}
+            author={author}
+            permission={author.permission}
+            viewerPermission={insight.viewerPermission}
+            size="lg"
+            width="100%"
+          />
         ))}
       </Stack>
       {insight.tags?.length > 0 && (

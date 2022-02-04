@@ -16,6 +16,7 @@
 
 import {
   Avatar,
+  Box,
   Divider,
   Heading,
   HStack,
@@ -95,10 +96,18 @@ const UserPopover = ({ userName }: { userName: string }) => {
 };
 interface Props {
   author: User;
+  permission?: string;
   placement?: Placement;
+  viewerPermission?: string;
 }
 
-export const InsightAuthor = ({ author, placement = 'right', ...tagProps }: Props & TagProps) => {
+export const InsightAuthor = ({
+  author,
+  permission,
+  placement = 'right',
+  viewerPermission,
+  ...tagProps
+}: Props & TagProps) => {
   const avatarProps = {
     size: '2xs',
     ml: -1,
@@ -123,8 +132,17 @@ export const InsightAuthor = ({ author, placement = 'right', ...tagProps }: Prop
             }}
             {...tagProps}
           >
-            <Avatar name={author.displayName} src={author?.avatarUrl} {...avatarProps} />
-            <TagLabel>{author.displayName}</TagLabel>
+            <HStack justifyContent="space-between" w="full">
+              <Box>
+                <Avatar name={author.displayName} src={author?.avatarUrl} {...avatarProps} />
+                <TagLabel>{author.displayName}</TagLabel>
+              </Box>
+              {permission && viewerPermission && viewerPermission === 'ADMIN' && (
+                <Box>
+                  <Icon as={iconFactory('crown')} />
+                </Box>
+              )}
+            </HStack>
           </Tag>
         </PopoverTrigger>
         <Portal>
