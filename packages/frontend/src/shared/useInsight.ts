@@ -42,15 +42,6 @@ const INSIGHT_FRAGMENT = gql`
         }
       }
     }
-    collaborators {
-      edges {
-        permission
-        node {
-          id
-          userName
-        }
-      }
-    }
     tags
     forks
     viewCount

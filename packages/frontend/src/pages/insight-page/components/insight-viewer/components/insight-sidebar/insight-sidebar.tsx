@@ -29,6 +29,7 @@ import {
   useColorModeValue
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
+import { gql, useQuery } from 'urql';
 
 import { InsightAuthor } from '../../../../../../components/insight-author/insight-author';
 import { InsightTag } from '../../../../../../components/insight-tag/insight-tag';
@@ -42,25 +43,60 @@ import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/dat
 import { GitHubButton } from '../github-button/github-button';
 import { ShareMenu } from '../share-menu/share-menu';
 
+const COLLABORATORS_FRAGMENT = gql`
+  fragment CollaboratorFields on Insight {
+    id
+    collaborators {
+      edges {
+        permission
+        node {
+          id
+          userName
+          displayName
+          avatarUrl
+        }
+      }
+    }
+  }
+`;
+
+const INSIGHT_COLLABORATORS_QUERY = gql`
+  ${COLLABORATORS_FRAGMENT}
+  query InsightCollaborators($id: ID!) {
+    insight(insightId: $id) {
+      ...CollaboratorFields
+    }
+  }
+`;
+
 export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & BoxProps) => {
   const fileBgColor = useColorModeValue('white', 'gray.700');
+
+  const [{ data, error, fetching: collaboratorsFetching }] = useQuery({
+    query: INSIGHT_COLLABORATORS_QUERY,
+    variables: { id: insight.id }
+  });
 
   if (insight == null) {
     return <Box></Box>;
   }
 
-  const authors = insight.authors.edges.reduce((acc, { node: author }) => {
-    const collab = insight.collaborators?.edges.find(({ permission, node: collaborator }) => {
-      return collaborator.id === author.id;
-    });
+  let authors: any = [];
+  if (!collaboratorsFetching) {
+    const collaborators = data?.insight.collaborators?.edges;
+    authors = insight.authors.edges.reduce((acc, { node: author }) => {
+      const collab = collaborators.find(({ permission, node: collaborator }) => {
+        return collaborator.id === author.id;
+      });
 
-    if (collab) {
-      acc.push({ ...author, permission: collab.permission });
-    } else {
-      acc.push(author);
-    }
-    return acc;
-  }, [] as any);
+      if (collab) {
+        acc.push({ ...author, permission: collab.permission });
+      } else {
+        acc.push(author);
+      }
+      return acc;
+    }, [] as any);
+  }
 
   return (
     <VStack spacing="1rem" align="stretch" {...props} pt="0.5rem">
@@ -115,16 +151,18 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
 
       <SidebarHeading>Authors</SidebarHeading>
       <Stack spacing="0.25rem">
-        {authors.map((author) => (
-          <InsightAuthor
-            key={author.userName}
-            author={author}
-            permission={author.permission}
-            viewerPermission={insight.viewerPermission}
-            size="lg"
-            width="100%"
-          />
-        ))}
+        {!collaboratorsFetching &&
+          authors &&
+          authors.map((author) => (
+            <InsightAuthor
+              key={author.userName}
+              author={author}
+              permission={author.permission}
+              viewerPermission={insight.viewerPermission}
+              size="lg"
+              width="100%"
+            />
+          ))}
       </Stack>
       {insight.tags?.length > 0 && (
         <>
