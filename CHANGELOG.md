@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.5.8](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.7...v2.5.8) (2022-02-04)
+
+
+### Bug Fixes
+
+* **deps:** bump @reduxjs/toolkit from 1.7.1 to 1.7.2 ([1065582](https://github.com/ExpediaGroup/insights-explorer/commit/1065582eb5d2caf85af7b75c6fec2c950aa099b5))
+
 ### [2.5.7](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.6...v2.5.7) (2022-02-04)
 
 
