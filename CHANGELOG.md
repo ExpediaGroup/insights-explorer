@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.5.9](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.8...v2.5.9) (2022-02-04)
+
+
+### Bug Fixes
+
+* Differentiate between admin and collaborator in Insight view with a small icon ([797160b](https://github.com/ExpediaGroup/insights-explorer/commit/797160b58195fb02ea4178526e2294424c671b23))
+
 ### [2.5.8](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.7...v2.5.8) (2022-02-04)
 
 
