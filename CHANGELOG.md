@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.6.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.0...v2.6.1) (2022-02-07)
+
+
+### Bug Fixes
+
+* Make code renderer scale text responsively ([c44acba](https://github.com/ExpediaGroup/insights-explorer/commit/c44acbabfe7f077ca47baebec71d762847152653))
+
 ## [2.6.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.9...v2.6.0) (2022-02-07)
 
 
