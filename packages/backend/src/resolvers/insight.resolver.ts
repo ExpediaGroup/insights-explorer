@@ -22,7 +22,7 @@ import { ResolveTree } from 'graphql-parse-resolve-info';
 import { Arg, Authorized, Ctx, ID, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
-import { getCollaborators, getRepositoryReadme } from '../lib/backends/github';
+import { getCollaborators } from '../lib/backends/github';
 import { syncInsight } from '../lib/backends/sync';
 import { getInsight } from '../lib/elasticsearch';
 import { Activity, ActivityType, IndexedActivityDetails } from '../models/activity';
@@ -147,38 +147,6 @@ export class InsightResolver {
   thumbnailUrl(@Root() insight: Insight): string | undefined {
     if (insight.thumbnailUrl) {
       return `${process.env.PUBLIC_URL}/api/v1/insights/${insight.fullName}/assets/${insight.thumbnailUrl}`;
-    }
-  }
-
-  @FieldResolver()
-  async readme(@Root() insight: Insight): Promise<InsightReadme | undefined> {
-    logger.debug('[INSIGHT.RESOLVER] Fetching readme');
-
-    if (!insight.repository) {
-      // This scenario shouldn't be possible..might be able to remove.
-      logger.error('[INSIGHT.RESOLVER] Insight is missing repository, unable to retrieve README');
-      return insight.readme;
-    }
-
-    try {
-      // TODO: Swap this for the S3-cached version
-      // Fetch the latest readme from the GitHub API
-      const freshContents = await getRepositoryReadme(
-        insight.repository.owner.login,
-        insight.repository.externalName,
-        insight.repository.defaultBranch
-      );
-
-      return {
-        ...insight.readme!,
-        contents: freshContents
-      };
-    } catch (error: any) {
-      logger.warn(`[INSIGHT.RESOLVER] ${error.errors[0].message}`);
-
-      // Possibly the repository was deleted, but the repo is still in IEX
-      // In this case, let's just return the cached README.
-      return insight.readme;
     }
   }
 

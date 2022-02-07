@@ -230,32 +230,6 @@ export async function getRepositoryPermissions(
   }
 }
 
-/**
- * Given a Repo, returns the raw contents of the README.md
- */
-export async function getRepositoryReadme(owner: string, repo: string, branch: string): Promise<string> {
-  const expression = `${branch}:README.md`;
-
-  logger.debug(`[GITHUB] Querying for README.md: ${expression}`);
-  const { repository } = await makeGraphql()({
-    query: `query repository($owner: String!, $repo: String!, $expression: String!) {
-      repository(owner: $owner, name: $repo) {
-        readme: object(expression: $expression) {
-          ... on Blob {
-            oid
-            text
-          }
-        }
-      }
-    }`,
-    owner,
-    repo,
-    expression
-  });
-
-  return repository.readme?.text;
-}
-
 export async function getRepositoryOwner(login: string): Promise<RepositoryOwner> {
   const { repositoryOwner }: { repositoryOwner: RepositoryOwner } = await makeGraphql()({
     query: `query repositoryOwner($login: String!) {
