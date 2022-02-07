@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.9...v2.6.0) (2022-02-07)
+
+
+### Features
+
+* Switch from PDF to HTML-rendered Jupyter notebooks ([1ef0b4a](https://github.com/ExpediaGroup/insights-explorer/commit/1ef0b4a3946fe8a445da03f3958827739e2fa928))
+
 ### [2.5.9](https://github.com/ExpediaGroup/insights-explorer/compare/v2.5.8...v2.5.9) (2022-02-04)
 
 
