@@ -69,7 +69,7 @@ export const CodeRenderer = memo(
       );
 
     return (
-      <Box position="relative" {...boxProps}>
+      <Box position="relative" fontSize={{ base: 'sm', md: 'md' }} {...boxProps}>
         <HStack top="0.5rem" right="0.5rem" position="absolute">
           {copyButton && (
             <IconButton
