@@ -146,6 +146,9 @@ export const FileViewer = ({
   const downloadUrl = getCompletePath(baseAssetUrl, downloadPath || path, true);
   const downloadTooltip = `Download file${isConverted ? ' in original format' : ''}`;
 
+  // If the file is converted, this is the download URL for the converted file (download URL is original file)
+  const convertedDownloadUrl = isConverted ? getCompletePath(baseAssetUrl, path, true) : undefined;
+
   const [paused, setPaused] = useState(true);
   const [mode, setMode] = useState('rendered');
   const unpause = () => paused && setPaused(false);
@@ -224,7 +227,7 @@ export const FileViewer = ({
         case MIME_VIEWER.Html:
           unpause();
           if (mode === 'rendered') {
-            renderer = <HtmlRenderer url={downloadUrl} />;
+            renderer = <HtmlRenderer url={convertedDownloadUrl ?? downloadUrl} />;
           } else if (mode === 'raw') {
             renderer = <CodeRenderer contents={fetchedContents} language="xml" />;
           }

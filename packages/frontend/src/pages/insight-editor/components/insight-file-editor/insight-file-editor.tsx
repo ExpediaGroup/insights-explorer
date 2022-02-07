@@ -36,7 +36,7 @@ const preferredMimeTypes = {
   'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'application/pdf',
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'application/pdf',
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'application/pdf',
-  'application/x-ipynb+json': 'application/pdf'
+  'application/x-ipynb+json': 'text/html'
 };
 
 const determineEffectiveFile = (file: InsightFile): InsightFile => {
