@@ -69,7 +69,7 @@ export const ErrorPage = (props: Props) => {
                 </Button>
               </HStack>
 
-              <Box spacing="1.5rem" pt="2rem">
+              <Box pt="2rem">
                 <Link to="/help" color="frost.400">
                   Visit our Help Center
                 </Link>

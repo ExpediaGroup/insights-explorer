@@ -35,7 +35,7 @@ export const PrintHeader = () => {
           Return to Insight
         </Link>
       </Heading>
-      <HStack spacking="1rem">
+      <HStack spacing="1rem">
         <Button size="sm" onClick={onPrint} rightIcon={iconFactoryAs('print')}>
           Print
         </Button>

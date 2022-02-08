@@ -70,7 +70,7 @@ export const IexMenuItem = ({
       <MenuItem onClick={onClick}>
         {icon && <Icon as={icon} mr="1rem" />}
         {iconElement && <Box mr="1rem">{iconElement}</Box>}
-        {!icon && !iconElement && <Square boxSize="16px" mr="1rem" />}
+        {!icon && !iconElement && <Square size="16px" mr="1rem" />}
         {children}
       </MenuItem>
     </LinkWrapper>
