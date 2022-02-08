@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.6.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.1...v2.6.2) (2022-02-08)
+
+
+### Bug Fixes
+
+* Remove 'readme' FieldResolver since we already get it from ES ([54e48ca](https://github.com/ExpediaGroup/insights-explorer/commit/54e48ca5aaf90cd77b998a14578494eafb25277e))
+
 ### [2.6.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.0...v2.6.1) (2022-02-07)
 
 
