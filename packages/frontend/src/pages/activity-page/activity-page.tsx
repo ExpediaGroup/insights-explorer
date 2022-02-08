@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import { Box, Stack, VStack } from '@chakra-ui/react';
 import { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
@@ -85,7 +85,7 @@ export const ActivityPage = () => {
         <VStack spacing="1rem" align="stretch">
           <ActivitySearchBar />
 
-          <HStack spacing="1rem" pt="1rem" align="stretch">
+          <Stack spacing="1rem" align="stretch" direction={{ base: 'column-reverse', md: 'row' }}>
             <Box flexGrow={2}>
               <ActivityList
                 activityConnection={data.activityConnection}
@@ -105,9 +105,9 @@ export const ActivityPage = () => {
               padding="0.5rem"
               flexBasis={{ base: '16rem', md: '20rem', xl: '22rem' }}
               flexShrink={0}
-              maxWidth={{ base: '16rem', md: '20rem', xl: '26rem' }}
+              maxWidth={{ base: 'unset', md: '20rem', xl: '26rem' }}
             />
-          </HStack>
+          </Stack>
         </VStack>
       </VStack>
     </>
