@@ -52,8 +52,7 @@ export const UserSidebar = ({ user }: Props) => {
       align="stretch"
       flexBasis={{ base: '16rem', xl: '20rem' }}
       flexShrink={0}
-      maxWidth={{ base: '16rem', xl: '20rem' }}
-      minHeight="75vh"
+      maxWidth={{ base: 'unset', md: '16rem', xl: '20rem' }}
       mr="1rem"
       p="1rem"
     >

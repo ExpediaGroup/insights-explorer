@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { HStack, Stat, StatLabel, StatNumber, Text, VStack } from '@chakra-ui/react';
+import { Stack, Stat, StatLabel, StatNumber, Text } from '@chakra-ui/react';
 
 import { Card } from '../../../../../../components/card/card';
 import { MarkdownContainer } from '../../../../../../components/markdown-container/markdown-container';
@@ -26,19 +26,21 @@ interface Props {
 
 export const UserAbout = ({ user }: Props) => {
   return (
-    <HStack align="flex-start">
+    <Stack direction={{ base: 'column-reverse', md: 'row' }} align={{ base: 'stretch', md: 'flex-start' }}>
       <Card mt="1rem" p="1rem" flexGrow={2}>
         {user.readme && <MarkdownContainer contents={user.readme} />}
         {!user.readme && <Text>Apparently, this user prefers to keep an air of mystery about them.</Text>}
       </Card>
-      <VStack
+      <Stack
+        direction={{ base: 'row', md: 'column' }}
         spacing="1rem"
-        align="flex-start"
-        flexBasis={{ base: '10rem', xl: '12rem' }}
+        align={{ base: 'center', md: 'flex-start' }}
+        flexBasis={{ base: '5rem', md: '10rem', xl: '12rem' }}
         flexShrink={0}
-        maxWidth={{ base: '10rem', xl: '12rem' }}
-        mr="1rem"
-        p="1rem"
+        maxWidth={{ base: 'unset', xl: '12rem' }}
+        mr={{ base: 'unset', md: '1rem' }}
+        p={{ base: '0', md: '1rem' }}
+        textAlign={{ base: 'center', md: 'left' }}
       >
         <Stat>
           <StatLabel>Insights Authored</StatLabel>
@@ -52,7 +54,7 @@ export const UserAbout = ({ user }: Props) => {
           <StatLabel>Comments</StatLabel>
           <StatNumber fontSize="4xl">{user.commentCount}</StatNumber>
         </Stat>
-      </VStack>
-    </HStack>
+      </Stack>
+    </Stack>
   );
 };

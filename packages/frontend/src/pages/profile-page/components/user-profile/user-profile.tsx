@@ -71,7 +71,7 @@ export const UserProfile = ({ user }: Props) => {
         <title>{user.displayName}</title>
       </Helmet>
 
-      <Flex direction="row" mt="2rem" align="stretch" m="-0.5rem">
+      <Flex direction={{ base: 'column-reverse', md: 'row' }} align="stretch" m="-0.5rem">
         <VStack align="stretch" flexGrow={2} overflow="auto" mt="3rem" p="0.5rem">
           <Tabs isLazy variant="soft-rounded" colorScheme="nord8" index={tabIndex} onChange={handleTabsChange}>
             <TabList flexWrap="wrap">
@@ -110,6 +110,7 @@ export const UserProfile = ({ user }: Props) => {
             </TabPanels>
           </Tabs>
         </VStack>
+
         <UserSidebar user={user} />
       </Flex>
     </>
