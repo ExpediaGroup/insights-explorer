@@ -65,6 +65,7 @@ export const urqlClient = createClient({
         InsightFile: () => null,
         InsightFileConversion: () => null,
         InsightMetadata: () => null,
+        InsightReadingTime: () => null,
         InsightReadme: () => null,
         InsightSearchResults: () => null,
         LoginActivityDetails: () => null,
