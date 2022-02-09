@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.6...v2.7.0) (2022-02-09)
+
+
+### Features
+
+* Display estimated time to read Insight ([ae66bff](https://github.com/ExpediaGroup/insights-explorer/commit/ae66bff46705f2c1ee722d604b78eb38a68c6c35))
+
 ### [2.6.6](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.5...v2.6.6) (2022-02-09)
 
 
