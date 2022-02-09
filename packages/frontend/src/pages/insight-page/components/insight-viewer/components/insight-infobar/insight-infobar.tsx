@@ -16,6 +16,7 @@
 
 import {
   Badge,
+  Box,
   Collapse,
   Flex,
   HStack,
@@ -83,7 +84,7 @@ export const InsightInfobar = ({ insight, ...props }: { insight: Insight } & Sta
           <Wrap align="center" spacing="0.5rem">
             <WrapItem alignItems="baseline">
               <SidebarHeading mr="0.5rem">About</SidebarHeading>
-              <Text fontSize="md">
+              <Box>
                 <Linkify>{insight.description}</Linkify>
 
                 {insight.metadata?.publishedDate != null && (
@@ -104,7 +105,7 @@ export const InsightInfobar = ({ insight, ...props }: { insight: Insight } & Sta
                     {Math.round(insight.readme.readingTime.minutes)} min
                   </Flex>
                 )}
-              </Text>
+              </Box>
             </WrapItem>
 
             {insight.metadata?.publishedDate != null && (
