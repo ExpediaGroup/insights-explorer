@@ -109,6 +109,22 @@
         "properties": {
           "contents": {
             "type": "text"
+          },
+          "path": {
+            "type": "text"
+          },
+          "readingTime": {
+            "properties": {
+              "minutes": {
+                "type": "integer"
+              },
+              "time": {
+                "type": "integer"
+              },
+              "words": {
+                "type": "integer"
+              }
+            }
           }
         }
       },

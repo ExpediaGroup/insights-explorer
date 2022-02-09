@@ -18,7 +18,9 @@ import {
   Badge,
   Box,
   BoxProps,
+  Flex,
   HStack,
+  Icon,
   Stack,
   StackDivider,
   Tag,
@@ -39,6 +41,7 @@ import { SidebarStack } from '../../../../../../components/sidebar-stack/sidebar
 import { TeamTag } from '../../../../../../components/team-tag/team-tag';
 import { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
+import { iconFactory } from '../../../../../../shared/icon-factory';
 import { GitHubButton } from '../github-button/github-button';
 import { ShareMenu } from '../share-menu/share-menu';
 
@@ -79,6 +82,12 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
             </Tooltip>
           )}
         </HStack>
+        {insight.readme?.readingTime && (
+          <Flex align="center">
+            <Icon as={iconFactory('time')} mr="0.5rem" /> Est. time to read:{' '}
+            {Math.round(insight.readme.readingTime.minutes)} min
+          </Flex>
+        )}
       </SidebarStack>
 
       {insight.metadata?.publishedDate != null && (

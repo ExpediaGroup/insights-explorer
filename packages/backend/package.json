@@ -67,6 +67,7 @@
     "p-map": "4.0.0",
     "parsimmon": "1.18.1",
     "pg": "8.7.3",
+    "reading-time": "1.5.0",
     "reflect-metadata": "0.1.13",
     "tmp-promise": "3.0.3",
     "turndown": "7.1.1",

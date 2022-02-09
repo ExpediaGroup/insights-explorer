@@ -20,6 +20,7 @@ import { IconType } from 'react-icons';
 import {
   AiFillEdit,
   AiFillGift,
+  AiOutlineFieldTime,
   AiOutlineFileAdd,
   AiOutlineLink,
   AiOutlineLogin,
@@ -175,6 +176,7 @@ const icons = {
   tags: AiOutlineTags,
   team: FaUsers,
   template: GrTemplate,
+  time: AiOutlineFieldTime,
   trash: GoTrashcan,
   unlike: FaHeartBroken,
   video: MdOndemandVideo,

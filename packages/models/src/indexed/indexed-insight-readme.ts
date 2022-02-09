@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+export interface IndexedInsightReadingTime {
+  minutes: number;
+  time: number;
+  words: number;
+}
 
 export interface IndexedInsightReadme {
   path: string;
   contents?: string;
+  readingTime?: IndexedInsightReadingTime;
 }

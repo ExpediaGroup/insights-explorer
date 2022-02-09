@@ -23,6 +23,7 @@ import { MessageQueue } from '@iex/mq/message-queue';
 import logger from '@iex/shared/logger';
 import { nanoid } from 'nanoid';
 import pMap from 'p-map';
+import readingTime from 'reading-time';
 
 import { GitInstance, INSIGHT_YAML_FILE } from '../../lib/git-instance';
 import { writeToS3 } from '../../lib/storage';
@@ -312,10 +313,18 @@ const applyInsightYaml = async (yaml: any, insight: IndexedInsight): Promise<voi
 };
 
 const applyReadme = async (readme: string | null, insight: IndexedInsight): Promise<void> => {
+  const contents = readme || '';
+  const { minutes, time, words } = readingTime(readme || '', { wordsPerMinute: 150 });
+
   // Merge `README.md`
   insight.readme = {
     path: 'README.md',
-    contents: readme || ''
+    contents,
+    readingTime: {
+      minutes,
+      time,
+      words
+    }
   };
 };
 

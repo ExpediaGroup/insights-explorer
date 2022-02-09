@@ -14,9 +14,20 @@
  * limitations under the License.
  */
 
-import { IndexedInsightReadme } from '@iex/models/indexed/indexed-insight-readme';
+import { IndexedInsightReadingTime, IndexedInsightReadme } from '@iex/models/indexed/indexed-insight-readme';
 import { Field, ObjectType, InputType } from 'type-graphql';
 
+@ObjectType()
+export class InsightReadingTime implements IndexedInsightReadingTime {
+  @Field()
+  minutes!: number;
+
+  @Field()
+  time!: number;
+
+  @Field()
+  words!: number;
+}
 @ObjectType()
 export class InsightReadme implements IndexedInsightReadme {
   @Field()
@@ -24,6 +35,9 @@ export class InsightReadme implements IndexedInsightReadme {
 
   @Field({ nullable: true })
   contents?: string;
+
+  @Field({ nullable: true })
+  readingTime?: InsightReadingTime;
 }
 
 @InputType()

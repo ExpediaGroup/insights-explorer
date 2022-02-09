@@ -68,6 +68,9 @@ const INSIGHT_FRAGMENT = gql`
     }
     readme {
       contents
+      readingTime {
+        minutes
+      }
     }
     creation {
       template

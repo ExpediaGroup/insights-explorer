@@ -267,9 +267,16 @@ input InsightMetadataInput {
   team: String
 }
 
+type InsightReadingTime {
+  minutes: Float!
+  time: Float!
+  words: Float!
+}
+
 type InsightReadme {
   contents: String
   path: String!
+  readingTime: InsightReadingTime
 }
 
 input InsightSearch {
