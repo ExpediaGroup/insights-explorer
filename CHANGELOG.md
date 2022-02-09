@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.6.6](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.5...v2.6.6) (2022-02-09)
+
+
+### Bug Fixes
+
+* Fix incorrect component props ([fe20528](https://github.com/ExpediaGroup/insights-explorer/commit/fe20528e974684b0a1093c52d74d56081bef8bc3))
+
 ### [2.6.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.4...v2.6.5) (2022-02-09)
 
 
