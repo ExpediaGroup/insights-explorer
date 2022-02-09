@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.6.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.4...v2.6.5) (2022-02-09)
+
+
+### Bug Fixes
+
+* **deps:** bump aws-sdk from 2.1067.0 to 2.1071.0 ([39c1e26](https://github.com/ExpediaGroup/insights-explorer/commit/39c1e26e6dc752566be6a89f8f89483b7c852217))
+* **deps:** bump pg from 8.7.1 to 8.7.3 ([6b354d2](https://github.com/ExpediaGroup/insights-explorer/commit/6b354d2af39ba45df86d6faa340a4ddba6e23deb))
+
 ### [2.6.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.6.3...v2.6.4) (2022-02-08)
 
 
