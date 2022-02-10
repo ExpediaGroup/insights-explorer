@@ -22,6 +22,7 @@ import ReactMarkdown, { Components } from 'react-markdown';
 import { TransformLink } from 'react-markdown/lib/ast-to-react';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeRaw from 'rehype-raw';
+import rehypeSanitize from 'rehype-sanitize';
 import rehypeSlug from 'rehype-slug';
 import remarkDirective from 'remark-directive';
 import remarkEmoji from 'remark-emoji';
@@ -36,6 +37,7 @@ import { isHashUrl, isRelativeUrl } from '../../shared/url-utils';
 import { pick } from '../../shared/utility';
 
 import { ChakraUIRenderer } from './chakra-ui-renderer';
+import { IexMarkdownSchema } from './iexMarkdownSchema';
 
 interface Props {
   contents: string;
@@ -134,7 +136,8 @@ export const MarkdownContainer = memo(
                 {
                   behavior: 'append'
                 }
-              ]
+              ],
+              [rehypeSanitize, IexMarkdownSchema]
             ]}
             transformLinkUri={transformLinkUri ?? defaultTransformLinkUri}
             transformImageUri={transformAssetUri ?? defaultTransformAssetUri}
