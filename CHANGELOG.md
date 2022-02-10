@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.7.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.7.4...v2.7.5) (2022-02-10)
+
+
+### Bug Fixes
+
+* **deps:** bump react-infinite-scroller from 1.2.4 to 1.2.5 ([c86ce62](https://github.com/ExpediaGroup/insights-explorer/commit/c86ce62708bc24b21aed87aa2638ad2301da695c))
+
 ### [2.7.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.7.3...v2.7.4) (2022-02-10)
 
 
