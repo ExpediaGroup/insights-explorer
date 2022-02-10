@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.7.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.7.1...v2.7.2) (2022-02-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/theme from 1.13.0 to 1.13.2 ([6753a89](https://github.com/ExpediaGroup/insights-explorer/commit/6753a8938afdc82f80717395ace8910aa9c5c802))
+
 ### [2.7.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.7.0...v2.7.1) (2022-02-09)
 
 
