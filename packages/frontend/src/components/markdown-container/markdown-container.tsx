@@ -37,7 +37,7 @@ import { isHashUrl, isRelativeUrl } from '../../shared/url-utils';
 import { pick } from '../../shared/utility';
 
 import { ChakraUIRenderer } from './chakra-ui-renderer';
-import { IexMarkdownSchema } from './iexMarkdownSchema';
+import { IexMarkdownSchema } from './iex-markdown-schema';
 
 interface Props {
   contents: string;
