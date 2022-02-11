@@ -54,8 +54,8 @@ export const CompactInsightCard = ({ insightEdge, options, ...props }: InsightCo
             {insight.name}
           </Heading>
         </LinkOverlay>
-        <Wrap spacing={0} justify="flex-end">
-          {insight.tags.map((tag) => {
+        <Wrap spacing={0} justify="flex-end" display={{ base: 'none', md: 'flex' }}>
+          {insight.tags.slice(0, 5).map((tag) => {
             return (
               <WrapItem key={tag}>
                 <InsightTag tag={tag} dispatchSearch={options.dispatchSearch ?? true} m="0.125rem" />
