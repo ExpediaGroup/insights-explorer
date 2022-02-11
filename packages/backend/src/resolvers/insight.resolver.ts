@@ -29,7 +29,6 @@ import { Activity, ActivityType, IndexedActivityDetails } from '../models/activi
 import { CommentConnection } from '../models/comment';
 import { Context } from '../models/context';
 import { Insight, DbInsight, ValidateInsightName } from '../models/insight';
-import { InsightReadme } from '../models/insight-readme';
 import { Permission } from '../models/permission';
 import { Repository } from '../models/repository';
 import { User, UserConnection } from '../models/user';
