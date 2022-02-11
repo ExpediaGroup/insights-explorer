@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.7.5...v2.8.0) (2022-02-11)
+
+
+### Features
+
+* Add rehype-sanitize with a custom IEX Markdown schema to cover all components ([#452](https://github.com/ExpediaGroup/insights-explorer/issues/452)) ([3aa1936](https://github.com/ExpediaGroup/insights-explorer/commit/3aa1936cf1e3349395cef4159f7d1c086024848b))
+
 ### [2.7.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.7.4...v2.7.5) (2022-02-10)
 
 
