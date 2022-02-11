@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.8.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.0...v2.8.1) (2022-02-11)
+
+
+### Bug Fixes
+
+* Mobile-responsive compact insight card ([a1bd7fc](https://github.com/ExpediaGroup/insights-explorer/commit/a1bd7fce05fcafaa276f94e73059c0bb2b9308a7))
+* Mobile-responsive square insight card ([08d3c46](https://github.com/ExpediaGroup/insights-explorer/commit/08d3c4639cb42d20026b53b6cd951beb49814405))
+
 ## [2.8.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.7.5...v2.8.0) (2022-02-11)
 
 
