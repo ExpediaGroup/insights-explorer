@@ -43,15 +43,15 @@ export const SquareInsightCard = ({ insightEdge, options, ...props }: InsightCon
   const insight = insightEdge.node;
 
   return (
-    <LinkBox key={insight.id + '-' + insight.fullName}>
+    <LinkBox key={insight.id + '-' + insight.fullName} alignSelf="stretch">
       <VStack
         as={Card}
         bg={bgColor}
         p="1rem"
-        height={{ base: '16rem', md: '17rem', lg: '18rem', '2xl': '20rem' }}
-        width={{ base: '16rem', md: '17rem', lg: '18rem', '2xl': '20rem' }}
+        width={{ base: 'unset', sm: '16rem', md: '17rem', lg: '18rem', '2xl': '20rem' }}
         align="stretch"
         overflow="hidden"
+        sx={{ aspectRatio: '1' }}
         _hover={{ boxShadow: 'lg' }}
         {...props}
       >

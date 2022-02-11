@@ -28,9 +28,19 @@ const EdgeContainer = ({ edges, options }) => {
   switch (options.layout) {
     case 'square':
       return (
-        <Wrap spacing="1rem" pb="1rem">
+        <Wrap
+          spacing="1rem"
+          pb="1rem"
+          direction={{ base: 'column', sm: 'row' }}
+          sx={{
+            '> ul': {
+              // Disable wrap at small screen sizes
+              flexWrap: { base: 'nowrap', sm: 'wrap' }
+            }
+          }}
+        >
           {edges.map((edge) => (
-            <WrapItem key={edge.node.id}>
+            <WrapItem key={edge.node.id} flexDirection={{ base: 'column', sm: 'row' }}>
               <InsightConnectionCard insightEdge={edge} options={options} />
             </WrapItem>
           ))}

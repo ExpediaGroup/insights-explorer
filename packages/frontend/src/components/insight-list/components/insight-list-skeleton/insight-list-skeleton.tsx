@@ -14,9 +14,32 @@
  * limitations under the License.
  */
 
-import { Skeleton } from '@chakra-ui/react';
+import { Skeleton, Wrap } from '@chakra-ui/react';
 
 export const InsightListSkeleton = ({ count = 3, options }) => {
+  // Special handling for Square
+  if (options.layout === 'square') {
+    return (
+      <Wrap
+        spacing="1rem"
+        direction={{ base: 'column', sm: 'row' }}
+        sx={{
+          '> ul': {
+            flexWrap: { base: 'nowrap', sm: 'wrap' }
+          }
+        }}
+      >
+        {new Array(count * 2).fill(1).map((value, index) => (
+          <Skeleton
+            key={`search-results-skeleton-${index}`}
+            sx={{ aspectRatio: '1' }}
+            width={{ base: 'unset', sm: '16rem', md: '17rem', lg: '18rem', '2xl': '20rem' }}
+          />
+        ))}
+      </Wrap>
+    );
+  }
+
   let layoutProps = {};
   switch (options.layout) {
     case 'square':
