@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.8.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.2...v2.8.3) (2022-02-12)
+
+
+### Bug Fixes
+
+* **deps:** bump @urql/core from 2.3.6 to 2.4.1 ([039d755](https://github.com/ExpediaGroup/insights-explorer/commit/039d7553512ac19ec7ec9c17cc0a29fe05d339d3))
+* **deps:** bump apollo-server-express from 3.6.2 to 3.6.3 ([4670cee](https://github.com/ExpediaGroup/insights-explorer/commit/4670cee4fc5b1de77664a7ea46771c084d747be7))
+* **deps:** bump urql from 2.0.6 to 2.1.3 ([8778c0d](https://github.com/ExpediaGroup/insights-explorer/commit/8778c0d4fddaed8af65fe848d75dbf6b1288564a))
+
 ### [2.8.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.1...v2.8.2) (2022-02-11)
 
 
