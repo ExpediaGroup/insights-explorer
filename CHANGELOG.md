@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.8.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.4...v2.8.5) (2022-02-14)
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-core from 3.6.2 to 3.6.3 ([44b364c](https://github.com/ExpediaGroup/insights-explorer/commit/44b364c669a0f32fad784f69082a8f178d6259e3))
+* **deps:** bump aws-sdk from 2.1072.0 to 2.1073.0 ([36c9a30](https://github.com/ExpediaGroup/insights-explorer/commit/36c9a309afebc0244bd7df1b5772e7a79478fb13))
+
 ### [2.8.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.3...v2.8.4) (2022-02-14)
 
 
