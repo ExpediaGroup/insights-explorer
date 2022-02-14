@@ -33,7 +33,7 @@ export class UsersResolver {
       return users;
     } catch (error: any) {
       logger.error(JSON.stringify(error, null, 2));
-      return Promise.resolve([]);
+      return [];
     }
   }
 }
