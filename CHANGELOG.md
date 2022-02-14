@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.8.6](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.5...v2.8.6) (2022-02-14)
+
+
+### Bug Fixes
+
+* **backend:** Add retry logic to server startup ([86fad8d](https://github.com/ExpediaGroup/insights-explorer/commit/86fad8dbba4e0d97dcc91ec3f84c01879564ceec))
+
 ### [2.8.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.4...v2.8.5) (2022-02-14)
 
 
