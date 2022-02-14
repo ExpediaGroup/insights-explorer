@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.8.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.3...v2.8.4) (2022-02-14)
+
+
+### Bug Fixes
+
+* **deps:** bump follow-redirects from 1.14.7 to 1.14.8 ([28e8b5a](https://github.com/ExpediaGroup/insights-explorer/commit/28e8b5aaef9345877d207ce84aa1b5cd14e5ba70))
+
 ### [2.8.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.2...v2.8.3) (2022-02-12)
 
 
