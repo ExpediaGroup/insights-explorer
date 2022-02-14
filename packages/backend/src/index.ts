@@ -30,6 +30,7 @@ for (const packageName of packages) {
 
 import './environment';
 import type { Server } from 'http';
+import pRetry from 'p-retry';
 
 import { bootstrap, defaultKnex } from './lib/db';
 import { deployMappings } from './lib/elasticsearch';
@@ -51,11 +52,23 @@ process.on('uncaughtException', (uncaughtException) => {
 const startup = async (): Promise<Server> => {
   // Deploy Elasticsearch Index mappings
   logger.debug('[INDEX] Deploying elasticsearch indices');
-  await deployMappings();
+  await pRetry(() => deployMappings(), {
+    retries: 5,
+    factor: 3.86,
+    onFailedAttempt: (error) => {
+      logger.warn(`[INDEX] Deploying elasticsearch indices failed (attempt ${error.attemptNumber})`);
+    }
+  });
 
   // Create database pool & apply any schema migrations
   logger.debug('[INDEX] Bootstrapping database');
-  await bootstrap(defaultKnex);
+  await pRetry(() => bootstrap(defaultKnex), {
+    retries: 5,
+    factor: 3.86,
+    onFailedAttempt: (error) => {
+      logger.warn(`[INDEX] Bootstrapping database failed (attempt ${error.attemptNumber})`);
+    }
+  });
 
   // Start Express server
   logger.debug('[INDEX] Starting Express server');
