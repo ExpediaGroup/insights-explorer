@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-import fs from 'fs';
-
 import logger from '@iex/shared/logger';
 import * as dotenv from 'dotenv-flow';
+import fs from 'fs-extra';
 
 // Dynamically load current IEX version
 try {
-  const packageJsonString = fs.readFileSync(__dirname + `/../../../../package.json`, { encoding: 'utf-8' });
-  const packageJson = JSON.parse(packageJsonString);
+  const packageJson = fs.readJsonSync(__dirname + `/../../../../package.json`);
   process.env.IEX_VERSION = packageJson.version;
 } catch {
   logger.error('[ENV] Error loading package.json');

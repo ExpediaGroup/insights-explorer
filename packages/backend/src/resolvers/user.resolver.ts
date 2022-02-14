@@ -47,7 +47,7 @@ export class UserResolver {
       return user;
     } catch (error: any) {
       logger.error(JSON.stringify(error, null, 2));
-      return Promise.resolve(null);
+      return null;
     }
   }
 

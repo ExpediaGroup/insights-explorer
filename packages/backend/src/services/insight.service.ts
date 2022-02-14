@@ -475,7 +475,7 @@ export class InsightService {
                       if (file.originalPath) {
                         return gitInstance.renameFile(file.originalPath, file.path);
                       }
-                      return Promise.resolve();
+                      return;
 
                     // Delete file
                     case InsightFileAction.DELETE:
@@ -484,7 +484,7 @@ export class InsightService {
 
                     case InsightFileAction.NONE:
                     default:
-                      return Promise.resolve();
+                      return;
                   }
                 })
               );
