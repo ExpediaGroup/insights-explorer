@@ -723,7 +723,9 @@ export class InsightService {
     // TODO: We can lookup the GITHUB_SERVICE_ACCOUNT from the GITHUB_ACCESS_TOKEN value using the `viewer` query
     await addCollaborator(token, repository.owner!.login, repository.name, process.env.GITHUB_SERVICE_ACCOUNT!);
 
-    // Add IEX webhook
-    await createIexWebhook(token, repository.owner!.login, repository.name);
+    if (process.env.GITHUB_USE_WEBHOOK === 'true') {
+      // Add IEX webhook
+      await createIexWebhook(token, repository.owner!.login, repository.name);
+    }
   }
 }

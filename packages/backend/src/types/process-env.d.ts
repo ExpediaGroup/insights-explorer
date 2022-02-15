@@ -29,7 +29,7 @@ declare namespace NodeJS {
     PORT: string;
     ENCRYPTION_KEY: string;
     PUBLIC_URL: string;
-    GRAPHQL_PLAYGROUND: string;
+    APOLLO_SANDBOX: string;
 
     // GITHUB
     GITHUB_URL: string;
@@ -39,6 +39,7 @@ declare namespace NodeJS {
     GITHUB_ACCESS_TOKEN: string;
     GITHUB_TEMPLATE_REPOSITORY: string;
     GITHUB_DEFAULT_ORG: string;
+    GITHUB_USE_WEBHOOK: string;
 
     // MQ
     CONVERSION_SQS_URL: string;
