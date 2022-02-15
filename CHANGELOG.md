@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.6...v2.9.0) (2022-02-15)
+
+
+### Features
+
+* Add `GITHUB_USE_WEBHOOK` environment variable ([1124f16](https://github.com/ExpediaGroup/insights-explorer/commit/1124f16e6229da79f687fbe7efe069e4b172380b))
+
 ### [2.8.6](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.5...v2.8.6) (2022-02-14)
 
 
