@@ -19,5 +19,5 @@ The environment variable `ENCRYPTION_KEY` contains a secret key compatible with 
 To obtain a suitable key, run this:
 
 ```bash
-npx ts-node -e "import { generateKey } from './src/lib/crypto'; console.log(generateKey());"
+npx ts-node -e "import { generateKey } from './src/shared/crypto'; console.log(generateKey());"
 ```

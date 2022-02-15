@@ -37,7 +37,6 @@ declare namespace NodeJS {
     GITHUB_GRAPHQL_API_URL: string;
     GITHUB_SERVICE_ACCOUNT: string;
     GITHUB_ACCESS_TOKEN: string;
-    GITHUB_TEMPLATE_REPOSITORY: string;
     GITHUB_DEFAULT_ORG: string;
     GITHUB_USE_WEBHOOK: string;
 

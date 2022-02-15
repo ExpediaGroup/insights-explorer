@@ -75,9 +75,31 @@ Create a new `.env` file containing all the required configuration, then run the
 docker run -p 3001:3001 --env-file=.env ghcr.io/expediagroup/insights-explorer:1
 ```
 
-### Manually Building Docker Images
+### Docker Compose
 
-Building the Docker images manually only requires Docker to be installed.
+A `docker-compose.yml` file is provided to make it easy to spin up a local instance of Insights Explorer.  It includes PostgreSQL, Elasticsearch, and Minio.  It is pre-configured with all required environment variables to make it as easy to launch as possible.
+
+Please note that it is intended for development and testing ONLY and is not suitable for a production deployment!
+
+🎯 **Note**: Several environment variables must be manually-provided in the `docker-compose.yml` before it can be launched; specifically the GitHub-related variables.  Please refer to the [wiki] for more details.
+
+Launch all services with the `all` profile:
+
+```sh
+docker compose --profile all up
+```
+
+Once the services have started, you can access the following URLs:
+
+- Insights Explorer: http://localhost:3001
+- Kibana: http://localhost:5601
+- Minio Console: http://localhost:9001 (user `minio` / password `minio123`)
+
+For more information about `docker compose`, refer to the [wiki].
+
+[wiki]: https://github.com/ExpediaGroup/insights-explorer/wiki/Docker#docker-compose
+
+### Manually Building Docker Images
 
 You can build and run the main Docker image:
 
