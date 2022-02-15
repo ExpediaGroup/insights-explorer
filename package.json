@@ -51,7 +51,7 @@
   },
   "scripts": {
     "license:thirdparty": "ts-node scripts/third-party.ts",
-    "prune:production": "npm run prune:production --workspaces",
+    "prune:production": "npm run prune:production --workspaces --if-present",
     "getVersion": "node -p \"require('./package.json').version\"",
     "---------": "----------------------------------",
     "start:backend": "npm start --workspace=@iex/backend",
