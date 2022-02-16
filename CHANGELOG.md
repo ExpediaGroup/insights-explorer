@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.9.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.0...v2.9.1) (2022-02-16)
+
+
+### Bug Fixes
+
+* **deps:** bump aws-sdk from 2.1073.0 to 2.1074.0 ([69525c7](https://github.com/ExpediaGroup/insights-explorer/commit/69525c7ab09a11d04d5e7595285ae063548eb4cc))
+* **deps:** bump nanoid from 3.2.0 to 3.3.0 ([7789783](https://github.com/ExpediaGroup/insights-explorer/commit/7789783182612166a3cca1e6e4442a8b1b08ca9a))
+* Update storage module to work with Minio ([6d0ba6c](https://github.com/ExpediaGroup/insights-explorer/commit/6d0ba6cd5b2687841ed6cd8daf71c9f450d2a118))
+
 ## [2.9.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.8.6...v2.9.0) (2022-02-15)
 
 
