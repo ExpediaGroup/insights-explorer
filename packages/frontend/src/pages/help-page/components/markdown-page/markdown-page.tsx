@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-import { Flex } from '@chakra-ui/react';
+import { Flex, IconButton } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet';
 
 import { FileViewer } from '../../../../components/file-viewer/file-viewer';
+import { iconFactoryAs } from '../../../../shared/icon-factory';
 import { HelpSidebar } from '../help-sidebar/help-sidebar';
 
 const links = [
@@ -129,8 +130,25 @@ export const MarkdownPage = () => {
           overflow="hidden"
         />
 
-        <HelpSidebar links={links} />
+        <HelpSidebar links={links} headerTitle="Markdown" />
       </Flex>
+
+      <IconButton
+        display={{ base: 'none', sm: 'flex' }}
+        aria-label={'Scroll To Top'}
+        isRound={true}
+        position="fixed"
+        width="3rem"
+        height="3rem"
+        bottom="1.5rem"
+        left="1.5rem"
+        variant="frost"
+        boxShadow="2px 2px 3px #555"
+        icon={iconFactoryAs('chevronUp')}
+        onClick={(e) => {
+          window.scrollTo(0, 0);
+        }}
+      />
     </>
   );
 };
