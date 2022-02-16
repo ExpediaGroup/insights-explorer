@@ -38,7 +38,7 @@ const Bookmarklet = ({ name, contents }) => {
   return (
     <>
       <HStack spacing="1rem">
-        <Button as={ExternalLink} href={contents} variant="solid">
+        <Button as={ExternalLink} href={contents} variant="solid" size="sm">
           {name}
         </Button>
         <Button
@@ -65,8 +65,8 @@ export const IntegrationsPage = () => {
         <title>Integrations | Help</title>
       </Helmet>
 
-      <Flex direction="row" mt="2rem">
-        <VStack align="stretch">
+      <Flex direction="row" mt="2rem" maxWidth={{ base: '100%', sm: 'none' }} flexBasis={{ base: 'auto', sm: 'none' }}>
+        <VStack align="stretch" maxWidth={{ base: '100%', sm: 'none' }} flexBasis={{ base: 'auto', sm: 'none' }}>
           <Crumbs
             crumbs={[
               { text: 'Help', link: `/help` },
@@ -94,7 +94,7 @@ export const IntegrationsPage = () => {
               browser and provide new functionality.
             </Text>
             <Text>Drag any of the following buttons into your browser's toolbar:</Text>
-            <VStack spacing="1rem" align="flex-start" pl="2rem">
+            <VStack spacing="1rem" align="flex-start" pl={{ base: 'none', sm: '2rem' }} w="full" overflow="scroll">
               <Bookmarklet name="IEX Import" contents={importBookmarklet()} />
               <Bookmarklet name="IEX Import (New Window)" contents={importBookmarkletNewWindow()} />
             </VStack>
@@ -118,7 +118,7 @@ export const IntegrationsPage = () => {
           </VStack>
         </VStack>
 
-        <HelpSidebar links={links} />
+        <HelpSidebar links={links} headerTitle="Integrations" />
       </Flex>
     </>
   );
