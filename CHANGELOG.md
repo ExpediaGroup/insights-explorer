@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.9.2](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.1...v2.9.2) (2022-02-16)
+
+
+### Bug Fixes
+
+* Update GitHub personal access token validation pattern ([23a482f](https://github.com/ExpediaGroup/insights-explorer/commit/23a482f90270c0e57993d5bbef6ac25780ac296c))
+
 ### [2.9.1](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.0...v2.9.1) (2022-02-16)
 
 
