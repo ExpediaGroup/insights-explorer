@@ -65,7 +65,7 @@ const GitHubPersonalAccessTokenInput = ({ name, defaultValue, form }) => {
           placeholder="GitHub Personal Access Token"
           type={show ? 'text' : 'password'}
           defaultValue={defaultValue}
-          {...register(name, { required: true, maxLength: 40, pattern: /^[A-Za-z0-9]{40}$/ })}
+          {...register(name, { required: true, maxLength: 40, pattern: /^[A-Za-z0-9_]{40}$/ })}
           errorBorderColor="red.300"
           onChange={(e) => (e.target.value = e.target.value.trim())}
         />
