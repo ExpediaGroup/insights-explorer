@@ -41,5 +41,5 @@ if (result.error) {
 
 // Configuration validation checks
 if (process.env.GITHUB_USE_WEBHOOK === 'true' && process.env.PUBLIC_URL === '') {
-  logger.error('PUBLIC_URL must be set when GITHUB_USE_WEBHOOK is true');
+  logger.error('[ENV] Configuration Error: PUBLIC_URL must be set when GITHUB_USE_WEBHOOK is true');
 }

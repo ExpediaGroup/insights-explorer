@@ -22,7 +22,13 @@ import type { ReadStream } from 'fs-extra';
 
 const defaultOptions: S3.Types.ClientConfiguration = {
   region: process.env.S3_REGION,
-  maxRetries: 3
+  maxRetries: 3,
+
+  endpoint: process.env.S3_ENDPOINT !== '' ? process.env.S3_ENDPOINT : undefined,
+
+  // S3 Path-style requests are deprecated
+  // But some S3-compatible APIs may use them (e.g. Minio)
+  s3ForcePathStyle: process.env.S3_FORCE_PATH_STYLE === 'true' ? true : undefined
 };
 
 export function createS3Client(options: S3.Types.ClientConfiguration = defaultOptions): S3 {
@@ -64,7 +70,7 @@ export async function streamToS3(stream: ReadStream, fileSize: number, key: stri
   const bucket = process.env.S3_BUCKET!;
 
   const response = await defaultS3Client
-    .putObject({ Body: stream, Bucket: bucket, ContentLength: fileSize, Key: key })
+    .upload({ Body: stream, Bucket: bucket, ContentLength: fileSize, Key: key })
     .promise();
   const uri = `s3://${bucket}/${key}`;
 

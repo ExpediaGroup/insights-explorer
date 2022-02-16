@@ -64,6 +64,8 @@ declare namespace NodeJS {
     // Object Storage
     S3_BUCKET: string;
     S3_REGION: string;
+    S3_ENDPOINT?: string;
+    S3_FORCE_PATH_STYLE?: string;
     S3_CONCURRENCY_LIMIT: string;
 
     // Okta
