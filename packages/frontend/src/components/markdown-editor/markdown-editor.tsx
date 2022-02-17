@@ -68,10 +68,11 @@ const emojiCompleter = {
 interface Props {
   contents: string;
   onContentsChange: (updatedValue: string) => any;
+  scrollSync: boolean;
   uploadFile?: (file: File, name: string) => Promise<UploadSingleFileMutation | undefined>;
 }
 
-export const MarkdownEditor = ({ contents, onContentsChange, uploadFile }: Props) => {
+export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadFile }: Props) => {
   const aceTheme = useColorModeValue('chrome', 'nord_dark');
 
   const [internalValue, setInternalValue] = useState(contents);
@@ -117,6 +118,19 @@ export const MarkdownEditor = ({ contents, onContentsChange, uploadFile }: Props
     }
   });
 
+  function handleScroll(editor: any) {
+    if (scrollSync) {
+      let lineNumber = editor.getFirstVisibleRow() + 1;
+      do {
+        const element = document.querySelectorAll(`[data-sourcepos^="${lineNumber}:"]`)[0];
+        if (element) {
+          element.scrollIntoView({ block: 'start' });
+          break;
+        }
+      } while (--lineNumber > 0);
+    }
+  }
+
   // Debounce value changes to avoid too-frequent updates
   useDebounce(
     () => {
@@ -136,16 +150,19 @@ export const MarkdownEditor = ({ contents, onContentsChange, uploadFile }: Props
       ref={aceEditorRef}
       mode="markdown"
       theme={aceTheme}
-      editorProps={{ $blockScrolling: true }}
+      editorProps={{ $blockScrolling: false }}
       value={internalValue}
       onChange={setInternalValue}
+      onScroll={handleScroll}
       tabSize={2}
       wrapEnabled={true}
       showPrintMargin={false}
       width="100%"
       minLines={30}
-      maxLines={Infinity}
+      height={scrollSync ? '70vh' : '100%'}
       setOptions={{
+        scrollPastEnd: scrollSync,
+        autoScrollEditorIntoView: true,
         enableBasicAutocompletion: [emojiCompleter] as any,
         enableLiveAutocompletion: true,
         enableSnippets: true

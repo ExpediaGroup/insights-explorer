@@ -111,7 +111,7 @@ export const MarkdownContainer = memo(
     );
 
     return (
-      <Box {...boxProps} className="iex-markdown-container">
+      <Box overflow="scroll" overflowX="hidden" {...boxProps}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <ReactMarkdown
             children={contents}
@@ -141,6 +141,7 @@ export const MarkdownContainer = memo(
             ]}
             transformLinkUri={transformLinkUri ?? defaultTransformLinkUri}
             transformImageUri={transformAssetUri ?? defaultTransformAssetUri}
+            sourcePos={true}
           />
         </ErrorBoundary>
       </Box>
