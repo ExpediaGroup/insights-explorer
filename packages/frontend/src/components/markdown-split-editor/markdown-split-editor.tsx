@@ -32,7 +32,9 @@ import {
   Stack,
   Text,
   Tooltip,
-  Box
+  Box,
+  Checkbox,
+  HStack
 } from '@chakra-ui/react';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
@@ -140,6 +142,8 @@ export const MarkdownSplitEditor = ({
 
   const [isPreviewMode, setPreviewMode] = useState(false);
 
+  const [scrollSync, setScrollSync] = useState(false);
+
   // Overwrite internal state if external contents change
   useEffect(() => {
     setInternalValue(contents);
@@ -166,7 +170,18 @@ export const MarkdownSplitEditor = ({
   return (
     <Flex {...flexProps} direction="column">
       <Flex direction="row" justify="flex-end" pr="0.25rem">
-        {showFormattingHelp && <FormattingHelp />}
+        <HStack spacing="1rem" align="stretch">
+          <Checkbox
+            isChecked={scrollSync}
+            onChange={() => setScrollSync(!scrollSync)}
+            size="sm"
+            color="frost.400"
+            fontWeight={'medium'}
+          >
+            {'Enable Scroll Sync (experimental)'}
+          </Checkbox>
+          {showFormattingHelp && <FormattingHelp />}
+        </HStack>
         {showPreview && (
           <Box display={{ base: 'block', xl: 'none' }} ml="1rem">
             {isPreviewMode && (
@@ -192,14 +207,19 @@ export const MarkdownSplitEditor = ({
           </Box>
         )}
       </Flex>
-      <Flex direction="row" flexGrow={1}>
+      <Flex direction="row" flexGrow={1} maxH={scrollSync ? '60vh' : '100%'} overflow="hidden">
         <Box
           position="relative"
           flexGrow={1}
           width="100%"
           display={{ base: isPreviewMode ? 'none' : 'block', xl: 'block' }}
         >
-          <MarkdownEditor contents={contents} onContentsChange={setInternalValue} uploadFile={uploadFile} />
+          <MarkdownEditor
+            contents={contents}
+            onContentsChange={setInternalValue}
+            uploadFile={uploadFile}
+            scrollSync={scrollSync}
+          />
         </Box>
         {showPreview && (
           <MarkdownContainer

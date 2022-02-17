@@ -59,10 +59,6 @@ import { XkcdChartRendererAsync } from '../renderers/xkcd-chart-renderer/xkcd-ch
 import './markdown-container.css';
 import 'react-medium-image-zoom/dist/styles.css';
 
-export const getCoreProps = (props): any => {
-  return props['data-sourcepos'] ? { 'data-sourcepos': props['data-sourcepos'] } : {};
-};
-
 const heading = ({ node, level, children, ...props }) => {
   const sizes = ['2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
   const mt = ['2rem', '1.75rem', '1.5rem', '1rem', '1rem', '1rem'];
@@ -80,6 +76,7 @@ const heading = ({ node, level, children, ...props }) => {
       display="flex"
       alignItems="center"
       {...node.properties}
+      {...props}
     >
       {children}
     </Heading>
@@ -88,16 +85,15 @@ const heading = ({ node, level, children, ...props }) => {
 
 const getList = ({ node, ...props }) => {
   const { start, ordered, children, depth } = props;
-  const attrs = getCoreProps(props);
-  if (start !== null && start !== 1 && start !== undefined) {
-    attrs.start = start.toString();
+  if (props.start !== null && props.start !== 1 && props.start !== undefined) {
+    props.start = start.toString();
   }
   let styleType = 'disc';
   if (ordered) styleType = 'decimal';
   if (depth === 1) styleType = 'circle';
 
   return (
-    <List as={ordered ? 'ol' : 'ul'} styleType={styleType} ml={depth === 0 ? '1rem' : 0} pl="1rem" mb="1rem" {...attrs}>
+    <List as={ordered ? 'ol' : 'ul'} styleType={styleType} ml={depth === 0 ? '1rem' : 0} pl="1rem" mb="1rem" {...props}>
       {children}
     </List>
   );
@@ -140,6 +136,7 @@ export const ChakraUIRenderer = (
             fontSize="80%"
             ml="0.5rem"
             color="frost.400"
+            {...props['data-sourcepos']}
           />
         );
       }
@@ -167,7 +164,7 @@ export const ChakraUIRenderer = (
       const language = languageMatch && languageMatch[1];
 
       if (inline) {
-        return <Code {...getCoreProps(props)}>{children}</Code>;
+        return <Code {...props}>{children}</Code>;
       }
 
       if (props.uri) {
@@ -181,6 +178,7 @@ export const ChakraUIRenderer = (
             copyButton={true}
             defaultIsOpen={defaultIsOpen}
             mb="1rem"
+            {...props}
           />
         );
       } else {
@@ -191,6 +189,7 @@ export const ChakraUIRenderer = (
             copyButton={true}
             defaultIsOpen={defaultIsOpen}
             mb="1rem"
+            {...props}
           />
         );
       }
@@ -202,8 +201,8 @@ export const ChakraUIRenderer = (
         </Text>
       );
     },
-    hr: () => {
-      return <Divider my="0.5rem" />;
+    hr: ({ node, children, ...props }) => {
+      return <Divider my="0.5rem" {...props} />;
     },
     a: ({ node, ...props }) => {
       if (props.href && isRelativeUrl(props.href) && !isHashUrl(props.href)) {
@@ -219,7 +218,11 @@ export const ChakraUIRenderer = (
       );
     },
     text: ({ node, children, ...props }) => {
-      return <Text as="span">{children}</Text>;
+      return (
+        <Text as="span" {...props['data-sourcepos']}>
+          {children}
+        </Text>
+      );
     },
     ol: getList,
     ul: getList,
@@ -263,20 +266,24 @@ export const ChakraUIRenderer = (
         </Zoom>
       );
     },
-    thead: ({ children }) => {
+    thead: ({ children, ...props }) => {
       return <Thead>{children}</Thead>;
     },
-    tbody: ({ children }) => {
+    tbody: ({ children, ...props }) => {
       return <Tbody>{children}</Tbody>;
     },
-    tr: ({ children }) => {
+    tr: ({ children, ...props }) => {
       return <Tr>{children}</Tr>;
     },
     th: ({ node, children, ...props }) => {
       return <Th textAlign={props?.style?.textAlign}>{children}</Th>;
     },
     td: ({ node, children, ...props }) => {
-      return <Td textAlign={props?.style?.textAlign}>{children}</Td>;
+      return (
+        <Td textAlign={props?.style?.textAlign} {...props['data-sourcepos']}>
+          {children}
+        </Td>
+      );
     },
     section: ({ node, children, ...props }) => {
       if (props.className === 'footnotes') {
@@ -295,7 +302,7 @@ export const ChakraUIRenderer = (
     badge: ({ node, children, ...props }) => {
       return <Badge {...props}>{children}</Badge>;
     },
-    katex: ({ math, block }) => {
+    katex: ({ math, block, ...props }) => {
       return (
         <Zoom>
           <KaTeXRendererAsync math={math} block={block} />
@@ -308,6 +315,7 @@ export const ChakraUIRenderer = (
           fullName={props.fullName}
           options={{ ...destringObject(props), dispatchSearch: false }}
           mb="1rem"
+          {...props}
         />
       );
     },
@@ -328,6 +336,7 @@ export const ChakraUIRenderer = (
           sort={sort}
           options={{ ...destringObject(props), dispatchSearch: false }}
           mb="1rem"
+          {...props}
         />
       );
     },
@@ -359,15 +368,27 @@ export const ChakraUIRenderer = (
     // Fallbacks for unrecognized directives
     textdirective: ({ node, children, ...props }) => {
       // Unrecognized text directive
-      return <Text as="span">:{props.name}</Text>;
+      return (
+        <Text as="span" {...props}>
+          :{props.name}
+        </Text>
+      );
     },
     leafdirective: ({ node, children, ...props }) => {
       // Unrecognized leaf directive
-      return <Text as="span">::{props.name}</Text>;
+      return (
+        <Text as="span" {...props}>
+          ::{props.name}
+        </Text>
+      );
     },
     containerdirective: ({ node, children, ...props }) => {
       // Unrecognized container directive
-      return <Text as="span">:::{props.name}</Text>;
+      return (
+        <Text as="span" {...props}>
+          :::{props.name}
+        </Text>
+      );
     },
 
     ...customRenderers
