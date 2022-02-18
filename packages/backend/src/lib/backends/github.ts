@@ -40,19 +40,13 @@ import { sleep } from '../../shared/util';
  * GitHub GraphQL client configuration
  */
 export function makeGraphql(token: string = process.env.GITHUB_ACCESS_TOKEN!): graphql {
-  if (token == null) {
+  if (token == null || token === '') {
     logger.error('GitHub token is not configured; please provide the `GITHUB_ACCESS_TOKEN` environment variable.');
     throw new Error('No GitHub token configured');
   }
-  if (process.env.GITHUB_GRAPHQL_API_URL == null) {
-    logger.error(
-      'GitHub GraphQL API URL is not configured; please provide the `GITHUB_GRAPHQL_API_URL` environment variable.'
-    );
-    throw new Error('No GitHub URL configured');
-  }
 
   return GQ.defaults({
-    baseUrl: process.env.GITHUB_GRAPHQL_API_URL,
+    baseUrl: process.env.GITHUB_GRAPHQL_API_URL !== '' ? process.env.GITHUB_GRAPHQL_API_URL : undefined,
     mediaType: {
       previews: ['bane']
     },
@@ -66,21 +60,15 @@ export function makeGraphql(token: string = process.env.GITHUB_ACCESS_TOKEN!): g
  * GitHub client configuration
  */
 export function makeOctokit(token: string = process.env.GITHUB_ACCESS_TOKEN!): Octokit {
-  if (token == null) {
+  if (token == null || token === '') {
     logger.error('GitHub token is not configured; please provide the `GITHUB_ACCESS_TOKEN` environment variable.');
     throw new Error('No GitHub token configured');
-  }
-  if (process.env.GITHUB_REST_API_URL == null) {
-    logger.error(
-      'GitHub REST API URL is not configured; please provide the `GITHUB_REST_API_URL` environment variable.'
-    );
-    throw new Error('No GitHub URL configured');
   }
 
   return new Octokit({
     auth: token,
     userAgent: `iex ${process.env.IEX_VERSION || '0.0.0'}`,
-    baseUrl: process.env.GITHUB_REST_API_URL,
+    baseUrl: process.env.GITHUB_REST_API_URL !== '' ? process.env.GITHUB_REST_API_URL : undefined,
     log: logger,
     previews: ['mercy-preview']
   });
