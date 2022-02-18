@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.9.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.3...v2.9.4) (2022-02-18)
+
+
+### Bug Fixes
+
+* Support GitHub.com APIs ([b1f4d55](https://github.com/ExpediaGroup/insights-explorer/commit/b1f4d55380373f73d8820fb912d974cb5e1797e9))
+
 ### [2.9.3](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.2...v2.9.3) (2022-02-17)
 
 
