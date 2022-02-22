@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.9.5](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.4...v2.9.5) (2022-02-22)
+
+
+### Bug Fixes
+
+* **deps:** bump nanoid from 3.3.0 to 3.3.1 ([60bf099](https://github.com/ExpediaGroup/insights-explorer/commit/60bf099c1540f3b38dd4f386eb354f22a03da78b))
+
 ### [2.9.4](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.3...v2.9.4) (2022-02-18)
 
 
