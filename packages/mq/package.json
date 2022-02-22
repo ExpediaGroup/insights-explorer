@@ -20,7 +20,7 @@
     "dist"
   ],
   "dependencies": {
-    "aws-sdk": "2.1074.0",
+    "aws-sdk": "2.1079.0",
     "sqs-consumer": "5.6.0"
   }
 }
