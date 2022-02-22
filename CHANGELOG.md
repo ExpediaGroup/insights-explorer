@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.9.7](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.6...v2.9.7) (2022-02-22)
+
+
+### Bug Fixes
+
+* **deps:** bump isomorphic-git from 1.11.2 to 1.12.0 ([b47b7b2](https://github.com/ExpediaGroup/insights-explorer/commit/b47b7b276de367db84887c97232c048ef7ce2ea7))
+
 ### [2.9.6](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.5...v2.9.6) (2022-02-22)
 
 
