@@ -72,7 +72,7 @@
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
-    "@types/jest": "27.4.0",
+    "@types/jest": "27.4.1",
     "@types/luxon": "2.0.9",
     "@types/node-emoji": "1.8.1",
     "@types/parsimmon": "1.10.6",
