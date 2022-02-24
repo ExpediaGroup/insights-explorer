@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.0.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.0.0...v3.0.1) (2022-02-24)
+
+
+### Bug Fixes
+
+* Fix ref issues with `Link` component ([8f421d0](https://github.com/ExpediaGroup/insights-explorer/commit/8f421d0435d139833d0280e9a4a8caed01840c06))
+
 ## [3.0.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.10...v3.0.0) (2022-02-24)
 
 
