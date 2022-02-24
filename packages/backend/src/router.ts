@@ -26,7 +26,7 @@ import * as homeController from './controllers/home.v1';
 import * as importController from './controllers/import.v1';
 import * as insightsController from './controllers/insights.v1';
 import * as webhookController from './controllers/webhook.v1';
-import { oktaAuthenticator } from './middleware/okta-authenticator';
+import { oAuthAuthenticator } from './middleware/oauth-authenticator';
 import { requestId } from './middleware/request-id';
 
 export async function createRouter(): Promise<Router> {
@@ -50,7 +50,7 @@ export async function createRouter(): Promise<Router> {
 
   v1Router.use(
     '/graphql',
-    oktaAuthenticator,
+    oAuthAuthenticator,
     graphqlUploadExpress({ maxFileSize: 104_857_600, maxFiles: 50 }),
     graphQLServer.getMiddleware({ path: '/' })
   );

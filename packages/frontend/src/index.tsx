@@ -24,7 +24,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider as UrqlProvider } from 'urql';
 
 import { AnalyticsHandler } from './components/analytics-handler/analytics-handler';
-import { AuthProvider } from './components/auth-provider/auth-provider';
 import { GlobalErrors } from './pages/main-page/components/global-errors/global-errors';
 import { MainPage } from './pages/main-page/main-page';
 import * as serviceWorker from './serviceWorker';
@@ -66,11 +65,11 @@ const App = () => {
           <PersistGate loading={null} persistor={persistor}>
             <GraphQLClient>
               <BrowserRouter>
-                <AuthProvider>
+                <>
                   <AnalyticsHandler />
                   <Helmet defaultTitle="Insights Explorer" titleTemplate="%s | IEX" />
                   <MainPage />
-                </AuthProvider>
+                </>
                 <GlobalErrors />
               </BrowserRouter>
             </GraphQLClient>

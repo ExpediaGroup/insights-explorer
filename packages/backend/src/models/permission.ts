@@ -38,7 +38,7 @@ export interface Permission {
 
   /**
    * If true, rejects requests from users who are not admins.  This is configured with the
-   * OKTA_ADMIN_GROUPS environment variable
+   * OAUTH_OKTA_ADMIN_GROUPS environment variable
    */
   admin?: boolean;
 }

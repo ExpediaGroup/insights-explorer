@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import { OktaUserInfo } from '../models/okta-user-info';
 import { User } from '../models/user';
+
+import { OAuthUserInfo } from './oauth-user-info';
 
 export interface Context {
   container?: any;
@@ -23,7 +24,7 @@ export interface Context {
 
   // Authentication
   token?: string;
-  oktaUserInfo?: OktaUserInfo;
+  oAuthUserInfo?: OAuthUserInfo;
   user?: User;
 
   retrievedUserId?: number;

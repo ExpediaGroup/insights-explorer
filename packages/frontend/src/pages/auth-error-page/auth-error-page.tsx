@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { iconFactory } from '../../shared/icon-factory';
+import { RootState } from '../../store/store';
 import { ErrorPage } from '../error-page/error-page';
 interface AuthError {
   name: string;
@@ -25,20 +28,32 @@ interface AuthError {
 }
 
 export const AuthErrorPage = () => {
+  const { requestingLogin } = useSelector((state: RootState) => state.user);
+  const navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as { error: AuthError };
+  const state = location.state as { error: AuthError; message?: string };
   const error = state?.error;
+
+  useEffect(() => {
+    // If user requests a login we need to redirect away from the error page
+    if (requestingLogin === true) {
+      navigate('/');
+    }
+  }, [navigate, requestingLogin]);
 
   const props = {
     icon: iconFactory('authenticationError'),
     heading: 'Oops',
     errorCode: 'Authentication Error',
-    message: <>We couldn't log you in successfully.</>
+    message: state?.message ? <>{state.message}</> : <>We couldn't log you in successfully.</>
   };
 
   if (error?.errorCode === 'access_denied') {
     props.heading = "Don't Panic!";
-    props.message = <>You aren't assigned to this application in Okta. Please open your Okta dashboard and add it.</>;
+
+    if (state?.message === undefined) {
+      props.message = <>You aren't assigned to this application in Okta. Please open your Okta dashboard and add it.</>;
+    }
   }
 
   return <ErrorPage {...props} />;

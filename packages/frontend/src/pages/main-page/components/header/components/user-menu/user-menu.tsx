@@ -15,21 +15,18 @@
  */
 
 import { Avatar, Icon, Menu, MenuButton, MenuDivider, MenuGroup, MenuList, MenuItem, Spinner } from '@chakra-ui/react';
-import { useOktaAuth } from '@okta/okta-react';
-import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { IexMenuItem } from '../../../../../../components/iex-menu-item/iex-menu-item';
 import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
 import { RootState } from '../../../../../../store/store';
-import { LoginState } from '../../../../../../store/user.slice';
+import { LoginState, userSlice } from '../../../../../../store/user.slice';
 
 export const UserMenu = () => {
   const { userInfo, loginState } = useSelector((state: RootState) => state.user);
-  const location = useLocation();
+  const dispatch = useDispatch();
 
-  const { authService } = useOktaAuth();
-  const oktaLogin = () => authService.login(location.pathname);
+  const requestLogin = () => dispatch(userSlice.actions.requestLogin(true));
 
   return (
     <Menu>
@@ -49,7 +46,7 @@ export const UserMenu = () => {
       </MenuButton>
       <MenuList zIndex="10">
         {loginState !== LoginState.LOGGED_IN && (
-          <MenuItem onClick={oktaLogin} isDisabled={loginState === LoginState.LOGGING_IN}>
+          <MenuItem onClick={requestLogin} isDisabled={loginState === LoginState.LOGGING_IN}>
             <Icon as={iconFactory('login')} mr="0.5rem" />
             Login
           </MenuItem>

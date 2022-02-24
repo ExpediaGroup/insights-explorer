@@ -15,7 +15,7 @@
  */
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { OktaUserInfo } from '../models/okta-user-info';
+import { OAuthUserInfo } from '../models/oauth-user-info';
 
 declare global {
   namespace Express {
@@ -23,7 +23,7 @@ declare global {
       id: string;
 
       token?: string;
-      oktaUserInfo?: OktaUserInfo;
+      oAuthUserInfo?: OAuthUserInfo;
       user?: any;
     }
   }

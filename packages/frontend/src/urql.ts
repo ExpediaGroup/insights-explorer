@@ -54,6 +54,7 @@ export const urqlClient = createClient({
       // Any types that should NOT be cached independently should be mapped to null
       keys: {
         AppSettings: () => null,
+        AuthSettings: () => null,
         AutocompleteResults: () => null,
         ChatSettings: () => null,
         CommentActivityDetails: () => null,
@@ -70,7 +71,6 @@ export const urqlClient = createClient({
         InsightSearchResults: () => null,
         LoginActivityDetails: () => null,
         NewsActivityDetails: () => null,
-        OktaSettings: () => null,
         Repository: () => null,
         RepositoryPerson: () => null,
         SearchResult: () => null,

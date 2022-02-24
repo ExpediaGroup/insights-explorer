@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2022 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,68 +16,54 @@
 
 import { useOktaAuth } from '@okta/okta-react';
 import { Security, LoginCallback } from '@okta/okta-react';
-import { ReactChild, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import { RootState } from '../../store/store';
-import { userSlice, login } from '../../store/user.slice';
+import { RootState } from '../../../store/store';
+import { userSlice, login } from '../../../store/user.slice';
 
 export const AUTH_CALLBACK_PATH = '/auth/callback';
 export const AUTH_ERROR_PATH = '/auth/error';
 
 interface Props {
-  children: ReactChild[];
+  children: JSX.Element;
 }
 
-const LoginHandler = () => {
-  const dispatch = useDispatch();
+const AuthWrapper = ({ children }: Props) => {
   const { authState, authService } = useOktaAuth();
+  const { requestingLogin } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   // Watch Okta status and dispatch login/logout actions
   useEffect(() => {
+    if (requestingLogin === true) {
+      // We're handling it below!
+      dispatch(userSlice.actions.requestLogin(false));
+    }
+
+    // Delay rendering until Okta auth check is completed
+    // This avoids triggering another login while Okta is still pending
+    if (authState.isPending) {
+      return;
+    }
+
     if (!authState.isAuthenticated) {
-      console.log(`[AUTH_PROVIDER] Dispatching Logout`);
-      dispatch(userSlice.actions.logout());
+      // Trigger Okta Login
+      authService.login(window.location.href);
     } else {
-      console.log(`[AUTH_PROVIDER] Dispatching Login`);
+      // Okta already logged in
       // Login against the IEX service
       dispatch(login(authState.accessToken));
     }
-  }, [authState, authService, dispatch]);
+  }, [authState, authService, dispatch, requestingLogin]);
+
+  if (authState.isAuthenticated) {
+    // Already logged into Okta
+    return children;
+  }
 
   return null;
-};
-
-const ConditionalOnPending = ({ children }) => {
-  const { authState } = useOktaAuth();
-  const [initialized, setInitialized] = useState(false);
-
-  // console.log(`[AUTH_PROVIDER] AuthProvider Rendering`);
-
-  // Delay rendering until Okta auth check is completed
-  // This avoids triggering initial logout while Okta is still pending
-  if (authState.isPending && !initialized) {
-    // console.log(`[AUTH_PROVIDER] authState.isPending, returning null`);
-    return null;
-  }
-
-  // Only initialize once
-  // This avoids issues with refreshing Okta tokens causing
-  // the component tree to recreate itself
-  if (!initialized) {
-    setInitialized(true);
-  }
-
-  return (
-    <>
-      <LoginHandler />
-
-      <Routes>
-        <Route path="/*" element={<>{children}</>} />
-      </Routes>
-    </>
-  );
 };
 
 const CustomError = ({ error }) => {
@@ -88,16 +74,16 @@ const CustomError = ({ error }) => {
   return null;
 };
 
-export const AuthProvider = (props: Props) => {
+export const OktaAuthProvider = ({ children }: Props) => {
   const { appSettings } = useSelector((state: RootState) => state.app);
 
   if (appSettings !== null) {
     const okta = {
-      clientId: appSettings.oktaSettings.clientId,
-      issuer: appSettings.oktaSettings.issuer,
+      clientId: appSettings.authSettings.clientId,
+      issuer: appSettings.authSettings.issuer,
       redirectUri: `${window.location.origin}${AUTH_CALLBACK_PATH}`,
-      scopes: ['openid', 'profile', 'email', 'groups'],
-      pkce: false,
+      scopes: appSettings.authSettings.scopes.split(','),
+      pkce: appSettings.authSettings.pkceEnabled,
       tokenManager: {
         expireEarlySeconds: 60,
         autoRenew: true
@@ -111,7 +97,7 @@ export const AuthProvider = (props: Props) => {
           <Route path={AUTH_CALLBACK_PATH} element={<LoginCallback errorComponent={CustomError} />} />
 
           {/* Everything else */}
-          <Route path="*" element={<ConditionalOnPending children={props.children} />} />
+          <Route path="*" element={<AuthWrapper>{children}</AuthWrapper>} />
         </Routes>
       </Security>
     );

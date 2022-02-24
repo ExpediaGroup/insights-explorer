@@ -60,14 +60,23 @@ enum ActivityType {
 }
 
 type AppSettings {
+  authSettings: AuthSettings!
   chatSettings: ChatSettings
   externalBlogUrl: String
   externalDocUrl: String!
   externalVideosUrl: String
   gitHubSettings: GitHubSettings!
   iexScmUrl: String!
-  oktaSettings: OktaSettings!
   version: String!
+}
+
+type AuthSettings {
+  authorizeUrl: String!
+  clientId: String!
+  issuer: String
+  pkceEnabled: Boolean!
+  provider: String!
+  scopes: String!
 }
 
 type AutocompleteResults {
@@ -311,6 +320,7 @@ type Mutation {
   deleteDraft(draftKey: String!): Draft!
   deleteInsight(insightId: ID!): ID!
   deleteNews(newsId: ID!): News!
+  getAccessToken(code: String!): String!
   likeActivity(activityId: ID!, liked: Boolean!): Activity!
   likeComment(commentId: ID!, liked: Boolean!): Comment!
   likeInsight(insightId: ID!, liked: Boolean!): Insight!
@@ -372,11 +382,6 @@ input NewsInput {
   activeAt: DateTime!
   body: String!
   summary: String!
-}
-
-type OktaSettings {
-  clientId: String!
-  issuer: String!
 }
 
 type PageInfo {

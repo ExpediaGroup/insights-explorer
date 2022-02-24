@@ -37,7 +37,7 @@ const apolloConfig: ApolloServerExpressConfig = {
       container,
       requestId,
       token: req.token,
-      oktaUserInfo: req.oktaUserInfo,
+      oAuthUserInfo: req.oAuthUserInfo,
       user: req.user
     };
 

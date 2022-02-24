@@ -20,7 +20,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams, Routes, Route } from 'react-router-dom';
 
 import { Alert } from '../../components/alert/alert';
-import { SecureRoute } from '../../components/secure-route/secure-route';
 import { useInsight } from '../../shared/useInsight';
 import { useLikedBy } from '../../shared/useLikedBy';
 import { RootState } from '../../store/store';
@@ -154,14 +153,7 @@ export const InsightPage = ({ isExport = false }) => {
 
       {insight && (
         <Routes>
-          <Route
-            path="edit/*"
-            element={
-              <SecureRoute>
-                <InsightDraftSwitcher insight={insight} onRefresh={refreshInsight} />
-              </SecureRoute>
-            }
-          />
+          <Route path="edit/*" element={<InsightDraftSwitcher insight={insight} onRefresh={refreshInsight} />} />
           <Route
             path="*"
             element={

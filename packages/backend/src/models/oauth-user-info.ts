@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-export interface OktaUserInfo {
-  sub: string;
-  name: string;
-  locale: string;
-  email: string;
-  preferred_username: string;
-  given_name: string;
-  middle_name: string;
-  family_name: string;
-  zoneinfo: string;
-  updated_at: number;
-  email_verified: true;
-  groups: string[];
+export interface OAuthUserInfo {
+  username: string;
+  name?: string;
+  email?: string;
+
+  // Okta-only fields
+  groups?: string[];
+  sub?: string;
+  locale?: string;
+  given_name?: string;
+  middle_name?: string;
+  family_name?: string;
+  zoneinfo?: string;
+  updated_at?: number;
 }

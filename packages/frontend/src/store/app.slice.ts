@@ -50,9 +50,13 @@ export const initSettings = createAsyncThunk<AppSettings, void, { rejectValue: s
           `query AppSettings {
             appSettings {
               version
-              oktaSettings {
-                issuer
+              authSettings {
+                provider
+                authorizeUrl
                 clientId
+                scopes
+                issuer
+                pkceEnabled
               }
               gitHubSettings {
                 url

@@ -16,6 +16,29 @@
 
 import { Field, ObjectType } from 'type-graphql';
 
+export type OAuthProvider = 'github' | 'okta';
+
+@ObjectType()
+export class AuthSettings {
+  @Field()
+  provider!: OAuthProvider;
+
+  @Field()
+  authorizeUrl!: string;
+
+  @Field()
+  clientId!: string;
+
+  @Field()
+  scopes!: string;
+
+  @Field({ nullable: true })
+  issuer?: string;
+
+  @Field()
+  pkceEnabled!: boolean;
+}
+
 @ObjectType()
 export class GitHubSettings {
   @Field()
@@ -29,15 +52,6 @@ export class GitHubSettings {
 
   @Field()
   defaultOrg!: string;
-}
-
-@ObjectType()
-export class OktaSettings {
-  @Field()
-  clientId!: string;
-
-  @Field()
-  issuer!: string;
 }
 
 @ObjectType()
@@ -61,7 +75,7 @@ export class AppSettings {
   gitHubSettings!: GitHubSettings;
 
   @Field()
-  oktaSettings!: OktaSettings;
+  authSettings!: AuthSettings;
 
   @Field()
   iexScmUrl!: string;

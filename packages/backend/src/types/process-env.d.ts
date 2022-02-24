@@ -68,9 +68,16 @@ declare namespace NodeJS {
     S3_FORCE_PATH_STYLE?: string;
     S3_CONCURRENCY_LIMIT: string;
 
-    // Okta
-    OKTA_BASE_URL: string;
-    OKTA_CLIENT_ID: string;
+    // OAuth
+    OAUTH_PROVIDER: 'github' | 'okta';
+    OAUTH_SCOPES: string;
+    OAUTH_AUTHORIZE_URL: string;
+    OAUTH_CLIENT_ID: string;
+    OAUTH_CLIENT_SECRET: string;
+    OAUTH_PKCE_ENABLED: string;
+
+    OAUTH_OKTA_BASE_URL?: string;
+    OAUTH_GITHUB_ACCESS_TOKEN_URL?: string;
 
     // External
     IEX_SCM_URL: string;

@@ -22,7 +22,7 @@ import { Permission } from '../models/permission';
 
 const authChecker: AuthChecker<any, Permission> = ({ context }, permissions) => {
   // Must have a valid bearer token
-  if (!context.oktaUserInfo) {
+  if (!context.oAuthUserInfo) {
     return false;
   }
 
@@ -54,7 +54,7 @@ const authChecker: AuthChecker<any, Permission> = ({ context }, permissions) => 
 
       // Authorization: `admin`
       // Requires that an authenticated user is an admin.  This is configured with the
-      // OKTA_ADMIN_GROUPS environment variable
+      // OAUTH_OKTA_ADMIN_GROUPS environment variable
       if (permission.admin === true) {
         return context.user.isAdmin;
       }

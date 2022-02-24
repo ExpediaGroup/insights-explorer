@@ -17,7 +17,7 @@
 import { Resolver, Query } from 'type-graphql';
 import { Service } from 'typedi';
 
-import { AppSettings } from '../models/app-settings';
+import { AppSettings, OAuthProvider } from '../models/app-settings';
 
 @Service()
 @Resolver(() => AppSettings)
@@ -31,15 +31,19 @@ export class AppSettingsResolver {
   @Query(() => AppSettings)
   appSettings(): AppSettings {
     return {
+      authSettings: {
+        provider: process.env.OAUTH_PROVIDER as OAuthProvider,
+        authorizeUrl: process.env.OAUTH_AUTHORIZE_URL,
+        scopes: process.env.OAUTH_SCOPES,
+        clientId: process.env.OAUTH_CLIENT_ID,
+        issuer: process.env.OAUTH_OKTA_BASE_URL,
+        pkceEnabled: process.env.OAUTH_PKCE_ENABLED === 'true'
+      },
       gitHubSettings: {
         url: process.env.GITHUB_URL,
         graphqlApiUrl: process.env.GITHUB_GRAPHQL_API_URL,
         restApiUrl: process.env.GITHUB_REST_API_URL,
         defaultOrg: process.env.GITHUB_DEFAULT_ORG
-      },
-      oktaSettings: {
-        clientId: process.env.OKTA_CLIENT_ID,
-        issuer: process.env.OKTA_BASE_URL
       },
       iexScmUrl: process.env.IEX_SCM_URL,
       externalDocUrl: process.env.EXTERNAL_DOC_URL,

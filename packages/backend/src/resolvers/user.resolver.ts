@@ -18,22 +18,27 @@ import logger from '@iex/shared/logger';
 import { Arg, Args, Authorized, Ctx, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
-import { ADMIN_GROUPS, userCache } from '../middleware/okta-authenticator';
+import { ADMIN_GROUPS, userCache } from '../middleware/oauth-authenticator';
 import { ActivityType } from '../models/activity';
 import { ConnectionArgs } from '../models/connection';
 import { Context } from '../models/context';
 import { InsightConnection } from '../models/insight';
-import { OktaUserInfo } from '../models/okta-user-info';
+import { OAuthUserInfo } from '../models/oauth-user-info';
 import { Permission } from '../models/permission';
 import { User, UpdateUserInput } from '../models/user';
 import { UserHealthCheck } from '../models/user-health-check';
 import { ActivityService } from '../services/activity.service';
+import { OAuthService } from '../services/oauth.service';
 import { UserService } from '../services/user.service';
 
 @Service()
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private readonly activityService: ActivityService, private readonly userService: UserService) {}
+  constructor(
+    private readonly activityService: ActivityService,
+    private readonly oauthService: OAuthService,
+    private readonly userService: UserService
+  ) {}
 
   @Authorized<Permission>({ user: true })
   @Query(() => User, { nullable: true })
@@ -109,14 +114,18 @@ export class UserResolver {
     return this.userService.getCommentCount(user.userId);
   }
 
+  // Does NOT require authorization
+  @Mutation(() => String)
+  async getAccessToken(@Ctx() ctx: Context, @Arg('code') code: string): Promise<string> {
+    const accessToken = await this.oauthService.getAccessToken(code);
+
+    return accessToken;
+  }
+
   @Authorized<Permission>()
   @Mutation(() => User)
   async login(@Ctx() ctx: Context): Promise<User> {
-    const userInfo: OktaUserInfo = ctx.oktaUserInfo!;
-
-    // Preferred username is email, but that's not a great user name
-    // Default to the first part of their email
-    const userName = userInfo.preferred_username.split('@')[0].toLowerCase();
+    const userInfo: OAuthUserInfo = ctx.oAuthUserInfo!;
 
     // Upsert feature pending: https://github.com/knex/knex/pull/3763
     await User.knex().raw(
@@ -130,12 +139,16 @@ export class UserResolver {
         last_login_at = EXCLUDED.last_login_at,
         login_count = "user".login_count + 1;
     `,
-      [userName, userInfo.email, userInfo.name, User.knex().fn.now()]
+      [userInfo.username as any, userInfo.email, userInfo.name, User.knex().fn.now()]
     );
 
-    const user = await User.query().where('email', userInfo.email).first();
+    const user =
+      process.env.OAUTH_PROVIDER === 'okta'
+        ? await User.query().where('email', userInfo.email!).first()
+        : await User.query().where('user_name', userInfo.username).first();
 
     // Determine if user is an admin or not
+    // TODO: This doesn't work with GitHub OAuth since we don't have groups
     user.isAdmin = userInfo?.groups?.some((group) => ADMIN_GROUPS.includes(group)) ?? false;
 
     logger.debug(`[LOGIN] ${user.userName} logged in...`);

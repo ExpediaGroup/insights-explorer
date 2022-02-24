@@ -17,12 +17,11 @@
 import { Box, Flex, useColorModeValue } from '@chakra-ui/react';
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
-import { AUTH_ERROR_PATH } from '../../components/auth-provider/auth-provider';
+import { AuthProvider } from '../../components/auth/auth-provider';
 import { SecureRoute } from '../../components/secure-route/secure-route';
 import { useSimpleSearchParams } from '../../shared/useSimpleSearchParams';
 import { ActivityPage } from '../activity-page/activity-page';
 import { AdminPage } from '../admin-page/admin-page';
-import { AuthErrorPage } from '../auth-error-page/auth-error-page';
 import { ChangelogPage } from '../changelog-page/changelog-page';
 import { ErrorPage } from '../error-page/error-page';
 import { HelpPage } from '../help-page/help-page';
@@ -73,65 +72,64 @@ export const MainPage = () => {
     <Flex as="section" direction="column" minHeight="100vh" bg={backgroundColor}>
       <Header />
       <Flex as="main" flexGrow={1} direction="column" p={{ base: '1rem', md: '2rem' }} pt={0}>
-        <Routes>
-          {/* Authentication errors can be displayed without being logged in */}
-          <Route path={AUTH_ERROR_PATH} element={<AuthErrorPage />} />
+        <AuthProvider>
+          <Routes>
+            {/* All other routes are secured */}
+            <Route
+              path="/admin/*"
+              element={
+                <SecureRoute adminOnly={true}>
+                  <AdminPage />
+                </SecureRoute>
+              }
+            />
 
-          {/* All other routes are secured */}
-          <Route
-            path="/admin/*"
-            element={
-              <SecureRoute adminOnly={true}>
-                <AdminPage />
-              </SecureRoute>
-            }
-          />
+            <Route
+              path="/"
+              element={
+                <SecureRoute>
+                  <Outlet />
+                </SecureRoute>
+              }
+            >
+              {/* Search */}
+              <Route path="/search">
+                <Route path="" element={<SearchPage />} />
+                <Route path=":query" element={<SearchPage />} />
+              </Route>
 
-          <Route
-            path="/"
-            element={
-              <SecureRoute>
-                <Outlet />
-              </SecureRoute>
-            }
-          >
-            {/* Search */}
-            <Route path="/search">
-              <Route path="" element={<SearchPage />} />
-              <Route path=":query" element={<SearchPage />} />
+              {/* User Management */}
+              <Route path="/profile/:userName/*" element={<ProfilePage />} />
+              <Route path="/settings/*" element={<SettingsPage />} />
+
+              {/* Insight Viewing */}
+              {/* Each itemType has a unique route for aesthetics, but they are interchangeable */}
+              <Route path="/insight/:owner/:name/*" element={<InsightPage />} />
+              <Route path="/page/:owner/:name/*" element={<InsightPage />} />
+              <Route path="/template/:owner/:name/*" element={<InsightPage />} />
+
+              {/* Editing */}
+              <Route path="/edit/*" element={<InsightDraftSwitcher insight={null} onRefresh={undefined} />} />
+
+              {/* Create endpoints redirect to editor (necessary for deeplinking with state) */}
+              <Route path="/create/insight" element={<Navigate to="/edit" state={{ itemType: 'insight' }} />} />
+              <Route path="/create/page" element={<Navigate to="/edit" state={{ itemType: 'page' }} />} />
+              <Route path="/create/template" element={<Navigate to="/edit" state={{ itemType: 'template' }} />} />
+
+              <Route path="/activities">
+                <Route path="" element={<ActivityPage />} />
+                <Route path=":query" element={<ActivityPage />} />
+              </Route>
+
+              {/* Default Routes */}
+              <Route path="/changelog" element={<ChangelogPage />} />
+              <Route path="/help/*" element={<HelpPage />} />
+
+              <Route path="/" element={<Navigate to="/search" />} />
+              <Route path="*" element={<ErrorPage />}></Route>
             </Route>
-
-            {/* User Management */}
-            <Route path="/profile/:userName/*" element={<ProfilePage />} />
-            <Route path="/settings/*" element={<SettingsPage />} />
-
-            {/* Insight Viewing */}
-            {/* Each itemType has a unique route for aesthetics, but they are interchangeable */}
-            <Route path="/insight/:owner/:name/*" element={<InsightPage />} />
-            <Route path="/page/:owner/:name/*" element={<InsightPage />} />
-            <Route path="/template/:owner/:name/*" element={<InsightPage />} />
-
-            {/* Editing */}
-            <Route path="/edit/*" element={<InsightDraftSwitcher insight={null} onRefresh={undefined} />} />
-
-            {/* Create endpoints redirect to editor (necessary for deeplinking with state) */}
-            <Route path="/create/insight" element={<Navigate to="/edit" state={{ itemType: 'insight' }} />} />
-            <Route path="/create/page" element={<Navigate to="/edit" state={{ itemType: 'page' }} />} />
-            <Route path="/create/template" element={<Navigate to="/edit" state={{ itemType: 'template' }} />} />
-
-            <Route path="/activities">
-              <Route path="" element={<ActivityPage />} />
-              <Route path=":query" element={<ActivityPage />} />
-            </Route>
-
-            {/* Default Routes */}
-            <Route path="/changelog" element={<ChangelogPage />} />
-            <Route path="/help/*" element={<HelpPage />} />
-
-            <Route path="/" element={<Navigate to="/search" />} />
-            <Route path="*" element={<ErrorPage />}></Route>
-          </Route>
-        </Routes>
+          </Routes>
+        </AuthProvider>
       </Flex>
       <Footer />
     </Flex>

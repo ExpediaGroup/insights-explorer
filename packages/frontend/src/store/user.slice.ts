@@ -17,6 +17,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { gql } from 'urql';
 
+import { LOCAL_STORAGE_PREFIX } from '../components/auth/github-auth-provider/github-auth-provider';
 import { User, UserHealthCheck } from '../models/generated/graphql';
 import { urqlClient, enableAuthorization, disableAuthorization } from '../urql';
 
@@ -27,18 +28,22 @@ export enum LoginState {
 }
 
 export interface UserState {
+  accessToken: string | undefined;
   loggedIn: boolean;
   loginState: LoginState;
   loginError?: string;
   userInfo: Partial<User> | null;
   healthCheck?: UserHealthCheck;
+  requestingLogin: boolean;
 }
 
 const initialState: UserState = {
+  accessToken: undefined,
   loggedIn: false,
   loginState: LoginState.LOGGED_OUT,
   userInfo: null,
-  healthCheck: undefined
+  healthCheck: undefined,
+  requestingLogin: false
 };
 
 export const login = createAsyncThunk<User, string, { rejectValue: string }>(
@@ -114,6 +119,11 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setAccessToken(state, action: PayloadAction<string>) {
+      state.accessToken = action.payload;
+
+      localStorage.setItem(`${LOCAL_STORAGE_PREFIX}accessToken`, state.accessToken);
+    },
     setUserInfo(state, action: PayloadAction<Partial<User>>) {
       state.userInfo = { ...state.userInfo, ...action.payload };
     },
@@ -125,7 +135,13 @@ export const userSlice = createSlice({
       state.userInfo = null;
       state.loginState = LoginState.LOGGED_OUT;
       state.loggedIn = false;
+      state.accessToken = undefined;
       disableAuthorization();
+
+      localStorage.removeItem(`${LOCAL_STORAGE_PREFIX}accessToken`);
+    },
+    requestLogin(state, action: PayloadAction<boolean>) {
+      state.requestingLogin = action.payload;
     }
   },
   extraReducers: (builder) => {

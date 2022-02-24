@@ -34,7 +34,7 @@ export const security = helmet({
         // Allow GA to connect
         'https://*.google-analytics.com',
         'https://raw.githubusercontent.com',
-        process.env.OKTA_BASE_URL!,
+        process.env.OAUTH_AUTHORIZE_URL!,
         '*'
       ],
       'font-src': ["'self'", 'https:', 'data:'],
@@ -42,7 +42,7 @@ export const security = helmet({
       // Allow embedding in any sites; may need to revisit
       'frame-ancestors': ["'self'", '*'],
 
-      'frame-src': ["'self'", process.env.OKTA_BASE_URL!, '*'],
+      'frame-src': ["'self'", process.env.OAUTH_AUTHORIZE_URL!, '*'],
 
       // Allowing images/objects from all sources, since an Insight might
       // embed an image from an external URL
