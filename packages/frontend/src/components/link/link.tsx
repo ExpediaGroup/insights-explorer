@@ -15,6 +15,7 @@
  */
 
 import { Link as ChakraLink, LinkProps as ChakraLinkProps } from '@chakra-ui/react';
+import React, { forwardRef } from 'react';
 import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
 
 /**
@@ -22,6 +23,11 @@ import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-d
  *
  * @param props RouterLinkProps
  */
-export const Link = ({ underline = true, ...props }: { underline?: boolean } & RouterLinkProps & ChakraLinkProps) => (
-  <ChakraLink as={RouterLink} {...(!underline ? { _hover: { textDecoration: 'none' } } : {})} {...props} />
+export const Link = forwardRef(
+  (
+    { underline = true, ...props }: { underline?: boolean } & RouterLinkProps & ChakraLinkProps,
+    ref: React.Ref<any>
+  ) => (
+    <ChakraLink ref={ref} as={RouterLink} {...(!underline ? { _hover: { textDecoration: 'none' } } : {})} {...props} />
+  )
 );
