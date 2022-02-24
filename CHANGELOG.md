@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.9.9](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.8...v2.9.9) (2022-02-24)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/react from 1.8.3 to 1.8.5 ([e1fa833](https://github.com/ExpediaGroup/insights-explorer/commit/e1fa833782ad4ebfe9a617f0e7a9b134cd14d6e3))
+* **deps:** bump @chakra-ui/theme from 1.13.2 to 1.13.4 ([84f563f](https://github.com/ExpediaGroup/insights-explorer/commit/84f563f0df5a48a9dcba1c9be3c54f6d9c00e00a))
+* **deps:** bump @chakra-ui/theme-tools from 1.3.4 to 1.3.6 ([549135a](https://github.com/ExpediaGroup/insights-explorer/commit/549135ade225eb29a0981baaef7be514279efec2))
+* **deps:** bump @emotion/styled from 11.6.0 to 11.8.1 ([6938ecc](https://github.com/ExpediaGroup/insights-explorer/commit/6938ecc759c50013f0e9ed25cfe1e8d4897fd8dd))
+* **deps:** bump @slack/bolt from 3.9.0 to 3.10.0 ([bdb2fc5](https://github.com/ExpediaGroup/insights-explorer/commit/bdb2fc5ee0dbd2e2529d1303a4c65cb835967493))
+* **deps:** bump aws-sdk from 2.1074.0 to 2.1080.0 ([3bcea5f](https://github.com/ExpediaGroup/insights-explorer/commit/3bcea5f4b8e9731a11214889817cebe6d661728e))
+* **deps:** bump luxon from 2.3.0 to 2.3.1 ([0ad6646](https://github.com/ExpediaGroup/insights-explorer/commit/0ad6646848b8adadd4276417112f1f135c3971e2))
+
 ### [2.9.8](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.7...v2.9.8) (2022-02-22)
 
 
