@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.10...v3.0.0) (2022-02-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* The default OAuth provider has been switched to GitHub, and some of the environment variables have been renamed for consistency.  To migrate and continue using Okta, set `OAUTH_PROVIDER` to `okta`, then rename existing variables to `OAUTH_CLIENT_ID`, `OAUTH_SCOPES`, and `OAUTH_OKTA_BASE_URL`.
+
+### Features
+
+* OAuth support for GitHub, Okta ([06dc7f1](https://github.com/ExpediaGroup/insights-explorer/commit/06dc7f1710cf4ecbf41a8ab4e6159157cf04c7e8))
+
+
+### Bug Fixes
+
+* Address case-sensitivity in usernames with `ILIKE` ([114688c](https://github.com/ExpediaGroup/insights-explorer/commit/114688c34a6f04ea5d5b687058892f1dd524b0d9))
+
 ### [2.9.10](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.9...v2.9.10) (2022-02-24)
 
 
