@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [2.9.10](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.9...v2.9.10) (2022-02-24)
+
+
+### Bug Fixes
+
+* **deps:** bump @urql/core from 2.4.1 to 2.4.2 ([5961d80](https://github.com/ExpediaGroup/insights-explorer/commit/5961d8046cf7f99e23b350dc5caf210ae76c8969))
+* **deps:** bump fs-extra from 10.0.0 to 10.0.1 ([639fb8c](https://github.com/ExpediaGroup/insights-explorer/commit/639fb8cc3e4eb2492517a4a36e3d93b702929180))
+
 ### [2.9.9](https://github.com/ExpediaGroup/insights-explorer/compare/v2.9.8...v2.9.9) (2022-02-24)
 
 
