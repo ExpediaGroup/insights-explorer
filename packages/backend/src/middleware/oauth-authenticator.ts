@@ -74,7 +74,7 @@ export async function oAuthAuthenticator(req: Request, res: Response, next: Next
 
             // Preferred username is email, but that's not a great user name
             // Default to the first part of their email
-            username: response.data.preferred_username.split('@')[0].toLowerCase()
+            username: response.data.preferred_username.split('@')[0]
           };
 
           logger.debug(`[OAUTH_AUTHENTICATOR] Caching Okta user info for: ${userInfo?.email}`);

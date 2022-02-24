@@ -44,7 +44,7 @@ export class UserResolver {
   @Query(() => User, { nullable: true })
   async user(@Arg('userName') userName: string, @Ctx() ctx: Context): Promise<User | null> {
     try {
-      const user = await User.query().where('userName', userName.toLowerCase()).first();
+      const user = await User.query().where('userName', 'ILIKE', userName).first();
 
       // Store this for authorization checks later
       ctx.retrievedUserId = user?.userId;
