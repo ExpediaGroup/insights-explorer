@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, List, ListItem, Text } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { Components } from 'react-markdown';
 
@@ -35,6 +35,26 @@ const heading = ({ node, children, level, ...props }) => {
   );
 };
 
+const getList = ({ node, ...props }) => {
+  const { ordered, children, depth } = props;
+  let styleType = 'disc';
+  if (ordered) styleType = 'decimal';
+  if (depth === 1) styleType = 'circle';
+
+  return (
+    <List
+      as={ordered ? 'ol' : 'ul'}
+      styleType={styleType}
+      ml={depth === 0 ? '1rem' : 0}
+      pl="1rem"
+      mb="1rem"
+      fontSize="sm"
+    >
+      {children}
+    </List>
+  );
+};
+
 const customComponents: Components = {
   h1: heading,
   h2: heading,
@@ -47,6 +67,20 @@ const customComponents: Components = {
       <Text as={Box} mb="1rem" fontSize="sm">
         {children}
       </Text>
+    );
+  },
+  ol: getList,
+  ul: getList,
+  li: ({ node, children, checked, ordered, ...props }) => {
+    return (
+      <ListItem
+        {...props}
+        fontSize="sm"
+        listStyleType={checked !== null ? 'none' : 'inherit'}
+        {...(props.className === 'task-list-item' ? { display: 'flex', align: 'center', ml: '-1rem' } : {})}
+      >
+        {children}
+      </ListItem>
     );
   }
 };
