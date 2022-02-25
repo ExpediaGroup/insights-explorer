@@ -479,35 +479,40 @@ export async function getCollaborators(owner: string, repo: string): Promise<Git
   const edges: GitHubRepositoryCollaboratorEdge[] = [];
 
   while (hasNextPage === true) {
-    const { repository }: { repository: GitHubRepository } = await makeGraphql()({
-      query: `query collaborators($owner: String!, $repo: String!) {
-        repository(owner: $owner, name: $repo${endCursor ? ', after: $after' : ''}) {
-          collaborators(first: 100, affiliation: DIRECT) {
-            pageInfo {
-              endCursor
-              hasNextPage
-            }
-            edges {
-              permission
-              node {
-                id
-                login
-                email
-                __typename
+    try {
+      const { repository }: { repository: GitHubRepository } = await makeGraphql()({
+        query: `query collaborators($owner: String!, $repo: String!) {
+          repository(owner: $owner, name: $repo${endCursor ? ', after: $after' : ''}) {
+            collaborators(first: 100, affiliation: DIRECT) {
+              pageInfo {
+                endCursor
+                hasNextPage
+              }
+              edges {
+                permission
+                node {
+                  id
+                  login
+                  email
+                  __typename
+                }
               }
             }
           }
-        }
-      }`,
-      owner,
-      repo,
-      after: endCursor
-    });
+        }`,
+        owner,
+        repo,
+        after: endCursor
+      });
 
-    const collaborators = repository.collaborators;
-    hasNextPage = collaborators.pageInfo!.hasNextPage;
-    logger.info(`[GITHUB] Retrieved ${collaborators.edges.length} collaborators...`);
-    edges.push(...collaborators.edges);
+      const collaborators = repository.collaborators;
+      hasNextPage = collaborators.pageInfo!.hasNextPage;
+      logger.info(`[GITHUB] Retrieved ${collaborators.edges.length} collaborators...`);
+      edges.push(...collaborators.edges);
+    } catch (error: any) {
+      hasNextPage = false;
+      logger.debug(`[GITHUB] Unable to retrieve Repository collaborators: ${error}`);
+    }
   }
 
   logger.info(
