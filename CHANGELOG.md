@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.0.1...v3.1.0) (2022-02-25)
+
+
+### Features
+
+* Add checkbox to enable/disable scroll sync on markdown editor ([85d4b1d](https://github.com/ExpediaGroup/insights-explorer/commit/85d4b1ddd93f8d1acaa9b453c081acef7b18f751))
+
+
+### Bug Fixes
+
+* Add list components to the news-item customComponents renderer ([fc79e5c](https://github.com/ExpediaGroup/insights-explorer/commit/fc79e5c5f2f18451eac1e084c39d64c5fa96eda0))
+
 ### [3.0.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.0.0...v3.0.1) (2022-02-24)
 
 
