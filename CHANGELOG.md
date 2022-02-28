@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.1.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.1.1...v3.1.2) (2022-02-28)
+
+
+### Bug Fixes
+
+* **deps:** bump url-parse from 1.5.7 to 1.5.10 ([5c4ebb4](https://github.com/ExpediaGroup/insights-explorer/commit/5c4ebb46e3e10879ff0d1bded394fcb021e3f27a))
+
 ### [3.1.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.1.0...v3.1.1) (2022-02-25)
 
 
