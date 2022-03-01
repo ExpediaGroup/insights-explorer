@@ -34,8 +34,7 @@ const heading = ({ node, children, level, ...props }) => {
   );
 };
 
-const getList = ({ node, ...props }) => {
-  const { ordered, children, depth } = props;
+const getList = ({ node, children, depth, ordered, ...props }) => {
   let styleType = 'disc';
   if (ordered) styleType = 'decimal';
   if (depth === 1) styleType = 'circle';
