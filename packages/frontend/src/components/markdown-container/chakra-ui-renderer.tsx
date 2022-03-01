@@ -83,10 +83,9 @@ const heading = ({ node, level, children, ...props }) => {
   );
 };
 
-const getList = ({ node, ...props }) => {
-  const { start, ordered, children, depth } = props;
-  if (props.start !== null && props.start !== 1 && props.start !== undefined) {
-    props.start = start.toString();
+const getList = ({ node, children, depth, ordered, start, ...props }) => {
+  if (start !== null && start !== 1 && start !== undefined) {
+    start = start.toString();
   }
   let styleType = 'disc';
   if (ordered) styleType = 'decimal';
