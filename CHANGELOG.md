@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.1.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.1.3...v3.1.4) (2022-03-01)
+
+
+### Bug Fixes
+
+* Fix issue with 'ordered' property when using lists ([8d28a36](https://github.com/ExpediaGroup/insights-explorer/commit/8d28a369810d025a40731bd7f43d3cec2448cd81))
+* Fix source position attributes in Markdown ([82dc3ea](https://github.com/ExpediaGroup/insights-explorer/commit/82dc3ea2b3ef8aa21f0157df59bec31cd9aad393))
+
 ### [3.1.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.1.2...v3.1.3) (2022-03-01)
 
 
