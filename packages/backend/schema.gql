@@ -170,6 +170,7 @@ type Insight {
   collaborators: UserPermissionConnection
   commentCount: Float!
   comments: CommentConnection
+  config: InsightConfig
   createdAt: String!
   creation: InsightCreation
   description: String!
@@ -206,6 +207,11 @@ type InsightCollaboratorActivityDetails {
   insight: Insight
   permission: String!
   user: User!
+}
+
+type InsightConfig {
+  authors: [String!]
+  excludedAuthors: [String!]
 }
 
 type InsightConnection {

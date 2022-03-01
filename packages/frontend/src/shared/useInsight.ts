@@ -80,6 +80,10 @@ const INSIGHT_FRAGMENT = gql`
       team
       publishedDate
     }
+    config {
+      authors
+      excludedAuthors
+    }
     files {
       id
       name

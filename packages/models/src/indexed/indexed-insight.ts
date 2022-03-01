@@ -16,6 +16,7 @@
 
 import type { ItemType } from '../item-type';
 
+import type { IndexedInsightConfig } from './indexed-insight-config';
 import type { IndexedInsightCreation } from './indexed-insight-creation';
 import type { IndexedInsightFile } from './indexed-insight-file';
 import type { IndexedInsightMetadata } from './indexed-insight-metadata';
@@ -58,4 +59,6 @@ export interface IndexedInsight {
   creation?: IndexedInsightCreation;
 
   metadata?: IndexedInsightMetadata;
+
+  config?: IndexedInsightConfig;
 }

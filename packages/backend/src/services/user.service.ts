@@ -92,6 +92,15 @@ export class UserService {
   }
 
   /**
+   * Fetches a User by Email.
+   *
+   * @param email User email
+   */
+  async getUserByEmail(email: string): Promise<User | null> {
+    return await User.query().where('email', 'ILIKE', email).first();
+  }
+
+  /**
    * Provides several "health checks" for a user's configuration
    */
   async healthCheck(user: User): Promise<UserHealthCheck> {

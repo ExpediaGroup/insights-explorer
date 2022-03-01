@@ -116,6 +116,15 @@ export class GitInstance {
     }
   }
 
+  async latestCommitHash(): Promise<string> {
+    if (this.localPath === undefined) {
+      throw new Error('[GIT_INSTANCE] Git repository not cloned!');
+    }
+
+    const commits = await git.log({ fs, dir: this.localPath, ref: 'HEAD', depth: 1 });
+    return commits[0].oid;
+  }
+
   fileExists(filePath: string): boolean {
     if (this.localPath === undefined) {
       throw new Error('[GIT_INSTANCE] Git repository not cloned!');
@@ -241,7 +250,7 @@ export class GitInstance {
       author,
       message
     });
-    logger.debug('Commit SHA: ' + sha);
+    logger.info(`[GIT_INSTANCE] Commit SHA: ${sha}`);
 
     return sha;
   }

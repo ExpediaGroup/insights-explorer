@@ -15,14 +15,21 @@
  */
 
 import {
+  Collapse,
+  Divider,
   FormControl,
   FormErrorMessage,
   FormHelperText,
   FormLabel,
+  Heading,
+  HStack,
   Icon,
+  IconButton,
   Input,
   InputGroup,
   InputRightElement,
+  Text,
+  useDisclosure,
   VStack
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -34,10 +41,11 @@ import { gql, useQuery } from 'urql';
 import { Alert } from '../../../../components/alert/alert';
 import { Insight } from '../../../../models/generated/graphql';
 import { formatFormError } from '../../../../shared/form-utils';
-import { iconFactory } from '../../../../shared/icon-factory';
+import { iconFactory, iconFactoryAs } from '../../../../shared/icon-factory';
 import { ItemType } from '../../../../shared/item-type';
 import { DraftForm } from '../../draft-form';
 
+import { InsightAuthors } from './insight-authors';
 import { InsightTags } from './insight-tags';
 import { InsightTeam } from './insight-team';
 import { PublishedDate } from './published-date';
@@ -65,6 +73,8 @@ export const InsightMetadataEditor = ({ insight, isNewInsight, form, templates, 
     register,
     formState: { errors }
   } = form;
+
+  const { isOpen: isAdvancedOpen, onToggle: onAdvancedToggle } = useDisclosure({ defaultIsOpen: false });
 
   const isCloned = insight.creation?.clonedFrom != null;
 
@@ -94,7 +104,7 @@ export const InsightMetadataEditor = ({ insight, isNewInsight, form, templates, 
   }, [register]);
 
   return (
-    <VStack spacing="1rem" p="1rem">
+    <VStack spacing="1rem" p="1rem" align="stretch">
       {isNewInsight && isCloned && (
         <Alert
           mb="2rem"
@@ -187,6 +197,33 @@ export const InsightMetadataEditor = ({ insight, isNewInsight, form, templates, 
       <InsightTeam insight={insight} form={form} />
 
       {itemType === 'insight' && <PublishedDate insight={insight} form={form} />}
+
+      <Divider />
+
+      <HStack justify="space-between" onClick={onAdvancedToggle}>
+        <Heading fontSize="md" fontWeight="bold">
+          Advanced
+        </Heading>
+        <IconButton
+          aria-label="Expand/collapse"
+          icon={isAdvancedOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown')}
+          variant="ghost"
+          size="sm"
+          title={isAdvancedOpen ? 'Collapse this section' : 'Expand this section'}
+        />
+      </HStack>
+
+      <Collapse in={isAdvancedOpen} animateOpacity>
+        <VStack spacing="1rem" align="stretch">
+          <HStack align="center">
+            {iconFactoryAs('warning', { color: 'aurora.200' })}
+
+            <Text fontSize="sm">These settings typically don't need to be changed.</Text>
+          </HStack>
+
+          <InsightAuthors insight={insight} form={form} />
+        </VStack>
+      </Collapse>
     </VStack>
   );
 };

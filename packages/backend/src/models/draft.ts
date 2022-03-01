@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { IndexedInsightConfig } from '@iex/models/indexed/indexed-insight-config';
 import GraphQLJSON from 'graphql-type-json';
 import { Field, ObjectType, InputType, ID } from 'type-graphql';
 
@@ -25,7 +26,10 @@ export type DraftKey = string;
 
 export type DraftData = Partial<Insight> & { commitMessage?: string };
 
-export type DraftDataInput = Partial<UpdatedInsight> & { commitMessage?: string; initializedTemplate?: boolean };
+export type DraftDataInput = Partial<UpdatedInsight> & {
+  commitMessage?: string;
+  initializedTemplate?: boolean;
+} & IndexedInsightConfig;
 
 @ObjectType()
 export class Draft extends BaseModel {

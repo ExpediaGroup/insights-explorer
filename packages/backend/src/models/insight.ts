@@ -15,6 +15,7 @@
  */
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
+import { IndexedInsightConfig } from '@iex/models/indexed/indexed-insight-config';
 import { IndexedInsightCreation } from '@iex/models/indexed/indexed-insight-creation';
 import { IndexedInsightMetadata } from '@iex/models/indexed/indexed-insight-metadata';
 import { ItemType } from '@iex/models/item-type';
@@ -63,6 +64,15 @@ export class InsightMetadata implements IndexedInsightMetadata {
 
   @Field({ nullable: true })
   team?: string;
+}
+
+@ObjectType()
+export class InsightConfig implements IndexedInsightConfig {
+  @Field(() => [String], { nullable: true })
+  authors?: string[];
+
+  @Field(() => [String], { nullable: true })
+  excludedAuthors?: string[];
 }
 
 @InputType()
@@ -137,6 +147,9 @@ export class Insight implements IndexedInsight {
 
   @Field({ nullable: true })
   metadata?: InsightMetadata;
+
+  @Field({ nullable: true })
+  config?: InsightConfig;
 
   @Field(() => CommentConnection, { nullable: true })
   comments?: CommentConnection;

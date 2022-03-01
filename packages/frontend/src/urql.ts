@@ -62,6 +62,7 @@ export const urqlClient = createClient({
         GitHubSettings: () => null,
         InsightActivityDetails: () => null,
         InsightCollaboratorActivityDetails: () => null,
+        InsighgtConfig: () => null,
         InsightCreation: () => null,
         InsightFile: () => null,
         InsightFileConversion: () => null,

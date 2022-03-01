@@ -25,6 +25,8 @@ import { nanoid } from 'nanoid';
 import pMap from 'p-map';
 import readingTime from 'reading-time';
 
+import { InsightYaml } from '@iex/backend/models/insight-yaml';
+
 import { GitInstance, INSIGHT_YAML_FILE } from '../../lib/git-instance';
 import { writeToS3 } from '../../lib/storage';
 import { InsightFile, InsightFileConversion } from '../../models/insight-file';
@@ -93,17 +95,79 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
   const repository = await getRepository(owner, repo);
   logger.debug(JSON.stringify(repository, null, 2));
 
+  const insight: IndexedInsight = {
+    itemType: ItemType.INSIGHT,
+    namespace: repository.owner.login,
+    name: repository.name,
+    fullName: `${repository.owner.login}/${repository.name}`,
+    description: repository.description ?? '',
+    createdAt: repository.createdAt!,
+    updatedAt: repository.updatedAt!,
+    syncedAt: new Date().toISOString(),
+    stars: repository.stargazers!.totalCount,
+    forks: repository.forkCount!,
+    tags: repository.repositoryTopics!.edges.map(({ node }: any) => node.topic.name),
+    contributors: [],
+    repository: {
+      externalId: repository.id,
+      externalFullName: repository.nameWithOwner!,
+      externalName: repository.name,
+      type: RepositoryType.GITHUB,
+      defaultBranch: repository.defaultBranchRef?.name || 'master',
+      url: repository.url,
+      cloneUrl: repository.cloneUrl,
+      owner: {
+        type: repository.owner.__typename! as string as PersonType,
+        login: repository.owner.login,
+        externalId: repository.owner.id,
+        avatarUrl: repository.owner.avatarUrl!
+      },
+      isMissing: false,
+      isArchived: repository.isArchived
+    }
+  };
+
+  logger.debug(JSON.stringify(insight, null, 2));
+
+  return insight;
+}
+
+async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml): Promise<IndexedInsightUser[]> {
+  const userServices = new UserService(new ActivityService());
+
+  // If authors is manually specified in the YAML, use that instead of the GitHub API
+  if (yaml.authors && yaml.authors.length > 0) {
+    const contributors = await pMap(yaml.authors, async (author) => {
+      const user = await userServices.getUserByEmail(author);
+
+      return user === null
+        ? {
+            userName: author,
+            displayName: author,
+            email: author
+          }
+        : {
+            userId: user.userId,
+            userName: user.userName,
+            email: user.email,
+            displayName: user.displayName,
+            avatar: user.avatar
+          };
+    });
+
+    return contributors;
+  }
+
   // GraphQL API doesn't have an equivalent mutation for this.
   const contributorsResult = await withRetries<any>(() =>
     makeOctokit().repos.getContributorsStats({
-      owner,
-      repo
+      owner: insight.repository.owner.login,
+      repo: insight.repository.externalName
     })
   );
 
-  logger.debug('[GITHUB_SYNC] Retrieved Contributor details from GitHub API ' + repository.nameWithOwner);
+  logger.debug('[GITHUB_SYNC] Retrieved Contributor details from GitHub API ' + insight.repository.externalFullName);
 
-  const userServices = new UserService(new ActivityService());
   const contributors = await pMap(contributorsResult, async ({ author }: any): Promise<IndexedInsightUser> => {
     const user = await userServices.getUserByGitHubLogin(author.login);
     if (user === null) {
@@ -137,41 +201,19 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
     };
   });
 
-  const insight: IndexedInsight = {
-    itemType: ItemType.INSIGHT,
-    namespace: repository.owner.login,
-    name: repository.name,
-    fullName: `${repository.owner.login}/${repository.name}`,
-    description: repository.description ?? '',
-    contributors,
-    createdAt: repository.createdAt!,
-    updatedAt: repository.updatedAt!,
-    syncedAt: new Date().toISOString(),
-    stars: repository.stargazers!.totalCount,
-    forks: repository.forkCount!,
-    tags: repository.repositoryTopics!.edges.map(({ node }: any) => node.topic.name),
-    repository: {
-      externalId: repository.id,
-      externalFullName: repository.nameWithOwner!,
-      externalName: repository.name,
-      type: RepositoryType.GITHUB,
-      defaultBranch: repository.defaultBranchRef?.name || 'master',
-      url: repository.url,
-      cloneUrl: repository.cloneUrl,
-      owner: {
-        type: repository.owner.__typename! as string as PersonType,
-        login: repository.owner.login,
-        externalId: repository.owner.id,
-        avatarUrl: repository.owner.avatarUrl!
-      },
-      isMissing: false,
-      isArchived: repository.isArchived
-    }
-  };
+  // If excludedAuthors is specified in the YAML, use that to filter results
+  if (yaml.excludedAuthors && yaml.excludedAuthors.length > 0) {
+    return contributors.filter((c) => {
+      const excluded = yaml.excludedAuthors!.includes(c.email);
+      if (excluded) {
+        logger.info('[GITHUB_SYNC] Excluding contributor ' + c.email);
+      }
 
-  logger.debug(JSON.stringify(insight, null, 2));
+      return !excluded;
+    });
+  }
 
-  return insight;
+  return contributors;
 }
 
 /**
@@ -207,6 +249,8 @@ export const githubRepositorySync = async (
     // Clone the repository locally
     gitInstance = await GitInstance.from(insight.repository.cloneUrl, <string>process.env.GITHUB_ACCESS_TOKEN);
 
+    logger.debug(`[GITHUB_SYNC] Latest commit hash: ${await gitInstance.latestCommitHash()}`);
+
     // Ensure there is an `insight.yml` file in the repository
     if (!gitInstance.fileExists(INSIGHT_YAML_FILE)) {
       logger.warn(`[GITHUB_SYNC] This repository has no \`${INSIGHT_YAML_FILE}\`; skipping sync`);
@@ -226,6 +270,8 @@ export const githubRepositorySync = async (
     insight.tags = [...new Set(insight.tags.map((tag) => tag.toLowerCase()))];
 
     await syncFiles(gitInstance, insight, previousInsight);
+
+    insight.contributors = await getInsightContributors(insight, yaml);
 
     // Determine thumbnail
     // TODO: support insight.yml configuration
@@ -306,6 +352,16 @@ const applyInsightYaml = async (yaml: any, insight: IndexedInsight): Promise<voi
 
   if (yaml.metadata != null) {
     insight.metadata = yaml.metadata;
+  }
+
+  if (yaml.authors != null) {
+    insight.config ??= {};
+    insight.config.authors = yaml.authors;
+  }
+
+  if (yaml.excludedAuthors != null) {
+    insight.config ??= {};
+    insight.config.excludedAuthors = yaml.excludedAuthors;
   }
 
   // Default to Insight if not set

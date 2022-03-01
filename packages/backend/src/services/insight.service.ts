@@ -498,13 +498,15 @@ export class InsightService {
             // Merge the existing data with any fields specified in the update
             // This variable is hoisted so the merged version can be used to update
             // the GitHub API as well.
-            const { creation, description, itemType, metadata, name, tags } = updatedYaml;
+            const { authors, creation, description, excludedAuthors, itemType, metadata, name, tags } = updatedYaml;
             mergedYaml = {
               ...insightYaml,
               name,
               description,
               itemType,
-              tags
+              tags,
+              authors,
+              excludedAuthors
             };
 
             if (creation != null) {
@@ -522,6 +524,14 @@ export class InsightService {
               if (mergedYaml.metadata?.team?.trim() === '') {
                 delete mergedYaml.metadata.team;
               }
+            }
+
+            // Cleanup empty fields
+            if (mergedYaml.authors && mergedYaml.authors.length === 0) {
+              delete mergedYaml.authors;
+            }
+            if (mergedYaml.excludedAuthors && mergedYaml.excludedAuthors.length === 0) {
+              delete mergedYaml.excludedAuthors;
             }
 
             if (mergedYaml) await gitInstance.putInsightYaml(mergedYaml);
