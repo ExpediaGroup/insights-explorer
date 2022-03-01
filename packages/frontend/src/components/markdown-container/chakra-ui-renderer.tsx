@@ -59,6 +59,10 @@ import { XkcdChartRendererAsync } from '../renderers/xkcd-chart-renderer/xkcd-ch
 import './markdown-container.css';
 import 'react-medium-image-zoom/dist/styles.css';
 
+export const getDataAttributes = (props): any => {
+  return props['data-sourcepos'] ? { 'data-sourcepos': props['data-sourcepos'] } : {};
+};
+
 const heading = ({ node, level, children, ...props }) => {
   const sizes = ['2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
   const mt = ['2rem', '1.75rem', '1.5rem', '1rem', '1rem', '1rem'];
@@ -135,7 +139,7 @@ export const ChakraUIRenderer = (
             fontSize="80%"
             ml="0.5rem"
             color="frost.400"
-            {...props['data-sourcepos']}
+            {...getDataAttributes(props)}
           />
         );
       }
@@ -218,7 +222,7 @@ export const ChakraUIRenderer = (
     },
     text: ({ node, children, ...props }) => {
       return (
-        <Text as="span" {...props['data-sourcepos']}>
+        <Text as="span" {...getDataAttributes(props)}>
           {children}
         </Text>
       );
@@ -279,7 +283,7 @@ export const ChakraUIRenderer = (
     },
     td: ({ node, children, ...props }) => {
       return (
-        <Td textAlign={props?.style?.textAlign} {...props['data-sourcepos']}>
+        <Td textAlign={props?.style?.textAlign} {...getDataAttributes(props)}>
           {children}
         </Td>
       );

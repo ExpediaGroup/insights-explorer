@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { Components } from 'react-markdown';
 
 import { Card } from '../../../../../../components/card/card';
+import { getDataAttributes } from '../../../../../../components/markdown-container/chakra-ui-renderer';
 import { MarkdownContainer } from '../../../../../../components/markdown-container/markdown-container';
 import { NewsFieldsFragment } from '../../../../../../models/generated/graphql';
 import { formatDateIntl } from '../../../../../../shared/date-utils';
@@ -28,7 +29,7 @@ import { EditNewsItem } from '../edit-news-item/edit-news-item';
 const heading = ({ node, children, level, ...props }) => {
   const sizes = ['1.4rem', '1.2rem', '1.1rem', '1rem', '0.8rem', '0.6rem'];
   return (
-    <Heading as={`h${level}`} size={sizes[level - 1]} {...props['data-sourcepos']}>
+    <Heading as={`h${level}`} size={sizes[level - 1]} {...getDataAttributes(props)}>
       {children}
     </Heading>
   );
