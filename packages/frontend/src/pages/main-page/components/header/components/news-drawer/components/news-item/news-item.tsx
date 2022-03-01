@@ -21,6 +21,7 @@ import { Components } from 'react-markdown';
 import { Card } from '../../../../../../../../components/card/card';
 import { LikeButton } from '../../../../../../../../components/like-button/like-button';
 import { LikedByTooltip } from '../../../../../../../../components/liked-by-tooltip/liked-by-tooltip';
+import { getDataAttributes } from '../../../../../../../../components/markdown-container/chakra-ui-renderer';
 import { MarkdownContainer } from '../../../../../../../../components/markdown-container/markdown-container';
 import { News, User } from '../../../../../../../../models/generated/graphql';
 import { formatDateIntl } from '../../../../../../../../shared/date-utils';
@@ -28,7 +29,7 @@ import { formatDateIntl } from '../../../../../../../../shared/date-utils';
 const heading = ({ node, children, level, ...props }) => {
   const sizes = ['1.4rem', '1.2rem', '1.1rem', '1rem', '0.8rem', '0.6rem'];
   return (
-    <Heading as={`h${level}`} size={sizes[level - 1]} {...props['data-sourcepos']}>
+    <Heading as={`h${level}`} size={sizes[level - 1]} {...getDataAttributes(props)}>
       {children}
     </Heading>
   );
