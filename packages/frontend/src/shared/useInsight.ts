@@ -96,6 +96,11 @@ const INSIGHT_FRAGMENT = gql`
         path
       }
     }
+    links {
+      url
+      name
+      group
+    }
     viewerHasLiked
     viewerCanEdit
     viewerPermission

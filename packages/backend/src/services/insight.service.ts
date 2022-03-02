@@ -498,12 +498,14 @@ export class InsightService {
             // Merge the existing data with any fields specified in the update
             // This variable is hoisted so the merged version can be used to update
             // the GitHub API as well.
-            const { authors, creation, description, excludedAuthors, itemType, metadata, name, tags } = updatedYaml;
+            const { authors, creation, description, excludedAuthors, itemType, links, metadata, name, tags } =
+              updatedYaml;
             mergedYaml = {
               ...insightYaml,
               name,
               description,
               itemType,
+              links,
               tags,
               authors,
               excludedAuthors
@@ -527,6 +529,9 @@ export class InsightService {
             }
 
             // Cleanup empty fields
+            if (mergedYaml.links && mergedYaml.links.length === 0) {
+              delete mergedYaml.links;
+            }
             if (mergedYaml.authors && mergedYaml.authors.length === 0) {
               delete mergedYaml.authors;
             }

@@ -46,6 +46,7 @@ import { ItemType } from '../../../../shared/item-type';
 import { DraftForm } from '../../draft-form';
 
 import { InsightAuthors } from './insight-authors';
+import { InsightLinks } from './insight-links';
 import { InsightTags } from './insight-tags';
 import { InsightTeam } from './insight-team';
 import { PublishedDate } from './published-date';
@@ -197,6 +198,8 @@ export const InsightMetadataEditor = ({ insight, isNewInsight, form, templates, 
       <InsightTeam insight={insight} form={form} />
 
       {itemType === 'insight' && <PublishedDate insight={insight} form={form} />}
+
+      <InsightLinks insight={insight} form={form} />
 
       <Divider />
 

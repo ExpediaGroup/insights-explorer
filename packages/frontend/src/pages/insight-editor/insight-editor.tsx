@@ -163,6 +163,7 @@ export const InsightEditor = memo(
         files: (insight.files ?? []).map(
           (file): InsightFileInput => ({ ...file, action: 'none' as InsightFileAction })
         ),
+        links: (insight.links ?? []).map(({ __typename, ...link }) => link),
         ...draft
       }
     });

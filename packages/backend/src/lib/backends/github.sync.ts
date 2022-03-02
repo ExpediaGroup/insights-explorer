@@ -364,6 +364,10 @@ const applyInsightYaml = async (yaml: any, insight: IndexedInsight): Promise<voi
     insight.config.excludedAuthors = yaml.excludedAuthors;
   }
 
+  if (yaml.links != null) {
+    insight.links = yaml.links;
+  }
+
   // Default to Insight if not set
   insight.itemType = yaml.itemType ?? ItemType.INSIGHT;
 };

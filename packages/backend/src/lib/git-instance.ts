@@ -217,7 +217,7 @@ export class GitInstance {
   }
 
   async putInsightYaml(insightYaml: InsightYaml): Promise<void> {
-    const contents = yaml.dump(insightYaml);
+    const contents = yaml.dump(insightYaml, { lineWidth: -1 });
     return this.putFile('insight.yml', contents);
   }
 

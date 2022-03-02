@@ -181,6 +181,7 @@ type Insight {
   itemType: String!
   likeCount: Float!
   likedBy: UserConnection!
+  links: [InsightLink!]
   metadata: InsightMetadata
   name: String!
   namespace: String!
@@ -270,6 +271,18 @@ input InsightFileUploadInput {
   name: String
   path: String
   size: Float!
+}
+
+type InsightLink {
+  group: String
+  name: String
+  url: String!
+}
+
+input InsightLinkInput {
+  group: String
+  name: String
+  url: String!
 }
 
 type InsightMetadata {
@@ -492,6 +505,7 @@ input UpdatedInsight {
   description: String
   files: [InsightFileInput!]
   itemType: String!
+  links: [InsightLinkInput!]
   metadata: InsightMetadataInput
   name: String
   namespace: String

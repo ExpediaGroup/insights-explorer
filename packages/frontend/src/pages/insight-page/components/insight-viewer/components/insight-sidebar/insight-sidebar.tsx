@@ -28,10 +28,12 @@ import {
   Text,
   Tooltip,
   VStack,
-  useColorModeValue
+  useColorModeValue,
+  Heading
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
+import { ExternalLink } from '../../../../../../components/external-link/external-link';
 import { InsightAuthor } from '../../../../../../components/insight-author/insight-author';
 import { InsightTag } from '../../../../../../components/insight-tag/insight-tag';
 import { Link } from '../../../../../../components/link/link';
@@ -42,6 +44,7 @@ import { TeamTag } from '../../../../../../components/team-tag/team-tag';
 import { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory } from '../../../../../../shared/icon-factory';
+import { groupInsightLinks } from '../../../../../../shared/insight-utils';
 import { GitHubButton } from '../github-button/github-button';
 import { ShareMenu } from '../share-menu/share-menu';
 
@@ -64,6 +67,9 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
     }
     return acc;
   }, [] as any);
+
+  // Group links into sections, with a default section of `Links`
+  const links = groupInsightLinks(insight.links);
 
   return (
     <VStack spacing="1rem" align="stretch" {...props} pt="0.5rem">
@@ -139,6 +145,31 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
           </Stack>
         </>
       )}
+
+      {links.length > 0 && (
+        <>
+          <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
+          <SidebarHeading>Links</SidebarHeading>
+          {links.map(({ group, links: subLinks }) => (
+            <Stack spacing="0.25rem" key={group}>
+              <Heading as="h3" size="xs" pb="0.5rem">
+                {group}
+              </Heading>
+              {subLinks.map((link, index) => (
+                <ExternalLink href={link.url} key={`${link.url}-${index}`}>
+                  <Tag size="lg" rounded="full" bg="nord7.100">
+                    <TagLabel>
+                      {link.name && link.name.length > 0 ? link.name : link.url}
+                      <Icon as={iconFactory('linkExternal')} ml="0.5rem" />
+                    </TagLabel>
+                  </Tag>
+                </ExternalLink>
+              ))}
+            </Stack>
+          ))}
+        </>
+      )}
+
       {insight.files && insight.files.length > 0 && (
         <>
           <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />

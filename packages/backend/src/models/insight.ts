@@ -17,6 +17,7 @@
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { IndexedInsightConfig } from '@iex/models/indexed/indexed-insight-config';
 import { IndexedInsightCreation } from '@iex/models/indexed/indexed-insight-creation';
+import { IndexedInsightLink } from '@iex/models/indexed/indexed-insight-link';
 import { IndexedInsightMetadata } from '@iex/models/indexed/indexed-insight-metadata';
 import { ItemType } from '@iex/models/item-type';
 import { RepositoryPermission } from '@iex/models/repository-permission';
@@ -55,6 +56,30 @@ export class InsightCreationInput {
 
   @Field({ nullable: true })
   importedFrom?: string;
+}
+
+@ObjectType()
+export class InsightLink implements IndexedInsightLink {
+  @Field()
+  url!: string;
+
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  group?: string;
+}
+
+@InputType()
+export class InsightLinkInput {
+  @Field()
+  url!: string;
+
+  @Field({ nullable: true })
+  name?: string;
+
+  @Field({ nullable: true })
+  group?: string;
 }
 
 @ObjectType()
@@ -150,6 +175,9 @@ export class Insight implements IndexedInsight {
 
   @Field({ nullable: true })
   config?: InsightConfig;
+
+  @Field(() => [InsightLink], { nullable: true })
+  links?: InsightLink[];
 
   @Field(() => CommentConnection, { nullable: true })
   comments?: CommentConnection;
@@ -249,6 +277,9 @@ export class UpdatedInsight {
 
   @Field(() => [InsightFileInput], { nullable: true })
   files?: InsightFileInput[];
+
+  @Field(() => [InsightLinkInput], { nullable: true })
+  links?: InsightLinkInput[];
 }
 
 export class DbInsight extends BaseModel {

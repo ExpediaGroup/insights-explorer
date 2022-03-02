@@ -35,6 +35,7 @@ import {
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
+import { ExternalLink } from '../../../../../../components/external-link/external-link';
 import { InsightAuthor } from '../../../../../../components/insight-author/insight-author';
 import { InsightTag } from '../../../../../../components/insight-tag/insight-tag';
 import { Link } from '../../../../../../components/link/link';
@@ -44,11 +45,15 @@ import { TeamTag } from '../../../../../../components/team-tag/team-tag';
 import { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
+import { groupInsightLinks } from '../../../../../../shared/insight-utils';
 import { GitHubButton } from '../github-button/github-button';
 import { ShareMenu } from '../share-menu/share-menu';
 
 export const InsightInfobar = ({ insight, ...props }: { insight: Insight } & StackProps) => {
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: false });
+
+  // Group links into sections, with a default section of `Links`
+  const links = groupInsightLinks(insight.links);
 
   return (
     <VStack align="stretch" p="0.5rem" {...props}>
@@ -81,7 +86,7 @@ export const InsightInfobar = ({ insight, ...props }: { insight: Insight } & Sta
 
       <Collapse in={isOpen} animateOpacity>
         <VStack spacing="1rem" align="stretch" mt="0.5rem" ml={{ base: 0, md: '2.5rem' }}>
-          <Wrap align="center" spacing="0.5rem">
+          <Wrap align="flex-start" spacing="0.5rem">
             <WrapItem alignItems="baseline">
               <SidebarHeading mr="0.5rem">About</SidebarHeading>
               <Box>
@@ -129,6 +134,24 @@ export const InsightInfobar = ({ insight, ...props }: { insight: Insight } & Sta
               </Text>
             </WrapItem>
           </Wrap>
+
+          {links.length > 0 && (
+            <Wrap align="center" spacing="0.5rem" shouldWrapChildren={true}>
+              <SidebarHeading mr="0.5rem">Links</SidebarHeading>
+              {links.map(({ group, links: subLinks }) => {
+                return subLinks.map((link, index) => (
+                  <ExternalLink href={link.url} key={`${link.url}-${index}`}>
+                    <Tag rounded="full">
+                      <TagLabel>
+                        {link.name && link.name.length > 0 ? link.name : link.url}
+                        <Icon as={iconFactory('linkExternal')} ml="0.5rem" />
+                      </TagLabel>
+                    </Tag>
+                  </ExternalLink>
+                ));
+              })}
+            </Wrap>
+          )}
 
           {insight.files && insight.files.length > 0 && (
             <Wrap align="center" spacing="0.5rem" shouldWrapChildren={true}>

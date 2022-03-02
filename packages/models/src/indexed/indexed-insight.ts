@@ -19,6 +19,7 @@ import type { ItemType } from '../item-type';
 import type { IndexedInsightConfig } from './indexed-insight-config';
 import type { IndexedInsightCreation } from './indexed-insight-creation';
 import type { IndexedInsightFile } from './indexed-insight-file';
+import type { IndexedInsightLink } from './indexed-insight-link';
 import type { IndexedInsightMetadata } from './indexed-insight-metadata';
 import type { IndexedInsightReadme } from './indexed-insight-readme';
 import type { IndexedInsightUser } from './indexed-insight-user';
@@ -61,4 +62,6 @@ export interface IndexedInsight {
   metadata?: IndexedInsightMetadata;
 
   config?: IndexedInsightConfig;
+
+  links?: IndexedInsightLink[];
 }
