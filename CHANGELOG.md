@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.2.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.1.4...v3.2.0) (2022-03-02)
+
+
+### Features
+
+* Manually specify authors for an Insight ([659e5fb](https://github.com/ExpediaGroup/insights-explorer/commit/659e5fb60292255793f0543bef8736c37de88a5e))
+
 ### [3.1.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.1.3...v3.1.4) (2022-03-01)
 
 
