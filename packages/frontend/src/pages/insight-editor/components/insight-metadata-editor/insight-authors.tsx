@@ -68,7 +68,7 @@ export const InsightAuthors = ({ insight, form }) => {
                   }
                   onChange(values);
                 }}
-                value={value.map((author: string) => ({ value: author, label: author }))}
+                value={value?.map((author: string) => ({ value: author, label: author }))}
                 styles={{
                   menu: (base) => ({ ...base, zIndex: 11 }),
                   menuPortal: (base) => ({ ...base, zIndex: 11 }),
@@ -107,7 +107,7 @@ export const InsightAuthors = ({ insight, form }) => {
                   }
                   onChange(values);
                 }}
-                value={value.map((author: string) => ({ value: author, label: author }))}
+                value={value?.map((author: string) => ({ value: author, label: author }))}
                 styles={{
                   menu: (base) => ({ ...base, zIndex: 11 }),
                   menuPortal: (base) => ({ ...base, zIndex: 11 }),
