@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.2.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.2.2...v3.2.3) (2022-03-02)
+
+
+### Bug Fixes
+
+* Fix blank screen when creating new Insight ([14cee9f](https://github.com/ExpediaGroup/insights-explorer/commit/14cee9f1a842bb57ad4e70bbc74cfada8bdf3e67))
+
 ### [3.2.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.2.1...v3.2.2) (2022-03-02)
 
 
