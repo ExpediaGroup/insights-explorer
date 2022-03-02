@@ -138,7 +138,7 @@ export const InsightDraftContainer = ({ insight, draft, draftKey, onRefresh }) =
       return false;
     }
 
-    console.log('Saving Draft', draftData, draftData.files);
+    console.log('Saving Draft', draftData);
 
     const result = await upsertDraft({
       draft: {
