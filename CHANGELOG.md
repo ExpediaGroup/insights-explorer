@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.3.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.0...v3.3.1) (2022-03-03)
+
+
+### Bug Fixes
+
+* Mobile-responsive Settings Page ([2f496f8](https://github.com/ExpediaGroup/insights-explorer/commit/2f496f8490c3c7c33d094afdb4e56b1b9dbb2fda))
+
 ## [3.3.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.2.3...v3.3.0) (2022-03-03)
 
 
