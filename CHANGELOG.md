@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.2.3...v3.3.0) (2022-03-03)
+
+
+### Features
+
+* Add Insight Links ([8b655ac](https://github.com/ExpediaGroup/insights-explorer/commit/8b655ac671baae5e4fc9b99b94ac756deadfb512))
+
+
+### Bug Fixes
+
+* Fix typo in GraphQL config ([7b090c1](https://github.com/ExpediaGroup/insights-explorer/commit/7b090c1a5dfc72ecca44c93f85844a31c4f7c0b8))
+
 ### [3.2.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.2.2...v3.2.3) (2022-03-02)
 
 
