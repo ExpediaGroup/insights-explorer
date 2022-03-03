@@ -169,19 +169,18 @@ export const MarkdownSplitEditor = ({
 
   return (
     <Flex {...flexProps} direction="column">
-      <Flex direction="row" justify="flex-end" pr="0.25rem">
-        <HStack spacing="1rem" align="stretch">
-          <Checkbox
-            isChecked={scrollSync}
-            onChange={() => setScrollSync(!scrollSync)}
-            size="sm"
-            color="frost.400"
-            fontWeight={'medium'}
-          >
-            {'Enable Scroll Sync (experimental)'}
-          </Checkbox>
-          {showFormattingHelp && <FormattingHelp />}
-        </HStack>
+      <HStack justify="flex-end" spacing="0.5rem">
+        <Checkbox
+          isChecked={scrollSync}
+          onChange={() => setScrollSync(!scrollSync)}
+          size="sm"
+          color="frost.400"
+          fontWeight={'medium'}
+          display={{ base: 'none', xl: 'flex' }}
+        >
+          {'Enable Scroll Sync (experimental)'}
+        </Checkbox>
+        {showFormattingHelp && <FormattingHelp />}
         {showPreview && (
           <Box display={{ base: 'block', xl: 'none' }} ml="1rem">
             {isPreviewMode && (
@@ -206,7 +205,7 @@ export const MarkdownSplitEditor = ({
             )}
           </Box>
         )}
-      </Flex>
+      </HStack>
       <Flex direction="row" flexGrow={1} maxH={scrollSync ? '60vh' : '100%'} overflow="hidden">
         <Box
           position="relative"
