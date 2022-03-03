@@ -46,7 +46,14 @@ const Section = ({ section }: { section: SettingsSection }) => {
 
 export const SettingsSidebar = ({ bottomContent, sections, title = 'Settings' }: Props) => {
   return (
-    <VStack spacing="1rem" align="stretch" flexBasis="16rem" flexShrink={0} maxWidth="16rem" p="1rem">
+    <VStack
+      spacing="1rem"
+      flexBasis="16rem"
+      flexShrink={0}
+      maxWidth={{ base: '100%', md: '16rem' }}
+      p="1rem"
+      alignItems="start"
+    >
       <Heading mb="1rem">{title}</Heading>
 
       {sections.map((section) => (

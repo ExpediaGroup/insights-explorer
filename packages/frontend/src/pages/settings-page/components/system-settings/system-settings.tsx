@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import { Button, Flex, FormControl, FormHelperText, Select } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+import { Button, Flex, FormControl, FormHelperText } from '@chakra-ui/react';
+import { Controller, useForm } from 'react-hook-form';
+import Select from 'react-select';
 
 import { Alert } from '../../../../components/alert/alert';
 import { Card } from '../../../../components/card/card';
@@ -31,7 +32,7 @@ interface Props {
 
 export const SystemSettings = ({ user, onSubmit, isSubmitting }: Props) => {
   const { locale } = user;
-  const { formState, handleSubmit, register, reset } = useForm({
+  const { control, formState, handleSubmit, reset } = useForm({
     mode: 'onBlur',
     defaultValues: {
       locale
@@ -44,6 +45,7 @@ export const SystemSettings = ({ user, onSubmit, isSubmitting }: Props) => {
     reset(values);
   };
 
+  const localeOptions = availableLocales.map((locale) => ({ value: locale, label: locale }));
   const detectedLocale = Intl.DateTimeFormat().resolvedOptions().locale;
 
   return (
@@ -53,16 +55,26 @@ export const SystemSettings = ({ user, onSubmit, isSubmitting }: Props) => {
       <form onSubmit={handleSubmit(internalSubmit)}>
         <FormControl id="locale" mb="1rem">
           <FormLabel>Locale</FormLabel>
-          <Select defaultValue={locale} errorBorderColor="red.300" {...register('locale', { required: false })}>
-            <option key="detected" value="">
-              Detected ({detectedLocale})
-            </option>
-            {availableLocales.map((locale) => (
-              <option key={locale} value={locale}>
-                {locale}
-              </option>
-            ))}
-          </Select>
+          <Controller
+            control={control}
+            name="locale"
+            render={({ field: { onChange, value } }) => (
+              <Select
+                inputId="locale"
+                defaultValue={{ value: detectedLocale, label: `Detected (${detectedLocale})` }}
+                options={localeOptions}
+                onChange={(e) => onChange(e.value)}
+                value={localeOptions && value && localeOptions.find((l) => l.value === value)}
+                placeholder={`Detected (${detectedLocale})`}
+                styles={{
+                  menu: (base) => ({ ...base, zIndex: 11 }),
+                  container: (base) => ({ ...base, width: '100%' }),
+                  valueContainer: (base) => ({ ...base, paddingLeft: '10px' }),
+                  menuPortal: (base) => ({ ...base, zIndex: 9999 })
+                }}
+              />
+            )}
+          />
           <FormHelperText>The locale setting is used for formatting numbers, dates, etc.</FormHelperText>
         </FormControl>
 

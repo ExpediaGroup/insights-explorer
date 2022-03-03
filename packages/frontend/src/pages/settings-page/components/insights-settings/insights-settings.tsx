@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import { Box, Button, Flex, FormControl, FormHelperText, Select } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
+import { Box, Button, Flex, FormControl, FormHelperText } from '@chakra-ui/react';
+import { Controller, useForm } from 'react-hook-form';
+import Select from 'react-select';
 import { gql, useQuery } from 'urql';
 
 import { Alert } from '../../../../components/alert/alert';
@@ -41,8 +42,8 @@ interface Props {
 
 export const InsightsSettings = ({ user, onSubmit, isSubmitting }: Props) => {
   const { defaultTemplateId } = user;
-  const { formState, handleSubmit, register, reset } = useForm({
-    mode: 'onBlur',
+  const { control, formState, handleSubmit, reset } = useForm({
+    mode: 'onChange',
     defaultValues: {
       defaultTemplateId
     }
@@ -59,6 +60,9 @@ export const InsightsSettings = ({ user, onSubmit, isSubmitting }: Props) => {
     reset(values);
   };
 
+  const templateOptions =
+    templatesData?.templates.map((template) => ({ value: template.id, label: template.name })) ?? [];
+
   if (templatesData == null) {
     return <Box></Box>;
   }
@@ -70,20 +74,26 @@ export const InsightsSettings = ({ user, onSubmit, isSubmitting }: Props) => {
       <form onSubmit={handleSubmit(internalSubmit)}>
         <FormControl id="defaultTemplateId" mb="1rem">
           <FormLabel>Default Template</FormLabel>
-          <Select
-            defaultValue={defaultTemplateId}
-            errorBorderColor="red.300"
-            {...register('defaultTemplateId', { required: false })}
-          >
-            <option key="detected" value="">
-              None
-            </option>
-            {templatesData.templates.map((template) => (
-              <option key={template.id} value={template.id}>
-                {template.name}
-              </option>
-            ))}
-          </Select>
+          <Controller
+            control={control}
+            name="defaultTemplateId"
+            render={({ field: { onChange, value } }) => (
+              <Select
+                inputId="defaultTemplateId"
+                defaultValue={templateOptions.find((t) => t.value === defaultTemplateId)}
+                options={templateOptions}
+                onChange={(e) => (e === null ? onChange('') : onChange(e.value))}
+                value={templateOptions && value && templateOptions.find((t) => t.value === value)}
+                isClearable={true}
+                styles={{
+                  menu: (base) => ({ ...base, zIndex: 11 }),
+                  container: (base) => ({ ...base, width: '100%' }),
+                  valueContainer: (base) => ({ ...base, paddingLeft: '10px' }),
+                  menuPortal: (base) => ({ ...base, zIndex: 9999 })
+                }}
+              />
+            )}
+          />
           <FormHelperText>The default template is automatically used when creating new Insights.</FormHelperText>
         </FormControl>
 
