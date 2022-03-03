@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useBreakpointValue } from '@chakra-ui/media-query';
 import {
   Avatar,
   Box,
@@ -88,6 +89,8 @@ interface Props {
 
 export const ProfileSettings = ({ user, onSubmit, isSubmitting }: Props) => {
   const { appSettings } = useSelector((state: RootState) => state.app);
+
+  const profileImgSize = useBreakpointValue({ base: 'lg', md: '2xl' });
 
   const form = useForm<UpdateUserInput>({
     mode: 'onBlur',
@@ -183,7 +186,7 @@ export const ProfileSettings = ({ user, onSubmit, isSubmitting }: Props) => {
             <Flex direction="column" align="center">
               <FileUploadArea
                 onDrop={onDropAvatar}
-                element={<Avatar src={effectiveAvatarUrl} size="2xl" name={user.displayName} />}
+                element={<Avatar src={effectiveAvatarUrl} size={profileImgSize} name={user.displayName} />}
               />
               <Text as="em" fontSize="xs">
                 Click to edit.

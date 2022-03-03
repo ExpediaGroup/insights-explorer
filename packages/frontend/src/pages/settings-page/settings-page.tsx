@@ -135,7 +135,7 @@ export const SettingsPage = () => {
         {error && <Alert error={error} mb="1rem" />}
         {updateError && <Alert error={updateError} mb="1rem" />}
 
-        <Flex direction="row" mt="1rem" flexGrow={2}>
+        <Flex direction={{ base: 'column', md: 'row' }} mt="1rem" flexGrow={2}>
           <SettingsSidebar
             sections={settingSections}
             bottomContent={
