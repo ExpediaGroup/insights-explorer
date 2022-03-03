@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useBreakpointValue } from '@chakra-ui/media-query';
 import { useColorModeValue } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { emoji } from 'node-emoji';
@@ -144,6 +145,8 @@ export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadF
     [internalValue]
   );
 
+  const aceEditorHeight = useBreakpointValue({ base: undefined, xl: scrollSync ? '70vh' : '100%' });
+
   return (
     <AceEditor
       name="aceEditor"
@@ -159,7 +162,8 @@ export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadF
       showPrintMargin={false}
       width="100%"
       minLines={30}
-      height={scrollSync ? '70vh' : '100%'}
+      maxLines={scrollSync ? undefined : Infinity}
+      height={aceEditorHeight}
       setOptions={{
         scrollPastEnd: scrollSync,
         autoScrollEditorIntoView: true,
