@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
+import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 import { useOktaAuth } from '@okta/okta-react';
 import { Security, LoginCallback } from '@okta/okta-react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -31,14 +32,21 @@ interface Props {
 }
 
 const AuthWrapper = ({ children }: Props) => {
-  const { authState, authService } = useOktaAuth();
+  const { authState, oktaAuth } = useOktaAuth();
   const { requestingLogin } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
+  const loggingIn = useRef(false);
+
   // Watch Okta status and dispatch login/logout actions
   useEffect(() => {
+    if (!authState) {
+      return;
+    }
+
     if (requestingLogin === true) {
       // We're handling it below!
+      loggingIn.current = false;
       dispatch(userSlice.actions.requestLogin(false));
     }
 
@@ -50,15 +58,18 @@ const AuthWrapper = ({ children }: Props) => {
 
     if (!authState.isAuthenticated) {
       // Trigger Okta Login
-      authService.login(window.location.href);
+      oktaAuth.signInWithRedirect({ originalUri: window.location.href });
     } else {
       // Okta already logged in
       // Login against the IEX service
-      dispatch(login(authState.accessToken));
+      if (authState.accessToken && loggingIn.current === false) {
+        loggingIn.current = true;
+        dispatch(login(authState.accessToken.accessToken));
+      }
     }
-  }, [authState, authService, dispatch, requestingLogin]);
+  }, [authState, dispatch, requestingLogin, oktaAuth]);
 
-  if (authState.isAuthenticated) {
+  if (authState?.isAuthenticated) {
     // Already logged into Okta
     return children;
   }
@@ -76,9 +87,14 @@ const CustomError = ({ error }) => {
 
 export const OktaAuthProvider = ({ children }: Props) => {
   const { appSettings } = useSelector((state: RootState) => state.app);
+  const navigate = useNavigate();
+
+  const restoreOriginalUri = async (_oktaAuth, originalUri) => {
+    navigate(toRelativeUrl(originalUri, window.location.origin));
+  };
 
   if (appSettings !== null) {
-    const okta = {
+    const oidcConfig = {
       clientId: appSettings.authSettings.clientId,
       issuer: appSettings.authSettings.issuer,
       redirectUri: `${window.location.origin}${AUTH_CALLBACK_PATH}`,
@@ -90,8 +106,10 @@ export const OktaAuthProvider = ({ children }: Props) => {
       }
     };
 
+    const oktaAuth = new OktaAuth(oidcConfig);
+
     return (
-      <Security {...okta}>
+      <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
         <Routes>
           {/* OAuth Callback Route */}
           <Route path={AUTH_CALLBACK_PATH} element={<LoginCallback errorComponent={CustomError} />} />
