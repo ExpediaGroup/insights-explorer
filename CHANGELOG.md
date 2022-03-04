@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.3.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.3...v3.3.4) (2022-03-04)
+
+
+### Bug Fixes
+
+* **deps:** bump graphql from 15.5.3 to 15.8.0 ([c3fc955](https://github.com/ExpediaGroup/insights-explorer/commit/c3fc955f86f3160670839c8704b84647cf4d46e9))
+
 ### [3.3.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.2...v3.3.3) (2022-03-04)
 
 
