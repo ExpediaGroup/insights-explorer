@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.3.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.2...v3.3.3) (2022-03-04)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/react from 1.8.5 to 1.8.6 ([c052b2a](https://github.com/ExpediaGroup/insights-explorer/commit/c052b2ad6b260290d340149e37824d07394052b5))
+* **deps:** bump @chakra-ui/theme from 1.13.4 to 1.14.0 ([599f425](https://github.com/ExpediaGroup/insights-explorer/commit/599f4259a57424788b78c02a90d8b88343048696))
+* **deps:** bump @urql/core from 2.4.2 to 2.4.3 ([59e7b70](https://github.com/ExpediaGroup/insights-explorer/commit/59e7b70b705d28abf37ef8f7d20c990790034f0b))
+* **deps:** bump isomorphic-git from 1.12.0 to 1.12.1 ([7a1dac3](https://github.com/ExpediaGroup/insights-explorer/commit/7a1dac3bfcf6a78c36c9ccff135e8c53aa271110))
+* **deps:** bump react-router-dom from 6.2.1 to 6.2.2 ([6e825ad](https://github.com/ExpediaGroup/insights-explorer/commit/6e825ad7439705537caefc2b6a24aa188eb25ccf))
+
 ### [3.3.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.1...v3.3.2) (2022-03-03)
 
 
