@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useBreakpointValue } from '@chakra-ui/media-query';
 import {
   Alert as ChakraAlert,
   AlertIcon,
@@ -100,6 +101,8 @@ export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
   const hasDraftKey = draftKey !== '';
   const { isOpen, onToggle } = useDisclosure();
 
+  const buttonSize = useBreakpointValue({ base: 'sm', md: 'md' });
+
   const { userInfo } = useSelector((state: RootState) => state.user);
 
   // Existing In-Progress Drafts
@@ -182,7 +185,7 @@ export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
         (!hasDraftKey && pendingDrafts.length > 0)) && (
         <ChakraAlert status="info" borderRadius="0.25rem" mb="1rem" alignItems="flex-start" wordBreak="break-word">
           <AlertIcon flexShrink={0} />
-          <VStack spacing="1rem" align="stretch" flexGrow={2}>
+          <VStack spacing="1rem" align="stretch" flexGrow={2} fontSize={{ base: 'sm', md: 'md' }}>
             {!hasDraftKey && (
               <Text>
                 <strong>Info:</strong> You have {pendingDrafts.length} unpublished draft
@@ -258,7 +261,7 @@ export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
                   </Flex>
                 </Box>
                 {!hasDraftKey && (
-                  <Button variant="solid" bg="frost.300" onClick={createNewDraft}>
+                  <Button variant="solid" bg="frost.300" onClick={createNewDraft} size={buttonSize}>
                     Create a New Draft
                   </Button>
                 )}

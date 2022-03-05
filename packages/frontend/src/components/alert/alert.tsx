@@ -85,7 +85,7 @@ export const Alert = ({
       {icon && <AlertIcon as={icon} flexShrink={0} />}
       {icon === undefined && <AlertIcon flexShrink={0} />}
 
-      <Flex wordBreak="break-word" flexGrow={2} align="center">
+      <Flex wordBreak="break-word" flexGrow={2} align="center" fontSize={{ base: 'sm', md: 'md' }}>
         <Text as="strong" mr="0.5rem" flexShrink={0}>
           {startCase(derivedStatus)}:{' '}
         </Text>

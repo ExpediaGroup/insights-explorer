@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useBreakpointValue } from '@chakra-ui/media-query';
 import { Alert as ChakraAlert, AlertIcon, Badge, Box, BoxProps, Button, Stack, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,6 +30,8 @@ const HealthCheckAlert = ({ children, allowRecheck = true }) => {
 
   const onRecheck = () => dispatch(executeHealthCheck());
 
+  const buttonSize = useBreakpointValue({ base: 'xs', md: 'sm' });
+
   return (
     <ChakraAlert status="warning" borderRadius="0.25rem" mb="1rem" alignItems="flex-start" wordBreak="break-word">
       <AlertIcon flexShrink={0} />
@@ -38,7 +41,7 @@ const HealthCheckAlert = ({ children, allowRecheck = true }) => {
         </Text>
         {children}
         {allowRecheck && (
-          <Button size="xs" bg="snowstorm.100" flexShrink={0} onClick={onRecheck}>
+          <Button size={buttonSize} bg="snowstorm.100" flexShrink={0} onClick={onRecheck}>
             Recheck
           </Button>
         )}
@@ -77,7 +80,7 @@ export const UserHealthCheck = ({
     false;
 
   return (
-    <Box {...boxProps} fontSize={{ base: 'sm' }}>
+    <Box {...boxProps} fontSize={{ base: 'sm', md: 'md' }}>
       {showPositiveChecks && gitHubTokenValid && <Alert success="Your GitHub Personal Access Token is valid" />}
       {!healthCheck.hasGitHubToken && (
         <HealthCheckAlert allowRecheck={false}>
