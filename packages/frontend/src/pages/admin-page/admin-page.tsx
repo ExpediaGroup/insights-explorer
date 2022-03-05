@@ -33,7 +33,7 @@ export const AdminPage = () => {
       </Helmet>
 
       <Flex direction="column" justify="stretch" flexGrow={2}>
-        <Flex direction="row" mt="1rem" flexGrow={2}>
+        <Flex direction={{ base: 'column', md: 'row' }} mt="1rem" flexGrow={2}>
           <SettingsSidebar title="Admin" sections={adminSections} />
 
           <VStack align="stretch" flexGrow={2}>

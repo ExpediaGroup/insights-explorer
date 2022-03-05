@@ -48,7 +48,7 @@ export const SettingsSidebar = ({ bottomContent, sections, title = 'Settings' }:
   return (
     <VStack
       spacing="1rem"
-      flexBasis="16rem"
+      flexBasis={{ base: '8rem', md: '16rem' }}
       flexShrink={0}
       maxWidth={{ base: '100%', md: '16rem' }}
       p="1rem"
