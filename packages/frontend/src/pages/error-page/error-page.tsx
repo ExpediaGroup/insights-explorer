@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useBreakpointValue } from '@chakra-ui/media-query';
 import { Box, Button, Heading, HStack, Icon, Tag, TagLabel, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { ReactChild } from 'react';
 import { Helmet } from 'react-helmet';
@@ -39,6 +40,8 @@ const defaultProps: Required<Props> = {
 export const ErrorPage = (props: Props) => {
   const mergedProps = { ...defaultProps, ...props };
 
+  const tagSize = useBreakpointValue({ base: 'sm', md: 'lg' });
+
   return (
     <>
       <Helmet>
@@ -48,17 +51,17 @@ export const ErrorPage = (props: Props) => {
       <VStack as={Card} align="center" p="3rem">
         <Wrap spacing="2rem" align="center" p="2.5rem">
           <WrapItem>
-            <Icon as={mergedProps.icon} fontSize="12rem" color="polar.200" />
+            <Icon as={mergedProps.icon} fontSize={{ base: '6rem', md: '12rem' }} color="polar.200" />
           </WrapItem>
           <WrapItem>
             <VStack spacing="1rem" align="flex-start" maxWidth="36rem">
-              <Tag rounded="full" size="lg" bg="aurora.200" color="polar.100" fontWeight="bold">
+              <Tag rounded="full" size={tagSize} bg="aurora.200" color="polar.100" fontWeight="bold">
                 <TagLabel>{mergedProps.errorCode}</TagLabel>
               </Tag>
-              <Heading color="polar.200" fontSize="4rem">
+              <Heading color="polar.200" fontSize={{ base: '2rem', md: '4rem' }}>
                 {mergedProps.heading}
               </Heading>
-              <Text fontSize="1.4rem">{mergedProps.message}</Text>
+              <Text fontSize={{ base: '1rem', md: '1.4rem' }}>{mergedProps.message}</Text>
 
               <HStack>
                 <Button variant="frost" onClick={() => window.history.go(-1)}>
