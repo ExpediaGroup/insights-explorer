@@ -15,6 +15,7 @@
  */
 
 import type { SearchQuery } from '@iex/models/elasticsearch';
+import { isObject } from 'lodash';
 import isArray from 'lodash/isArray';
 import mergeWith from 'lodash/mergeWith';
 import Parsimmon, { optWhitespace } from 'parsimmon';
@@ -86,6 +87,7 @@ export class SearchMatch implements SearchClause {
   toElasticsearch(): any {
     return {
       bool: {
+        minimum_should_match: 1,
         should: [
           {
             multi_match: {
@@ -115,6 +117,7 @@ export class SearchPhrase implements SearchClause {
   toElasticsearch(): any {
     return {
       bool: {
+        minimum_should_match: 1,
         should: [
           {
             multi_match: {
@@ -387,10 +390,13 @@ export function parseSearchQuery(searchQuery: string): SearchClause[] {
   return clauses;
 }
 
-const mergeCustomizer = (objectValue: any, sourceValue: any) => {
+const mergeCustomizer = (objectValue: any, sourceValue: any): any => {
   // Concat arrays together
   if (isArray(objectValue)) {
     return [...objectValue, ...sourceValue];
+  }
+  if (isObject(objectValue)) {
+    return mergeWith(objectValue, sourceValue, mergeCustomizer);
   }
 };
 

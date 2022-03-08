@@ -299,14 +299,20 @@ describe('search', () => {
       const clauses: any[] = parseSearchQuery('avocado');
       const es = toElasticsearch(clauses);
       expect(es).toMatchObject({
-        bool: { should: [{ multi_match: { query: 'avocado' } }] }
+        bool: {
+          minimum_should_match: 1,
+          should: [{ multi_match: { query: 'avocado' } }]
+        }
       });
     });
     test('two words', () => {
       const clauses: any[] = parseSearchQuery('avocado toast');
       const es = toElasticsearch(clauses);
       expect(es).toMatchObject({
-        bool: { should: [{ multi_match: { query: 'avocado' } }, { multi_match: { query: 'toast' } }] }
+        bool: {
+          minimum_should_match: 1,
+          should: [{ multi_match: { query: 'avocado' } }, { multi_match: { query: 'toast' } }]
+        }
       });
     });
     test('word and tag', () => {
@@ -314,6 +320,7 @@ describe('search', () => {
       const es = toElasticsearch(clauses);
       expect(es).toMatchObject({
         bool: {
+          minimum_should_match: 1,
           filter: [{ term: { 'tags.keyword': { value: 'demo' } } }],
           should: [{ multi_match: { query: 'insight' } }]
         }
@@ -395,6 +402,7 @@ describe('search', () => {
       const es = parseToElasticsearch('"best practice" tag:demo insight');
       expect(es).toMatchObject({
         bool: {
+          minimum_should_match: 1,
           filter: [{ term: { 'tags.keyword': { value: 'demo' } } }],
           should: [
             {
