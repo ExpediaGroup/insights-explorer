@@ -38,15 +38,11 @@ export const remarkIex = (options) => {
         break;
 
       case 'image': {
-        const { height: h, width: w, ...attributes } = node.attributes;
-
         node.data = {
           hName: 'img',
           hProperties: {
             src: node.children[0]?.value ?? node.children[0]?.url,
-            w,
-            h,
-            ...attributes
+            ...node.attributes
           }
         };
 
@@ -176,17 +172,12 @@ export const remarkIex = (options) => {
       }
 
       case 'vega': {
-        // Convert height/width if available
-        const { height: h, width: w, ...attributes } = node.attributes;
-
         node.data = {
           hName: 'vegachart',
           hProperties: {
             // Extract body of node into text
             config: remarkNodetoText(node),
-            w,
-            h,
-            ...attributes
+            ...node.attributes
           }
         };
 
@@ -209,18 +200,13 @@ export const remarkIex = (options) => {
           }
         }
 
-        // Convert height/width if available
-        const { height: h, width: w, ...attributes } = node.attributes;
-
         node.data = {
           hName: 'xkcdchart',
           hProperties: {
             // Extract body of node into text
             config: remarkNodetoText(node),
             xkcdType,
-            w,
-            h,
-            ...attributes
+            ...node.attributes
           }
         };
 

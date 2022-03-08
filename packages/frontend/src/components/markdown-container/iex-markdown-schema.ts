@@ -1,5 +1,6 @@
-/** @type {import('./index.js').Schema} */
-export const IexMarkdownSchema = {
+import { Options } from 'rehype-sanitize';
+
+export const IexMarkdownSchema: Options = {
   strip: ['script'],
   clobber: [],
   ancestors: {
