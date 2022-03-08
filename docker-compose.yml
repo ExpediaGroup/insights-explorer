@@ -16,7 +16,6 @@ services:
       OAUTH_PROVIDER: github
       OAUTH_CLIENT_ID: __MUST_BE_PROVIDED__
       OAUTH_CLIENT_SECRET: __MUST_BE_PROVIDED__
-      OAUTH_CALLBACK_URL: http://localhost:3001/auth/github/callback
 
       # Database
       DB_HOST: db
