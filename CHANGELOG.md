@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.3.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.6...v3.3.7) (2022-03-09)
+
+
+### Bug Fixes
+
+* **deps:** bump @okta/okta-react from 3.0.8 to 6.4.3 ([423bbaa](https://github.com/ExpediaGroup/insights-explorer/commit/423bbaac746da6585419d63cbe9d84e0715efcf6))
+* Migrate Okta provider to version 6.x ([a174a7d](https://github.com/ExpediaGroup/insights-explorer/commit/a174a7d353be3333c39d88e68faa148da715d32b))
+
 ### [3.3.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.5...v3.3.6) (2022-03-08)
 
 
