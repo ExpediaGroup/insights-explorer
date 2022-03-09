@@ -225,16 +225,17 @@ export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
                         align={{ base: 'stretch', md: 'center' }}
                         spacing={{ base: 0, md: '1rem' }}
                         ml="1rem"
-                        mb="0.25rem"
+                        my={{ base: '0.5rem', md: '0.25rem' }}
                         flexDirection={{ base: 'column', md: 'row' }}
                       >
                         <Box flexGrow={2}>
                           <ListIcon as={iconFactory('edit')} />
-                          {draft.draftKey} (last modified {formatRelativeIntl(draft.updatedAt)})
+                          {draft.draftKey}
                         </Box>
+                        <Box flexGrow={2}>(last modified {formatRelativeIntl(draft.updatedAt)})</Box>
                         {draftKey === draft.draftKey && <Badge>Currently Editing</Badge>}
                         {draftKey !== draft.draftKey && (
-                          <>
+                          <HStack align="stretch" spacing="1rem" pt={{ base: '0.25rem', md: 'unset' }}>
                             <RouterLink
                               to={`${insight === null ? '' : `/${insight.itemType}/${insight.fullName}`}/edit/${
                                 draft.draftKey
@@ -249,12 +250,12 @@ export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
                               variant="link"
                               size="sm"
                               width={{ base: '100%', md: 'unset' }}
-                              pt={{ base: '0.5rem', md: 'unset' }}
+                              pt={{ base: '0.25rem', md: 'unset' }}
                               onClick={() => onDiscardDraft(draft.draftKey)}
                             >
                               Discard
                             </Button>
-                          </>
+                          </HStack>
                         )}
                       </HStack>
                     ))}
