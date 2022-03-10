@@ -34,13 +34,13 @@ import {
 import { DateTime } from 'luxon';
 
 import { ExternalLink } from '../../../../../../components/external-link/external-link';
-import { InsightAuthor } from '../../../../../../components/insight-author/insight-author';
 import { InsightTag } from '../../../../../../components/insight-tag/insight-tag';
 import { Link } from '../../../../../../components/link/link';
 import { Linkify } from '../../../../../../components/linkify/linkify';
 import { SidebarHeading } from '../../../../../../components/sidebar-heading/sidebar-heading';
 import { SidebarStack } from '../../../../../../components/sidebar-stack/sidebar-stack';
 import { TeamTag } from '../../../../../../components/team-tag/team-tag';
+import { UserTag } from '../../../../../../components/user-tag/user-tag';
 import { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory } from '../../../../../../shared/icon-factory';
@@ -131,7 +131,7 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
       <SidebarHeading>Authors</SidebarHeading>
       <Stack spacing="0.25rem">
         {authors.map((author) => (
-          <InsightAuthor key={author.userName} author={author} permission={author.permission} size="lg" width="100%" />
+          <UserTag key={author.userName} user={author} permission={author.permission} size="lg" width="100%" />
         ))}
       </Stack>
       {insight.tags?.length > 0 && (

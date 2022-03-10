@@ -31,11 +31,11 @@ import {
 import { formatDateIntl, formatRelativeIntl } from '../../shared/date-utils';
 import { iconFactory } from '../../shared/icon-factory';
 import { BlockQuote } from '../blockquote/blockquote';
-import { InsightAuthor } from '../insight-author/insight-author';
 import { InsightConnectionCard } from '../insight-connection-card/insight-connection-card';
 import { LikeButton } from '../like-button/like-button';
 import { LikedByTooltip } from '../liked-by-tooltip/liked-by-tooltip';
 import { Link } from '../link/link';
+import { UserTag } from '../user-tag/user-tag';
 
 const DeletedBadge = () => <Badge colorScheme="red">deleted</Badge>;
 
@@ -46,7 +46,7 @@ const getActivityParts = (activity: Activity) => {
         icon: 'login',
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">logged in</Text>
           </Box>
         ),
@@ -59,7 +59,7 @@ const getActivityParts = (activity: Activity) => {
         icon: 'newInsight',
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             {details.insight != null ? (
               <Text as="span">
                 created a new {details.insight.itemType}{' '}
@@ -89,7 +89,7 @@ const getActivityParts = (activity: Activity) => {
         icon: 'edit',
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             {details.insight != null ? (
               <Text as="span">
                 edited{' '}
@@ -119,7 +119,7 @@ const getActivityParts = (activity: Activity) => {
         icon: 'trash',
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             {details.insight != null ? (
               <Text as="span">
                 deleted{' '}
@@ -158,7 +158,7 @@ const getActivityParts = (activity: Activity) => {
         icon,
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb}{' '}
               {details.insight != null ? (
@@ -188,7 +188,7 @@ const getActivityParts = (activity: Activity) => {
         icon,
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb}{' '}
               {details.insight != null ? (
@@ -242,7 +242,7 @@ const getActivityParts = (activity: Activity) => {
         icon,
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb}{' '}
               <Link
@@ -265,7 +265,7 @@ const getActivityParts = (activity: Activity) => {
         icon: 'profile',
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               updated their{' '}
               <Link to={`/profile/${activity.user.userName}`} display="inline-block">
@@ -285,10 +285,10 @@ const getActivityParts = (activity: Activity) => {
         icon: 'permissions',
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {added ? <Text as="span">added </Text> : <Text as="span">removed </Text>}
-              <InsightAuthor author={details.user} mr="0.25rem" />
+              <UserTag user={details.user} mr="0.25rem" />
               {added ? ' to ' : ' from '}
               {details.insight != null ? (
                 <Link to={`/${details.insight.itemType}/${details.insight.fullName}`} display="inline-block">
@@ -324,7 +324,7 @@ const getActivityParts = (activity: Activity) => {
         icon,
         lead: (
           <Box>
-            <InsightAuthor author={activity.user} mr="0.25rem" />
+            <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb} <Text as="span">a news item: </Text>
               {details.news !== null ? (

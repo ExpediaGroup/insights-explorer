@@ -94,13 +94,17 @@ const UserPopover = ({ userName }: { userName: string }) => {
 
   return <Text>Unknown user</Text>;
 };
-interface Props {
-  author: User;
+
+export interface UserTagProps {
+  user?: User;
+  isLoading?: boolean;
   permission?: string;
   placement?: Placement;
 }
 
-export const InsightAuthor = ({ author, permission, placement = 'right', ...tagProps }: Props & TagProps) => {
+export const UserTag = ({ user, isLoading, permission, placement = 'right', ...tagProps }: UserTagProps & TagProps) => {
+  const popoverColor = useColorModeValue('whiteAlpha.900', 'gray.900');
+
   const avatarProps = {
     size: '2xs',
     ml: -1,
@@ -112,8 +116,29 @@ export const InsightAuthor = ({ author, permission, placement = 'right', ...tagP
     avatarProps.ml = -2;
   }
 
+  if (isLoading || user === undefined) {
+    return (
+      <Tag
+        bg="nord13.200"
+        rounded="full"
+        size="md"
+        _hover={{
+          boxShadow: '0 0 0 3px rgba(136, 192, 208, 0.6)'
+        }}
+        {...tagProps}
+      >
+        <Box>
+          <Avatar name="A" {...avatarProps} />
+          <TagLabel>
+            <Spinner thickness="2px" speed="0.65s" emptyColor="gray.200" color="frost.200" size="xs" />
+          </TagLabel>
+        </Box>
+      </Tag>
+    );
+  }
+
   return (
-    <Link to={`/profile/${author.userName}`}>
+    <Link to={`/profile/${user.userName}`}>
       <Popover isLazy placement={placement} trigger="hover">
         <PopoverTrigger>
           <Tag
@@ -127,8 +152,8 @@ export const InsightAuthor = ({ author, permission, placement = 'right', ...tagP
           >
             <HStack justifyContent="space-between" w="full">
               <Box>
-                <Avatar name={author.displayName} src={author?.avatarUrl} {...avatarProps} />
-                <TagLabel>{author.displayName}</TagLabel>
+                <Avatar name={user.displayName} src={user?.avatarUrl} {...avatarProps} />
+                <TagLabel>{user.displayName}</TagLabel>
               </Box>
               {permission && (
                 <Box>
@@ -141,7 +166,7 @@ export const InsightAuthor = ({ author, permission, placement = 'right', ...tagP
         <Portal>
           <PopoverContent
             bg="polar.300"
-            color={useColorModeValue('whiteAlpha.900', 'gray.900')}
+            color={popoverColor}
             boxShadow="lg"
             borderRadius={0}
             width="auto"
@@ -149,7 +174,7 @@ export const InsightAuthor = ({ author, permission, placement = 'right', ...tagP
           >
             <PopoverArrow bg="polar.300" />
             <PopoverBody>
-              <UserPopover userName={author.userName} />
+              <UserPopover userName={user.userName} />
             </PopoverBody>
           </PopoverContent>
         </Portal>

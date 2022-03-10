@@ -18,10 +18,10 @@ import { Badge, Box, BoxProps, HStack, Text, Tooltip, VStack, Wrap, WrapItem } f
 import { DateTime } from 'luxon';
 
 import { Card } from '../../../../../../components/card/card';
-import { InsightAuthor } from '../../../../../../components/insight-author/insight-author';
 import { InsightTag } from '../../../../../../components/insight-tag/insight-tag';
 import { Linkify } from '../../../../../../components/linkify/linkify';
 import { SidebarHeading } from '../../../../../../components/sidebar-heading/sidebar-heading';
+import { UserTag } from '../../../../../../components/user-tag/user-tag';
 import { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 
@@ -78,7 +78,7 @@ export const ExportHeader = ({ insight, ...props }: { insight: Insight } & BoxPr
           <HStack spacing="0.25" align="center">
             <SidebarHeading mr="0.5rem">Authors</SidebarHeading>
             {insight.authors.edges.map(({ node: author }) => (
-              <InsightAuthor key={author.userName} author={author} size="lg" width="100%" />
+              <UserTag key={author.userName} user={author} size="lg" width="100%" />
             ))}
           </HStack>
         </WrapItem>

@@ -31,10 +31,10 @@ import {
 
 import { getInsightGradient } from '../../../../shared/gradient';
 import { Card } from '../../../card/card';
-import { InsightAuthor } from '../../../insight-author/insight-author';
 import { InsightTag } from '../../../insight-tag/insight-tag';
 import { ItemTypeIcon } from '../../../item-type-icon/item-type-icon';
 import { LinkOverlay } from '../../../link-overlay/link-overlay';
+import { UserTag } from '../../../user-tag/user-tag';
 import { InsightConnectionCardProps } from '../../insight-connection-card';
 import { InsightStats } from '../insight-stats/insight-stats';
 
@@ -84,7 +84,7 @@ export const SquareInsightCard = ({ insightEdge, options, ...props }: InsightCon
             {insight.authors.edges.slice(0, 5).map(({ node: author }) => {
               return (
                 <WrapItem key={author.userName}>
-                  <InsightAuthor author={author} />
+                  <UserTag user={author} />
                 </WrapItem>
               );
             })}

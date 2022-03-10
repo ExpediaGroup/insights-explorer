@@ -36,12 +36,12 @@ import {
 import { DateTime } from 'luxon';
 
 import { ExternalLink } from '../../../../../../components/external-link/external-link';
-import { InsightAuthor } from '../../../../../../components/insight-author/insight-author';
 import { InsightTag } from '../../../../../../components/insight-tag/insight-tag';
 import { Link } from '../../../../../../components/link/link';
 import { Linkify } from '../../../../../../components/linkify/linkify';
 import { SidebarHeading } from '../../../../../../components/sidebar-heading/sidebar-heading';
 import { TeamTag } from '../../../../../../components/team-tag/team-tag';
+import { UserTag } from '../../../../../../components/user-tag/user-tag';
 import { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
@@ -71,7 +71,7 @@ export const InsightInfobar = ({ insight, ...props }: { insight: Insight } & Sta
             {insight.metadata?.team && <TeamTag team={insight.metadata.team} size="md" />}
 
             {insight.authors.edges.map(({ node: author }) => (
-              <InsightAuthor key={author.userName} author={author} size="md" width="100%" />
+              <UserTag key={author.userName} user={author} size="md" width="100%" />
             ))}
 
             {insight.tags?.length > 0 && insight.tags.map((tag) => <InsightTag key={tag} tag={tag} size="md" />)}

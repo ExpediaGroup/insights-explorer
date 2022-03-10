@@ -30,10 +30,10 @@ import { DateTime } from 'luxon';
 
 import { formatDateIntl } from '../../../../shared/date-utils';
 import { getItemType } from '../../../../shared/item-type';
-import { InsightAuthor } from '../../../insight-author/insight-author';
 import { InsightTag } from '../../../insight-tag/insight-tag';
 import { ItemTypeIcon } from '../../../item-type-icon/item-type-icon';
 import { LinkOverlay } from '../../../link-overlay/link-overlay';
+import { UserTag } from '../../../user-tag/user-tag';
 import { InsightConnectionCardProps } from '../../insight-connection-card';
 import { InsightStats } from '../insight-stats/insight-stats';
 
@@ -82,7 +82,7 @@ export const DefaultInsightCard = ({ insightEdge, options, ...props }: InsightCo
         <HStack>
           <Flex wrap="wrap">
             {insight.authors.edges.map(({ node: author }) => {
-              return <InsightAuthor key={author.userName + '-' + author.displayName} author={author} m="0.25rem" />;
+              return <UserTag key={author.userName + '-' + author.displayName} user={author} m="0.25rem" />;
             })}
             {insight.tags.map((tag) => {
               return <InsightTag key={tag} tag={tag} dispatchSearch={options.dispatchSearch ?? true} m="0.25rem" />;
