@@ -20,16 +20,28 @@ import { nanoid } from 'nanoid';
 import { emoji } from 'node-emoji';
 import { useEffect, useRef, useState } from 'react';
 import AceEditor from 'react-ace';
+import { gql } from 'urql';
 
-import { UploadSingleFileMutation } from '../../models/generated/graphql';
+import { UploadSingleFileMutation, UsersCompletionQuery } from '../../models/generated/graphql';
 import { useDebounce } from '../../shared/useDebounce';
+import { urqlClient } from '../../urql';
 
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/mode-markdown';
 import 'ace-builds/src-noconflict/theme-chrome';
 import 'ace-builds/src-noconflict/theme-nord_dark';
 
+const USERS_COMPLETION_QUERY = gql`
+  query UsersCompletion {
+    users {
+      id
+      userName
+    }
+  }
+`;
+
 let emojiList: Record<string, unknown>[] | undefined = undefined;
+let userList: Record<string, unknown>[] | undefined = undefined;
 
 const emojiCompleter = {
   identifierRegexps: [/[:]/],
@@ -63,6 +75,38 @@ const emojiCompleter = {
     }
 
     callback(null, emojiList);
+  }
+};
+
+const mentionCompleter = {
+  identifierRegexps: [/[@]/],
+  getCompletions: async (editor, session, pos, prefix, callback) => {
+    // Only trigger completions after an initial "@"
+    if (prefix !== '@') {
+      callback(null, []);
+      return;
+    }
+
+    if (userList === undefined) {
+      const { data, error } = await urqlClient.query<UsersCompletionQuery>(USERS_COMPLETION_QUERY).toPromise();
+      if (error || data === undefined) {
+        callback(null, []);
+        return;
+      }
+
+      userList = data.users.map((user) => {
+        const shortcode = `@${user.userName}`;
+        return {
+          name: shortcode,
+          value: shortcode,
+          caption: `${shortcode}`,
+          meta: 'mention',
+          score: 1000
+        };
+      });
+    }
+
+    callback(null, userList);
   }
 };
 
@@ -167,7 +211,7 @@ export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadF
       setOptions={{
         scrollPastEnd: scrollSync,
         autoScrollEditorIntoView: true,
-        enableBasicAutocompletion: [emojiCompleter] as any,
+        enableBasicAutocompletion: [emojiCompleter, mentionCompleter] as any,
         enableLiveAutocompletion: true,
         enableSnippets: true
       }}
