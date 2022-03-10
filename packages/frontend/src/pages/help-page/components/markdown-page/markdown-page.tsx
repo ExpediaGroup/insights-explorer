@@ -86,6 +86,7 @@ const links = [
       { name: 'Tables', hash: 'tables' },
       { name: 'Task List', hash: 'task-list' },
       { name: 'Emojis', hash: 'emojis-' },
+      { name: 'Mentions', hash: 'mentions' },
       { name: 'Collapsible Sections', hash: 'collapsible-sections' },
       {
         name: 'Directives',

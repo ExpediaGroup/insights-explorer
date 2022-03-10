@@ -589,7 +589,22 @@ Alternately, colon-sandwiched emojicodes like `:smile:` :smile: can be used.
 :smile:
 ```
 
-Insight Explorer provides autocomplete for emojicodes within the Insight Editor.  Emojicodes are provided by [node-emoji](https://github.com/omnidan/node-emoji).
+Insight Explorer provides autocomplete suggestions for emojicodes within Markdown editors.
+Emojicodes are provided by [node-emoji](https://github.com/omnidan/node-emoji).
+
+## Mentions
+
+User mentions start wth a `@` followed by a username, and are converted into a user tag for that user.  If the user is recognized, it will display the user's display name, with a link to their profile and more information in a popover.  If the user is not recognized, it will display a user tag containing the given username as-is.
+
+```md
+Created by: @superhero and @sidekick
+```
+
+Created by: @superhero and @sidekick
+
+Insights Explorer provides autocomplete suggestions for `@mentions` within Markdown editors.
+
+Please note that GitHub also links `@mentions` to GitHub users, but usernames may vary between Insights Explorer and GitHub.
 
 ## Collapsible Sections
 
