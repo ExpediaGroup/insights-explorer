@@ -55,6 +55,7 @@ import { KaTeXRendererAsync } from '../renderers/katex-renderer/katex-renderer-a
 import { VegaRendererAsync } from '../renderers/vega-renderer/vega-renderer-async';
 import { VideoRenderer } from '../renderers/video-renderer/video-renderer';
 import { XkcdChartRendererAsync } from '../renderers/xkcd-chart-renderer/xkcd-chart-renderer-async';
+import { FetchUserTag } from '../user-tag/fetch-user-tag';
 
 import './markdown-container.css';
 import 'react-medium-image-zoom/dist/styles.css';
@@ -342,6 +343,9 @@ export const ChakraUIRenderer = (
           {...props}
         />
       );
+    },
+    user: ({ node, username, ...props }) => {
+      return <FetchUserTag userName={username} />;
     },
     vegachart: ({ node, config, ...props }) => {
       // TODO: Zoom doesn't work with Vega Charts

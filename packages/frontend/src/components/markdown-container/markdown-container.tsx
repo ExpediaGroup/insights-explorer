@@ -33,6 +33,7 @@ import urljoin from 'url-join';
 import { remarkCodePlus } from '../../shared/remark/remark-code-plus';
 import { remarkIex } from '../../shared/remark/remark-iex';
 import { remarkIexLogo } from '../../shared/remark/remark-iex-logo';
+import { remarkMentions } from '../../shared/remark/remark-mentions';
 import { isHashUrl, isRelativeUrl } from '../../shared/url-utils';
 import { pick } from '../../shared/utility';
 
@@ -126,7 +127,8 @@ export const MarkdownContainer = memo(
               [
                 remarkCodePlus,
                 { baseUrl: baseAssetUrl, transformAssetUri: transformAssetUri ?? defaultTransformAssetUri }
-              ]
+              ],
+              remarkMentions
             ]}
             rehypePlugins={[
               rehypeRaw,
