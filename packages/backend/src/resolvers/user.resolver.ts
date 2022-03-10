@@ -18,7 +18,7 @@ import logger from '@iex/shared/logger';
 import { Arg, Args, Authorized, Ctx, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
-import { ADMIN_GROUPS, userCache } from '../middleware/oauth-authenticator';
+import { userCache } from '../middleware/oauth-authenticator';
 import { ActivityType } from '../models/activity';
 import { ConnectionArgs } from '../models/connection';
 import { Context } from '../models/context';
@@ -148,8 +148,7 @@ export class UserResolver {
         : await User.query().where('user_name', userInfo.username).first();
 
     // Determine if user is an admin or not
-    // TODO: This doesn't work with GitHub OAuth since we don't have groups
-    user.isAdmin = userInfo?.groups?.some((group) => ADMIN_GROUPS.includes(group)) ?? false;
+    user.isAdmin = ctx.user?.isAdmin ?? false;
 
     logger.debug(`[LOGIN] ${user.userName} logged in...`);
 

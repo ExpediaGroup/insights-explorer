@@ -33,7 +33,17 @@ export const userCache = new NodeCache({
   stdTTL: 600
 });
 
+export const ADMIN_USERNAMES = process.env.ADMIN_USERNAMES?.split(';') ?? [];
+
 export const ADMIN_GROUPS = process.env.OAUTH_OKTA_ADMIN_GROUPS?.split(';') ?? [];
+
+const isAdmin = (userInfo: OAuthUserInfo | undefined, user: User) => {
+  if (ADMIN_USERNAMES.includes(user.userName)) {
+    return true;
+  }
+
+  return userInfo?.groups?.some((group) => ADMIN_GROUPS.includes(group)) ?? false;
+};
 
 /**
  * Middleware for validating OAuth access tokens (if available). If valid, `req.oAuthUserInfo` will be set
@@ -143,7 +153,7 @@ export async function oAuthAuthenticator(req: Request, res: Response, next: Next
         .where('email', email || '')
         .first();
       if (user) {
-        user.isAdmin = userInfo?.groups?.some((group) => ADMIN_GROUPS.includes(group)) ?? false;
+        user.isAdmin = isAdmin(userInfo, user);
 
         logger.debug(`[OAUTH_AUTHENTICATOR] Caching User for: ${email}`);
         userCache.set(accessToken, user);
