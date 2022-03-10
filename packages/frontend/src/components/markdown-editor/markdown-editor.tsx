@@ -68,7 +68,7 @@ const emojiCompleter = {
       emojiList.push({
         name: ':iex:',
         value: ':iex:',
-        caption: `:iex: IEX logo`,
+        caption: `IEX :iex:`,
         meta: 'emoji',
         score: 2000
       });
