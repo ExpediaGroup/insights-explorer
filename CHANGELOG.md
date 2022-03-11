@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.10...v3.4.0) (2022-03-11)
+
+
+### Features
+
+* Add editor suggestions for [@mentions](https://github.com/mentions) ([9aafc7a](https://github.com/ExpediaGroup/insights-explorer/commit/9aafc7a4a690e41ba2396d8b3129ce0aafcf3dfd))
+* Add support for [@mentions](https://github.com/mentions) in Markdown ([838a6c1](https://github.com/ExpediaGroup/insights-explorer/commit/838a6c1e28cb41ba8a1267432a1fc98f43ab80a7))
+* Documented Mentions on Markdown help page ([47357ee](https://github.com/ExpediaGroup/insights-explorer/commit/47357ee4c59f36350496d8035e0d0277716ad57b))
+
+
+### Bug Fixes
+
+* Prevent `:iex:` suggestion from sticking around ([6b9f53c](https://github.com/ExpediaGroup/insights-explorer/commit/6b9f53cc379ee0305589a6d62f85ac2fa865d795))
+
 ### [3.3.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.9...v3.3.10) (2022-03-11)
 
 
