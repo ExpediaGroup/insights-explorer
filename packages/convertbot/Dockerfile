@@ -22,11 +22,6 @@ FROM node:16.13.1-buster
 RUN apt-get update && apt-get install -y \
       nano \
       curl \
-      fonts-dejavu-core \
-      fonts-droid-fallback \
-      fonts-freefont-ttf \
-      fonts-liberation \
-      fonts-noto-mono \
       git \
       ghostscript \
       libreoffice-common \
@@ -35,10 +30,26 @@ RUN apt-get update && apt-get install -y \
       python3-pip \
       texlive-latex-recommended \
       texlive-xetex \
-      texlive-fonts-recommended \
       texlive-generic-recommended \
-      unoconv \
-  && rm -rf /var/lib/apt/lists/*
+      unoconv
+
+# Fonts
+RUN apt-get update && apt-get install -y \
+      fonts-crosextra-caladea \
+      fonts-crosextra-carlito \
+      fonts-dejavu-core \
+      fonts-droid-fallback \
+      fonts-ebgaramond \
+      fonts-firacode \
+      fonts-freefont-ttf \
+      fonts-inconsolata \
+      fonts-liberation2 \
+      fonts-noto-mono \
+      fonts-open-sans \
+      fonts-roboto \
+      texlive-fonts-recommended
+
+RUN rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install nbconvert
 
