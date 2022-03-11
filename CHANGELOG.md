@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.3.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.9...v3.3.10) (2022-03-11)
+
+
+### Bug Fixes
+
+* Remove unused overflow props for markdown container ([d192b0a](https://github.com/ExpediaGroup/insights-explorer/commit/d192b0ae57c26df8ac86fb533336b3e0d7ff77cd))
+
 ### [3.3.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.8...v3.3.9) (2022-03-11)
 
 
