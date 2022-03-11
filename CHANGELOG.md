@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.3.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.7...v3.3.8) (2022-03-11)
+
+
+### Bug Fixes
+
+* Mobile-friendly Insight Draft Switcher ([fd72038](https://github.com/ExpediaGroup/insights-explorer/commit/fd720382de0f77d6aa035a94ebbf75fd3771b0c7))
+
 ### [3.3.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.6...v3.3.7) (2022-03-09)
 
 
