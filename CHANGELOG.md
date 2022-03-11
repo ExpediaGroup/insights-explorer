@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.3.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.8...v3.3.9) (2022-03-11)
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-express from 3.6.3 to 3.6.4 ([7e034ac](https://github.com/ExpediaGroup/insights-explorer/commit/7e034ac59b85e3d4b90e0ce3456b723f432a390e))
+* **deps:** bump axios from 0.25.0 to 0.26.0 ([1864f2b](https://github.com/ExpediaGroup/insights-explorer/commit/1864f2b5f0d3a4b7429067a746224edc26119df3))
+* **deps:** bump isomorphic-git from 1.12.1 to 1.13.1 ([76dac3a](https://github.com/ExpediaGroup/insights-explorer/commit/76dac3a850c6321369085de8bf30111b5608f8c0))
+
 ### [3.3.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.7...v3.3.8) (2022-03-11)
 
 
