@@ -111,7 +111,7 @@ export const MarkdownContainer = memo(
     );
 
     return (
-      <Box overflow="scroll" overflowX="hidden" {...boxProps}>
+      <Box {...boxProps}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <ReactMarkdown
             children={contents}
