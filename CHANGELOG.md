@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.4.0...v3.5.0) (2022-03-14)
+
+
+### Features
+
+* Add environment variable `ADMIN_USERNAMES` ([ceee3f6](https://github.com/ExpediaGroup/insights-explorer/commit/ceee3f6d235249484b2c09054280b457ef0f8250))
+
 ## [3.4.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.3.10...v3.4.0) (2022-03-11)
 
 
