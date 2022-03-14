@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.5.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.0...v3.5.1) (2022-03-14)
+
+
+### Bug Fixes
+
+* **deps:** bump react-markdown from 8.0.0 to 8.0.1 ([5d3f2af](https://github.com/ExpediaGroup/insights-explorer/commit/5d3f2af082d877e1e7fae53d97a068b05842e1d3))
+* **deps:** bump react-syntax-highlighter from 15.4.5 to 15.5.0 ([4616afe](https://github.com/ExpediaGroup/insights-explorer/commit/4616afe567714f4ff795fb264d822032919734e5))
+
 ## [3.5.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.4.0...v3.5.0) (2022-03-14)
 
 
