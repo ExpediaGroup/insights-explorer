@@ -50,7 +50,7 @@
     "react-redux": "7.2.6",
     "react-router-dom": "6.2.2",
     "react-select": "4.3.1",
-    "react-syntax-highlighter": "15.4.5",
+    "react-syntax-highlighter": "15.5.0",
     "react-vega": "7.4.4",
     "redux-persist": "6.0.0",
     "rehype-autolink-headings": "6.1.1",
