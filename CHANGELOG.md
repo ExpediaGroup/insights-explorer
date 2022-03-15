@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.5.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.3...v3.5.4) (2022-03-15)
+
+
+### Bug Fixes
+
+* **convertbot:** Install additional fonts ([58677be](https://github.com/ExpediaGroup/insights-explorer/commit/58677beabd2654a0e7f48a830b49632c3547fb49))
+
 ### [3.5.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.2...v3.5.3) (2022-03-15)
 
 
