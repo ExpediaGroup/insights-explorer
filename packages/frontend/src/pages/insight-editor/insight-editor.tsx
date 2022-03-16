@@ -360,7 +360,7 @@ export const InsightEditor = memo(
           onDiscard={onDiscard}
           onRefresh={onRefresh}
         />
-        <Flex flexDirection="row">
+        <Flex flexDirection={{ base: 'column', md: 'row' }}>
           <InsightEditorSidebar
             insight={insight}
             draftKey={draftKey}
@@ -368,13 +368,14 @@ export const InsightEditor = memo(
             form={form}
             fileTree={fileTree}
             onFileTreeChanged={fileTreeChange}
-            flexBasis={{ base: '16rem', md: '20rem', xl: '22rem' }}
+            flexBasis={{ base: '3rem', md: '20rem', xl: '22rem' }}
             flexShrink={0}
-            maxW={{ base: '16rem', md: '20rem', xl: '26rem' }}
+            maxW={{ base: '26rem', md: '20rem', xl: '26rem' }}
             minW={0}
             borderBottomWidth="1px"
             borderLeftWidth="1px"
-            borderBottomLeftRadius="lg"
+            borderRightWidth="1px"
+            borderBottomLeftRadius={{ base: 'none', md: 'lg' }}
             onSelectFile={(file) => {
               setSelectedFileId(file?.id);
               setTabIndex(1);

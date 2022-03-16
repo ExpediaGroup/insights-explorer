@@ -24,6 +24,7 @@ interface Props {
   accept?: string;
   element?: any;
   dragElement?: any;
+  display?: any;
 }
 
 const defaultElement = (
@@ -38,7 +39,13 @@ const defaultDragElement = (
   </Box>
 );
 
-export const FileUploadArea = ({ onDrop, accept = DROPZONE_ACCEPT_ALL_FILES, element, dragElement }: Props) => {
+export const FileUploadArea = ({
+  onDrop,
+  accept = DROPZONE_ACCEPT_ALL_FILES,
+  element,
+  dragElement,
+  display
+}: Props) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept
@@ -52,6 +59,7 @@ export const FileUploadArea = ({ onDrop, accept = DROPZONE_ACCEPT_ALL_FILES, ele
       borderStyle="dashed"
       borderColor={isDragActive ? 'green.200' : 'gray.100'}
       cursor="pointer"
+      display={display}
     >
       <input className="dropzone-input" {...getInputProps()} />
       {isDragActive ? dragElement ?? defaultDragElement : element ?? defaultElement}
