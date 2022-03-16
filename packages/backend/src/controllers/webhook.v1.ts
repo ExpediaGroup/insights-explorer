@@ -39,6 +39,13 @@ export const hook = (req: Request, res: Response): void => {
     }
   };
 
+  // Remove some un-needed fields
+  delete webhook.enterprise;
+  delete webhook.master_branch;
+  delete webhook.sender;
+  delete webhook.team;
+  delete webhook.zen;
+
   // Track webhooks in Elasticsearch
   defaultElasticsearchClient.index({
     index: ElasticIndex.WEBHOOKS,
