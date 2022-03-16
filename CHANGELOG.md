@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.5.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.5...v3.5.6) (2022-03-16)
+
+
+### Bug Fixes
+
+* Update Webhooks mapping ([278bf87](https://github.com/ExpediaGroup/insights-explorer/commit/278bf878257386995ed32fb0e327d9d11775bf2f))
+
 ### [3.5.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.4...v3.5.5) (2022-03-16)
 
 
