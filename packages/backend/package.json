@@ -30,7 +30,7 @@
     "@types/turndown": "5.0.1",
     "apollo-server-core": "3.6.3",
     "apollo-server-express": "3.6.4",
-    "aws-sdk": "2.1093.0",
+    "aws-sdk": "2.1095.0",
     "axios": "0.26.1",
     "better-queue": "3.8.10",
     "chardet": "1.4.0",
