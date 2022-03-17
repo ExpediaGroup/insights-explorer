@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 import { useDropzone } from 'react-dropzone';
 
 export const DROPZONE_ACCEPT_ALL_FILES = '';
@@ -24,7 +24,6 @@ interface Props {
   accept?: string;
   element?: any;
   dragElement?: any;
-  display?: any;
 }
 
 const defaultElement = (
@@ -44,8 +43,8 @@ export const FileUploadArea = ({
   accept = DROPZONE_ACCEPT_ALL_FILES,
   element,
   dragElement,
-  display
-}: Props) => {
+  ...props
+}: Props & Omit<BoxProps, 'onDrop'>) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept
@@ -59,7 +58,7 @@ export const FileUploadArea = ({
       borderStyle="dashed"
       borderColor={isDragActive ? 'green.200' : 'gray.100'}
       cursor="pointer"
-      display={display}
+      {...props}
     >
       <input className="dropzone-input" {...getInputProps()} />
       {isDragActive ? dragElement ?? defaultDragElement : element ?? defaultElement}

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { useBreakpointValue } from '@chakra-ui/media-query';
 import {
   Button,
   Box,
@@ -175,7 +176,9 @@ export const SidebarFiles = ({
     onTreeChanged(tree);
   };
 
-  const [isMobile] = useMediaQuery('(max-width: 768px)');
+  // TODO: there's an issue where it first returns true and then false later on but the render is based on the first response
+  const isMobile = useBreakpointValue({ base: true, md: false });
+  console.log(`isMobile: ${isMobile}`);
 
   const { isOpen: filesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: !isMobile });
 
