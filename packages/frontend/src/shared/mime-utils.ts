@@ -92,6 +92,7 @@ const mimeTypes: MimeTypeDefinition[] = [
   { mimeType: 'text/x-groovy', editorLanguage: 'groovy', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },
   { mimeType: 'text/x-java-source', editorLanguage: 'java', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },
   { mimeType: 'text/x-python', editorLanguage: 'python', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },
+  { mimeType: 'text/x-r', editorLanguage: 'r', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },
   { mimeType: 'text/x-ruby', editorLanguage: 'ruby', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },
   { mimeType: 'text/x-scala', editorLanguage: 'scala', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },
   { mimeType: 'text/yaml', editorLanguage: 'yaml', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },
@@ -102,6 +103,8 @@ export function getMimeTypeDefinition(mimeType?: string): MimeTypeDefinition | u
   if (mimeType === undefined) {
     return undefined;
   }
+
+  mimeType = mimeType.toLowerCase();
 
   const exactMatch = mimeTypes.find((m) => m.mimeType === mimeType);
   if (exactMatch !== undefined) {
@@ -142,6 +145,7 @@ const extentionToMime = {
   ppt: 'application/vnd.ms-powerpoint',
   pptx: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
   py: 'text/x-python',
+  r: 'text/x-r',
   rb: 'text/x-ruby',
   scala: 'text/x-scala',
   sh: 'application/x-sh',
@@ -180,7 +184,7 @@ export function getLanguageForMime(mimeType: string): string {
 export function getMimeForFileName(fileName?: string, fallback = 'text/plain'): string {
   if (fileName !== undefined) {
     const extension = fileName.split('.').pop() ?? fileName;
-    const mimeType = extentionToMime[extension];
+    const mimeType = extentionToMime[extension.toLowerCase()];
 
     if (mimeType !== undefined) {
       return mimeType;

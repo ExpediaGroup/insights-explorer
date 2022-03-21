@@ -32,6 +32,7 @@ mime.define(
     'text/x-go': ['go'],
     'text/x-groovy': ['groovy', 'pipeline'],
     'text/x-python': ['py'],
+    'text/x-r': ['r'],
     'text/x-ruby': ['rb'],
     'text/x-scala': ['scala'],
 

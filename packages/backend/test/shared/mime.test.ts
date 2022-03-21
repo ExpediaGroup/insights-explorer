@@ -190,6 +190,12 @@ describe('mime', () => {
       const type = getType('video.webm');
       expect(type).toBe('video/webm');
     });
+    test('R', () => {
+      const type = getType('code.r');
+      const type2 = getType('code.R');
+      expect(type).toBe('text/x-r');
+      expect(type2).toBe('text/x-r');
+    });
   });
   describe('getTypeAsync', () => {
     test('Jenkinsfile (filename)', async () => {

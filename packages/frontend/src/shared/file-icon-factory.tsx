@@ -45,6 +45,7 @@ import {
   SiMicrosoftword,
   SiPython,
   SiQuicktime,
+  SiRstudio,
   SiRuby,
   SiScala,
   SiTypescript
@@ -186,6 +187,10 @@ const icons: Record<string, FileIcon> = {
   },
   'text/x-python': {
     icon: SiPython,
+    color: COLORS.blue
+  },
+  'text/x-r': {
+    icon: SiRstudio,
     color: COLORS.blue
   },
   'text/x-ruby': {
