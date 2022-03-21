@@ -92,7 +92,7 @@
     "@types/jest": "27.4.1",
     "@types/js-yaml": "4.0.5",
     "@types/jsonfile": "6.1.0",
-    "@types/lodash": "4.14.179",
+    "@types/lodash": "4.14.180",
     "@types/luxon": "2.3.1",
     "@types/mime": "2.0.3",
     "@types/module-alias": "2.0.1",
