@@ -176,31 +176,26 @@ export const SidebarFiles = ({
     onTreeChanged(tree);
   };
 
-  // TODO: there's an issue where it first returns true and then false later on but the render is based on the first response
   const isMobile = useBreakpointValue({ base: true, md: false });
-  console.log(`isMobile: ${isMobile}`);
 
-  const { isOpen: filesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: !isMobile });
+  const { isOpen: mobileFilesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: false });
 
   return (
     <Flex direction="column" align="stretch" {...flexProps}>
-      <HStack spacing="space-between" onClick={onFilesToggle}>
-        <SidebarHeading p="1rem" pb={0}>
-          Files
-        </SidebarHeading>
+      <HStack spacing="space-between" onClick={onFilesToggle} align="center">
         <IconButton
           size="sm"
           display={{ base: 'flex', sm: 'none' }}
           aria-label={'Expand/collapse'}
           variant="ghost"
-          pt="1rem"
-          icon={filesOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown')}
-          title={filesOpen ? 'Collapse the files section' : 'Expand the files section'}
+          icon={mobileFilesOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown')}
+          title={mobileFilesOpen ? 'Collapse the files section' : 'Expand the files section'}
         />
+        <SidebarHeading p="0.5rem">Files</SidebarHeading>
       </HStack>
-      <Collapse in={filesOpen} animateOpacity>
+      <Collapse in={!isMobile || mobileFilesOpen} animateOpacity>
         <FileBrowser
-          mt="-1.75rem"
+          mt="-2rem"
           mb="1rem"
           tree={tree}
           actions={{
