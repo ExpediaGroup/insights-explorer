@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.5.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.6...v3.5.7) (2022-03-21)
+
+
+### Bug Fixes
+
+* **deps:** bump @emotion/react from 11.8.1 to 11.8.2 ([bffb2f7](https://github.com/ExpediaGroup/insights-explorer/commit/bffb2f7b0ed9658a881b726d4eb0008f69e0fa22))
+* **deps:** bump apollo-server-core from 3.6.3 to 3.6.4 ([3b1cdbc](https://github.com/ExpediaGroup/insights-explorer/commit/3b1cdbcaff9e7c27d10c5d598f044cc1d3c41959))
+* Fix issue with R file mime type ([e1c0b0e](https://github.com/ExpediaGroup/insights-explorer/commit/e1c0b0e0cff172ab8cb956253277e6e31c627d6c))
+* Mobile-friendly Create/Edit Insight ([#587](https://github.com/ExpediaGroup/insights-explorer/issues/587)) ([80c9ff1](https://github.com/ExpediaGroup/insights-explorer/commit/80c9ff1732ed288b13b9fdbda0af89b00b27ff82))
+
 ### [3.5.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.5...v3.5.6) (2022-03-16)
 
 
