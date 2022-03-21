@@ -26,7 +26,6 @@ import {
   Spinner,
   Text,
   useDisclosure,
-  useMediaQuery,
   useToast,
   VStack,
   HStack
