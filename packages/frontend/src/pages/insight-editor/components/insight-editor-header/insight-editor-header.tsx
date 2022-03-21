@@ -32,6 +32,7 @@ import {
   Heading,
   HStack,
   Input,
+  Stack,
   Tag,
   Text,
   useDisclosure,
@@ -172,18 +173,20 @@ export const InsightEditorHeader = ({ insight, isPublishing, isSavingDraft, form
             )}
             <FormErrorMessage>{formatFormError(errors.commitMessage)}</FormErrorMessage>
           </FormControl>
-          <Button variant="link" px="1rem" p="0.5rem" width={{ base: '100%', md: 'unset' }} onClick={onDiscardOpen}>
-            Discard
-          </Button>
-          <Button
-            width={{ base: '100%', md: 'unset' }}
-            bg="green.400"
-            type="submit"
-            isDisabled={!canEdit}
-            isLoading={isPublishing || isSavingDraft}
-          >
-            Publish
-          </Button>
+          <Stack direction="row" align="stretch" mt={{ base: '0.5rem', md: 'unset' }}>
+            <Button variant="link" px="1rem" p="0.5rem" width={{ base: '100%', md: 'unset' }} onClick={onDiscardOpen}>
+              Discard
+            </Button>
+            <Button
+              width={{ base: '100%', md: 'unset' }}
+              bg="green.400"
+              type="submit"
+              isDisabled={!canEdit}
+              isLoading={isPublishing || isSavingDraft}
+            >
+              Publish
+            </Button>
+          </Stack>
         </Flex>
       </Flex>
 

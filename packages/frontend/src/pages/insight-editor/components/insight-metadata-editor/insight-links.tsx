@@ -19,7 +19,6 @@ import {
   FormControl,
   FormHelperText,
   FormLabel,
-  HStack,
   IconButton,
   Input,
   InputGroup,
@@ -49,7 +48,7 @@ export const InsightLinks = ({ insight, form }) => {
         <FormLabel>Links</FormLabel>
         <VStack spacing="1rem" align="stretch" justify="stretch">
           {fields.map((field, index) => (
-            <Stack key={`links-${index}`} direction={{ base: 'column', '2xl': 'row' }} align="stretch">
+            <Stack key={`links-${index}`} direction="column" align="stretch">
               <InputGroup>
                 <InputLeftElement
                   pointerEvents="none"
@@ -62,21 +61,23 @@ export const InsightLinks = ({ insight, form }) => {
                   {...register(`links.${index}.url`)}
                 />
               </InputGroup>
-              <HStack>
+              <Stack direction={{ base: 'column', md: 'row' }}>
                 <Input
                   placeholder={`Name`}
                   errorBorderColor="red.300"
                   flexBasis="50%%"
                   {...register(`links.${index}.name`)}
                 />
-                <Input
-                  placeholder={`Group (Optional)`}
-                  errorBorderColor="red.300"
-                  flexBasis="50%"
-                  {...register(`links.${index}.group`)}
-                />
-                <IconButton icon={iconFactoryAs('trash')} onClick={() => remove(index)} aria-label="Remove link" />
-              </HStack>
+                <Stack direction="row" flexBasis="65%">
+                  <Input
+                    placeholder={`Group (Optional)`}
+                    errorBorderColor="red.300"
+                    flexBasis="100%"
+                    {...register(`links.${index}.group`)}
+                  />
+                  <IconButton icon={iconFactoryAs('trash')} onClick={() => remove(index)} aria-label="Remove link" />
+                </Stack>
+              </Stack>
             </Stack>
           ))}
           <Button

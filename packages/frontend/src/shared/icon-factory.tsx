@@ -87,6 +87,7 @@ import {
   VscChevronLeft,
   VscChevronRight,
   VscCircuitBoard,
+  VscCloudUpload,
   VscCode,
   VscDebugDisconnect,
   VscError,
@@ -186,6 +187,7 @@ const icons = {
   undo: GrUndo,
   unknown: GrStatusUnknown,
   updateDate: MdUpdate,
+  upload: VscCloudUpload,
   user: FaUserCircle,
   userMissing: FaUserTimes,
   warning: VscWarning

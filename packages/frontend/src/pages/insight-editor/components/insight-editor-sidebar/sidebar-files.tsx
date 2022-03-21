@@ -14,7 +14,22 @@
  * limitations under the License.
  */
 
-import { Flex, FlexProps, Spinner, Text, useToast, VStack } from '@chakra-ui/react';
+import { useBreakpointValue } from '@chakra-ui/media-query';
+import {
+  Button,
+  Box,
+  Collapse,
+  Flex,
+  FlexProps,
+  Icon,
+  IconButton,
+  Spinner,
+  Text,
+  useDisclosure,
+  useToast,
+  VStack,
+  HStack
+} from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { useCallback, useState } from 'react';
 import { gql } from 'urql';
@@ -25,6 +40,7 @@ import { SidebarHeading } from '../../../../components/sidebar-heading/sidebar-h
 import { FileOrFolder, InsightFile, InsightFileAction, InsightFolder } from '../../../../models/file-tree';
 import { UploadSingleFileMutation } from '../../../../models/generated/graphql';
 import { InsightFileTree } from '../../../../shared/file-tree';
+import { iconFactory, iconFactoryAs } from '../../../../shared/icon-factory';
 import { urqlClient } from '../../../../urql';
 
 const UPLOAD_SINGLE_FILE_MUTATION = gql`
@@ -159,44 +175,67 @@ export const SidebarFiles = ({
     onTreeChanged(tree);
   };
 
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
+  const { isOpen: mobileFilesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: false });
+
   return (
     <Flex direction="column" align="stretch" {...flexProps}>
-      <SidebarHeading p="1rem" pb={0}>
-        Files
-      </SidebarHeading>
-      <FileBrowser
-        mt="-1.75rem"
-        mb="1rem"
-        tree={tree}
-        actions={{
-          onSelect: (f) => {
-            // Ignore folders which have trees
-            if (f === undefined || !('tree' in f)) {
-              onSelectFile(f);
-            }
-          },
-          onDelete: (f, force = false) => onDelete(f, true, force),
-          onNewFile,
-          onNewFolder,
-          onRename,
-          onUndelete: (f) => onDelete(f, false, false)
-        }}
-      />
+      <HStack spacing="space-between" onClick={onFilesToggle} align="center">
+        <IconButton
+          size="sm"
+          display={{ base: 'flex', sm: 'none' }}
+          aria-label={'Expand/collapse'}
+          variant="ghost"
+          icon={mobileFilesOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown')}
+          title={mobileFilesOpen ? 'Collapse the files section' : 'Expand the files section'}
+        />
+        <SidebarHeading p="0.5rem">Files</SidebarHeading>
+      </HStack>
+      <Collapse in={!isMobile || mobileFilesOpen} animateOpacity>
+        <FileBrowser
+          mt="-2rem"
+          mb="1rem"
+          tree={tree}
+          actions={{
+            onSelect: (f) => {
+              // Ignore folders which have trees
+              if (f === undefined || !('tree' in f)) {
+                onSelectFile(f);
+              }
+            },
+            onDelete: (f, force = false) => onDelete(f, true, force),
+            onNewFile,
+            onNewFolder,
+            onRename,
+            onUndelete: (f) => onDelete(f, false, false)
+          }}
+        />
 
-      {uploading && (
-        <VStack spacing="0.5rem" align="center">
-          <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
-          <Text>Uploading...</Text>
-        </VStack>
-      )}
-      {!uploading && (
-        <>
-          <FileUploadArea onDrop={onDropFile} />
-          <Text as="em" fontSize="xs">
-            Maximum file size is 100MB.
-          </Text>
-        </>
-      )}
+        {uploading && (
+          <VStack spacing="0.5rem" align="center">
+            <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
+            <Text>Uploading...</Text>
+          </VStack>
+        )}
+        {!uploading && (
+          <Box p="0.5rem">
+            <FileUploadArea onDrop={onDropFile} display={{ base: 'none', md: 'flex' }} />
+            <Button
+              width={{ base: '100%', md: 'unset' }}
+              display={{ base: 'flex', md: 'none' }}
+              bg="blue.400"
+              type="submit"
+            >
+              <Icon as={iconFactory('upload')} mr="0.5rem" />
+              Upload File
+            </Button>
+            <Text as="em" fontSize="xs">
+              Maximum file size is 100MB.
+            </Text>
+          </Box>
+        )}
+      </Collapse>
     </Flex>
   );
 };
