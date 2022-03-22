@@ -7,20 +7,22 @@ plugins:
   - '@typescript-eslint'
   - jsx-a11y
 extends:
-  - react-app
   - eslint:recommended
   - plugin:@typescript-eslint/recommended
   - plugin:import/errors
   - plugin:import/typescript
   - plugin:prettier/recommended
   - plugin:jsx-a11y/recommended
+  - plugin:react-hooks/recommended
 rules:
+  '@typescript-eslint/consistent-type-imports': off
   '@typescript-eslint/explicit-function-return-type': off
   '@typescript-eslint/no-explicit-any': off
+  '@typescript-eslint/no-unused-vars': off
   '@typescript-eslint/explicit-module-boundary-types': off
   import/newline-after-import: off
   import/order:
-    - error
+    - off
     - groups:
         - builtin
         - external
@@ -32,3 +34,26 @@ rules:
         order: asc
         caseInsensitive: true
       newlines-between: always
+  no-console: ['off']
+  unicorn/better-regex: off
+  unicorn/catch-error-name: off
+  unicorn/consistent-destructuring: off
+  unicorn/consistent-function-scoping: off
+  unicorn/explicit-length-check: off
+  unicorn/filename-case: off
+  unicorn/new-for-builtins: off
+  unicorn/no-array-callback-reference: off
+  unicorn/no-array-for-each: off
+  unicorn/no-lonely-if: off
+  unicorn/no-new-array: off
+  unicorn/no-useless-undefined: off
+  unicorn/prefer-code-point: off
+  unicorn/prefer-export-from: off
+  unicorn/prefer-math-trunc: off
+  unicorn/prefer-number-properties: off
+  unicorn/prefer-optional-catch-binding: off
+  unicorn/prefer-regexp-test: off
+  unicorn/prefer-spread: off
+  unicorn/prefer-string-slice: off
+  unicorn/prefer-string-starts-ends-with: off
+  unicorn/prefer-ternary: off

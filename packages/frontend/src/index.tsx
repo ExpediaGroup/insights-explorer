@@ -15,18 +15,19 @@
  */
 
 import { ChakraProvider, ColorModeScript, useColorMode } from '@chakra-ui/react';
-import { DOMAttributes, useEffect } from 'react';
+import type { DOMAttributes } from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import { Provider as Redux } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
+
 import { Provider as UrqlProvider } from 'urql';
 
 import { AnalyticsHandler } from './components/analytics-handler/analytics-handler';
 import { GlobalErrors } from './pages/main-page/components/global-errors/global-errors';
 import { MainPage } from './pages/main-page/main-page';
-import * as serviceWorker from './serviceWorker';
 import { initSettings } from './store/app.slice';
 import { store, persistor } from './store/store';
 import { IexTheme } from './theme';
@@ -80,7 +81,7 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.querySelector('#root'));
 
 // Enable axe-core
 // https://github.com/dequelabs/axe-core-npm/tree/develop/packages/react
@@ -89,8 +90,3 @@ ReactDOM.render(<App />, document.getElementById('root'));
 //   const axe = require('@axe-core/react');
 //   axe(React, ReactDOM, 1000);
 // }
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

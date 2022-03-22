@@ -20,7 +20,6 @@ import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/theme-chrome';
 import 'ace-builds/src-noconflict/theme-nord_dark';
-import 'ace-builds/webpack-resolver';
 
 import { useDebounce } from '../../shared/useDebounce';
 

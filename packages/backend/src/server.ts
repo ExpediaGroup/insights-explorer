@@ -71,7 +71,7 @@ export async function createServer(): Promise<express.Express> {
   });
 
   // Serve front-end
-  const frontendDir = path.join(__dirname, '../../../frontend/build');
+  const frontendDir = path.join(__dirname, '../../../frontend/dist');
 
   app.use(
     express.static(frontendDir, {

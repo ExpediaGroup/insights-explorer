@@ -86,30 +86,39 @@
     "@types/react-router-dom": "5.3.3",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
+    "@vitejs/plugin-react": "1.2.0",
+    "esbuild": "0.14.27",
+    "esbuild-jest": "0.5.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.4.0",
     "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "jest": "27.5.1",
     "prettier": "2.5.1",
-    "react-scripts": "4.0.3",
     "source-map-explorer": "2.5.2",
-    "typescript": "4.5.5"
+    "typescript": "4.5.5",
+    "vite": "2.8.4"
   },
   "scripts": {
-    "clean": "rm -rf ./build && rm -f tsconfig.tsbuildinfo",
+    "clean": "rm -rf ./dist && rm -f tsconfig.tsbuildinfo",
     "clean:deep": "rm -rf node_modules",
-    "start": "react-scripts start",
-    "build": "tsc --build && npm run build:react",
-    "build:react": "react-scripts build",
-    "test": "CI=true react-scripts test --passWithNoTests",
-    "test:watch": "CI=true react-scripts test --passWithNoTests --watch",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "start": "npm run dev",
+    "build": "tsc --build && vite build",
+    "build:react": "vite build",
+    "preview": "vite preview",
     "prune:production": "rm -rf ./node_modules",
+    "----": "-----------------------------------",
+    "test": "jest --coverage --verbose --detectOpenHandles",
+    "test:watch": "npm run test -- --watch",
     "------": "------------------------------------",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --fix",
+    "prettier": "prettier --check .",
     "-------": "------------------------------------",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'dist/assets/*.js'"
   },
   "browserslist": {
     "production": [
@@ -122,6 +131,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:3001"
+  }
 }
