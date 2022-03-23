@@ -15,6 +15,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+
 import { CombinedError, gql } from 'urql';
 
 import { AutocompleteResults, SearchResult, Sort } from '../models/generated/graphql';

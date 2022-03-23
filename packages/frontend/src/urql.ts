@@ -18,8 +18,9 @@ import { cacheExchange, KeyGenerator } from '@urql/exchange-graphcache';
 import type { IntrospectionData } from '@urql/exchange-graphcache/dist/types/ast/schema';
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch';
 import { retryExchange } from '@urql/exchange-retry';
-import { createClient, dedupExchange, OperationResult, Operation } from 'urql';
 import { Source, pipe, tap } from 'wonka';
+
+import { createClient, dedupExchange, OperationResult, Operation } from 'urql';
 
 import schema from './introspection.json';
 import { Draft } from './models/generated/graphql';

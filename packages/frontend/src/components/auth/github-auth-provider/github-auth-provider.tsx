@@ -18,6 +18,7 @@ import { Spinner, Text, VStack } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+
 import { gql } from 'urql';
 
 import { RootState } from '../../../store/store';

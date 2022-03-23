@@ -18,6 +18,7 @@ import { BoxProps, StackDivider, VStack } from '@chakra-ui/react';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+
 import { gql, useQuery } from 'urql';
 
 import { AutocompleteFilterSidebarQuery, AutocompleteResults } from '../../../../models/generated/graphql';

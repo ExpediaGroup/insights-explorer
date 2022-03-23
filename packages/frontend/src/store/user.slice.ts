@@ -15,6 +15,7 @@
  */
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { gql } from 'urql';
 
 import { LOCAL_STORAGE_PREFIX } from '../components/auth/github-auth-provider/github-auth-provider';

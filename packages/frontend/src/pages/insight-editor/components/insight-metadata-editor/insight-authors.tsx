@@ -17,6 +17,7 @@
 import { FormControl, FormHelperText, FormLabel, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import { Controller } from 'react-hook-form';
 import CreatableSelect from 'react-select/creatable';
+
 import { gql, useQuery } from 'urql';
 
 import { UsersAsAuthorsQuery } from '../../../../models/generated/graphql';
