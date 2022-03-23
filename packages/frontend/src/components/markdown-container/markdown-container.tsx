@@ -114,7 +114,7 @@ export const MarkdownContainer = memo(
     );
 
     return (
-      <Box {...boxProps}>
+      <Box {...boxProps} className="iex-markdown-container">
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <ReactMarkdown
             children={contents}
