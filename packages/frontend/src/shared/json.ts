@@ -16,5 +16,5 @@
 
 export const looseJsonParse = (jsonString: string) => {
   // eslint-disable-next-line no-new-func
-  return Function('"use strict";return (' + jsonString + ')')();
+  return new Function('"use strict";return (' + jsonString + ')')();
 };
