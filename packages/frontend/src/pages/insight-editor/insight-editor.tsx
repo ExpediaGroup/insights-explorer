@@ -31,14 +31,13 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import urljoin from 'url-join';
 
 import { gql, useMutation, useQuery } from 'urql';
 
 import { FileOrFolder, InsightFileAction } from '../../models/file-tree';
 import { Insight, InsightFileInput, UploadSingleFileMutation } from '../../models/generated/graphql';
 import { InsightFileTree, isFile } from '../../shared/file-tree';
-import { isRelativeUrl } from '../../shared/url-utils';
+import { isRelativeUrl, urljoin } from '../../shared/url-utils';
 import { useDebounce } from '../../shared/useDebounce';
 import { RootState } from '../../store/store';
 import { urqlClient } from '../../urql';

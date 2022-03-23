@@ -29,7 +29,10 @@ rules:
   unicorn/no-array-for-each: off
   unicorn/no-lonely-if: off
   unicorn/no-useless-undefined: off
-  unicorn/prefer-export-from: off
+  unicorn/prefer-export-from:
+    - warn
+    -
+      ignoreUsedVariables: true
   unicorn/prefer-spread: off
   unicorn/prefer-ternary:
     - warn

@@ -28,13 +28,12 @@ import remarkDirective from 'remark-directive';
 import remarkEmoji from 'remark-emoji';
 import remarkGfm from 'remark-gfm';
 import remarkToc from 'remark-toc';
-import urljoin from 'url-join';
 
 import { remarkCodePlus } from '../../shared/remark/remark-code-plus';
 import { remarkIex } from '../../shared/remark/remark-iex';
 import { remarkIexLogo } from '../../shared/remark/remark-iex-logo';
 import { remarkMentions } from '../../shared/remark/remark-mentions';
-import { isHashUrl, isRelativeUrl } from '../../shared/url-utils';
+import { isHashUrl, isRelativeUrl, urljoin } from '../../shared/url-utils';
 import { pick } from '../../shared/utility';
 
 import { ChakraUIRenderer } from './chakra-ui-renderer';

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import urljoin from 'url-join';
+import { default as urljoin } from 'url-join';
 
 export function isAbsoluteUrl(url: string) {
   return /^[a-z][\d+.a-z-]*:|\/\//.test(url);
