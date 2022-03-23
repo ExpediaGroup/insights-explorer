@@ -41,13 +41,13 @@ export function destring(value: string | Array<any> | Record<string, string>): a
     return Number.parseInt(value, 2);
   }
   // try parse int
-  if (value.match(/^-?\d+$/)) {
+  if (/^-?\d+$/.test(value)) {
     return Number.parseInt(value, 10);
   }
-  if (value.match(/^-?\d*\.\d+$/)) {
+  if (/^-?\d*\.\d+$/.test(value)) {
     return Number.parseFloat(value);
   }
-  if (value.match(/^-?\d*\.\d*(e[+-]?\d+)?$/)) {
+  if (/^-?\d*\.\d*(e[+-]?\d+)?$/.test(value)) {
     return Number.parseFloat(value);
   }
 

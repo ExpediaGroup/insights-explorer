@@ -34,7 +34,6 @@ rules:
   unicorn/no-useless-undefined: off
   unicorn/prefer-export-from: off
   unicorn/prefer-optional-catch-binding: off
-  unicorn/prefer-regexp-test: off
   unicorn/prefer-spread: off
   unicorn/prefer-string-starts-ends-with: off
   unicorn/prefer-ternary: off
