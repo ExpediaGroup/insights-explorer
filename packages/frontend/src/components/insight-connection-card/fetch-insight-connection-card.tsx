@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import { BoxProps, Progress } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Progress } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import { useInsight } from '../../shared/useInsight';
 import { Alert } from '../alert/alert';
-import { InsightConnectionCard, InsightConnectionCardProps } from '../insight-connection-card/insight-connection-card';
+import type { InsightConnectionCardProps } from '../insight-connection-card/insight-connection-card';
+import { InsightConnectionCard } from '../insight-connection-card/insight-connection-card';
 
 type Props = Omit<InsightConnectionCardProps, 'insightEdge'> & { fullName: string };
 

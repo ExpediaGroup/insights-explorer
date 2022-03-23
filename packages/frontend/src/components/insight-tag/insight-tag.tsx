@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Tag, TagLabel, TagProps } from '@chakra-ui/react';
+import type { TagProps } from '@chakra-ui/react';
+import { Tag, TagLabel } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 
 import { searchSlice } from '../../store/search.slice';

@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-import { Box, BoxProps, Flex, VStack } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Box, Flex, VStack } from '@chakra-ui/react';
 
 import { FetchActivityList } from '../../../../../../components/activity-list/fetch-activity-list';
 import { Crumbs } from '../../../../../../components/crumbs/crumbs';
-import { Insight } from '../../../../../../models/generated/graphql';
+import type { Insight } from '../../../../../../models/generated/graphql';
 
 interface Props {
   insight: Insight;

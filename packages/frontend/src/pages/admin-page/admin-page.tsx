@@ -18,7 +18,8 @@ import { Flex, Text, VStack } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet';
 import { Route, Routes } from 'react-router-dom';
 
-import { SettingsSection, SettingsSidebar } from '../../components/settings-sidebar/settings-sidebar';
+import type { SettingsSection } from '../../components/settings-sidebar/settings-sidebar';
+import { SettingsSidebar } from '../../components/settings-sidebar/settings-sidebar';
 import { ErrorPage } from '../error-page/error-page';
 
 import { NewsAdmin } from './components/news-admin/news-admin';

@@ -15,9 +15,9 @@
  */
 
 import { Box, Icon, Link, MenuItem, Square } from '@chakra-ui/react';
-import { MouseEventHandler, ReactChildren, ReactElement } from 'react';
-import { IconType } from 'react-icons';
-import { LinkProps } from 'react-router-dom';
+import type { MouseEventHandler, ReactChildren, ReactElement } from 'react';
+import type { IconType } from 'react-icons';
+import type { LinkProps } from 'react-router-dom';
 
 import { Link as RouterLink } from '../link/link';
 

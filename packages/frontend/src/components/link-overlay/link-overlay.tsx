@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-import { LinkOverlay as ChakraLinkOverlay, LinkOverlayProps as ChakraLinkOverlayProps } from '@chakra-ui/react';
-import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
+import type { LinkOverlayProps as ChakraLinkOverlayProps } from '@chakra-ui/react';
+import { LinkOverlay as ChakraLinkOverlay } from '@chakra-ui/react';
+import type { LinkProps as RouterLinkProps } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 /**
  * Custom link overlay component that composes Chakra-UI presentation with React Router functionality

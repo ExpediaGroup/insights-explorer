@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { BoxProps, Progress } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Progress } from '@chakra-ui/react';
 import { lazy, Suspense } from 'react';
 
 const VegaRenderer = lazy(() => import(/* webpackChunkName: "vega-renderer" */ './vega-renderer'));

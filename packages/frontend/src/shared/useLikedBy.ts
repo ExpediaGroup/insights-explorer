@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { gql, TypedDocumentNode } from 'urql';
+import type { TypedDocumentNode } from 'urql';
+import { gql } from 'urql';
 
-import { User } from '../models/generated/graphql';
+import type { User } from '../models/generated/graphql';
 import { urqlClient } from '../urql';
 
 type LikedByType = 'insight' | 'comment' | 'activity' | 'news';

@@ -26,7 +26,7 @@ import { Alert } from '../../components/alert/alert';
 import { generateSearchUrl } from '../../shared/search-url';
 import { useActivities } from '../../shared/useActivities';
 import { activitySlice } from '../../store/activity.slice';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 
 import { ActivityFilterSidebar } from './components/activity-filter-sidebar/activity-filter-sidebar';
 import { ActivitySearchBar } from './components/activity-search-bar/activity-search-bar';

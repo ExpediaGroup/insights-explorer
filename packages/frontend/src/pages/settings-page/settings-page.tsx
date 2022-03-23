@@ -24,9 +24,10 @@ import { useQuery, useMutation, gql } from 'urql';
 
 import { Alert } from '../../components/alert/alert';
 import { Link } from '../../components/link/link';
-import { SettingsSection, SettingsSidebar } from '../../components/settings-sidebar/settings-sidebar';
+import type { SettingsSection } from '../../components/settings-sidebar/settings-sidebar';
+import { SettingsSidebar } from '../../components/settings-sidebar/settings-sidebar';
 import { iconFactory } from '../../shared/icon-factory';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { executeHealthCheck, userSlice } from '../../store/user.slice';
 import { ErrorPage } from '../error-page/error-page';
 

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
+import type { BoxProps } from '@chakra-ui/react';
 import {
   Badge,
   Box,
-  BoxProps,
   Heading,
   HStack,
   LinkBox,
@@ -35,7 +35,7 @@ import { InsightTag } from '../../../insight-tag/insight-tag';
 import { ItemTypeIcon } from '../../../item-type-icon/item-type-icon';
 import { LinkOverlay } from '../../../link-overlay/link-overlay';
 import { UserTag } from '../../../user-tag/user-tag';
-import { InsightConnectionCardProps } from '../../insight-connection-card';
+import type { InsightConnectionCardProps } from '../../insight-connection-card';
 import { InsightStats } from '../insight-stats/insight-stats';
 
 export const SquareInsightCard = ({ insightEdge, options, ...props }: InsightConnectionCardProps & BoxProps) => {

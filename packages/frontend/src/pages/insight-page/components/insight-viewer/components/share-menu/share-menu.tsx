@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import type { BoxProps } from '@chakra-ui/react';
 import {
-  BoxProps,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -30,7 +30,7 @@ import {
 import { IconButtonMenu } from '../../../../../../components/icon-button-menu/icon-button-menu';
 import { IexMenuItem } from '../../../../../../components/iex-menu-item/iex-menu-item';
 import { CodeRenderer } from '../../../../../../components/renderers/code-renderer/code-renderer';
-import { Insight } from '../../../../../../models/generated/graphql';
+import type { Insight } from '../../../../../../models/generated/graphql';
 import { iconFactory } from '../../../../../../shared/icon-factory';
 
 const EmbedModal = ({ insight }: { insight: Insight }) => {

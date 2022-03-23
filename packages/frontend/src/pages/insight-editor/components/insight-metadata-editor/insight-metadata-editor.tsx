@@ -33,18 +33,19 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { Controller, UseFormReturn, useWatch } from 'react-hook-form';
+import type { UseFormReturn } from 'react-hook-form';
+import { Controller, useWatch } from 'react-hook-form';
 import Select from 'react-select';
 import titleize from 'titleize';
 
 import { gql, useQuery } from 'urql';
 
 import { Alert } from '../../../../components/alert/alert';
-import { Insight } from '../../../../models/generated/graphql';
+import type { Insight } from '../../../../models/generated/graphql';
 import { formatFormError } from '../../../../shared/form-utils';
 import { iconFactory, iconFactoryAs } from '../../../../shared/icon-factory';
 import { ItemType } from '../../../../shared/item-type';
-import { DraftForm } from '../../draft-form';
+import type { DraftForm } from '../../draft-form';
 
 import { InsightAuthors } from './insight-authors';
 import { InsightLinks } from './insight-links';

@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-import { Box, BoxProps } from '@chakra-ui/layout';
-import { ReactNode, useEffect, useState } from 'react';
+import type { BoxProps } from '@chakra-ui/layout';
+import { Box } from '@chakra-ui/layout';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { memo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { VegaLite } from 'react-vega';

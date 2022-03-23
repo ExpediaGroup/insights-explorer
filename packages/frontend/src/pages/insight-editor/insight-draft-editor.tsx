@@ -23,10 +23,11 @@ import { useNavigate } from 'react-router-dom';
 import { gql } from 'urql';
 
 import { InsightFileAction } from '../../models/file-tree';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { urqlClient } from '../../urql';
 
-import { DraftDataInput, InsightDraftContainer } from './insight-draft-container';
+import type { DraftDataInput } from './insight-draft-container';
+import { InsightDraftContainer } from './insight-draft-container';
 
 const DRAFT_QUERY = gql`
   query draftByKey($draftKey: String!) {

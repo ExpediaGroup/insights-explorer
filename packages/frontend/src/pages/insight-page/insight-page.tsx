@@ -22,7 +22,7 @@ import { useNavigate, useParams, Routes, Route } from 'react-router-dom';
 import { Alert } from '../../components/alert/alert';
 import { useInsight } from '../../shared/useInsight';
 import { useLikedBy } from '../../shared/useLikedBy';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { InsightDraftSwitcher } from '../insight-editor/insight-draft-switcher';
 import { InsightNotFoundPage } from '../insight-not-found-page/insight-not-found-page';
 

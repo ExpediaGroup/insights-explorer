@@ -18,7 +18,7 @@ import { Box, Heading, HStack, Stack, Text, VStack } from '@chakra-ui/react';
 
 import { ItemTypeIcon } from '../../../../../../components/item-type-icon/item-type-icon';
 import { Linkify } from '../../../../../../components/linkify/linkify';
-import { Insight, User } from '../../../../../../models/generated/graphql';
+import type { Insight, User } from '../../../../../../models/generated/graphql';
 import { getInsightGradient } from '../../../../../../shared/gradient';
 import { ActionBar } from '../action-bar/action-bar';
 import { NavigationButtons } from '../navigation-buttons/navigation-buttons';

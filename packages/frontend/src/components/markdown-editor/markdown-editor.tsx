@@ -23,7 +23,7 @@ import AceEditor from 'react-ace';
 
 import { gql } from 'urql';
 
-import { UploadSingleFileMutation, UsersCompletionQuery } from '../../models/generated/graphql';
+import type { UploadSingleFileMutation, UsersCompletionQuery } from '../../models/generated/graphql';
 import { useDebounce } from '../../shared/useDebounce';
 import { urqlClient } from '../../urql';
 

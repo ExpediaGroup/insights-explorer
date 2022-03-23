@@ -15,14 +15,15 @@
  */
 
 import { useBreakpointValue } from '@chakra-ui/media-query';
-import { Alert as ChakraAlert, AlertIcon, Badge, Box, BoxProps, Button, Stack, Text } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Alert as ChakraAlert, AlertIcon, Badge, Box, Button, Stack, Text } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Alert } from '../../../../components/alert/alert';
 import { ExternalLink } from '../../../../components/external-link/external-link';
 import { Link as RouterLink } from '../../../../components/link/link';
-import { RootState } from '../../../../store/store';
+import type { RootState } from '../../../../store/store';
 import { executeHealthCheck } from '../../../../store/user.slice';
 
 const HealthCheckAlert = ({ children, allowRecheck = true }) => {

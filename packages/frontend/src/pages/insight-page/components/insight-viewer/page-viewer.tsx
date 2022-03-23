@@ -28,7 +28,7 @@ import { InsightComments } from './components/insight-comments/insight-comments'
 import { InsightFileViewer } from './components/insight-file-viewer/insight-file-viewer';
 import { InsightInfobar } from './components/insight-infobar/insight-infobar';
 import { PageHeader } from './components/page-header/page-header';
-import { ItemTypeViewerProps } from './item-type-viewer';
+import type { ItemTypeViewerProps } from './item-type-viewer';
 
 /**
  * Main pane of content---shared with normal/export view

@@ -26,14 +26,15 @@ import {
   MenuOptionGroup,
   Tooltip
 } from '@chakra-ui/react';
-import { ReactElement, useEffect, useRef, useState } from 'react';
+import type { ReactElement } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import { iconFactoryAs } from '../../../../shared/icon-factory';
 import { useDebounce } from '../../../../shared/useDebounce';
 import { activitySlice } from '../../../../store/activity.slice';
-import { RootState } from '../../../../store/store';
+import type { RootState } from '../../../../store/store';
 import { ActivitySearchBox } from '../activity-search-box/activity-search-box';
 
 const availableSortFields = [

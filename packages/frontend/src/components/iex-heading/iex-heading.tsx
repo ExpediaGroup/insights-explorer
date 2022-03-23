@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Heading, HeadingProps } from '@chakra-ui/react';
+import type { HeadingProps } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 
 interface Props {
   level: number;

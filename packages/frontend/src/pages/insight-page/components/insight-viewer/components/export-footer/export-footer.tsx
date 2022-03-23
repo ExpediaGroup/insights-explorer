@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import { Box, BoxProps, Stack, Tag, TagLabel, useColorModeValue } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Box, Stack, Tag, TagLabel, useColorModeValue } from '@chakra-ui/react';
 
 import { Card } from '../../../../../../components/card/card';
 import { Link } from '../../../../../../components/link/link';
 import { SidebarHeading } from '../../../../../../components/sidebar-heading/sidebar-heading';
-import { Insight } from '../../../../../../models/generated/graphql';
+import type { Insight } from '../../../../../../models/generated/graphql';
 
 export const ExportFooter = ({ insight, ...props }: { insight: Insight } & BoxProps) => {
   const fileBgColor = useColorModeValue('snowstorm.300', 'gray.700');

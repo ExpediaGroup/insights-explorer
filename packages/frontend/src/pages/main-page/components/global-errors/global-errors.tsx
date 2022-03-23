@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { appSlice } from '../../../../store/app.slice';
-import { RootState } from '../../../../store/store';
+import type { RootState } from '../../../../store/store';
 
 export const GlobalErrors = () => {
   const { globalErrorMessages } = useSelector((state: RootState) => state.app);

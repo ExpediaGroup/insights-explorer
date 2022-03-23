@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-import { Link as ChakraLink, LinkProps as ChakraLinkProps } from '@chakra-ui/react';
+import type { LinkProps as ChakraLinkProps } from '@chakra-ui/react';
+import { Link as ChakraLink } from '@chakra-ui/react';
 import React, { forwardRef } from 'react';
-import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
+import type { LinkProps as RouterLinkProps } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 /**
  * Custom link component that composes Chakra-UI presentation with React Router functionality

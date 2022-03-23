@@ -16,9 +16,10 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { CombinedError, gql, useMutation } from 'urql';
+import type { CombinedError } from 'urql';
+import { gql, useMutation } from 'urql';
 
-import { ActivityConnection, ActivityEdge, AutocompleteResults, Sort } from '../models/generated/graphql';
+import type { ActivityConnection, ActivityEdge, AutocompleteResults, Sort } from '../models/generated/graphql';
 import { urqlClient } from '../urql';
 
 const ACTIVITIES_QUERY = gql`

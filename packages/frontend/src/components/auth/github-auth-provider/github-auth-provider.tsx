@@ -21,7 +21,7 @@ import { Routes, Route, useNavigate, useSearchParams, useLocation } from 'react-
 
 import { gql } from 'urql';
 
-import { RootState } from '../../../store/store';
+import type { RootState } from '../../../store/store';
 import { userSlice, login } from '../../../store/user.slice';
 import { urqlClient } from '../../../urql';
 

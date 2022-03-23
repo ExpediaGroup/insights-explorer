@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { FieldError } from 'react-hook-form';
+import type { FieldError } from 'react-hook-form';
 
 export const formatFormError = (
   error: FieldError | undefined,

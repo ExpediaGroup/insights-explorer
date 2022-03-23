@@ -47,7 +47,7 @@ import { Card } from '../../../../components/card/card';
 import { FileUploadArea } from '../../../../components/file-upload-area/file-upload-area';
 import { FormLabel } from '../../../../components/form-label/form-label';
 import { MarkdownSplitEditor } from '../../../../components/markdown-split-editor/markdown-split-editor';
-import {
+import type {
   AutocompleteProfileQuery,
   AvatarUploadResult,
   UpdateUserInput,
@@ -56,7 +56,7 @@ import {
 import { chatIcon } from '../../../../shared/chat-icon';
 import { formatFormError } from '../../../../shared/form-utils';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
-import { RootState } from '../../../../store/store';
+import type { RootState } from '../../../../store/store';
 import { urqlClient } from '../../../../urql';
 
 const AUTOCOMPLETE_QUERY = gql`

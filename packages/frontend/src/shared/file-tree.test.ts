@@ -16,7 +16,7 @@
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { InsightFile, InsightFileAction, InsightFolder } from '../models/file-tree';
+import type { InsightFile, InsightFileAction, InsightFolder } from '../models/file-tree';
 
 import { convertFilesIntoTree, InsightFileTree, isFile, isFolder } from './file-tree';
 

@@ -19,9 +19,9 @@ import { useState } from 'react';
 
 import { IconButtonMenu } from '../../../../../../components/icon-button-menu/icon-button-menu';
 import { InsightList } from '../../../../../../components/insight-list/insight-list';
-import { InsightConnection, User } from '../../../../../../models/generated/graphql';
+import type { InsightConnection, User } from '../../../../../../models/generated/graphql';
 import { iconFactory } from '../../../../../../shared/icon-factory';
-import { SearchOptions } from '../../../../../../store/search.slice';
+import type { SearchOptions } from '../../../../../../store/search.slice';
 
 interface Props {
   user: User;

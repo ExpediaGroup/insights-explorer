@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-import { cacheExchange, KeyGenerator } from '@urql/exchange-graphcache';
+import type { KeyGenerator } from '@urql/exchange-graphcache';
+import { cacheExchange } from '@urql/exchange-graphcache';
 import type { IntrospectionData } from '@urql/exchange-graphcache/dist/types/ast/schema';
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch';
 import { retryExchange } from '@urql/exchange-retry';
-import { Source, pipe, tap } from 'wonka';
+import type { Source } from 'wonka';
+import { pipe, tap } from 'wonka';
 
-import { createClient, dedupExchange, OperationResult, Operation } from 'urql';
+import type { OperationResult, Operation } from 'urql';
+import { createClient, dedupExchange } from 'urql';
 
 import schema from './introspection.json';
-import { Draft } from './models/generated/graphql';
+import type { Draft } from './models/generated/graphql';
 import { userSlice } from './store/user.slice';
 
 let store: { dispatch: any } | null = null;

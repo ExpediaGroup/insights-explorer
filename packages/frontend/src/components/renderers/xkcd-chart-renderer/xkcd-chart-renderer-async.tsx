@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { BoxProps, Progress } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Progress } from '@chakra-ui/react';
 import { lazy, Suspense } from 'react';
 
 const XkcdChartRenderer = lazy(() => import(/* webpackChunkName: "xkcd-chart-renderer" */ './xkcd-chart-renderer'));

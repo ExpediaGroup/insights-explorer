@@ -15,8 +15,8 @@
  */
 
 import { HStack, Icon, Text } from '@chakra-ui/react';
-import { ReactElement } from 'react';
-import { IconType } from 'react-icons';
+import type { ReactElement } from 'react';
+import type { IconType } from 'react-icons';
 
 import { iconFactory } from '../../shared/icon-factory';
 

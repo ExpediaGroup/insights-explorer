@@ -14,18 +14,8 @@
  * limitations under the License.
  */
 
-import {
-  BoxProps,
-  Center,
-  Flex,
-  Heading,
-  HStack,
-  Spinner,
-  StackDivider,
-  Text,
-  useToast,
-  VStack
-} from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Center, Flex, Heading, HStack, Spinner, StackDivider, Text, useToast, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
 import { gql, useMutation, useQuery } from 'urql';
@@ -33,9 +23,9 @@ import { gql, useMutation, useQuery } from 'urql';
 import { Alert } from '../../../../../../components/alert/alert';
 import { Card } from '../../../../../../components/card/card';
 import { Crumbs } from '../../../../../../components/crumbs/crumbs';
-import { Comment, CommentConnection, Insight } from '../../../../../../models/generated/graphql';
+import type { Comment, CommentConnection, Insight } from '../../../../../../models/generated/graphql';
 import { useLikedBy } from '../../../../../../shared/useLikedBy';
-import { RootState } from '../../../../../../store/store';
+import type { RootState } from '../../../../../../store/store';
 
 import { CommentCard } from './components/comment-card/comment-card';
 import { ReplyCard } from './components/reply-card/reply-card';

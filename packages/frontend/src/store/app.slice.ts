@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { DateTime } from 'luxon';
 
-import { AppSettings } from '../models/generated/graphql';
+import type { AppSettings } from '../models/generated/graphql';
 import { urqlClient } from '../urql';
 
 import { login } from './user.slice';

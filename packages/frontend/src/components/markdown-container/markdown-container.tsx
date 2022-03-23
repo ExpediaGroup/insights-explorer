@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-import { Alert as ChakraAlert, AlertIcon, BoxProps, Box, Button, Flex, Text } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Alert as ChakraAlert, AlertIcon, Box, Button, Flex, Text } from '@chakra-ui/react';
 import isEqual from 'lodash/isEqual';
-import { memo, ReactElement, useCallback, useState } from 'react';
+import type { ReactElement } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import ReactMarkdown, { Components } from 'react-markdown';
-import { TransformLink } from 'react-markdown/lib/ast-to-react';
+import type { Components } from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
+import type { TransformLink } from 'react-markdown/lib/ast-to-react';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';

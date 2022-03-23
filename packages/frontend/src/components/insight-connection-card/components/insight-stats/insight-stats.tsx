@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Badge, Box, HStack, Icon, StackProps, Tooltip } from '@chakra-ui/react';
+import type { StackProps } from '@chakra-ui/react';
+import { Badge, Box, HStack, Icon, Tooltip } from '@chakra-ui/react';
 
 import { LikedByTooltip } from '../../../../components/liked-by-tooltip/liked-by-tooltip';
 import { iconFactory } from '../../../../shared/icon-factory';

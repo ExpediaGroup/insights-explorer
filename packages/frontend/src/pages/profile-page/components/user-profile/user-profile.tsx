@@ -19,7 +19,7 @@ import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { User } from '../../../../models/generated/graphql';
+import type { User } from '../../../../models/generated/graphql';
 import { iconFactory } from '../../../../shared/icon-factory';
 
 import { UserAbout } from './components/user-about/user-about';

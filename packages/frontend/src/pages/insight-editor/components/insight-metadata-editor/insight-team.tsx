@@ -23,9 +23,9 @@ import titleize from 'titleize';
 import { gql, useQuery } from 'urql';
 
 import { Link } from '../../../../components/link/link';
-import { AutocompleteInsightTeamQuery } from '../../../../models/generated/graphql';
+import type { AutocompleteInsightTeamQuery } from '../../../../models/generated/graphql';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
-import { RootState } from '../../../../store/store';
+import type { RootState } from '../../../../store/store';
 
 const AUTOCOMPLETE_QUERY = gql`
   query AutocompleteInsightTeam {

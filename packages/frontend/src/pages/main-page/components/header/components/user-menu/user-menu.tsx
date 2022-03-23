@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { IexMenuItem } from '../../../../../../components/iex-menu-item/iex-menu-item';
 import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
-import { RootState } from '../../../../../../store/store';
+import type { RootState } from '../../../../../../store/store';
 import { LoginState, userSlice } from '../../../../../../store/user.slice';
 
 export const UserMenu = () => {

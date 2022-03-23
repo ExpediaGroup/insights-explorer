@@ -1,4 +1,4 @@
-import { InsightLink } from '../models/generated/graphql';
+import type { InsightLink } from '../models/generated/graphql';
 
 /**
  * Group links into sections, with a default section of `Links.

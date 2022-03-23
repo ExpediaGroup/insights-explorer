@@ -18,8 +18,8 @@ import { Checkbox } from '@chakra-ui/react';
 import CreatableSelect from 'react-select/creatable';
 
 import { SidebarStack } from '../../../../../../components/sidebar-stack/sidebar-stack';
-import { UniqueValue } from '../../../../../../models/generated/graphql';
-import { SearchTerm } from '../../../../../../shared/search';
+import type { UniqueValue } from '../../../../../../models/generated/graphql';
+import type { SearchTerm } from '../../../../../../shared/search';
 
 interface Props {
   filterKey: string;

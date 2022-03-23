@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-import { BoxProps } from '@chakra-ui/layout';
+import type { BoxProps } from '@chakra-ui/layout';
 import { Badge, Box, Flex, HStack, Icon, Text, Tooltip, VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import {
+import type {
   Activity,
   ActivityEdge,
-  ActivityType,
   CommentActivityDetails,
   InsightActivityDetails,
   InsightCollaboratorActivityDetails,
   NewsActivityDetails,
   User
 } from '../../models/generated/graphql';
+import { ActivityType } from '../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../shared/date-utils';
 import { iconFactory } from '../../shared/icon-factory';
 import { BlockQuote } from '../blockquote/blockquote';

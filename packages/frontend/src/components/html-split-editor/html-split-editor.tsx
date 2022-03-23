@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Flex, FlexProps, IconButton, Tooltip, Box } from '@chakra-ui/react';
+import type { FlexProps } from '@chakra-ui/react';
+import { Flex, IconButton, Tooltip, Box } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 
 import { iconFactoryAs } from '../../shared/icon-factory';

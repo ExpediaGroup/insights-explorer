@@ -29,7 +29,7 @@ import { InsightFileViewer } from './components/insight-file-viewer/insight-file
 import { InsightHeader } from './components/insight-header/insight-header';
 import { InsightInfobar } from './components/insight-infobar/insight-infobar';
 import { InsightSidebar } from './components/insight-sidebar/insight-sidebar';
-import { ItemTypeViewerProps } from './item-type-viewer';
+import type { ItemTypeViewerProps } from './item-type-viewer';
 import { PageViewer } from './page-viewer';
 
 /**

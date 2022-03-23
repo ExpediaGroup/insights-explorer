@@ -15,12 +15,12 @@
  */
 
 import { useBreakpointValue } from '@chakra-ui/media-query';
+import type { FlexProps } from '@chakra-ui/react';
 import {
   Button,
   Box,
   Collapse,
   Flex,
-  FlexProps,
   Icon,
   IconButton,
   Spinner,
@@ -38,9 +38,10 @@ import { gql } from 'urql';
 import { FileBrowser } from '../../../../components/file-browser/file-browser';
 import { FileUploadArea } from '../../../../components/file-upload-area/file-upload-area';
 import { SidebarHeading } from '../../../../components/sidebar-heading/sidebar-heading';
-import { FileOrFolder, InsightFile, InsightFileAction, InsightFolder } from '../../../../models/file-tree';
-import { UploadSingleFileMutation } from '../../../../models/generated/graphql';
-import { InsightFileTree } from '../../../../shared/file-tree';
+import type { FileOrFolder, InsightFile, InsightFolder } from '../../../../models/file-tree';
+import { InsightFileAction } from '../../../../models/file-tree';
+import type { UploadSingleFileMutation } from '../../../../models/generated/graphql';
+import type { InsightFileTree } from '../../../../shared/file-tree';
 import { iconFactory, iconFactoryAs } from '../../../../shared/icon-factory';
 import { urqlClient } from '../../../../urql';
 

@@ -17,7 +17,7 @@
 import { Flex, Heading, Icon, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { IconType } from 'react-icons';
+import type { IconType } from 'react-icons';
 import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ import { ExternalLink } from '../../components/external-link/external-link';
 import { Link } from '../../components/link/link';
 import { chatIcon } from '../../shared/chat-icon';
 import { iconFactory } from '../../shared/icon-factory';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 
 import { GettingStartedPage } from './components/getting-started-page/getting-started-page';
 import { IntegrationsPage } from './components/integrations-page/integrations-page';

@@ -18,7 +18,7 @@ import { useCallback } from 'react';
 
 import { gql, useMutation, useQuery } from 'urql';
 
-import { DeleteNewsMutation, DeleteNewsMutationVariables, NewsQuery } from '../models/generated/graphql';
+import type { DeleteNewsMutation, DeleteNewsMutationVariables, NewsQuery } from '../models/generated/graphql';
 
 const NEWS_FRAGMENT = gql`
   fragment NewsFields on News {

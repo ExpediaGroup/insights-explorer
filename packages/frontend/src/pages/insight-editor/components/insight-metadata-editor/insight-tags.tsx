@@ -21,7 +21,7 @@ import titleize from 'titleize';
 
 import { gql, useQuery } from 'urql';
 
-import { AutocompleteInsightTagsQuery } from '../../../../models/generated/graphql';
+import type { AutocompleteInsightTagsQuery } from '../../../../models/generated/graphql';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
 
 const AUTOCOMPLETE_QUERY = gql`

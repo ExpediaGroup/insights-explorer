@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
+import type { BoxProps } from '@chakra-ui/react';
 import {
   Badge,
   Box,
-  BoxProps,
   Drawer,
   DrawerBody,
   DrawerCloseButton,

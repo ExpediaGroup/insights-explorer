@@ -31,7 +31,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Card } from '../../../../../../components/card/card';
 import { DatePicker } from '../../../../../../components/date-picker/date-picker';
 import { MarkdownSplitEditor } from '../../../../../../components/markdown-split-editor/markdown-split-editor';
-import { NewsFieldsFragment } from '../../../../../../models/generated/graphql';
+import type { NewsFieldsFragment } from '../../../../../../models/generated/graphql';
 import { iconFactoryAs } from '../../../../../../shared/icon-factory';
 
 export const EditNewsItem = ({

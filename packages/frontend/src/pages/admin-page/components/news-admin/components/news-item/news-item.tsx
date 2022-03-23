@@ -17,12 +17,12 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { useState } from 'react';
-import { Components } from 'react-markdown';
+import type { Components } from 'react-markdown';
 
 import { Card } from '../../../../../../components/card/card';
 import { getDataAttributes } from '../../../../../../components/markdown-container/chakra-ui-renderer';
 import { MarkdownContainer } from '../../../../../../components/markdown-container/markdown-container';
-import { NewsFieldsFragment } from '../../../../../../models/generated/graphql';
+import type { NewsFieldsFragment } from '../../../../../../models/generated/graphql';
 import { formatDateIntl } from '../../../../../../shared/date-utils';
 import { EditNewsItem } from '../edit-news-item/edit-news-item';
 

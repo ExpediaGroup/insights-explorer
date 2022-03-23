@@ -14,24 +14,15 @@
  * limitations under the License.
  */
 
-import {
-  Box,
-  BoxProps,
-  Flex,
-  HStack,
-  Icon,
-  IconButton,
-  Link,
-  Progress,
-  Spinner,
-  Tooltip,
-  VStack
-} from '@chakra-ui/react';
-import { ReactElement, useState } from 'react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Box, Flex, HStack, Icon, IconButton, Link, Progress, Spinner, Tooltip, VStack } from '@chakra-ui/react';
+import type { ReactElement } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { Alert } from '../../components/alert/alert';
-import { Crumb, Crumbs } from '../../components/crumbs/crumbs';
+import type { Crumb } from '../../components/crumbs/crumbs';
+import { Crumbs } from '../../components/crumbs/crumbs';
 import { iconFactory, iconFactoryAs } from '../../shared/icon-factory';
 import { getMimeTypeDefinition, MIME_VIEWER } from '../../shared/mime-utils';
 import { getCompletePath } from '../../shared/url-utils';

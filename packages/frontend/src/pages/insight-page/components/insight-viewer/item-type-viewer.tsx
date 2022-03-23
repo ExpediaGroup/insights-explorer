@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Insight, User } from '../../../../models/generated/graphql';
+import type { Insight, User } from '../../../../models/generated/graphql';
 
 import { InsightViewer } from './insight-viewer';
 import { PageViewer } from './page-viewer';

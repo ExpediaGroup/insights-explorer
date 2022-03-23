@@ -15,7 +15,7 @@
  */
 
 import { Badge, Box, Button, IconButton, Tooltip } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 interface Props {
   color?: string;

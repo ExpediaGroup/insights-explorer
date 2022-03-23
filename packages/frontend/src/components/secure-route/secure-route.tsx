@@ -17,7 +17,7 @@
 import { useSelector } from 'react-redux';
 
 import { NotAllowedPage } from '../../pages/not-allowed-page/not-allowed-page';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { LoginState } from '../../store/user.slice';
 
 /**

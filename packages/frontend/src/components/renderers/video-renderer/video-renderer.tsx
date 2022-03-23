@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { DetailedHTMLProps, ReactNode, VideoHTMLAttributes } from 'react';
+import type { DetailedHTMLProps, ReactNode, VideoHTMLAttributes } from 'react';
 
 import { isRelativeUrl } from '../../../shared/url-utils';
 

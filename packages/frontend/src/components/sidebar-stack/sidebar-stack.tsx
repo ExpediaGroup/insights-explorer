@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { BoxProps, Tooltip, VStack } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Tooltip, VStack } from '@chakra-ui/react';
 
 import { SidebarHeading } from '../sidebar-heading/sidebar-heading';
 

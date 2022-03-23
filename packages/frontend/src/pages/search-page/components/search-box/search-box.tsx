@@ -15,7 +15,7 @@
  */
 
 import { IconButton, Input, InputGroup, InputLeftElement, InputRightElement, Tooltip } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 import { iconFactoryAs } from '../../../../shared/icon-factory';
 

@@ -16,14 +16,14 @@
 
 import { Box, Flex, Heading, List, ListItem, Text } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
-import { Components } from 'react-markdown';
+import type { Components } from 'react-markdown';
 
 import { Card } from '../../../../../../../../components/card/card';
 import { LikeButton } from '../../../../../../../../components/like-button/like-button';
 import { LikedByTooltip } from '../../../../../../../../components/liked-by-tooltip/liked-by-tooltip';
 import { getDataAttributes } from '../../../../../../../../components/markdown-container/chakra-ui-renderer';
 import { MarkdownContainer } from '../../../../../../../../components/markdown-container/markdown-container';
-import { News, User } from '../../../../../../../../models/generated/graphql';
+import type { News, User } from '../../../../../../../../models/generated/graphql';
 import { formatDateIntl } from '../../../../../../../../shared/date-utils';
 
 const heading = ({ node, children, level, ...props }) => {

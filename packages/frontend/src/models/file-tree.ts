@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { InsightFile as InsightFileGQL } from './generated/graphql';
+import type { InsightFile as InsightFileGQL } from './generated/graphql';
 
 // TODO: Replace with a generated GraphQL enum
 export enum InsightFileAction {

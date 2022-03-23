@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Icon, Link as ChakraLink, LinkProps } from '@chakra-ui/react';
+import type { LinkProps } from '@chakra-ui/react';
+import { Icon, Link as ChakraLink } from '@chakra-ui/react';
 
 import { iconFactory } from '../../shared/icon-factory';
 

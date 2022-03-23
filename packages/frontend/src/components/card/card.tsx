@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Box, BoxProps, useColorModeValue } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 
 export const Card = (boxProps: BoxProps) => {
   return (

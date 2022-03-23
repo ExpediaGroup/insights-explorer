@@ -27,10 +27,11 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import { useRef, RefObject, useState } from 'react';
+import type { RefObject } from 'react';
+import { useRef, useState } from 'react';
 import titleize from 'titleize';
 
-import { Insight } from '../../../../../../models/generated/graphql';
+import type { Insight } from '../../../../../../models/generated/graphql';
 import { iconFactory } from '../../../../../../shared/icon-factory';
 
 interface Props {

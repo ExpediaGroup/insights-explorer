@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
+import type { FlexProps } from '@chakra-ui/react';
 import {
   Button,
   Code,
   Divider,
   Flex,
-  FlexProps,
   Icon,
   IconButton,
   Popover,
@@ -36,9 +36,10 @@ import {
   Checkbox,
   HStack
 } from '@chakra-ui/react';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { UploadSingleFileMutation } from '../../models/generated/graphql';
+import type { UploadSingleFileMutation } from '../../models/generated/graphql';
 import { iconFactory, iconFactoryAs } from '../../shared/icon-factory';
 import { useDebounce } from '../../shared/useDebounce';
 import { Link } from '../link/link';

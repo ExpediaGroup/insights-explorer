@@ -15,8 +15,9 @@
  */
 
 import { useColorMode } from '@chakra-ui/react';
-import { HTMLAttributes } from 'react';
-import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
+import type { HTMLAttributes } from 'react';
+import type { ReactDatePickerProps } from 'react-datepicker';
+import ReactDatePicker from 'react-datepicker';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './date-picker.css';

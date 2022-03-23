@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux';
 
 import { gql, useMutation, useQuery } from 'urql';
 
-import { RootState } from '../store/store';
+import type { RootState } from '../store/store';
 
 const INSIGHT_FRAGMENT = gql`
   fragment InsightFields on Insight {

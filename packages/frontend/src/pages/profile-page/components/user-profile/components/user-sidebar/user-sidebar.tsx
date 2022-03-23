@@ -33,11 +33,11 @@ import { useSelector } from 'react-redux';
 import { ExternalLink } from '../../../../../../components/external-link/external-link';
 import { Link } from '../../../../../../components/link/link';
 import { TextWithIcon } from '../../../../../../components/text-with-icon/text-with-icon';
-import { User } from '../../../../../../models/generated/graphql';
+import type { User } from '../../../../../../models/generated/graphql';
 import { chatIcon } from '../../../../../../shared/chat-icon';
 import { formatDateIntl } from '../../../../../../shared/date-utils';
 import { iconFactory } from '../../../../../../shared/icon-factory';
-import { RootState } from '../../../../../../store/store';
+import type { RootState } from '../../../../../../store/store';
 
 interface Props {
   user: User;

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import { BoxProps } from '@chakra-ui/layout';
+import type { BoxProps } from '@chakra-ui/layout';
 
-import { InsightEdge } from '../../models/generated/graphql';
-import { SearchOptions } from '../../store/search.slice';
+import type { InsightEdge } from '../../models/generated/graphql';
+import type { SearchOptions } from '../../store/search.slice';
 
 import { CompactInsightCard } from './components/compact-insight-card/compact-insight-card';
 import { DefaultInsightCard } from './components/default-insight-card/default-insight-card';

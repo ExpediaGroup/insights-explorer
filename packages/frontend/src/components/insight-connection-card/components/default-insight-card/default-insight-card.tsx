@@ -14,18 +14,8 @@
  * limitations under the License.
  */
 
-import {
-  Badge,
-  BoxProps,
-  Flex,
-  Heading,
-  HStack,
-  LinkBox,
-  Text,
-  Tooltip,
-  VStack,
-  useColorModeValue
-} from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Badge, Flex, Heading, HStack, LinkBox, Text, Tooltip, VStack, useColorModeValue } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
 import { formatDateIntl } from '../../../../shared/date-utils';
@@ -34,7 +24,7 @@ import { InsightTag } from '../../../insight-tag/insight-tag';
 import { ItemTypeIcon } from '../../../item-type-icon/item-type-icon';
 import { LinkOverlay } from '../../../link-overlay/link-overlay';
 import { UserTag } from '../../../user-tag/user-tag';
-import { InsightConnectionCardProps } from '../../insight-connection-card';
+import type { InsightConnectionCardProps } from '../../insight-connection-card';
 import { InsightStats } from '../insight-stats/insight-stats';
 
 export const DefaultInsightCard = ({ insightEdge, options, ...props }: InsightConnectionCardProps & BoxProps) => {

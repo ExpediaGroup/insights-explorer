@@ -27,13 +27,14 @@ import {
   FormLabel,
   useDisclosure
 } from '@chakra-ui/react';
-import { RefObject, useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
+import { useEffect, useRef } from 'react';
 import { useWatch } from 'react-hook-form';
-import { UseFormReturn } from 'react-hook-form';
+import type { UseFormReturn } from 'react-hook-form';
 import Select from 'react-select';
 import titleize from 'titleize';
 
-import { Insight } from '../../../../models/generated/graphql';
+import type { Insight } from '../../../../models/generated/graphql';
 
 interface Props {
   insight: any;

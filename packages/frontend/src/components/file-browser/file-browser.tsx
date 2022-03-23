@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
+import type { BoxProps } from '@chakra-ui/react';
 import {
   Badge,
   Box,
-  BoxProps,
   Button,
   Collapse,
   Editable,
@@ -33,9 +33,10 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import { FileOrFolder, InsightFolder } from '../../models/file-tree';
+import type { FileOrFolder, InsightFolder } from '../../models/file-tree';
 import { fileIconFactoryAs } from '../../shared/file-icon-factory';
-import { InsightFileTree, isFolder } from '../../shared/file-tree';
+import type { InsightFileTree } from '../../shared/file-tree';
+import { isFolder } from '../../shared/file-tree';
 import { iconFactoryAs } from '../../shared/icon-factory';
 import { DeleteIconButton } from '../delete-icon-button/delete-icon-button';
 

@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-import { BoxProps } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import { Sort } from '../../models/generated/graphql';
+import type { Sort } from '../../models/generated/graphql';
 import { useActivities } from '../../shared/useActivities';
 import { Alert } from '../alert/alert';
 
-import { ActivityList, ActivityListProps } from './activity-list';
+import type { ActivityListProps } from './activity-list';
+import { ActivityList } from './activity-list';
 
 type Props = Omit<ActivityListProps, 'activityConnection' | 'onLikeActivity'> & {
   query?: string;

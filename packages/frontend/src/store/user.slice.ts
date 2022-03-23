@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { gql } from 'urql';
 
 import { LOCAL_STORAGE_PREFIX } from '../components/auth/github-auth-provider/github-auth-provider';
-import { User, UserHealthCheck } from '../models/generated/graphql';
+import type { User, UserHealthCheck } from '../models/generated/graphql';
 import { urqlClient, enableAuthorization, disableAuthorization } from '../urql';
 
 export enum LoginState {

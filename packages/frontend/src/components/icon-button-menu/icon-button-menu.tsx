@@ -15,7 +15,7 @@
  */
 
 import { Box, IconButton, Icon, Menu, MenuButton, MenuList, Tooltip, forwardRef } from '@chakra-ui/react';
-import { ReactNode, ElementType } from 'react';
+import type { ReactNode, ElementType } from 'react';
 
 interface Props {
   'aria-label': string;

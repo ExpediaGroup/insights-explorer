@@ -1,4 +1,4 @@
-import { Options } from 'rehype-sanitize';
+import type { Options } from 'rehype-sanitize';
 
 export const IexMarkdownSchema: Options = {
   strip: ['script'],

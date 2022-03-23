@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Sort } from '../models/generated/graphql';
+import type { Sort } from '../models/generated/graphql';
 
 export const generateSearchUrl = (query: string | undefined, sort: Sort | undefined) => {
   const path = `/${encodeURIComponent(query || '')}`;

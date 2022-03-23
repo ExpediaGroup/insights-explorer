@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { DateTime, DateTimeFormatOptions, ToRelativeOptions } from 'luxon';
+import type { DateTimeFormatOptions, ToRelativeOptions } from 'luxon';
+import { DateTime } from 'luxon';
 
 import { store } from '../store/store';
 

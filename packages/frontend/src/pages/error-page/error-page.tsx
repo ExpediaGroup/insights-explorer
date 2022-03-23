@@ -16,7 +16,7 @@
 
 import { useBreakpointValue } from '@chakra-ui/media-query';
 import { Box, Button, Heading, HStack, Icon, Tag, TagLabel, Text, VStack, Wrap, WrapItem } from '@chakra-ui/react';
-import { ReactChild } from 'react';
+import type { ReactChild } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { Card } from '../../components/card/card';

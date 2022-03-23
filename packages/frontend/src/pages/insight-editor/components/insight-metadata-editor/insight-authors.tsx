@@ -20,7 +20,7 @@ import CreatableSelect from 'react-select/creatable';
 
 import { gql, useQuery } from 'urql';
 
-import { UsersAsAuthorsQuery } from '../../../../models/generated/graphql';
+import type { UsersAsAuthorsQuery } from '../../../../models/generated/graphql';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
 
 const USERS_QUERY = gql`

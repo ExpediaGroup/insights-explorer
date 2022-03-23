@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { Paging, Sort } from '../models/generated/graphql';
+import type { Paging, Sort } from '../models/generated/graphql';
 
 export interface ActivityOptions {
   showScores?: boolean;

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+import type { BoxProps } from '@chakra-ui/react';
 import {
   Box,
-  BoxProps,
   Button,
   FormControl,
   FormLabel,

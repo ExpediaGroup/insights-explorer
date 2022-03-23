@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IexMenuItem } from '../../../../../../components/iex-menu-item/iex-menu-item';
 import { iconFactory } from '../../../../../../shared/icon-factory';
 import { appSlice } from '../../../../../../store/app.slice';
-import { RootState } from '../../../../../../store/store';
+import type { RootState } from '../../../../../../store/store';
 
 import { NewsDrawerContents } from './components/news-drawer-contents/news-drawer-contents';
 

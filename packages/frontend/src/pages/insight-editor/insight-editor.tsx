@@ -34,20 +34,21 @@ import { useNavigate } from 'react-router-dom';
 
 import { gql, useMutation, useQuery } from 'urql';
 
-import { FileOrFolder, InsightFileAction } from '../../models/file-tree';
-import { Insight, InsightFileInput, UploadSingleFileMutation } from '../../models/generated/graphql';
+import type { FileOrFolder } from '../../models/file-tree';
+import { InsightFileAction } from '../../models/file-tree';
+import type { Insight, InsightFileInput, UploadSingleFileMutation } from '../../models/generated/graphql';
 import { InsightFileTree, isFile } from '../../shared/file-tree';
 import { isRelativeUrl, urljoin } from '../../shared/url-utils';
 import { useDebounce } from '../../shared/useDebounce';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { urqlClient } from '../../urql';
 
 import { InsightEditorHeader } from './components/insight-editor-header/insight-editor-header';
 import { InsightEditorSidebar } from './components/insight-editor-sidebar/insight-editor-sidebar';
 import { InsightFileEditor } from './components/insight-file-editor/insight-file-editor';
 import { InsightMetadataEditor } from './components/insight-metadata-editor/insight-metadata-editor';
-import { DraftForm } from './draft-form';
-import { DraftDataInput } from './insight-draft-container';
+import type { DraftForm } from './draft-form';
+import type { DraftDataInput } from './insight-draft-container';
 
 const TEMPLATES_QUERY = gql`
   query Templates {

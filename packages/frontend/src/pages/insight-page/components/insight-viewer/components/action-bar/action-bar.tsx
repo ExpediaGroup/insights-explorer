@@ -39,9 +39,9 @@ import { InsightCollaboratorsModal } from '../../../../../../components/insight-
 import { LikeButton } from '../../../../../../components/like-button/like-button';
 import { LikedByTooltip } from '../../../../../../components/liked-by-tooltip/liked-by-tooltip';
 import { NumberIconButton } from '../../../../../../components/number-icon-button/number-icon-button';
-import { Insight, User } from '../../../../../../models/generated/graphql';
+import type { Insight, User } from '../../../../../../models/generated/graphql';
 import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
-import { RootState } from '../../../../../../store/store';
+import type { RootState } from '../../../../../../store/store';
 import { CloneDialog } from '../clone-dialog/clone-dialog';
 import { DeleteDialog } from '../delete-dialog/delete-dialog';
 

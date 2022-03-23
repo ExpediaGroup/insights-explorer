@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
+import type { BoxProps } from '@chakra-ui/react';
 import {
   Badge,
   Box,
-  BoxProps,
   Flex,
   HStack,
   Icon,
@@ -41,7 +41,7 @@ import { SidebarHeading } from '../../../../../../components/sidebar-heading/sid
 import { SidebarStack } from '../../../../../../components/sidebar-stack/sidebar-stack';
 import { TeamTag } from '../../../../../../components/team-tag/team-tag';
 import { UserTag } from '../../../../../../components/user-tag/user-tag';
-import { Insight } from '../../../../../../models/generated/graphql';
+import type { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory } from '../../../../../../shared/icon-factory';
 import { groupInsightLinks } from '../../../../../../shared/insight-utils';

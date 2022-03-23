@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import type { StackProps } from '@chakra-ui/react';
 import {
   Badge,
   Box,
@@ -23,7 +24,6 @@ import {
   Icon,
   IconButton,
   Stack,
-  StackProps,
   Tag,
   TagLabel,
   Text,
@@ -42,7 +42,7 @@ import { Linkify } from '../../../../../../components/linkify/linkify';
 import { SidebarHeading } from '../../../../../../components/sidebar-heading/sidebar-heading';
 import { TeamTag } from '../../../../../../components/team-tag/team-tag';
 import { UserTag } from '../../../../../../components/user-tag/user-tag';
-import { Insight } from '../../../../../../models/generated/graphql';
+import type { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
 import { groupInsightLinks } from '../../../../../../shared/insight-utils';

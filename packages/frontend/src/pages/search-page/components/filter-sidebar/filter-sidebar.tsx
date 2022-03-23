@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-import { BoxProps, StackDivider, VStack } from '@chakra-ui/react';
-import { ReactElement, useEffect, useRef, useState } from 'react';
+import type { BoxProps } from '@chakra-ui/react';
+import { StackDivider, VStack } from '@chakra-ui/react';
+import type { ReactElement } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 import { gql, useQuery } from 'urql';
 
-import { AutocompleteFilterSidebarQuery, AutocompleteResults } from '../../../../models/generated/graphql';
+import type { AutocompleteFilterSidebarQuery, AutocompleteResults } from '../../../../models/generated/graphql';
+import type { SearchClause } from '../../../../shared/search';
 import {
   parseSearchQuery,
-  SearchClause,
   SearchCompoundRange,
   SearchMultiTerm,
   SearchRange,
@@ -32,7 +34,7 @@ import {
   toSearchQuery
 } from '../../../../shared/search';
 import { searchSlice } from '../../../../store/search.slice';
-import { RootState } from '../../../../store/store';
+import type { RootState } from '../../../../store/store';
 
 import { DateStack } from './components/date-stack/date-stack';
 import { FilterStack } from './components/filter-stack/filter-stack';

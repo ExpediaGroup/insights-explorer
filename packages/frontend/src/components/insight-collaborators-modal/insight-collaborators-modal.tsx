@@ -42,7 +42,7 @@ import Select from 'react-select';
 import { gql, useMutation, useQuery } from 'urql';
 
 import { iconFactoryAs } from '../../shared/icon-factory';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { Alert } from '../alert/alert';
 import { DeleteIconButton } from '../delete-icon-button/delete-icon-button';
 import { Link as RouterLink } from '../link/link';

@@ -18,7 +18,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { iconFactoryAs } from '../../shared/icon-factory';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { NumberIconButton } from '../number-icon-button/number-icon-button';
 
 interface Props {

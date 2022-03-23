@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Box, BoxProps, Collapse, HStack, IconButton, Code, useClipboard, useDisclosure } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Box, Collapse, HStack, IconButton, Code, useClipboard, useDisclosure } from '@chakra-ui/react';
 import { memo, useEffect } from 'react';
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism';

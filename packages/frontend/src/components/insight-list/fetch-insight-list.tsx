@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-import { BoxProps, Progress } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Progress } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import { Sort } from '../../models/generated/graphql';
+import type { Sort } from '../../models/generated/graphql';
 import { useSearch } from '../../shared/useSearch';
 import { Alert } from '../alert/alert';
 
-import { InsightList, InsightListProps } from './insight-list';
+import type { InsightListProps } from './insight-list';
+import { InsightList } from './insight-list';
 
 type Props = Omit<InsightListProps, 'insightConnection'> & { query: string; sort?: Sort };
 

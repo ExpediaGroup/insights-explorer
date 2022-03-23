@@ -17,8 +17,9 @@
 import { useParams } from 'react-router-dom';
 
 import { Alert } from '../../../../../../components/alert/alert';
-import { FileViewer, FileViewerProps } from '../../../../../../components/file-viewer/file-viewer';
-import { Insight, InsightFile } from '../../../../../../models/generated/graphql';
+import type { FileViewerProps } from '../../../../../../components/file-viewer/file-viewer';
+import { FileViewer } from '../../../../../../components/file-viewer/file-viewer';
+import type { Insight, InsightFile } from '../../../../../../models/generated/graphql';
 
 const preferredMimeTypes = {
   'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'application/pdf',

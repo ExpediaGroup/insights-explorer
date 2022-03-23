@@ -27,7 +27,7 @@ import { generateSearchUrl } from '../../shared/search-url';
 import { useDebounce } from '../../shared/useDebounce';
 import { useSearch } from '../../shared/useSearch';
 import { searchSlice } from '../../store/search.slice';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 
 import { FilterSidebar } from './components/filter-sidebar/filter-sidebar';
 import { SearchBar } from './components/search-bar/search-bar';

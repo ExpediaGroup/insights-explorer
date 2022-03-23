@@ -15,7 +15,7 @@
  */
 
 import { Heading, VStack } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Link } from '../link/link';

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
+import type { ButtonProps } from '@chakra-ui/react';
 import {
   Button,
-  ButtonProps,
   IconButton,
   ListItem,
   Modal,
@@ -36,7 +36,7 @@ import { useSelector } from 'react-redux';
 
 import { ExternalLink } from '../../../../components/external-link/external-link';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
-import { RootState } from '../../../../store/store';
+import type { RootState } from '../../../../store/store';
 
 export const GithubTokenInfo = (props: ButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -23,10 +23,10 @@ import { LikeButton } from '../../../../../../../../components/like-button/like-
 import { LikedByTooltip } from '../../../../../../../../components/liked-by-tooltip/liked-by-tooltip';
 import { Link } from '../../../../../../../../components/link/link';
 import { MarkdownContainer } from '../../../../../../../../components/markdown-container/markdown-container';
-import { Comment, User } from '../../../../../../../../models/generated/graphql';
+import type { Comment, User } from '../../../../../../../../models/generated/graphql';
 import { formatDateIntl } from '../../../../../../../../shared/date-utils';
 import { iconFactoryAs } from '../../../../../../../../shared/icon-factory';
-import { RootState } from '../../../../../../../../store/store';
+import type { RootState } from '../../../../../../../../store/store';
 import { ReplyCard } from '../reply-card/reply-card';
 
 interface Props {

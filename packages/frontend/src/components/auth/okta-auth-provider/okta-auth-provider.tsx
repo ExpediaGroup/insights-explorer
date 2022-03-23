@@ -21,7 +21,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import { RootState } from '../../../store/store';
+import type { RootState } from '../../../store/store';
 import { userSlice, login } from '../../../store/user.slice';
 
 export const AUTH_CALLBACK_PATH = '/auth/callback';

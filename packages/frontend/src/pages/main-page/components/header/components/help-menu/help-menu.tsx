@@ -21,7 +21,7 @@ import { IconButtonMenu } from '../../../../../../components/icon-button-menu/ic
 import { IexMenuItem } from '../../../../../../components/iex-menu-item/iex-menu-item';
 import { chatIcon } from '../../../../../../shared/chat-icon';
 import { iconFactory } from '../../../../../../shared/icon-factory';
-import { RootState } from '../../../../../../store/store';
+import type { RootState } from '../../../../../../store/store';
 import { AboutModal } from '../../../about-modal/about-modal';
 import { NewsDrawer } from '../news-drawer/news-drawer';
 

@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Fragment, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { Fragment } from 'react';
 
 interface Props {
   items: ReactNode[];

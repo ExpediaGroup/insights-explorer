@@ -21,7 +21,7 @@ import Select from 'react-select';
 import { Alert } from '../../../../components/alert/alert';
 import { Card } from '../../../../components/card/card';
 import { FormLabel } from '../../../../components/form-label/form-label';
-import { User } from '../../../../models/generated/graphql';
+import type { User } from '../../../../models/generated/graphql';
 import { availableLocales } from '../../../../shared/date-utils';
 
 interface Props {

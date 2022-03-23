@@ -15,7 +15,7 @@
  */
 
 import { FetchActivityList } from '../../../../../../components/activity-list/fetch-activity-list';
-import { User } from '../../../../../../models/generated/graphql';
+import type { User } from '../../../../../../models/generated/graphql';
 
 interface Props {
   user: User;

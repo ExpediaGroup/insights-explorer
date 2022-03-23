@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Insight } from '../models/generated/graphql';
+import type { Insight } from '../models/generated/graphql';
 
 import { hashCode } from './hash';
 import { getRandomInt } from './random';

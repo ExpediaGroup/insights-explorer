@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { Alert as ChakraAlert, AlertIcon, AlertStatus, As, BoxProps, Flex, Text } from '@chakra-ui/react';
+import type { AlertStatus, As, BoxProps } from '@chakra-ui/react';
+import { Alert as ChakraAlert, AlertIcon, Flex, Text } from '@chakra-ui/react';
 import startCase from 'lodash/startCase';
-import { ReactChild, ReactChildren } from 'react';
+import type { ReactChild, ReactChildren } from 'react';
 
 import { iconFactory } from '../../shared/icon-factory';
 

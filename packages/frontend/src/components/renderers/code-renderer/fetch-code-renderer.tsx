@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-import { BoxProps, Progress } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Progress } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import { filterContentByLines } from '../../../shared/lines';
 import { useFetch } from '../../../shared/useFetch';
 import { Alert } from '../../alert/alert';
 
-import { CodeRenderer, CodeRendererProps } from './code-renderer';
+import type { CodeRendererProps } from './code-renderer';
+import { CodeRenderer } from './code-renderer';
 
 type Props = CodeRendererProps & {
   url: string;

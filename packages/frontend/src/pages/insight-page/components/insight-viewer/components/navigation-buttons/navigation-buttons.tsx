@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-import { BoxProps, HStack, IconButton, Tooltip } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { HStack, IconButton, Tooltip } from '@chakra-ui/react';
 import titleize from 'titleize';
 
 import { Link } from '../../../../../../components/link/link';
-import { Insight } from '../../../../../../models/generated/graphql';
+import type { Insight } from '../../../../../../models/generated/graphql';
 import { iconFactoryAs } from '../../../../../../shared/icon-factory';
 
 interface Props {

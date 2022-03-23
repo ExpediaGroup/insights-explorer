@@ -36,10 +36,10 @@ import {
   Thead,
   Tr
 } from '@chakra-ui/react';
-import { Components } from 'react-markdown';
+import type { Components } from 'react-markdown';
 import Zoom from 'react-medium-image-zoom';
 
-import { Sort } from '../../models/generated/graphql';
+import type { Sort } from '../../models/generated/graphql';
 import { destringObject } from '../../shared/destring';
 import { hashCode } from '../../shared/hash';
 import { iconFactory } from '../../shared/icon-factory';

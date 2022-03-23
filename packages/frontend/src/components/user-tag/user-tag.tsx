@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import type { Placement, TagProps } from '@chakra-ui/react';
 import {
   Avatar,
   Box,
@@ -21,7 +22,6 @@ import {
   Heading,
   HStack,
   Icon,
-  Placement,
   Popover,
   PopoverArrow,
   PopoverTrigger,
@@ -29,7 +29,6 @@ import {
   PopoverBody,
   Tag,
   TagLabel,
-  TagProps,
   Text,
   Portal,
   Spinner,
@@ -37,7 +36,7 @@ import {
   useColorModeValue
 } from '@chakra-ui/react';
 
-import { User } from '../../models/generated/graphql';
+import type { User } from '../../models/generated/graphql';
 import { iconFactory } from '../../shared/icon-factory';
 import { useUser } from '../../shared/useUser';
 import { Link } from '../link/link';

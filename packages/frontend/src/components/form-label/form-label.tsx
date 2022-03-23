@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { FormLabel as ChakraFormLabel, FormLabelProps } from '@chakra-ui/react';
+import type { FormLabelProps } from '@chakra-ui/react';
+import { FormLabel as ChakraFormLabel } from '@chakra-ui/react';
 
 interface Props {
   childre?: boolean;

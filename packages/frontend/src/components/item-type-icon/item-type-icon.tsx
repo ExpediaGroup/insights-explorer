@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Icon, IconProps, Tooltip } from '@chakra-ui/react';
+import type { IconProps } from '@chakra-ui/react';
+import { Icon, Tooltip } from '@chakra-ui/react';
 import titleize from 'titleize';
 
 import { iconFactory } from '../../shared/icon-factory';

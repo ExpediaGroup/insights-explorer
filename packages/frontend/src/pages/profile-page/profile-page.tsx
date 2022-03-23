@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { useUser } from '../../shared/useUser';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { ProfileNotFoundPage } from '../profile-not-found-page/profile-not-found-page';
 
 import { UserProfile } from './components/user-profile/user-profile';

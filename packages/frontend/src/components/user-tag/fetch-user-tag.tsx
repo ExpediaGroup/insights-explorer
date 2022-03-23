@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-import { BoxProps } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import { User } from '../../models/generated/graphql';
+import type { User } from '../../models/generated/graphql';
 import { useUser } from '../../shared/useUser';
 
-import { UserTag, UserTagProps } from './user-tag';
+import type { UserTagProps } from './user-tag';
+import { UserTag } from './user-tag';
 
 type Props = Omit<UserTagProps, 'user'> & { userName: string };
 

@@ -18,7 +18,7 @@ import { Stack, Stat, StatLabel, StatNumber, Text } from '@chakra-ui/react';
 
 import { Card } from '../../../../../../components/card/card';
 import { MarkdownContainer } from '../../../../../../components/markdown-container/markdown-container';
-import { User } from '../../../../../../models/generated/graphql';
+import type { User } from '../../../../../../models/generated/graphql';
 
 interface Props {
   user: User;

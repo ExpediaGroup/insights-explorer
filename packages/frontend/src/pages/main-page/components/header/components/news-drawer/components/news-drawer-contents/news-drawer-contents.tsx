@@ -27,7 +27,7 @@ import {
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { News } from '../../../../../../../../models/generated/graphql';
+import type { News } from '../../../../../../../../models/generated/graphql';
 import { useLikedBy } from '../../../../../../../../shared/useLikedBy';
 import { useNews } from '../../../../../../../../shared/useNews';
 import { appSlice } from '../../../../../../../../store/app.slice';

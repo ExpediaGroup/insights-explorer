@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Badge, Box, BoxProps, HStack, Text, Tooltip, VStack, Wrap, WrapItem } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Badge, Box, HStack, Text, Tooltip, VStack, Wrap, WrapItem } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 
 import { Card } from '../../../../../../components/card/card';
@@ -22,7 +23,7 @@ import { InsightTag } from '../../../../../../components/insight-tag/insight-tag
 import { Linkify } from '../../../../../../components/linkify/linkify';
 import { SidebarHeading } from '../../../../../../components/sidebar-heading/sidebar-heading';
 import { UserTag } from '../../../../../../components/user-tag/user-tag';
-import { Insight } from '../../../../../../models/generated/graphql';
+import type { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 
 export const ExportHeader = ({ insight, ...props }: { insight: Insight } & BoxProps) => {

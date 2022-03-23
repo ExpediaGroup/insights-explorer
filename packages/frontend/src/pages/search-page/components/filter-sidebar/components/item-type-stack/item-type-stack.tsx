@@ -17,7 +17,8 @@
 import { Checkbox } from '@chakra-ui/react';
 
 import { SidebarStack } from '../../../../../../components/sidebar-stack/sidebar-stack';
-import { SearchClause, SearchMultiTerm, SearchTerm } from '../../../../../../shared/search';
+import type { SearchClause } from '../../../../../../shared/search';
+import { SearchMultiTerm, SearchTerm } from '../../../../../../shared/search';
 
 const itemTypes = [
   { value: 'insight', label: 'Insight' },

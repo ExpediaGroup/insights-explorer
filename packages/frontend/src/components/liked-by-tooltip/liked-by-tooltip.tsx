@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import type { Placement } from '@chakra-ui/react';
 import {
   Avatar,
   Box,
@@ -27,7 +28,6 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  Placement,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -39,10 +39,11 @@ import {
   useDisclosure,
   VStack
 } from '@chakra-ui/react';
-import { ReactNode, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { User } from '../../models/generated/graphql';
+import type { User } from '../../models/generated/graphql';
 import { Link as RouterLink } from '../link/link';
 import { OxfordComma } from '../oxford-comma/oxford-comma';
 

@@ -18,7 +18,7 @@ import { Flex, Skeleton, StackDivider, Text, useToast, VStack } from '@chakra-ui
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { Alert } from '../../components/alert/alert';
-import { ActivityConnection } from '../../models/generated/graphql';
+import type { ActivityConnection } from '../../models/generated/graphql';
 import { useLikedBy } from '../../shared/useLikedBy';
 import { ActivityView } from '../activity-view/activity-view';
 

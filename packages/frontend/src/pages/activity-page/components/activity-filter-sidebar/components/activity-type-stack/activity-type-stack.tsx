@@ -19,7 +19,8 @@ import titleize from 'titleize';
 
 import { SidebarStack } from '../../../../../../components/sidebar-stack/sidebar-stack';
 import { ActivityType } from '../../../../../../models/generated/graphql';
-import { SearchClause, SearchMultiTerm, SearchTerm } from '../../../../../../shared/search';
+import type { SearchClause } from '../../../../../../shared/search';
+import { SearchMultiTerm, SearchTerm } from '../../../../../../shared/search';
 
 // This is a manually-curated subset of all Activity Types
 // E.g. we don't need to allow users to filter for LOGIN activities

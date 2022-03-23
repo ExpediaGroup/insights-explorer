@@ -22,7 +22,7 @@ import { useState } from 'react';
 import { gql, useMutation } from 'urql';
 
 import { Alert } from '../../components/alert/alert';
-import { Insight, UpdatedInsight, UploadSingleFileMutation } from '../../models/generated/graphql';
+import type { Insight, UpdatedInsight, UploadSingleFileMutation } from '../../models/generated/graphql';
 import { urqlClient } from '../../urql';
 
 import { InsightEditor } from './insight-editor';

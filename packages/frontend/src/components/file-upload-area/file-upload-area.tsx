@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Box, BoxProps } from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useDropzone } from 'react-dropzone';
 
 export const DROPZONE_ACCEPT_ALL_FILES = '';

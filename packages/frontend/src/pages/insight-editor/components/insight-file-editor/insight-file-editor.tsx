@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Flex, FlexProps, Spinner } from '@chakra-ui/react';
+import type { FlexProps } from '@chakra-ui/react';
+import { Flex, Spinner } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 import { Alert } from '../../../../components/alert/alert';
@@ -22,8 +23,9 @@ import { CodeEditor } from '../../../../components/code-editor/code-editor';
 import { FileViewer } from '../../../../components/file-viewer/file-viewer';
 import { HtmlSplitEditor } from '../../../../components/html-split-editor/html-split-editor';
 import { MarkdownSplitEditor } from '../../../../components/markdown-split-editor/markdown-split-editor';
-import { InsightFile, InsightFileAction } from '../../../../models/file-tree';
-import { Insight, InsightFileInput, UploadSingleFileMutation } from '../../../../models/generated/graphql';
+import type { InsightFile } from '../../../../models/file-tree';
+import { InsightFileAction } from '../../../../models/file-tree';
+import type { Insight, InsightFileInput, UploadSingleFileMutation } from '../../../../models/generated/graphql';
 import {
   getLanguageForMime,
   getMimeForFileName,

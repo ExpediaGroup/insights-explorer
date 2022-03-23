@@ -16,9 +16,10 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { CombinedError, gql } from 'urql';
+import type { CombinedError } from 'urql';
+import { gql } from 'urql';
 
-import { AutocompleteResults, SearchResult, Sort } from '../models/generated/graphql';
+import type { AutocompleteResults, SearchResult, Sort } from '../models/generated/graphql';
 import { urqlClient } from '../urql';
 
 const INSIGHTS_QUERY = gql`

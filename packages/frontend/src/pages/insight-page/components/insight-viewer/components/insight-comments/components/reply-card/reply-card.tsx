@@ -18,7 +18,7 @@ import { Button, FormControl, Heading, HStack, Textarea, VStack } from '@chakra-
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Comment } from '../../../../../../../../models/generated/graphql';
+import type { Comment } from '../../../../../../../../models/generated/graphql';
 
 import { DeleteCommentButton } from './delete-comment-button';
 

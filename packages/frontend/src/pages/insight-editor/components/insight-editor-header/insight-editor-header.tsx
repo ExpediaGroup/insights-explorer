@@ -38,8 +38,10 @@ import {
   useDisclosure,
   VStack
 } from '@chakra-ui/react';
-import { RefObject, useRef, useState } from 'react';
-import { UseFormReturn, useWatch } from 'react-hook-form';
+import type { RefObject } from 'react';
+import { useRef, useState } from 'react';
+import type { UseFormReturn } from 'react-hook-form';
+import { useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import titleize from 'titleize';
 
@@ -48,7 +50,7 @@ import { ItemTypeIcon } from '../../../../components/item-type-icon/item-type-ic
 import { Linkify } from '../../../../components/linkify/linkify';
 import { formatFormError } from '../../../../shared/form-utils';
 import { getItemType } from '../../../../shared/item-type';
-import { DraftForm } from '../../draft-form';
+import type { DraftForm } from '../../draft-form';
 
 interface Props {
   insight: any;

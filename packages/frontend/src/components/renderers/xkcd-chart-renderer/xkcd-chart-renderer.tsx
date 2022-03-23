@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Box, BoxProps } from '@chakra-ui/layout';
+import type { BoxProps } from '@chakra-ui/layout';
+import { Box } from '@chakra-ui/layout';
 import { Bar, Line, Pie, Radar, StackedBar, XY } from 'chart.xkcd-react';
 import { useEffect, useState } from 'react';
 import ContainerDimensions from 'react-container-dimensions';

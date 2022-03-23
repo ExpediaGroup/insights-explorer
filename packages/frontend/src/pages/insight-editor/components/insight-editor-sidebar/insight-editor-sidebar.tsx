@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import { Flex, FlexProps } from '@chakra-ui/react';
-import { UseFormReturn } from 'react-hook-form';
+import type { FlexProps } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import type { UseFormReturn } from 'react-hook-form';
 
-import { InsightFile } from '../../../../models/file-tree';
-import { Insight } from '../../../../models/generated/graphql';
-import { InsightFileTree } from '../../../../shared/file-tree';
+import type { InsightFile } from '../../../../models/file-tree';
+import type { Insight } from '../../../../models/generated/graphql';
+import type { InsightFileTree } from '../../../../shared/file-tree';
 
 import { SidebarFiles } from './sidebar-files';
 

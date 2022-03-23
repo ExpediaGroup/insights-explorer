@@ -39,7 +39,7 @@ import Confetti from 'react-confetti';
 import { ExternalLink } from '../../../../components/external-link/external-link';
 import { IexMenuItem } from '../../../../components/iex-menu-item/iex-menu-item';
 import { Link as RouterLink } from '../../../../components/link/link';
-import { AppSettings } from '../../../../models/generated/graphql';
+import type { AppSettings } from '../../../../models/generated/graphql';
 
 const icons = [
   {

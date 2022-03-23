@@ -17,7 +17,7 @@
 import { freeze, produce } from 'immer';
 import { nanoid } from 'nanoid';
 
-import { FileOrFolder, InsightFile, InsightFileAction, InsightFolder } from '../models/file-tree';
+import type { FileOrFolder, InsightFile, InsightFileAction, InsightFolder } from '../models/file-tree';
 
 const PATH_SEPARATOR = '/';
 

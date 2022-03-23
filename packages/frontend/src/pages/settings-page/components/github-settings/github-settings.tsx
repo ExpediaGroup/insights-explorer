@@ -34,7 +34,7 @@ import { useForm } from 'react-hook-form';
 import { Alert } from '../../../../components/alert/alert';
 import { Card } from '../../../../components/card/card';
 import { FormLabel } from '../../../../components/form-label/form-label';
-import { User } from '../../../../models/generated/graphql';
+import type { User } from '../../../../models/generated/graphql';
 import { formatFormError } from '../../../../shared/form-utils';
 import { UserHealthCheck } from '../../../main-page/components/user-health-check/user-health-check';
 

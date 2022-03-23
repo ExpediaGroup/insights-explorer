@@ -43,10 +43,10 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { gql, useMutation, useQuery } from 'urql';
 
 import { Link as RouterLink } from '../../components/link/link';
-import { Insight } from '../../models/generated/graphql';
+import type { Insight } from '../../models/generated/graphql';
 import { formatRelativeIntl } from '../../shared/date-utils';
 import { iconFactory, iconFactoryAs } from '../../shared/icon-factory';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 import { UserHealthCheck } from '../main-page/components/user-health-check/user-health-check';
 
 import { InsightDraftEditor } from './insight-draft-editor';

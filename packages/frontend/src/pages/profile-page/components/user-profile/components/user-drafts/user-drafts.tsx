@@ -35,7 +35,7 @@ import { Alert } from '../../../../../../components/alert/alert';
 import { Card } from '../../../../../../components/card/card';
 import { ItemTypeIcon } from '../../../../../../components/item-type-icon/item-type-icon';
 import { Link } from '../../../../../../components/link/link';
-import { Draft, Insight, User } from '../../../../../../models/generated/graphql';
+import type { Draft, Insight, User } from '../../../../../../models/generated/graphql';
 import { formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory } from '../../../../../../shared/icon-factory';
 

@@ -18,8 +18,8 @@ import { Flex, Skeleton, Text, Wrap, WrapItem } from '@chakra-ui/react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { Alert } from '../../components/alert/alert';
-import { InsightConnection } from '../../models/generated/graphql';
-import { SearchOptions } from '../../store/search.slice';
+import type { InsightConnection } from '../../models/generated/graphql';
+import type { SearchOptions } from '../../store/search.slice';
 import { InsightConnectionCard } from '../insight-connection-card/insight-connection-card';
 
 import { InsightListSkeleton } from './components/insight-list-skeleton/insight-list-skeleton';

@@ -23,7 +23,7 @@ import { gql, useQuery } from 'urql';
 import { Alert } from '../../../../components/alert/alert';
 import { Card } from '../../../../components/card/card';
 import { FormLabel } from '../../../../components/form-label/form-label';
-import { TemplatesQuery, User } from '../../../../models/generated/graphql';
+import type { TemplatesQuery, User } from '../../../../models/generated/graphql';
 
 const TEMPLATES_QUERY = gql`
   query Templates {

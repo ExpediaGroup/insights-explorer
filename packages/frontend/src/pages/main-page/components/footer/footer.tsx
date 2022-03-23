@@ -18,7 +18,7 @@ import { HStack, Icon, Link, Text, useColorModeValue } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
 import { iconFactory } from '../../../../shared/icon-factory';
-import { RootState } from '../../../../store/store';
+import type { RootState } from '../../../../store/store';
 
 const FooterItem = ({ children }) => (
   <HStack spacing="0.25rem" fontSize="xs" align="center">

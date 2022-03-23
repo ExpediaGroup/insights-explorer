@@ -18,7 +18,7 @@ import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
 import { AuthErrorPage } from '../../pages/auth-error-page/auth-error-page';
-import { RootState } from '../../store/store';
+import type { RootState } from '../../store/store';
 
 import { GitHubAuthProvider } from './github-auth-provider/github-auth-provider';
 import { OktaAuthProvider } from './okta-auth-provider/okta-auth-provider';

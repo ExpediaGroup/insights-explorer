@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-import {
-  Badge,
-  BoxProps,
-  Heading,
-  HStack,
-  LinkBox,
-  Tooltip,
-  useColorModeValue,
-  Wrap,
-  WrapItem
-} from '@chakra-ui/react';
+import type { BoxProps } from '@chakra-ui/react';
+import { Badge, Heading, HStack, LinkBox, Tooltip, useColorModeValue, Wrap, WrapItem } from '@chakra-ui/react';
 
 import { InsightTag } from '../../../insight-tag/insight-tag';
 import { ItemTypeIcon } from '../../../item-type-icon/item-type-icon';
 import { LinkOverlay } from '../../../link-overlay/link-overlay';
-import { InsightConnectionCardProps } from '../../insight-connection-card';
+import type { InsightConnectionCardProps } from '../../insight-connection-card';
 import { InsightStats } from '../insight-stats/insight-stats';
 
 export const CompactInsightCard = ({ insightEdge, options, ...props }: InsightConnectionCardProps & BoxProps) => {

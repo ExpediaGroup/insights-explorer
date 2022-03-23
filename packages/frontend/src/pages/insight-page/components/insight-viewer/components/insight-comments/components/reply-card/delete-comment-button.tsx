@@ -23,7 +23,8 @@ import {
   AlertDialogOverlay,
   Button
 } from '@chakra-ui/react';
-import { RefObject, useRef, useState } from 'react';
+import type { RefObject } from 'react';
+import { useRef, useState } from 'react';
 
 import { DeleteIconButton } from '../../../../../../../../components/delete-icon-button/delete-icon-button';
 
