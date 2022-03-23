@@ -22,7 +22,7 @@ export const hashCode = (str: string): number => {
     chr = str.codePointAt(i);
     if (chr !== undefined) {
       hash = (hash << 5) - hash + chr;
-      hash |= 0;
+      hash = Math.trunc(hash);
     }
   }
   return hash;

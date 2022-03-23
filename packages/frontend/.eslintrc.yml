@@ -34,7 +34,6 @@ rules:
   unicorn/no-new-array: off
   unicorn/no-useless-undefined: off
   unicorn/prefer-export-from: off
-  unicorn/prefer-math-trunc: off
   unicorn/prefer-number-properties: off
   unicorn/prefer-optional-catch-binding: off
   unicorn/prefer-regexp-test: off
