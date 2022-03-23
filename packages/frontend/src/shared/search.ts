@@ -167,11 +167,7 @@ export class SearchTerm implements SearchClause {
       case 'tag':
         return `#${this.value}`;
       default:
-        if (this.value.includes(' ')) {
-          return `${this.key}:"${this.value}"`;
-        } else {
-          return `${this.key}:${this.value}`;
-        }
+        return this.value.includes(' ') ? `${this.key}:"${this.value}"` : `${this.key}:${this.value}`;
     }
   }
 }

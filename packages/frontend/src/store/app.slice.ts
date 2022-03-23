@@ -75,11 +75,7 @@ export const initSettings = createAsyncThunk<AppSettings, void, { rejectValue: s
           }`
         )
         .toPromise();
-      if (response.error) {
-        return thunkApi.rejectWithValue(response.error.message);
-      } else {
-        return response.data.appSettings;
-      }
+      return response.error ? thunkApi.rejectWithValue(response.error.message) : response.data.appSettings;
     } catch (error: any) {
       return thunkApi.rejectWithValue(error);
     }

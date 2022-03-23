@@ -56,18 +56,12 @@ export function formatDateIntl(
     locale = store?.getState().user.userInfo?.locale;
   }
   if (locale == null) {
-    if (typeof format == 'string') {
-      return dt.toFormat(format);
-    } else {
-      return dt.toLocaleString(format);
-    }
+    return typeof format == 'string' ? dt.toFormat(format) : dt.toLocaleString(format);
   }
 
-  if (typeof format == 'string') {
-    return dt.setLocale(locale).toFormat(format);
-  } else {
-    return dt.setLocale(locale).toLocaleString(format);
-  }
+  return typeof format == 'string'
+    ? dt.setLocale(locale).toFormat(format)
+    : dt.setLocale(locale).toLocaleString(format);
 }
 
 export function formatRelativeIntl(
@@ -75,13 +69,7 @@ export function formatRelativeIntl(
   options: ToRelativeOptions = {},
   locale?: string
 ): string | null {
-  let dt: DateTime;
-
-  if (typeof dateTimeOrString == 'string') {
-    dt = DateTime.fromISO(dateTimeOrString);
-  } else {
-    dt = dateTimeOrString;
-  }
+  const dt = typeof dateTimeOrString == 'string' ? DateTime.fromISO(dateTimeOrString) : dateTimeOrString;
 
   if (locale == null) {
     locale = store?.getState().user.userInfo?.locale;

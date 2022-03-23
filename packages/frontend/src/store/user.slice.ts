@@ -72,11 +72,7 @@ export const login = createAsyncThunk<User, string, { rejectValue: string }>(
           `
         )
         .toPromise();
-      if (response.error) {
-        return thunkApi.rejectWithValue(response.error.message);
-      } else {
-        return response.data.login;
-      }
+      return response.error ? thunkApi.rejectWithValue(response.error.message) : response.data.login;
     } catch (error: any) {
       return thunkApi.rejectWithValue(error);
     }
@@ -105,11 +101,7 @@ export const executeHealthCheck = createAsyncThunk<UserHealthCheck, void, { reje
           { requestPolicy: 'network-only' }
         )
         .toPromise();
-      if (response.error) {
-        return thunkApi.rejectWithValue(response.error.message);
-      } else {
-        return response.data.currentUser.healthCheck;
-      }
+      return response.error ? thunkApi.rejectWithValue(response.error.message) : response.data.currentUser.healthCheck;
     } catch (error: any) {
       return thunkApi.rejectWithValue(error);
     }

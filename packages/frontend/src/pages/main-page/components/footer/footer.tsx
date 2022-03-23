@@ -32,12 +32,8 @@ export const Footer = (props) => {
   const bgColor = useColorModeValue('unset', 'gray.700');
   const color = useColorModeValue('gray.700', 'gray.200');
 
-  let apolloSandboxLink;
-  if (window.location.origin === 'http://localhost:3000') {
-    apolloSandboxLink = 'http://localhost:3001/api/v1/graphql';
-  } else {
-    apolloSandboxLink = '/api/v1/graphql';
-  }
+  const apolloSandboxLink =
+    window.location.origin === 'http://localhost:3000' ? 'http://localhost:3001/api/v1/graphql' : '/api/v1/graphql';
 
   return (
     <HStack

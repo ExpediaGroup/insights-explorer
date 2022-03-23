@@ -28,9 +28,5 @@ export const generateSearchUrl = (query: string | undefined, sort: Sort | undefi
     }
   }
 
-  if (searchParams.length > 0) {
-    return `${path}?${searchParams.join('&')}`;
-  } else {
-    return path;
-  }
+  return searchParams.length > 0 ? `${path}?${searchParams.join('&')}` : path;
 };

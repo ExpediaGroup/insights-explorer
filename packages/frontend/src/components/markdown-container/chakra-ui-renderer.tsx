@@ -242,11 +242,11 @@ export const ChakraUIRenderer = (
       );
     },
     input: ({ node, children, ...props }) => {
-      if (props.type === 'checkbox') {
-        return <Checkbox isChecked={props.checked} isReadOnly mr="0.5rem" {...(props as any)} />;
-      } else {
-        return <Input {...(props as any)}>{children}</Input>;
-      }
+      return props.type === 'checkbox' ? (
+        <Checkbox isChecked={props.checked} isReadOnly mr="0.5rem" {...(props as any)} />
+      ) : (
+        <Input {...(props as any)}>{children}</Input>
+      );
     },
     table: ({ node, children, border, caption, width, ...props }: any) => {
       const defaultProps = { variant: 'simple', size: 'sm' };

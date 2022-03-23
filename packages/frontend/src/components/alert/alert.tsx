@@ -35,11 +35,7 @@ interface Props {
 }
 
 function getMessage(i: StringOrMessage): string {
-  if (typeof i === 'string') {
-    return i;
-  } else {
-    return i.message;
-  }
+  return typeof i === 'string' ? i : i.message;
 }
 
 export const Alert = ({

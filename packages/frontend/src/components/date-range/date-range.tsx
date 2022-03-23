@@ -73,11 +73,7 @@ function parseDate(dateString: string | undefined): Date | undefined {
   }
   const date = DateTime.fromISO(dateString);
 
-  if (date.isValid) {
-    return date.toJSDate();
-  } else {
-    return undefined;
-  }
+  return date.isValid ? date.toJSDate() : undefined;
 }
 
 const RelativeDateLink = ({ start, end, onChange, children }) => {

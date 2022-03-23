@@ -34,4 +34,6 @@ rules:
   unicorn/prefer-export-from: off
   unicorn/prefer-optional-catch-binding: off
   unicorn/prefer-spread: off
-  unicorn/prefer-ternary: off
+  unicorn/prefer-ternary:
+    - warn
+    - only-single-line

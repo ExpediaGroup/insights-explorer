@@ -33,12 +33,7 @@ type Props =
     };
 
 export const TextWithIcon = ({ children, iconColor = 'frost.400', ...props }: Props) => {
-  let icon: IconType;
-  if ('icon' in props) {
-    icon = props.icon;
-  } else {
-    icon = iconFactory(props.iconName);
-  }
+  const icon: IconType = 'icon' in props ? props.icon : iconFactory(props.iconName);
 
   return (
     <HStack>
