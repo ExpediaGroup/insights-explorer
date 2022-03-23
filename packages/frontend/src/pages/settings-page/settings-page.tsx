@@ -19,7 +19,6 @@ import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
-
 import { useQuery, useMutation, gql } from 'urql';
 
 import { Alert } from '../../components/alert/alert';

@@ -19,7 +19,6 @@ import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import { gql } from 'urql';
 
 import { InsightFileAction } from '../../models/file-tree';

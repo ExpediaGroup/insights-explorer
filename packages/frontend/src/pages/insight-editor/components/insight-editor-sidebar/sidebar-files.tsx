@@ -32,7 +32,6 @@ import {
 } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { useCallback, useState } from 'react';
-
 import { gql } from 'urql';
 
 import { FileBrowser } from '../../../../components/file-browser/file-browser';

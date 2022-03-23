@@ -39,7 +39,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import CreatableSelect from 'react-select/creatable';
 import titleize from 'titleize';
-
 import { gql, useQuery } from 'urql';
 
 import { Alert } from '../../../../components/alert/alert';

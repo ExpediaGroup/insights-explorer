@@ -17,7 +17,6 @@
 import { Box, Button, Flex, FormControl, FormHelperText } from '@chakra-ui/react';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
-
 import { gql, useQuery } from 'urql';
 
 import { Alert } from '../../../../components/alert/alert';

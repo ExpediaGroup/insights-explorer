@@ -32,7 +32,6 @@ import {
 import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 import titleize from 'titleize';
-
 import { gql, useMutation } from 'urql';
 
 import { InsightCollaboratorsModal } from '../../../../../../components/insight-collaborators-modal/insight-collaborators-modal';

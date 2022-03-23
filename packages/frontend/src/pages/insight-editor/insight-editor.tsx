@@ -31,7 +31,6 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
 import { gql, useMutation, useQuery } from 'urql';
 
 import type { FileOrFolder } from '../../models/file-tree';

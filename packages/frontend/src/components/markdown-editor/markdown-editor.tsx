@@ -20,7 +20,6 @@ import { nanoid } from 'nanoid';
 import { emoji } from 'node-emoji';
 import { useEffect, useRef, useState } from 'react';
 import AceEditor from 'react-ace';
-
 import { gql } from 'urql';
 
 import type { UploadSingleFileMutation, UsersCompletionQuery } from '../../models/generated/graphql';

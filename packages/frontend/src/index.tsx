@@ -22,7 +22,6 @@ import { Helmet } from 'react-helmet';
 import { Provider as Redux } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-
 import { Provider as UrqlProvider } from 'urql';
 
 import { AnalyticsHandler } from './components/analytics-handler/analytics-handler';

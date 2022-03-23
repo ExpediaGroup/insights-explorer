@@ -37,7 +37,6 @@ import type { UseFormReturn } from 'react-hook-form';
 import { Controller, useWatch } from 'react-hook-form';
 import Select from 'react-select';
 import titleize from 'titleize';
-
 import { gql, useQuery } from 'urql';
 
 import { Alert } from '../../../../components/alert/alert';

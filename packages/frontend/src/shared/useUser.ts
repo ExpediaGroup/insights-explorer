@@ -15,7 +15,6 @@
  */
 
 import { useCallback } from 'react';
-
 import { gql, useQuery } from 'urql';
 
 type UserQuery = 'basic' | 'profile';

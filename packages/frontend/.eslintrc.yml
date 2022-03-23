@@ -4,19 +4,12 @@ parserOptions:
   sourceType: module
   warnOnUnsupportedTypeScriptVersion: false
 plugins:
-  - '@typescript-eslint'
   - jsx-a11y
 extends:
-  - eslint:recommended
-  - plugin:@typescript-eslint/recommended
-  - plugin:import/errors
-  - plugin:import/typescript
-  - plugin:prettier/recommended
   - plugin:jsx-a11y/recommended
   - plugin:react-hooks/recommended
 rules:
   '@typescript-eslint/explicit-function-return-type': off
-  '@typescript-eslint/no-explicit-any': off
   '@typescript-eslint/no-unused-vars': off
   '@typescript-eslint/explicit-module-boundary-types': off
   no-console: ['off']

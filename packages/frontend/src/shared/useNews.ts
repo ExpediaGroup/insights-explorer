@@ -15,7 +15,6 @@
  */
 
 import { useCallback } from 'react';
-
 import { gql, useMutation, useQuery } from 'urql';
 
 import type { DeleteNewsMutation, DeleteNewsMutationVariables, NewsQuery } from '../models/generated/graphql';

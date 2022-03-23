@@ -18,7 +18,6 @@ import { FormControl, FormHelperText, FormLabel, InputGroup, InputLeftElement } 
 import { Controller, useWatch } from 'react-hook-form';
 import CreatableSelect from 'react-select/creatable';
 import titleize from 'titleize';
-
 import { gql, useQuery } from 'urql';
 
 import type { AutocompleteInsightTagsQuery } from '../../../../models/generated/graphql';

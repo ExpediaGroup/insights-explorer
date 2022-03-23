@@ -15,7 +15,6 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-
 import type { CombinedError } from 'urql';
 import { gql, useMutation } from 'urql';
 

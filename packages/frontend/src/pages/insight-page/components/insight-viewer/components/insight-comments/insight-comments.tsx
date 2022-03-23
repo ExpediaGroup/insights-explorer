@@ -17,7 +17,6 @@
 import type { BoxProps } from '@chakra-ui/react';
 import { Center, Flex, Heading, HStack, Spinner, StackDivider, Text, useToast, VStack } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
-
 import { gql, useMutation, useQuery } from 'urql';
 
 import { Alert } from '../../../../../../components/alert/alert';
