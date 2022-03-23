@@ -58,16 +58,16 @@ export function parseLineFilter(lineFilter: string): LineSlice[] {
         return undefined;
       }
 
-      const start = parseInt(parts[0]) - 1;
+      const start = Number.parseInt(parts[0]) - 1;
       let end = start + 1;
 
       if (parts.length === 2) {
         if (parts[1] === '') {
-          end = Infinity;
+          end = Number.POSITIVE_INFINITY;
         } else {
           // Don't subtract one because `.slice()` is end-exclusive and this is inclusive.
           // Works for both positive and negative variations.
-          end = parseInt(parts[1]);
+          end = Number.parseInt(parts[1]);
         }
       }
 

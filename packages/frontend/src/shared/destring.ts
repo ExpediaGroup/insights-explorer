@@ -20,35 +20,35 @@ export function destring(value: string | Array<any> | Record<string, string>): a
     return false;
   }
   if (lowerValue === 'nan') {
-    return NaN;
+    return Number.NaN;
   }
   if (lowerValue === '-nan') {
-    return -NaN;
+    return -Number.NaN;
   }
   if (lowerValue === 'infinity') {
-    return Infinity;
+    return Number.POSITIVE_INFINITY;
   }
   if (lowerValue === '-infinity') {
-    return -Infinity;
+    return Number.NEGATIVE_INFINITY;
   }
   if (lowerValue.startsWith('0x')) {
-    return parseInt(value, 16);
+    return Number.parseInt(value, 16);
   }
   if (lowerValue.startsWith('0o')) {
-    return parseInt(value, 8);
+    return Number.parseInt(value, 8);
   }
   if (lowerValue.startsWith('0b')) {
-    return parseInt(value, 2);
+    return Number.parseInt(value, 2);
   }
   // try parse int
   if (value.match(/^-?\d+$/)) {
-    return parseInt(value, 10);
+    return Number.parseInt(value, 10);
   }
   if (value.match(/^-?\d*\.\d+$/)) {
-    return parseFloat(value);
+    return Number.parseFloat(value);
   }
   if (value.match(/^-?\d*\.\d*(e[+-]?\d+)?$/)) {
-    return parseFloat(value);
+    return Number.parseFloat(value);
   }
 
   return value;

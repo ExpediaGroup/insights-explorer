@@ -66,7 +66,7 @@ export const CodeEditor = ({ contents, language, onContentsChange, readOnly = fa
       showPrintMargin={false}
       width="100%"
       minLines={30}
-      maxLines={Infinity}
+      maxLines={Number.POSITIVE_INFINITY}
       readOnly={readOnly}
       setOptions={{
         enableBasicAutocompletion: true,

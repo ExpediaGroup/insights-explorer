@@ -57,7 +57,7 @@ describe('destring', () => {
     expect(destring('-2.45e10')).toEqual(-2.45e10);
   });
   test('-infinity', () => {
-    expect(destring('-infinity')).toEqual(-Infinity);
+    expect(destring('-infinity')).toEqual(Number.NEGATIVE_INFINITY);
   });
   test('unstyled', () => {
     expect(destring('unstyled')).toEqual('unstyled');

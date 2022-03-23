@@ -207,7 +207,7 @@ export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadF
       showPrintMargin={false}
       width="100%"
       minLines={30}
-      maxLines={scrollSync ? undefined : Infinity}
+      maxLines={scrollSync ? undefined : Number.POSITIVE_INFINITY}
       height={aceEditorHeight}
       setOptions={{
         scrollPastEnd: scrollSync,
