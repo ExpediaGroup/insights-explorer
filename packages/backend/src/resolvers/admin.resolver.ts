@@ -25,6 +25,7 @@ import { DbInsight } from '../models/insight';
 import { Permission } from '../models/permission';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+
 @Service()
 @Resolver()
 export class AdminResolver {

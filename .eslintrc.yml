@@ -32,7 +32,7 @@ rules:
       disallowTypeAnnotations: false
   '@typescript-eslint/no-explicit-any': off
   '@typescript-eslint/no-non-null-assertion': off
-  import/newline-after-import: off
+  import/newline-after-import: error
   import/order:
     - error
     - groups:

@@ -21,6 +21,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { iconFactory } from '../../shared/icon-factory';
 import { RootState } from '../../store/store';
 import { ErrorPage } from '../error-page/error-page';
+
 interface AuthError {
   name: string;
   message: string;
