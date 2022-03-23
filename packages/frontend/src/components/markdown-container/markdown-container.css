@@ -64,8 +64,3 @@
   font-family: monospace;
   font-size: 1rem;
 }
-
-/* Display heading self-link on hover */
-.iex-markdown-container .heading:hover .heading-auto-link {
-  display: block;
-}

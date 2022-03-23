@@ -80,6 +80,14 @@ const heading = ({ node, level, children, ...props }) => {
       borderBottomColor="snowstorm.100"
       display="flex"
       alignItems="center"
+      sx={{
+        // Display self-link on hover
+        '&:hover': {
+          '.heading-auto-link': {
+            display: 'block'
+          }
+        }
+      }}
       {...node.properties}
       {...props}
     >
