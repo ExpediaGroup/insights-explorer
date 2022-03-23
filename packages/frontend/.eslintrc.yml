@@ -28,7 +28,6 @@ rules:
   unicorn/no-array-callback-reference: off
   unicorn/no-array-for-each: off
   unicorn/no-lonely-if: off
-  unicorn/no-new-array: off
   unicorn/no-useless-undefined: off
   unicorn/prefer-export-from: off
   unicorn/prefer-optional-catch-binding: off

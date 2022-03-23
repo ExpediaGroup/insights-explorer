@@ -29,13 +29,15 @@ export const InsightListSkeleton = ({ count = 3, options }) => {
           }
         }}
       >
-        {new Array(count * 2).fill(1).map((value, index) => (
-          <Skeleton
-            key={`search-results-skeleton-${index}`}
-            sx={{ aspectRatio: '1' }}
-            width={{ base: 'unset', sm: '16rem', md: '17rem', lg: '18rem', '2xl': '20rem' }}
-          />
-        ))}
+        {Array.from({ length: count * 2 })
+          .fill(1)
+          .map((value, index) => (
+            <Skeleton
+              key={`search-results-skeleton-${index}`}
+              sx={{ aspectRatio: '1' }}
+              width={{ base: 'unset', sm: '16rem', md: '17rem', lg: '18rem', '2xl': '20rem' }}
+            />
+          ))}
       </Wrap>
     );
   }
@@ -64,9 +66,11 @@ export const InsightListSkeleton = ({ count = 3, options }) => {
 
   return (
     <>
-      {new Array(count).fill(1).map((value, index) => (
-        <Skeleton key={`search-results-skeleton-${index}`} mb="1rem" {...layoutProps} />
-      ))}
+      {Array.from({ length: count })
+        .fill(1)
+        .map((value, index) => (
+          <Skeleton key={`search-results-skeleton-${index}`} mb="1rem" {...layoutProps} />
+        ))}
     </>
   );
 };

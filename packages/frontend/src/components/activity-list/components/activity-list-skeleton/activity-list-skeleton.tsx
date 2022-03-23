@@ -20,20 +20,22 @@ const widthArray = ['50%', '25%', '80%', '40%', '66%'];
 export const ActivityListSkeleton = ({ count = 3 }) => {
   return (
     <VStack align="stretch" divider={<StackDivider borderColor="snowstorm.300" />}>
-      {new Array(count).fill(1).map((value, index) => (
-        <VStack key={`activity-icon-skeleton-${index}`} align="stretch">
-          <HStack>
-            <Skeleton boxSize="1.5rem" />
-            <Box flexGrow={2}>
-              <Skeleton height="1.5rem" width={widthArray[index % 5]} />
+      {Array.from({ length: count })
+        .fill(1)
+        .map((value, index) => (
+          <VStack key={`activity-icon-skeleton-${index}`} align="stretch">
+            <HStack>
+              <Skeleton boxSize="1.5rem" />
+              <Box flexGrow={2}>
+                <Skeleton height="1.5rem" width={widthArray[index % 5]} />
+              </Box>
+              <Skeleton height="1.5rem" width="4.5rem" />
+            </HStack>
+            <Box>
+              <Skeleton ml="2rem" height="2.5rem" width="auto" />
             </Box>
-            <Skeleton height="1.5rem" width="4.5rem" />
-          </HStack>
-          <Box>
-            <Skeleton ml="2rem" height="2.5rem" width="auto" />
-          </Box>
-        </VStack>
-      ))}
+          </VStack>
+        ))}
     </VStack>
   );
 };
