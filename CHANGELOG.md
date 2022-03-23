@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.5.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.7...v3.5.8) (2022-03-23)
+
+
+### Bug Fixes
+
+* Fix missing Markdown styles ([36dd5b9](https://github.com/ExpediaGroup/insights-explorer/commit/36dd5b9455ac3c3227675922751c69541fbe1e09))
+
 ### [3.5.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.6...v3.5.7) (2022-03-21)
 
 
