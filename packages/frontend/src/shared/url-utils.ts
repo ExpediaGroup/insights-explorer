@@ -25,7 +25,7 @@ export function isRelativeUrl(url: string) {
 }
 
 export function isHashUrl(url: string) {
-  return /^#/.test(url);
+  return url.startsWith('#');
 }
 
 export type MaybeUndefined<T> = undefined extends T ? undefined : never;
