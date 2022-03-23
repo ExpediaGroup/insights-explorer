@@ -30,7 +30,6 @@ rules:
   unicorn/no-lonely-if: off
   unicorn/no-useless-undefined: off
   unicorn/prefer-export-from: off
-  unicorn/prefer-optional-catch-binding: off
   unicorn/prefer-spread: off
   unicorn/prefer-ternary:
     - warn

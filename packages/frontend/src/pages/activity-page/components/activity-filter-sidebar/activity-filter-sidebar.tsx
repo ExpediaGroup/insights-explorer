@@ -92,7 +92,7 @@ export const ActivityFilterSidebar = ({ suggestedFilters, ...boxProps }: Props &
         if (isActuallyFiltered !== isFiltered) {
           dispatch(activitySlice.actions.setIsFiltered(isActuallyFiltered));
         }
-      } catch (e: any) {
+      } catch {
         // If there's a parsing error, it will be detected
         // server-side and displayed elsewhere.
         // Do nothing.

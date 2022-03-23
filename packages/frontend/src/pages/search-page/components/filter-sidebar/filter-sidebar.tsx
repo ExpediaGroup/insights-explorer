@@ -96,7 +96,7 @@ export const FilterSidebar = ({ suggestedFilters, ...boxProps }: Props & BoxProp
         if (isActuallyFiltered !== isFiltered) {
           dispatch(searchSlice.actions.setIsFiltered(isActuallyFiltered));
         }
-      } catch (e: any) {
+      } catch {
         // If there's a parsing error, it will be detected
         // server-side and displayed elsewhere.
         // Do nothing.

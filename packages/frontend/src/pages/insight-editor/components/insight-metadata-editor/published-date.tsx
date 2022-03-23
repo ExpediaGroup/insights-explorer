@@ -38,7 +38,7 @@ export const PublishedDate = ({ insight, form }) => {
     let publishedDate: string | null;
     try {
       publishedDate = DateTime.fromJSDate(selectedDate).toISODate();
-    } catch (error: any) {
+    } catch {
       publishedDate = null;
     }
     setValue('metadata.publishedDate', publishedDate);
