@@ -66,9 +66,9 @@ export const XkcdChartRenderer = ({ type, configString, ...boxProps }: Props & B
           .replaceAll('chartXkcd.config.positionType.downRight', '4')
       );
       setConfig(configObj);
-    } catch (e: any) {
+    } catch (error_: any) {
       setConfig(undefined);
-      setError(e);
+      setError(error_);
     }
   }, [configString]);
 

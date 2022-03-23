@@ -57,9 +57,9 @@ export const VegaRenderer = memo(({ specString, transformAssetUri, ...boxProps }
         //height: 'container',
         ...specObj
       });
-    } catch (e: any) {
+    } catch (error_: any) {
       setSpec(undefined);
-      setError(e);
+      setError(error_);
     }
   }, [specString, transformAssetUri]);
 
