@@ -26,6 +26,7 @@ import { Crumbs } from '../../components/crumbs/crumbs';
 import { iconFactory, iconFactoryAs } from '../../shared/icon-factory';
 import { getMimeTypeDefinition, MIME_VIEWER } from '../../shared/mime-utils';
 import { getCompletePath } from '../../shared/url-utils';
+import { useScrollToLocation } from '../../shared/use-scroll-to-location';
 import { useFetch } from '../../shared/useFetch';
 import { MarkdownContainer } from '../markdown-container/markdown-container';
 import { CodeRenderer } from '../renderers/code-renderer/code-renderer';
@@ -132,6 +133,9 @@ export const FileViewer = ({
   transformAssetUri,
   ...props
 }: FileViewerProps & BoxProps) => {
+  // Scroll to anchor location if needed
+  useScrollToLocation();
+
   const fileUrl = determineFileUrl(path, baseAssetUrl, transformAssetUri);
 
   const downloadUrl = getCompletePath(baseAssetUrl, downloadPath || path, true);
