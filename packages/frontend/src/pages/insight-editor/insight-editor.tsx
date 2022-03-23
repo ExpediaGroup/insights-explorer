@@ -312,7 +312,7 @@ export const InsightEditor = memo(
 
       if (isRelativeUrl(uri)) {
         if (uri[0] === '/') {
-          uri = uri.substring(1);
+          uri = uri.slice(1);
         }
 
         const file = fileTree.getFileByPath(uri);

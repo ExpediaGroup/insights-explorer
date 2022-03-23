@@ -122,7 +122,9 @@ export class InsightFileTree {
         if (updatedItem.name && item.name !== updatedItem.name) {
           if (item.path.includes(PATH_SEPARATOR)) {
             item.path =
-              item.path.substring(0, item.path.lastIndexOf(PATH_SEPARATOR)) + PATH_SEPARATOR + updatedItem.name;
+              item.path.slice(0, Math.max(0, item.path.lastIndexOf(PATH_SEPARATOR))) +
+              PATH_SEPARATOR +
+              updatedItem.name;
           } else {
             item.path = updatedItem.name;
           }

@@ -143,7 +143,7 @@ export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadF
         // Set the proper image name by generating a random name if it has a default name (eg: 'image.png')
         // or add `<` and `>` characters to the name in case it contains any spaces
         const name = file.name.startsWith('image.')
-          ? file.name.replace('image', `pasted-${nanoid().substring(0, 6)}`)
+          ? file.name.replace('image', `pasted-${nanoid().slice(0, 6)}`)
           : file.name;
 
         // Insert the image with Markdown notation based on the current cursor position
