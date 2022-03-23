@@ -140,7 +140,7 @@ export const ProfileSettings = ({ user, onSubmit, isSubmitting }: Props) => {
 
   const onDropAvatar = useCallback(
     async (acceptedFiles: any[]) => {
-      if (acceptedFiles.length < 1) {
+      if (acceptedFiles.length === 0) {
         return;
       }
 
