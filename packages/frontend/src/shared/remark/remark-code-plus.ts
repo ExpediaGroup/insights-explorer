@@ -49,7 +49,7 @@ export const remarkCodePlus = ({ baseUrl = '', transformAssetUri }: Props) => {
       };
 
       // Parse out attributes (if any)
-      const attrs = (node.meta || node.lang || '').match(/\{(.*)\}/);
+      const attrs = (node.meta || node.lang || '').match(/{(.*)}/);
 
       if (attrs !== null && attrs.length === 2) {
         const attributes = parseAttributes(attrs[1]);

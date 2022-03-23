@@ -29,7 +29,7 @@ export class KeyValueAttribute implements Attribute {
 
 const lang = Parsimmon.createLanguage({
   Word: () => {
-    return Parsimmon.regexp(/[^=\s]+/i);
+    return Parsimmon.regexp(/[^\s=]+/i);
   },
   String: () => {
     // One of possible quotes, then sequence of anything

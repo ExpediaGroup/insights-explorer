@@ -16,7 +16,7 @@
 
 import { findAndReplace } from 'mdast-util-find-and-replace';
 
-const mentionRegex = /@([A-Z0-9_]+)?/gi;
+const mentionRegex = /@(\w+)?/gi;
 
 const replaceMention = (match: string, username: string): any => {
   return {

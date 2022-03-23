@@ -204,7 +204,7 @@ export const ProfileSettings = ({ user, onSubmit, isSubmitting }: Props) => {
                 placeholder="User Name"
                 defaultValue={user.userName}
                 errorBorderColor="red.300"
-                {...register('userName', { required: true, pattern: /^[A-Za-z0-9]+$/ })}
+                {...register('userName', { required: true, pattern: /^[\dA-Za-z]+$/ })}
                 onChange={(e) => (e.target.value = e.target.value.trim().toLowerCase())}
               />
               <FormHelperText>Your user name appears in your profile URL and can be used for @mentions.</FormHelperText>

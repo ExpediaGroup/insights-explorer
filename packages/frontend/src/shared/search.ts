@@ -274,13 +274,13 @@ export class SearchCompoundRange implements SearchClause {
 //
 const lang = Parsimmon.createLanguage({
   Word: () => {
-    return Parsimmon.regexp(/[^:\s]+/i);
+    return Parsimmon.regexp(/[^\s:]+/i);
   },
   CompoundRangeWord: () => {
-    return Parsimmon.regexp(/[^[\]:\s]+/i).fallback('');
+    return Parsimmon.regexp(/[^\s:[\]]+/i).fallback('');
   },
   MultiTermWord: () => {
-    return Parsimmon.regexp(/[^{}:,\s]+/i).fallback('');
+    return Parsimmon.regexp(/[^\s,:{}]+/i).fallback('');
   },
   String: () => {
     // One of possible quotes, then sequence of anything
@@ -332,7 +332,7 @@ const lang = Parsimmon.createLanguage({
     return Parsimmon.seq(
       r.Word,
       r.FilterSeparator.then(
-        Parsimmon.lookahead(/\{(.*)\}/).then(
+        Parsimmon.lookahead(/{(.*)}/).then(
           Parsimmon.alt(r.String, r.MultiTermWord.fallback(''))
             .trim(optWhitespace)
             .sepBy(Parsimmon.string(',').trim(optWhitespace))
@@ -357,7 +357,7 @@ const lang = Parsimmon.createLanguage({
     return Parsimmon.seq(
       r.Word,
       r.FilterSeparator.then(
-        Parsimmon.lookahead(/\[(.*)\]/).then(
+        Parsimmon.lookahead(/\[(.*)]/).then(
           Parsimmon.seq(r.CompoundRangeWord, Parsimmon.string('to').trim(optWhitespace).then(r.CompoundRangeWord)).wrap(
             Parsimmon.string('['),
             Parsimmon.string(']')

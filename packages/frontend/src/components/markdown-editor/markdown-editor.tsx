@@ -45,7 +45,7 @@ let emojiList: Record<string, unknown>[] | undefined = undefined;
 let userList: Record<string, unknown>[] | undefined = undefined;
 
 const emojiCompleter = {
-  identifierRegexps: [/[:]/],
+  identifierRegexps: [/:/],
   getCompletions: (editor, session, pos, prefix, callback) => {
     // Only trigger completions after an initial ":"
     if (prefix !== ':') {
@@ -80,7 +80,7 @@ const emojiCompleter = {
 };
 
 const mentionCompleter = {
-  identifierRegexps: [/[@]/],
+  identifierRegexps: [/@/],
   getCompletions: async (editor, session, pos, prefix, callback) => {
     // Only trigger completions after an initial "@"
     if (prefix !== '@') {

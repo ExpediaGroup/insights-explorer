@@ -17,7 +17,7 @@
 import urljoin from 'url-join';
 
 export function isAbsoluteUrl(url: string) {
-  return /(?:^[a-z][a-z0-9+.-]*:|\/\/)/.test(url);
+  return /^[a-z][\d+.a-z-]*:|\/\//.test(url);
 }
 
 export function isRelativeUrl(url: string) {
