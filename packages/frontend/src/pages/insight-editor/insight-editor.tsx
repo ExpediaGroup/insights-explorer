@@ -368,13 +368,11 @@ export const InsightEditor = memo(
             form={form}
             fileTree={fileTree}
             onFileTreeChanged={fileTreeChange}
-            flexBasis={{ base: 'unset', md: '20rem', xl: '22rem' }}
             flexShrink={0}
-            maxW={{ base: 'unset', md: '20rem', xl: '26rem' }}
             minW={0}
             borderBottomWidth="1px"
             borderLeftWidth="1px"
-            borderRightWidth="1px"
+            borderRightWidth={{ base: '1px', md: '0px' }}
             borderBottomLeftRadius={{ base: 'none', md: 'lg' }}
             onSelectFile={(file) => {
               setSelectedFileId(file?.id);
