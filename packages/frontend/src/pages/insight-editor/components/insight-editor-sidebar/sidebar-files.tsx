@@ -178,22 +178,33 @@ export const SidebarFiles = ({
 
   const isMobile = useBreakpointValue({ base: true, md: false });
 
-  const { isOpen: mobileFilesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: false });
+  const { isOpen: isFilesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: false });
+
+  const iconOption = useBreakpointValue({
+    base: isFilesOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown'),
+    md: isFilesOpen ? iconFactoryAs('chevronRight') : iconFactoryAs('folderOpened')
+  });
 
   return (
-    <Flex direction="column" align="stretch" {...flexProps}>
+    <Flex
+      direction="column"
+      align="stretch"
+      flexBasis={{ base: 'unset', md: '20rem', xl: '22rem' }}
+      maxW={{ base: 'unset', md: '20rem', xl: '26rem' }}
+      {...flexProps}
+    >
       <HStack spacing="space-between" onClick={onFilesToggle} align="center">
         <IconButton
           size="sm"
-          display={{ base: 'flex', sm: 'none' }}
+          display={{ base: 'flex', sm: 'flex' }}
           aria-label={'Expand/collapse'}
           variant="ghost"
-          icon={mobileFilesOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown')}
-          title={mobileFilesOpen ? 'Collapse the files section' : 'Expand the files section'}
+          icon={iconOption}
+          title={isFilesOpen ? 'Collapse the files section' : 'Expand the files section'}
         />
-        <SidebarHeading p="0.5rem">Files</SidebarHeading>
+        {(isFilesOpen || isMobile) && <SidebarHeading p="0.5rem">Files</SidebarHeading>}
       </HStack>
-      <Collapse in={!isMobile || mobileFilesOpen} animateOpacity>
+      <Collapse in={isFilesOpen || (!isMobile && isFilesOpen)} animateOpacity>
         <FileBrowser
           mt="-2rem"
           mb="1rem"
