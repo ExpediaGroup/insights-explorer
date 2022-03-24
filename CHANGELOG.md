@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.5.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.8...v3.5.9) (2022-03-24)
+
+
+### Bug Fixes
+
+* Fix anchor links to dynamic content (e.g. Markdown headings) ([a30d862](https://github.com/ExpediaGroup/insights-explorer/commit/a30d8629c8dd8e275cf3d8e4ae3c97f39ed6777a))
+
 ### [3.5.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.7...v3.5.8) (2022-03-23)
 
 
