@@ -25,6 +25,18 @@ The latest version includes both [Unoconv](https://github.com/unoconv/unoconv) (
 
 </details>
 
+## Supported Conversions
+
+The following conversions are supported:
+
+| From     | To       |
+| -------- | -------- |
+| .docx    | .pdf     |
+| .xlsx    | .pdf     |
+| .pptx    | .pdf <br> .png* |
+| .ipynb   | .html <br> .md <br> .pdf |
+
+\* Powerpoint is converted to PDF, and individual slides are rendered as PNGs. This happens automatically as part of the PDF conversion.
 ## Installation
 
 ```

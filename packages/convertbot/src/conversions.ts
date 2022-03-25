@@ -14,36 +14,63 @@
  * limitations under the License.
  */
 
+import fs from 'fs';
+import path from 'path';
+
 import type { Convertbot } from './lib/convertbot';
 import { exec } from './lib/exec';
 
 export const registerConversionMappings = (convertbot: Convertbot): void => {
-  // Register Conversion mappings
-  const officeMimes = [
-    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  // .docx, .xlxs
+  for (const mime of [
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-  ];
-
-  for (const mime of officeMimes) {
+  ]) {
     convertbot.registerMappings({
       from: mime,
       to: 'application/pdf',
       apply: async (source) => {
         //await exec(`cp "${source}" "${target}"`);
         await exec(`unoconv -f pdf "${source}"`);
-        return source.slice(0, Math.max(0, source.lastIndexOf('.'))) + '.pdf';
+        return [source.slice(0, Math.max(0, source.lastIndexOf('.'))) + '.pdf'];
       }
     });
   }
 
+  // .pptx
+  convertbot.registerMappings({
+    from: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    to: 'application/pdf',
+    apply: async (source) => {
+      const fileNameBase = source.slice(0, Math.max(0, source.lastIndexOf('.')));
+      await exec(`unoconv -f pdf "${source}"`);
+      const pdfFilename = `${fileNameBase}.pdf`;
+
+      // Convert slides to images
+      //await exec(`convert -density 400 ${pdfFilename} -resize 2000x1500 ${fileNameBase}-%d.png`);
+      await exec(`gs -sDEVICE=pngalpha -o "${source}-%d.png" -r300 "${pdfFilename}"`);
+
+      // Find all png images
+      const images = fs
+        .readdirSync(path.dirname(source))
+        .filter((file) => {
+          return file.endsWith('.png');
+        })
+        .map((file) => path.join(path.dirname(source), file));
+
+      // Return pdf and images
+      return [pdfFilename, ...images];
+    }
+  });
+
+  // .ipynb
   convertbot.registerMappings(
     {
       from: 'application/x-ipynb+json',
       to: 'application/pdf',
       apply: async (source) => {
         await exec(`jupyter nbconvert --to pdf "${source}"`);
-        return source.slice(0, Math.max(0, source.lastIndexOf('.'))) + '.pdf';
+        return [source.slice(0, Math.max(0, source.lastIndexOf('.'))) + '.pdf'];
       }
     },
     {
@@ -51,7 +78,7 @@ export const registerConversionMappings = (convertbot: Convertbot): void => {
       to: 'text/html',
       apply: async (source) => {
         await exec(`jupyter nbconvert --to html "${source}"`);
-        return source.slice(0, Math.max(0, source.lastIndexOf('.'))) + '.html';
+        return [source.slice(0, Math.max(0, source.lastIndexOf('.'))) + '.html'];
       }
     },
     {
@@ -59,7 +86,7 @@ export const registerConversionMappings = (convertbot: Convertbot): void => {
       to: 'text/markdown',
       apply: async (source) => {
         await exec(`jupyter nbconvert --to markdown "${source}"`);
-        return source.slice(0, Math.max(0, source.lastIndexOf('.'))) + '.md';
+        return [source.slice(0, Math.max(0, source.lastIndexOf('.'))) + '.md'];
       }
     }
   );
