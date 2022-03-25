@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.9...v3.6.0) (2022-03-25)
+
+
+### Features
+
+* **convertbot:** Convert pptx files into individual slide PNGs ([af2b20b](https://github.com/ExpediaGroup/insights-explorer/commit/af2b20b4ce936182fb84a5f23e18db6d1188e488))
+
 ### [3.5.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.5.8...v3.5.9) (2022-03-24)
 
 
