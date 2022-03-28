@@ -20,7 +20,7 @@
     "dist"
   ],
   "dependencies": {
-    "aws-sdk": "2.1093.0",
+    "aws-sdk": "2.1102.0",
     "fs-extra": "10.0.1",
     "lodash": "4.17.21",
     "parsimmon": "1.18.1",
