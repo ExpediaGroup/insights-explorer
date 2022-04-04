@@ -86,7 +86,7 @@ export const InsightList = ({
     );
   }
 
-  if (insightConnection.edges?.length === 0) {
+  if (insightConnection.edges.length === 0) {
     return <Alert info={`No Insights found.`} />;
   }
 

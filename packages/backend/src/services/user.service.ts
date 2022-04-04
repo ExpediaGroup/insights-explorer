@@ -292,6 +292,7 @@ export class UserService {
       .where('authorId', user.userId)
       .innerJoin('insight', 'comment.insightId', 'insight.insightId')
       .whereNull('insight.deletedAt')
+      .whereNull('comment.deletedAt')
       .orderBy('updatedAt', 'desc');
 
     return {
