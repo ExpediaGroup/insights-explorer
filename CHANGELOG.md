@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.6.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.2...v3.6.3) (2022-04-04)
+
+
+### Bug Fixes
+
+* Make sidebar panel collapsible in Insight editor ([ecc83c7](https://github.com/ExpediaGroup/insights-explorer/commit/ecc83c7d4cf954640302f85943590e4f7f715ab8))
+
 ### [3.6.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.1...v3.6.2) (2022-04-04)
 
 
