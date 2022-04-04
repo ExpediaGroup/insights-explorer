@@ -21,8 +21,8 @@ import { BaseModel } from '../models/base-model';
 import { Permission } from '../models/permission';
 import { encrypt, decrypt } from '../shared/crypto';
 import { toGlobalId } from '../shared/resolver-utils';
-import { CommentConnection } from './comment';
 
+import { CommentConnection } from './comment';
 import { Connection, Edge } from './connection';
 import { PageInfo } from './connection';
 import { InsightConnection } from './insight';

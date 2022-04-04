@@ -17,8 +17,7 @@
 import { Flex, StackDivider, Text, useToast, VStack } from '@chakra-ui/react';
 import { gql, useMutation } from 'urql';
 
-import { User } from '../../../../../../models/generated/graphql';
-import { Comment } from '../../../../../../models/generated/graphql';
+import type { User, Comment } from '../../../../../../models/generated/graphql';
 import { useLikedBy } from '../../../../../../shared/useLikedBy';
 import { ProfileCommentCard } from '../profile-comment-card/profile-comment-card';
 

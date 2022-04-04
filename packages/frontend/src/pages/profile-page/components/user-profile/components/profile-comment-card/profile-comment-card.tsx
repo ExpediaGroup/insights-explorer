@@ -21,7 +21,7 @@ import { LikeButton } from '../../../../../../components/like-button/like-button
 import { LikedByTooltip } from '../../../../../../components/liked-by-tooltip/liked-by-tooltip';
 import { Link } from '../../../../../../components/link/link';
 import { MarkdownContainer } from '../../../../../../components/markdown-container/markdown-container';
-import { Comment, User } from '../../../../../../models/generated/graphql';
+import type { Comment, User } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 
 interface Props {
