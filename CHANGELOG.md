@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.6.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.1...v3.6.2) (2022-04-04)
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-express from 3.6.4 to 3.6.7 ([33cc282](https://github.com/ExpediaGroup/insights-explorer/commit/33cc28213017384b702b6eb36c7ad3bb446a9908))
+* **deps:** bump minimist from 1.2.5 to 1.2.6 ([4b621e1](https://github.com/ExpediaGroup/insights-explorer/commit/4b621e1e67526d5c9ef9d118e8a5b7e446258f6b))
+* **deps:** bump react-markdown from 8.0.1 to 8.0.2 ([7697de5](https://github.com/ExpediaGroup/insights-explorer/commit/7697de5b46dbed731b5c44256396a58287eb685d))
+
 ### [3.6.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.0...v3.6.1) (2022-04-04)
 
 
