@@ -1,0 +1,9 @@
+name: Example Insight 1
+description: Rhoncus aliquam etima ist mit einer Schlange
+itemType: insight
+tags:
+  - example
+  - generated
+  - gpt-neo-125M
+authors:
+  - andrew.mcpherson@email.dev

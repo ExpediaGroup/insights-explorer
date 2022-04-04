@@ -1,0 +1,10 @@
+name: Example Insight 2
+description: Quod est inceptuus? Obrum eum, et faciunt conversion decrease year over year.
+itemType: insight
+tags:
+  - example
+  - generated
+  - gpt-neo-125M
+authors:
+  - fiona.williams@email.dev
+  - ben.g.young@email.dev

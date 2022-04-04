@@ -1,0 +1,9 @@
+name: Example Insight 6
+description: The model used in the present study was based on the model developed by @bkat5 for the estimation of the correlation between two variables.
+itemType: insight
+tags:
+  - example
+  - generated
+  - gpt-neo-125M
+authors:
+  - yshtola2@email.dev
