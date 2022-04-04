@@ -97,7 +97,7 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "jest": "27.5.1",
     "prettier": "2.5.1",
-    "source-map-explorer": "2.5.2",
+    "rollup-plugin-visualizer": "5.6.0",
     "typescript": "4.5.5",
     "vite": "2.9.1"
   },
@@ -116,9 +116,7 @@
     "------": "------------------------------------",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
     "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --fix",
-    "prettier": "prettier --check .",
-    "-------": "------------------------------------",
-    "analyze": "source-map-explorer 'dist/assets/*.js'"
+    "prettier": "prettier --check ."
   },
   "browserslist": {
     "production": [
