@@ -127,7 +127,7 @@ type CommentConnection {
 }
 
 type CommentEdge {
-  cursor: String!
+  cursor: String
   node: Comment!
 }
 
@@ -578,6 +578,22 @@ type User {
   team: String
   title: String
   updatedAt: DateTime!
+  userComments(
+    """Paginate after opaque cursor"""
+    after: String
+
+    """Paginate before opaque cursor"""
+    before: String
+
+    """Paginate first"""
+    first: Float
+
+    """Paginate last"""
+    last: Float
+
+    """Sort columns"""
+    sort: [Sort!]
+  ): CommentConnection
   userName: String!
 }
 

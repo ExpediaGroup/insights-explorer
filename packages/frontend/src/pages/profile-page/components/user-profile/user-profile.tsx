@@ -24,6 +24,7 @@ import { iconFactory } from '../../../../shared/icon-factory';
 
 import { UserAbout } from './components/user-about/user-about';
 import { UserActivity } from './components/user-activity/user-activity';
+import { UserComments } from './components/user-comments/user-comments';
 import { UserDrafts } from './components/user-drafts/user-drafts';
 import { UserInsights } from './components/user-insights/user-insights';
 import { UserSidebar } from './components/user-sidebar/user-sidebar';
@@ -37,6 +38,7 @@ const tabs = [
   { label: 'Activity', path: 'activity' },
   { label: 'Authored Insights', path: 'insights' },
   { label: 'Liked Insights', path: 'likes' },
+  { label: 'Comments', path: 'comments' },
   { label: 'Drafts', path: 'drafts', selfOnly: true }
 ];
 
@@ -101,6 +103,9 @@ export const UserProfile = ({ user }: Props) => {
               </TabPanel>
               <TabPanel>
                 <UserInsights user={user} insightConnection={user.likedInsights} />
+              </TabPanel>
+              <TabPanel>
+                <UserComments user={user} />
               </TabPanel>
               {user.isSelf && (
                 <TabPanel px={0}>

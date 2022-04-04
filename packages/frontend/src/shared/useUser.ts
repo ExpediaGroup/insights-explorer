@@ -111,6 +111,28 @@ const PROFILE_FRAGMENT = gql`
         }
       }
     }
+    userComments(first: 50) {
+      pageInfo {
+        total
+      }
+      edges {
+        node {
+          commentText
+          createdAt
+          id
+          insight {
+            id
+            fullName
+            name
+            itemType
+          }
+          isEdited
+          isOwnComment
+          likeCount
+          updatedAt
+        }
+      }
+    }
   }
 `;
 

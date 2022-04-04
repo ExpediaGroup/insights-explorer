@@ -27,13 +27,13 @@ import { getInsights, getInsightsByContributor } from '../lib/elasticsearch';
 import { ActivityType } from '../models/activity';
 import { UniqueValue } from '../models/autocomplete';
 import { GitHubTokenMetadata } from '../models/backends/github';
-import { Comment } from '../models/comment';
+import { Comment, CommentConnection } from '../models/comment';
 import { ConnectionArgs } from '../models/connection';
 import { Insight, InsightConnection } from '../models/insight';
 import { UpdateUserInput, User, UserGitHubProfile } from '../models/user';
 import { UserHealthCheck } from '../models/user-health-check';
 import { UserInsight } from '../models/user-insight';
-import { fromGlobalId } from '../shared/resolver-utils';
+import { fromGlobalId, toCursor } from '../shared/resolver-utils';
 
 import { ActivityService } from './activity.service';
 
@@ -283,5 +283,22 @@ export class UserService {
       .orderBy('count', 'desc');
 
     return result.map((row: any) => ({ value: row.team as string, occurrences: Number.parseInt(row.count) }));
+  }
+
+  async getUserComments(user: User, connectionArgs: ConnectionArgs): Promise<CommentConnection> {
+    logger.silly('[USER.SERVICE] userComments');
+
+    const userComments = await Comment.query()
+      .where('authorId', user.userId)
+      .innerJoin('insight', 'comment.insightId', 'insight.insightId')
+      .whereNull('insight.deletedAt')
+      .orderBy('updatedAt', 'desc');
+
+    return {
+      pageInfo: {
+        total: userComments.length
+      },
+      edges: userComments.map((comment, i) => ({ cursor: toCursor('Comment', i), node: comment as Comment }))
+    } as CommentConnection;
   }
 }
