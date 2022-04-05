@@ -865,23 +865,42 @@ Possible `layout` values: `default`, `compact`, `square`.
 Search results can be included using the `::insights` directive:
 
 ```md
-::insights[#demo]
+::insights{query="#demo"}
 ```
 
-::insights[#demo]
+::insights{query="#demo"}
 
-The search query included in the brackets uses the same syntax as the Search page.  Zero or more matching results may be displayed.
+The search query included in the 'query' property uses the same syntax as the Search page.  Zero or more matching results may be displayed.
 
 The presentation can be configured with optional attributes:
 
 ```md
-::insights[markdown #demo]{layout=compact sortField=name sortDirection=asc}
+::insights{query="markdown #demo" layout=compact sortField=name sortDirection=asc}
 ```
 
-::insights[markdown #demo]{layout=compact sortField=name sortDirection=asc}
+::insights{query="markdown #demo" layout=compact sortField=name sortDirection=asc}
+
+You can filter the results from the search query by using the following attributes:
+* `itemType`: Type of Insights. Can be set to `insight`, `page` or `template`.
+* `tag`: Tag set to specific insights. Use it with `#` and the name of the tag.
+* `team`: Team set on an Insight metadata. Can be set as `team:"<Team Name>"` 
+* `authors`: Authors of an Insight. Can be used with `@` and the name of the author.
+* `createdDate`: Date of creation for the insights. Can be set as a date math expression. 
+
+```md
+::insights{query="#demo itemType:insight  @dbauman createdDate:[now-1M/M to now/M]"}
+```
+
+::insights{query="#demo itemType:insight  @dbauman createdDate:[now-1M/M to now/M]"}
+
+Note: You can either use brackets or the query property to enter a search query. 
+This query `::insights{query="#demo"}` is the same as `::insights[#demo]`. Just take into consideration that when using certain search attributes you'll have to surround the attributes that contain double colon `:` along with the value, with `<>`. Eg: `::insights[#demo <itemType:page>]`
+
+::insights[#demo <itemType:page>]
 
 #### Attributes
 
+* `query`: Specifies the search query to use and uses the same syntax as the Search page.
 * `layout`: Changes the display layout.  Can be set to `default`, `compact`, `square`
 * `sortField`: Specifies the sort field.  Can be set to `relevance`, `name`, `relevance`, `createdAt`, `updatedAt`, `publishedDate`
 * `sortDirection`: Specifies the sort direction.  Can be set to `asc` or `desc`
