@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.6.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.3...v3.6.4) (2022-04-05)
+
+
+### Bug Fixes
+
+* **deps:** bump react-router-dom from 6.2.2 to 6.3.0 ([ef68f54](https://github.com/ExpediaGroup/insights-explorer/commit/ef68f5465cb5740c61e32ea22ddaefbb79c117ca))
+
 ### [3.6.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.2...v3.6.3) (2022-04-04)
 
 
