@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.6.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.4...v3.6.5) (2022-04-05)
+
+
+### Bug Fixes
+
+* **deps:** bump @reduxjs/toolkit from 1.8.0 to 1.8.1 ([1db0eff](https://github.com/ExpediaGroup/insights-explorer/commit/1db0eff459dd301d99ed3e0918eab093038b6c45))
+* **deps:** bump vega from 5.21.0 to 5.22.1 ([ca216ae](https://github.com/ExpediaGroup/insights-explorer/commit/ca216aefc5187bad8a666d60c4e0078e4b7d7ac2))
+
 ### [3.6.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.3...v3.6.4) (2022-04-05)
 
 
