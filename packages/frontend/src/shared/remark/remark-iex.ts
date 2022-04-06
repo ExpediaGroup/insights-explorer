@@ -100,8 +100,8 @@ export const remarkIex = (options) => {
         node.data = {
           hName: 'insights',
           hProperties: {
-            ...node.attributes,
-            query: remarkNodetoText(node)
+            query: remarkNodetoText(node),
+            ...node.attributes
           }
         };
 
