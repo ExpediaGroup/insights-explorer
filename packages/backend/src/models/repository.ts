@@ -53,5 +53,8 @@ export class Repository implements IndexedRepository {
   @Field()
   isArchived?: boolean;
 
+  @Field()
+  isReadOnly!: boolean;
+
   collaborators?: IndexedInsightUser[];
 }

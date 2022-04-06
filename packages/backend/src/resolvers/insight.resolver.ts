@@ -176,6 +176,10 @@ export class InsightResolver {
 
   @FieldResolver()
   async collaborators(@Root() insight: Insight): Promise<UserPermissionConnection> {
+    if (insight.repository.type === RepositoryType.FILE) {
+      return { edges: [] };
+    }
+
     const gitHubCollaborators = await getCollaborators(insight.repository.owner.login, insight.repository.externalName);
     if (gitHubCollaborators == null || gitHubCollaborators.length === 0) {
       return { edges: [] };

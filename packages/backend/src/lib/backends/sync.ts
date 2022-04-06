@@ -22,6 +22,7 @@ import { GitHubRepositorySync } from '../../lib/backends/github.sync';
 import { InsightSyncTask } from '../../models/tasks';
 
 import { BaseSync } from './base.sync';
+import { FileSystemSync } from './file-system.sync';
 
 export async function syncInsight(insightSyncTask: InsightSyncTask): Promise<IndexedInsight | null> {
   logger.debug('[SYNC] Syncing Insight');
@@ -30,6 +31,9 @@ export async function syncInsight(insightSyncTask: InsightSyncTask): Promise<Ind
   switch (insightSyncTask.repositoryType) {
     case RepositoryType.GITHUB:
       syncer = new GitHubRepositorySync();
+      break;
+    case RepositoryType.FILE:
+      syncer = new FileSystemSync();
       break;
     default:
       throw new Error('Unknown Repository Type');

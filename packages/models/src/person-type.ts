@@ -15,6 +15,8 @@
  */
 
 export enum PersonType {
+  FILE_SYSTEM = 'FileSystem',
+
   ORGANIZATON = 'Organization',
   USER = 'User'
 }

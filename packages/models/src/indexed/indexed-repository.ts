@@ -29,4 +29,5 @@ export interface IndexedRepository {
   owner: IndexedRepositoryPerson;
   isMissing: boolean;
   isArchived?: boolean;
+  isReadOnly: boolean;
 }

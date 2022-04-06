@@ -54,8 +54,14 @@ export const hook = (req: Request, res: Response): void => {
 
   // Convert Webhook to Sync task
   let insightSyncTask: InsightSyncTask | null = null;
-  if (req.headers['x-github-event'] != undefined) {
+  if (req.headers['x-github-event'] !== undefined) {
     insightSyncTask = handleGitHub(webhook);
+  } else if (webhook.path !== undefined) {
+    insightSyncTask = {
+      repositoryType: RepositoryType.FILE,
+      owner: 'local',
+      repo: webhook.path
+    };
   } else {
     res.status(400).send('Not Recognized');
     return;

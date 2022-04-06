@@ -8,6 +8,9 @@ services:
       # See /packages/backend/README.md for more information
       ENCRYPTION_KEY: dnEkng5me8XzTejUayNFWeWATLtSrRq2vVm6hO3Uhtg=
 
+      # Automatically deploy example Insights
+      EXAMPLES_INIT_ON_STARTUP: true
+
       # Elasticsearch
       ELASTICSEARCH_NODE: http://elasticsearch:9200
       ELASTICSEARCH_MAX_RETRIES: 5

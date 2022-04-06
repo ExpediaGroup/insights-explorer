@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
+import fs from 'fs';
+
 import { CountResponse, SearchResponse, SearchBody } from '@iex/models/elasticsearch';
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { InsightFileAction } from '@iex/models/insight-file-action';
 import { RepositoryPermission } from '@iex/models/repository-permission';
+import { RepositoryType } from '@iex/models/repository-type';
 import { sort } from '@iex/shared/dataloader-util';
 import logger from '@iex/shared/logger';
 import { ApolloError } from 'apollo-server-express';
@@ -135,6 +138,10 @@ export class InsightService {
    * @param user User
    */
   async canUserEdit(insight: Insight, user: User): Promise<boolean> {
+    if (insight.repository?.isReadOnly === true) {
+      return false;
+    }
+
     if (user == null || user.githubPersonalAccessToken == null) {
       return false;
     }
@@ -312,6 +319,10 @@ export class InsightService {
   }
 
   async isRepositoryMissing(repository: Repository): Promise<boolean> {
+    if (repository.type === RepositoryType.FILE) {
+      return !fs.existsSync(repository.externalId ?? repository.url);
+    }
+
     try {
       // Fetch the latest readme from the GitHub API
       const { repository: repositoryExists, exists } = await doesRepositoryExist(

@@ -24,6 +24,33 @@ import { InsightSyncTask } from '../../models/tasks';
 import { ActivityService } from '../../services/activity.service';
 import { InsightService } from '../../services/insight.service';
 
+export const THUMBNAIL_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.svg'];
+export const THUMBNAIL_LOCATIONS = ['thumbnail', '.iex/thumbnail'].flatMap((prefix) =>
+  THUMBNAIL_EXTENSIONS.map((extension) => prefix + extension)
+);
+
+export const READONLY_FILES = new Set(['insight.yml']);
+
+export const INDEXABLE_MIME_TYPES = new Set([
+  'application/x-ipynb+json',
+  'application/javascript',
+  'application/json',
+  'application/x-sh',
+  'application/x-sql',
+  'application/x-typescript',
+  'application/xml',
+  'text/html',
+  'text/markdown',
+  'text/plain',
+  'text/x-clojure',
+  'text/x-groovy',
+  'text/x-java-source',
+  'text/x-python',
+  'text/x-ruby',
+  'text/x-scala',
+  'text/yaml'
+]);
+
 export abstract class BaseSync {
   private insightService = new InsightService(new ActivityService());
 
@@ -107,10 +134,8 @@ export abstract class BaseSync {
     insight.insightId = existingDbInsight.insightId!;
   }
 
-  async getPreviouslySyncedInsight(insightSyncTask: InsightSyncTask): Promise<IndexedInsight | null> {
-    const { owner, repo } = insightSyncTask;
-    const existingInsight = await this.insightService.getInsightByFullName(`${owner}/${repo}`);
-    return existingInsight;
+  async getPreviouslySyncedInsight(fullName: string): Promise<IndexedInsight | null> {
+    return await this.insightService.getInsightByFullName(fullName);
   }
 
   abstract sync(insightSyncTask: InsightSyncTask): Promise<IndexedInsight | null>;

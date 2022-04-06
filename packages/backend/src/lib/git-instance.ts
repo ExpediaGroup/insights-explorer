@@ -62,6 +62,17 @@ export class GitInstance {
   }
 
   /**
+   * Creates a new GitInstance from a local path.
+   *
+   * @param path Local path to a git repository
+   */
+  public static async fromLocalPath(path: string): Promise<GitInstance> {
+    const gitInstance = new GitInstance(path);
+    gitInstance.localPath = path;
+    return gitInstance;
+  }
+
+  /**
    * Clone, modify, commit, and push one or more changes to a git repository.
    *
    * @param insight Insight to update

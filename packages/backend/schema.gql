@@ -452,13 +452,14 @@ type Repository {
   externalName: String!
   isArchived: Boolean!
   isMissing: Boolean!
+  isReadOnly: Boolean!
   owner: RepositoryPerson!
   type: String!
   url: String!
 }
 
 type RepositoryPerson {
-  avatarUrl: String!
+  avatarUrl: String
   email: String
   externalId: String!
   ldapDn: String

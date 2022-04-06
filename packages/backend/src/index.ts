@@ -36,6 +36,7 @@ import { bootstrap, defaultKnex } from './lib/db';
 import { deployMappings } from './lib/elasticsearch';
 import { createServer } from './server';
 import logger from '@iex/shared/logger';
+import { syncExampleInsights } from './lib/init';
 
 // Safeguard to prevent the application from crashing.
 // It would be better to catch any promise rejections and handle directly
@@ -76,6 +77,11 @@ const startup = async (): Promise<Server> => {
   const server = app.listen(app.get('port'), () => {
     logger.info(`IEX Server started in ${app.get('env')} mode on port: ${app.get('port')}`);
   });
+
+  // Load example Insights from the `examples` package
+  if (process.env.EXAMPLES_INIT_ON_STARTUP === 'true') {
+    syncExampleInsights();
+  }
 
   return server;
 };

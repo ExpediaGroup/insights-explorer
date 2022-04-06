@@ -161,6 +161,9 @@
           "isMissing": {
             "type": "boolean"
           },
+          "isReadOnly": {
+            "type": "boolean"
+          },
           "owner": {
             "properties": {
               "avatarUrl": {

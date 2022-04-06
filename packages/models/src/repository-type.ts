@@ -15,5 +15,6 @@
  */
 
 export enum RepositoryType {
-  GITHUB = 'github'
+  GITHUB = 'github',
+  FILE = 'file'
 }

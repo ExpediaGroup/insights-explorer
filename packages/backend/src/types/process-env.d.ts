@@ -30,6 +30,7 @@ declare namespace NodeJS {
     ENCRYPTION_KEY: string;
     PUBLIC_URL: string;
     APOLLO_SANDBOX: string;
+    EXAMPLES_INIT_ON_STARTUP: string;
 
     // GITHUB
     GITHUB_URL: string;

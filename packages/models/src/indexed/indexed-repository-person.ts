@@ -26,7 +26,7 @@ export interface IndexedRepositoryPerson {
 
   ldapDn?: string;
 
-  avatarUrl: string;
+  avatarUrl?: string;
 
   externalId: string;
 

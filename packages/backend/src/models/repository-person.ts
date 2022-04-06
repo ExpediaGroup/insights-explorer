@@ -33,8 +33,8 @@ export class RepositoryPerson implements IndexedRepositoryPerson {
   @Field({ nullable: true })
   ldapDn?: string;
 
-  @Field()
-  avatarUrl!: string;
+  @Field({ nullable: true })
+  avatarUrl?: string;
 
   @Field()
   externalId!: string;
