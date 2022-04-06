@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.6...v3.7.0) (2022-04-06)
+
+
+### Features
+
+* Add example Insights to new `examples` package ([8e8b81d](https://github.com/ExpediaGroup/insights-explorer/commit/8e8b81d91d2364538d52277cfee79d4836daa399))
+* Automatically sync example Insights on startup ([9743658](https://github.com/ExpediaGroup/insights-explorer/commit/9743658990bf662d79c419d8a2b12f9b0137ce11))
+
 ### [3.6.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.5...v3.6.6) (2022-04-06)
 
 
