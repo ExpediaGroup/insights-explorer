@@ -893,10 +893,11 @@ You can filter the results from the search query by using the following attribut
 
 ::insights{query="#demo itemType:insight  @dbauman createdDate:[now-1M/M to now/M]"}
 
-Note: You can either use brackets or the query property to enter a search query. 
-This query `::insights{query="#demo"}` is the same as `::insights[#demo]`. Just take into consideration that when using certain search attributes you'll have to surround the attributes that contain double colon `:` along with the value, with `<>`. Eg: `::insights[#demo <itemType:page>]`
+Note: You can either use brackets or the query property to enter a search query.  This query `::insights{query="#demo"}` is the same as `::insights[#demo]`. 
 
-::insights[#demo <itemType:page>]
+When using the bracket notation, certain search attributes must be wrapped with `<>` to prevent parsing as Markdown.  This includes search terms with colons `:`, e.g. `::insights[<#demo itemType:page>]`
+
+::insights[<#demo itemType:page>]
 
 #### Attributes
 
