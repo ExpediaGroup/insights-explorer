@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.6.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.5...v3.6.6) (2022-04-06)
+
+
+### Bug Fixes
+
+* **deps:** bump nanoid from 3.3.1 to 3.3.2 ([f30c188](https://github.com/ExpediaGroup/insights-explorer/commit/f30c18868992b1954b2e4cabc1b86cd3881bb44e))
+* Update insights directive to include query as attribute ([7b91823](https://github.com/ExpediaGroup/insights-explorer/commit/7b918230ab386ecaf87b27fd0803af32bd618026))
+
 ### [3.6.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.4...v3.6.5) (2022-04-05)
 
 
