@@ -42,25 +42,11 @@ const GraphQLClient = ({ children }: DOMAttributes<unknown>) => {
   return <UrqlProvider value={urqlClient}>{children}</UrqlProvider>;
 };
 
-// Workaround per https://github.com/chakra-ui/chakra-ui/pull/2114
-function FixColorMode() {
-  const { colorMode, setColorMode } = useColorMode();
-
-  useEffect(() => {
-    if (!colorMode) {
-      setColorMode('light');
-    }
-  }, [colorMode, setColorMode]);
-
-  return null;
-}
-
 const App = () => {
   return (
     <>
       <ColorModeScript initialColorMode={IexTheme.config.initialColorMode} />
       <ChakraProvider resetCSS theme={IexTheme} portalZIndex={10}>
-        <FixColorMode />
         <Redux store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <GraphQLClient>

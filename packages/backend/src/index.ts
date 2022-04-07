@@ -68,6 +68,7 @@ const startup = async (): Promise<Server> => {
     factor: 3.86,
     onFailedAttempt: (error) => {
       logger.warn(`[INDEX] Bootstrapping database failed (attempt ${error.attemptNumber})`);
+      logger.warn(error);
     }
   });
 

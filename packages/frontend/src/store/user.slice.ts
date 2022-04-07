@@ -67,6 +67,7 @@ export const login = createAsyncThunk<User, string, { rejectValue: string }>(
                 avatarUrl
                 team
                 isAdmin
+                featureFlags
               }
             }
           `

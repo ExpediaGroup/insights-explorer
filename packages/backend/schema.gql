@@ -490,6 +490,7 @@ input UpdateUserInput {
   chatHandle: String
   currentStatus: String
   defaultTemplateId: String
+  featureFlags: JSON
   githubPersonalAccessToken: String
   locale: String
   location: String
@@ -548,6 +549,7 @@ type User {
   deletedAt: DateTime!
   displayName: String!
   email: String!
+  featureFlags: JSON
   githubPersonalAccessToken: String
   githubProfile: UserGitHubProfile
   healthCheck: UserHealthCheck!

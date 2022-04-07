@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Button, Flex, FormControl, FormHelperText } from '@chakra-ui/react';
+import { Button, Flex, FormControl, FormHelperText, Heading, Switch, Text, VStack } from '@chakra-ui/react';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 
@@ -31,11 +31,12 @@ interface Props {
 }
 
 export const SystemSettings = ({ user, onSubmit, isSubmitting }: Props) => {
-  const { locale } = user;
+  const { locale, featureFlags } = user;
   const { control, formState, handleSubmit, reset } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      locale
+      locale,
+      featureFlags
     }
   });
   const { isDirty } = formState;
@@ -50,38 +51,74 @@ export const SystemSettings = ({ user, onSubmit, isSubmitting }: Props) => {
 
   return (
     <Card as={Flex} flexDirection="column" p="1rem">
-      {isDirty && <Alert info="You have unsaved changes" mb="1rem" />}
+      <VStack spacing="1rem" align="stretch">
+        {isDirty && <Alert info="You have unsaved changes" />}
 
-      <form onSubmit={handleSubmit(internalSubmit)}>
-        <FormControl id="locale" mb="1rem">
-          <FormLabel>Locale</FormLabel>
-          <Controller
-            control={control}
-            name="locale"
-            render={({ field: { onChange, value } }) => (
-              <Select
-                inputId="locale"
-                defaultValue={{ value: detectedLocale, label: `Detected (${detectedLocale})` }}
-                options={localeOptions}
-                onChange={(e) => onChange(e.value)}
-                value={localeOptions && value && localeOptions.find((l) => l.value === value)}
-                placeholder={`Detected (${detectedLocale})`}
-                styles={{
-                  menu: (base) => ({ ...base, zIndex: 11 }),
-                  container: (base) => ({ ...base, width: '100%' }),
-                  valueContainer: (base) => ({ ...base, paddingLeft: '10px' }),
-                  menuPortal: (base) => ({ ...base, zIndex: 9999 })
-                }}
+        <form onSubmit={handleSubmit(internalSubmit)}>
+          <VStack spacing="1rem" align="stretch">
+            <Heading as="h2" size="md">
+              Localization
+            </Heading>
+            <FormControl id="locale">
+              <FormLabel>Locale</FormLabel>
+              <Controller
+                control={control}
+                name="locale"
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    inputId="locale"
+                    defaultValue={{ value: detectedLocale, label: `Detected (${detectedLocale})` }}
+                    options={localeOptions}
+                    onChange={(e) => onChange(e.value)}
+                    value={localeOptions && value && localeOptions.find((l) => l.value === value)}
+                    placeholder={`Detected (${detectedLocale})`}
+                    styles={{
+                      menu: (base) => ({ ...base, zIndex: 11 }),
+                      container: (base) => ({ ...base, width: '100%' }),
+                      valueContainer: (base) => ({ ...base, paddingLeft: '10px' }),
+                      menuPortal: (base) => ({ ...base, zIndex: 9999 })
+                    }}
+                  />
+                )}
               />
-            )}
-          />
-          <FormHelperText>The locale setting is used for formatting numbers, dates, etc.</FormHelperText>
-        </FormControl>
+              <FormHelperText>The locale setting is used for formatting numbers, dates, etc.</FormHelperText>
+            </FormControl>
 
-        <Button mt="0.5rem" variant="frost" isLoading={isSubmitting} type="submit">
-          Save
-        </Button>
-      </form>
+            <Heading as="h2" size="md" pt="1rem">
+              Feature Flags
+            </Heading>
+
+            <Text fontSize="sm">
+              Feature flags allow you to enable or disable specific features in the application.
+            </Text>
+
+            <FormControl>
+              <Flex display="flex" alignItems="center">
+                <FormLabel htmlFor="feature-flag-dark-mode" mb="0">
+                  Enable Dark Mode
+                </FormLabel>
+                <Controller
+                  control={control}
+                  name="featureFlags.darkMode"
+                  render={({ field: { onChange, value } }) => (
+                    <Switch
+                      id="feature-flag-dark-mode"
+                      colorScheme="nord8"
+                      isChecked={value ?? false}
+                      onChange={onChange}
+                    />
+                  )}
+                />
+              </Flex>
+              <FormHelperText>Enables a toggle between light and dark mode.</FormHelperText>
+            </FormControl>
+          </VStack>
+
+          <Button mt="2rem" variant="frost" isLoading={isSubmitting} type="submit">
+            Save
+          </Button>
+        </form>
+      </VStack>
     </Card>
   );
 };

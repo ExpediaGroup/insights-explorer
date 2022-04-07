@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import GraphQLJSON from 'graphql-type-json';
 import { Pojo } from 'objection';
 import { Field, ObjectType, Authorized, InputType, ID } from 'type-graphql';
 
@@ -164,6 +165,9 @@ export class User extends BaseModel {
   @Field()
   healthCheck!: UserHealthCheck;
 
+  @Field(() => GraphQLJSON, { nullable: true })
+  featureFlags?: Record<string, boolean>;
+
   userId!: number;
 
   defaultTemplate?: number;
@@ -249,6 +253,9 @@ export class UpdateUserInput implements Partial<User> {
 
   @Field({ nullable: true })
   avatar?: string;
+
+  @Field(() => GraphQLJSON, { nullable: true })
+  featureFlags?: Record<string, boolean>;
 }
 
 @ObjectType()

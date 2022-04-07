@@ -53,6 +53,7 @@ const USER_FRAGMENT = gql`
     skills
     readme
     defaultTemplateId
+    featureFlags
   }
 `;
 

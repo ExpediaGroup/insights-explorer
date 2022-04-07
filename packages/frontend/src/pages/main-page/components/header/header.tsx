@@ -28,9 +28,11 @@ import {
   useColorMode,
   useDisclosure
 } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { iconFactory, iconFactoryAs } from '../../../../shared/icon-factory';
+import type { RootState } from '../../../../store/store';
 
 import { CreateMenu } from './components/create-menu/create-menu';
 import { HelpMenu } from './components/help-menu/help-menu';
@@ -45,6 +47,9 @@ const MenuItems = ({ children }) => (
 
 export const Header = (props) => {
   const { isOpen, onToggle } = useDisclosure();
+
+  const { userInfo } = useSelector((state: RootState) => state.user);
+  const showDarkModeToggle = userInfo?.featureFlags?.darkMode === true;
 
   const { colorMode, toggleColorMode } = useColorMode();
 
@@ -81,14 +86,16 @@ export const Header = (props) => {
         <HStack spacing="0.5rem">
           <CreateMenu />
 
-          {/* Disable dark mode for now.. */}
-          <IconButton
-            display="none"
-            onClick={toggleColorMode}
-            variant="ghost"
-            aria-label="Toggle dark mode"
-            icon={colorMode === 'light' ? iconFactoryAs('moon') : iconFactoryAs('sun')}
-          />
+          {showDarkModeToggle && (
+            <Tooltip label="Toggle color mode">
+              <IconButton
+                onClick={toggleColorMode}
+                variant="ghost"
+                aria-label="Toggle dark mode"
+                icon={colorMode === 'light' ? iconFactoryAs('moon') : iconFactoryAs('sun')}
+              />
+            </Tooltip>
+          )}
 
           <Tooltip label="Activity Feed">
             <RouterLink to="/activities">
