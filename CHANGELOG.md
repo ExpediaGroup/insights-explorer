@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.8.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.7.0...v3.8.0) (2022-04-07)
+
+
+### Features
+
+* Add Comments tab to User Profile ([#653](https://github.com/ExpediaGroup/insights-explorer/issues/653)) ([dc3db70](https://github.com/ExpediaGroup/insights-explorer/commit/dc3db7044d93a9d01e13a94c92595c9ba42f93ec))
+
 ## [3.7.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.6.6...v3.7.0) (2022-04-06)
 
 
