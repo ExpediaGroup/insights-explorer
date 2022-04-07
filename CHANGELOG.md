@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.9.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.0...v3.9.1) (2022-04-07)
+
+
+### Bug Fixes
+
+* Optimize Elasticsearch queries for the user profile ([fd1f77d](https://github.com/ExpediaGroup/insights-explorer/commit/fd1f77dd8290a4c1670e140e278a61191c9c25ba))
+
 ## [3.9.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.8.0...v3.9.0) (2022-04-07)
 
 
