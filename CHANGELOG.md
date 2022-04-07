@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.9.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.8.0...v3.9.0) (2022-04-07)
+
+
+### Features
+
+* Add feature flags to settings page ([74a2a74](https://github.com/ExpediaGroup/insights-explorer/commit/74a2a7430c339768929b0b178c4b6b6de06e4f58))
+
+
+### Bug Fixes
+
+* **dark-mode:** Improvements to dark mode ([1055551](https://github.com/ExpediaGroup/insights-explorer/commit/10555513aa09a1bcbe91f36557ac16a8be020aa5))
+* Fix icon paths in manifest.json ([a48c895](https://github.com/ExpediaGroup/insights-explorer/commit/a48c895ce42213560ce26bf43ebad2f38b6cde93))
+
 ## [3.8.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.7.0...v3.8.0) (2022-04-07)
 
 
