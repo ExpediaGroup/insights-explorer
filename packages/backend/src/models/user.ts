@@ -22,6 +22,7 @@ import { Permission } from '../models/permission';
 import { encrypt, decrypt } from '../shared/crypto';
 import { toGlobalId } from '../shared/resolver-utils';
 
+import { CommentConnection } from './comment';
 import { Connection, Edge } from './connection';
 import { PageInfo } from './connection';
 import { InsightConnection } from './insight';
@@ -153,6 +154,9 @@ export class User extends BaseModel {
 
   @Field(() => InsightConnection, { nullable: true })
   likedInsights?: InsightConnection;
+
+  @Field(() => CommentConnection, { nullable: true })
+  userComments?: CommentConnection;
 
   @Field()
   commentCount!: number;

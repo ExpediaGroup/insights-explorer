@@ -20,6 +20,7 @@ import { Service } from 'typedi';
 
 import { userCache } from '../middleware/oauth-authenticator';
 import { ActivityType } from '../models/activity';
+import { CommentConnection } from '../models/comment';
 import { ConnectionArgs } from '../models/connection';
 import { Context } from '../models/context';
 import { InsightConnection } from '../models/insight';
@@ -107,6 +108,11 @@ export class UserResolver {
   @FieldResolver()
   async likedInsights(@Root() user: User, @Args() connectionArgs: ConnectionArgs): Promise<InsightConnection> {
     return this.userService.getLikedInsights(user, connectionArgs);
+  }
+
+  @FieldResolver()
+  async userComments(@Root() user: User, @Args() connectionArgs: ConnectionArgs): Promise<CommentConnection> {
+    return this.userService.getUserComments(user, connectionArgs);
   }
 
   @FieldResolver()
