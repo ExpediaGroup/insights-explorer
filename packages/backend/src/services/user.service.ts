@@ -285,6 +285,7 @@ export class UserService {
     return result.map((row: any) => ({ value: row.team as string, occurrences: Number.parseInt(row.count) }));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getUserComments(user: User, connectionArgs: ConnectionArgs): Promise<CommentConnection> {
     logger.silly('[USER.SERVICE] userComments');
 
