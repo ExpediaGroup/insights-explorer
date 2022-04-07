@@ -34,7 +34,7 @@ import { appSlice } from '../../../../../../../../store/app.slice';
 import { NewsItem } from '../news-item/news-item';
 
 export const NewsDrawerContents = () => {
-  const backgroundColor = useColorModeValue('nord.100', '#555');
+  const backgroundColor = useColorModeValue('nord.100', 'polar.100');
 
   const toast = useToast();
   const dispatch = useDispatch();

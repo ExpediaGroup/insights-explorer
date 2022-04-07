@@ -58,7 +58,7 @@ const TooltipIcon = forwardRef(
 export const IconButtonMenu = ({
   'aria-label': ariaLabel,
   bg,
-  color = 'black',
+  color,
   children,
   icon,
   fontSize,

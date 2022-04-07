@@ -45,7 +45,7 @@ export const MainPage = () => {
 
   const { export: isExport, print: isPrint } = useSimpleSearchParams<{ export?: string; print?: string }>();
 
-  const backgroundColor = useColorModeValue('nord.100', '#555');
+  const backgroundColor = useColorModeValue('nord.100', 'polar.100');
 
   if (isExport !== undefined) {
     return (

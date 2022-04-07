@@ -206,5 +206,5 @@ export const iconFactory = (key: string): IconType => {
 };
 
 export const iconFactoryAs = (key: string, props = {}): ReactElement => {
-  return <Icon as={iconFactory(key)} {...props} />;
+  return <Icon as={iconFactory(key)} {...props} sx={{ path: { stroke: 'unset' } }} />;
 };

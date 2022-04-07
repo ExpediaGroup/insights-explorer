@@ -95,7 +95,7 @@ const SidebarContent = ({ links }) => {
 
 export const HelpSidebar = ({ links, headerTitle, ...props }: Props & BoxProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const backgroundColor = useColorModeValue('nord.100', '#555');
+  const backgroundColor = useColorModeValue('nord.100', 'polar.100');
 
   return (
     <>
