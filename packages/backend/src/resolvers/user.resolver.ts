@@ -15,6 +15,7 @@
  */
 
 import logger from '@iex/shared/logger';
+import { ResolveTree } from 'graphql-parse-resolve-info';
 import { Arg, Args, Authorized, Ctx, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
@@ -31,6 +32,7 @@ import { UserHealthCheck } from '../models/user-health-check';
 import { ActivityService } from '../services/activity.service';
 import { OAuthService } from '../services/oauth.service';
 import { UserService } from '../services/user.service';
+import { Fields } from '../shared/field-parameter-decorator';
 
 @Service()
 @Resolver(() => User)
@@ -101,13 +103,21 @@ export class UserResolver {
   }
 
   @FieldResolver()
-  async authoredInsights(@Root() user: User, @Args() connectionArgs: ConnectionArgs): Promise<InsightConnection> {
-    return this.userService.getAuthoredInsights(user, connectionArgs);
+  async authoredInsights(
+    @Root() user: User,
+    @Args() connectionArgs: ConnectionArgs,
+    @Fields() fields: { InsightConnection: { [str: string]: ResolveTree } }
+  ): Promise<InsightConnection> {
+    return this.userService.getAuthoredInsights(user, connectionArgs, this.getInsightConnectionFields(fields));
   }
 
   @FieldResolver()
-  async likedInsights(@Root() user: User, @Args() connectionArgs: ConnectionArgs): Promise<InsightConnection> {
-    return this.userService.getLikedInsights(user, connectionArgs);
+  async likedInsights(
+    @Root() user: User,
+    @Args() connectionArgs: ConnectionArgs,
+    @Fields() fields: { InsightConnection: { [str: string]: ResolveTree } }
+  ): Promise<InsightConnection> {
+    return this.userService.getLikedInsights(user, connectionArgs, this.getInsightConnectionFields(fields));
   }
 
   @FieldResolver()
@@ -181,5 +191,23 @@ export class UserResolver {
     userCache.del(ctx.token!);
 
     return updated;
+  }
+
+  private getInsightConnectionFields(fields: { InsightConnection: { [str: string]: ResolveTree } }): string[] {
+    const requestedFields = Object.keys(
+      fields.InsightConnection.edges.fieldsByTypeName.InsightEdge.node.fieldsByTypeName.Insight
+    );
+    return [
+      ...new Set([
+        ...requestedFields,
+        'insightId',
+        'namespace',
+        'name',
+        'fullName',
+        'description',
+        'contributors',
+        'repository'
+      ])
+    ];
   }
 }

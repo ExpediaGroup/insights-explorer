@@ -18,6 +18,7 @@ import { Flex, Spinner } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { Alert } from '../../components/alert/alert';
 import { useUser } from '../../shared/useUser';
 import type { RootState } from '../../store/store';
 import { ProfileNotFoundPage } from '../profile-not-found-page/profile-not-found-page';
@@ -40,7 +41,7 @@ export const ProfilePage = () => {
 
   return (
     <Flex direction="column" justify="stretch" flexGrow={2}>
-      {error && <p>Oh no... {error.message}</p>}
+      {error && <Alert error={error} />}
       {fetching && <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />}
       {!fetching && user && <UserProfile user={user} />}
       {!fetching && user === null && <ProfileNotFoundPage />}

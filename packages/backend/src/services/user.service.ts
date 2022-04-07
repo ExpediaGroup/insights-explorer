@@ -230,12 +230,16 @@ export class UserService {
     }
   }
 
-  async getAuthoredInsights(user: User, connectionArgs: ConnectionArgs): Promise<InsightConnection> {
-    return getInsightsByContributor(user.email, connectionArgs);
+  async getAuthoredInsights(
+    user: User,
+    connectionArgs: ConnectionArgs,
+    _source?: string[]
+  ): Promise<InsightConnection> {
+    return getInsightsByContributor(user.email, connectionArgs, _source);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getLikedInsights(user: User, connectionArgs: ConnectionArgs): Promise<InsightConnection> {
+  async getLikedInsights(user: User, connectionArgs: ConnectionArgs, _source?: string[]): Promise<InsightConnection> {
     const likedUserInsights = await UserInsight.query()
       .where('userId', user.userId)
       .where('liked', true)
@@ -243,7 +247,10 @@ export class UserService {
       .whereNull('insight.deletedAt')
       .orderBy('updatedAt', 'desc');
 
-    const likedInsights = (await getInsights(likedUserInsights.map((i) => i.insightId))) as Insight[];
+    const likedInsights = (await getInsights(
+      likedUserInsights.map((i) => i.insightId),
+      _source
+    )) as unknown as Insight[];
     const currentLikedInsights = likedInsights.filter((i) => i !== null);
 
     return {

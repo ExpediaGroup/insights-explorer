@@ -491,7 +491,7 @@ export async function getInsightsByContributor(
   const insights: Insight[] = elasticResponse.body.hits.hits.map((doc: { _id: string; _source: IndexedInsight }) => {
     const insight = { ...doc._source };
 
-    return insight as Insight;
+    return insight as unknown as Insight;
   });
 
   const edges: Edge<Insight>[] = insights.map((insight) => {
