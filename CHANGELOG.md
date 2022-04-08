@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.9.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.1...v3.9.2) (2022-04-08)
+
+
+### Bug Fixes
+
+* **deps:** bump @slack/bolt from 3.10.0 to 3.11.0 ([0f56de7](https://github.com/ExpediaGroup/insights-explorer/commit/0f56de7d9cff7d5dc54a6cb6494b80f027e93239))
+* **deps:** bump apollo-server-core from 3.6.4 to 3.6.7 ([a33b208](https://github.com/ExpediaGroup/insights-explorer/commit/a33b208ed61534b2197ce632ef3f9bab8b985525))
+* **deps:** bump aws-sdk from 2.1106.0 to 2.1110.0 ([79e1c96](https://github.com/ExpediaGroup/insights-explorer/commit/79e1c964792952ec23076828bdd6cf517d0cf4eb))
+* **deps:** bump react-redux from 7.2.6 to 7.2.8 ([16e5790](https://github.com/ExpediaGroup/insights-explorer/commit/16e5790863afd1f9c7f4bf4011f78e4eaae8c870))
+
 ### [3.9.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.0...v3.9.1) (2022-04-07)
 
 
