@@ -99,7 +99,7 @@
     "@types/morgan": "1.9.3",
     "@types/node": "16.11.26",
     "@types/parsimmon": "1.10.6",
-    "@types/supertest": "2.0.11",
+    "@types/supertest": "2.0.12",
     "@types/tmp": "0.2.3",
     "@types/validator": "13.7.2",
     "@typescript-eslint/eslint-plugin": "4.33.0",
