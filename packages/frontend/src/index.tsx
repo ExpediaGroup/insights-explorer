@@ -67,11 +67,3 @@ const App = () => {
 };
 
 ReactDOM.render(<App />, document.querySelector('#root'));
-
-// Enable axe-core
-// https://github.com/dequelabs/axe-core-npm/tree/develop/packages/react
-// if (process.env.NODE_ENV !== 'production') {
-//   // eslint-disable-next-line @typescript-eslint/no-var-requires
-//   const axe = require('@axe-core/react');
-//   axe(React, ReactDOM, 1000);
-// }
