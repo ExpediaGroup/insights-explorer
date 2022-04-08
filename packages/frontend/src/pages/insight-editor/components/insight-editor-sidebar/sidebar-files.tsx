@@ -178,7 +178,7 @@ export const SidebarFiles = ({
 
   const isMobile = useBreakpointValue({ base: true, md: false });
 
-  const { isOpen: isFilesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: false });
+  const { isOpen: isFilesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: true });
 
   const iconOption = useBreakpointValue({
     base: isFilesOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown'),
