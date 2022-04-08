@@ -28,7 +28,7 @@
     "@octokit/graphql": "4.8.0",
     "@octokit/rest": "18.12.0",
     "@types/turndown": "5.0.1",
-    "apollo-server-core": "3.6.4",
+    "apollo-server-core": "3.6.7",
     "apollo-server-express": "3.6.7",
     "aws-sdk": "2.1110.0",
     "axios": "0.26.1",
