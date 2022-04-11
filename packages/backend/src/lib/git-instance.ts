@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import fs from 'fs';
 import path from 'path';
 import { Readable } from 'stream';
 
 import logger from '@iex/shared/logger';
+import fs from 'fs-extra';
 import globby from 'globby';
 import git from 'isomorphic-git';
 import http from 'isomorphic-git/http/node';
@@ -206,6 +206,9 @@ export class GitInstance {
     }
 
     const localFilePath = path.join(this.localPath, filePath);
+
+    // Ensure the directory exists before we try to write the file there
+    await fs.ensureDir(path.dirname(localFilePath));
 
     const writable = fs.createWriteStream(localFilePath);
     const stream = readable.pipe(writable);

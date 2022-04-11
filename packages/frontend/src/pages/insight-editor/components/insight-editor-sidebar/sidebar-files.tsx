@@ -16,6 +16,9 @@
 
 import { useBreakpointValue } from '@chakra-ui/media-query';
 import type { FlexProps } from '@chakra-ui/react';
+import { useColorModeValue } from '@chakra-ui/react';
+import { Progress } from '@chakra-ui/react';
+import { Divider } from '@chakra-ui/react';
 import {
   Box,
   Collapse,
@@ -30,6 +33,7 @@ import {
 } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { gql } from 'urql';
 
 import { FileBrowser } from '../../../../components/file-browser/file-browser';
@@ -74,18 +78,18 @@ export const SidebarFiles = ({
   const [uploading, setUploading] = useState(false);
 
   const onDropFile = useCallback(
-    async (acceptedFiles: any[]) => {
+    async (acceptedFiles: any[], item?: FileOrFolder) => {
       setUploading(true);
       const uploadedFiles = await Promise.all(
         acceptedFiles.map(async (file) => {
-          console.log(file);
           // Upload file to IEX storage
           const { data, error } = await urqlClient
             .mutation<UploadSingleFileMutation>(UPLOAD_SINGLE_FILE_MUTATION, {
               draftKey,
               attachment: {
                 id: nanoid(),
-                size: file.size
+                size: file.size,
+                path: item ? `${item?.path}/${file.name}` : undefined
               },
               file: file
             })
@@ -183,14 +187,34 @@ export const SidebarFiles = ({
     md: isFilesOpen ? iconFactoryAs('chevronRight') : iconFactoryAs('folderOpened')
   });
 
+  const {
+    getInputProps,
+    getRootProps,
+    isDragActive,
+    open: openFilePicker
+  } = useDropzone({
+    onDrop: (acceptedFiles) => onDropFile(acceptedFiles, undefined),
+    noClick: true
+  });
+
+  const dragBgColor = useColorModeValue('snowstorm.200', 'polar.100');
+  const dragBorderColor = useColorModeValue('polar.200', 'snowstorm.300');
+
   return (
     <Flex
       direction="column"
       align="stretch"
-      flexBasis={{ base: 'unset', md: '20rem', xl: '22rem' }}
-      maxW={{ base: 'unset', md: '20rem', xl: '26rem' }}
+      flexGrow={1}
+      {...(isDragActive && {
+        bg: dragBgColor,
+        borderWidth: '1px',
+        borderStyle: 'dashed',
+        borderColor: dragBorderColor
+      })}
       {...flexProps}
+      {...getRootProps()}
     >
+      <input {...getInputProps()} />
       <HStack spacing="space-between" onClick={onFilesToggle} align="center">
         <IconButton
           size="sm"
@@ -218,24 +242,20 @@ export const SidebarFiles = ({
             onNewFile,
             onNewFolder,
             onRename,
-            onUndelete: (f) => onDelete(f, false, false)
+            onUndelete: (f) => onDelete(f, false, false),
+            onUpload: onDropFile
           }}
         />
 
-        {uploading && (
-          <VStack spacing="0.5rem" align="center">
-            <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
-            <Text>Uploading...</Text>
-          </VStack>
-        )}
-        {!uploading && (
-          <Box p="0.5rem">
-            <FileUploadArea onDrop={onDropFile} />
-            <Text as="em" fontSize="xs">
-              Maximum file size is 100MB.
-            </Text>
-          </Box>
-        )}
+        {uploading && <Progress size="xs" isIndeterminate />}
+
+        <Divider />
+
+        <Box p="0.5rem">
+          <Text as="em" fontSize="xs">
+            Maximum file size is 100MB.
+          </Text>
+        </Box>
       </Collapse>
     </Flex>
   );

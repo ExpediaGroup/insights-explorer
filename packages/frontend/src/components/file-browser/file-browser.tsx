@@ -15,6 +15,7 @@
  */
 
 import type { BoxProps } from '@chakra-ui/react';
+import { useColorModeValue } from '@chakra-ui/react';
 import {
   Badge,
   Box,
@@ -32,13 +33,16 @@ import {
   VStack
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 
-import type { FileOrFolder, InsightFolder } from '../../models/file-tree';
+import type { FileOrFolder, InsightFile, InsightFolder } from '../../models/file-tree';
 import { fileIconFactoryAs } from '../../shared/file-icon-factory';
 import type { InsightFileTree } from '../../shared/file-tree';
 import { isFolder } from '../../shared/file-tree';
 import { iconFactoryAs } from '../../shared/icon-factory';
 import { DeleteIconButton } from '../delete-icon-button/delete-icon-button';
+
+import { EditableControls } from './components/editable-controls/editable-controls';
 
 type FileOrFolderSelect = (fileOrFolder: FileOrFolder) => void;
 
@@ -49,6 +53,8 @@ export type FileBrowserActions = {
   onRename?: (fileOrFolder: FileOrFolder, newName: string) => void;
   onSelect?: (fileOrFolder: FileOrFolder | undefined) => void;
   onUndelete?: (fileOrFolder: FileOrFolder) => void;
+  onFilePicker?: () => void;
+  onUpload?: (acceptedFiles: any[], parent?: InsightFolder) => void;
 };
 
 type RendererProps = BoxProps & {
@@ -56,91 +62,6 @@ type RendererProps = BoxProps & {
   selected: FileOrFolder | undefined;
   onFileSelect: FileOrFolderSelect;
   actions: FileBrowserActions;
-};
-
-const EditableControls = ({ actions, isDeleted, isDisabled, item, onOpen, selected }) => {
-  const { isEditing, getEditButtonProps } = useEditableControls();
-
-  return (
-    <HStack ml="0.25rem" spacing="0.25rem" display="none" className="actions">
-      {isDeleted && (
-        <Tooltip label="Undelete" aria-label="Undelete">
-          <Button
-            aria-label="Undelete"
-            variant="ghost"
-            size="sm"
-            leftIcon={iconFactoryAs('undo')}
-            onClick={() => {
-              if (selected && actions.onUndelete) {
-                actions.onUndelete(selected);
-              }
-            }}
-          >
-            Undelete
-          </Button>
-        </Tooltip>
-      )}
-      {!isDeleted && !isEditing && !item.readonly && (
-        <>
-          <Tooltip label="Rename" aria-label="Rename">
-            <IconButton
-              variant="ghost"
-              size="sm"
-              _hover={{ backgroundColor: 'snowstorm.100' }}
-              aria-label="Rename"
-              icon={iconFactoryAs('edit')}
-              {...getEditButtonProps()}
-            />
-          </Tooltip>
-
-          {isFolder(item) && (
-            <>
-              <Tooltip label="New File" aria-label="New File">
-                <IconButton
-                  variant="ghost"
-                  size="sm"
-                  _hover={{ backgroundColor: 'aurora.400' }}
-                  aria-label="New File"
-                  icon={iconFactoryAs('newFile')}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (actions.onNewFile) {
-                      actions.onNewFile(item);
-                      onOpen();
-                    }
-                  }}
-                />
-              </Tooltip>
-              <Tooltip label="New Folder" aria-label="New Folder">
-                <IconButton
-                  variant="ghost"
-                  size="sm"
-                  _hover={{ backgroundColor: 'aurora.400' }}
-                  aria-label="New Folder"
-                  icon={iconFactoryAs('newFolder')}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (actions.onNewFolder) {
-                      actions.onNewFolder(item);
-                      onOpen();
-                    }
-                  }}
-                />
-              </Tooltip>
-            </>
-          )}
-          <DeleteIconButton
-            onClick={() => {
-              if (actions.onDelete) {
-                actions.onDelete(item);
-              }
-            }}
-            isDisabled={item.readonly}
-          />
-        </>
-      )}
-    </HStack>
-  );
 };
 
 const FileTreeRenderer = ({
@@ -153,30 +74,40 @@ const FileTreeRenderer = ({
 }: { treeItems: FileOrFolder[] } & RendererProps) => {
   return (
     <Box {...boxProps}>
-      {treeItems.map((item) => (
-        <FileOrFolderRenderer
-          key={item.id}
-          item={item}
-          onFileSelect={onFileSelect}
-          selected={selected}
-          actions={actions}
-          indent={indent}
-        />
-      ))}
+      {treeItems.map((item) =>
+        isFolder(item) ? (
+          <FolderRenderer
+            key={item.id}
+            item={item}
+            onFileSelect={onFileSelect}
+            selected={selected}
+            actions={actions}
+            indent={indent}
+          />
+        ) : (
+          <FileRenderer
+            key={item.id}
+            item={item}
+            onFileSelect={onFileSelect}
+            selected={selected}
+            actions={actions}
+            indent={indent}
+          />
+        )
+      )}
     </Box>
   );
 };
 
-const FileOrFolderRenderer = ({
+const FolderRenderer = ({
   actions,
   indent = 0,
   item,
   onFileSelect,
   selected
-}: { indent: number; item: FileOrFolder } & RendererProps) => {
+}: { indent: number; item: InsightFolder } & RendererProps) => {
   const { isOpen, onOpen, onToggle } = useDisclosure();
   const isSelected = selected?.id === item.id;
-  const isFolder2 = isFolder(item);
   const isDeleted = item.action === 'delete';
 
   const [name, setName] = useState(item.name);
@@ -199,15 +130,46 @@ const FileOrFolderRenderer = ({
     }
   };
 
+  const {
+    getInputProps,
+    getRootProps,
+    isDragActive,
+    open: openFilePicker
+  } = useDropzone({
+    onDrop: (acceptedFiles, rejectedFile, event) => {
+      event.stopPropagation();
+      if (actions.onUpload) {
+        actions.onUpload(acceptedFiles, item);
+      }
+    },
+    noClick: true,
+    noDragEventsBubbling: true
+  });
+
+  const dragBgColor = useColorModeValue('snowstorm.200', 'polar.100');
+  const dragBorderColor = useColorModeValue('polar.200', 'snowstorm.100');
+  const selectedBgColor = useColorModeValue('snowstorm.300', 'polar.300');
+
   return (
-    <Flex key={item.id} flexDirection="column">
-      <Box bg={isSelected ? 'snowstorm.300' : 'transparent'} fontWeight={isSelected ? 'bold' : 'unset'}>
+    <Flex
+      key={item.id}
+      flexDirection="column"
+      {...(isDragActive && {
+        bg: dragBgColor,
+        borderWidth: '1px',
+        borderStyle: 'dashed',
+        borderColor: dragBorderColor
+      })}
+      {...getRootProps()}
+    >
+      <input {...getInputProps()} />
+      <Box bg={isSelected ? selectedBgColor : 'transparent'} fontWeight={isSelected ? 'bold' : 'unset'}>
         <Editable
           as={Flex}
           value={name}
           onChange={setName}
           onSubmit={onRename}
-          placeholder={isFolder2 ? '<Folder>' : '<File>'}
+          placeholder="<Folder>"
           isDisabled={item.readonly || isDeleted}
           startWithEditView={item.name === ''}
           isPreviewFocusable={false}
@@ -219,18 +181,118 @@ const FileOrFolderRenderer = ({
           align="center"
           minHeight="32px"
           onClick={() => {
-            if (isFolder2) {
-              onToggle();
-            }
+            onToggle();
             onFileSelect(item);
           }}
           _hover={item.readonly ? {} : { '& > .actions': { display: 'flex' } }}
         >
           {fileIconFactoryAs(
             {
-              mimeType: isFolder(item) ? undefined : item.mimeType,
+              mimeType: undefined,
               fileName: item.name,
-              isFolder: isFolder2,
+              isFolder: true,
+              isOpen,
+              isSelected
+            },
+            { fontSize: '1rem', mr: '0.5rem' }
+          )}
+          <EditablePreview
+            textDecoration={isDeleted ? 'line-through' : 'none'}
+            color={isDeleted ? 'gray.400' : 'unset'}
+            minW={0}
+            maxW="100%"
+            flexGrow={2}
+            isTruncated={true}
+          />
+          {item.readonly && <Badge>readonly</Badge>}
+          <EditableInput />
+
+          <EditableControls
+            actions={{ ...actions, onFilePicker: openFilePicker }}
+            isDeleted={isDeleted}
+            isDisabled={item.readonly}
+            item={item}
+            onOpen={onOpen}
+            selected={selected}
+          />
+        </Editable>
+      </Box>
+
+      <Collapse in={isOpen} animateOpacity>
+        <FileTreeRenderer
+          treeItems={item.tree}
+          onFileSelect={onFileSelect}
+          selected={selected}
+          actions={actions}
+          indent={indent + 1}
+        />
+      </Collapse>
+    </Flex>
+  );
+};
+
+const FileRenderer = ({
+  actions,
+  indent = 0,
+  item,
+  onFileSelect,
+  selected
+}: { indent: number; item: InsightFile } & RendererProps) => {
+  const { isOpen, onOpen, onToggle } = useDisclosure();
+  const isSelected = selected?.id === item.id;
+  const isDeleted = item.action === 'delete';
+
+  const [name, setName] = useState(item.name);
+
+  const onRename = (newName: string) => {
+    // If empty, reset to original name
+    if (newName === '') {
+      // If never had a name, delete it
+      if (item.name === '' && actions.onDelete) {
+        actions.onDelete(item, true);
+        return;
+      }
+
+      // Reset to original name
+      setName(item.name);
+    }
+
+    if (actions.onRename) {
+      actions.onRename(item, newName);
+    }
+  };
+
+  const selectedBgColor = useColorModeValue('snowstorm.300', 'polar.300');
+
+  return (
+    <Flex key={item.id} flexDirection="column">
+      <Box bg={isSelected ? selectedBgColor : 'transparent'} fontWeight={isSelected ? 'bold' : 'unset'}>
+        <Editable
+          as={Flex}
+          value={name}
+          onChange={setName}
+          onSubmit={onRename}
+          placeholder="<File>"
+          isDisabled={item.readonly || isDeleted}
+          startWithEditView={item.name === ''}
+          isPreviewFocusable={false}
+          minW={0}
+          maxW="100%"
+          px="1rem"
+          ml={`${indent * 1.5}rem`}
+          justify="space-between"
+          align="center"
+          minHeight="32px"
+          onClick={() => {
+            onFileSelect(item);
+          }}
+          _hover={item.readonly ? {} : { '& > .actions': { display: 'flex' } }}
+        >
+          {fileIconFactoryAs(
+            {
+              mimeType: item.mimeType,
+              fileName: item.name,
+              isFolder: false,
               isOpen,
               isSelected
             },
@@ -257,21 +319,10 @@ const FileOrFolderRenderer = ({
           />
         </Editable>
       </Box>
-
-      {isFolder(item) && (
-        <Collapse in={isOpen} animateOpacity>
-          <FileTreeRenderer
-            treeItems={item.tree}
-            onFileSelect={onFileSelect}
-            selected={selected}
-            actions={actions}
-            indent={indent + 1}
-          />
-        </Collapse>
-      )}
     </Flex>
   );
 };
+
 interface Props {
   tree: InsightFileTree;
   actions?: FileBrowserActions;
@@ -287,9 +338,34 @@ export const FileBrowser = ({ tree, actions = {}, ...boxProps }: Props & BoxProp
     }
   };
 
+  const {
+    getInputProps,
+    getRootProps,
+    isDragActive,
+    open: openFilePicker
+  } = useDropzone({
+    onDrop: (acceptedFiles) => {
+      if (actions.onUpload) {
+        actions.onUpload(acceptedFiles, undefined);
+      }
+    },
+    noClick: true
+  });
+
   return (
-    <VStack align="stretch" fontSize="sm" {...boxProps}>
+    <VStack align="stretch" fontSize="sm" {...boxProps} {...getRootProps()}>
       <HStack spacing="0.25rem" justify="flex-end" pr="1rem">
+        <input {...getInputProps()} />
+        <Tooltip label="Upload File" aria-label="Upload File">
+          <IconButton
+            variant="ghost"
+            size="sm"
+            _hover={{ backgroundColor: 'aurora.400' }}
+            aria-label="Upload File"
+            icon={iconFactoryAs('upload')}
+            onClick={openFilePicker}
+          />
+        </Tooltip>
         <Tooltip label="New File" aria-label="New File">
           <IconButton
             variant="ghost"

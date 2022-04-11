@@ -45,7 +45,13 @@ export const InsightEditorSidebar = ({
   ...flexProps
 }: Props & FlexProps) => {
   return (
-    <Flex direction="column" {...flexProps}>
+    <Flex
+      direction="column"
+      flexGrow={1}
+      flexBasis={{ base: 'unset', md: '20rem', xl: '22rem' }}
+      maxW={{ base: 'unset', md: '20rem', xl: '26rem' }}
+      {...flexProps}
+    >
       <SidebarFiles
         draftKey={draftKey}
         isNewInsight={isNewInsight}

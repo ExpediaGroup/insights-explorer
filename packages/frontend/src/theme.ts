@@ -287,7 +287,7 @@ export const IexTheme = extendTheme({
     Tooltip: {
       baseStyle: (props: Record<string, any>) => {
         return {
-          bg: 'polar.300'
+          bg: props.colorMode === 'dark' ? 'snowstorm.50' : 'polar.300'
         };
       }
     }
