@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.9.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.3...v3.9.4) (2022-04-11)
+
+
+### Bug Fixes
+
+* Fix Insight Editor file upload button on mobile ([#704](https://github.com/ExpediaGroup/insights-explorer/issues/704)) ([8e02e29](https://github.com/ExpediaGroup/insights-explorer/commit/8e02e29cd3c5072ef5d6c53d53051fe34869710f))
+
 ### [3.9.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.2...v3.9.3) (2022-04-11)
 
 
