@@ -15,8 +15,10 @@
  */
 
 import type { BoxProps } from '@chakra-ui/react';
-import { Box } from '@chakra-ui/react';
+import { Box, Button, Icon } from '@chakra-ui/react';
 import { useDropzone } from 'react-dropzone';
+
+import { iconFactory } from '../../shared/icon-factory';
 
 export const DROPZONE_ACCEPT_ALL_FILES = '';
 
@@ -46,23 +48,31 @@ export const FileUploadArea = ({
   dragElement,
   ...props
 }: Props & Omit<BoxProps, 'onDrop'>) => {
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
     onDrop,
     accept
   });
 
   return (
-    <Box
-      {...getRootProps()}
-      outline="none"
-      borderWidth="2px"
-      borderStyle="dashed"
-      borderColor={isDragActive ? 'green.200' : 'gray.100'}
-      cursor="pointer"
-      {...props}
-    >
-      <input className="dropzone-input" {...getInputProps()} />
-      {isDragActive ? dragElement ?? defaultDragElement : element ?? defaultElement}
-    </Box>
+    <>
+      <Box
+        {...getRootProps()}
+        outline="none"
+        borderWidth="2px"
+        borderStyle="dashed"
+        borderColor={isDragActive ? 'green.200' : 'gray.100'}
+        cursor="pointer"
+        display={{ base: 'none', md: 'flex' }}
+        {...props}
+      >
+        <input className="dropzone-input" {...getInputProps()} />
+        {isDragActive ? dragElement ?? defaultDragElement : element ?? defaultElement}
+      </Box>
+      {/* mobile only */}
+      <Button width={{ base: '100%', md: 'unset' }} display={{ base: 'flex', md: 'none' }} bg="blue.400" onClick={open}>
+        <Icon as={iconFactory('upload')} mr="0.5rem" />
+        Upload File
+      </Button>
+    </>
   );
 };
