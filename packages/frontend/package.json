@@ -50,7 +50,7 @@
     "react-router-dom": "6.3.0",
     "react-select": "4.3.1",
     "react-syntax-highlighter": "15.5.0",
-    "react-vega": "7.4.4",
+    "react-vega": "7.5.0",
     "redux-persist": "6.0.0",
     "rehype-autolink-headings": "6.1.1",
     "rehype-raw": "6.1.1",
@@ -71,7 +71,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.4",
-    "@testing-library/user-event": "13.5.0",
+    "@testing-library/user-event": "14.1.0",
     "@types/jest": "27.4.1",
     "@types/luxon": "2.3.1",
     "@types/node-emoji": "1.8.1",
