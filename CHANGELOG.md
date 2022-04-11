@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.9.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.2...v3.9.3) (2022-04-11)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/theme from 1.14.0 to 1.14.1 ([3582f0e](https://github.com/ExpediaGroup/insights-explorer/commit/3582f0e25c49c0dce10894ec6a40e4d0530d51af))
+* **deps:** bump react-medium-image-zoom from 4.3.5 to 4.3.6 ([6827529](https://github.com/ExpediaGroup/insights-explorer/commit/6827529d0d11804e3a707e41ea871d099481c705))
+* **deps:** bump react-vega from 7.4.4 to 7.5.0 ([342c514](https://github.com/ExpediaGroup/insights-explorer/commit/342c514e94f270efa5a1d1f42e8549cb8e8d7abe))
+* Make the Insight Editor file sidebar open initially ([7925e1b](https://github.com/ExpediaGroup/insights-explorer/commit/7925e1b8f33e274166dc29959fb5ad4208bfc9b1))
+
 ### [3.9.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.1...v3.9.2) (2022-04-08)
 
 
