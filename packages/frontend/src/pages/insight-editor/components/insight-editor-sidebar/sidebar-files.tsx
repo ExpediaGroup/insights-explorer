@@ -17,11 +17,9 @@
 import { useBreakpointValue } from '@chakra-ui/media-query';
 import type { FlexProps } from '@chakra-ui/react';
 import {
-  Button,
   Box,
   Collapse,
   Flex,
-  Icon,
   IconButton,
   Spinner,
   Text,
@@ -232,16 +230,7 @@ export const SidebarFiles = ({
         )}
         {!uploading && (
           <Box p="0.5rem">
-            <FileUploadArea onDrop={onDropFile} display={{ base: 'none', md: 'flex' }} />
-            <Button
-              width={{ base: '100%', md: 'unset' }}
-              display={{ base: 'flex', md: 'none' }}
-              bg="blue.400"
-              type="submit"
-            >
-              <Icon as={iconFactory('upload')} mr="0.5rem" />
-              Upload File
-            </Button>
+            <FileUploadArea onDrop={onDropFile} />
             <Text as="em" fontSize="xs">
               Maximum file size is 100MB.
             </Text>
