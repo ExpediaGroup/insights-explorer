@@ -22,7 +22,8 @@ import { Divider } from '@chakra-ui/react';
 import { Box, Collapse, Flex, IconButton, Text, useToast, HStack } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { useCallback, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { useDrop } from 'react-dnd';
+import { NativeTypes } from 'react-dnd-html5-backend';
 import { gql } from 'urql';
 
 import { FileBrowser } from '../../../../components/file-browser/file-browser';
@@ -69,7 +70,7 @@ export const SidebarFiles = ({
   const toast = useToast();
   const [uploading, setUploading] = useState(false);
 
-  const onDropFile = useCallback(
+  const onUploadFile = useCallback(
     async (acceptedFiles: any[], item?: FileOrFolder) => {
       setUploading(true);
       const uploadedFiles = await Promise.all(
@@ -137,6 +138,11 @@ export const SidebarFiles = ({
     onTreeChanged(tree);
   };
 
+  const onMove = (fileOrFolder: FileOrFolder, newPath: string) => {
+    tree.moveItem(fileOrFolder, newPath);
+    onTreeChanged(tree);
+  };
+
   const onRename = (fileOrFolder: FileOrFolder, newName: string) => {
     tree.updateItemById({
       id: fileOrFolder.id,
@@ -177,15 +183,32 @@ export const SidebarFiles = ({
     md: isFilesOpen ? iconFactoryAs('chevronRight') : iconFactoryAs('folderOpened')
   });
 
-  const {
-    getInputProps,
-    getRootProps,
-    isDragActive,
-    open: openFilePicker
-  } = useDropzone({
-    onDrop: (acceptedFiles) => onDropFile(acceptedFiles, undefined),
-    noClick: true
-  });
+  const [{ isDragOver }, drop] = useDrop<FileOrFolder | any, FileOrFolder, any>(
+    () => ({
+      accept: ['file', NativeTypes.FILE],
+      drop: (droppedItem, monitor) => {
+        if (monitor.didDrop()) {
+          // Already dropped
+          return undefined;
+        }
+
+        switch (monitor.getItemType()) {
+          case NativeTypes.FILE:
+            // Upload file and add to tree
+            onUploadFile(droppedItem.files, undefined);
+            break;
+
+          case 'file':
+            // Move file to new location in tree
+            onMove(droppedItem, droppedItem.name);
+        }
+      },
+      collect: (monitor) => ({
+        isDragOver: monitor.isOver({ shallow: true })
+      })
+    }),
+    []
+  );
 
   const dragBgColor = useColorModeValue('snowstorm.200', 'polar.100');
   const dragBorderColor = useColorModeValue('polar.200', 'snowstorm.300');
@@ -195,16 +218,15 @@ export const SidebarFiles = ({
       direction="column"
       align="stretch"
       flexGrow={1}
-      {...(isDragActive && {
+      ref={drop}
+      {...(isDragOver && {
         bg: dragBgColor,
         borderWidth: '1px',
         borderStyle: 'dashed',
         borderColor: dragBorderColor
       })}
       {...flexProps}
-      {...getRootProps()}
     >
-      <input {...getInputProps()} />
       <HStack spacing="space-between" onClick={onFilesToggle} align="center">
         <IconButton
           size="sm"
@@ -216,6 +238,7 @@ export const SidebarFiles = ({
         />
         {(isFilesOpen || isMobile) && <SidebarHeading p="0.5rem">Files</SidebarHeading>}
       </HStack>
+
       <Collapse in={isFilesOpen || (!isMobile && isFilesOpen)} animateOpacity>
         <FileBrowser
           mt="-2rem"
@@ -229,11 +252,12 @@ export const SidebarFiles = ({
               }
             },
             onDelete: (f, force = false) => onDelete(f, true, force),
+            onMove,
             onNewFile,
             onNewFolder,
             onRename,
             onUndelete: (f) => onDelete(f, false, false),
-            onUpload: onDropFile
+            onUpload: onUploadFile
           }}
         />
 

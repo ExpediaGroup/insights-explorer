@@ -17,6 +17,8 @@
 import type { FlexProps } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/react';
 import { Flex } from '@chakra-ui/react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import type { UseFormReturn } from 'react-hook-form';
 
 import type { InsightFile } from '../../../../models/file-tree';
@@ -57,15 +59,17 @@ export const InsightEditorSidebar = ({
       maxW={{ base: 'unset', md: '20rem', xl: '26rem' }}
       {...flexProps}
     >
-      <SidebarFiles
-        draftKey={draftKey}
-        isFilesOpen={isFilesOpen}
-        isNewInsight={isNewInsight}
-        tree={fileTree}
-        onFilesToggle={onFilesToggle}
-        onSelectFile={onSelectFile}
-        onTreeChanged={onFileTreeChanged}
-      />
+      <DndProvider backend={HTML5Backend}>
+        <SidebarFiles
+          draftKey={draftKey}
+          isFilesOpen={isFilesOpen}
+          isNewInsight={isNewInsight}
+          tree={fileTree}
+          onFilesToggle={onFilesToggle}
+          onSelectFile={onSelectFile}
+          onTreeChanged={onFileTreeChanged}
+        />
+      </DndProvider>
     </Flex>
   );
 };

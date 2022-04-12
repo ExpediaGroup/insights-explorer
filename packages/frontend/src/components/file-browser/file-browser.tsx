@@ -19,7 +19,6 @@ import { useColorModeValue } from '@chakra-ui/react';
 import {
   Badge,
   Box,
-  Button,
   Collapse,
   Editable,
   EditableInput,
@@ -29,17 +28,18 @@ import {
   IconButton,
   Tooltip,
   useDisclosure,
-  useEditableControls,
   VStack
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { useDrag, useDrop } from 'react-dnd';
+import { NativeTypes } from 'react-dnd-html5-backend';
 
 import type { FileOrFolder, InsightFile, InsightFolder } from '../../models/file-tree';
 import { fileIconFactoryAs } from '../../shared/file-icon-factory';
 import type { InsightFileTree } from '../../shared/file-tree';
 import { isFolder } from '../../shared/file-tree';
 import { iconFactoryAs } from '../../shared/icon-factory';
+import { useFilePicker } from '../../shared/use-file-picker';
 
 import { EditableControls } from './components/editable-controls/editable-controls';
 
@@ -47,12 +47,13 @@ type FileOrFolderSelect = (fileOrFolder: FileOrFolder) => void;
 
 export type FileBrowserActions = {
   onDelete?: (fileOrFolder: FileOrFolder, force?: boolean) => void;
+  onFilePicker?: () => void;
+  onMove?: (fileOrFolder: FileOrFolder, newPath: string) => void;
   onNewFile?: (parent?: InsightFolder) => void;
   onNewFolder?: (parent?: InsightFolder) => void;
   onRename?: (fileOrFolder: FileOrFolder, newName: string) => void;
   onSelect?: (fileOrFolder: FileOrFolder | undefined) => void;
   onUndelete?: (fileOrFolder: FileOrFolder) => void;
-  onFilePicker?: () => void;
   onUpload?: (acceptedFiles: any[], parent?: InsightFolder) => void;
 };
 
@@ -129,20 +130,46 @@ const FolderRenderer = ({
     }
   };
 
-  const {
-    getInputProps,
-    getRootProps,
-    isDragActive,
-    open: openFilePicker
-  } = useDropzone({
-    onDrop: (acceptedFiles, rejectedFile, event) => {
-      event.stopPropagation();
+  const [{ isDragOver }, drop] = useDrop<FileOrFolder | any, FileOrFolder, any>(
+    () => ({
+      accept: ['file', NativeTypes.FILE],
+      drop: (droppedItem, monitor) => {
+        if (monitor.didDrop()) {
+          // Already dropped
+          return undefined;
+        }
+
+        switch (monitor.getItemType()) {
+          case NativeTypes.FILE:
+            // Upload file and add to tree
+            if (actions.onUpload) {
+              actions.onUpload(droppedItem.files, item);
+              onOpen();
+            }
+            break;
+
+          case 'file':
+            // Move file to new location in tree
+            if (actions.onMove) {
+              actions.onMove(droppedItem, `${item.path}/${droppedItem.name}`);
+              onOpen();
+            }
+        }
+      },
+      collect: (monitor) => ({
+        isDragOver: monitor.isOver({ shallow: true })
+      })
+    }),
+    [actions.onMove, item]
+  );
+
+  const [openFilePicker] = useFilePicker({
+    onFilesPicked: (files) => {
       if (actions.onUpload) {
-        actions.onUpload(acceptedFiles, item);
+        actions.onUpload(files, item);
+        onOpen();
       }
-    },
-    noClick: true,
-    noDragEventsBubbling: true
+    }
   });
 
   const dragBgColor = useColorModeValue('snowstorm.200', 'polar.100');
@@ -153,15 +180,14 @@ const FolderRenderer = ({
     <Flex
       key={item.id}
       flexDirection="column"
-      {...(isDragActive && {
+      ref={drop}
+      {...(isDragOver && {
         bg: dragBgColor,
         borderWidth: '1px',
         borderStyle: 'dashed',
         borderColor: dragBorderColor
       })}
-      {...getRootProps()}
     >
-      <input {...getInputProps()} />
       <Box bg={isSelected ? selectedBgColor : 'transparent'} fontWeight={isSelected ? 'bold' : 'unset'}>
         <Editable
           as={Flex}
@@ -241,6 +267,15 @@ const FileRenderer = ({
   const isSelected = selected?.id === item.id;
   const isDeleted = item.action === 'delete';
 
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'file',
+    item: () => item,
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging()
+    }),
+    canDrag: () => !item.readonly
+  }));
+
   const [name, setName] = useState(item.name);
 
   const onRename = (newName: string) => {
@@ -264,61 +299,70 @@ const FileRenderer = ({
   const selectedBgColor = useColorModeValue('snowstorm.300', 'polar.300');
 
   return (
-    <Flex key={item.id} flexDirection="column">
-      <Box bg={isSelected ? selectedBgColor : 'transparent'} fontWeight={isSelected ? 'bold' : 'unset'}>
-        <Editable
-          as={Flex}
-          value={name}
-          onChange={setName}
-          onSubmit={onRename}
-          placeholder="<File>"
-          isDisabled={item.readonly || isDeleted}
-          startWithEditView={item.name === ''}
-          isPreviewFocusable={false}
+    <Box
+      ref={drag}
+      key={item.id}
+      bg={isSelected ? selectedBgColor : 'transparent'}
+      fontWeight={isSelected ? 'bold' : 'unset'}
+      cursor="pointer"
+      {...(isDragging && {
+        opacity: 0.5,
+        cursor: 'move'
+      })}
+    >
+      <Editable
+        as={Flex}
+        value={name}
+        onChange={setName}
+        onSubmit={onRename}
+        placeholder="<File>"
+        isDisabled={item.readonly || isDeleted}
+        startWithEditView={item.name === ''}
+        isPreviewFocusable={false}
+        minW={0}
+        maxW="100%"
+        px="1rem"
+        ml={`${indent * 1.5}rem`}
+        justify="space-between"
+        align="center"
+        minHeight="32px"
+        onClick={() => {
+          onFileSelect(item);
+        }}
+        _hover={item.readonly ? {} : { '& > .actions': { display: 'flex' } }}
+      >
+        {fileIconFactoryAs(
+          {
+            mimeType: item.mimeType,
+            fileName: item.name,
+            isFolder: false,
+            isOpen,
+            isSelected
+          },
+          { fontSize: '1rem', mr: '0.5rem' }
+        )}
+        <EditablePreview
+          textDecoration={isDeleted ? 'line-through' : 'none'}
+          color={isDeleted ? 'gray.400' : 'unset'}
           minW={0}
           maxW="100%"
-          px="1rem"
-          ml={`${indent * 1.5}rem`}
-          justify="space-between"
-          align="center"
-          minHeight="32px"
-          onClick={() => {
-            onFileSelect(item);
-          }}
-          _hover={item.readonly ? {} : { '& > .actions': { display: 'flex' } }}
-        >
-          {fileIconFactoryAs(
-            {
-              mimeType: item.mimeType,
-              fileName: item.name,
-              isFolder: false,
-              isOpen,
-              isSelected
-            },
-            { fontSize: '1rem', mr: '0.5rem' }
-          )}
-          <EditablePreview
-            textDecoration={isDeleted ? 'line-through' : 'none'}
-            color={isDeleted ? 'gray.400' : 'unset'}
-            minW={0}
-            maxW="100%"
-            flexGrow={2}
-            isTruncated={true}
-          />
-          {item.readonly && <Badge>readonly</Badge>}
-          <EditableInput />
+          flexGrow={2}
+          isTruncated={true}
+          cursor="unset"
+        />
+        {item.readonly && <Badge>readonly</Badge>}
+        <EditableInput />
 
-          <EditableControls
-            actions={actions}
-            isDeleted={isDeleted}
-            isDisabled={item.readonly}
-            item={item}
-            onOpen={onOpen}
-            selected={selected}
-          />
-        </Editable>
-      </Box>
-    </Flex>
+        <EditableControls
+          actions={actions}
+          isDeleted={isDeleted}
+          isDisabled={item.readonly}
+          item={item}
+          onOpen={onOpen}
+          selected={selected}
+        />
+      </Editable>
+    </Box>
   );
 };
 
@@ -337,24 +381,20 @@ export const FileBrowser = ({ tree, actions = {}, ...boxProps }: Props & BoxProp
     }
   };
 
-  const {
-    getInputProps,
-    getRootProps,
-    isDragActive,
-    open: openFilePicker
-  } = useDropzone({
-    onDrop: (acceptedFiles) => {
+  const [openFilePicker] = useFilePicker({
+    onFilesPicked: (files) => {
       if (actions.onUpload) {
-        actions.onUpload(acceptedFiles, undefined);
+        actions.onUpload(files, undefined);
       }
-    },
-    noClick: true
+    }
   });
 
+  const dragBgColor = useColorModeValue('snowstorm.200', 'polar.100');
+  const dragBorderColor = useColorModeValue('polar.200', 'snowstorm.300');
+
   return (
-    <VStack align="stretch" fontSize="sm" {...boxProps} {...getRootProps()}>
+    <VStack align="stretch" fontSize="sm" {...boxProps}>
       <HStack spacing="0.25rem" justify="flex-end" pr="1rem">
-        <input {...getInputProps()} />
         <Tooltip label="Upload File" aria-label="Upload File">
           <IconButton
             variant="ghost"

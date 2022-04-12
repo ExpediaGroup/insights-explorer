@@ -17,7 +17,8 @@
 import { freeze, produce } from 'immer';
 import { nanoid } from 'nanoid';
 
-import type { FileOrFolder, InsightFile, InsightFileAction, InsightFolder } from '../models/file-tree';
+import type { FileOrFolder, InsightFile, InsightFolder } from '../models/file-tree';
+import { InsightFileAction } from '../models/file-tree';
 
 const PATH_SEPARATOR = '/';
 
@@ -100,6 +101,28 @@ export class InsightFileTree {
     });
   }
 
+  /**
+   * Moves an item in the tree by following its `path`
+   *
+   * @param partialItem (Partial) Item to move
+   * @param newPath New path
+   */
+  moveItem(partialItem: Pick<FileOrFolder, 'id'> & Partial<FileOrFolder>, newPath: string) {
+    this.files = produce(this.files, (draft) => {
+      const item = findById(draft, partialItem.id) as InsightFile;
+
+      if (item) {
+        const paths = item.path.split(PATH_SEPARATOR);
+        const newPaths = newPath.split(PATH_SEPARATOR);
+
+        removeFileFromTree(draft, item, paths);
+        item.originalPath ??= item.path;
+        item.path = newPath;
+        item.action ??= InsightFileAction.RENAME;
+        addFileToTree(draft, item, newPaths);
+      }
+    });
+  }
   /**
    * Updates an item by ID.
    *
@@ -230,6 +253,7 @@ export function addFileToTree(
 export function removeFileFromTree(tree: FileOrFolder[], file: FileOrFolder, remainingPathParts: string[]) {
   if (remainingPathParts.length === 1) {
     // This is a file, find it
+
     const existingFileIndex = tree.findIndex((f) => f.name === file.name);
     if (existingFileIndex !== undefined) {
       tree.splice(existingFileIndex, 1);
@@ -239,7 +263,7 @@ export function removeFileFromTree(tree: FileOrFolder[], file: FileOrFolder, rem
 
     // Check for an existing folder
     const existingFolder: InsightFolder | undefined = tree.filter(isFolder).find((folder) => {
-      return folder.path === current;
+      return folder.name === current;
     });
 
     if (existingFolder) {
