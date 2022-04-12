@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.9.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.4...v3.9.5) (2022-04-12)
+
+
+### Bug Fixes
+
+* Fix Scroll Sync checkbox on News Admin page ([a8a9c0d](https://github.com/ExpediaGroup/insights-explorer/commit/a8a9c0d838cea94472d71b75ad9072545788f201))
+
 ### [3.9.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.3...v3.9.4) (2022-04-11)
 
 
