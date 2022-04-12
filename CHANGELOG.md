@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.10.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.5...v3.10.0) (2022-04-12)
+
+
+### Features
+
+* Allow uploading files to subfolders via button or drag-n-drop ([bcc389d](https://github.com/ExpediaGroup/insights-explorer/commit/bcc389d5491ebcf0d48aa816363ec6041724500c))
+
 ### [3.9.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.4...v3.9.5) (2022-04-12)
 
 
