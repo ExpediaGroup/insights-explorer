@@ -173,6 +173,7 @@ export const MarkdownSplitEditor = ({
       <HStack justify="flex-end" spacing="0.5rem">
         <Checkbox
           isChecked={scrollSync}
+          isRequired={false}
           onChange={() => setScrollSync(!scrollSync)}
           size="sm"
           color="frost.400"
