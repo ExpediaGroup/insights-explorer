@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.10.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.10.0...v3.10.1) (2022-04-13)
+
+
+### Bug Fixes
+
+* **deps:** bump aws-sdk from 2.1110.0 to 2.1113.0 ([9f07448](https://github.com/ExpediaGroup/insights-explorer/commit/9f074486024039200d3315754626118ff4f7e590))
+* **deps:** bump isomorphic-git from 1.13.1 to 1.17.0 ([101dec2](https://github.com/ExpediaGroup/insights-explorer/commit/101dec2c7e6bd129e274f615191f95a9c76e2347))
+* **deps:** bump react-dropzone from 11.4.2 to 12.0.5 ([88d02c0](https://github.com/ExpediaGroup/insights-explorer/commit/88d02c0407359602aa886cbab7981b65c375ea62))
+* **deps:** bump react-medium-image-zoom from 4.3.5 to 4.3.7 ([745405b](https://github.com/ExpediaGroup/insights-explorer/commit/745405ba9d46a0081567649c719f0edd3abb83dd))
+
 ## [3.10.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.9.5...v3.10.0) (2022-04-12)
 
 
