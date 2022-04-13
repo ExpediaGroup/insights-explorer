@@ -40,7 +40,6 @@ import { fileIconFactoryAs } from '../../shared/file-icon-factory';
 import type { InsightFileTree } from '../../shared/file-tree';
 import { isFolder } from '../../shared/file-tree';
 import { iconFactoryAs } from '../../shared/icon-factory';
-import { DeleteIconButton } from '../delete-icon-button/delete-icon-button';
 
 import { EditableControls } from './components/editable-controls/editable-controls';
 

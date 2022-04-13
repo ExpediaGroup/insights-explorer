@@ -32,9 +32,10 @@ export const EditableControls = ({ actions, isDeleted, isDisabled, item, onOpen,
             variant="ghost"
             size="sm"
             leftIcon={iconFactoryAs('undo')}
-            onClick={() => {
-              if (selected && actions.onUndelete) {
-                actions.onUndelete(selected);
+            onClick={(event) => {
+              event.stopPropagation();
+              if (actions.onUndelete) {
+                actions.onUndelete(item);
               }
             }}
           >
