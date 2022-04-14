@@ -19,31 +19,19 @@ import type { FlexProps } from '@chakra-ui/react';
 import { useColorModeValue } from '@chakra-ui/react';
 import { Progress } from '@chakra-ui/react';
 import { Divider } from '@chakra-ui/react';
-import {
-  Box,
-  Collapse,
-  Flex,
-  IconButton,
-  Spinner,
-  Text,
-  useDisclosure,
-  useToast,
-  VStack,
-  HStack
-} from '@chakra-ui/react';
+import { Box, Collapse, Flex, IconButton, Text, useToast, HStack } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { gql } from 'urql';
 
 import { FileBrowser } from '../../../../components/file-browser/file-browser';
-import { FileUploadArea } from '../../../../components/file-upload-area/file-upload-area';
 import { SidebarHeading } from '../../../../components/sidebar-heading/sidebar-heading';
 import type { FileOrFolder, InsightFile, InsightFolder } from '../../../../models/file-tree';
 import { InsightFileAction } from '../../../../models/file-tree';
 import type { UploadSingleFileMutation } from '../../../../models/generated/graphql';
 import type { InsightFileTree } from '../../../../shared/file-tree';
-import { iconFactory, iconFactoryAs } from '../../../../shared/icon-factory';
+import { iconFactoryAs } from '../../../../shared/icon-factory';
 import { urqlClient } from '../../../../urql';
 
 const UPLOAD_SINGLE_FILE_MUTATION = gql`
@@ -60,7 +48,9 @@ const UPLOAD_SINGLE_FILE_MUTATION = gql`
 
 interface Props {
   draftKey: string;
+  isFilesOpen: boolean;
   isNewInsight: boolean;
+  onFilesToggle: () => void;
   onSelectFile: (f: InsightFile | undefined) => void;
   onTreeChanged: (tree: InsightFileTree) => void;
   tree: InsightFileTree;
@@ -68,7 +58,9 @@ interface Props {
 
 export const SidebarFiles = ({
   draftKey,
+  isFilesOpen,
   isNewInsight,
+  onFilesToggle,
   onSelectFile,
   onTreeChanged,
   tree,
@@ -179,8 +171,6 @@ export const SidebarFiles = ({
   };
 
   const isMobile = useBreakpointValue({ base: true, md: false });
-
-  const { isOpen: isFilesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: true });
 
   const iconOption = useBreakpointValue({
     base: isFilesOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown'),

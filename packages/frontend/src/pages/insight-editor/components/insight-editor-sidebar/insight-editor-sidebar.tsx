@@ -15,6 +15,7 @@
  */
 
 import type { FlexProps } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import { Flex } from '@chakra-ui/react';
 import type { UseFormReturn } from 'react-hook-form';
 
@@ -44,18 +45,24 @@ export const InsightEditorSidebar = ({
   fileTree,
   ...flexProps
 }: Props & FlexProps) => {
+  const { isOpen: isFilesOpen, onToggle: onFilesToggle } = useDisclosure({ defaultIsOpen: true });
+
   return (
     <Flex
       direction="column"
-      flexGrow={1}
-      flexBasis={{ base: 'unset', md: '20rem', xl: '22rem' }}
+      {...(isFilesOpen && {
+        flexGrow: 1,
+        flexBasis: { base: 'unset', md: '20rem', xl: '22rem' }
+      })}
       maxW={{ base: 'unset', md: '20rem', xl: '26rem' }}
       {...flexProps}
     >
       <SidebarFiles
         draftKey={draftKey}
+        isFilesOpen={isFilesOpen}
         isNewInsight={isNewInsight}
         tree={fileTree}
+        onFilesToggle={onFilesToggle}
         onSelectFile={onSelectFile}
         onTreeChanged={onFileTreeChanged}
       />
