@@ -64,7 +64,7 @@
     "remark-toc": "8.0.1",
     "titleize": "3.0.0",
     "unist-util-visit": "4.0.0",
-    "url-join": "4.0.1",
+    "url-join": "5.0.0",
     "urql": "2.2.0",
     "use-file-picker": "1.4.2",
     "use-trace-update": "1.3.2",
