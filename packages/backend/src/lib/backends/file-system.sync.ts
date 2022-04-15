@@ -342,7 +342,7 @@ const syncFiles = async (
 
       // Include the contents of text-based files
       if (INDEXABLE_MIME_TYPES.has(file.mimeType) || file.mimeType.startsWith('text/')) {
-        file.contents = contents?.toString('utf-8');
+        file.contents = contents?.toString('utf8');
       }
 
       file.conversions = getConversions(file);

@@ -46,9 +46,14 @@ rules:
         order: asc
         caseInsensitive: true
       newlines-between: always
+  unicorn/consistent-function-scoping:
+    - error
+    -
+      checkArrowFunctions: false
   unicorn/no-array-for-each: off
   unicorn/no-array-reduce: off
   unicorn/no-null: off
+  unicorn/no-useless-switch-case: off
   unicorn/prefer-dom-node-text-content: off
   unicorn/prefer-module: off
   unicorn/prefer-node-protocol: off

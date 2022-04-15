@@ -101,7 +101,7 @@ export async function deployMappings(client: Client = defaultElasticsearchClient
     Object.values(ElasticIndex).map(async (index) => {
       const { exists, indexName: existingIndexName, index: existingIndex } = await getIndex(index);
 
-      const indexFile = fs.readFileSync(`indices/${index}.json`, { encoding: 'utf-8' });
+      const indexFile = fs.readFileSync(`indices/${index}.json`, { encoding: 'utf8' });
       const newIndex = JSON.parse(indexFile);
       logger.debug(`Loaded Elasticsearch index file for ${index}`);
 
