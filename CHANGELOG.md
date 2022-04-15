@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.11.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.10.1...v3.11.0) (2022-04-15)
+
+
+### Features
+
+* Reorganize Insight Files via drag and drop ([6207828](https://github.com/ExpediaGroup/insights-explorer/commit/62078286b12d536ad5dab138cc013e681ea5bc7b))
+
+
+### Bug Fixes
+
+* Fix collapsible file sidebar ([608ba2c](https://github.com/ExpediaGroup/insights-explorer/commit/608ba2c62548bdde3b2efe812fb8d79838499ceb))
+* Fix UX of the undelete file button ([a7dad50](https://github.com/ExpediaGroup/insights-explorer/commit/a7dad50c95fce09723ef453f7f2eb603098139c6))
+
 ### [3.10.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.10.0...v3.10.1) (2022-04-13)
 
 
