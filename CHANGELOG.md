@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.2...v3.11.3) (2022-04-18)
+
+
+### Bug Fixes
+
+* Add spinner to the Insight Editor file upload button ([493997c](https://github.com/ExpediaGroup/insights-explorer/commit/493997cade0164e356ddc6f1cb889692ec17ec60))
+
 ### [3.11.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.1...v3.11.2) (2022-04-18)
 
 
