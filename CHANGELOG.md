@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.0...v3.11.1) (2022-04-18)
+
+
+### Bug Fixes
+
+* **deps:** bump @okta/okta-auth-js from 6.2.0 to 6.4.2 ([6aaeecd](https://github.com/ExpediaGroup/insights-explorer/commit/6aaeecd40dc634e272c198380392f05f49e4f26e))
+* **deps:** bump @urql/exchange-retry from 0.3.2 to 0.3.3 ([bee2778](https://github.com/ExpediaGroup/insights-explorer/commit/bee27786d2c59cd59380567f4821389644c99f94))
+* **deps:** bump async from 2.6.3 to 2.6.4 ([4ce0ab2](https://github.com/ExpediaGroup/insights-explorer/commit/4ce0ab2f0659596718b1b338c8da8520c635089d))
+* **deps:** bump react-infinite-scroller from 1.2.5 to 1.2.6 ([b767558](https://github.com/ExpediaGroup/insights-explorer/commit/b767558efa1402333cb7661c11f5be307151b0f1))
+
 ## [3.11.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.10.1...v3.11.0) (2022-04-15)
 
 
