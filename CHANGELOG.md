@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.1...v3.11.2) (2022-04-18)
+
+
+### Bug Fixes
+
+* **deps:** bump @urql/core from 2.4.3 to 2.4.4 ([846aaea](https://github.com/ExpediaGroup/insights-explorer/commit/846aaea20a3921ed75a96e625696f5087d2c80c6))
+* **deps:** bump nanoid from 3.3.2 to 3.3.3 ([cf73694](https://github.com/ExpediaGroup/insights-explorer/commit/cf73694df31856ac5cc30293fb9d097dc0396b57))
+
 ### [3.11.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.0...v3.11.1) (2022-04-18)
 
 
