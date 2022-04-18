@@ -369,9 +369,10 @@ const FileRenderer = ({
 interface Props {
   tree: InsightFileTree;
   actions?: FileBrowserActions;
+  isUploading?: boolean;
 }
 
-export const FileBrowser = ({ tree, actions = {}, ...boxProps }: Props & BoxProps) => {
+export const FileBrowser = ({ actions = {}, isUploading, tree, ...boxProps }: Props & BoxProps) => {
   const [selected, setSelected] = useState<FileOrFolder>();
 
   const onFileSelect = (selected: FileOrFolder) => {
@@ -402,6 +403,7 @@ export const FileBrowser = ({ tree, actions = {}, ...boxProps }: Props & BoxProp
             _hover={{ backgroundColor: 'aurora.400' }}
             aria-label="Upload File"
             icon={iconFactoryAs('upload')}
+            isLoading={isUploading}
             onClick={openFilePicker}
           />
         </Tooltip>

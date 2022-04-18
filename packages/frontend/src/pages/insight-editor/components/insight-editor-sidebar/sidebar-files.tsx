@@ -259,6 +259,7 @@ export const SidebarFiles = ({
             onUndelete: (f) => onDelete(f, false, false),
             onUpload: onUploadFile
           }}
+          isUploading={uploading}
         />
 
         {uploading && <Progress size="xs" isIndeterminate />}
