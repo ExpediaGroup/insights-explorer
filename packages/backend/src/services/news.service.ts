@@ -15,7 +15,7 @@
  */
 
 import { sort } from '@iex/shared/dataloader-util';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import DataLoader from 'dataloader';
 import { raw, ref } from 'objection';
 import { Service } from 'typedi';
@@ -28,10 +28,12 @@ import { UserNews } from '../models/user-news';
 
 import { ActivityService } from './activity.service';
 
+const logger = getLogger('news.service');
+
 @Service()
 export class NewsService {
   private userNewsLoader: DataLoader<{ newsId: number; userId: number }, UserNews> = new DataLoader(async (tuples) => {
-    logger.silly('[NEWS.SERVICE] userNewsLoader');
+    logger.trace('userNewsLoader');
 
     const existingUserNews = await UserNews.query().whereInComposite(
       ['newsId', 'userId'],
@@ -42,7 +44,7 @@ export class NewsService {
   });
 
   private likeCountLoader: DataLoader<number, number> = new DataLoader(async (newsIds) => {
-    logger.silly('[NEWS.SERVICE] likeCountLoader');
+    logger.trace('likeCountLoader');
 
     const result = await UserNews.query()
       .whereIn('newsId', newsIds as number[])
@@ -55,7 +57,7 @@ export class NewsService {
   });
 
   private likedByLoader: DataLoader<number, number[]> = new DataLoader(async (newsIds) => {
-    logger.silly('[NEWS.SERVICE] likedByLoader');
+    logger.trace('likedByLoader');
 
     const result = await UserNews.query()
       .whereIn('newsId', newsIds as number[])
@@ -67,7 +69,7 @@ export class NewsService {
   });
 
   constructor(private readonly activityService: ActivityService) {
-    logger.silly('[NEWS.SERVICE] Constructing New News Service');
+    logger.trace('Constructing New News Service');
   }
 
   /**
@@ -92,7 +94,7 @@ export class NewsService {
    * @param user User
    */
   async doesUserLikeNews(newsId: number, user: User): Promise<boolean> {
-    logger.silly('[NEWS.SERVICE] doesUserLikeNews ' + newsId);
+    logger.trace('doesUserLikeNews ' + newsId);
 
     if (user == null) {
       return false;
@@ -109,7 +111,7 @@ export class NewsService {
    * @param newsId News ID
    */
   async likeCount(newsId: number): Promise<number> {
-    logger.silly('[NEWS.SERVICE] likeCount for ' + newsId);
+    logger.trace('likeCount for ' + newsId);
 
     return this.likeCountLoader.load(newsId);
   }
@@ -120,7 +122,7 @@ export class NewsService {
    * @param newsId News ID
    */
   async likedBy(newsId: number): Promise<number[]> {
-    logger.silly('[NEWS.SERVICE] likedBy for ' + newsId);
+    logger.trace('likedBy for ' + newsId);
 
     return this.likedByLoader.load(newsId);
   }

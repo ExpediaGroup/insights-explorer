@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import type { MessageAttachment } from '@slack/bolt';
 
 import { getInsight } from './iex';
+
+const logger = getLogger('unfurls');
 
 interface Link {
   domain: string;
@@ -51,7 +53,7 @@ export const unfurlInsight = async (namespace: string, name: string): Promise<Me
   const insight = await getInsight(namespace, name);
 
   if (insight === undefined) {
-    logger.warn(`[UNFURLS] Insight not found: ${namespace}/${name}`);
+    logger.warn(`Insight not found: ${namespace}/${name}`);
     return undefined;
   }
 

@@ -35,8 +35,10 @@ import pRetry from 'p-retry';
 import { bootstrap, defaultKnex } from './lib/db';
 import { deployMappings } from './lib/elasticsearch';
 import { createServer } from './server';
-import logger from '@iex/shared/logger';
 import { syncExampleInsights } from './lib/init';
+import { getLogger } from '@iex/shared/logger';
+
+const logger = getLogger('index');
 
 // Safeguard to prevent the application from crashing.
 // It would be better to catch any promise rejections and handle directly
@@ -52,28 +54,28 @@ process.on('uncaughtException', (uncaughtException) => {
 
 const startup = async (): Promise<Server> => {
   // Deploy Elasticsearch Index mappings
-  logger.debug('[INDEX] Deploying elasticsearch indices');
+  logger.debug('Deploying elasticsearch indices');
   await pRetry(() => deployMappings(), {
     retries: 5,
     factor: 3.86,
     onFailedAttempt: (error) => {
-      logger.warn(`[INDEX] Deploying elasticsearch indices failed (attempt ${error.attemptNumber})`);
+      logger.warn(`Deploying elasticsearch indices failed (attempt ${error.attemptNumber})`);
     }
   });
 
   // Create database pool & apply any schema migrations
-  logger.debug('[INDEX] Bootstrapping database');
+  logger.debug('Bootstrapping database');
   await pRetry(() => bootstrap(defaultKnex), {
     retries: 5,
     factor: 3.86,
     onFailedAttempt: (error) => {
-      logger.warn(`[INDEX] Bootstrapping database failed (attempt ${error.attemptNumber})`);
+      logger.warn(`Bootstrapping database failed (attempt ${error.attemptNumber})`);
       logger.warn(error);
     }
   });
 
   // Start Express server
-  logger.debug('[INDEX] Starting Express server');
+  logger.debug('Starting Express server');
   const app = await createServer();
   const server = app.listen(app.get('port'), () => {
     logger.info(`IEX Server started in ${app.get('env')} mode on port: ${app.get('port')}`);

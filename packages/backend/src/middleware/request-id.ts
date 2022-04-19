@@ -21,6 +21,8 @@ import { nanoid } from 'nanoid';
  * Express middleware for attaching a unique ID to each request
  */
 export const requestId = (req: Request, res: Response, next: NextFunction): void => {
-  req.id = nanoid();
+  // pino-http also attaches a unique ID to each request
+  // Only add a new id if one is not already present
+  req.id ??= nanoid();
   next();
 };

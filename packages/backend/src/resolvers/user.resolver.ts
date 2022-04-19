@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { ResolveTree } from 'graphql-parse-resolve-info';
 import { Arg, Args, Authorized, Ctx, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
@@ -33,6 +33,8 @@ import { ActivityService } from '../services/activity.service';
 import { OAuthService } from '../services/oauth.service';
 import { UserService } from '../services/user.service';
 import { Fields } from '../shared/field-parameter-decorator';
+
+const logger = getLogger('user.resolver');
 
 @Service()
 @Resolver(() => User)
@@ -166,7 +168,7 @@ export class UserResolver {
     // Determine if user is an admin or not
     user.isAdmin = ctx.user?.isAdmin ?? false;
 
-    logger.debug(`[LOGIN] ${user.userName} logged in...`);
+    logger.debug(`${user.userName} logged in...`);
 
     if (process.env.ACTIVITIES_IGNORE_LOGIN === 'false') {
       const { loginCount } = user;

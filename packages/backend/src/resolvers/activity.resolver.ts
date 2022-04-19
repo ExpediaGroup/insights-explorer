@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Arg, Authorized, Ctx, FieldResolver, ID, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
@@ -28,6 +28,8 @@ import { ActivityService } from '../services/activity.service';
 import { InsightService } from '../services/insight.service';
 import { UserService } from '../services/user.service';
 import { toCursor } from '../shared/resolver-utils';
+
+const logger = getLogger('activity.resolver');
 
 @Service()
 @Resolver(() => Activity)
@@ -126,7 +128,7 @@ export class ActivityResolver {
     @Arg('liked') liked: boolean,
     @Ctx() ctx: Context
   ): Promise<Activity> {
-    logger.debug('[ACTIVITY.RESOLVER] Toggling liked for Activity', activityId);
+    logger.debug('Toggling liked for Activity', activityId);
 
     try {
       const activity = await this.activityService.likeActivity(activityId, liked, ctx.user!);

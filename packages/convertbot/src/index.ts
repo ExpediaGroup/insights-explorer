@@ -32,7 +32,9 @@ import './environment';
 import type { Server } from 'http';
 
 import app from './server';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
+
+const logger = getLogger('index');
 
 // Safeguard to prevent the application from crashing.
 process.on('uncaughtException', (uncaughtException) => {
@@ -42,7 +44,7 @@ process.on('uncaughtException', (uncaughtException) => {
 
 const startup = async (): Promise<Server> => {
   // Start Express server
-  logger.debug('[INDEX] Starting Express server');
+  logger.debug('Starting Express server');
   const server = app.listen(app.get('port'), () => {
     logger.info(`IEX Convertbot started in ${app.get('env')} mode on port: ${app.get('port')}`);
   });

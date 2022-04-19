@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { NextFunction, Request, Response } from 'express';
+
+const logger = getLogger('require-auth');
 
 /**
  * Middleware for rejecting unauthenticated requests.
@@ -23,7 +25,7 @@ import { NextFunction, Request, Response } from 'express';
  */
 export async function requireAuth(req: Request, res: Response, next: NextFunction): Promise<void> {
   if (req.token === undefined) {
-    logger.error('[REQUIRE_AUTH] Request did not contain authorization, or authorization was invalid.');
+    logger.error('Request did not contain authorization, or authorization was invalid.');
     res.status(401).send('Unauthorized');
     return;
   }

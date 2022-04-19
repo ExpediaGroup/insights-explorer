@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Arg, Authorized, Ctx, FieldResolver, ID, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
@@ -27,6 +27,8 @@ import { CommentService } from '../services/comment.service';
 import { InsightService } from '../services/insight.service';
 import { UserService } from '../services/user.service';
 import { fromGlobalId, toCursor } from '../shared/resolver-utils';
+
+const logger = getLogger('comment.resolver');
 
 @Service()
 @Resolver(() => Comment)
@@ -142,7 +144,7 @@ export class CommentResolver {
   @Authorized<Permission>({ user: true })
   @Mutation(() => Comment)
   async addComment(@Arg('comment') comment: CommentInput, @Ctx() ctx: Context): Promise<Comment> {
-    logger.debug('[COMMENT.RESOLVER] Adding new Comment', comment);
+    logger.debug('Adding new Comment', comment);
 
     const { insightId, commentText, parentCommentId } = comment;
     const [, dbInsightId] = fromGlobalId(insightId!);
@@ -174,7 +176,7 @@ export class CommentResolver {
     @Arg('comment') comment: CommentInput,
     @Ctx() ctx: Context
   ): Promise<Comment> {
-    logger.debug('[COMMENT.RESOLVER] Updating Comment', comment);
+    logger.debug('Updating Comment', comment);
 
     const [, dbCommentId] = fromGlobalId(commentId);
     const newComment: Partial<Comment> = {
@@ -193,7 +195,7 @@ export class CommentResolver {
   @Authorized<Permission>({ user: true })
   @Mutation(() => Comment)
   async deleteComment(@Arg('commentId', () => ID) commentId: string, @Ctx() ctx: Context): Promise<Comment> {
-    logger.debug('[COMMENT.RESOLVER] Deleting Comment', commentId);
+    logger.debug('Deleting Comment', commentId);
 
     const [, dbCommentId] = fromGlobalId(commentId);
 
@@ -213,7 +215,7 @@ export class CommentResolver {
     @Arg('liked') liked: boolean,
     @Ctx() ctx: Context
   ): Promise<Comment> {
-    logger.debug('[COMMENT.RESOLVER] Toggling liked for Comment', commentId);
+    logger.debug('Toggling liked for Comment', commentId);
 
     const [, dbCommentId] = fromGlobalId(commentId);
 

@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Resolver, Query, Authorized } from 'type-graphql';
 import { Service } from 'typedi';
 
 import { Permission } from '../models/permission';
 import { User } from '../models/user';
+
+const logger = getLogger('users.resolver');
 
 @Service()
 @Resolver()

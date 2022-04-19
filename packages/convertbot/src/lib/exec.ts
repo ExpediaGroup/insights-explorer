@@ -16,19 +16,21 @@
 
 import * as childProcess from 'child_process';
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
+
+const logger = getLogger('exec');
 
 export const exec = async (command: string): Promise<{ stdout: string; stderr: string }> => {
   return new Promise((resolve, reject) => {
-    logger.silly(`[EXEC] Executing command ${command}`);
+    logger.trace(`Executing command ${command}`);
     childProcess.exec(command, (err, stdout, stderr) => {
-      logger.silly(`[EXEC] stdout: `);
-      logger.silly(stdout);
-      logger.silly(`[EXEC] stderr: `);
-      logger.silly(stderr);
+      logger.trace(`stdout: `);
+      logger.trace(stdout);
+      logger.trace(`stderr: `);
+      logger.trace(stderr);
 
       if (err) {
-        logger.error('[EXEC] Failed: ' + err);
+        logger.error('Failed: ' + err);
         reject(err);
       }
 

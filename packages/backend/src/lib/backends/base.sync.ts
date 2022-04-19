@@ -15,7 +15,7 @@
  */
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 
 import { defaultElasticsearchClient, ElasticIndex } from '../../lib/elasticsearch';
 import { DbInsight } from '../../models/insight';
@@ -23,6 +23,8 @@ import { DbRepositoryType } from '../../models/repository-type';
 import { InsightSyncTask } from '../../models/tasks';
 import { ActivityService } from '../../services/activity.service';
 import { InsightService } from '../../services/insight.service';
+
+const logger = getLogger('base.sync');
 
 export const THUMBNAIL_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.gif', '.svg'];
 export const THUMBNAIL_LOCATIONS = ['thumbnail', '.iex/thumbnail'].flatMap((prefix) =>
@@ -58,7 +60,7 @@ export abstract class BaseSync {
     const documentType = insight.itemType;
     const index = ElasticIndex.INSIGHTS;
 
-    logger.info(`[BASE_SYNC] Publishing ${documentType} to Elasticsearch: ${insight.fullName}`);
+    logger.info(`Publishing ${documentType} to Elasticsearch: ${insight.fullName}`);
     logger.debug(JSON.stringify(insight, null, 2));
 
     try {
@@ -73,9 +75,9 @@ export abstract class BaseSync {
       });
 
       logger.debug(JSON.stringify(result));
-      logger.info(`[BASE_SYNC] Successfully published ${documentType}: ${insight.fullName}`);
+      logger.info(`Successfully published ${documentType}: ${insight.fullName}`);
     } catch (error: any) {
-      logger.error(`[BASE_SYNC] Error publishing ${documentType} to Elasticsearch`);
+      logger.error(`Error publishing ${documentType} to Elasticsearch`);
       logger.error(error);
       throw error;
     }
@@ -92,14 +94,14 @@ export abstract class BaseSync {
     let existingDbInsight = await DbInsight.query().where('externalId', externalId).first();
 
     if (existingDbInsight != undefined) {
-      logger.silly('[BASE_SYNC] Insight does exist in database');
+      logger.trace('Insight does exist in database');
       await existingDbInsight.$query().patch({
         insightName: insight.fullName,
         itemType: insight.itemType,
         deletedAt: null
       });
     } else {
-      logger.silly('[BASE_SYNC] Insight does not exist in database');
+      logger.trace('Insight does not exist in database');
 
       // Check to see if the fullName already exists, but with a different externalID
       existingDbInsight = await DbInsight.query().where('insightName', insight.fullName).first();
@@ -107,14 +109,14 @@ export abstract class BaseSync {
       if (existingDbInsight != undefined) {
         // Assume the repo was deleted and recreated, and just update the external ID
         // (We've already checked to ensure the external ID is unique)
-        logger.silly('[BASE_SYNC] Insight exists in database, but with a different externalId');
+        logger.trace('Insight exists in database, but with a different externalId');
         await existingDbInsight.$query().patch({
           externalId,
           itemType: insight.itemType,
           deletedAt: null
         });
       } else {
-        logger.silly('[BASE_SYNC] Insight does not exist in database');
+        logger.trace('Insight does not exist in database');
         existingDbInsight = await DbInsight.query().insert({
           externalId,
           insightName: insight.fullName,
@@ -128,7 +130,7 @@ export abstract class BaseSync {
       }
     }
 
-    logger.silly(JSON.stringify(existingDbInsight, null, 2));
+    logger.trace(JSON.stringify(existingDbInsight, null, 2));
 
     // Use the Database ID as the document ID in Elasticsearch
     insight.insightId = existingDbInsight.insightId!;

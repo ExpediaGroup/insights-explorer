@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { AWSError } from 'aws-sdk';
 import { Response, Request } from 'express';
 
 import { getFromS3, headFromS3 } from '../lib/storage';
 import { getType } from '../shared/mime';
+
+const logger = getLogger('insights.v1');
 
 /**
  * HEAD /insights/:namespace/:name/assets/:filepath
@@ -28,7 +30,7 @@ export const headInsightFile = async (req: Request, res: Response): Promise<void
   const filePath = req.params.filepath + req.params[0];
   const key = `insights/${req.params.namespace}/${req.params.name}/files/${filePath}`;
 
-  logger.debug(`[INSIGHTS.V1] Attempting to HEAD insight attachment: ${filePath}`);
+  logger.debug(`Attempting to HEAD insight attachment: ${filePath}`);
 
   const headObject = await headFromS3(key);
 
@@ -53,7 +55,7 @@ export const getInsightFile = async (req: Request, res: Response): Promise<void>
   const filePath = req.params.filepath + req.params[0];
   const key = `insights/${req.params.namespace}/${req.params.name}/files/${filePath}`;
 
-  logger.debug(`[INSIGHTS.V1] Attempting to load insight attachment: ${filePath}`);
+  logger.debug(`Attempting to load insight attachment: ${filePath}`);
 
   const range = Array.isArray(req.headers['range']) ? req.headers['range'][0] : req.headers['range'];
 

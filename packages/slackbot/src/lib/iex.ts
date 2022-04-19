@@ -18,7 +18,9 @@ import type { ClientOptions } from '@elastic/elasticsearch';
 import { Client } from '@elastic/elasticsearch';
 import type { SearchBody, SearchResponse } from '@iex/models/elasticsearch';
 import type { IndexedInsight } from '@iex/models/indexed/indexed-insight';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
+
+const logger = getLogger('iex');
 
 const defaultOptions: ClientOptions = {
   node: process.env.ELASTICSEARCH_NODE,

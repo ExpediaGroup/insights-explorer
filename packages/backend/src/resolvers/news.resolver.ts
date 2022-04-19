@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Arg, Authorized, Ctx, FieldResolver, ID, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
@@ -25,6 +25,8 @@ import { User, UserConnection } from '../models/user';
 import { NewsService } from '../services/news.service';
 import { UserService } from '../services/user.service';
 import { fromCursor, fromGlobalId, toCursor } from '../shared/resolver-utils';
+
+const logger = getLogger('news.resolver');
 
 @Service()
 @Resolver(() => News)
@@ -146,7 +148,7 @@ export class NewsResolver {
   @Authorized<Permission>({ user: true, admin: true })
   @Mutation(() => News)
   async addNews(@Arg('news') news: NewsInput, @Ctx() ctx: Context): Promise<News> {
-    logger.debug('[NEWS.RESOLVER] Adding new News', news);
+    logger.debug('Adding new News', news);
 
     try {
       return await this.newsService.createNews(news, ctx.user!);
@@ -160,7 +162,7 @@ export class NewsResolver {
   @Authorized<Permission>({ user: true, admin: true })
   @Mutation(() => News)
   async updateNews(@Arg('newsId', () => ID) newsId: string, @Arg('news') news: NewsInput): Promise<News> {
-    logger.debug('[NEWS.RESOLVER] Updating News', news);
+    logger.debug('Updating News', news);
 
     const [, dbNewsId] = fromGlobalId(newsId);
     try {
@@ -175,7 +177,7 @@ export class NewsResolver {
   @Authorized<Permission>({ user: true, admin: true })
   @Mutation(() => News)
   async deleteNews(@Arg('newsId', () => ID) newsId: string): Promise<News> {
-    logger.debug('[NEWS.RESOLVER] Deleting News', newsId);
+    logger.debug('Deleting News', newsId);
 
     const [, dbNewsId] = fromGlobalId(newsId);
 
@@ -195,7 +197,7 @@ export class NewsResolver {
     @Arg('liked') liked: boolean,
     @Ctx() ctx: Context
   ): Promise<News> {
-    logger.debug('[NEWS.RESOLVER] Toggling liked for News', newsId);
+    logger.debug('Toggling liked for News', newsId);
 
     const [, dbNewsId] = fromGlobalId(newsId);
 

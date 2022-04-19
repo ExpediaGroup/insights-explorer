@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { SQS } from 'aws-sdk';
 import { Consumer } from 'sqs-consumer';
+
+const logger = getLogger('message-queue');
 
 export interface SQSMessageQueueOptions {
   region: string;
@@ -46,31 +48,31 @@ export class MessageQueue {
       queueUrl: this.options.queueUrl,
       region: this.options.region,
       handleMessage: async (message) => {
-        logger.silly('[MESSAGE_QUEUE] Received message: ' + message.MessageId);
+        logger.trace('Received message: ' + message.MessageId);
 
         let body: T;
         try {
           body = JSON.parse(message.Body!);
         } catch (error: any) {
-          logger.error('[MESSAGE_QUEUE] Unable to parse body of message: ' + message.Body);
-          logger.error('[MESSAGE_QUEUE] Error: ' + error);
+          logger.error('Unable to parse body of message: ' + message.Body);
+          logger.error('Error: ' + error);
         }
 
         try {
           await handler(body!, message);
         } catch (error: any) {
-          logger.error('[MESSAGE_QUEUE] Error: ' + error);
+          logger.error('Error: ' + error);
           throw error;
         }
       }
     });
 
     consumer.on('error', (error) => {
-      logger.error('[MESSAGE_QUEUE] ' + error.message);
+      logger.error(error.message);
     });
 
     consumer.on('processing_error', (error) => {
-      logger.error('[MESSAGE_QUEUE] ' + error.message);
+      logger.error(error.message);
     });
 
     consumer.start();

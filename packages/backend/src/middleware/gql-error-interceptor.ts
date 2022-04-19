@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { DBError, NotNullViolationError, UniqueViolationError } from 'objection';
 import { MiddlewareFn } from 'type-graphql';
+
+const logger = getLogger('gql-error-interceptor');
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const GqlErrorInterceptor: MiddlewareFn<any> = async ({ context, info }, next) => {

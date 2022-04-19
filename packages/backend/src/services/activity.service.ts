@@ -17,7 +17,7 @@
 import { RequestParams } from '@elastic/elasticsearch';
 import { GetResponse, SearchBody, SearchResponse } from '@iex/models/elasticsearch';
 import { sort } from '@iex/shared/dataloader-util';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { parseToElasticsearch, SearchMultiTerm, SearchRange, SearchTerm } from '@iex/shared/search';
 import DataLoader from 'dataloader';
 import { DateTime } from 'luxon';
@@ -32,6 +32,7 @@ import { User } from '../models/user';
 import { UserActivity } from '../models/user-activity';
 import { fromElasticsearchCursor, toElasticsearchCursor } from '../shared/resolver-utils';
 
+const logger = getLogger('activity.service');
 @Service()
 export class ActivityService {
   private defaultSort: Sort = {
@@ -41,7 +42,7 @@ export class ActivityService {
 
   private userActivityLoader: DataLoader<{ activityId: string; userId: number }, UserActivity> = new DataLoader(
     async (tuples) => {
-      logger.silly('[ACTIVITY.SERVICE] userActivityLoader');
+      logger.trace('userActivityLoader');
 
       const existingUserActivity = await UserActivity.query().whereInComposite(
         ['activityId', 'userId'],
@@ -53,7 +54,7 @@ export class ActivityService {
   );
 
   private likeCountLoader: DataLoader<string, number> = new DataLoader(async (activityIds) => {
-    logger.silly('[ACTIVITY.SERVICE] likeCountLoader');
+    logger.trace('likeCountLoader');
 
     const result = await UserActivity.query()
       .whereIn('activityId', activityIds as string[])
@@ -66,7 +67,7 @@ export class ActivityService {
   });
 
   private likedByLoader: DataLoader<string, number[]> = new DataLoader(async (activityIds) => {
-    logger.silly('[ACTIVITY.SERVICE] likedByLoader');
+    logger.trace('likedByLoader');
 
     const result = await UserActivity.query()
       .whereIn('activityId', activityIds as string[])
@@ -78,7 +79,7 @@ export class ActivityService {
   });
 
   constructor() {
-    logger.silly('[ACTIVITY.SERVICE] Constructing New Activity Service');
+    logger.trace('Constructing New Activity Service');
   }
 
   /**
@@ -92,7 +93,7 @@ export class ActivityService {
     user: User,
     details: IndexedActivityDetails
   ): Promise<void | string> {
-    logger.debug(`[ACTIVITY.SERVICE] Recording a ${activityType} activity`);
+    logger.debug(`Recording a ${activityType} activity`);
     const activityId = nanoid();
 
     const activity = {
@@ -114,7 +115,7 @@ export class ActivityService {
         body: activity
       })
       .then(() => {
-        logger.silly(`[ACTIVITY.SERVICE] Activity ${activityId} recorded!`);
+        logger.trace(`Activity ${activityId} recorded!`);
       });
 
     return activityId;
@@ -126,7 +127,7 @@ export class ActivityService {
    * @param activityId Activity ID
    */
   async getActivity(activityId: string): Promise<Activity> {
-    logger.debug(`[ACTIVITY.SERVICE] Getting Activity with ID ${activityId}`);
+    logger.debug(`Getting Activity with ID ${activityId}`);
 
     try {
       const result = await defaultElasticsearchClient.get<GetResponse<Activity>>({
@@ -148,7 +149,7 @@ export class ActivityService {
    * Fetches all Activities
    */
   async getActivities(search?: string, limit?: number, cursor?: string, sort?: Sort[]): Promise<ActivityConnection> {
-    logger.silly('[ACTIVITY.SERVICE] getActivities');
+    logger.trace('getActivities');
 
     const query: RequestParams.Search<SearchBody> = {
       index: ElasticIndex.ACTIVITIES,
@@ -326,7 +327,7 @@ export class ActivityService {
    * @param user User
    */
   async doesUserLikeActivity(activityId: string, user: User): Promise<boolean> {
-    logger.silly('[ACTIVITY.SERVICE] doesUserLikeActivity ' + activityId);
+    logger.trace('doesUserLikeActivity ' + activityId);
 
     if (user == null) {
       return false;
@@ -343,7 +344,7 @@ export class ActivityService {
    * @param activityId News ID
    */
   async likeCount(activityId: string): Promise<number> {
-    logger.silly('[ACTIVITY.SERVICE] likeCount for ' + activityId);
+    logger.trace('likeCount for ' + activityId);
 
     return this.likeCountLoader.load(activityId);
   }
@@ -354,7 +355,7 @@ export class ActivityService {
    * @param activityId News ID
    */
   async likedBy(activityId: string): Promise<number[]> {
-    logger.silly('[ACTIVITY.SERVICE] likedBy for ' + activityId);
+    logger.trace('likedBy for ' + activityId);
 
     return this.likedByLoader.load(activityId);
   }

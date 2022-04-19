@@ -15,7 +15,7 @@
  */
 
 import { RepositoryType } from '@iex/models/repository-type';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import pMap from 'p-map';
 import { Resolver, Mutation, Authorized } from 'type-graphql';
 import { Service } from 'typedi';
@@ -26,6 +26,8 @@ import { Permission } from '../models/permission';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 
+const logger = getLogger('admin.resolver');
+
 @Service()
 @Resolver()
 export class AdminResolver {
@@ -34,7 +36,7 @@ export class AdminResolver {
   @Authorized<Permission>({ user: true, admin: true })
   @Mutation(() => Number)
   async syncAllInsights(): Promise<number> {
-    logger.warn('[ADMIN.RESOLVER] Syncing All Insights');
+    logger.warn('Syncing All Insights');
 
     const dbInsights = await DbInsight.query();
 
@@ -63,7 +65,7 @@ export class AdminResolver {
   @Authorized<Permission>({ user: true, admin: true })
   @Mutation(() => Number)
   async syncAllUsers(): Promise<number> {
-    logger.warn('[ADMIN.RESOLVER] Syncing All Users');
+    logger.warn('Syncing All Users');
 
     const users = await User.query();
 

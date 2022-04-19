@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { ResolveTree } from 'graphql-parse-resolve-info';
 import { Arg, Authorized, Query, Resolver } from 'type-graphql';
 import { Service } from 'typedi';
@@ -23,6 +23,8 @@ import { searchInsights } from '../lib/elasticsearch';
 import { InsightSearch, InsightSearchResults } from '../models/insight-search';
 import { Permission } from '../models/permission';
 import { Fields } from '../shared/field-parameter-decorator';
+
+const logger = getLogger('insight.resolver');
 
 @Service()
 @Resolver()

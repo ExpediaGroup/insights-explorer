@@ -17,7 +17,7 @@
 import { PersonType } from '@iex/models/person-type';
 import { RepositoryPermission } from '@iex/models/repository-permission';
 import { RepositoryType } from '@iex/models/repository-type';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { ResolveTree } from 'graphql-parse-resolve-info';
 import { Arg, Authorized, Ctx, ID, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
@@ -40,6 +40,8 @@ import { InsightService } from '../services/insight.service';
 import { UserService } from '../services/user.service';
 import { Fields } from '../shared/field-parameter-decorator';
 import { fromGlobalId, toCursor } from '../shared/resolver-utils';
+
+const logger = getLogger('insight.resolver');
 
 @Service()
 @Resolver(() => Insight)
@@ -105,7 +107,7 @@ export class InsightResolver {
     @Fields() fields: { Insight: { [str: string]: ResolveTree } },
     @Arg('fullName') fullName: string
   ): Promise<Insight | null> {
-    logger.debug(`[INSIGHT.RESOLVER] Insight by Full Name: ${fullName}`);
+    logger.debug(`Insight by Full Name: ${fullName}`);
     try {
       const insight = (await this.insightService.getInsightByFullName(
         fullName,
@@ -125,7 +127,7 @@ export class InsightResolver {
     @Arg('name') name: string,
     @Arg('namespace') namespace: string
   ): Promise<ValidateInsightName> {
-    logger.debug(`[INSIGHT.RESOLVER] Insight by Display Name: ${name}`);
+    logger.debug(`Insight by Display Name: ${name}`);
     try {
       const validation = await this.insightService.validateInsightName(name, namespace);
       return validation;
@@ -296,7 +298,7 @@ export class InsightResolver {
   @Authorized<Permission>({ user: true, github: true })
   @Mutation(() => Insight)
   async publishDraft(@Arg('draftKey') draftKey: string, @Ctx() ctx: Context): Promise<Insight> {
-    logger.debug('[INSIGHT.RESOLVER] Publishing Draft Key', draftKey);
+    logger.debug('Publishing Draft Key', draftKey);
 
     try {
       const draft = await this.draftService.getDraft(draftKey);
@@ -368,7 +370,7 @@ export class InsightResolver {
     @Arg('liked') liked: boolean,
     @Ctx() ctx: Context
   ): Promise<Insight> {
-    logger.debug('[INSIGHT.RESOLVER] Toggling liked for Insight', insightId);
+    logger.debug('Toggling liked for Insight', insightId);
 
     try {
       const [, dbInsightId] = fromGlobalId(insightId);
@@ -391,7 +393,7 @@ export class InsightResolver {
     @Arg('insightName') insightName: string,
     @Ctx() ctx: Context
   ): Promise<Activity> {
-    logger.debug('[INSIGHT.RESOLVER] Recording view Insight', insightId);
+    logger.debug('Recording view Insight', insightId);
 
     try {
       const [, dbInsightId] = fromGlobalId(insightId);
@@ -412,7 +414,7 @@ export class InsightResolver {
   @Authorized<Permission>({ user: true })
   @Mutation(() => Insight)
   async syncInsight(@Arg('insightId', () => ID) insightId: string): Promise<Insight | null> {
-    logger.debug('[INSIGHT.RESOLVER] Syncing Insight', insightId);
+    logger.debug('Syncing Insight', insightId);
 
     const [, dbInsightId] = fromGlobalId(insightId);
     const dbInsight = await DbInsight.query().where('insightId', dbInsightId).first();
@@ -441,7 +443,7 @@ export class InsightResolver {
   @Authorized<Permission>({ user: true, github: true })
   @Mutation(() => ID)
   async deleteInsight(@Arg('insightId', () => ID) insightId: string, @Ctx() ctx: Context): Promise<string> {
-    logger.debug('[INSIGHT.RESOLVER] Deleting Insight', insightId);
+    logger.debug('Deleting Insight', insightId);
 
     try {
       const [, dbInsightId] = fromGlobalId(insightId);
@@ -466,7 +468,7 @@ export class InsightResolver {
     @Fields() fields: { Insight: { [str: string]: ResolveTree } },
     @Arg('permission', { nullable: true }) permission?: RepositoryPermission
   ): Promise<Insight> {
-    logger.debug('[INSIGHT.RESOLVER] Adding Collaborator', insightId);
+    logger.debug('Adding Collaborator', insightId);
 
     try {
       const [, dbInsightId] = fromGlobalId(insightId);
@@ -494,7 +496,7 @@ export class InsightResolver {
     @Ctx() ctx: Context,
     @Fields() fields: { Insight: { [str: string]: ResolveTree } }
   ): Promise<Insight> {
-    logger.debug('[INSIGHT.RESOLVER] Removing Collaborator', insightId);
+    logger.debug('Removing Collaborator', insightId);
 
     try {
       const [, dbInsightId] = fromGlobalId(insightId);

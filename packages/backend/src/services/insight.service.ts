@@ -22,7 +22,7 @@ import { InsightFileAction } from '@iex/models/insight-file-action';
 import { RepositoryPermission } from '@iex/models/repository-permission';
 import { RepositoryType } from '@iex/models/repository-type';
 import { sort } from '@iex/shared/dataloader-util';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { ApolloError } from 'apollo-server-express';
 import DataLoader from 'dataloader';
 import { raw } from 'objection';
@@ -63,13 +63,15 @@ import { sleep } from '../shared/util';
 
 import { ActivityService } from './activity.service';
 
+const logger = getLogger('insight.service');
+
 @Service()
 export class InsightService {
   // These fields will always be requested even if not included in _source args
   private requiredSourceFields = ['fullName'];
 
   private insightLoader: DataLoader<number, IndexedInsight> = new DataLoader(async (insightIds) => {
-    logger.silly(`[INSIGHT.SERVICE] insightLoader with ${insightIds.length} IDs`);
+    logger.trace(`insightLoader with ${insightIds.length} IDs`);
 
     const result = await getInsights(insightIds as number[]);
 
@@ -77,7 +79,7 @@ export class InsightService {
   });
 
   private commentCountById: DataLoader<number, number> = new DataLoader(async (insightIds) => {
-    logger.silly(`[INSIGHT.SERVICE] commentCountById with ${insightIds.length} IDs`);
+    logger.trace(`commentCountById with ${insightIds.length} IDs`);
 
     const result = await Comment.query()
       .whereIn('insightId', insightIds as number[])
@@ -90,7 +92,7 @@ export class InsightService {
   });
 
   private likeCountById: DataLoader<number, number> = new DataLoader(async (insightIds) => {
-    logger.silly(`[INSIGHT.SERVICE] likeCountById with ${insightIds.length} IDs`);
+    logger.trace(`likeCountById with ${insightIds.length} IDs`);
 
     const result = await UserInsight.query()
       .whereIn('insightId', insightIds as number[])
@@ -104,7 +106,7 @@ export class InsightService {
 
   private userInsightsById: DataLoader<{ insightId: number; userId: number }, UserInsight> = new DataLoader(
     async (tuples) => {
-      logger.silly(`[INSIGHT.SERVICE] userInsightsById with ${tuples.length} IDs`);
+      logger.trace(`userInsightsById with ${tuples.length} IDs`);
 
       const existingUserInsights = await UserInsight.query().whereInComposite(
         ['insightId', 'userId'],
@@ -116,7 +118,7 @@ export class InsightService {
   );
 
   private likedByLoader: DataLoader<number, number[]> = new DataLoader(async (insightIds) => {
-    logger.silly(`[INSIGHT.SERVICE] likedByLoader with ${insightIds.length} IDs`);
+    logger.trace(`likedByLoader with ${insightIds.length} IDs`);
 
     const result = await UserInsight.query()
       .whereIn('insightId', insightIds as number[])
@@ -128,7 +130,7 @@ export class InsightService {
   });
 
   constructor(private readonly activityService: ActivityService) {
-    logger.silly('[INSIGHT.SERVICE] Constructing New Insight Service');
+    logger.trace('Constructing New Insight Service');
   }
 
   /**
@@ -338,7 +340,7 @@ export class InsightService {
 
       return false;
     } catch (error: any) {
-      logger.warn(`[INSIGHT.SERVICE] ${error.errors[0].message}`);
+      logger.warn(`${error.errors[0].message}`);
 
       // Most likely the repository was deleted
       return true;
@@ -376,11 +378,11 @@ export class InsightService {
     // In case the repository already exists, increase the slug name to make it unique
     let { exists: repoExists } = await doesRepositoryExist(owner.login, slugName);
     while (repoExists) {
-      logger.debug(`[INSIGHT.SERVICE] The respository name [${slugName}] already exists`);
+      logger.debug(`The respository name [${slugName}] already exists`);
       slugName = incrementInsightName(slugName);
       ({ exists: repoExists } = await doesRepositoryExist(owner.login, slugName));
     }
-    logger.debug(`[INSIGHT.SERVICE] Repository name available [${slugName}]`);
+    logger.debug(`Repository name available [${slugName}]`);
 
     // Create Repository from scratch
     const repository = await createRepository(githubPersonalAccessToken!, {
@@ -435,7 +437,7 @@ export class InsightService {
     const { files, ...updatedYaml } = draftData;
     let mergedYaml = updatedYaml;
 
-    logger.info(`[INSIGHTS] Updating Insight: ${insight.fullName}`);
+    logger.info(`Updating Insight: ${insight.fullName}`);
 
     // Convert all tags to lower case
     updatedYaml.tags = updatedYaml.tags?.map((tag) => tag.trim().toLowerCase().replace(/\s/g, '-'));
@@ -452,14 +454,14 @@ export class InsightService {
           async (gitInstance) => {
             // Process any changes in files
             if (files != null) {
-              logger.debug(`[INSIGHTS] Processing ${files.length} files`);
+              logger.debug(`Processing ${files.length} files`);
 
               await Promise.all(
                 files.map(async (file) => {
                   switch (file.action) {
                     // Add newly uploaded files
                     case InsightFileAction.ADD: {
-                      logger.debug(`[INSIGHTS] Adding new file: ${file.path}`);
+                      logger.debug(`Adding new file: ${file.path}`);
                       const fileObjectKey = `drafts/${draftKey}/files/${file.id}`;
                       const readable = await streamFromS3(fileObjectKey);
                       return gitInstance.putFileFromStream(file.path!, readable);
@@ -467,7 +469,7 @@ export class InsightService {
 
                     // Add/modify existing file with inline content
                     case InsightFileAction.MODIFY:
-                      logger.debug(`[INSIGHTS] Modifying file: ${file.path}`);
+                      logger.debug(`Modifying file: ${file.path}`);
 
                       if (
                         file.originalPath &&
@@ -482,7 +484,7 @@ export class InsightService {
 
                     // Rename file only
                     case InsightFileAction.RENAME:
-                      logger.debug(`[INSIGHTS] Renaming file: ${file.path}`);
+                      logger.debug(`Renaming file: ${file.path}`);
                       if (file.originalPath) {
                         return gitInstance.renameFile(file.originalPath, file.path);
                       }
@@ -490,7 +492,7 @@ export class InsightService {
 
                     // Delete file
                     case InsightFileAction.DELETE:
-                      logger.debug(`[INSIGHTS] Deleting file: ${file.path}`);
+                      logger.debug(`Deleting file: ${file.path}`);
                       return gitInstance.deleteFile(file.path);
 
                     case InsightFileAction.NONE:
@@ -503,7 +505,7 @@ export class InsightService {
           },
           async (gitInstance) => {
             // Update `insight.yml`
-            logger.debug(`[INSIGHTS] Updating insight.yml`);
+            logger.debug(`Updating insight.yml`);
             const insightYaml = await gitInstance.retrieveInsightYaml();
 
             // Merge the existing data with any fields specified in the update
@@ -583,7 +585,7 @@ export class InsightService {
       }
     } catch (error: any) {
       // Eat any exceptions since keeping GitHub in sync is not required
-      logger.error(`[INSIGHTS] Unable to update GitHub repository: ${insight.repository.externalFullName}`);
+      logger.error(`Unable to update GitHub repository: ${insight.repository.externalFullName}`);
       logger.error(JSON.stringify(error, null, 2));
     }
   }
@@ -630,13 +632,13 @@ export class InsightService {
    */
   async deleteInsight(insightId: number, user: User, hard = false): Promise<DbInsight> {
     if (hard === true) {
-      throw new Error('[INSIGHT.SERVICE] Hard deletes of Insights are not yet supported.');
+      throw new Error('Hard deletes of Insights are not yet supported.');
     }
 
     const existingInsight = await this.getDbInsight(insightId);
 
     if (existingInsight.deletedAt != null) {
-      throw new Error('[INSIGHT.SERVICE] Insight is already deleted');
+      throw new Error('Insight is already deleted');
     }
 
     const insight = await getInsight(insightId);
@@ -675,7 +677,7 @@ export class InsightService {
     permission?: RepositoryPermission
   ): Promise<void> {
     if (collaborator.githubProfile?.login === undefined) {
-      throw new Error('[INSIGHT.SERVICE] Cannot add collaborators without a GitHub login');
+      throw new Error('Cannot add collaborators without a GitHub login');
     }
 
     const perm = (() => {
@@ -705,7 +707,7 @@ export class InsightService {
       permission
     });
 
-    logger.debug(`[INSIGHT.SERVICE] Added collaborator ${collaborator.githubProfile!.login!} to ${insight.fullName}`);
+    logger.debug(`Added collaborator ${collaborator.githubProfile!.login!} to ${insight.fullName}`);
   }
 
   /**
@@ -717,7 +719,7 @@ export class InsightService {
    */
   async removeCollaborator(insight: Insight, collaborator: User, user: User): Promise<void> {
     if (collaborator.githubProfile?.login === undefined) {
-      throw new Error('[INSIGHT.SERVICE] Cannot add collaborators without a GitHub login');
+      throw new Error('Cannot add collaborators without a GitHub login');
     }
 
     await removeCollaborator(
@@ -733,9 +735,7 @@ export class InsightService {
       permission: 'NONE'
     });
 
-    logger.debug(
-      `[INSIGHT.SERVICE] Removed collaborator ${collaborator.githubProfile!.login!} from ${insight.fullName}`
-    );
+    logger.debug(`Removed collaborator ${collaborator.githubProfile!.login!} from ${insight.fullName}`);
   }
 
   /**

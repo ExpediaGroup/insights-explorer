@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Arg, Authorized, Ctx, FieldResolver, ID, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
@@ -27,6 +27,8 @@ import { DraftService } from '../services/draft.service';
 import { InsightService } from '../services/insight.service';
 import { UserService } from '../services/user.service';
 import { fromGlobalId } from '../shared/resolver-utils';
+
+const logger = getLogger('draft.resolver');
 
 @Service()
 @Resolver(() => Draft)
@@ -98,7 +100,7 @@ export class DraftResolver {
   @Authorized<Permission>({ user: true })
   @Mutation(() => Draft)
   async upsertDraft(@Arg('draft') draft: DraftInput, @Ctx() ctx: Context): Promise<Draft> {
-    logger.debug('[DRAFT.RESOLVER] Upserting Draft', draft);
+    logger.debug('Upserting Draft', draft);
 
     try {
       const upserted = await this.draftService.upsertDraft(draft, ctx.user!);
@@ -117,7 +119,7 @@ export class DraftResolver {
   @Authorized<Permission>({ user: true })
   @Mutation(() => Draft)
   async deleteDraft(@Arg('draftKey') draftKey: DraftKey, @Ctx() ctx: Context): Promise<Draft> {
-    logger.debug('[DRAFT.RESOLVER] Deleting Draft', draftKey);
+    logger.debug('Deleting Draft', draftKey);
 
     try {
       return await this.draftService.deleteDraft(draftKey, ctx.user!);
@@ -131,7 +133,7 @@ export class DraftResolver {
   @Authorized<Permission>({ user: true, github: true })
   @Mutation(() => Draft)
   async cloneInsight(@Arg('insightId', () => ID) insightId: string, @Ctx() ctx: Context): Promise<Draft> {
-    logger.debug('[INSIGHT.RESOLVER] Cloning Insight', insightId);
+    logger.debug('Cloning Insight', insightId);
 
     try {
       const [, dbInsightId] = fromGlobalId(insightId);

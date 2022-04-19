@@ -16,10 +16,11 @@
 
 import type { Server } from 'http';
 
-import logger from '@iex/shared/logger';
+import { getLogger, httpLogger } from '@iex/shared/logger';
 import type { Request, Response } from 'express';
 import express from 'express';
-import morgan from 'morgan';
+
+const logger = getLogger('server');
 
 // Init express
 const app = express();
@@ -28,7 +29,7 @@ app.set('port', Number(process.env.PORT || 3000));
 app.set('env', process.env.NODE_ENV);
 
 if (process.env.LOG_REQUESTS === 'true') {
-  app.use(morgan('dev'));
+  app.use(httpLogger());
 }
 
 // Add APIs

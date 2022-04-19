@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { ResolveTree } from 'graphql-parse-resolve-info';
 import { Arg, Authorized, ID, Query, Resolver } from 'type-graphql';
 import { Service } from 'typedi';
@@ -26,6 +26,7 @@ import { TemplateService } from '../services/template.service';
 import { Fields } from '../shared/field-parameter-decorator';
 import { fromGlobalId } from '../shared/resolver-utils';
 
+const logger = getLogger('template.resolver');
 @Service()
 @Resolver()
 export class TemplateResolver {
@@ -61,7 +62,7 @@ export class TemplateResolver {
     @Arg('templateId', () => ID, { nullable: true }) templateId?: string,
     @Arg('fullName', { nullable: true }) fullName?: string
   ): Promise<Insight | null> {
-    logger.debug(`[TEMPLATE.RESOLVER] Template by id (${templateId}) / name (${fullName})`);
+    logger.debug(`Template by id (${templateId}) / name (${fullName})`);
     try {
       let template: Insight | null = null;
 

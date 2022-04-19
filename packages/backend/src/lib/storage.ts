@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { S3 } from 'aws-sdk';
 import type { AWSError, Request } from 'aws-sdk';
 import type { HeadObjectOutput } from 'aws-sdk/clients/s3';
 import type { ReadStream } from 'fs-extra';
+
+const logger = getLogger('storage');
 
 const defaultOptions: S3.Types.ClientConfiguration = {
   region: process.env.S3_REGION,
@@ -52,7 +54,7 @@ export async function writeToS3(body: Buffer | string, key: string): Promise<str
   const response = await defaultS3Client.putObject({ Body: body, Bucket: bucket, Key: key }).promise();
   const uri = `s3://${bucket}/${key}`;
 
-  logger.info(`[STORAGE] S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
+  logger.info(`S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
   return uri;
 }
 
@@ -74,7 +76,7 @@ export async function streamToS3(stream: ReadStream, fileSize: number, key: stri
     .promise();
   const uri = `s3://${bucket}/${key}`;
 
-  logger.info(`[STORAGE] S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
+  logger.info(`S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
   return uri;
 }
 
@@ -88,7 +90,7 @@ export async function streamToS3(stream: ReadStream, fileSize: number, key: stri
 export async function readFromS3(key: string): Promise<Buffer> {
   const bucket = process.env.S3_BUCKET!;
 
-  logger.info(`[STORAGE] Streaming from s3://${bucket}/${key}`);
+  logger.info(`Streaming from s3://${bucket}/${key}`);
   const file = await defaultS3Client.getObject({ Bucket: bucket, Key: key }).promise();
 
   return Buffer.from(file.Body as Buffer);
@@ -105,7 +107,7 @@ export async function readFromS3(key: string): Promise<Buffer> {
 export async function streamFromS3(key: string, range?: string): Promise<ReadStream> {
   const bucket = process.env.S3_BUCKET!;
 
-  logger.info(`[STORAGE] Streaming from s3://${bucket}/${key}`);
+  logger.info(`Streaming from s3://${bucket}/${key}`);
 
   const response = defaultS3Client.getObject({ Bucket: bucket, Key: key, Range: range });
 
@@ -123,7 +125,7 @@ export async function streamFromS3(key: string, range?: string): Promise<ReadStr
 export function getFromS3(key: string, range?: string): Request<S3.Types.GetObjectOutput, AWSError> {
   const bucket = process.env.S3_BUCKET!;
 
-  logger.info(`[STORAGE] Streaming from s3://${bucket}/${key}`);
+  logger.info(`Streaming from s3://${bucket}/${key}`);
 
   return defaultS3Client.getObject({ Bucket: bucket, Key: key, Range: range });
 }
@@ -138,7 +140,7 @@ export function getFromS3(key: string, range?: string): Request<S3.Types.GetObje
 export async function headFromS3(key: string): Promise<HeadObjectOutput | undefined> {
   const bucket = process.env.S3_BUCKET!;
 
-  logger.info(`[STORAGE] Checking existance of s3://${bucket}/${key}`);
+  logger.info(`Checking existance of s3://${bucket}/${key}`);
   try {
     return await defaultS3Client.headObject({ Bucket: bucket, Key: key }).promise();
   } catch (error: any) {
@@ -157,7 +159,7 @@ export async function headFromS3(key: string): Promise<HeadObjectOutput | undefi
 export async function existsInS3(key: string): Promise<boolean> {
   const bucket = process.env.S3_BUCKET!;
 
-  logger.info(`[STORAGE] Checking existance of s3://${bucket}/${key}`);
+  logger.info(`Checking existance of s3://${bucket}/${key}`);
   try {
     await defaultS3Client.headObject({ Bucket: bucket, Key: key }).promise();
     return true;

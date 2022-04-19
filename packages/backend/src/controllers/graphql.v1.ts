@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import {
   ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginLandingPageProductionDefault
@@ -24,14 +24,16 @@ import { Container } from 'typedi';
 
 import { schema } from '../lib/graphql';
 
+const logger = getLogger('graphql.v1');
+
 const apolloConfig: ApolloServerExpressConfig = {
   schema,
   context: ({ req }) => {
     const requestId = req.id;
 
     // Scoped container
-    logger.silly('[GRAPHQL.V1] Creating Container ' + requestId);
-    const container = Container.of(requestId);
+    logger.trace('Creating Container ' + requestId);
+    const container = Container.of(requestId as string);
 
     const context = {
       container,
@@ -51,7 +53,7 @@ const apolloConfig: ApolloServerExpressConfig = {
         return {
           async willSendResponse(requestContext) {
             // Remove the request's scoped container
-            logger.silly('[GRAPHQL.V1] Terminating Container ' + requestContext.context.requestId);
+            logger.trace('Terminating Container ' + requestContext.context.requestId);
             Container.reset(requestContext.context.requestId);
           }
         };

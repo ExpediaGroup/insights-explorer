@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { graphql as GQ } from '@octokit/graphql';
 import { graphql } from '@octokit/graphql/dist-types/types';
 import { Octokit } from '@octokit/rest';
@@ -35,6 +35,8 @@ import {
   GitHubRepositoryCollaboratorEdge
 } from '../../models/backends/github';
 import { sleep } from '../../shared/util';
+
+const logger = getLogger('github');
 
 /*
  * GitHub GraphQL client configuration
@@ -92,16 +94,16 @@ export async function withRetries<T>(
 
   if (result.status === 202 || result.status == 204) {
     if (retriesLeft > 0) {
-      logger.debug(`[GITHUB] ${result.status} response, retrying request...`);
+      logger.debug(`${result.status} response, retrying request...`);
       await sleep(sleepDuration);
       return withRetries(fn, retriesLeft - 1, sleepDuration * 1.25);
     }
 
-    throw new Error('[GITHUB] Unable to query GitHub successfully before retries ran out...');
+    throw new Error('Unable to query GitHub successfully before retries ran out...');
   }
 
   logger.error(JSON.stringify(result, null, 2));
-  throw new Error('[GITHUB] Error in withRetries() request');
+  throw new Error('Error in withRetries() request');
 }
 
 //
@@ -124,7 +126,7 @@ export async function doesRepositoryExist(
       repo
     });
 
-    logger.info('[GITHUB] Checked Repository existance for ' + repository.nameWithOwner);
+    logger.info('Checked Repository existance for ' + repository.nameWithOwner);
 
     if (repository) {
       return { repository, exists: true };
@@ -185,7 +187,7 @@ export async function getRepository(owner: string, repo: string): Promise<GitHub
     repo
   });
 
-  logger.info('[GITHUB] Retrieved Repository details for ' + repository.nameWithOwner);
+  logger.info('Retrieved Repository details for ' + repository.nameWithOwner);
 
   repository.cloneUrl = repository.url + '.git';
 
@@ -208,11 +210,11 @@ export async function getRepositoryPermissions(
       repo
     });
 
-    logger.info(`[GITHUB] Retrieved Repository permissions of ${repository.viewerPermission} on ${owner}/${repo}`);
+    logger.info(`Retrieved Repository permissions of ${repository.viewerPermission} on ${owner}/${repo}`);
 
     return repository.viewerPermission as GitHubRepositoryPermission;
   } catch (error: any) {
-    logger.debug(`[GITHUB] Unable to retrieve Repository permissions: ${error}`);
+    logger.debug(`Unable to retrieve Repository permissions: ${error}`);
 
     return 'NONE';
   }
@@ -302,7 +304,7 @@ export async function createRepository(token: string, input: CreateRepositoryInp
     input
   });
 
-  logger.info(`[GITHUB] Successfully created GitHub Repository ${input.ownerId}/${input.name}`);
+  logger.info(`Successfully created GitHub Repository ${input.ownerId}/${input.name}`);
   logger.debug(JSON.stringify(createRepository, null, 2));
 
   const repository: GitHubRepository = createRepository.repository;
@@ -334,7 +336,7 @@ export async function cloneTemplateRepository(
   });
 
   logger.info(
-    `[GITHUB] Successfully cloned GitHub Repository ${input.ownerId}/${input.name} from template ${input.repositoryId}`
+    `Successfully cloned GitHub Repository ${input.ownerId}/${input.name} from template ${input.repositoryId}`
   );
   logger.debug(JSON.stringify(cloneTemplateRepository, null, 2));
   const repository: GitHubRepository = cloneTemplateRepository.repository;
@@ -358,7 +360,7 @@ export async function updateRepository(token: string, input: UpdateRepositoryInp
     input
   });
 
-  logger.info(`[GITHUB] Successfully updated GitHub Repository ${input.repositoryId}`);
+  logger.info(`Successfully updated GitHub Repository ${input.repositoryId}`);
   const repository: GitHubRepository = updateRepository.repository;
   repository.cloneUrl = repository.url + '.git';
 
@@ -380,7 +382,7 @@ export async function updateTopics(token: string, input: UpdateTopicsInput): Pro
     input
   })) as GitHubRepositoryStub;
 
-  logger.info(`[GITHUB] Successfully updated GitHub Repository topics ${input.repositoryId}`);
+  logger.info(`Successfully updated GitHub Repository topics ${input.repositoryId}`);
   return repository;
 }
 
@@ -399,7 +401,7 @@ export async function addCollaborator(
     permission
   });
 
-  logger.info(`[GITHUB] Successfully added ${username} to ${owner}/${repo}`);
+  logger.info(`Successfully added ${username} to ${owner}/${repo}`);
 }
 
 export async function removeCollaborator(token: string, owner: string, repo: string, username: string): Promise<void> {
@@ -410,7 +412,7 @@ export async function removeCollaborator(token: string, owner: string, repo: str
     username
   });
 
-  logger.info(`[GITHUB] Successfully removed ${username} from ${owner}/${repo}`);
+  logger.info(`Successfully removed ${username} from ${owner}/${repo}`);
 }
 
 export async function listWebhooks(owner: string, repo: string): Promise<void> {
@@ -420,7 +422,7 @@ export async function listWebhooks(owner: string, repo: string): Promise<void> {
     repo
   });
 
-  logger.info(`[GITHUB] Wehbooks for ${owner}/${repo}: ${JSON.stringify(webhooks, null, 2)}`);
+  logger.info(`Wehbooks for ${owner}/${repo}: ${JSON.stringify(webhooks, null, 2)}`);
 }
 
 export async function createIexWebhook(token: string, owner: string, repo: string): Promise<void> {
@@ -438,7 +440,7 @@ export async function createIexWebhook(token: string, owner: string, repo: strin
     active: true
   });
 
-  logger.info(`[GITHUB] Wehbooks for ${owner}/${repo}: ${JSON.stringify(webhooks, null, 2)}`);
+  logger.info(`Wehbooks for ${owner}/${repo}: ${JSON.stringify(webhooks, null, 2)}`);
 }
 
 export async function archiveRepository(token: string, repositoryId: string): Promise<GitHubRepositoryStub> {
@@ -458,7 +460,7 @@ export async function archiveRepository(token: string, repositoryId: string): Pr
     }
   })) as GitHubRepositoryStub;
 
-  logger.info(`[GITHUB] Successfully archived GitHub repository ${repositoryId}`);
+  logger.info(`Successfully archived GitHub repository ${repositoryId}`);
   return repository;
 }
 
@@ -470,7 +472,7 @@ export async function addUserToOrganization(token: string, org: string, username
     role: 'member'
   });
 
-  logger.info(`[GITHUB] Successfully added ${username} to ${org}`);
+  logger.info(`Successfully added ${username} to ${org}`);
 }
 
 export async function getCollaborators(owner: string, repo: string): Promise<GitHubRepositoryCollaboratorEdge[]> {
@@ -507,17 +509,15 @@ export async function getCollaborators(owner: string, repo: string): Promise<Git
 
       const collaborators = repository.collaborators;
       hasNextPage = collaborators.pageInfo!.hasNextPage;
-      logger.info(`[GITHUB] Retrieved ${collaborators.edges.length} collaborators...`);
+      logger.info(`Retrieved ${collaborators.edges.length} collaborators...`);
       edges.push(...collaborators.edges);
     } catch (error: any) {
       hasNextPage = false;
-      logger.debug(`[GITHUB] Unable to retrieve Repository collaborators: ${error}`);
+      logger.debug(`Unable to retrieve Repository collaborators: ${error}`);
     }
   }
 
-  logger.info(
-    `[GITHUB] ${edges.length} Retrieved collaborators for ${owner}/${repo}: ${JSON.stringify(edges, null, 2)}`
-  );
+  logger.info(`${edges.length} Retrieved collaborators for ${owner}/${repo}: ${JSON.stringify(edges, null, 2)}`);
 
   return edges;
 }

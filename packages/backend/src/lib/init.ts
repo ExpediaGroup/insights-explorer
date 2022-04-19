@@ -18,9 +18,11 @@ import fs from 'fs';
 import path from 'path';
 
 import { RepositoryType } from '@iex/models/repository-type';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 
 import { syncInsight } from './backends/sync';
+
+const logger = getLogger('init');
 
 export async function syncExampleInsights(): Promise<void> {
   const exampleDirectory = path.join(__dirname, '../../../../examples/insights');

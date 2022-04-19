@@ -19,7 +19,9 @@ import type { Readable } from 'stream';
 import { S3 } from 'aws-sdk';
 import type { ReadStream } from 'fs-extra';
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
+
+const logger = getLogger('storage');
 
 export type StorageOptions = S3.Types.ClientConfiguration;
 
@@ -99,7 +101,7 @@ export class Storage {
 
     if (body !== undefined) {
       const response = await this.s3.putObject({ Body: body, Bucket: bucket, Key: path }).promise();
-      logger.debug(`[STORAGE] S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
+      logger.debug(`S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
     } else if (stream !== undefined) {
       const uploadOptions: S3.PutObjectRequest = { Body: stream, Bucket: bucket, Key: path };
 
@@ -108,7 +110,7 @@ export class Storage {
       }
 
       const response = await this.s3.upload(uploadOptions).promise();
-      logger.debug(`[STORAGE] S3 file successfully streamed with Etag: ${response.ETag} and URI: ${uri}`);
+      logger.debug(`S3 file successfully streamed with Etag: ${response.ETag} and URI: ${uri}`);
     } else {
       throw new Error('Either body or stream options must be set.');
     }
@@ -122,7 +124,7 @@ export class Storage {
   async streamFile(options: StorageReadOptions): Promise<Readable> {
     const { bucket, path, uri } = Storage.normalizeUriOptions(options);
 
-    logger.debug(`[STORAGE] Streaming from ${uri}`);
+    logger.debug(`Streaming from ${uri}`);
     const response = this.s3.getObject({ Bucket: bucket, Key: path }).createReadStream();
 
     return response;
@@ -134,7 +136,7 @@ export class Storage {
   async exists(options: StorageReadOptions): Promise<boolean> {
     const { bucket, path, uri } = Storage.normalizeUriOptions(options);
 
-    logger.debug(`[STORAGE] Checking existance of ${uri}`);
+    logger.debug(`Checking existance of ${uri}`);
     try {
       await this.s3.headObject({ Bucket: bucket, Key: path }).promise();
       return true;

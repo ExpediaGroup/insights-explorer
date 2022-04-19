@@ -20,7 +20,7 @@ import { Client, ClientOptions, RequestParams } from '@elastic/elasticsearch';
 import { GetResponse, MgetResponse, SearchBody, SearchResponse } from '@iex/models/elasticsearch';
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { ItemType } from '@iex/models/item-type';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { parseToElasticsearch, SearchMultiTerm, SearchTerm } from '@iex/shared/search';
 import { detailedDiff } from 'deep-object-diff';
 import { DateTime } from 'luxon';
@@ -30,6 +30,8 @@ import { ConnectionArgs, Edge, Sort } from '../models/connection';
 import { Insight, InsightConnection } from '../models/insight';
 import { InsightSearch, InsightSearchResults, SearchResult } from '../models/insight-search';
 import { fromElasticsearchCursor, toElasticsearchCursor } from '../shared/resolver-utils';
+
+const logger = getLogger('elasticsearch');
 
 // TODO: Provide index generation strategies (e.g. monthly, per org, etc)
 
@@ -69,7 +71,7 @@ export async function getIndex(
   index: string,
   client: Client = defaultElasticsearchClient
 ): Promise<{ exists: boolean; index?: any; indexName?: string; raw?: any }> {
-  logger.debug(`[ELASTICSEARCH] Getting Mapping for Index ${index}`);
+  logger.debug(`Getting Mapping for Index ${index}`);
 
   // Ensure index exists first
   const existResponse = await client.indices.exists({ index });
@@ -123,17 +125,13 @@ export async function deployMappings(client: Client = defaultElasticsearchClient
       const diff: Record<string, any> = detailedDiff(existingIndex, newIndex);
 
       if (!exists) {
-        logger.debug(`[ELASTICSEARCH] Elasticsearch index ${index} does not exist and will be created.`);
+        logger.debug(`Elasticsearch index ${index} does not exist and will be created.`);
         create = true;
       } else if (Object.keys(diff.added).length === 0 && Object.keys(diff.updated).length === 0) {
-        logger.debug(
-          `[ELASTICSEARCH] Elasticsearch index ${index} exists as ${existingIndexName} and does not need to be updated.`
-        );
+        logger.debug(`Elasticsearch index ${index} exists as ${existingIndexName} and does not need to be updated.`);
       } else {
-        logger.debug(
-          `[ELASTICSEARCH] Elasticsearch index ${index} exists as ${existingIndexName} and DOES need to be updated.`
-        );
-        logger.debug(`[ELASTICSEARCH] ${JSON.stringify(diff, null, 2)}`);
+        logger.debug(`Elasticsearch index ${index} exists as ${existingIndexName} and DOES need to be updated.`);
+        logger.debug(`${JSON.stringify(diff, null, 2)}`);
         create = true;
         reindex = true;
       }
@@ -141,7 +139,7 @@ export async function deployMappings(client: Client = defaultElasticsearchClient
       if (create) {
         // Create a timestamped index, then use an alias
         const timestampedIndex = `${index}-${timestamp}`;
-        logger.debug(`[ELASTICSEARCH] Creating Index ${timestampedIndex}`);
+        logger.debug(`Creating Index ${timestampedIndex}`);
 
         await client.indices.create({
           index: timestampedIndex,
@@ -149,7 +147,7 @@ export async function deployMappings(client: Client = defaultElasticsearchClient
         });
 
         if (reindex && existingIndexName) {
-          logger.debug(`[ELASTICSEARCH] Reindexing from ${existingIndexName} to ${timestampedIndex}`);
+          logger.debug(`Reindexing from ${existingIndexName} to ${timestampedIndex}`);
           await client.reindex({
             body: {
               source: {
@@ -179,7 +177,7 @@ export async function getInsight(
   index = ElasticIndex.INSIGHTS
 ): Promise<IndexedInsight | null> {
   try {
-    logger.debug(`[ELASTICSEARCH] Getting Insight with ID ${insightId}`);
+    logger.debug(`Getting Insight with ID ${insightId}`);
 
     const result = await defaultElasticsearchClient.get<GetResponse<IndexedInsight>>({
       id: insightId.toString(),
@@ -192,7 +190,7 @@ export async function getInsight(
       return insight;
     }
   } catch (error: any) {
-    logger.warn(`[ELASTICSEARCH] Error getting Insight: ${error}`);
+    logger.warn(`Error getting Insight: ${error}`);
   }
 
   return null;
@@ -203,7 +201,7 @@ export async function getInsights(
   _source?: string[],
   index = ElasticIndex.INSIGHTS
 ): Promise<(IndexedInsight | null)[]> {
-  logger.debug(`[ELASTICSEARCH] Getting Insights with ${insightIds.length} IDs`);
+  logger.debug(`Getting Insights with ${insightIds.length} IDs`);
 
   if (insightIds.length === 0) {
     return [];
@@ -448,7 +446,7 @@ export async function getInsightsByContributor(
   _source?: string[],
   index = ElasticIndex.INSIGHTS
 ): Promise<InsightConnection> {
-  logger.silly(`[ELASTICSEARCH] Retriving authored insights for ${email}`);
+  logger.trace(`Retriving authored insights for ${email}`);
 
   const query: RequestParams.Search<SearchBody> = {
     index,

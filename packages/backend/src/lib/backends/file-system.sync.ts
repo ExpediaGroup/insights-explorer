@@ -20,7 +20,7 @@ import { ItemType } from '@iex/models/item-type';
 import { PersonType } from '@iex/models/person-type';
 import { RepositoryType } from '@iex/models/repository-type';
 import { MessageQueue } from '@iex/mq/message-queue';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { nanoid } from 'nanoid';
 import pMap from 'p-map';
 import readingTime from 'reading-time';
@@ -36,6 +36,8 @@ import { GitInstance, INSIGHT_YAML_FILE } from '../git-instance';
 import { writeToS3 } from '../storage';
 
 import { BaseSync, INDEXABLE_MIME_TYPES, READONLY_FILES, THUMBNAIL_LOCATIONS } from './base.sync';
+
+const logger = getLogger('file-system.sync');
 
 /**
  * Sync Insights from the local filesystem.
@@ -65,7 +67,7 @@ export class FileSystemSync extends BaseSync {
 
     const endTime = process.hrtime.bigint();
     const elapsedTime = Number(endTime - startTime) / 1e9;
-    logger.info(`[FILE_SYSTEM_SYNC] Sync for ${path} took ${elapsedTime} seconds`);
+    logger.info(`Sync for ${path} took ${elapsedTime} seconds`);
 
     return insight;
   }
@@ -111,7 +113,7 @@ export const getInsight = async (
   path: string,
   previousInsight: IndexedInsight | null
 ): Promise<IndexedInsight | null> => {
-  logger.info(`[FILE_SYSTEM_SYNC] Processing item: ${namespace}/${name}`);
+  logger.info(`Processing item: ${namespace}/${name}`);
 
   // Load insight details
   const insight: IndexedInsight = {
@@ -152,7 +154,7 @@ export const getInsight = async (
 
   // Ensure there is an `insight.yml` file in the repository
   if (!gitInstance.fileExists(INSIGHT_YAML_FILE)) {
-    logger.warn(`[FILE_SYSTEM_SYNC] This repository has no \`${INSIGHT_YAML_FILE}\`; skipping sync`);
+    logger.warn(`This repository has no \`${INSIGHT_YAML_FILE}\`; skipping sync`);
     return null;
   }
 
@@ -351,7 +353,7 @@ const syncFiles = async (
 
       // We only need to update S3 if the file is new or the hash changes
       if (previousFile === undefined || previousFile.hash !== file.hash) {
-        logger.silly(`[FILE_SYSTEM_SYNC] Found new/modified file: ${file.path}`);
+        logger.trace(`Found new/modified file: ${file.path}`);
 
         const targetS3Path = `insights/${insight.fullName}/files/${wf.path}`;
 
@@ -372,7 +374,7 @@ const syncFiles = async (
           });
         }
       } else {
-        logger.silly(`[FILE_SYSTEM_SYNC] Found unmodified file: ${file.path}`);
+        logger.trace(`Found unmodified file: ${file.path}`);
       }
 
       return {

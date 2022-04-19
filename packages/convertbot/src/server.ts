@@ -16,17 +16,18 @@
 
 import 'express-async-errors';
 
-import logger from '@iex/shared/logger';
+import { getLogger, httpLogger } from '@iex/shared/logger';
 import compression from 'compression';
 import type { NextFunction, Request, Response } from 'express';
 import express from 'express';
 import { StatusCodes } from 'http-status-codes';
-import morgan from 'morgan';
 
 import { registerConversionMappings } from './conversions';
 import { Convertbot } from './lib/convertbot';
 import { security } from './middleware/security';
 import router from './router';
+
+const logger = getLogger('server');
 
 // Init express
 const app = express();
@@ -53,7 +54,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 if (process.env.LOG_REQUESTS === 'true') {
-  app.use(morgan('dev'));
+  app.use(httpLogger());
 }
 
 // Add APIs

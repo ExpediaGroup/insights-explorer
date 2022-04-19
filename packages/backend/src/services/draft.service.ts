@@ -16,7 +16,7 @@
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { InsightFileAction } from '@iex/models/insight-file-action';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { nanoid } from 'nanoid';
 import pMap from 'p-map';
 import { Service } from 'typedi';
@@ -27,10 +27,12 @@ import { User } from '../models/user';
 import { AttachmentService } from '../services/attachment.service';
 import { fromGlobalId } from '../shared/resolver-utils';
 
+const logger = getLogger('draft.service');
+
 @Service()
 export class DraftService {
   constructor(private readonly attachmentService: AttachmentService) {
-    logger.silly('[DRAFT.SERVICE] Constructing New Draft Service');
+    logger.trace('[DRAFT.SERVICE] Constructing New Draft Service');
   }
 
   newDraftKey(): string {
@@ -95,10 +97,10 @@ export class DraftService {
     }
 
     if (existingDraft != undefined) {
-      logger.silly('Draft does exist in database');
+      logger.trace('Draft does exist in database');
       return await existingDraft.$query().patchAndFetch(draftRemains);
     } else {
-      logger.silly('Draft does not exist in database');
+      logger.trace('Draft does not exist in database');
       return await Draft.query().insert({
         ...draftRemains,
         createdByUserId: user?.userId
@@ -120,7 +122,7 @@ export class DraftService {
         throw new Error('Not allowed');
       }
 
-      logger.silly('Draft does exist in database');
+      logger.trace('Draft does exist in database');
       const count = await existingDraft.$query().delete();
       if (count !== 1) {
         throw new Error('Unexpectedly, Draft not deleted');
@@ -137,7 +139,7 @@ export class DraftService {
    * @param sourceInsight Source Insight
    */
   async cloneInsight(sourceInsight: IndexedInsight, user: User): Promise<Draft> {
-    logger.info(`[INSIGHT.SERVICE] Cloning ${sourceInsight.fullName} into a new Draft`);
+    logger.info(`Cloning ${sourceInsight.fullName} into a new Draft`);
 
     const draftKey = nanoid();
     const draft: DraftInput = {

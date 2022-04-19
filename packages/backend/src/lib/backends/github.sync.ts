@@ -20,7 +20,7 @@ import { ItemType } from '@iex/models/item-type';
 import { PersonType } from '@iex/models/person-type';
 import { RepositoryType } from '@iex/models/repository-type';
 import { MessageQueue } from '@iex/mq/message-queue';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { nanoid } from 'nanoid';
 import pMap from 'p-map';
 import readingTime from 'reading-time';
@@ -37,6 +37,8 @@ import { getTypeAsync } from '../../shared/mime';
 
 import { BaseSync, INDEXABLE_MIME_TYPES, READONLY_FILES, THUMBNAIL_LOCATIONS } from './base.sync';
 import { getRepository, makeOctokit, withRetries } from './github';
+
+const logger = getLogger('github.sync');
 
 export class GitHubRepositorySync extends BaseSync {
   async sync(insightSyncTask: InsightSyncTask): Promise<IndexedInsight | null> {
@@ -58,7 +60,7 @@ export class GitHubRepositorySync extends BaseSync {
 
     const endTime = process.hrtime.bigint();
     const elapsedTime = Number(endTime - startTime) / 1e9;
-    logger.info(`[GITHUB_SYNC] Sync for ${insightSyncTask.owner}/${insightSyncTask.repo} took ${elapsedTime} seconds`);
+    logger.info(`Sync for ${insightSyncTask.owner}/${insightSyncTask.repo} took ${elapsedTime} seconds`);
 
     return insight;
   }
@@ -140,7 +142,7 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
     })
   );
 
-  logger.debug('[GITHUB_SYNC] Retrieved Contributor details from GitHub API ' + insight.repository.externalFullName);
+  logger.debug('Retrieved Contributor details from GitHub API ' + insight.repository.externalFullName);
 
   const contributors = await pMap(contributorsResult, async ({ author }: any): Promise<IndexedInsightUser> => {
     const user = await userServices.getUserByGitHubLogin(author.login);
@@ -180,7 +182,7 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
     return contributors.filter((c) => {
       const excluded = yaml.excludedAuthors!.includes(c.email);
       if (excluded) {
-        logger.info('[GITHUB_SYNC] Excluding contributor ' + c.email);
+        logger.info('Excluding contributor ' + c.email);
       }
 
       return !excluded;
@@ -199,7 +201,7 @@ export const githubRepositorySync = async (
   item: InsightSyncTask,
   previousInsight: IndexedInsight | null
 ): Promise<IndexedInsight | null> => {
-  logger.info(`[GITHUB_SYNC] Processing item: ${item.owner}/${item.repo}`);
+  logger.info(`Processing item: ${item.owner}/${item.repo}`);
   logger.debug(JSON.stringify(item, null, 2));
 
   let gitInstance: GitInstance | null = null;
@@ -216,18 +218,18 @@ export const githubRepositorySync = async (
 
     // Short-circuit if the repository is archived
     if (insight.repository.isArchived) {
-      logger.warn(`[GITHUB_SYNC] This repository is archived; stopping sync`);
+      logger.warn(`This repository is archived; stopping sync`);
       return insight;
     }
 
     // Clone the repository locally
     gitInstance = await GitInstance.from(insight.repository.cloneUrl, <string>process.env.GITHUB_ACCESS_TOKEN);
 
-    logger.debug(`[GITHUB_SYNC] Latest commit hash: ${await gitInstance.latestCommitHash()}`);
+    logger.debug(`Latest commit hash: ${await gitInstance.latestCommitHash()}`);
 
     // Ensure there is an `insight.yml` file in the repository
     if (!gitInstance.fileExists(INSIGHT_YAML_FILE)) {
-      logger.warn(`[GITHUB_SYNC] This repository has no \`${INSIGHT_YAML_FILE}\`; skipping sync`);
+      logger.warn(`This repository has no \`${INSIGHT_YAML_FILE}\`; skipping sync`);
       return null;
     }
 
@@ -431,7 +433,7 @@ const syncFiles = async (
 
       // We only need to update S3 if the file is new or the hash changes
       if (previousFile === undefined || previousFile.hash !== file.hash) {
-        logger.silly(`[GITHUB_SYNC] Found new/modified file: ${file.path}`);
+        logger.trace(`Found new/modified file: ${file.path}`);
 
         const targetS3Path = `insights/${insight.fullName}/files/${wf.path}`;
 
@@ -452,7 +454,7 @@ const syncFiles = async (
           });
         }
       } else {
-        logger.silly(`[GITHUB_SYNC] Found unmodified file: ${file.path}`);
+        logger.trace(`Found unmodified file: ${file.path}`);
       }
 
       return {

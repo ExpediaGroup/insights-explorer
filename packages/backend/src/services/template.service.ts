@@ -18,7 +18,7 @@ import { RequestParams } from '@elastic/elasticsearch';
 import { SearchBody, SearchResponse } from '@iex/models/elasticsearch';
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { ItemType } from '@iex/models/item-type';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Service } from 'typedi';
 
 import {
@@ -29,13 +29,15 @@ import {
 } from '../lib/elasticsearch';
 import { Insight } from '../models/insight';
 
+const logger = getLogger('template.service');
+
 @Service()
 export class TemplateService {
   // These fields will always be requested even if not included in _source args
   private requiredSourceFields = ['insightId', 'fullName'];
 
   constructor() {
-    logger.silly('[TEMPLATE.SERVICE] Constructing New Template Service');
+    logger.trace('Constructing New Template Service');
   }
 
   /**

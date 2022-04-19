@@ -15,12 +15,14 @@
  */
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import BetterQueue from 'better-queue';
 
 import { InsightSyncTask } from '../models/tasks';
 
 import { syncInsight } from './backends/sync';
+
+const logger = getLogger('insight-queue');
 
 /**
  * Queue processing function.
@@ -32,13 +34,13 @@ const queueHandler: BetterQueue.ProcessFunction<InsightSyncTask, IndexedInsight 
   item: InsightSyncTask,
   callback
 ) => {
-  logger.info(`[INSIGHT QUEUE] Processing item: ${item.owner}/${item.repo}`);
+  logger.info(`Processing item: ${item.owner}/${item.repo}`);
 
   try {
     const insight = await syncInsight(item);
     callback(null, insight);
   } catch (error: any) {
-    logger.error(`[INSIGHT QUEUE] Error syncing insight ${item.owner}/${item.repo}`);
+    logger.error(`Error syncing insight ${item.owner}/${item.repo}`);
     logger.error(JSON.stringify(error, null, 2));
 
     callback(null);

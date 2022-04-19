@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger, initializeLogger } from '@iex/shared/logger';
 import * as dotenv from 'dotenv-flow';
 import fs from 'fs-extra';
 
@@ -23,7 +23,7 @@ try {
   const packageJson = fs.readJsonSync(__dirname + `/../../../../package.json`);
   process.env.IEX_VERSION = packageJson.version;
 } catch {
-  logger.error('[ENV] Error loading package.json');
+  getLogger('environment').error('Error loading package.json');
   process.env.IEX_VERSION = 'unknown';
 }
 
@@ -39,7 +39,13 @@ if (result.error) {
   throw result.error;
 }
 
+// Initialize logger after loading environment variables
+initializeLogger();
+
+getLogger('environment').info(`NODE_ENV: ${process.env.NODE_ENV}`);
+
 // Configuration validation checks
+// eslint-disable-next-line no-constant-condition
 if (process.env.GITHUB_USE_WEBHOOK === 'true' && process.env.PUBLIC_URL === '') {
-  logger.error('[ENV] Configuration Error: PUBLIC_URL must be set when GITHUB_USE_WEBHOOK is true');
+  getLogger('environment').error('Configuration Error: PUBLIC_URL must be set when GITHUB_USE_WEBHOOK is true');
 }

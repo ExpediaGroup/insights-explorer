@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
 import NodeCache from 'node-cache';
@@ -22,6 +22,8 @@ import NodeCache from 'node-cache';
 import { makeOctokit } from '../lib/backends/github';
 import { OAuthUserInfo } from '../models/oauth-user-info';
 import { User } from '../models/user';
+
+const logger = getLogger('oauth-authenticator');
 
 // TTL cache of bearer token -> OAuthUserInfo
 export const oAuthUserInfoCache = new NodeCache({
@@ -71,7 +73,7 @@ export async function oAuthAuthenticator(req: Request, res: Response, next: Next
   let user: User | null | undefined = userCache.get<User>(accessToken);
 
   if (userInfo === undefined) {
-    logger.info('[OAUTH_AUTHENTICATOR] User not in cache');
+    logger.info('User not in cache');
     try {
       switch (process.env.OAUTH_PROVIDER) {
         case 'okta': {
@@ -87,7 +89,7 @@ export async function oAuthAuthenticator(req: Request, res: Response, next: Next
             username: response.data.preferred_username.split('@')[0]
           };
 
-          logger.debug(`[OAUTH_AUTHENTICATOR] Caching Okta user info for: ${userInfo?.email}`);
+          logger.debug(`Caching Okta user info for: ${userInfo?.email}`);
 
           oAuthUserInfoCache.set(accessToken, userInfo);
 
@@ -102,7 +104,7 @@ export async function oAuthAuthenticator(req: Request, res: Response, next: Next
             email: response.data.email ?? undefined,
             name: response.data.name ?? undefined
           };
-          logger.debug(`[OAUTH_AUTHENTICATOR] Caching GitHub user info for: ${userInfo?.email}`);
+          logger.debug(`Caching GitHub user info for: ${userInfo?.email}`);
 
           oAuthUserInfoCache.set(accessToken, userInfo);
 
@@ -127,7 +129,7 @@ export async function oAuthAuthenticator(req: Request, res: Response, next: Next
         }
       }
     } catch (error: any) {
-      logger.error('[OAUTH_AUTHENTICATOR] Error verifying access token: ' + error);
+      logger.error('Error verifying access token: ' + error);
       res.status(401).send({
         data: null,
         errors: [
@@ -155,15 +157,15 @@ export async function oAuthAuthenticator(req: Request, res: Response, next: Next
       if (user) {
         user.isAdmin = isAdmin(userInfo, user);
 
-        logger.debug(`[OAUTH_AUTHENTICATOR] Caching User for: ${email}`);
+        logger.debug(`Caching User for: ${email}`);
         userCache.set(accessToken, user);
       }
     } catch (error: any) {
-      logger.error(`[OAUTH_AUTHENTICATOR] ${error}`);
+      logger.error(`${error}`);
     }
   }
 
-  logger.info('[OAUTH_AUTHENTICATOR] Authenticated user: ' + userInfo?.email);
+  logger.info('Authenticated user: ' + userInfo?.email);
 
   req.token = accessToken;
   req.oAuthUserInfo = userInfo;

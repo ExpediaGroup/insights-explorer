@@ -18,15 +18,17 @@ import 'express-async-errors';
 
 import path from 'path';
 
-import logger from '@iex/shared/logger';
+import { getLogger, httpLogger } from '@iex/shared/logger';
 import compression from 'compression';
 import express from 'express';
 import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import morgan from 'morgan';
+import { nanoid } from 'nanoid';
 
 import { security } from './middleware/security';
 import { createRouter } from './router';
+
+const logger = getLogger('server');
 
 export async function createServer(): Promise<express.Express> {
   // Init express
@@ -54,7 +56,11 @@ export async function createServer(): Promise<express.Express> {
   app.use(express.urlencoded({ extended: true }));
 
   if (process.env.LOG_REQUESTS === 'true') {
-    app.use(morgan('dev'));
+    app.use(
+      httpLogger({
+        genReqId: () => nanoid()
+      })
+    );
   }
 
   // Add APIs

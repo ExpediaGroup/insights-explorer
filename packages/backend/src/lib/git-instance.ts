@@ -17,7 +17,7 @@
 import path from 'path';
 import { Readable } from 'stream';
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import fs from 'fs-extra';
 import globby from 'globby';
 import git from 'isomorphic-git';
@@ -30,6 +30,8 @@ import { User } from '../models/user';
 import { walk, WalkPredicate, WalkedFile } from '../shared/walk';
 
 export const INSIGHT_YAML_FILE = 'insight.yml';
+
+const logger = getLogger('git-instance');
 
 export type GitChangeFunction = (gitInstance: GitInstance) => Promise<void>;
 
@@ -88,16 +90,16 @@ export class GitInstance {
 
     // Synchronously apply each change in turn.
     for (const change of changes) {
-      logger.silly('[GIT_INSTANCE] Applying a git change!');
+      logger.trace('Applying a git change!');
       await change(gitInstance);
     }
 
     // Commit changes and push
-    logger.debug(`[GIT_INSTANCE] Making commit as user ${name} (${email})`);
+    logger.debug(`Making commit as user ${name} (${email})`);
     const sha = await gitInstance.commit(commitMessage, { name, email });
-    logger.debug(`[GIT_INSTANCE] Pushing change to origin!`);
+    logger.debug(`Pushing change to origin!`);
     await gitInstance.push(githubPersonalAccessToken!);
-    logger.debug(`[GIT_INSTANCE] Changes pushed successfully!`);
+    logger.debug(`Changes pushed successfully!`);
     await gitInstance.cleanup();
 
     return sha;
@@ -107,9 +109,9 @@ export class GitInstance {
     const { path, cleanup } = await tmp.dir({ unsafeCleanup: true });
     this.localPath = path;
     this.cleanupFn = cleanup;
-    logger.silly('[GIT_INSTANCE] GitInstance temp path: ' + path);
+    logger.trace('GitInstance temp path: ' + path);
 
-    logger.info(`[GIT_INSTANCE] Cloning git repo from ${this.url} to ${this.localPath}`);
+    logger.info(`Cloning git repo from ${this.url} to ${this.localPath}`);
     await git.clone({
       fs,
       http,
@@ -129,7 +131,7 @@ export class GitInstance {
 
   async latestCommitHash(): Promise<string> {
     if (this.localPath === undefined) {
-      throw new Error('[GIT_INSTANCE] Git repository not cloned!');
+      throw new Error('Git repository not cloned!');
     }
 
     const commits = await git.log({ fs, dir: this.localPath, ref: 'HEAD', depth: 1 });
@@ -138,7 +140,7 @@ export class GitInstance {
 
   fileExists(filePath: string): boolean {
     if (this.localPath === undefined) {
-      throw new Error('[GIT_INSTANCE] Git repository not cloned!');
+      throw new Error('Git repository not cloned!');
     }
 
     const localFilePath = path.join(this.localPath, filePath);
@@ -150,7 +152,7 @@ export class GitInstance {
    */
   async listFiles(filter?: WalkPredicate): Promise<WalkedFile[]> {
     if (this.localPath === undefined) {
-      throw new Error('[GIT_INSTANCE] Git repository not cloned!');
+      throw new Error('Git repository not cloned!');
     }
 
     const combinedFilter = filter == undefined ? gitFilter : (wf: WalkedFile) => filter(wf) && gitFilter(wf);
@@ -158,7 +160,7 @@ export class GitInstance {
     const files = await walk(this.localPath, combinedFilter);
 
     for (const file of files) {
-      logger.silly(`[FILE] ${file.path}`);
+      logger.trace(`[FILE] ${file.path}`);
     }
 
     return files;
@@ -166,7 +168,7 @@ export class GitInstance {
 
   async retrieveFile(filePath: string): Promise<Buffer | null> {
     if (this.localPath === undefined) {
-      throw new Error('[GIT_INSTANCE] Git repository not cloned!');
+      throw new Error('Git repository not cloned!');
     }
 
     const localFilePath = path.join(this.localPath, filePath);
@@ -174,7 +176,7 @@ export class GitInstance {
       try {
         return await fs.promises.readFile(localFilePath);
       } catch (error: any) {
-        logger.error(`[GIT_INSTANCE] Error reading \`${localFilePath}\`: ${error}`);
+        logger.error(`Error reading \`${localFilePath}\`: ${error}`);
         return null;
       }
     } else {
@@ -264,7 +266,7 @@ export class GitInstance {
       author,
       message
     });
-    logger.info(`[GIT_INSTANCE] Commit SHA: ${sha}`);
+    logger.info(`Commit SHA: ${sha}`);
 
     return sha;
   }
@@ -291,7 +293,7 @@ export class GitInstance {
 
     const paths = await globby(['./**', './.*/**', '!./.git'], { cwd: from.getLocalPath() });
     for (const filepath of paths) {
-      logger.silly('[GIT_INSTANCE] Copying file path: ' + filepath);
+      logger.trace('Copying file path: ' + filepath);
       await fs.promises.copyFile(path.join(from.getLocalPath(), filepath), path.join(this.localPath, filepath));
       await git.add({ fs, dir: this.localPath, filepath });
     }
@@ -299,7 +301,7 @@ export class GitInstance {
 
   private getLocalPath(): string {
     if (this.localPath === undefined) {
-      throw new Error('[GIT_INSTANCE] Git repository not cloned!');
+      throw new Error('Git repository not cloned!');
     }
 
     return this.localPath;

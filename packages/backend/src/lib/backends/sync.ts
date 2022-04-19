@@ -16,7 +16,7 @@
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { RepositoryType } from '@iex/models/repository-type';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 
 import { GitHubRepositorySync } from '../../lib/backends/github.sync';
 import { InsightSyncTask } from '../../models/tasks';
@@ -24,8 +24,10 @@ import { InsightSyncTask } from '../../models/tasks';
 import { BaseSync } from './base.sync';
 import { FileSystemSync } from './file-system.sync';
 
+const logger = getLogger('sync');
+
 export async function syncInsight(insightSyncTask: InsightSyncTask): Promise<IndexedInsight | null> {
-  logger.debug('[SYNC] Syncing Insight');
+  logger.debug('Syncing Insight');
 
   let syncer: BaseSync;
   switch (insightSyncTask.repositoryType) {

@@ -15,7 +15,7 @@
  */
 
 import { sort } from '@iex/shared/dataloader-util';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { ValidationError } from 'apollo-server-express';
 import DataLoader from 'dataloader';
 import { PartialModelObject, raw } from 'objection';
@@ -37,17 +37,19 @@ import { fromGlobalId, toCursor } from '../shared/resolver-utils';
 
 import { ActivityService } from './activity.service';
 
+const logger = getLogger('user.service');
+
 @Service()
 export class UserService {
   private userLoader: DataLoader<number, User> = new DataLoader(async (userIds) => {
-    logger.silly('[USER.SERVICE] userLoader');
+    logger.trace('userLoader');
     const users = await User.query().whereIn('userId', userIds as number[]);
 
     return sort(userIds, users, 'userId');
   });
 
   private commentCountLoader: DataLoader<number, number> = new DataLoader(async (userIds) => {
-    logger.silly('[USER.SERVICE] commentCountLoader');
+    logger.trace('commentCountLoader');
 
     const result = await Comment.query()
       .whereIn('authorId', userIds as number[])
@@ -61,7 +63,7 @@ export class UserService {
   });
 
   private gitHubUserLoader: DataLoader<string, User> = new DataLoader(async (githubLogins) => {
-    logger.silly('[USER.SERVICE] gitHubUserLoader');
+    logger.trace('gitHubUserLoader');
     const users = await User.query()
       .select('user.*', raw("github_profile->>'login'").as('githubLogin'))
       .whereIn(raw("github_profile->>'login'"), githubLogins as string[]);
@@ -70,7 +72,7 @@ export class UserService {
   });
 
   constructor(private readonly activityService: ActivityService) {
-    logger.silly('[USER.SERVICE] Constructing New User Service');
+    logger.trace('Constructing New User Service');
   }
 
   /**
@@ -104,7 +106,7 @@ export class UserService {
    * Provides several "health checks" for a user's configuration
    */
   async healthCheck(user: User): Promise<UserHealthCheck> {
-    logger.debug(`[USER.SERVICE] Executing health check for ${user.displayName}`);
+    logger.debug(`Executing health check for ${user.displayName}`);
     const healthCheck = new UserHealthCheck();
 
     if (user.githubPersonalAccessToken != null && user.githubPersonalAccessToken.length > 0) {
@@ -124,7 +126,7 @@ export class UserService {
         if (gitHubUser.defaultOrg === null) {
           try {
             // User is not a member of the default org; add them automatically
-            logger.warn(`[USER_SERVICE] ADDING USER ${metadata.login} to ${process.env.GITHUB_DEFAULT_ORG}`);
+            logger.warn(`Adding user ${metadata.login} to ${process.env.GITHUB_DEFAULT_ORG}`);
             await addUserToOrganization(
               process.env.GITHUB_ACCESS_TOKEN,
               process.env.GITHUB_DEFAULT_ORG,
@@ -211,7 +213,7 @@ export class UserService {
     }
 
     try {
-      logger.debug('[USER.SERVICE] Fetching GitHub Profile');
+      logger.debug('Fetching GitHub Profile');
       const { login } = await getTokenMetadata(githubPersonalAccessToken);
       const { avatarUrl, url, bio, location, status } = await getUser(login);
 
@@ -226,7 +228,7 @@ export class UserService {
 
       return githubProfile;
     } catch {
-      logger.warn('[USER.SERVICE] Unable to get GitHub profile information');
+      logger.warn('Unable to get GitHub profile information');
     }
   }
 
@@ -294,7 +296,7 @@ export class UserService {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getUserComments(user: User, connectionArgs: ConnectionArgs): Promise<CommentConnection> {
-    logger.silly('[USER.SERVICE] userComments');
+    logger.trace('userComments');
 
     const userComments = await Comment.query()
       .where('authorId', user.userId)

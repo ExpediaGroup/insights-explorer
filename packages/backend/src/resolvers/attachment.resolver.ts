@@ -16,7 +16,7 @@
 
 import path from 'path';
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { GraphQLUpload, FileUpload } from 'graphql-upload';
 import { nanoid } from 'nanoid';
 import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
@@ -29,11 +29,13 @@ import { AvatarUploadResult } from '../models/user';
 import { AttachmentService } from '../services/attachment.service';
 import { getTypeAsync } from '../shared/mime';
 
+const logger = getLogger('attachment.resolver');
+
 @Service()
 @Resolver()
 export class AttachmentResolver {
   constructor(private readonly attachmentService: AttachmentService) {
-    logger.silly('[ATTACHMENT.RESOLVER] Constructing New Attachment Resolver');
+    logger.trace('Constructing New Attachment Resolver');
   }
 
   @Authorized<Permission>({ user: true })
@@ -49,7 +51,7 @@ export class AttachmentResolver {
 
     try {
       const uri = await this.attachmentService.uploadToDraft(draftKey, attachment, createReadStream());
-      logger.debug('[ATTACHMENT_RESOLVER] Wrote stream to S3: ' + uri);
+      logger.debug('Wrote stream to S3: ' + uri);
 
       // Detect the mimeType of the attachment
       const stream = await this.attachmentService.streamFromDraft(draftKey, attachment);
@@ -81,7 +83,7 @@ export class AttachmentResolver {
     const key = this.newAvatarKey() + path.extname(filename);
     try {
       const uri = await this.attachmentService.uploadAvatar(key, size, createReadStream());
-      logger.debug('[ATTACHMENT_RESOLVER] Wrote stream to S3: ' + uri);
+      logger.debug('Wrote stream to S3: ' + uri);
 
       return {
         avatar: key,

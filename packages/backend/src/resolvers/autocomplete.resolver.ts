@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Authorized, FieldResolver, Query, Resolver } from 'type-graphql';
 import { Service } from 'typedi';
 
@@ -22,6 +22,8 @@ import { ElasticIndex, uniqueTerms } from '../lib/elasticsearch';
 import { UniqueValue, AutocompleteResults } from '../models/autocomplete';
 import { Permission } from '../models/permission';
 import { UserService } from '../services/user.service';
+
+const logger = getLogger('autocomplete.resolver');
 
 @Service()
 @Resolver(() => AutocompleteResults)

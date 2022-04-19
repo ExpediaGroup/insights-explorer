@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { AWSError } from 'aws-sdk';
 import { Response, Request } from 'express';
 
 import { streamFromS3 } from '../lib/storage';
+
+const logger = getLogger('drafts.v1');
 
 /**
  * GET /drafts/:draftKey/assets/:attachmentKey?content-type=
  */
 export const getDraftAttachment = async (req: Request, res: Response): Promise<void> => {
   const draftKey = `drafts/${req.params.draftKey}/files/${req.params.attachmentKey}`;
-  logger.debug(`[DRAFTS.V1] Attempting to load draft attachment: ${draftKey}, ${req.params.attachmentKey}`);
+  logger.debug(`Attempting to load draft attachment: ${draftKey}, ${req.params.attachmentKey}`);
 
   const readable = await streamFromS3(draftKey);
   readable.on('error', (error: AWSError) => {

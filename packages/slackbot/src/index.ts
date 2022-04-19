@@ -32,7 +32,9 @@ import './environment';
 
 import { startApp } from './app';
 import { startHttpServer } from './server';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
+
+const logger = getLogger('index');
 
 // Safeguard to prevent the application from crashing.
 process.on('uncaughtException', (uncaughtException) => {

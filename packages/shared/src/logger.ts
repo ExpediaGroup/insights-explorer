@@ -14,59 +14,92 @@
  * limitations under the License.
  */
 
+import type { ChildLoggerOptions, Logger, LoggerOptions } from 'pino';
+import { pino } from 'pino';
+import type { HttpLogger, Options } from 'pino-http';
+import pinoHttp from 'pino-http';
+
+// Default, unconfigured logger
+// Should be initialized at startup
+let logger: Logger = pino();
+
 /**
- * Setup the winston logger.
+ * Initialize the default logger from environment variables.
  *
- * Documentation: https://github.com/winstonjs/winston
+ * This is required since environment variables will be loaded dynamically and may
+ * not be available when this module is loaded by Node.js.
  */
-import type { TransformableInfo } from 'logform';
-import { createLogger, format, transports } from 'winston';
+export const initializeLogger = (): Logger => {
+  const options: LoggerOptions = {
+    level: process.env.LOG_LEVEL || 'info'
+  };
 
-// Init Logger
-const logger = createLogger({
-  level: process.env.LOG_LEVEL
-});
+  switch (process.env.LOG_FORMAT) {
+    case 'json':
+      // Default
+      break;
 
-const errorStackFormat = format((info) => {
-  if (info.stack) {
-    // eslint-disable-next-line no-console
-    console.log(info.stack);
-    return false;
+    case 'pretty':
+    case 'default': {
+      const ignore = ['hostname', 'module', 'pid'];
+
+      if (process.env.LOG_TIMESTAMPS === 'false') {
+        ignore.push('time');
+      }
+
+      options.transport = {
+        target: 'pino-pretty',
+        options: {
+          colorize: true,
+          translateTime: 'SYS:standard',
+          ignore: ignore.join(','),
+          messageFormat: '[{module}] {msg}'
+        }
+      };
+
+      break;
+    }
   }
-  return info;
-});
 
-const getFormatPrinter = () => {
-  if (process.env.LOG_TIMESTAMPS === 'true') {
-    return (info: TransformableInfo) => `${info.timestamp} ${info.level}: ${info.message}`;
-  }
-  return (info: TransformableInfo) => `${info.level}: ${info.message}`;
+  logger = pino(options);
+  logger.info(`Initialized logger in ${process.env.LOG_FORMAT} mode with log level ${process.env.LOG_LEVEL}`);
+  return logger;
 };
 
-let logFormat;
+/**
+ * Creates a child logger derived from the default logger.
+ *
+ * @param bindings Context bindings to apply to the child logger
+ * @param options Optional logger options
+ * @returns {Logger} A child logger
+ */
+export const childLogger = (bindings: pino.Bindings, options?: ChildLoggerOptions): Logger => {
+  return logger.child(bindings, { ...options });
+};
 
-switch (process.env.LOG_FORMAT) {
-  case 'json':
-    logFormat = format.combine(format.timestamp(), format.json());
-    break;
+/**
+ * Creates a new Http logger derived from the default logger.
+ *
+ * @returns {HttpLogger}
+ */
+export const httpLogger = (options?: Options): HttpLogger => {
+  return pinoHttp({
+    ...options,
+    logger
+  });
+};
 
-  case 'default':
-    logFormat = format.combine(
-      format.colorize(),
-      format.timestamp(),
-      format.printf(getFormatPrinter()),
-      errorStackFormat()
-    );
+/**
+ * Gets a logger instance.
+ * @param module Optionally provides the module name
+ * @returns {Logger} A logger instance
+ */
+export const getLogger = (module?: string): Logger => {
+  if (module) {
+    return childLogger({ module });
+  }
+  return logger;
+};
 
-    break;
-}
-
-const consoleTransport = new transports.Console({
-  format: logFormat
-});
-
-logger.add(consoleTransport);
-
-logger.info(`Initialized logger in ${process.env.LOG_FORMAT} mode with log level ${process.env.LOG_LEVEL}`);
-
+// TODO: Remove default logger
 export default logger;

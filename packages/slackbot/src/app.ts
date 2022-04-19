@@ -15,11 +15,13 @@
  */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import type { LinkUnfurls } from '@slack/bolt';
 import { App, LogLevel } from '@slack/bolt';
 
 import { getUnfurl } from './lib/unfurls';
+
+const logger = getLogger('app');
 
 const app = new App({
   appToken: process.env.SLACK_APP_TOKEN,

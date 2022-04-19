@@ -15,7 +15,7 @@
  */
 
 import { InsightFileAction } from '@iex/models/insight-file-action';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import isArray from 'lodash/isArray';
 import mergeWith from 'lodash/mergeWith';
 import { nanoid } from 'nanoid';
@@ -26,6 +26,8 @@ import * as turndownPluginGfm from 'turndown-plugin-gfm';
 import { DraftDataInput, DraftKey } from '../models/draft';
 import { AttachmentService } from '../services/attachment.service';
 import { DraftService } from '../services/draft.service';
+
+const logger = getLogger('import');
 
 export type ImportFormat = 'html' | undefined;
 
@@ -152,7 +154,7 @@ export function convertToDraft(request: ImportRequest): DraftDataInput {
     throw new Error('Cannot find a matching converter for this import request');
   }
 
-  logger.debug(`[IMPORT] Importing using the '${converter.name}' converter`);
+  logger.debug(`Importing using the '${converter.name}' converter`);
 
   // Convert request contents
   const draftData = converter.convert(request);
@@ -186,7 +188,7 @@ export function convertToDraft(request: ImportRequest): DraftDataInput {
 }
 
 export async function importToNewDraft(request: ImportRequest): Promise<DraftKey> {
-  logger.info(`[IMPORT] Importing web page ${request.url}`);
+  logger.info(`Importing web page ${request.url}`);
 
   const draftService = new DraftService(new AttachmentService());
   const draftKey = draftService.newDraftKey();

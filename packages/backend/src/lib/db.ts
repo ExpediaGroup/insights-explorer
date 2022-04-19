@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import Knex from 'knex';
 import { Model, knexSnakeCaseMappers } from 'objection';
+
+const logger = getLogger('db');
 
 const defaultOptions: Knex.Config = {
   client: 'pg',

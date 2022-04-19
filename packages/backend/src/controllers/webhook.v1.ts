@@ -17,12 +17,14 @@
 import { IncomingHttpHeaders } from 'http';
 
 import { RepositoryType } from '@iex/models/repository-type';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Request, Response } from 'express';
 
 import { defaultElasticsearchClient, ElasticIndex } from '../lib/elasticsearch';
 import insightQueue from '../lib/insight-queue';
 import { InsightSyncTask } from '../models/tasks';
+
+const logger = getLogger('webhook.v1');
 
 type Webhook = any & { headers: IncomingHttpHeaders };
 

@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { AWSError } from 'aws-sdk';
 import { Response, Request } from 'express';
 
 import { streamFromS3 } from '../lib/storage';
 import { getType } from '../shared/mime';
+
+const logger = getLogger('avatars.v1');
 
 /**
  * GET /avatars/:key?content-type=
@@ -27,7 +29,7 @@ import { getType } from '../shared/mime';
 export const getAvatar = async (req: Request, res: Response): Promise<void> => {
   const key = req.params.key;
   const path = `avatars/${key}`;
-  logger.debug(`[AVATARS.V1] Attempting to load avatar: ${path}`);
+  logger.debug(`Attempting to load avatar: ${path}`);
 
   const readable = await streamFromS3(path);
   readable.on('error', (error: AWSError) => {

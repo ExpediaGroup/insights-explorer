@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Resolver, FieldResolver, Root, ResolverInterface } from 'type-graphql';
 import { Service } from 'typedi';
 
 import { Repository } from '../models/repository';
 import { InsightService } from '../services/insight.service';
+
+const logger = getLogger('repository.resolver');
 
 @Service()
 @Resolver(() => Repository)
@@ -28,7 +30,7 @@ export class RepositoryResolver implements ResolverInterface<Repository> {
 
   @FieldResolver()
   async isMissing(@Root() repository: Repository): Promise<boolean> {
-    logger.debug('[REPOSITORY.RESOLVER] Fetching isMissing');
+    logger.debug('Fetching isMissing');
 
     return this.insightService.isRepositoryMissing(repository);
   }

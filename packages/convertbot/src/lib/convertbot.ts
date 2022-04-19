@@ -19,9 +19,11 @@ import path from 'path';
 
 import type { ConvertibleFile, ConvertRequest } from '@iex/models/convertbot/convert-request';
 import { MessageQueue } from '@iex/mq/message-queue';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import { Storage } from '@iex/shared/storage';
 import * as tmp from 'tmp-promise';
+
+const logger = getLogger('convertbot');
 
 export type ConversionMapping = {
   from: string;
@@ -44,12 +46,12 @@ export class Convertbot {
 
     if (existingMappingIndex >= 0) {
       logger.warn(
-        `[CONVERTBOT] A conversion mapping from '${newMapping.from}' to '${newMapping.to}' already exists and will be overwritten!`
+        `A conversion mapping from '${newMapping.from}' to '${newMapping.to}' already exists and will be overwritten!`
       );
       this.conversionMappings.splice(existingMappingIndex, 1);
     }
 
-    logger.info(`[CONVERTBOT] Registering a new mapping from '${newMapping.from}' to '${newMapping.to}'`);
+    logger.info(`Registering a new mapping from '${newMapping.from}' to '${newMapping.to}'`);
     this.conversionMappings.push(newMapping);
   }
 
@@ -59,11 +61,11 @@ export class Convertbot {
 
   start(): void {
     this.conversionMq.consumeMessages(async (request: ConvertRequest) => {
-      logger.info(`[CONVERTBOT] Conversion request for ${request.source.uri} to ${request.targets.length} targets`);
+      logger.info(`Conversion request for ${request.source.uri} to ${request.targets.length} targets`);
 
       await tmp.withDir(
         async ({ path: tempPath }) => {
-          logger.debug(`[CONVERTBOT] Using temporary path: ${tempPath}`);
+          logger.debug(`Using temporary path: ${tempPath}`);
 
           try {
             // Download source file
@@ -75,12 +77,12 @@ export class Convertbot {
               const target = request.targets[i];
               const targetBase = target.uri.slice(0, Math.max(0, target.uri.lastIndexOf('/')));
 
-              logger.info(`[CONVERTBOT] Starting conversion for ${request.source.uri} to ${target.mimeType}`);
+              logger.info(`Starting conversion for ${request.source.uri} to ${target.mimeType}`);
               const localTargetPaths = await this.convert(request.source, target, localSourcePath);
-              logger.debug('[CONVERTBOT] Converted files: ' + localTargetPaths.join(', '));
+              logger.debug('Converted files: ' + localTargetPaths.join(', '));
 
               for (const [j, localTargetPath] of localTargetPaths.entries()) {
-                logger.debug(`[CONVERTBOT] Uploading file from: ${localTargetPath}`);
+                logger.debug(`Uploading file from: ${localTargetPath}`);
 
                 // This is basically a hack to support generating multiple files from a single source
                 // For things like PPTX slide images, IEX doesn't know how many files will be generated, so
@@ -91,17 +93,17 @@ export class Convertbot {
                 const targetUri = j === 0 ? target.uri : `${targetBase}/${path.basename(localTargetPath)}`;
 
                 await this.uploadFile(targetUri, localTargetPath);
-                logger.info(`[CONVERTBOT] Uploaded file to: ${target.uri}`);
+                logger.info(`Uploaded file to: ${target.uri}`);
               }
             }
           } catch (error: any) {
-            logger.error(`[CONVERTBOT] Error in conversion: ${error}`);
+            logger.error(`Error in conversion: ${error}`);
           }
         },
         { unsafeCleanup: true }
       );
 
-      logger.info('[CONVERTBOT] Request completed!');
+      logger.info('Request completed!');
     });
   }
 
@@ -114,7 +116,7 @@ export class Convertbot {
 
       sourceReadable
         .on('error', (e) => {
-          logger.error(`[CONVERTBOT] Error downloading file: ${e}`);
+          logger.error(`Error downloading file: ${e}`);
           reject(e);
         })
         .pipe(sourceWriteable)
@@ -123,16 +125,14 @@ export class Convertbot {
   }
 
   private async convert(source: ConvertibleFile, target: ConvertibleFile, localSourcePath: string): Promise<string[]> {
-    logger.info(`[CONVERTBOT] Converting from ${source.mimeType} to ${target.mimeType}`);
+    logger.info(`Converting from ${source.mimeType} to ${target.mimeType}`);
 
     const mapping = this.conversionMappings.find((m) => {
       return m.from === source.mimeType && m.to === target.mimeType;
     });
 
     if (mapping === undefined) {
-      logger.error(
-        `[CONVERTBOT] Unsupported source/target MIME types! Unable to convert (${source.mimeType},  ${target.mimeType})`
-      );
+      logger.error(`Unsupported source/target MIME types! Unable to convert (${source.mimeType},  ${target.mimeType})`);
       throw new Error('Unable to convert');
     }
 

@@ -20,8 +20,6 @@ import { OAuthUserInfo } from '../models/oauth-user-info';
 declare global {
   namespace Express {
     export interface Request {
-      id: string;
-
       token?: string;
       oAuthUserInfo?: OAuthUserInfo;
       user?: any;

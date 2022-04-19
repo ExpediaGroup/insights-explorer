@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import deburr from 'lodash/deburr';
 import kebabCase from 'lodash/kebabCase';
+
+const logger = getLogger('slugify');
 
 /**
  * Converts an Insight Name into a slug-ready version

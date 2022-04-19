@@ -15,7 +15,7 @@
  */
 
 import { sort } from '@iex/shared/dataloader-util';
-import logger from '@iex/shared/logger';
+import { getLogger } from '@iex/shared/logger';
 import DataLoader from 'dataloader';
 import { raw, ref } from 'objection';
 import { Service } from 'typedi';
@@ -28,11 +28,13 @@ import { UserComment } from '../models/user-comment';
 
 import { ActivityService } from './activity.service';
 
+const logger = getLogger('comment.service');
+
 @Service()
 export class CommentService {
   private userCommentLoader: DataLoader<{ commentId: number; userId: number }, UserComment> = new DataLoader(
     async (tuples) => {
-      logger.silly('[COMMENT.SERVICE] userCommentLoader');
+      logger.trace('userCommentLoader');
 
       const existingUserComments = await UserComment.query().whereInComposite(
         ['commentId', 'userId'],
@@ -44,7 +46,7 @@ export class CommentService {
   );
 
   private likeCountLoader: DataLoader<number, number> = new DataLoader(async (commentIds) => {
-    logger.silly('[COMMENT.SERVICE] likeCountLoader');
+    logger.trace('likeCountLoader');
 
     const result = await UserComment.query()
       .whereIn('commentId', commentIds as number[])
@@ -57,7 +59,7 @@ export class CommentService {
   });
 
   private likedByLoader: DataLoader<number, number[]> = new DataLoader(async (commentIds) => {
-    logger.silly('[COMMENT.SERVICE] likedByLoader');
+    logger.trace('likedByLoader');
 
     const result = await UserComment.query()
       .whereIn('commentId', commentIds as number[])
@@ -69,7 +71,7 @@ export class CommentService {
   });
 
   constructor(private readonly activityService: ActivityService) {
-    logger.silly('[COMMENT.SERVICE] Constructing New Comment Service');
+    logger.trace('Constructing New Comment Service');
   }
 
   /**
@@ -94,7 +96,7 @@ export class CommentService {
    * @param user User
    */
   async doesUserLikeComment(commentId: number, user: User): Promise<boolean> {
-    logger.silly('[COMMENT.SERVICE] doesUserLikeComment ' + commentId);
+    logger.trace('doesUserLikeComment ' + commentId);
 
     if (user == null) {
       return false;
@@ -111,7 +113,7 @@ export class CommentService {
    * @param commentId Comment ID
    */
   async likeCount(commentId: number): Promise<number> {
-    logger.silly('[COMMENT.SERVICE] likeCount for ' + commentId);
+    logger.trace('likeCount for ' + commentId);
 
     return this.likeCountLoader.load(commentId);
   }
@@ -122,7 +124,7 @@ export class CommentService {
    * @param commentId Comment ID
    */
   async likedBy(commentId: number): Promise<number[]> {
-    logger.silly('[COMMENT.SERVICE] likedBy for ' + commentId);
+    logger.trace('likedBy for ' + commentId);
 
     return this.likedByLoader.load(commentId);
   }
