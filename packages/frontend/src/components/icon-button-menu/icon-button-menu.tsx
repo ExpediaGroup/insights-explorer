@@ -31,24 +31,18 @@ interface Props {
 
 const TooltipIcon = forwardRef(
   ({ bg, color, children, fontSize, icon, label, size, tooltip, variant, ...props }, ref) => {
-    if (bg !== undefined) {
-      return (
-        <Box ref={ref} {...props}>
-          <Tooltip label={tooltip} aria-label={label}>
-            <IconButton bg={bg} color={color} fontSize={fontSize} size={size} variant={variant} aria-label={label}>
-              {children}
-            </IconButton>
-          </Tooltip>
-        </Box>
-      );
-    }
-
     return (
       <Box ref={ref} {...props}>
         <Tooltip label={tooltip} aria-label={label}>
-          <IconButton color={color} fontSize={fontSize} size={size} variant={variant} aria-label={label}>
-            {children}
-          </IconButton>
+          <IconButton
+            icon={<Icon as={icon} aria-label={label} />}
+            color={color}
+            fontSize={fontSize}
+            size={size}
+            variant={variant}
+            aria-label={label}
+            bg={bg}
+          />
         </Tooltip>
       </Box>
     );
@@ -78,9 +72,7 @@ export const IconButtonMenu = ({
         size={size}
         tooltip={tooltip}
         variant={variant}
-      >
-        <Icon as={icon} aria-label={ariaLabel} />
-      </MenuButton>
+      />
       <MenuList zIndex="10">{children}</MenuList>
     </Menu>
   );
