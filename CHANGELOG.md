@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.4...v3.11.5) (2022-04-21)
+
+
+### Bug Fixes
+
+* Revert react-syntax-highlighter to 15.4.5 ([617dddf](https://github.com/ExpediaGroup/insights-explorer/commit/617dddf7d54354701cc8ab84aaebadc595cc9d9d))
+
 ### [3.11.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.3...v3.11.4) (2022-04-21)
 
 
