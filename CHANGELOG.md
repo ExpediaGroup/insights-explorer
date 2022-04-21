@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.3...v3.11.4) (2022-04-21)
+
+
+### Bug Fixes
+
+* Fix misaligned icon in the icon button menu ([72c4ec2](https://github.com/ExpediaGroup/insights-explorer/commit/72c4ec2f4a9388eb996ebbde7c4218ceb08399cd))
+
 ### [3.11.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.2...v3.11.3) (2022-04-18)
 
 
