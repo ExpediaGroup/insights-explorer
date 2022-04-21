@@ -17,10 +17,19 @@
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
+import pluginRewriteAll from 'vite-plugin-rewrite-all';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), visualizer({ filename: './.generated/vite-stats.html' })],
+  plugins: [
+    react(),
+
+    // Generates a bundle visualization
+    visualizer({ filename: './.generated/vite-stats.html' }),
+
+    // Fixes this issue: https://github.com/vitejs/vite/issues/2245
+    pluginRewriteAll()
+  ],
 
   build: {
     // Avoid warnings from the oversized vendor.js
