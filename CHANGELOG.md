@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.5...v3.11.6) (2022-04-22)
+
+
+### Bug Fixes
+
+* Make docker compose db init script executable ([0e0bfe3](https://github.com/ExpediaGroup/insights-explorer/commit/0e0bfe3bbca7117387842167d9b8958aacda11bf))
+
 ### [3.11.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.4...v3.11.5) (2022-04-21)
 
 
