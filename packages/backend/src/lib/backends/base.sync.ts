@@ -48,6 +48,7 @@ export const INDEXABLE_MIME_TYPES = new Set([
   'text/x-groovy',
   'text/x-java-source',
   'text/x-python',
+  'text/x-r',
   'text/x-ruby',
   'text/x-scala',
   'text/yaml'
