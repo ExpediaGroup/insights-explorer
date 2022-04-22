@@ -253,7 +253,11 @@ export const InsightEditor = memo(
             contents: template.readme?.contents
           };
 
-          reset({ ...template, initializedTemplate: true, name, description, itemType } as any, { keepDirty: true });
+          const metadata = { team: userInfo?.team };
+
+          reset({ ...template, initializedTemplate: true, name, description, itemType, metadata } as any, {
+            keepDirty: true
+          });
           setValue('creation.template', selectedTemplate.fullName);
           setValue('tags', template.tags);
 
@@ -268,7 +272,7 @@ export const InsightEditor = memo(
 
         loadingTemplate.current = false;
       },
-      [fileTree, form, reset, setValue]
+      [fileTree, form, reset, setValue, userInfo?.team]
     );
 
     useEffect(() => {
