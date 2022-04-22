@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.6...v3.11.7) (2022-04-22)
+
+
+### Bug Fixes
+
+* Add R file mime type to full-text search ([c9f150c](https://github.com/ExpediaGroup/insights-explorer/commit/c9f150ce3c5a85adf868257745e4dd4f84c90ea7))
+* Fix template change overwriting team field ([adf08ef](https://github.com/ExpediaGroup/insights-explorer/commit/adf08ef6cabbf5d2941e9d21f09ca70fcda05bc8))
+
 ### [3.11.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.5...v3.11.6) (2022-04-22)
 
 
