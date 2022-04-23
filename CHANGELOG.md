@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.7...v3.11.8) (2022-04-23)
+
+
+### Bug Fixes
+
+* **deps:** bump react-syntax-highlighter from 15.4.5 to 15.5.0 ([1145292](https://github.com/ExpediaGroup/insights-explorer/commit/114529204d7ec730b05095ceed5c503ba08403d2))
+* Downgrade Vite from 2.9.5 to 2.8.6 ([6ad56c2](https://github.com/ExpediaGroup/insights-explorer/commit/6ad56c2e79ff882c653ea8ced67910840e9c54bd))
+
 ### [3.11.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.6...v3.11.7) (2022-04-22)
 
 
