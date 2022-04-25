@@ -71,7 +71,12 @@ export function makeOctokit(token: string = process.env.GITHUB_ACCESS_TOKEN!): O
     auth: token,
     userAgent: `iex ${process.env.IEX_VERSION || '0.0.0'}`,
     baseUrl: process.env.GITHUB_REST_API_URL !== '' ? process.env.GITHUB_REST_API_URL : undefined,
-    log: logger,
+    log: {
+      debug: logger.debug.bind(logger),
+      info: logger.info.bind(logger),
+      warn: logger.warn.bind(logger),
+      error: logger.error.bind(logger)
+    },
     previews: ['mercy-preview']
   });
 }
