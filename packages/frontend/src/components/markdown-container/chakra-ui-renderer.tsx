@@ -260,22 +260,20 @@ export const ChakraUIRenderer = (
       const defaultProps = { variant: 'simple', size: 'sm' };
 
       return (
-        <Zoom>
-          <Box
-            width={width || 'fit-content'}
-            overflow="auto"
-            py="0.5rem"
-            mb="1rem"
-            {...(border === 'true'
-              ? { border: '1px solid', borderRadius: 'lg', borderColor: 'snowstorm.300', p: '1rem' }
-              : {})}
-          >
-            <Table {...defaultProps} {...props}>
-              {caption && <TableCaption>{caption}</TableCaption>}
-              {children}
-            </Table>
-          </Box>
-        </Zoom>
+        <Box
+          width={width || 'fit-content'}
+          overflow="auto"
+          py="0.5rem"
+          mb="1rem"
+          {...(border === 'true'
+            ? { border: '1px solid', borderRadius: 'lg', borderColor: 'snowstorm.300', p: '1rem' }
+            : {})}
+        >
+          <Table {...defaultProps} {...props}>
+            {caption && <TableCaption>{caption}</TableCaption>}
+            {children}
+          </Table>
+        </Box>
       );
     },
     thead: ({ children, ...props }) => {
