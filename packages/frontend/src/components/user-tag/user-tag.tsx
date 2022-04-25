@@ -19,6 +19,7 @@ import {
   Avatar,
   Box,
   Divider,
+  Flex,
   Heading,
   HStack,
   Icon,
@@ -149,16 +150,12 @@ export const UserTag = ({ user, isLoading, permission, placement = 'right', ...t
             }}
             {...tagProps}
           >
-            <HStack justifyContent="space-between" w="full">
-              <Box>
+            <HStack justifyContent="space-between" w="full" alignItems="center">
+              <Flex align="center">
                 <Avatar name={user.displayName} src={user?.avatarUrl} {...avatarProps} />
                 <TagLabel>{user.displayName}</TagLabel>
-              </Box>
-              {permission && (
-                <Box>
-                  <Icon as={iconFactory('crown')} />
-                </Box>
-              )}
+              </Flex>
+              {permission && <Icon as={iconFactory('crown')} />}
             </HStack>
           </Tag>
         </PopoverTrigger>
