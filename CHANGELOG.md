@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.8...v3.11.9) (2022-04-25)
+
+
+### Bug Fixes
+
+* Fix misaligned text and icon on User Tag ([a67233d](https://github.com/ExpediaGroup/insights-explorer/commit/a67233d4b8b06e2e529d1b6f38f68b36191fea2e))
+
 ### [3.11.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.7...v3.11.8) (2022-04-23)
 
 
