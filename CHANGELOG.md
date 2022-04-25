@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.9...v3.11.10) (2022-04-25)
+
+
+### Bug Fixes
+
+* Fix `this[writeSym] is not a function` error ([f60663c](https://github.com/ExpediaGroup/insights-explorer/commit/f60663c38a1bd84cc8bed69d8a14c373da5e9c32))
+
 ### [3.11.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.8...v3.11.9) (2022-04-25)
 
 
