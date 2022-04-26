@@ -24,14 +24,14 @@
     "fs-extra": "10.0.1",
     "lodash": "4.17.21",
     "parsimmon": "1.18.1",
-    "pino": "7.10.0",
+    "pino": "7.11.0",
     "pino-http": "6.6.0",
     "pino-pretty": "7.6.1"
   },
   "devDependencies": {
     "@types/fs-extra": "9.0.13",
     "@types/jest": "27.4.1",
-    "@types/lodash": "4.14.181",
+    "@types/lodash": "4.14.182",
     "@types/node": "16.11.29",
     "@types/parsimmon": "1.10.6",
     "jest": "27.5.1",
