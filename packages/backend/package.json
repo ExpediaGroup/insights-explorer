@@ -107,7 +107,7 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-prettier": "4.0.0",
     "find": "0.3.0",
-    "fs-extra": "10.0.1",
+    "fs-extra": "10.1.0",
     "jest": "27.5.1",
     "jsonfile": "6.1.0",
     "nodemon": "2.0.15",
