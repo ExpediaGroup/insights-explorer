@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.12](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.11...v3.11.12) (2022-05-02)
+
+
+### Bug Fixes
+
+* Update `repositoryData` field when syncing Insights ([b85e64f](https://github.com/ExpediaGroup/insights-explorer/commit/b85e64f23606ce105dbe9a413b718fbffe48f919))
+
 ### [3.11.11](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.10...v3.11.11) (2022-05-02)
 
 
