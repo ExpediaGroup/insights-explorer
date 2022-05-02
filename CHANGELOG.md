@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.11.11](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.10...v3.11.11) (2022-05-02)
+
+
+### Bug Fixes
+
+* **deps:** bump @emotion/react from 11.8.2 to 11.9.0 ([8fde5b4](https://github.com/ExpediaGroup/insights-explorer/commit/8fde5b4ae925ddd6c614ce4af7bc0fad54626806))
+* **deps:** bump fs-extra from 10.0.1 to 10.1.0 ([3287cb3](https://github.com/ExpediaGroup/insights-explorer/commit/3287cb3d7ad253259440632d98b423f7866064f7))
+* **deps:** bump isomorphic-git from 1.17.0 to 1.17.1 ([64879a8](https://github.com/ExpediaGroup/insights-explorer/commit/64879a8a57dc03b17f4d2a27e0ac2db34d6b9daf))
+* **deps:** bump luxon from 2.3.1 to 2.3.2 ([5b8f8eb](https://github.com/ExpediaGroup/insights-explorer/commit/5b8f8eb4ba119562c2c5803f9cd7302470f4b612))
+* **deps:** bump pino from 7.10.0 to 7.11.0 ([4779243](https://github.com/ExpediaGroup/insights-explorer/commit/4779243af2de54e36f1a5299ff50fb0495c57755))
+* **deps:** bump react-dropzone from 12.0.5 to 12.1.0 ([785a380](https://github.com/ExpediaGroup/insights-explorer/commit/785a380fd7bafafc95d119ee27e0ca342c30cba1))
+* **deps:** bump react-markdown from 8.0.2 to 8.0.3 ([06bc098](https://github.com/ExpediaGroup/insights-explorer/commit/06bc098c4282cb420950e552ff93ef1823ff4e21))
+
 ### [3.11.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.9...v3.11.10) (2022-04-25)
 
 
