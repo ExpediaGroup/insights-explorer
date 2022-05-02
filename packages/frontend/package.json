@@ -4,7 +4,7 @@
   "description": "Insights Explorer Frontend",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "1.8.6",
+    "@chakra-ui/react": "1.8.8",
     "@chakra-ui/theme": "1.14.1",
     "@chakra-ui/theme-tools": "1.3.6",
     "@emotion/react": "11.9.0",
