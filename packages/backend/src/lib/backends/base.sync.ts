@@ -62,7 +62,7 @@ export abstract class BaseSync {
     const index = ElasticIndex.INSIGHTS;
 
     logger.info(`Publishing ${documentType} to Elasticsearch: ${insight.fullName}`);
-    logger.debug(JSON.stringify(insight, null, 2));
+    logger.trace(JSON.stringify(insight, null, 2));
 
     try {
       const result = await defaultElasticsearchClient.index({
@@ -75,7 +75,7 @@ export abstract class BaseSync {
         refresh
       });
 
-      logger.debug(JSON.stringify(result));
+      logger.trace(JSON.stringify(result));
       logger.info(`Successfully published ${documentType}: ${insight.fullName}`);
     } catch (error: any) {
       logger.error(`Error publishing ${documentType} to Elasticsearch`);
@@ -99,7 +99,8 @@ export abstract class BaseSync {
       await existingDbInsight.$query().patch({
         insightName: insight.fullName,
         itemType: insight.itemType,
-        deletedAt: null
+        deletedAt: null,
+        repositoryData
       });
     } else {
       logger.trace('Insight does not exist in database');
@@ -114,7 +115,8 @@ export abstract class BaseSync {
         await existingDbInsight.$query().patch({
           externalId,
           itemType: insight.itemType,
-          deletedAt: null
+          deletedAt: null,
+          repositoryData
         });
       } else {
         logger.trace('Insight does not exist in database');
@@ -125,7 +127,7 @@ export abstract class BaseSync {
             .select('repositoryTypeId')
             .where('repositoryTypeName', repositoryType)
             .first(),
-          repositoryData: repositoryData,
+          repositoryData,
           itemType: insight.itemType
         });
       }

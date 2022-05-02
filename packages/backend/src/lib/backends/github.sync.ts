@@ -54,7 +54,14 @@ export class GitHubRepositorySync extends BaseSync {
         return null;
       }
 
-      await super.updateDatabase(insightSyncTask, insight);
+      // If the Insight was renamed, this needs to be updated in the database
+      const updatedInsightSyncTask = {
+        ...insightSyncTask,
+        owner: insight.namespace,
+        repo: insight.repository.externalName
+      };
+
+      await super.updateDatabase(updatedInsightSyncTask, insight);
       await super.publishInsight(insight, insightSyncTask.refresh);
     }
 
@@ -256,9 +263,6 @@ export const githubRepositorySync = async (
     if (thumbnail) {
       insight.thumbnailUrl = thumbnail;
     }
-
-    // Done!
-    logger.debug(JSON.stringify(insight, null, 2));
 
     return insight;
   } finally {
