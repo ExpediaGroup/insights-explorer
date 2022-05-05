@@ -23,6 +23,7 @@ import { Alert } from '../../../../../../components/alert/alert';
 import { Card } from '../../../../../../components/card/card';
 import { Crumbs } from '../../../../../../components/crumbs/crumbs';
 import type { Comment, CommentConnection, Insight } from '../../../../../../models/generated/graphql';
+import { useScrollToLocation } from '../../../../../../shared/use-scroll-to-location';
 import { useLikedBy } from '../../../../../../shared/useLikedBy';
 import type { RootState } from '../../../../../../store/store';
 
@@ -134,6 +135,9 @@ export const InsightComments = ({ insight, inline = false, ...props }: Props & B
 
   // Standalone mode is the opposite of inline mode.
   const standalone = !inline;
+
+  // Scroll to anchor location if needed
+  useScrollToLocation();
 
   const toast = useToast();
 

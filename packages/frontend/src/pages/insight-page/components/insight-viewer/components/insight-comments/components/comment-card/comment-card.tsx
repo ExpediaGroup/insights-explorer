@@ -14,7 +14,18 @@
  * limitations under the License.
  */
 
-import { Avatar, Box, Flex, HStack, IconButton, Text, Tooltip, StackDivider, VStack } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Flex,
+  HStack,
+  IconButton,
+  Link as ChakraLink,
+  Text,
+  Tooltip,
+  StackDivider,
+  VStack
+} from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -109,8 +120,11 @@ export const CommentCard = ({
     return onLike(comment.id, liked);
   };
 
+  // `=` characters are not valid in CSS selectors
+  const idSlug = `comment-${comment.id.replaceAll(/=/gi, '')}`;
+
   return (
-    <VStack spacing="1rem" align="stretch">
+    <VStack spacing="1rem" align="stretch" id={idSlug}>
       <HStack align="center">
         <Avatar name={comment.author?.displayName} size="sm" />
 
@@ -119,14 +133,14 @@ export const CommentCard = ({
             {comment.author?.displayName}
           </Text>
         </Link>
-        <Text color="polar.600" fontSize="sm">
+        <ChakraLink href={`#${idSlug}`} color="polar.600" fontSize="sm">
           {formatDateIntl(comment.createdAt as unknown as string, DateTime.DATETIME_MED)}
           {comment.isEdited && (
             <Tooltip label="This comment was edited" aria-label="This comment was edited">
               {' (edited)'}
             </Tooltip>
           )}
-        </Text>
+        </ChakraLink>
 
         <HStack spacing="0.25rem" flexGrow={1} justify="flex-end" align="center">
           {isOwnComment && (
