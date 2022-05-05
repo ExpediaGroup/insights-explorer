@@ -37,6 +37,8 @@ import { activitySlice } from '../../../../store/activity.slice';
 import type { RootState } from '../../../../store/store';
 import { ActivitySearchBox } from '../activity-search-box/activity-search-box';
 
+import { ActivitySearchSyntax } from './activity-search-syntax';
+
 const availableSortFields = [
   { value: 'occurredAt', label: 'Activity Date' },
   { value: 'relevance', label: 'Relevance' }
@@ -85,8 +87,8 @@ export const ActivitySearchBar = (): ReactElement => {
   };
 
   const optionsArray = Object.entries(options || {})
-    .filter(([key, value]) => value === true)
-    .map(([key, value]) => key);
+    .filter(([, value]) => value === true)
+    .map(([key]) => key);
 
   const onOptionsChange = (selectedOptions: string | string[]) => {
     const updatedOptions = { ...options };
@@ -110,6 +112,8 @@ export const ActivitySearchBar = (): ReactElement => {
         onClear={onClear}
         canClear={query.length > 0 || sort !== undefined}
       />
+
+      <ActivitySearchSyntax />
 
       <Menu>
         <Tooltip placement="left" label="Show sort options" aria-label="Show sort options" zIndex="10">

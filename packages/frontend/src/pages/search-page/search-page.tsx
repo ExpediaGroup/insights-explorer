@@ -48,7 +48,7 @@ export const SearchPage = () => {
     paused: !initialized.current
   });
 
-  const insightResults = data.insights.results.map(({ score, insight }) => {
+  const insightResults = data.insights.results.map(({ insight }) => {
     return { id: insight.id, name: insight.name, fullName: insight.fullName, itemType: insight.itemType };
   });
 

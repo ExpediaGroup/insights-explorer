@@ -39,6 +39,7 @@ export const SearchBox = ({ query, canClear, onQueryChange, onClear }: Props): R
         onChange={(e) => onQueryChange(e.target.value)}
         aria-label="Search"
       />
+
       {canClear && (
         <InputRightElement zIndex="unset">
           <Tooltip placement="left" label="Clear search" aria-label="Clear search">

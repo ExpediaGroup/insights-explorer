@@ -37,6 +37,8 @@ import { searchSlice } from '../../../../store/search.slice';
 import type { RootState } from '../../../../store/store';
 import { SearchBox } from '../search-box/search-box';
 
+import { SearchSyntax } from './search-syntax';
+
 const availableSortFields = [
   { value: 'relevance', label: 'Relevance' },
   { value: 'createdAt', label: 'Created Date' },
@@ -92,8 +94,8 @@ export const SearchBar = (): ReactElement => {
   };
 
   const optionsArray = Object.entries(options || {})
-    .filter(([key, value]) => value === true)
-    .map(([key, value]) => key);
+    .filter(([, value]) => value === true)
+    .map(([key]) => key);
 
   const onOptionsChange = (selectedOptions: string | string[]) => {
     const updatedOptions = { ...options };
@@ -118,6 +120,8 @@ export const SearchBar = (): ReactElement => {
         onClear={onClear}
         canClear={query.length > 0 || sort !== undefined}
       />
+
+      <SearchSyntax />
 
       <Menu>
         <Tooltip placement="left" label="Show sort options" aria-label="Show sort options" zIndex="10">
