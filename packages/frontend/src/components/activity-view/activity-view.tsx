@@ -245,18 +245,22 @@ const getActivityParts = (activity: Activity) => {
             <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb}{' '}
-              <Link
-                to={`/${details.comment.insight.itemType}/${details.comment.insight.fullName}`}
-                display="inline-block"
-              >
-                <Text as="span" fontWeight="bold">
-                  {details.comment.insight.name}
-                </Text>
-              </Link>
+              {details?.comment != null ? (
+                <Link
+                  to={`/${details.comment.insight.itemType}/${details.comment.insight.fullName}`}
+                  display="inline-block"
+                >
+                  <Text as="span" fontWeight="bold">
+                    {details.comment.insight.name}
+                  </Text>
+                </Link>
+              ) : (
+                <DeletedBadge />
+              )}
             </Text>
           </Box>
         ),
-        details: <BlockQuote>{details.comment.commentText}</BlockQuote>
+        details: details?.comment && <BlockQuote>{details.comment.commentText}</BlockQuote>
       };
     }
 
