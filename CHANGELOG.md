@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.12.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.12...v3.12.0) (2022-05-05)
+
+
+### Features
+
+* Add search syntax guide popovers to search, activities pages ([46a9c09](https://github.com/ExpediaGroup/insights-explorer/commit/46a9c0997853c2f746fc8bc34d5b8ad1fbea568b))
+
+
+### Bug Fixes
+
+* Fix activity view for create comments on deleted Insights ([f0de495](https://github.com/ExpediaGroup/insights-explorer/commit/f0de495aa40ca0504c90ff9653e490723c39d18b))
+
 ### [3.11.12](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.11...v3.11.12) (2022-05-02)
 
 
