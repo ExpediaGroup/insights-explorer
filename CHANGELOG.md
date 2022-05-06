@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.12.0...v3.13.0) (2022-05-06)
+
+
+### Features
+
+* Add deeplink to comments on Insights ([2c16b29](https://github.com/ExpediaGroup/insights-explorer/commit/2c16b2979c3cd685fed14ca97dae920d0b564b15))
+
 ## [3.12.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.11.12...v3.12.0) (2022-05-05)
 
 
