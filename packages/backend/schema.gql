@@ -337,7 +337,7 @@ type Mutation {
   cloneInsight(insightId: ID!): Draft!
   deleteComment(commentId: ID!): Comment!
   deleteDraft(draftKey: String!): Draft!
-  deleteInsight(insightId: ID!): ID!
+  deleteInsight(archiveRepo: Boolean!, insightId: ID!): ID!
   deleteNews(newsId: ID!): News!
   getAccessToken(code: String!): String!
   likeActivity(activityId: ID!, liked: Boolean!): Activity!

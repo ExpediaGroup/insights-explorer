@@ -87,9 +87,10 @@ export const InsightPage = ({ isExport = false }) => {
     return true;
   };
 
-  const onDelete = async (): Promise<boolean> => {
+  const onDelete = async (archiveRepo): Promise<boolean> => {
     const { error } = await deleteInsight({
-      insightId: insight.id
+      insightId: insight.id,
+      archiveRepo: archiveRepo
     });
 
     if (error) {

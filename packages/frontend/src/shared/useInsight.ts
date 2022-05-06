@@ -117,8 +117,8 @@ const INSIGHT_QUERY = gql`
 `;
 
 const INSIGHT_DELETE_MUTATION = gql`
-  mutation InsightDelete($insightId: ID!) {
-    deleteInsight(insightId: $insightId)
+  mutation InsightDelete($insightId: ID!, $archiveRepo: Boolean!) {
+    deleteInsight(insightId: $insightId, archiveRepo: $archiveRepo)
   }
 `;
 

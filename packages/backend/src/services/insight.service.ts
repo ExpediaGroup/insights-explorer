@@ -630,7 +630,7 @@ export class InsightService {
    * @param user User making the change
    * @param hard True for a hard delete, false for a soft delete (default)
    */
-  async deleteInsight(insightId: number, user: User, hard = false): Promise<DbInsight> {
+  async deleteInsight(insightId: number, archiveRepo: boolean, user: User, hard = false): Promise<DbInsight> {
     if (hard === true) {
       throw new Error('Hard deletes of Insights are not yet supported.');
     }
@@ -644,7 +644,7 @@ export class InsightService {
     const insight = await getInsight(insightId);
     const isMissing = await this.isRepositoryMissing(insight!.repository);
 
-    if (!isMissing) {
+    if (!isMissing && archiveRepo) {
       // Archive GitHub repository
       await archiveRepository(user.githubPersonalAccessToken!, existingInsight.externalId);
     }
