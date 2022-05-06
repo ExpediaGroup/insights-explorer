@@ -73,12 +73,12 @@ export const DeleteDialog = ({ insight, isOpen, onDelete, onClose }: Props) => {
                 accessible.
               </Text>
               <Text>
-                Based on your choice the Githu repository for this {titleize(insight.itemType)} can be either archived
+                Based on your choice the Github repository for this {titleize(insight.itemType)} can be either archived
                 or left untouched after the Insight is deleted.
               </Text>
               <Text>
-                If you click 'Delete' the Github repository will be archived, else if you click 'Delete, but keep repo'
-                the Github repository will be left untouched.
+                If you click 'Delete' the Github repository will be left untouched, else if you click 'Delete & Archive'
+                the Github repository will be archived.
               </Text>
             </VStack>
           </AlertDialogBody>
@@ -86,11 +86,11 @@ export const DeleteDialog = ({ insight, isOpen, onDelete, onClose }: Props) => {
             <Button ref={cancelRef} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="red" onClick={() => onDeleteInternal(true)} ml={3} isLoading={isDeleting}>
+            <Button colorScheme="red" onClick={() => onDeleteInternal(false)} ml={3} isLoading={isDeleting}>
               Delete
             </Button>
-            <Button colorScheme="red" onClick={() => onDeleteInternal(false)} ml={3} isLoading={isDeleting}>
-              Delete, but keep repo
+            <Button colorScheme="red" onClick={() => onDeleteInternal(true)} ml={3} isLoading={isDeleting}>
+              Delete & Archive
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
