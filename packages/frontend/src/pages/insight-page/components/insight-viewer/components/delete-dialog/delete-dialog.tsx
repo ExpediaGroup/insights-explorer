@@ -73,7 +73,7 @@ export const DeleteDialog = ({ insight, isOpen, onDelete, onClose }: Props) => {
                 accessible.
               </Text>
               <Text>
-                Based on your choice the Github repository for this {titleize(insight.itemType)} can be either archived
+                Based on your choice, the Github repository for this {titleize(insight.itemType)} can be either archived
                 or left untouched after the Insight is deleted.
               </Text>
               <Text>
