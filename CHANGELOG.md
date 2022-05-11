@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.13.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.13.1...v3.13.2) (2022-05-11)
+
+
+### Bug Fixes
+
+* Add option to delete Insight from IEX but keep GH repository ([#824](https://github.com/ExpediaGroup/insights-explorer/issues/824)) ([0baf7c7](https://github.com/ExpediaGroup/insights-explorer/commit/0baf7c79bce14caed4bb9f123c74031f78b6da92))
+* **deps:** bump luxon and @types/luxon ([26e22d8](https://github.com/ExpediaGroup/insights-explorer/commit/26e22d8202bc0da03ea075df4dd70730adff62ad))
+* Disable Zoom feature for tables on Markdown files to have links clickable ([37ae7c3](https://github.com/ExpediaGroup/insights-explorer/commit/37ae7c3bf3a2773d3cdc0fbd98ca9dd2bdf62b0a))
+
 ### [3.13.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.13.0...v3.13.1) (2022-05-06)
 
 
