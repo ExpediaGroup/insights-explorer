@@ -100,7 +100,7 @@
     "@types/turndown": "5.0.1",
     "@types/validator": "13.7.2",
     "@typescript-eslint/eslint-plugin": "5.23.0",
-    "@typescript-eslint/parser": "5.19.0",
+    "@typescript-eslint/parser": "5.23.0",
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-import-resolver-typescript": "2.7.1",
