@@ -28,7 +28,7 @@
     "@octokit/graphql": "4.8.0",
     "@octokit/rest": "18.12.0",
     "apollo-server-core": "3.6.7",
-    "apollo-server-express": "3.6.7",
+    "apollo-server-express": "3.7.0",
     "aws-sdk": "2.1113.0",
     "axios": "0.27.2",
     "better-queue": "3.8.10",
@@ -93,7 +93,7 @@
     "@types/luxon": "2.3.1",
     "@types/mime": "2.0.3",
     "@types/module-alias": "2.0.1",
-    "@types/node": "16.11.29",
+    "@types/node": "16.11.33",
     "@types/parsimmon": "1.10.6",
     "@types/supertest": "2.0.12",
     "@types/tmp": "0.2.3",
@@ -115,6 +115,6 @@
     "prettier": "2.6.2",
     "supertest": "6.2.3",
     "ts-jest": "27.1.4",
-    "typescript": "4.6.3"
+    "typescript": "4.6.4"
   }
 }
