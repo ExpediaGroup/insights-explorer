@@ -37,7 +37,7 @@ export const NavigationButtons = ({ insight, nextInsight, previousInsight, ...bo
     <HStack spacing="1rem" {...boxProps}>
       {showPreviousAndNextButtons && (
         <>
-          <Link to={previousInsightLink} flexGrow={{ base: '1', md: 'unset' }}>
+          <Link to={previousInsightLink} flexGrow={{ base: 1, md: 'unset' }}>
             <Tooltip
               label={`Previous ${titleize(insight.itemType)}`}
               aria-label={`Previous ${titleize(insight.itemType)}`}
@@ -51,7 +51,7 @@ export const NavigationButtons = ({ insight, nextInsight, previousInsight, ...bo
               />
             </Tooltip>
           </Link>
-          <Link to={nextInsightLink} flexGrow={{ base: '1', md: 'unset' }}>
+          <Link to={nextInsightLink} flexGrow={{ base: 1, md: 'unset' }}>
             <Tooltip label={`Next ${titleize(insight.itemType)}`} aria-label={`Next ${titleize(insight.itemType)}`}>
               <IconButton
                 aria-label={`Next ${titleize(insight.itemType)}`}
