@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.13.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.13.3...v3.13.4) (2022-05-11)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/react from 1.8.6 to 1.8.8 ([04c2b4d](https://github.com/ExpediaGroup/insights-explorer/commit/04c2b4de3c921008501c0bb811165647deb3bece))
+* **deps:** bump apollo-server-express from 3.6.7 to 3.7.0 ([0eb6eaa](https://github.com/ExpediaGroup/insights-explorer/commit/0eb6eaa7b2f06c55874d3e1f3badacf97d7e352b))
+* **deps:** bump express from 4.17.3 to 4.18.1 ([226ec89](https://github.com/ExpediaGroup/insights-explorer/commit/226ec894937c76a962957e59a89fa5c8e30f0e36))
+* **deps:** bump isomorphic-git from 1.17.1 to 1.17.2 ([884d8f0](https://github.com/ExpediaGroup/insights-explorer/commit/884d8f097c469ae3e092189cc51ddeadaee2037d))
+
 ### [3.13.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.13.2...v3.13.3) (2022-05-11)
 
 
