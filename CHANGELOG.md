@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.13.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.13.2...v3.13.3) (2022-05-11)
+
+
+### Bug Fixes
+
+* **deps:** bump dataloader from 2.0.0 to 2.1.0 ([52a1d17](https://github.com/ExpediaGroup/insights-explorer/commit/52a1d17856091571de954c2f73ef91538d264bcf))
+* **deps:** bump react-datepicker from 4.6.0 to 4.7.0 ([d67a639](https://github.com/ExpediaGroup/insights-explorer/commit/d67a6397d9098ced201e1f14be04f731a7130b3c))
+
 ### [3.13.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.13.1...v3.13.2) (2022-05-11)
 
 
