@@ -29,7 +29,7 @@ interface Props {
   nextInsight?: Pick<Insight, 'id' | 'name' | 'fullName' | 'itemType'>;
   previousInsight?: Pick<Insight, 'id' | 'name' | 'fullName' | 'itemType'>;
   onClone: () => Promise<boolean>;
-  onDelete: () => Promise<boolean>;
+  onDelete: (archiveRepo: boolean) => Promise<boolean>;
   onFetchLikedBy: (insightId?: string) => Promise<User[]>;
   onLike: (liked: boolean) => Promise<boolean>;
 }

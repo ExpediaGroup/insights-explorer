@@ -38,7 +38,7 @@ import { iconFactory } from '../../../../../../shared/icon-factory';
 interface Props {
   insight: Insight;
   isOpen: boolean;
-  onDelete: () => Promise<boolean>;
+  onDelete: (archiveRepo: boolean) => Promise<boolean>;
   onClose: () => void;
 }
 
@@ -47,9 +47,9 @@ export const DeleteDialog = ({ insight, isOpen, onDelete, onClose }: Props) => {
   const [isDeleting, setDeleting] = useState(false);
   const navigate = useNavigate();
 
-  const onDeleteInternal = async () => {
+  const onDeleteInternal = async (archiveRepo) => {
     setDeleting(true);
-    const deleted = await onDelete();
+    const deleted = await onDelete(archiveRepo);
     if (deleted) {
       navigate('/');
     } else {
@@ -73,8 +73,12 @@ export const DeleteDialog = ({ insight, isOpen, onDelete, onClose }: Props) => {
                 accessible.
               </Text>
               <Text>
-                The GitHub repository for the {titleize(insight.itemType)} will be archived rather than deleted. This
-                will make it read-only on GitHub, and it can be manually recovered later if necessary.
+                Based on your choice, the Github repository for this {titleize(insight.itemType)} can be either archived
+                or left untouched after the Insight is deleted.
+              </Text>
+              <Text>
+                If you click 'Delete' the Github repository will be left untouched, else if you click 'Delete & Archive'
+                the Github repository will be archived.
               </Text>
             </VStack>
           </AlertDialogBody>
@@ -82,8 +86,11 @@ export const DeleteDialog = ({ insight, isOpen, onDelete, onClose }: Props) => {
             <Button ref={cancelRef} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="red" onClick={onDeleteInternal} ml={3} isLoading={isDeleting}>
+            <Button colorScheme="red" onClick={() => onDeleteInternal(false)} ml={3} isLoading={isDeleting}>
               Delete
+            </Button>
+            <Button colorScheme="red" onClick={() => onDeleteInternal(true)} ml={3} isLoading={isDeleting}>
+              Delete & Archive
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

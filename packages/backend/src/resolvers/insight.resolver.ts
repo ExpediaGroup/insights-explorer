@@ -442,14 +442,18 @@ export class InsightResolver {
 
   @Authorized<Permission>({ user: true, github: true })
   @Mutation(() => ID)
-  async deleteInsight(@Arg('insightId', () => ID) insightId: string, @Ctx() ctx: Context): Promise<string> {
+  async deleteInsight(
+    @Arg('insightId', () => ID) insightId: string,
+    @Arg('archiveRepo') archiveRepo: boolean,
+    @Ctx() ctx: Context
+  ): Promise<string> {
     logger.debug('Deleting Insight', insightId);
 
     try {
       const [, dbInsightId] = fromGlobalId(insightId);
 
       // Delete Insight
-      await this.insightService.deleteInsight(dbInsightId, ctx.user!);
+      await this.insightService.deleteInsight(dbInsightId, archiveRepo, ctx.user!);
 
       return insightId;
     } catch (error: any) {
