@@ -40,6 +40,8 @@ import { getRepository, makeOctokit, withRetries } from './github';
 
 const logger = getLogger('github.sync');
 
+const IGNORE_AUTHORS = process.env.INSIGHT_IGNORE_AUTHORS?.split(';') ?? [];
+
 export class GitHubRepositorySync extends BaseSync {
   async sync(insightSyncTask: InsightSyncTask): Promise<IndexedInsight | null> {
     const startTime = process.hrtime.bigint();
@@ -115,6 +117,41 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
   return insight;
 }
 
+/**
+ * Filters a list of Insight contributors using multiple criteria:
+ *  - Environment variable INSIGHT_IGNORE_AUTHORS may contain usernames/emails that should be ignored globally
+ *  - Insight YAML may contain a field `excludedAuthors` that contains usernames/emails that should be ignored for that Insight
+ *
+ * @param contributors Original list of Insight contributors
+ * @param yaml Insight YAML
+ * @returns Filtered list of Insight contributors
+ */
+function excludeContributors(contributors: IndexedInsightUser[], yaml: InsightYaml): IndexedInsightUser[] {
+  return contributors.filter((c) => {
+    // Remove any contributors in the `INSIGHT_IGNORE_AUTHORS` config
+    const ignored = IGNORE_AUTHORS.includes(c.email) || IGNORE_AUTHORS.includes(c.userName);
+    if (ignored) {
+      logger.info(
+        `Excluding contributor ${
+          c.email === 'unknown' ? c.userName : c.email
+        } due to INSIGHT_IGNORE_AUTHORS environment variable`
+      );
+      return false;
+    }
+
+    // If excludedAuthors is specified in the YAML, use that to filter results
+    if (yaml.excludedAuthors && yaml.excludedAuthors.length > 0) {
+      const excluded = yaml.excludedAuthors!.includes(c.email) || yaml.excludedAuthors!.includes(c.userName);
+      if (excluded) {
+        logger.info(`Excluding contributor ${c.email === 'unknown' ? c.userName : c.email} due to YAML`);
+        return false;
+      }
+    }
+
+    return true;
+  });
+}
+
 async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml): Promise<IndexedInsightUser[]> {
   const userServices = new UserService(new ActivityService());
 
@@ -138,7 +175,8 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
           };
     });
 
-    return contributors;
+    // Filter for contributors to to be excluded
+    return excludeContributors(contributors, yaml);
   }
 
   // GraphQL API doesn't have an equivalent mutation for this.
@@ -184,19 +222,8 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
     };
   });
 
-  // If excludedAuthors is specified in the YAML, use that to filter results
-  if (yaml.excludedAuthors && yaml.excludedAuthors.length > 0) {
-    return contributors.filter((c) => {
-      const excluded = yaml.excludedAuthors!.includes(c.email);
-      if (excluded) {
-        logger.info('Excluding contributor ' + c.email);
-      }
-
-      return !excluded;
-    });
-  }
-
-  return contributors;
+  // Filter for contributors to to be excluded
+  return excludeContributors(contributors, yaml);
 }
 
 /**

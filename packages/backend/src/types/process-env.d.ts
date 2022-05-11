@@ -30,7 +30,6 @@ declare namespace NodeJS {
     ENCRYPTION_KEY: string;
     PUBLIC_URL: string;
     APOLLO_SANDBOX: string;
-    EXAMPLES_INIT_ON_STARTUP: string;
 
     // GITHUB
     GITHUB_URL: string;
@@ -85,5 +84,15 @@ declare namespace NodeJS {
     CHAT_PROVIDER: string;
     CHAT_CHANNEL: string;
     CHAT_URL: string;
+
+    // Admin
+    ADMIN_USERNAMES: string;
+
+    // Insight
+    INSIGHT_IGNORE_AUTHORS: string;
+    EXAMPLES_INIT_ON_STARTUP: string;
+
+    // Activities
+    ACTIVITIES_IGNORE_LOGIN: string;
   }
 }
