@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.0...v3.14.1) (2022-05-13)
+
+
+### Bug Fixes
+
+* **deps:** bump ace-builds from 1.4.14 to 1.5.0 ([3206876](https://github.com/ExpediaGroup/insights-explorer/commit/3206876ca06261fb07c54e993b02bca24cf9b338))
+* **deps:** bump pino-http from 6.6.0 to 7.0.0 ([8de5a44](https://github.com/ExpediaGroup/insights-explorer/commit/8de5a44c0442f024e4c04d7adf1a559b0d2e009c))
+* **deps:** bump react-vega from 7.5.0 to 7.5.1 ([95f42b9](https://github.com/ExpediaGroup/insights-explorer/commit/95f42b9955bf118ec550dc45b2b6667797fb5b69))
+
 ## [3.14.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.13.4...v3.14.0) (2022-05-11)
 
 
