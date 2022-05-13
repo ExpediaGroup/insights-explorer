@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.1...v3.14.2) (2022-05-13)
+
+
+### Bug Fixes
+
+* **deps:** bump nanoid from 3.3.3 to 3.3.4 ([4a81353](https://github.com/ExpediaGroup/insights-explorer/commit/4a8135331fb3eccf1e14dc62dc69fb71b1eb2e75))
+* **deps:** bump react-ace from 9.5.0 to 10.1.0 ([482f082](https://github.com/ExpediaGroup/insights-explorer/commit/482f0820d2c16e1a177f44e5346c15cce6ae4641))
+* **deps:** bump react-dnd from 16.0.0 to 16.0.1 ([19e397a](https://github.com/ExpediaGroup/insights-explorer/commit/19e397ac5da0a52acbb4bc4aa47744313061ac09))
+* **deps:** bump react-dnd-html5-backend from 16.0.0 to 16.0.1 ([b23a9fb](https://github.com/ExpediaGroup/insights-explorer/commit/b23a9fbb924ddb041822544b43c383477c044e3e))
+
 ### [3.14.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.0...v3.14.1) (2022-05-13)
 
 
