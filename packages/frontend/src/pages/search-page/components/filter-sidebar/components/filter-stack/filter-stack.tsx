@@ -75,7 +75,7 @@ export const FilterStack = ({
         .filter((searchTerm) => searchTerm.key === filterKey)
         .map((searchTerm) => {
           return (
-            <Checkbox key={searchTerm.value} defaultIsChecked onChange={() => removeFilter(searchTerm)}>
+            <Checkbox key={searchTerm.value} defaultChecked onChange={() => removeFilter(searchTerm)}>
               {getLabel(searchTerm)}
             </Checkbox>
           );

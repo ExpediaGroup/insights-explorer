@@ -17,7 +17,7 @@
 import type { AlertStatus, As, BoxProps } from '@chakra-ui/react';
 import { Alert as ChakraAlert, AlertIcon, Flex, Text } from '@chakra-ui/react';
 import startCase from 'lodash/startCase';
-import type { ReactChild, ReactChildren } from 'react';
+import type { ReactNode } from 'react';
 
 import { iconFactory } from '../../shared/icon-factory';
 
@@ -25,7 +25,7 @@ type StringOrMessage = string | { message: string };
 type Status = 'error' | 'success' | 'warning' | 'info' | 'secure';
 
 interface Props {
-  children?: JSX.Element | ReactChild[] | ReactChildren | string | string[];
+  children?: ReactNode | ReactNode[] | string | string[];
   status?: Status;
   message?: StringOrMessage;
   error?: StringOrMessage;
@@ -49,7 +49,7 @@ export const Alert = ({
   success,
   icon,
   ...props
-}: Props & BoxProps) => {
+}: Props & Omit<BoxProps, 'children'>) => {
   let derivedMessage = message;
   let derivedStatus: AlertStatus;
 
@@ -86,8 +86,7 @@ export const Alert = ({
         <Text as="strong" mr="0.5rem" flexShrink={0}>
           {startCase(derivedStatus)}:{' '}
         </Text>
-        {children !== undefined && children}
-        {children === undefined && derivedMessage}
+        {children === undefined ? (derivedMessage as string) : children}
       </Flex>
     </ChakraAlert>
   );

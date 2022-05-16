@@ -142,7 +142,7 @@ export const InsightEditorHeader = ({ insight, isPublishing, isSavingDraft, form
 
         {!canEdit && (
           <Alert status="warning">
-            <HStack spacing="0.5rem" d="inline-flex" align="center" justify="space-between" flexGrow={2}>
+            <HStack spacing="0.5rem" display="inline-flex" align="center" justify="space-between" flexGrow={2}>
               <Text>You don't have permission to publish changes to this Insight.</Text>
               <Button size="sm" bg="snowstorm.100" flexShrink={0} onClick={onRefresh}>
                 Recheck

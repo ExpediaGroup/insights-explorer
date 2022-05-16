@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-import { ChakraProvider, ColorModeScript, useColorMode } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript, createStandaloneToast, useColorMode } from '@chakra-ui/react';
 import type { DOMAttributes } from 'react';
-import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Helmet } from 'react-helmet';
 import { Provider as Redux } from 'react-redux';
@@ -66,4 +65,12 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+const { ToastContainer } = createStandaloneToast();
+
+ReactDOM.render(
+  <>
+    <App />
+    <ToastContainer />
+  </>,
+  document.querySelector('#root')
+);

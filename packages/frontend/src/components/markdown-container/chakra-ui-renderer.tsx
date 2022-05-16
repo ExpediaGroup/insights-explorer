@@ -167,7 +167,7 @@ export const ChakraUIRenderer = (
       );
     },
     blockquote: ({ node, children, ...props }) => {
-      return <BlockQuote {...props}>{children}</BlockQuote>;
+      return <BlockQuote {...(props as any)}>{children}</BlockQuote>;
     },
     code: ({ node, inline, className, collapse, value, children, ...props }: any) => {
       const defaultIsOpen = !(collapse === 'true');
@@ -208,7 +208,7 @@ export const ChakraUIRenderer = (
     },
     del: ({ node, children, ...props }) => {
       return (
-        <Text as="del" {...props}>
+        <Text as="del" {...(props as any)}>
           {children}
         </Text>
       );

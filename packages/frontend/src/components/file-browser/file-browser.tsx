@@ -227,7 +227,7 @@ const FolderRenderer = ({
             minW={0}
             maxW="100%"
             flexGrow={2}
-            isTruncated={true}
+            noOfLines={1}
           />
           {item.readonly && <Badge>readonly</Badge>}
           <EditableInput />
@@ -347,7 +347,7 @@ const FileRenderer = ({
           minW={0}
           maxW="100%"
           flexGrow={2}
-          isTruncated={true}
+          noOfLines={1}
           cursor="unset"
         />
         {item.readonly && <Badge>readonly</Badge>}
