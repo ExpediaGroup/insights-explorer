@@ -21,7 +21,7 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import type { RootState } from '../../../store/store';
+import type { AppDispatch, RootState } from '../../../store/store';
 import { userSlice, login } from '../../../store/user.slice';
 
 export const AUTH_CALLBACK_PATH = '/auth/callback';
@@ -34,7 +34,7 @@ interface Props {
 const AuthWrapper = ({ children }: Props) => {
   const { authState, oktaAuth } = useOktaAuth();
   const { requestingLogin } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const loggingIn = useRef(false);
 

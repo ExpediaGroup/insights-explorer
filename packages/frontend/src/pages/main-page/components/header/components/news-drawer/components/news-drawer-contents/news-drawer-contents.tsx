@@ -31,13 +31,14 @@ import type { News } from '../../../../../../../../models/generated/graphql';
 import { useLikedBy } from '../../../../../../../../shared/useLikedBy';
 import { useNews } from '../../../../../../../../shared/useNews';
 import { appSlice } from '../../../../../../../../store/app.slice';
+import type { AppDispatch } from '../../../../../../../../store/store';
 import { NewsItem } from '../news-item/news-item';
 
 export const NewsDrawerContents = () => {
   const backgroundColor = useColorModeValue('nord.100', 'polar.100');
 
   const toast = useToast();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { data, fetching, onLikeNews } = useNews({ active: true });
   const { onFetchLikedBy } = useLikedBy('news');

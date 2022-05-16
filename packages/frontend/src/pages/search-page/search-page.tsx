@@ -27,14 +27,14 @@ import { generateSearchUrl } from '../../shared/search-url';
 import { useDebounce } from '../../shared/useDebounce';
 import { useSearch } from '../../shared/useSearch';
 import { searchSlice } from '../../store/search.slice';
-import type { RootState } from '../../store/store';
+import type { AppDispatch, RootState } from '../../store/store';
 
 import { FilterSidebar } from './components/filter-sidebar/filter-sidebar';
 import { SearchBar } from './components/search-bar/search-bar';
 
 export const SearchPage = () => {
   const initialized = useRef(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { query, sort, showFilters, options } = useSelector((state: RootState) => state.search);
 
   // Load query from params

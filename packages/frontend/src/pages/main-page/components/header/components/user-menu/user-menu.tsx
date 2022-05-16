@@ -19,12 +19,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { IexMenuItem } from '../../../../../../components/iex-menu-item/iex-menu-item';
 import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
-import type { RootState } from '../../../../../../store/store';
+import type { AppDispatch, RootState } from '../../../../../../store/store';
 import { LoginState, userSlice } from '../../../../../../store/user.slice';
 
 export const UserMenu = () => {
   const { userInfo, loginState } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const requestLogin = () => dispatch(userSlice.actions.requestLogin(true));
 
