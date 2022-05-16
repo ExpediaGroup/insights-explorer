@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.3...v3.14.4) (2022-05-16)
+
+
+### Bug Fixes
+
+* **deps:** bump @testing-library/react to 13.2.0 ([39679e2](https://github.com/ExpediaGroup/insights-explorer/commit/39679e24463032e6ac2c6df57ea17be9c578f593))
+* **deps:** bump chakra-ui to 2.0.0 ([fdc11b0](https://github.com/ExpediaGroup/insights-explorer/commit/fdc11b058786929cbc0c6e3f51fd8f31f477c569))
+* **deps:** bump react and @types/react ([14a15b9](https://github.com/ExpediaGroup/insights-explorer/commit/14a15b9f39501e7616ed88885e3a3594b0c9a07a))
+* **deps:** bump react-dom to 18.1.0 ([55699fd](https://github.com/ExpediaGroup/insights-explorer/commit/55699fd418da98cc1da3991875152cafb1887e86))
+
 ### [3.14.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.2...v3.14.3) (2022-05-16)
 
 
