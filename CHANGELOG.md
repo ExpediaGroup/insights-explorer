@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.2...v3.14.3) (2022-05-16)
+
+
+### Bug Fixes
+
+* **deps:** bump @slack/bolt from 3.11.0 to 3.11.1 ([74c581c](https://github.com/ExpediaGroup/insights-explorer/commit/74c581cfb3cac59bf41adc7048d7a2a5d7560088))
+* **deps:** bump react-redux from 7.2.8 to 8.0.1 ([f06f74f](https://github.com/ExpediaGroup/insights-explorer/commit/f06f74f597017150319601d6195c2e1b38320f01))
+* Migrate to React-Redux 8.x ([3b3a2b6](https://github.com/ExpediaGroup/insights-explorer/commit/3b3a2b640d9ec1faeb93528e7e8463f0af16eda1)), closes [/github.com/reduxjs/react-redux/issues/1918#issuecomment-1120697340](https://github.com/ExpediaGroup//github.com/reduxjs/react-redux/issues/1918/issues/issuecomment-1120697340)
+
 ### [3.14.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.1...v3.14.2) (2022-05-13)
 
 
