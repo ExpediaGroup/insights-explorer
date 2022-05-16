@@ -61,8 +61,19 @@ export const Header = (props) => {
       <Flex align="center" mr={5}>
         <RouterLink to="/">
           <Heading as="h1" display="flex" alignItems="center">
-            <Image src={`/assets/${headerImage}`} height="2rem" display="inline-block" mr="0.5rem" alt="IEX Logo" />
-            <Image src="/assets/iex-name.svg" height="1.33rem" display="inline-block" alt="Insights Explorer" />
+            <Image
+              src={`/assets/${headerImage}`}
+              height={{ base: '1.5rem', md: '2rem' }}
+              display="inline-block"
+              mr="0.5rem"
+              alt="IEX Logo"
+            />
+            <Image
+              src="/assets/iex-name.svg"
+              height={{ base: '1rem', md: '1.33rem' }}
+              display="inline-block"
+              alt="Insights Explorer"
+            />
           </Heading>
         </RouterLink>
       </Flex>
