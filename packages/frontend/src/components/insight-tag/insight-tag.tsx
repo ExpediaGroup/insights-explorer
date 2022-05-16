@@ -19,6 +19,7 @@ import { Tag, TagLabel } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 
 import { searchSlice } from '../../store/search.slice';
+import type { AppDispatch } from '../../store/store';
 import { Link } from '../link/link';
 
 interface Props {
@@ -27,7 +28,7 @@ interface Props {
 }
 
 export const InsightTag = ({ tag, dispatchSearch = false, ...tagProps }: Props & TagProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   let onClick = (e) => {
     return;

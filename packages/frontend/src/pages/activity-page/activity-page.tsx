@@ -26,14 +26,14 @@ import { Alert } from '../../components/alert/alert';
 import { generateSearchUrl } from '../../shared/search-url';
 import { useActivities } from '../../shared/useActivities';
 import { activitySlice } from '../../store/activity.slice';
-import type { RootState } from '../../store/store';
+import type { AppDispatch, RootState } from '../../store/store';
 
 import { ActivityFilterSidebar } from './components/activity-filter-sidebar/activity-filter-sidebar';
 import { ActivitySearchBar } from './components/activity-search-bar/activity-search-bar';
 
 export const ActivityPage = () => {
   const initialized = useRef(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { query, sort, showFilters, options } = useSelector((state: RootState) => state.activity);
 
   // Load query from params

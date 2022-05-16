@@ -33,7 +33,7 @@ import {
   toSearchQuery
 } from '../../../../shared/search';
 import { activitySlice } from '../../../../store/activity.slice';
-import type { RootState } from '../../../../store/store';
+import type { AppDispatch, RootState } from '../../../../store/store';
 
 import { ActivityTypeStack } from './components/activity-type-stack/activity-type-stack';
 import { DateStack } from './components/date-stack/date-stack';
@@ -61,7 +61,7 @@ interface Props {
 }
 
 export const ActivityFilterSidebar = ({ suggestedFilters, ...boxProps }: Props & BoxProps): ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { query, isFiltered } = useSelector((state: RootState) => state.activity);
 
   const [searchClauses, setSearchClauses] = useState<SearchClause[]>([]);

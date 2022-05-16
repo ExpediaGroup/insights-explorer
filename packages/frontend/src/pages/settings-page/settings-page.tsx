@@ -26,7 +26,7 @@ import { Link } from '../../components/link/link';
 import type { SettingsSection } from '../../components/settings-sidebar/settings-sidebar';
 import { SettingsSidebar } from '../../components/settings-sidebar/settings-sidebar';
 import { iconFactory } from '../../shared/icon-factory';
-import type { RootState } from '../../store/store';
+import type { AppDispatch, RootState } from '../../store/store';
 import { executeHealthCheck, userSlice } from '../../store/user.slice';
 import { ErrorPage } from '../error-page/error-page';
 
@@ -84,7 +84,7 @@ const settingSections: SettingsSection[] = [
 ];
 
 export const SettingsPage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { userInfo } = useSelector((state: RootState) => state.user);
 
   const [{ data, fetching, error }] = useQuery({

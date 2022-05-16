@@ -34,7 +34,7 @@ import { useDispatch } from 'react-redux';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
 import { useDebounce } from '../../../../shared/useDebounce';
 import { activitySlice } from '../../../../store/activity.slice';
-import type { RootState } from '../../../../store/store';
+import type { AppDispatch, RootState } from '../../../../store/store';
 import { ActivitySearchBox } from '../activity-search-box/activity-search-box';
 
 import { ActivitySearchSyntax } from './activity-search-syntax';
@@ -45,7 +45,7 @@ const availableSortFields = [
 ];
 
 export const ActivitySearchBar = (): ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const { query, sort, showFilters, isFiltered, options } = useSelector((state: RootState) => state.activity);
 

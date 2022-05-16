@@ -31,9 +31,7 @@ export const rootReducer = combineReducers({
   user: userSlice.reducer
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
-
-const persistedReducer = persistReducer<RootState>(
+const persistedReducer = persistReducer<ReturnType<typeof rootReducer>>(
   {
     key: 'root',
     version: 1,
@@ -52,6 +50,8 @@ export const store = configureStore({
     }
   })
 });
+
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export const persistor = persistStore(store);

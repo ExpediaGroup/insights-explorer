@@ -19,11 +19,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { appSlice } from '../../../../store/app.slice';
-import type { RootState } from '../../../../store/store';
+import type { AppDispatch, RootState } from '../../../../store/store';
 
 export const GlobalErrors = () => {
   const { globalErrorMessages } = useSelector((state: RootState) => state.app);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const toast = useToast();
 
   // Whenever global error messages are added, this component

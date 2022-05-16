@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { gql } from 'urql';
 
-import type { RootState } from '../../../store/store';
+import type { AppDispatch, RootState } from '../../../store/store';
 import { userSlice, login } from '../../../store/user.slice';
 import { urqlClient } from '../../../urql';
 
@@ -34,7 +34,7 @@ interface Props {
 }
 
 const LoginCallback = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { loggedIn } = useSelector((state: RootState) => state.user);
@@ -117,7 +117,7 @@ const AuthWrapper = ({ children }: Props) => {
   const { accessToken, loggedIn, requestingLogin } = useSelector((state: RootState) => state.user);
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (requestingLogin === true) {

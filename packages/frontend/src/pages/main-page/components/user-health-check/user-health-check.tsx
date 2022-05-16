@@ -23,11 +23,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '../../../../components/alert/alert';
 import { ExternalLink } from '../../../../components/external-link/external-link';
 import { Link as RouterLink } from '../../../../components/link/link';
-import type { RootState } from '../../../../store/store';
+import type { AppDispatch, RootState } from '../../../../store/store';
 import { executeHealthCheck } from '../../../../store/user.slice';
 
 const HealthCheckAlert = ({ children, allowRecheck = true }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const onRecheck = () => dispatch(executeHealthCheck());
 
@@ -59,7 +59,7 @@ export const UserHealthCheck = ({
   showPositiveChecks = false,
   ...boxProps
 }: { showPositiveChecks?: boolean } & BoxProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { loggedIn, healthCheck } = useSelector((state: RootState) => state.user);
   const { appSettings } = useSelector((state: RootState) => state.app);
 
