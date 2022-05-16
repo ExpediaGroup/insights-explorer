@@ -123,14 +123,14 @@ export const InsightEditorHeader = ({ insight, isPublishing, isSavingDraft, form
         borderBottomLeftRadius={0}
         borderBottomRightRadius={0}
       >
-        <HStack align="center">
-          <ItemTypeIcon itemType={itemType} fontSize={{ base: '2rem' }} />
+        <HStack align="flex-start">
+          <ItemTypeIcon itemType={itemType} fontSize={{ base: '1.75rem', sm: '2rem' }} />
 
-          <Heading as="h1" size="lg" flexGrow={1}>
+          <Heading as="h1" fontSize={{ base: 'xl', sm: '2xl', md: '3xl' }} flexGrow={1}>
             {insightName || `New ${titleize(itemType)}`}
           </Heading>
 
-          <Tag size="md" color="white" bg={getItemType(itemType).color}>
+          <Tag size="md" color="white" bg={getItemType(itemType).color} flexShrink={0}>
             Editing {titleize(itemType)}
           </Tag>
         </HStack>

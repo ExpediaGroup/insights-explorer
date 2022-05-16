@@ -15,7 +15,7 @@
  */
 
 import type { IconProps } from '@chakra-ui/react';
-import { Icon, Tooltip } from '@chakra-ui/react';
+import { Flex, Icon, Tooltip } from '@chakra-ui/react';
 import titleize from 'titleize';
 
 import { iconFactory } from '../../shared/icon-factory';
@@ -31,7 +31,7 @@ export const ItemTypeIcon = ({ itemType, ...extraProps }: { itemType: string } &
 
   return (
     <Tooltip label={`${titleize(itemType)}`} aria-label={`${titleize(itemType)} icon`}>
-      <span>
+      <Flex>
         <Icon
           as={iconFactory(iconKey)}
           rounded="md"
@@ -46,7 +46,7 @@ export const ItemTypeIcon = ({ itemType, ...extraProps }: { itemType: string } &
             }
           }}
         />
-      </span>
+      </Flex>
     </Tooltip>
   );
 };
