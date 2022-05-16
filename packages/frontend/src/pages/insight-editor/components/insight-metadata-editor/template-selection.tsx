@@ -27,7 +27,6 @@ import {
   FormLabel,
   useDisclosure
 } from '@chakra-ui/react';
-import type { RefObject } from 'react';
 import { useEffect, useRef } from 'react';
 import { useWatch } from 'react-hook-form';
 import type { UseFormReturn } from 'react-hook-form';
@@ -47,7 +46,7 @@ interface Props {
 export const TemplateSelection = ({ insight, isNewInsight, form, templates, templateChange }: Props) => {
   // Template alert confirmation
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = useRef() as RefObject<HTMLButtonElement>;
+  const cancelRef = useRef(null);
 
   const pendingTemplate = useRef<Insight>();
 

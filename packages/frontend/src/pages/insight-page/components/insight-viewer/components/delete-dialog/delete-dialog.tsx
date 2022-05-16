@@ -27,7 +27,6 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import type { RefObject } from 'react';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import titleize from 'titleize';
@@ -43,7 +42,7 @@ interface Props {
 }
 
 export const DeleteDialog = ({ insight, isOpen, onDelete, onClose }: Props) => {
-  const cancelRef = useRef() as RefObject<HTMLButtonElement>;
+  const cancelRef = useRef(null);
   const [isDeleting, setDeleting] = useState(false);
   const navigate = useNavigate();
 

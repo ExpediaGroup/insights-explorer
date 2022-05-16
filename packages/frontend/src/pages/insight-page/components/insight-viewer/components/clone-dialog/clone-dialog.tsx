@@ -27,7 +27,6 @@ import {
   Text,
   VStack
 } from '@chakra-ui/react';
-import type { RefObject } from 'react';
 import { useRef, useState } from 'react';
 import titleize from 'titleize';
 
@@ -42,7 +41,7 @@ interface Props {
 }
 
 export const CloneDialog = ({ insight, isOpen, onClone, onClose }: Props) => {
-  const cancelRef = useRef() as RefObject<HTMLButtonElement>;
+  const cancelRef = useRef(null);
   const [isCloning, setCloning] = useState(false);
 
   const onCloneInternal = async () => {

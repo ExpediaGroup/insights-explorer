@@ -38,7 +38,6 @@ import {
   useDisclosure,
   VStack
 } from '@chakra-ui/react';
-import type { RefObject } from 'react';
 import { useRef, useState } from 'react';
 import type { UseFormReturn } from 'react-hook-form';
 import { useWatch } from 'react-hook-form';
@@ -71,7 +70,7 @@ export const InsightEditorHeader = ({ insight, isPublishing, isSavingDraft, form
 
   // Delete Draft confirmation
   const { isOpen: isDiscardOpen, onOpen: onDiscardOpen, onClose: onDiscardClose } = useDisclosure();
-  const cancelRef = useRef() as RefObject<HTMLButtonElement>;
+  const cancelRef = useRef(null);
   const [isDiscarding, setDiscarding] = useState(false);
 
   const insightName = useWatch({

@@ -23,7 +23,6 @@ import {
   AlertDialogOverlay,
   Button
 } from '@chakra-ui/react';
-import type { RefObject } from 'react';
 import { useRef, useState } from 'react';
 
 import { DeleteIconButton } from '../../../../../../../../components/delete-icon-button/delete-icon-button';
@@ -36,7 +35,7 @@ interface Props {
 export const DeleteCommentButton = ({ onDelete, isDeleting }: Props) => {
   const [isAlertOpen, setAlertOpen] = useState(false);
   const onClose = () => setAlertOpen(false);
-  const cancelRef = useRef() as RefObject<HTMLButtonElement>;
+  const cancelRef = useRef(null);
 
   const handleDelete = () => {
     onClose();
