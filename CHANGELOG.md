@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.7...v3.14.8) (2022-05-17)
+
+
+### Bug Fixes
+
+* Fix missing Editor Sidebar icons ([c7096c1](https://github.com/ExpediaGroup/insights-explorer/commit/c7096c11230303e5c28a79c1d97dd487e76a3bb8))
+
 ### [3.14.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.6...v3.14.7) (2022-05-17)
 
 
