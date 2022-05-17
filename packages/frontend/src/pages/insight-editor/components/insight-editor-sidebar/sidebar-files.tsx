@@ -239,39 +239,40 @@ export const SidebarFiles = ({
         {(isFilesOpen || isMobile) && <SidebarHeading p="0.5rem">Files</SidebarHeading>}
       </HStack>
 
-      <Collapse in={isFilesOpen || (!isMobile && isFilesOpen)} animateOpacity>
-        <FileBrowser
-          mt="-2rem"
-          mb="1rem"
-          tree={tree}
-          actions={{
-            onSelect: (f) => {
-              // Ignore folders which have trees
-              if (f === undefined || !('tree' in f)) {
-                onSelectFile(f);
-              }
-            },
-            onDelete: (f, force = false) => onDelete(f, true, force),
-            onMove,
-            onNewFile,
-            onNewFolder,
-            onRename,
-            onUndelete: (f) => onDelete(f, false, false),
-            onUpload: onUploadFile
-          }}
-          isUploading={uploading}
-        />
+      <Box mt={isFilesOpen ? '-2rem' : 'unset'}>
+        <Collapse in={isFilesOpen || (!isMobile && isFilesOpen)} animateOpacity>
+          <FileBrowser
+            mb="1rem"
+            tree={tree}
+            actions={{
+              onSelect: (f) => {
+                // Ignore folders which have trees
+                if (f === undefined || !('tree' in f)) {
+                  onSelectFile(f);
+                }
+              },
+              onDelete: (f, force = false) => onDelete(f, true, force),
+              onMove,
+              onNewFile,
+              onNewFolder,
+              onRename,
+              onUndelete: (f) => onDelete(f, false, false),
+              onUpload: onUploadFile
+            }}
+            isUploading={uploading}
+          />
 
-        {uploading && <Progress size="xs" isIndeterminate />}
+          {uploading && <Progress size="xs" isIndeterminate />}
 
-        <Divider />
+          <Divider />
 
-        <Box p="0.5rem">
-          <Text as="em" fontSize="xs">
-            Maximum file size is 100MB.
-          </Text>
-        </Box>
-      </Collapse>
+          <Box p="0.5rem">
+            <Text as="em" fontSize="xs">
+              Maximum file size is 100MB.
+            </Text>
+          </Box>
+        </Collapse>
+      </Box>
     </Flex>
   );
 };
