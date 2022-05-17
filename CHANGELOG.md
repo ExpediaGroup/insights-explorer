@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.5...v3.14.6) (2022-05-17)
+
+
+### Bug Fixes
+
+* Fix overflowing Insights at very small resolutions ([4f6fc18](https://github.com/ExpediaGroup/insights-explorer/commit/4f6fc181f3dc2a764be924a369424270b3d92089))
+
 ### [3.14.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.4...v3.14.5) (2022-05-17)
 
 
