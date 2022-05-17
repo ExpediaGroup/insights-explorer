@@ -47,7 +47,7 @@ export const DefaultInsightCard = ({ insightEdge, options, ...props }: InsightCo
         <HStack spacing="0.5rem" align="center">
           <ItemTypeIcon itemType={insight.itemType} />
 
-          <LinkOverlay to={`/${insight.itemType}/${insight.fullName}`}>
+          <LinkOverlay to={`/${insight.itemType}/${insight.fullName}`} overflow="hidden">
             <Heading as="h2" size="lg">
               {insight.name}
             </Heading>
@@ -69,8 +69,8 @@ export const DefaultInsightCard = ({ insightEdge, options, ...props }: InsightCo
 
         <Text pl="0.5rem">{insight.description}</Text>
 
-        <HStack>
-          <Flex wrap="wrap">
+        <HStack wrap="wrap">
+          <Flex wrap="wrap" flexBasis={{ base: '70%', sm: '75%' }} flexShrink={1}>
             {insight.authors.edges.map(({ node: author }) => {
               return <UserTag key={author.userName + '-' + author.displayName} user={author} m="0.25rem" />;
             })}
@@ -79,7 +79,7 @@ export const DefaultInsightCard = ({ insightEdge, options, ...props }: InsightCo
             })}
           </Flex>
 
-          <VStack flexGrow={2} align="flex-end" alignSelf="flex-end" justify="flex-end" pr="0.5rem">
+          <VStack flexGrow={2} align="flex-end" alignSelf="flex-end" justify="flex-end" pr="0.5rem" flexShrink={0}>
             {options.showScores && (
               <Tooltip
                 label="This score indicates how relevant this Insight is to the search"
