@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.4...v3.14.5) (2022-05-17)
+
+
+### Bug Fixes
+
+* Improve editor header layout on mobile screens ([53ab330](https://github.com/ExpediaGroup/insights-explorer/commit/53ab330bbd31c9f3298861e9178d19c9b5bf7732))
+* Improve header layout on mobile screens ([4dbf552](https://github.com/ExpediaGroup/insights-explorer/commit/4dbf5526364d1790267c5224ed7358758c3d4dcb))
+
 ### [3.14.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.3...v3.14.4) (2022-05-16)
 
 
