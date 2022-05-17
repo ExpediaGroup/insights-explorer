@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.6...v3.14.7) (2022-05-17)
+
+
+### Bug Fixes
+
+* **deps:** bump @okta/okta-auth-js from 6.4.2 to 6.5.1 ([87297a9](https://github.com/ExpediaGroup/insights-explorer/commit/87297a9edb12f1f5cade95e80711d054d44055df))
+
 ### [3.14.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.5...v3.14.6) (2022-05-17)
 
 
