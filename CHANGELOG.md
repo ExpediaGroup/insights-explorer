@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.14.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.8...v3.14.9) (2022-05-18)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/react from 2.0.0 to 2.0.2 ([dffee19](https://github.com/ExpediaGroup/insights-explorer/commit/dffee190d32cfe57f69943d9cc1508111e20651a))
+* **deps:** bump helmet from 5.0.2 to 5.1.0 ([412931f](https://github.com/ExpediaGroup/insights-explorer/commit/412931f405911de02cc0d91cefbc76a7c0f6b9a4))
+* **deps:** bump react-medium-image-zoom from 4.3.7 to 4.4.0 ([16de2d0](https://github.com/ExpediaGroup/insights-explorer/commit/16de2d06bf37d7d501c883b01708164c41f04e5b))
+
 ### [3.14.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.7...v3.14.8) (2022-05-17)
 
 
