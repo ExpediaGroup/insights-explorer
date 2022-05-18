@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.15.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.9...v3.15.0) (2022-05-18)
+
+
+### Features
+
+* Autocomplete file names in the Markdown editor ([8ef735a](https://github.com/ExpediaGroup/insights-explorer/commit/8ef735a462b62c31df4cc7beadec194fb604549b))
+
 ### [3.14.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.8...v3.14.9) (2022-05-18)
 
 
