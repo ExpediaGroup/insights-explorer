@@ -112,12 +112,13 @@ const mentionCompleter = {
 
 interface Props {
   contents: string;
+  getAutocompleteFiles?: () => string[];
   onContentsChange: (updatedValue: string) => any;
   scrollSync: boolean;
   uploadFile?: (file: File, name: string) => Promise<UploadSingleFileMutation | undefined>;
 }
 
-export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadFile }: Props) => {
+export const MarkdownEditor = ({ contents, getAutocompleteFiles, onContentsChange, scrollSync, uploadFile }: Props) => {
   const aceTheme = useColorModeValue('chrome', 'nord_dark');
 
   const [internalValue, setInternalValue] = useState(contents);
@@ -189,6 +190,30 @@ export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadF
     [internalValue]
   );
 
+  const fileCompleter = {
+    identifierRegexps: [/\(.*/],
+    getCompletions: async (editor, session, pos, prefix: string, callback) => {
+      if (!prefix.endsWith('(')) {
+        callback(null, []);
+        return;
+      }
+
+      if (getAutocompleteFiles) {
+        const fileList = getAutocompleteFiles();
+        callback(
+          null,
+          fileList.map((file) => ({
+            name: `(${file})`,
+            value: `(${file})`,
+            snippet: `(${file}`,
+            meta: 'files',
+            score: 2000
+          }))
+        );
+      }
+    }
+  };
+
   const aceEditorHeight = useBreakpointValue({ base: undefined, xl: scrollSync ? '70vh' : '100%' });
 
   return (
@@ -211,7 +236,7 @@ export const MarkdownEditor = ({ contents, onContentsChange, scrollSync, uploadF
       setOptions={{
         scrollPastEnd: scrollSync,
         autoScrollEditorIntoView: true,
-        enableBasicAutocompletion: [emojiCompleter, mentionCompleter] as any,
+        enableBasicAutocompletion: [emojiCompleter, mentionCompleter, fileCompleter] as any,
         enableLiveAutocompletion: true,
         enableSnippets: true
       }}

@@ -17,6 +17,7 @@
 import type { FlexProps } from '@chakra-ui/react';
 import { Flex, Spinner } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import type { UseFormReturn } from 'react-hook-form';
 
 import { Alert } from '../../../../components/alert/alert';
 import { CodeEditor } from '../../../../components/code-editor/code-editor';
@@ -33,6 +34,7 @@ import {
   MIME_EDITOR
 } from '../../../../shared/mime-utils';
 import { useFetch } from '../../../../shared/useFetch';
+import type { DraftForm } from '../../draft-form';
 
 const preferredMimeTypes = {
   'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'application/pdf',
@@ -91,6 +93,7 @@ interface Props {
   baseAssetUrl?: string;
   baseLinkUrl?: string;
   file: InsightFile;
+  form: UseFormReturn<DraftForm>;
   onFileChange: (updatedFile: InsightFileInput) => void;
   insight: Insight;
   transformAssetUri: (uri: string) => string;
@@ -101,6 +104,7 @@ export const InsightFileEditor = ({
   baseAssetUrl = '/',
   baseLinkUrl = '/',
   file,
+  form,
   onFileChange,
   insight,
   transformAssetUri,
@@ -143,6 +147,7 @@ export const InsightFileEditor = ({
           renderer={(contents) => (
             <MarkdownSplitEditor
               contents={contents}
+              getAutocompleteFiles={() => form.getValues('files')?.map((f) => f.path) ?? []}
               onChange={onContentsChanged}
               baseAssetUrl={baseAssetUrl}
               baseLinkUrl={baseLinkUrl}

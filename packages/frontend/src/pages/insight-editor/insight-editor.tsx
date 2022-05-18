@@ -418,6 +418,7 @@ export const InsightEditor = memo(
                   <InsightFileEditor
                     key={selectedFileId}
                     insight={insight}
+                    form={form}
                     file={selectedFile}
                     onFileChange={fileChange}
                     baseAssetUrl={`/api/v1/insights/${insight.fullName}/assets`}
@@ -428,16 +429,6 @@ export const InsightEditor = memo(
                     overflow="auto"
                   />
                 )}
-                {/* <MarkdownSplitEditor
-                name="readme.contents"
-                contents={updatedReadme}
-                form={form}
-                flexGrow={1}
-                overflow="auto"
-                baseAssetUrl={`/api/v1/insights/${insight.fullName}/assets`}
-                baseLinkUrl={`/${itemType}/${insight.fullName}/files`}
-                transformAssetUri={transformAssetUri}
-              /> */}
               </TabPanel>
             </TabPanels>
           </Tabs>

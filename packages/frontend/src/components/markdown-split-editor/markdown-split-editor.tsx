@@ -117,6 +117,7 @@ interface Props {
   baseAssetUrl?: string;
   baseLinkUrl?: string;
   contents: string;
+  getAutocompleteFiles?: () => string[];
   onChange: (updatedContents: string) => void;
   showFormattingHelp?: boolean;
   showPreview?: boolean;
@@ -128,6 +129,7 @@ export const MarkdownSplitEditor = ({
   baseAssetUrl,
   baseLinkUrl,
   contents,
+  getAutocompleteFiles,
   onChange,
   showFormattingHelp = true,
   showPreview = true,
@@ -217,6 +219,7 @@ export const MarkdownSplitEditor = ({
         >
           <MarkdownEditor
             contents={contents}
+            getAutocompleteFiles={getAutocompleteFiles}
             onContentsChange={setInternalValue}
             uploadFile={uploadFile}
             scrollSync={scrollSync}
