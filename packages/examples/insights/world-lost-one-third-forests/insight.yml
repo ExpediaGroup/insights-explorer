@@ -1,0 +1,12 @@
+name: The world has lost one-third of its forest, but an end of deforestation is possible
+description: Over the last 10,000 years the world has lost one-third of its forests. An area twice the size of the United States. Half occurred in the last century.
+itemType: insight
+links:
+  - url: https://ourworldindata.org/world-lost-one-third-forests
+    name: Our World in Data
+    group: 'Source'
+tags:
+  - example
+metadata:
+  team: Our World in Data
+  publishedDate: '2021-02-09'
