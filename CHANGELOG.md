@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.16.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.15.0...v3.16.0) (2022-05-19)
+
+
+### Features
+
+* Add more examples from Our World in Data ([5f52da2](https://github.com/ExpediaGroup/insights-explorer/commit/5f52da21683d1ca5e4061026e44b8b20ad1b318c))
+
 ## [3.15.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.14.9...v3.15.0) (2022-05-18)
 
 
