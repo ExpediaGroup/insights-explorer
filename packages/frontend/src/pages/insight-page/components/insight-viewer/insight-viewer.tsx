@@ -24,6 +24,7 @@ import { FileViewer } from '../../../../components/file-viewer/file-viewer';
 import { ExportFooter } from './components/export-footer/export-footer';
 import { ExportHeader } from './components/export-header/export-header';
 import { InsightActivity } from './components/insight-activity/insight-activity';
+import { InsightChangeHistory } from './components/insight-change-history/insight-change-history';
 import { InsightComments } from './components/insight-comments/insight-comments';
 import { InsightFileViewer } from './components/insight-file-viewer/insight-file-viewer';
 import { InsightHeader } from './components/insight-header/insight-header';
@@ -156,6 +157,9 @@ export const InsightViewer = ({
 
                   {/* Activity view */}
                   <Route path="/activity" element={<InsightActivity insight={insight} />} />
+
+                  {/* Change History view */}
+                  <Route path="/change-history" element={<InsightChangeHistory insight={insight} />} />
                 </>
               )}
             </Routes>

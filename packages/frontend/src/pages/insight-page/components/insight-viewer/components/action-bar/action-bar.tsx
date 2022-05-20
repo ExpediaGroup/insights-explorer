@@ -173,6 +173,13 @@ export const ActionBar = ({
               Sync Now
             </MenuItem>
 
+            <RouterLink to={`/${insight.itemType}/${insight.fullName}/change-history`}>
+              <MenuItem>
+                <Icon as={iconFactory('commit')} mr="0.5rem" />
+                Change History
+              </MenuItem>
+            </RouterLink>
+
             {loggedIn && (
               <>
                 <MenuDivider />
