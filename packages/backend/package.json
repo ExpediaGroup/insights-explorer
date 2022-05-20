@@ -29,7 +29,7 @@
     "@octokit/rest": "18.12.0",
     "apollo-server-core": "3.6.7",
     "apollo-server-express": "3.7.0",
-    "aws-sdk": "2.1113.0",
+    "aws-sdk": "2.1140.0",
     "axios": "0.27.2",
     "better-queue": "3.8.10",
     "chardet": "1.4.0",
