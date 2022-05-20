@@ -29,8 +29,10 @@ export enum MIME_EDITOR {
 
 export enum MIME_VIEWER {
   Code,
+  Csv,
   Html,
   Image,
+  Json,
   Markdown,
   PDF,
   Video,
@@ -56,7 +58,7 @@ const mimeTypes: MimeTypeDefinition[] = [
     editor: MIME_EDITOR.Code,
     viewer: MIME_VIEWER.Code
   },
-  { mimeType: 'application/json', editorLanguage: 'json', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },
+  { mimeType: 'application/json', editorLanguage: 'json', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Json },
   { mimeType: 'application/pdf', editor: MIME_EDITOR.None, viewer: MIME_VIEWER.PDF },
   {
     mimeType: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -85,6 +87,7 @@ const mimeTypes: MimeTypeDefinition[] = [
 
   { mimeType: 'image/*', editor: MIME_EDITOR.None, viewer: MIME_VIEWER.Image },
 
+  { mimeType: 'text/csv', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Csv },
   { mimeType: 'text/html', editorLanguage: 'xml', editor: MIME_EDITOR.Html, viewer: MIME_VIEWER.Html },
   { mimeType: 'text/markdown', editorLanguage: 'markdown', editor: MIME_EDITOR.Markdown, viewer: MIME_VIEWER.Markdown },
   { mimeType: 'text/plain', editorLanguage: 'text', editor: MIME_EDITOR.Code, viewer: MIME_VIEWER.Code },

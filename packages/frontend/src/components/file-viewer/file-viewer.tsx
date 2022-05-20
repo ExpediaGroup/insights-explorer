@@ -30,8 +30,10 @@ import { useScrollToLocation } from '../../shared/use-scroll-to-location';
 import { useFetch } from '../../shared/useFetch';
 import { MarkdownContainer } from '../markdown-container/markdown-container';
 import { CodeRenderer } from '../renderers/code-renderer/code-renderer';
+import { CsvRenderer } from '../renderers/csv-renderer/csv-renderer';
 import { HtmlRenderer } from '../renderers/html-renderer/html-renderer';
 import { ImageRenderer } from '../renderers/image-renderer/image-renderer';
+import { JsonRenderer } from '../renderers/json-renderer/json-renderer';
 import { PdfRenderer } from '../renderers/pdf-renderer/pdf-renderer';
 import { VideoRenderer } from '../renderers/video-renderer/video-renderer';
 
@@ -225,6 +227,28 @@ export const FileViewer = ({
             renderer = <HtmlRenderer url={convertedDownloadUrl ?? downloadUrl} />;
           } else if (mode === 'raw') {
             renderer = <CodeRenderer contents={fetchedContents} language="xml" />;
+          }
+          canDisplayRaw = mode === 'rendered';
+          canDisplayRendered = !canDisplayRaw;
+          break;
+
+        case MIME_VIEWER.Csv:
+          unpause();
+          if (mode === 'rendered') {
+            renderer = <CsvRenderer contents={fetchedContents} />;
+          } else if (mode === 'raw') {
+            renderer = <CodeRenderer contents={fetchedContents} language="csv" />;
+          }
+          canDisplayRaw = mode === 'rendered';
+          canDisplayRendered = !canDisplayRaw;
+          break;
+
+        case MIME_VIEWER.Json:
+          unpause();
+          if (mode === 'rendered') {
+            renderer = <JsonRenderer contents={fetchedContents} />;
+          } else if (mode === 'raw') {
+            renderer = <CodeRenderer contents={fetchedContents} language="json" />;
           }
           canDisplayRaw = mode === 'rendered';
           canDisplayRendered = !canDisplayRaw;

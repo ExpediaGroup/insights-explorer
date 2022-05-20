@@ -46,10 +46,11 @@ import {
   FaUsers,
   FaUserTimes
 } from 'react-icons/fa';
-import { FiActivity } from 'react-icons/fi';
+import { FiActivity, FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 import {
   GoCheck,
   GoChevronDown,
+  GoChevronLeft,
   GoChevronRight,
   GoChevronUp,
   GoCircleSlash,
@@ -117,6 +118,7 @@ const icons = {
   calendar: VscCalendar,
   check: GoCheck,
   chevronDown: GoChevronDown,
+  chevronLeft: GoChevronLeft,
   chevronRight: GoChevronRight,
   chevronUp: GoChevronUp,
   clone: GrClone,
@@ -160,6 +162,10 @@ const icons = {
   optionsMenu: BsThreeDotsVertical,
   news: AiFillGift,
   page: GrDocumentText,
+  paginateLeft: FiChevronLeft,
+  paginateRight: FiChevronRight,
+  paginateFirst: FiChevronsLeft,
+  paginateLast: FiChevronsRight,
   permissions: FaUserEdit,
   preview: VscPreview,
   previousPage: VscChevronLeft,
