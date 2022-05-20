@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.17.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.16.0...v3.17.0) (2022-05-20)
+
+
+### Features
+
+* Render CSV and JSON files as tables ([e63c400](https://github.com/ExpediaGroup/insights-explorer/commit/e63c4004bc14445c1387d9d20ad3316f47aee717))
+
 ## [3.16.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.15.0...v3.16.0) (2022-05-19)
 
 
