@@ -23,7 +23,7 @@
     "framer-motion": "4.1.17",
     "graphql": "15.8.0",
     "immer": "9.0.12",
-    "katex": "0.15.3",
+    "katex": "0.15.6",
     "lodash": "4.17.21",
     "luxon": "2.4.0",
     "mdast-util-find-and-replace": "2.2.0",
