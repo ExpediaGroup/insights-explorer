@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.17.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.0...v3.17.1) (2022-05-23)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/theme from 2.0.0 to 2.0.1 ([100a56a](https://github.com/ExpediaGroup/insights-explorer/commit/100a56a9cabac9c2eb5610db46c784c1e1323c64))
+* **deps:** bump dset from 3.1.1 to 3.1.2 ([8c08c47](https://github.com/ExpediaGroup/insights-explorer/commit/8c08c476f9d5c1719780be9a349ce5a2ecc29476))
+* **deps:** bump mdast-util-find-and-replace from 2.1.0 to 2.2.0 ([5844787](https://github.com/ExpediaGroup/insights-explorer/commit/5844787095e34283971bc173b4c7bd751a82f3ed))
+* **deps:** bump react-confetti from 6.0.1 to 6.1.0 ([f29d997](https://github.com/ExpediaGroup/insights-explorer/commit/f29d997afc9bb551df0849a3d73cefb4d258411f))
+
 ## [3.17.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.16.0...v3.17.0) (2022-05-20)
 
 
