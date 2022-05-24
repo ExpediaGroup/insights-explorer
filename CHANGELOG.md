@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.17.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.8...v3.17.9) (2022-05-24)
+
+
+### Bug Fixes
+
+* **deps:** bump react-redux from 8.0.1 to 8.0.2 ([44915bd](https://github.com/ExpediaGroup/insights-explorer/commit/44915bdde01ed58216d0b1fbee6004d6ffe01899))
+
 ### [3.17.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.7...v3.17.8) (2022-05-24)
 
 
