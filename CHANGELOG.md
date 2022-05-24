@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.17.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.7...v3.17.8) (2022-05-24)
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-core from 3.6.7 to 3.8.1 ([92085f6](https://github.com/ExpediaGroup/insights-explorer/commit/92085f6ddc78fd3c6b5a1aec8a6b0d1782639731))
+* Update `package-lock.json` ([9e4e89a](https://github.com/ExpediaGroup/insights-explorer/commit/9e4e89a27bd788ff65a9dbffc18e95250735a84d))
+
 ### [3.17.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.6...v3.17.7) (2022-05-24)
 
 
