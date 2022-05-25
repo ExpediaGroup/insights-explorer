@@ -14,29 +14,41 @@
  * limitations under the License.
  */
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
+import { Alert } from '../../alert/alert';
+import { CodeRenderer } from '../code-renderer/code-renderer';
 import { TableRenderer } from '../table-renderer/table-renderer';
 
 export const JsonRenderer = ({ contents }) => {
+  const [error, setError] = useState(undefined);
+
   const results = useMemo(() => {
     if (contents) {
-      const data = JSON.parse(contents);
+      try {
+        const data = JSON.parse(contents);
 
-      // Assume all the columns are in the first row
-      // We could extend this to take a larger sample of data to determine the columns
-      const columns = Object.keys(data[0]).map((column) => ({
-        Header: column,
-        accessor: column
-      }));
+        // Assume all the columns are in the first row
+        // We could extend this to take a larger sample of data to determine the columns
+        const columns = Object.keys(data[0]).map((column) => ({
+          Header: column,
+          accessor: column
+        }));
 
-      return {
-        columns,
-        data
-      };
+        return {
+          columns,
+          data
+        };
+      } catch (error: any) {
+        setError(error);
+      }
     }
   }, [contents]);
 
+  if (error) {
+    // Fallback to displaying the contents as a code snippet
+    return <CodeRenderer contents={contents} language="json" />;
+  }
   if (results === undefined) {
     return null;
   }

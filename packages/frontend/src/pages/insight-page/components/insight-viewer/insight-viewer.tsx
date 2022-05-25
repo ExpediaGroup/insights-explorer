@@ -138,6 +138,8 @@ export const InsightViewer = ({
                     element={
                       <FileViewer
                         mime="application/json"
+                        defaultMode="raw"
+                        canRender={false}
                         contents={JSON.stringify(insight, null, 2)}
                         baseAssetUrl={`/api/v1/insights/${insight.fullName}/assets`}
                         baseLinkUrl={`/${insight.itemType}/${insight.fullName}/files`}

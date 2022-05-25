@@ -110,6 +110,9 @@ export interface FileViewerProps {
   // Set true to indicate the rendered file is a conversion
   isConverted?: boolean;
 
+  defaultMode?: 'rendered' | 'raw';
+  canRender?: boolean;
+
   mime?: string;
   path?: string;
 
@@ -131,6 +134,8 @@ export const FileViewer = ({
   headerStyles = {},
   isConverted = false,
   mime,
+  defaultMode = 'rendered',
+  canRender = true,
   path,
   transformAssetUri,
   ...props
@@ -147,7 +152,7 @@ export const FileViewer = ({
   const convertedDownloadUrl = isConverted ? getCompletePath(baseAssetUrl, path, true) : undefined;
 
   const [paused, setPaused] = useState(true);
-  const [mode, setMode] = useState('rendered');
+  const [mode, setMode] = useState(defaultMode);
   const unpause = () => paused && setPaused(false);
   const pause = () => !paused && setPaused(true);
 
@@ -162,7 +167,7 @@ export const FileViewer = ({
   });
 
   let canDisplayRaw = false;
-  let canDisplayRendered = false;
+  let canDisplayRendered = canRender;
   const canDownload = allowDownload;
   let renderer: ReactElement | null = null;
 
@@ -334,7 +339,7 @@ export const FileViewer = ({
               />
             </Tooltip>
           )}
-          {canDisplayRendered && (
+          {canRender && canDisplayRendered && (
             <Tooltip placement="bottom" label="Display rendered" aria-label="Display rendered">
               <IconButton
                 aria-label="Display rendered"
