@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.17.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.9...v3.17.10) (2022-05-25)
+
+
+### Bug Fixes
+
+* Allow JSONRenderer to fallback to code view if data is not tabular ([81aa5eb](https://github.com/ExpediaGroup/insights-explorer/commit/81aa5ebaa7161ff97e8c21a85f7b49d4f3611ad8))
+
 ### [3.17.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.8...v3.17.9) (2022-05-24)
 
 
