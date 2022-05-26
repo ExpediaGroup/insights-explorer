@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.17.11](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.10...v3.17.11) (2022-05-26)
+
+
+### Bug Fixes
+
+* **deps:** bump pino-http from 7.0.0 to 7.1.0 ([68d6d69](https://github.com/ExpediaGroup/insights-explorer/commit/68d6d69123008b8f0a573c0d49e100b6037d19a1))
+
 ### [3.17.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.9...v3.17.10) (2022-05-25)
 
 
