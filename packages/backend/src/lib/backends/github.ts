@@ -496,7 +496,7 @@ export async function getCommitList(owner: string, repo: string): Promise<GitHub
             defaultBranchRef {
               target {
                 ... on Commit {
-                  history(first:100, ${endCursor ? ', after: $after' : ''}) {
+                  history(first:100 ${endCursor ? ', after: $after' : ''}) {
                     pageInfo {
                       endCursor
                       hasNextPage
