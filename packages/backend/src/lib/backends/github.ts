@@ -32,7 +32,8 @@ import {
   GitHubUser,
   GitHubTokenMetadata,
   GitHubRepositoryPermission,
-  GitHubRepositoryCollaboratorEdge
+  GitHubRepositoryCollaboratorEdge,
+  GitHubRepositoryHistoryEdge
 } from '../../models/backends/github';
 import { sleep } from '../../shared/util';
 
@@ -478,6 +479,59 @@ export async function addUserToOrganization(token: string, org: string, username
   });
 
   logger.info(`Successfully added ${username} to ${org}`);
+}
+
+export async function getCommitList(owner: string, repo: string): Promise<GitHubRepositoryHistoryEdge[]> {
+  const edges: GitHubRepositoryHistoryEdge[] = [];
+  try {
+    const { repository }: { repository: GitHubRepository } = await makeGraphql()({
+      query: `query commitList($owner: String!, $repo: String!) {
+      repository(owner: $owner, name: $repo) {
+        id
+        name
+        defaultBranchRef {
+          target {
+            ... on Commit {
+              history(first:100) {
+                edges {
+                  node {
+                    ... on Commit {
+                      message
+                      author {
+                        name
+                        user {
+                          login
+                          name
+                        }
+                      }
+                      committedDate
+                      changedFiles
+                      additions
+                      deletions
+                      abbreviatedOid
+                      oid
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }`,
+      owner,
+      repo
+    });
+
+    const commits = repository!.defaultBranchRef!.target?.history;
+    edges.push(...commits.edges);
+  } catch (error: any) {
+    logger.debug(`Unable to retrieve Repository commits. ${error}`);
+  }
+
+  logger.info(`${edges.length} Retrieved commits for ${owner}/${repo}: ${JSON.stringify(edges, null, 2)}`);
+
+  return edges;
 }
 
 export async function getCollaborators(owner: string, repo: string): Promise<GitHubRepositoryCollaboratorEdge[]> {

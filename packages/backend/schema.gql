@@ -167,6 +167,7 @@ type GitHubSettings {
 
 type Insight {
   authors: UserConnection!
+  changeHistory: InsightChangeConnection!
   collaborators: UserPermissionConnection
   commentCount: Float!
   comments: CommentConnection
@@ -202,6 +203,27 @@ type Insight {
 type InsightActivityDetails {
   commitMessage: String
   insight: Insight
+}
+
+type InsightChange {
+  abbreviatedOid: String!
+  additions: Float!
+  author: User!
+  changedFiles: Float!
+  committedDate: String!
+  deletions: Float!
+  message: String!
+  oid: String!
+}
+
+type InsightChangeConnection {
+  edges: [InsightChangeEdge!]!
+  pageInfo: PageInfo
+}
+
+type InsightChangeEdge {
+  cursor: String!
+  node: InsightChange!
 }
 
 type InsightCollaboratorActivityDetails {
