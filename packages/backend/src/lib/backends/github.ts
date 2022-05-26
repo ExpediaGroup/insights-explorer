@@ -556,7 +556,7 @@ export async function getCollaborators(owner: string, repo: string): Promise<Git
   while (hasNextPage === true) {
     try {
       const { repository }: { repository: GitHubRepository } = await makeGraphql()({
-        query: `query collaborators($owner: String!, $repo: String!) {
+        query: `query collaborators($owner: String!, $repo: String!${endCursor ? ', $after: String!' : ''}) {
           repository(owner: $owner, name: $repo${endCursor ? ', after: $after' : ''}) {
             collaborators(first: 100, affiliation: DIRECT) {
               pageInfo {
@@ -582,6 +582,7 @@ export async function getCollaborators(owner: string, repo: string): Promise<Git
 
       const collaborators = repository.collaborators;
       hasNextPage = collaborators.pageInfo!.hasNextPage;
+      endCursor = collaborators.pageInfo!.endCursor;
       logger.info(`Retrieved ${collaborators.edges.length} collaborators...`);
       edges.push(...collaborators.edges);
     } catch (error: any) {
