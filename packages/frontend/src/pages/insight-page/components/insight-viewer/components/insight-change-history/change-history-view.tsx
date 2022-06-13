@@ -14,20 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  Box,
-  Button,
-  Collapse,
-  Flex,
-  Heading,
-  HStack,
-  Icon,
-  IconButton,
-  Text,
-  Tooltip,
-  useDisclosure,
-  VStack
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack, Icon, Text, Tooltip, Stack, VStack } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
 import { useSelector } from 'react-redux';
 
@@ -36,7 +23,7 @@ import { TextWithIcon } from '../../../../../../components/text-with-icon/text-w
 import { UserTag } from '../../../../../../components/user-tag/user-tag';
 import type { InsightChangeEdge } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
-import { iconFactory, iconFactoryAs } from '../../../../../../shared/icon-factory';
+import { iconFactory } from '../../../../../../shared/icon-factory';
 import type { RootState } from '../../../../../../store/store';
 
 export interface ChangeHistoryProps {
@@ -45,8 +32,6 @@ export interface ChangeHistoryProps {
 }
 export const ChangeHistoryView = ({ changeEdge, insightFullName, ...props }) => {
   const change = changeEdge.node;
-
-  const { isOpen, onOpen, onToggle } = useDisclosure();
 
   const { appSettings } = useSelector((state: RootState) => state.app);
 
@@ -67,49 +52,42 @@ export const ChangeHistoryView = ({ changeEdge, insightFullName, ...props }) => 
           </HStack>
         </VStack>
         <HStack alignContent="center" h="full">
-          <Button size="sm">Roll back to commit</Button>
+          {/* <Button size="sm">Roll back to commit</Button> */}
         </HStack>
       </HStack>
 
       <Flex direction="column">
-        <HStack justify="space-between" onClick={onToggle} pl="1rem" m="0.5rem">
-          <Heading fontSize="sm" fontWeight="bold">
-            Show more info
-          </Heading>
-          <IconButton
-            aria-label="Expand/collapse"
-            icon={isOpen ? iconFactoryAs('chevronUp') : iconFactoryAs('chevronDown')}
-            variant="ghost"
-            size="sm"
-            title={isOpen ? 'Collapse this section' : 'Expand this section'}
-          />
-        </HStack>
-        <Collapse in={isOpen} animateOpacity>
-          <VStack flexGrow={1} align="flex-start" m="0.5rem" ml="2rem">
-            <TextWithIcon iconName="fileChange" iconColor="fff">
-              {change.changedFiles} Files Changed
+        <Stack
+          direction={{ base: 'column', xl: 'row' }}
+          spacing={{ xl: '1.5rem' }}
+          flexGrow={1}
+          align="flex-start"
+          m="0.5rem"
+          ml="2rem"
+        >
+          <TextWithIcon iconName="fileChange" iconColor="fff">
+            {change.changedFiles} Files Changed
+          </TextWithIcon>
+          <TextWithIcon iconName="additions" iconColor="fff">
+            {change.additions} Additions
+          </TextWithIcon>
+          <TextWithIcon iconName="deletions" iconColor="fff">
+            {change.deletions} Deletions
+          </TextWithIcon>
+          <HStack>
+            <TextWithIcon iconName="commit" iconColor="fff">
+              Commit Hash:{' '}
             </TextWithIcon>
-            <TextWithIcon iconName="additions" iconColor="fff">
-              {change.additions} Additions
-            </TextWithIcon>
-            <TextWithIcon iconName="deletions" iconColor="fff">
-              {change.deletions} Deletions
-            </TextWithIcon>
-            <HStack>
-              <TextWithIcon iconName="commit" iconColor="fff">
-                Commit Hash:{' '}
-              </TextWithIcon>
-              <ExternalLink
-                href={`${appSettings?.gitHubSettings.url}/${insightFullName}/commit/${change.oid}`}
-                display="inline-block"
-              >
-                <Text as="span" fontWeight="bold">
-                  {change.abbreviatedOid}
-                </Text>
-              </ExternalLink>
-            </HStack>
-          </VStack>
-        </Collapse>
+            <ExternalLink
+              href={`${appSettings?.gitHubSettings.url}/${insightFullName}/commit/${change.oid}`}
+              display="inline-block"
+            >
+              <Text as="span" fontWeight="bold">
+                {change.abbreviatedOid}
+              </Text>
+            </ExternalLink>
+          </HStack>
+        </Stack>
       </Flex>
     </>
   );
