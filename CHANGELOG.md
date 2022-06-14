@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.17.12](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.11...v3.17.12) (2022-06-14)
+
+
+### Bug Fixes
+
+* Add Change History feature on Backend ([#926](https://github.com/ExpediaGroup/insights-explorer/issues/926)) ([74223c3](https://github.com/ExpediaGroup/insights-explorer/commit/74223c31bdef19e59c2438665fc553bf78b0dfe4))
+
 ### [3.17.11](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.10...v3.17.11) (2022-05-26)
 
 
