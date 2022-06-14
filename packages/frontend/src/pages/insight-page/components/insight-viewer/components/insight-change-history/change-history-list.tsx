@@ -15,11 +15,18 @@
  */
 
 import { Box, Flex, StackDivider, useToast, VStack } from '@chakra-ui/react';
-import { gql, useQuery } from 'urql';
+import { gql, useMutation, useQuery } from 'urql';
 
 import { ActivityListSkeleton } from '../../../../../../components/activity-list/components/activity-list-skeleton/activity-list-skeleton';
+import { Alert } from '../../../../../../components/alert/alert';
 
 import { ChangeHistoryView } from './change-history-view';
+
+const ROLL_BACK_CHANGE_MUTATION = gql`
+  mutation RollBackChange($gitHash: String!, $insightId: ID!) {
+    rollBackChange(gitHash: $gitHash, insightId: $insightId)
+  }
+`;
 
 const CHANGE_HISTORY_FRAGMENT = gql`
   fragment ChangeHistoryFields on Insight {
@@ -60,20 +67,55 @@ const INSIGHT_CHANGE_HISTORY_QUERY = gql`
 export interface ChangeHistoryProps {
   insightId?: string;
   insightFullName?: string;
+  canEdit?: boolean;
 }
 
-export const ChangeHistoryList = ({ insightId, insightFullName }: ChangeHistoryProps) => {
-  const [{ data, error, fetching: changeHistoryFetching }] = useQuery({
+export const ChangeHistoryList = ({ insightId, insightFullName, canEdit }: ChangeHistoryProps) => {
+  const toast = useToast();
+
+  const [{ data, error, fetching: changeHistoryFetching }, reexecuteChangeHistory] = useQuery({
     query: INSIGHT_CHANGE_HISTORY_QUERY,
     variables: { id: insightId }
   });
 
-  const toast = useToast();
+  const [{ fetching: fetchingRollBack }, rollBackChange] = useMutation(ROLL_BACK_CHANGE_MUTATION);
+
+  const onRollBackChange = async (gitHash) => {
+    const { error } = await rollBackChange({
+      gitHash,
+      insightId
+    });
+
+    if (error) {
+      toast({
+        position: 'bottom-right',
+        title: `Error when trying to roll back.`,
+        description: error.message,
+        status: 'error',
+        duration: 9000,
+        isClosable: true
+      });
+
+      return false;
+    }
+
+    toast({
+      position: 'bottom-right',
+      title: `Rolled back successfull.`,
+      description: `Successfully rolled back to commit ${gitHash}`,
+      status: 'success',
+      duration: 9000,
+      isClosable: true
+    });
+
+    reexecuteChangeHistory({ requestPolicy: 'network-only' });
+  };
 
   if (error) {
     toast({
       position: 'bottom-right',
-      title: `Error while fetcing Change History.`,
+      title: `Error while fetching Change History.`,
+      description: error.message,
       status: 'error',
       duration: 9000,
       isClosable: true
@@ -88,16 +130,30 @@ export const ChangeHistoryList = ({ insightId, insightFullName }: ChangeHistoryP
 
   const changeHistory = data.insight.changeHistory;
 
-  if (changeHistory) {
-    console.log(`Changes: ${changeHistory.edges.length}`);
-  }
-
   return (
     <Box>
+      {fetchingRollBack && (
+        <Alert info={`Rolling Back to commit.\nPlease wait, this might take some time.`} mb="1rem" />
+      )}
+
+      {!canEdit && (
+        <Alert
+          warning={`You don't have permissions to publish changes to this Insight. So you can't roll back to a previous commit.`}
+          mb="1rem"
+        />
+      )}
+
       <Flex>
         <VStack flexGrow={1} spacing="0.5rem" align="stretch" divider={<StackDivider borderColor="snowstorm.100" />}>
-          {changeHistory.edges.map((edge) => (
-            <ChangeHistoryView key={edge.node.id} changeEdge={edge} insightFullName={insightFullName} />
+          {changeHistory.edges.map((edge, index) => (
+            <ChangeHistoryView
+              key={edge.node.abbreviatedOid}
+              changeEdge={edge}
+              insightFullName={insightFullName}
+              enableRollBack={index > 0 && canEdit}
+              onRollBackChange={onRollBackChange}
+              fetchingRollBack={fetchingRollBack}
+            />
           ))}
         </VStack>
       </Flex>

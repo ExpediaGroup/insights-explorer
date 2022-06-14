@@ -532,6 +532,31 @@ export class InsightResolver {
     }
   }
 
+  @Authorized<Permission>({ user: true, github: true })
+  @Mutation(() => ID)
+  async rollBackChange(
+    @Arg('gitHash') gitHash: string,
+    @Arg('insightId', () => ID) insightId: string,
+    @Ctx() ctx: Context
+    // Get fields
+  ): Promise<string> {
+    logger.debug('Roll back to specific change', insightId);
+
+    try {
+      const [, dbInsightId] = fromGlobalId(insightId);
+
+      const insight = (await getInsight(dbInsightId)) as Insight;
+
+      const commitHash = await this.changeHistoryService.rollBackToCommit(gitHash, ctx.user!, insight);
+
+      return commitHash;
+    } catch (error: any) {
+      logger.error(error.message);
+      logger.error(JSON.stringify(error, null, 2));
+      throw error;
+    }
+  }
+
   private getRequestedFields(fields: { Insight: { [str: string]: ResolveTree } }): string[] {
     const requestedFields = Object.keys(fields.Insight);
     return [...new Set([...requestedFields, 'insightId', 'fullName', 'contributors', 'repository'])];

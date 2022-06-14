@@ -42,6 +42,12 @@ export type ApplyGitChangesArgs = {
   commitMessage: string;
 };
 
+export type RollBackCommitArgs = {
+  gitHash: string;
+  gitUrl: string;
+  user: User;
+};
+
 // Filter out `.git` files, and optionally a provided filter
 const gitFilter: WalkPredicate = (wf) => wf.path != `.git`;
 
@@ -77,7 +83,7 @@ export class GitInstance {
   /**
    * Clone, modify, commit, and push one or more changes to a git repository.
    *
-   * @param insight Insight to update
+   * @param gitUrl Repository url from Insight
    * @param user User making the changes
    * @param changes Array of one or more change functions
    * @param commitMessage Message to use when making the commit
@@ -97,6 +103,33 @@ export class GitInstance {
     // Commit changes and push
     logger.debug(`Making commit as user ${name} (${email})`);
     const sha = await gitInstance.commit(commitMessage, { name, email });
+    logger.debug(`Pushing change to origin!`);
+    await gitInstance.push(githubPersonalAccessToken!);
+    logger.debug(`Changes pushed successfully!`);
+    await gitInstance.cleanup();
+
+    return sha;
+  }
+
+  /**
+   * Rollback to a previous commit using the git commit hash
+   * @param gitHash Commit has to rollback to
+   * @param gitUrl Git repository url from Insight
+   * @param user User making the changes
+   * @returns Hash from new pushed commit
+   */
+  public static async rollBackCommit({ gitHash, gitUrl, user }: RollBackCommitArgs): Promise<string> {
+    const { displayName: name, email, githubPersonalAccessToken } = user;
+
+    const gitInstance = await GitInstance.from(gitUrl, githubPersonalAccessToken!);
+
+    // Checkout changes from commit using hash
+    logger.debug(`Checkout from commit hash to restore files`);
+    await gitInstance.checkoutOnRef(gitHash, githubPersonalAccessToken!);
+
+    // Commit changes and push
+    logger.debug(`Making commit as user ${name} (${email})`);
+    const sha = await gitInstance.commit(`Rollback changes from ${gitHash.slice(0, 7)}`, { name, email });
     logger.debug(`Pushing change to origin!`);
     await gitInstance.push(githubPersonalAccessToken!);
     logger.debug(`Changes pushed successfully!`);
@@ -297,6 +330,37 @@ export class GitInstance {
       await fs.promises.copyFile(path.join(from.getLocalPath(), filepath), path.join(this.localPath, filepath));
       await git.add({ fs, dir: this.localPath, filepath });
     }
+  }
+
+  /**
+   * Checkout commit based on Git hash as ref
+   * to restore files from specific commit
+   * @param gitHash commit sha
+   * @param token personal token
+   */
+  async checkoutOnRef(gitHash: string, token: string): Promise<void> {
+    // Fetching git commit using hash
+    await git.fetch({
+      fs,
+      http,
+      dir: this.localPath,
+      url: this.url,
+      ref: gitHash,
+      depth: 1,
+      singleBranch: true,
+      tags: false,
+      onAuth: () => ({ username: token })
+    });
+
+    // Checkout using commit hash to restore files
+    await git.checkout({
+      fs,
+      dir: this.localPath!,
+      ref: gitHash,
+      noUpdateHead: true,
+      force: true
+    });
+    logger.debug(`Finished checking out commit with hash ${gitHash}`);
   }
 
   private getLocalPath(): string {

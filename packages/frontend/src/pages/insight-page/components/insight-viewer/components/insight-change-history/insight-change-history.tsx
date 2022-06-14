@@ -38,7 +38,7 @@ export const InsightChangeHistory = ({ insight, ...props }: Props & BoxProps) =>
       <Flex direction="row" align="center" height="50px">
         <Crumbs crumbs={breadcrumbs} />
       </Flex>
-      <ChangeHistoryList insightId={insight.id} insightFullName={insight.fullName} />
+      <ChangeHistoryList insightId={insight.id} insightFullName={insight.fullName} canEdit={insight.viewerCanEdit} />
     </VStack>
   );
 };

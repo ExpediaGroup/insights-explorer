@@ -15,21 +15,25 @@
  */
 
 import { getLogger } from '@iex/shared/logger';
+import { ApolloError } from 'apollo-server-core';
 import pMap from 'p-map';
 import { Service } from 'typedi';
 
 import { getCommitList } from '../lib/backends/github';
+import { GitInstance } from '../lib/git-instance';
+import { ActivityType } from '../models/activity';
 import { GitHubUser } from '../models/backends/github';
 import { Insight, InsightChange } from '../models/insight';
 import { User } from '../models/user';
 
+import { ActivityService } from './activity.service';
 import { UserService } from './user.service';
 
 const logger = getLogger('change-history.service');
 
 @Service()
 export class ChangeHistoryService {
-  constructor(private readonly userService: UserService) {
+  constructor(private readonly userService: UserService, private readonly activityService: ActivityService) {
     logger.trace('Constructing New Change History Service');
   }
 
@@ -45,6 +49,38 @@ export class ChangeHistoryService {
       const author = await this.getUser(node.author.name, node.author.user);
       return { ...node, author };
     });
+  }
+
+  async rollBackToCommit(gitHash: string, user: User, insight: Insight): Promise<string> {
+    const gitUrl = insight.repository.cloneUrl;
+    let commitHash;
+    try {
+      commitHash = await GitInstance.rollBackCommit({ gitHash, gitUrl, user });
+
+      //TODO: Sync repository to have the latest?
+
+      // Log Activity
+      this.activityService.recordActivity(ActivityType.EDIT_INSIGHT, user, {
+        insightId: insight.insightId,
+        insightName: insight.name
+      });
+    } catch (error: any) {
+      logger.error(`Error while rolling back to commit ${gitHash}`, error);
+
+      if (error.code === 'HttpError') {
+        // TODO: is 504 also related to git push permission ?
+        if (error.data.statusCode === 504) {
+          throw new ApolloError(error.data.statusMessage, 'TIMEOUT_ERROR');
+        }
+        throw new ApolloError(error.data.response, 'GIT_PUSH_PERMISSION');
+      } else if (error.caller === 'git.clone' && error.data.statusCode === 401) {
+        throw new ApolloError(error.data.response, 'GIT_CLONE_PERMISSION');
+      }
+
+      throw error;
+    }
+
+    return commitHash;
   }
 
   /**
