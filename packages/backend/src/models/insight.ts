@@ -21,7 +21,7 @@ import { IndexedInsightLink } from '@iex/models/indexed/indexed-insight-link';
 import { IndexedInsightMetadata } from '@iex/models/indexed/indexed-insight-metadata';
 import { ItemType } from '@iex/models/item-type';
 import { RepositoryPermission } from '@iex/models/repository-permission';
-import { Field, ObjectType, InputType, ID } from 'type-graphql';
+import { Field, InputType, ID, ObjectType } from 'type-graphql';
 
 import { Connection, Edge, PageInfo } from '../models/connection';
 import { toGlobalId } from '../shared/resolver-utils';
@@ -320,4 +320,49 @@ export class ValidateInsightName {
 
   @Field({ nullable: true })
   existingInsight?: Insight;
+}
+
+@ObjectType()
+export class InsightChange {
+  @Field()
+  message!: string;
+
+  @Field(() => User)
+  author!: User;
+
+  @Field()
+  committedDate!: string;
+
+  @Field()
+  changedFiles!: number;
+
+  @Field()
+  additions!: number;
+
+  @Field()
+  deletions!: number;
+
+  @Field()
+  abbreviatedOid!: string;
+
+  @Field()
+  oid!: string;
+}
+
+@ObjectType()
+export class InsightChangeEdge implements Edge<InsightChange> {
+  @Field()
+  cursor!: string;
+
+  @Field(() => InsightChange)
+  node!: InsightChange;
+}
+
+@ObjectType()
+export class InsightChangeConnection implements Connection<InsightChange> {
+  @Field(() => PageInfo, { nullable: true })
+  pageInfo?: PageInfo;
+
+  @Field(() => [InsightChangeEdge])
+  edges!: InsightChangeEdge[];
 }

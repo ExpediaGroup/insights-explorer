@@ -32,7 +32,8 @@ import {
   GitHubUser,
   GitHubTokenMetadata,
   GitHubRepositoryPermission,
-  GitHubRepositoryCollaboratorEdge
+  GitHubRepositoryCollaboratorEdge,
+  GitHubRepositoryHistoryEdge
 } from '../../models/backends/github';
 import { sleep } from '../../shared/util';
 
@@ -480,6 +481,73 @@ export async function addUserToOrganization(token: string, org: string, username
   logger.info(`Successfully added ${username} to ${org}`);
 }
 
+export async function getCommitList(owner: string, repo: string): Promise<GitHubRepositoryHistoryEdge[]> {
+  let hasNextPage = true;
+  let endCursor: string | undefined;
+  const edges: GitHubRepositoryHistoryEdge[] = [];
+
+  while (hasNextPage === true) {
+    try {
+      const { repository }: { repository: GitHubRepository } = await makeGraphql()({
+        query: `query commitList($owner: String!, $repo: String!${endCursor ? ', $after: String!' : ''}) {
+          repository(owner: $owner, name: $repo) {
+            id
+            name
+            defaultBranchRef {
+              target {
+                ... on Commit {
+                  history(first:100 ${endCursor ? ', after: $after' : ''}) {
+                    pageInfo {
+                      endCursor
+                      hasNextPage
+                    }
+                    edges {
+                      node {
+                        ... on Commit {
+                          message
+                          author {
+                            name
+                            user {
+                              login
+                              name
+                            }
+                          }
+                          committedDate
+                          changedFiles
+                          additions
+                          deletions
+                          abbreviatedOid
+                          oid
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }`,
+        owner,
+        repo,
+        after: endCursor
+      });
+
+      const commits = repository!.defaultBranchRef!.target?.history;
+      hasNextPage = commits.pageInfo!.hasNextPage;
+      endCursor = commits.pageInfo!.endCursor;
+      logger.info(`Retrieved ${commits.edges.length} commits...`);
+      edges.push(...commits.edges);
+    } catch (error: any) {
+      hasNextPage = false;
+      logger.debug(`Unable to retrieve Repository commits. ${error}`);
+    }
+  }
+
+  logger.info(`${edges.length} Retrieved commits for ${owner}/${repo}: ${JSON.stringify(edges, null, 2)}`);
+
+  return edges;
+}
+
 export async function getCollaborators(owner: string, repo: string): Promise<GitHubRepositoryCollaboratorEdge[]> {
   let hasNextPage = true;
   let endCursor: string | undefined;
@@ -488,7 +556,7 @@ export async function getCollaborators(owner: string, repo: string): Promise<Git
   while (hasNextPage === true) {
     try {
       const { repository }: { repository: GitHubRepository } = await makeGraphql()({
-        query: `query collaborators($owner: String!, $repo: String!) {
+        query: `query collaborators($owner: String!, $repo: String!${endCursor ? ', $after: String!' : ''}) {
           repository(owner: $owner, name: $repo${endCursor ? ', after: $after' : ''}) {
             collaborators(first: 100, affiliation: DIRECT) {
               pageInfo {
@@ -514,6 +582,7 @@ export async function getCollaborators(owner: string, repo: string): Promise<Git
 
       const collaborators = repository.collaborators;
       hasNextPage = collaborators.pageInfo!.hasNextPage;
+      endCursor = collaborators.pageInfo!.endCursor;
       logger.info(`Retrieved ${collaborators.edges.length} collaborators...`);
       edges.push(...collaborators.edges);
     } catch (error: any) {

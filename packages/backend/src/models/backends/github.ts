@@ -88,7 +88,7 @@ export interface GitHubRepository extends GitHubRepositoryStub {
   forkCount?: number;
   stargazers?: { totalCount: number };
   repositoryTopics?: { edges: { node: any }[] };
-  defaultBranchRef?: { name: string };
+  defaultBranchRef?: { name: string; target?: any };
   isArchived: boolean;
   collaborators: {
     pageInfo?: {
@@ -100,6 +100,8 @@ export interface GitHubRepository extends GitHubRepositoryStub {
 }
 
 export type GitHubRepositoryCollaboratorEdge = { permission: GitHubRepositoryPermission; node: GitHubUser };
+
+export type GitHubRepositoryHistoryEdge = { node: GitHubCommit };
 
 export type GitHubRepositoryPermission = 'ADMIN' | 'MAINTAIN' | 'READ' | 'TRIAGE' | 'WRITE' | 'NONE';
 
@@ -128,4 +130,18 @@ export interface GitHubUser {
 export interface GitHubTokenMetadata {
   login: string;
   scopes: string[];
+}
+
+export interface GitHubCommit {
+  message: string;
+  committedDate: string;
+  author: {
+    name: string;
+    user: GitHubUser;
+  };
+  changedFiles: number;
+  additions: number;
+  deletions: number;
+  abbreviatedOid: string;
+  oid: string;
 }

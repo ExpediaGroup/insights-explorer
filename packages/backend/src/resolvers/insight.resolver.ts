@@ -28,12 +28,13 @@ import { getInsight } from '../lib/elasticsearch';
 import { Activity, ActivityType, IndexedActivityDetails } from '../models/activity';
 import { CommentConnection } from '../models/comment';
 import { Context } from '../models/context';
-import { Insight, DbInsight, ValidateInsightName } from '../models/insight';
+import { Insight, DbInsight, ValidateInsightName, InsightChangeConnection } from '../models/insight';
 import { Permission } from '../models/permission';
 import { Repository } from '../models/repository';
 import { User, UserConnection } from '../models/user';
 import { UserPermissionConnection } from '../models/user-permission';
 import { ActivityService } from '../services/activity.service';
+import { ChangeHistoryService } from '../services/change-history.service';
 import { CommentService } from '../services/comment.service';
 import { DraftService } from '../services/draft.service';
 import { InsightService } from '../services/insight.service';
@@ -48,6 +49,7 @@ const logger = getLogger('insight.resolver');
 export class InsightResolver {
   constructor(
     private readonly activityService: ActivityService,
+    private readonly changeHistoryService: ChangeHistoryService,
     private readonly commentService: CommentService,
     private readonly draftService: DraftService,
     private readonly insightService: InsightService,
@@ -293,6 +295,17 @@ export class InsightResolver {
   @FieldResolver({ nullable: true })
   async viewerPermission(@Root() insight: Insight, @Ctx() ctx: Context): Promise<RepositoryPermission | null> {
     return ctx.user ? this.insightService.getUserPermission(insight, ctx.user) : null;
+  }
+
+  @FieldResolver(() => InsightChangeConnection)
+  async changeHistory(@Root() insight: Insight): Promise<InsightChangeConnection> {
+    const changes = await this.changeHistoryService.getChangeHistory(insight);
+    return {
+      edges: changes.map((c, i) => ({
+        cursor: toCursor('InsightChange', i),
+        node: c
+      }))
+    };
   }
 
   @Authorized<Permission>({ user: true, github: true })
