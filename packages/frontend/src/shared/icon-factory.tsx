@@ -46,7 +46,16 @@ import {
   FaUsers,
   FaUserTimes
 } from 'react-icons/fa';
-import { FiActivity, FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
+import {
+  FiActivity,
+  FiChevronLeft,
+  FiChevronRight,
+  FiChevronsLeft,
+  FiChevronsRight,
+  FiFileMinus,
+  FiFilePlus,
+  FiFileText
+} from 'react-icons/fi';
 import {
   GoCheck,
   GoChevronDown,
@@ -94,6 +103,7 @@ import {
   VscError,
   VscFeedback,
   VscFolderOpened,
+  VscGitPullRequest,
   VscJson,
   VscListTree,
   VscMail,
@@ -109,6 +119,7 @@ import {
 const icons = {
   404: VscDebugDisconnect,
   activities: FiActivity,
+  additions: FiFilePlus,
   admin: BsShieldLock,
   arrowLeft: FaArrowCircleLeft,
   authenticationError: VscError,
@@ -130,10 +141,12 @@ const icons = {
   converted: AiOutlineSwap,
   createDate: MdSchedule,
   crown: RiVipCrownLine,
+  deletions: FiFileMinus,
   download: MdFileDownload,
   draft: AiFillEdit,
   edit: AiFillEdit,
   email: VscMail,
+  fileChange: FiFileText,
   filter: FaFilter,
   folderOpened: VscFolderOpened,
   github: GoMarkGithub,
@@ -171,6 +184,7 @@ const icons = {
   previousPage: VscChevronLeft,
   print: MdPrint,
   profile: AiOutlineProfile,
+  pullRequest: VscGitPullRequest,
   readonly: GrDocumentLocked,
   reply: GoReply,
   rocket: VscRocket,
