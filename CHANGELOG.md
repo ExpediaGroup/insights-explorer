@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.18.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.18.0...v3.18.1) (2022-06-15)
+
+
+### Bug Fixes
+
+* **deps:** bump framer-motion from 6.3.3 to 6.3.11 ([d4d3d8e](https://github.com/ExpediaGroup/insights-explorer/commit/d4d3d8e8c2504fe89e31304fa50c88a663315e2e))
+
 ## [3.18.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.17.12...v3.18.0) (2022-06-14)
 
 
