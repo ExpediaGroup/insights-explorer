@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.18.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.18.1...v3.18.2) (2022-06-17)
+
+
+### Bug Fixes
+
+* **deps:** bump ace-builds from 1.5.1 to 1.6.0 ([c8a12ee](https://github.com/ExpediaGroup/insights-explorer/commit/c8a12eeef091fb956e3d341392e38c6e08c057de))
+* **deps:** bump react-icons from 4.3.1 to 4.4.0 ([f1d1496](https://github.com/ExpediaGroup/insights-explorer/commit/f1d1496fc23ebb482a3791cef788c8c2894ae744))
+
 ### [3.18.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.18.0...v3.18.1) (2022-06-15)
 
 
