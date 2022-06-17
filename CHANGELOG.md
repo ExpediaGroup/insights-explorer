@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.18.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.18.2...v3.18.3) (2022-06-17)
+
+
+### Bug Fixes
+
+* **deps:** bump react-medium-image-zoom from 4.4.0 to 4.4.3 ([a861bee](https://github.com/ExpediaGroup/insights-explorer/commit/a861beeb9267a4be624c8328268a7db0829ee592))
+
 ### [3.18.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.18.1...v3.18.2) (2022-06-17)
 
 
