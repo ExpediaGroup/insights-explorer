@@ -116,9 +116,9 @@ export class GitInstance {
    * @param gitHash Commit has to rollback to
    * @param gitUrl Git repository url from Insight
    * @param user User making the changes
-   * @returns Hash from new pushed commit
+   * @returns insight yaml from local path
    */
-  public static async rollBackCommit({ gitHash, gitUrl, user }: RollBackCommitArgs): Promise<string> {
+  public static async rollBackCommit({ gitHash, gitUrl, user }: RollBackCommitArgs): Promise<InsightYaml> {
     const { displayName: name, email, githubPersonalAccessToken } = user;
 
     const gitInstance = await GitInstance.from(gitUrl, githubPersonalAccessToken!);
@@ -129,13 +129,16 @@ export class GitInstance {
 
     // Commit changes and push
     logger.debug(`Making commit as user ${name} (${email})`);
-    const sha = await gitInstance.commit(`Rollback changes from ${gitHash.slice(0, 7)}`, { name, email });
+    await gitInstance.commit(`Rollback changes from ${gitHash.slice(0, 7)}`, { name, email });
     logger.debug(`Pushing change to origin!`);
     await gitInstance.push(githubPersonalAccessToken!);
     logger.debug(`Changes pushed successfully!`);
     await gitInstance.cleanup();
 
-    return sha;
+    // Get insightYaml to sync the Insight
+    const insightYaml = await gitInstance.retrieveInsightYaml();
+
+    return insightYaml;
   }
 
   async clone(token: string): Promise<void> {

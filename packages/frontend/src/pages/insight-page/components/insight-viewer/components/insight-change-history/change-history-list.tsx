@@ -22,12 +22,6 @@ import { Alert } from '../../../../../../components/alert/alert';
 
 import { ChangeHistoryView } from './change-history-view';
 
-const ROLL_BACK_CHANGE_MUTATION = gql`
-  mutation RollBackChange($gitHash: String!, $insightId: ID!) {
-    rollBackChange(gitHash: $gitHash, insightId: $insightId)
-  }
-`;
-
 const CHANGE_HISTORY_FRAGMENT = gql`
   fragment ChangeHistoryFields on Insight {
     id
@@ -60,6 +54,14 @@ const INSIGHT_CHANGE_HISTORY_QUERY = gql`
   query InsightChangeHistory($id: ID!) {
     insight(insightId: $id) {
       ...ChangeHistoryFields
+    }
+  }
+`;
+
+const ROLL_BACK_CHANGE_MUTATION = gql`
+  mutation RollBackChange($gitHash: String!, $insightId: ID!) {
+    rollBackChange(gitHash: $gitHash, insightId: $insightId) {
+      id
     }
   }
 `;

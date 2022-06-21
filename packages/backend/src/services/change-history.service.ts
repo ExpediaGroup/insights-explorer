@@ -19,7 +19,7 @@ import { ApolloError } from 'apollo-server-core';
 import pMap from 'p-map';
 import { Service } from 'typedi';
 
-import { getCommitList } from '../lib/backends/github';
+import { getCommitList, updateRepository, updateTopics } from '../lib/backends/github';
 import { GitInstance } from '../lib/git-instance';
 import { ActivityType } from '../models/activity';
 import { GitHubUser } from '../models/backends/github';
@@ -51,15 +51,13 @@ export class ChangeHistoryService {
     });
   }
 
-  async rollBackToCommit(gitHash: string, user: User, insight: Insight): Promise<string> {
+  async rollBackToCommit(gitHash: string, user: User, insight: Insight): Promise<void> {
     const gitUrl = insight.repository.cloneUrl;
-    let commitHash;
+    const { githubPersonalAccessToken } = user;
+    let insightYaml;
     try {
-      commitHash = await GitInstance.rollBackCommit({ gitHash, gitUrl, user });
+      insightYaml = await GitInstance.rollBackCommit({ gitHash, gitUrl, user });
 
-      //TODO: Sync repository to have the latest?
-
-      // Log Activity
       this.activityService.recordActivity(ActivityType.EDIT_INSIGHT, user, {
         insightId: insight.insightId,
         insightName: insight.name
@@ -68,7 +66,6 @@ export class ChangeHistoryService {
       logger.error(`Error while rolling back to commit ${gitHash}`, error);
 
       if (error.code === 'HttpError') {
-        // TODO: is 504 also related to git push permission ?
         if (error.data.statusCode === 504) {
           throw new ApolloError(error.data.statusMessage, 'TIMEOUT_ERROR');
         }
@@ -80,7 +77,26 @@ export class ChangeHistoryService {
       throw error;
     }
 
-    return commitHash;
+    // GitHub API updates (Sync Insight repository and update metadata)
+    logger.debug(`Updating GitHub repository (${insight.repository.externalId})`);
+    try {
+      if (insightYaml && insightYaml.description != null) {
+        await updateRepository(githubPersonalAccessToken!, {
+          repositoryId: insight.repository.externalId,
+          description: insightYaml.description
+        });
+      }
+      if (insightYaml && insightYaml.tags != null) {
+        await updateTopics(githubPersonalAccessToken!, {
+          repositoryId: insight.repository.externalId,
+          topicNames: insightYaml.tags
+        });
+      }
+    } catch (error: any) {
+      // Eat any exceptions since keeping GitHub in sync is not required
+      logger.error(`Unable to update GitHub repository: ${insight.repository.externalFullName}`);
+      logger.error(JSON.stringify(error, null, 2));
+    }
   }
 
   /**

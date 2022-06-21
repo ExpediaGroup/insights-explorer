@@ -51,6 +51,7 @@ export const ChangeHistoryView = ({
   const onClick = async () => {
     setClicked(true);
     await onRollBackChange(change.oid);
+    setClicked(false);
   };
 
   return (
