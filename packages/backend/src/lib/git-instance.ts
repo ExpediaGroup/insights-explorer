@@ -133,10 +133,12 @@ export class GitInstance {
     logger.debug(`Pushing change to origin!`);
     await gitInstance.push(githubPersonalAccessToken!);
     logger.debug(`Changes pushed successfully!`);
-    await gitInstance.cleanup();
 
     // Get insightYaml to sync the Insight
     const insightYaml = await gitInstance.retrieveInsightYaml();
+
+    // Cleanup
+    await gitInstance.cleanup();
 
     return insightYaml;
   }
