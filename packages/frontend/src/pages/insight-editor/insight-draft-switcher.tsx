@@ -42,9 +42,9 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { gql, useMutation, useQuery } from 'urql';
 
 import { Link as RouterLink } from '../../components/link/link';
-import type { Insight } from '../../models/generated/graphql';
 import { formatRelativeIntl } from '../../shared/date-utils';
 import { iconFactory, iconFactoryAs } from '../../shared/icon-factory';
+import { ItemType } from '../../shared/item-type';
 import type { RootState } from '../../store/store';
 import { UserHealthCheck } from '../main-page/components/user-health-check/user-health-check';
 
@@ -94,7 +94,7 @@ const DELETE_DRAFT_MUTATION = gql`
 export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
   const toast = useToast();
   const location = useLocation();
-  const state: { clonedFrom?: Insight; itemType?: string } | null = location.state as any;
+  const state: { itemType?: ItemType } | null = location.state as any;
 
   const navigate = useNavigate();
   const { '*': draftKey } = useParams();
@@ -154,14 +154,7 @@ export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
   };
 
   useEffect(() => {
-    // If cloning, just create a new draft immediately
-    // Can't clone onto an existing draft
-    if (state?.clonedFrom != null && draftKey === '') {
-      createNewDraft();
-      return;
-    }
-
-    // Otherwise, wait for pending drafts to load
+    // Wait for pending drafts to load
     if (pendingDraftsData === undefined) {
       return;
     }
@@ -276,8 +269,7 @@ export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
         <InsightDraftEditor
           insight={insight}
           draftKey={draftKey}
-          clonedFrom={state?.clonedFrom}
-          itemType={state?.itemType}
+          itemType={state?.itemType ?? ItemType.INSIGHT}
           onRefresh={onRefresh}
         />
       )}

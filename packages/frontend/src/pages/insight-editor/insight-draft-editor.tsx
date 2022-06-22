@@ -22,6 +22,8 @@ import { useNavigate } from 'react-router-dom';
 import { gql } from 'urql';
 
 import { InsightFileAction } from '../../models/file-tree';
+import type { Insight } from '../../models/generated/graphql';
+import type { ItemType } from '../../shared/item-type';
 import type { RootState } from '../../store/store';
 import { urqlClient } from '../../urql';
 
@@ -39,6 +41,13 @@ const DRAFT_QUERY = gql`
   }
 `;
 
+interface Props {
+  insight: Insight;
+  draftKey: string;
+  itemType: ItemType;
+  onRefresh: any;
+}
+
 /**
  * The Insight Editor uses a draftKey to persist Drafts, and this key is
  * stored in the URL.  This component will attempt to load Drafts from the API
@@ -48,7 +57,7 @@ const DRAFT_QUERY = gql`
  *
  * The InsightDraftContainer is not rendered until the draft has been loaded or initialized
  */
-export const InsightDraftEditor = ({ insight, draftKey, clonedFrom, itemType, onRefresh }) => {
+export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: Props) => {
   const navigate = useNavigate();
   const [draft, setDraft] = useState<DraftDataInput | undefined>(undefined);
 
@@ -59,7 +68,7 @@ export const InsightDraftEditor = ({ insight, draftKey, clonedFrom, itemType, on
     namespace: appSettings?.gitHubSettings.defaultOrg,
     name: '',
     tags: [],
-    itemType: itemType ?? 'insight',
+    itemType,
     files: [
       {
         id: nanoid(),
@@ -85,22 +94,6 @@ export const InsightDraftEditor = ({ insight, draftKey, clonedFrom, itemType, on
       if (data?.draftByKey) {
         // Use existing draft from server
         setDraft(data?.draftByKey.draftData);
-      } else if (clonedFrom) {
-        // Handle cloning an Insight passed through the route state
-        // TODO: support cloning insights with files
-        setDraft({
-          commitMessage: 'Cloned from ' + clonedFrom.fullName,
-          namespace: appSettings?.gitHubSettings.defaultOrg,
-          name: clonedFrom.name,
-          description: clonedFrom.description,
-          tags: clonedFrom.tags,
-          readme: {
-            contents: clonedFrom.readme?.contents
-          },
-          creation: {
-            clonedFrom: clonedFrom.fullName
-          }
-        });
       } else {
         // If there is no draft data, assume it's a new draft key and initialize with an empty object
         setDraft({});
@@ -116,7 +109,7 @@ export const InsightDraftEditor = ({ insight, draftKey, clonedFrom, itemType, on
       cancelled = true;
       return;
     };
-  }, [appSettings, clonedFrom, draft, draftKey, navigate]);
+  }, [appSettings, draft, draftKey, navigate]);
 
   // Merge draft changes (if any) with Insight
   const mergedInsight = {
