@@ -543,7 +543,7 @@ export async function getCommitList(owner: string, repo: string): Promise<GitHub
     }
   }
 
-  logger.info(`${edges.length} Retrieved commits for ${owner}/${repo}: ${JSON.stringify(edges, null, 2)}`);
+  logger.info(`${edges.length} Retrieved commits for ${owner}/${repo}`);
 
   return edges;
 }

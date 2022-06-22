@@ -64,6 +64,7 @@ export const urqlClient = createClient({
         Draft: ((draft: Draft) => draft.draftKey) as unknown as KeyGenerator,
         GitHubSettings: () => null,
         InsightActivityDetails: () => null,
+        InsightChange: () => null,
         InsightCollaboratorActivityDetails: () => null,
         InsightConfig: () => null,
         InsightCreation: () => null,

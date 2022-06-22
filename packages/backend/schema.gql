@@ -369,6 +369,7 @@ type Mutation {
   login: User!
   publishDraft(draftKey: String!): Insight!
   removeCollaborator(insightId: ID!, userId: ID!): Insight!
+  rollBackChange(gitHash: String!, insightId: ID!): Insight!
   syncAllInsights: Float!
   syncAllUsers: Float!
   syncInsight(insightId: ID!): Insight!

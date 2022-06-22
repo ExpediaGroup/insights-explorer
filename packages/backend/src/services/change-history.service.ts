@@ -15,21 +15,25 @@
  */
 
 import { getLogger } from '@iex/shared/logger';
+import { ApolloError } from 'apollo-server-core';
 import pMap from 'p-map';
 import { Service } from 'typedi';
 
-import { getCommitList } from '../lib/backends/github';
+import { getCommitList, updateRepository, updateTopics } from '../lib/backends/github';
+import { GitInstance } from '../lib/git-instance';
+import { ActivityType } from '../models/activity';
 import { GitHubUser } from '../models/backends/github';
 import { Insight, InsightChange } from '../models/insight';
 import { User } from '../models/user';
 
+import { ActivityService } from './activity.service';
 import { UserService } from './user.service';
 
 const logger = getLogger('change-history.service');
 
 @Service()
 export class ChangeHistoryService {
-  constructor(private readonly userService: UserService) {
+  constructor(private readonly userService: UserService, private readonly activityService: ActivityService) {
     logger.trace('Constructing New Change History Service');
   }
 
@@ -45,6 +49,60 @@ export class ChangeHistoryService {
       const author = await this.getUser(node.author.name, node.author.user);
       return { ...node, author };
     });
+  }
+
+  /**
+   * Roll back an Insight to a specific change based on a given commit
+   * @param gitHash commit hash to roll back to
+   * @param user user who will commit changes
+   * @param insight Insight on which to roll back
+   */
+  async rollBackToCommit(gitHash: string, user: User, insight: Insight): Promise<void> {
+    const gitUrl = insight.repository.cloneUrl;
+    const { githubPersonalAccessToken } = user;
+    let insightYaml;
+    try {
+      insightYaml = await GitInstance.rollBackCommit(gitHash, gitUrl, user);
+
+      this.activityService.recordActivity(ActivityType.EDIT_INSIGHT, user, {
+        insightId: insight.insightId,
+        insightName: insight.name
+      });
+    } catch (error: any) {
+      logger.error(`Error while rolling back to commit ${gitHash}`, error);
+
+      if (error.code === 'HttpError') {
+        if (error.data.statusCode === 504) {
+          throw new ApolloError(error.data.statusMessage, 'TIMEOUT_ERROR');
+        }
+        throw new ApolloError(error.data.response, 'GIT_PUSH_PERMISSION');
+      } else if (error.caller === 'git.clone' && error.data.statusCode === 401) {
+        throw new ApolloError(error.data.response, 'GIT_CLONE_PERMISSION');
+      }
+
+      throw error;
+    }
+
+    // GitHub API updates (Sync Insight repository and update metadata)
+    logger.debug(`Updating GitHub repository (${insight.repository.externalId})`);
+    try {
+      if (insightYaml && insightYaml.description != null) {
+        await updateRepository(githubPersonalAccessToken!, {
+          repositoryId: insight.repository.externalId,
+          description: insightYaml.description
+        });
+      }
+      if (insightYaml && insightYaml.tags != null) {
+        await updateTopics(githubPersonalAccessToken!, {
+          repositoryId: insight.repository.externalId,
+          topicNames: insightYaml.tags
+        });
+      }
+    } catch (error: any) {
+      // Eat any exceptions since keeping GitHub in sync is not required
+      logger.error(`Unable to update GitHub repository: ${insight.repository.externalFullName}`);
+      logger.error(JSON.stringify(error, null, 2));
+    }
   }
 
   /**

@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-import { Box, Flex, Heading, HStack, Icon, Text, Tooltip, Stack, VStack } from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack, Icon, Text, Tooltip, Stack, VStack, Button } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ExternalLink } from '../../../../../../components/external-link/external-link';
 import { TextWithIcon } from '../../../../../../components/text-with-icon/text-with-icon';
 import { UserTag } from '../../../../../../components/user-tag/user-tag';
-import type { InsightChangeEdge } from '../../../../../../models/generated/graphql';
+import type { Insight, InsightChange, InsightChangeEdge } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory } from '../../../../../../shared/icon-factory';
 import type { RootState } from '../../../../../../store/store';
@@ -29,14 +30,32 @@ import type { RootState } from '../../../../../../store/store';
 export interface ChangeHistoryProps {
   changeEdge: InsightChangeEdge;
   insightFullName: string;
+  enableRollBack: boolean;
+  onRollBackChange: Promise<Insight>;
+  fetchingRollBack: boolean;
 }
-export const ChangeHistoryView = ({ changeEdge, insightFullName, ...props }) => {
-  const change = changeEdge.node;
+export const ChangeHistoryView = ({
+  changeEdge,
+  insightFullName,
+  enableRollBack,
+  onRollBackChange,
+  fetchingRollBack,
+  ...props
+}) => {
+  const change: InsightChange = changeEdge.node;
 
   const { appSettings } = useSelector((state: RootState) => state.app);
 
+  const [clicked, setClicked] = useState(false);
+
+  const onClick = async () => {
+    setClicked(true);
+    await onRollBackChange(change.oid);
+    setClicked(false);
+  };
+
   return (
-    <>
+    <Stack {...props}>
       <HStack align="flex-start">
         <Box h="full" alignContent="center">
           <Icon as={iconFactory('pullRequest')} />
@@ -52,7 +71,9 @@ export const ChangeHistoryView = ({ changeEdge, insightFullName, ...props }) => 
           </HStack>
         </VStack>
         <HStack alignContent="center" h="full">
-          {/* <Button size="sm">Roll back to commit</Button> */}
+          <Button size="sm" onClick={onClick} disabled={!enableRollBack || fetchingRollBack} isLoading={clicked}>
+            Roll back to commit
+          </Button>
         </HStack>
       </HStack>
 
@@ -66,13 +87,13 @@ export const ChangeHistoryView = ({ changeEdge, insightFullName, ...props }) => 
           ml="2rem"
         >
           <TextWithIcon iconName="fileChange" iconColor="fff">
-            {change.changedFiles} Files Changed
+            {`${change.changedFiles} Files Changed`}
           </TextWithIcon>
           <TextWithIcon iconName="additions" iconColor="fff">
-            {change.additions} Additions
+            {`${change.additions} Additions`}
           </TextWithIcon>
           <TextWithIcon iconName="deletions" iconColor="fff">
-            {change.deletions} Deletions
+            {`${change.deletions} Deletions`}
           </TextWithIcon>
           <HStack>
             <TextWithIcon iconName="commit" iconColor="fff">
@@ -89,6 +110,6 @@ export const ChangeHistoryView = ({ changeEdge, insightFullName, ...props }) => 
           </HStack>
         </Stack>
       </Flex>
-    </>
+    </Stack>
   );
 };
