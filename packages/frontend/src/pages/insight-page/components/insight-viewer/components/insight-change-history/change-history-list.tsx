@@ -38,6 +38,7 @@ const CHANGE_HISTORY_FRAGMENT = gql`
           deletions
           additions
           author {
+            id
             team
             email
             userName

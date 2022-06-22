@@ -42,12 +42,6 @@ export type ApplyGitChangesArgs = {
   commitMessage: string;
 };
 
-export type RollBackCommitArgs = {
-  gitHash: string;
-  gitUrl: string;
-  user: User;
-};
-
 // Filter out `.git` files, and optionally a provided filter
 const gitFilter: WalkPredicate = (wf) => wf.path != `.git`;
 
@@ -118,7 +112,7 @@ export class GitInstance {
    * @param user User making the changes
    * @returns insight yaml from local path
    */
-  public static async rollBackCommit({ gitHash, gitUrl, user }: RollBackCommitArgs): Promise<InsightYaml> {
+  public static async rollBackCommit(gitHash: string, gitUrl: string, user: User): Promise<InsightYaml> {
     const { displayName: name, email, githubPersonalAccessToken } = user;
 
     const gitInstance = await GitInstance.from(gitUrl, githubPersonalAccessToken!);

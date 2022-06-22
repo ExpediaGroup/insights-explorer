@@ -62,7 +62,7 @@ export class ChangeHistoryService {
     const { githubPersonalAccessToken } = user;
     let insightYaml;
     try {
-      insightYaml = await GitInstance.rollBackCommit({ gitHash, gitUrl, user });
+      insightYaml = await GitInstance.rollBackCommit(gitHash, gitUrl, user);
 
       this.activityService.recordActivity(ActivityType.EDIT_INSIGHT, user, {
         insightId: insight.insightId,

@@ -55,7 +55,7 @@ export const ChangeHistoryView = ({
   };
 
   return (
-    <Stack key={change.abbreviatedOid} {...props}>
+    <Stack {...props}>
       <HStack align="flex-start">
         <Box h="full" alignContent="center">
           <Icon as={iconFactory('pullRequest')} />
