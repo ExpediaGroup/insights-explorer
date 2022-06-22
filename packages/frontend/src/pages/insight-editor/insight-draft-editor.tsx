@@ -19,7 +19,7 @@ import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { gql } from 'urql';
+import { gql, useMutation } from 'urql';
 
 import { InsightFileAction } from '../../models/file-tree';
 import type { Insight } from '../../models/generated/graphql';
@@ -33,6 +33,17 @@ import { InsightDraftContainer } from './insight-draft-container';
 const DRAFT_QUERY = gql`
   query draftByKey($draftKey: String!) {
     draftByKey(draftKey: $draftKey) {
+      draftKey
+      createdAt
+      updatedAt
+      draftData
+    }
+  }
+`;
+
+const CREATE_DRAFT_MUTATION = gql`
+  mutation createDraft($itemType: String!, $draftKey: String!) {
+    createDraft(itemType: $itemType, draftKey: $draftKey) {
       draftKey
       createdAt
       updatedAt
@@ -63,23 +74,7 @@ export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: P
 
   const { appSettings } = useSelector((state: RootState) => state.app);
 
-  const defaultInsight = {
-    commitMessage: 'Initial commit',
-    namespace: appSettings?.gitHubSettings.defaultOrg,
-    name: '',
-    tags: [],
-    itemType,
-    files: [
-      {
-        id: nanoid(),
-        action: InsightFileAction.MODIFY,
-        name: 'README.md',
-        path: 'README.md',
-        mimeType: 'text/markdown',
-        contents: ''
-      }
-    ]
-  };
+  const [, createDraft] = useMutation(CREATE_DRAFT_MUTATION);
 
   useEffect(() => {
     let cancelled = false;
@@ -95,8 +90,16 @@ export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: P
         // Use existing draft from server
         setDraft(data?.draftByKey.draftData);
       } else {
-        // If there is no draft data, assume it's a new draft key and initialize with an empty object
-        setDraft({});
+        // No existing draft found, create a new one
+        const { data } = await createDraft({
+          itemType,
+          draftKey
+        });
+
+        // Avoid changing state if already unmounted
+        if (cancelled) return;
+
+        setDraft(data.createDraft.draftData);
       }
     };
 
@@ -109,11 +112,11 @@ export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: P
       cancelled = true;
       return;
     };
-  }, [appSettings, draft, draftKey, navigate]);
+  }, [appSettings, createDraft, draft, draftKey, itemType, navigate]);
 
   // Merge draft changes (if any) with Insight
   const mergedInsight = {
-    ...(insight || defaultInsight),
+    ...insight,
     ...draft
   };
 

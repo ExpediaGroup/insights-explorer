@@ -16,6 +16,7 @@
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { InsightFileAction } from '@iex/models/insight-file-action';
+import { ItemType } from '@iex/models/item-type';
 import { getLogger } from '@iex/shared/logger';
 import { nanoid } from 'nanoid';
 import pMap from 'p-map';
@@ -131,6 +132,46 @@ export class DraftService {
     } else {
       throw new Error('Draft not found by key: ' + draftKey);
     }
+  }
+
+  /**
+   * Create a new Draft.
+   *
+   * @param user User
+   * @param itemType Optional item type, defaults to Insight
+   * @param draftKey Optional draft key, defaults to a new one
+   */
+  async createDraft(user: User, draftKey = nanoid(), itemType = ItemType.INSIGHT): Promise<Draft> {
+    logger.info(`Creating a new Draft (${itemType})`);
+
+    const draft: DraftInput = {
+      draftKey,
+      draftData: {
+        commitMessage: `Initial commit`,
+        namespace: process.env.GITHUB_DEFAULT_ORG,
+        name: '',
+        tags: [],
+        itemType,
+        files: [
+          {
+            id: nanoid(),
+            action: InsightFileAction.MODIFY,
+            name: 'README.md',
+            path: 'README.md',
+            mimeType: 'text/markdown',
+            contents: ''
+          }
+        ]
+      }
+    };
+
+    const upserted = await this.upsertDraft(draft, user);
+
+    if (upserted.updatedAt == null) {
+      upserted.updatedAt = new Date();
+    }
+
+    return upserted;
   }
 
   /**

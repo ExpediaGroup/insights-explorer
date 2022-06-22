@@ -357,6 +357,7 @@ type Mutation {
   addComment(comment: CommentInput!): Comment!
   addNews(news: NewsInput!): News!
   cloneInsight(insightId: ID!): Draft!
+  createDraft(draftKey: String, itemType: String!): Draft!
   deleteComment(commentId: ID!): Comment!
   deleteDraft(draftKey: String!): Draft!
   deleteInsight(archiveRepo: Boolean!, insightId: ID!): ID!

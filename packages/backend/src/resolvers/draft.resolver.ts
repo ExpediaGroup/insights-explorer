@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { ItemType } from '@iex/models/item-type';
 import { getLogger } from '@iex/shared/logger';
 import { Arg, Authorized, Ctx, FieldResolver, ID, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
@@ -123,6 +124,24 @@ export class DraftResolver {
 
     try {
       return await this.draftService.deleteDraft(draftKey, ctx.user!);
+    } catch (error: any) {
+      logger.error(error.message);
+      logger.error(JSON.stringify(error, null, 2));
+      throw error;
+    }
+  }
+
+  @Authorized<Permission>({ user: true, github: true })
+  @Mutation(() => Draft)
+  async createDraft(
+    @Arg('itemType') itemType: ItemType,
+    @Arg('draftKey', { nullable: true }) draftKey: DraftKey,
+    @Ctx() ctx: Context
+  ): Promise<Draft> {
+    logger.debug('Creating a new Draft');
+
+    try {
+      return await this.draftService.createDraft(ctx.user!, draftKey, itemType);
     } catch (error: any) {
       logger.error(error.message);
       logger.error(JSON.stringify(error, null, 2));
