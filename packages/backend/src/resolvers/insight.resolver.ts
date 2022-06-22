@@ -547,7 +547,17 @@ export class InsightResolver {
       const insight = (await getInsight(dbInsightId, this.getRequestedFields(fields))) as Insight;
 
       await this.changeHistoryService.rollBackToCommit(gitHash, ctx.user!, insight);
-      return insight;
+
+      // Force a sync of the repository to avoid showing the user un-synced data
+      const updatedInsight = (await syncInsight({
+        owner: insight.repository.owner.login,
+        repo: insight.repository.externalName,
+        repositoryType: RepositoryType.GITHUB,
+        refresh: true,
+        updated: true
+      })) as Insight;
+
+      return updatedInsight;
     } catch (error: any) {
       logger.error(error.message);
       logger.error(JSON.stringify(error, null, 2));

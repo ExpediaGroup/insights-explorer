@@ -51,6 +51,12 @@ export class ChangeHistoryService {
     });
   }
 
+  /**
+   * Roll back an Insight to a specific change based on a given commit
+   * @param gitHash commit hash to roll back to
+   * @param user user who will commit changes
+   * @param insight Insight on which to roll back
+   */
   async rollBackToCommit(gitHash: string, user: User, insight: Insight): Promise<void> {
     const gitUrl = insight.repository.cloneUrl;
     const { githubPersonalAccessToken } = user;
