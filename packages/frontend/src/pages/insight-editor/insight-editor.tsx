@@ -26,7 +26,6 @@ import {
   useColorModeValue,
   useToast
 } from '@chakra-ui/react';
-import { nanoid } from 'nanoid';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -40,7 +39,6 @@ import { InsightFileTree, isFile } from '../../shared/file-tree';
 import { isRelativeUrl, urljoin } from '../../shared/url-utils';
 import { useDebounce } from '../../shared/useDebounce';
 import type { RootState } from '../../store/store';
-import { urqlClient } from '../../urql';
 
 import { InsightEditorHeader } from './components/insight-editor-header/insight-editor-header';
 import { InsightEditorSidebar } from './components/insight-editor-sidebar/insight-editor-sidebar';
@@ -55,34 +53,6 @@ const TEMPLATES_QUERY = gql`
       id
       fullName
       name
-    }
-  }
-`;
-
-const TEMPLATE_BY_ID_QUERY = gql`
-  query TemplateById($templateId: ID!) {
-    template(templateId: $templateId) {
-      id
-      tags
-      repository {
-        url
-        type
-        owner {
-          login
-          type
-        }
-        isMissing
-      }
-      readme {
-        contents
-      }
-      files {
-        id
-        name
-        path
-        mimeType
-        size
-      }
     }
   }
 `;
@@ -103,6 +73,7 @@ interface Props {
   publish: (draft: DraftDataInput) => Promise<Insight | undefined>;
   isPublishing: boolean;
   isSavingDraft: boolean;
+  onApplyTemplate: (templateId: string) => Promise<void>;
   onRefresh: () => void;
   uploadFile: (file: File, name: string) => Promise<UploadSingleFileMutation | undefined>;
 }
@@ -115,7 +86,18 @@ interface Props {
  * This component should not be rendered until `insight` and `draft` have been loaded.
  */
 export const InsightEditor = memo(
-  ({ insight, draftKey, draft, saveDraft, publish, isSavingDraft, isPublishing, onRefresh, uploadFile }: Props) => {
+  ({
+    insight,
+    draftKey,
+    draft,
+    saveDraft,
+    publish,
+    isSavingDraft,
+    isPublishing,
+    onApplyTemplate,
+    onRefresh,
+    uploadFile
+  }: Props) => {
     const navigate = useNavigate();
     const toast = useToast();
 
@@ -123,7 +105,8 @@ export const InsightEditor = memo(
 
     const ignoreDirtyCheck = useRef(false);
     const initDefaultTemplate = useRef(false);
-    const loadingTemplate = useRef(false);
+
+    const [isApplyingTemplate, setApplyingTemplate] = useState(false);
 
     const bgColor = useColorModeValue('white', 'gray.700');
     const color = useColorModeValue('gray.700', 'gray.200');
@@ -235,47 +218,15 @@ export const InsightEditor = memo(
     const templateChange = useCallback(
       async (selectedTemplate: Pick<Insight, 'id' | 'fullName'>): Promise<void> => {
         console.log(`Template change ${selectedTemplate.id} / ${selectedTemplate.fullName}`);
-        loadingTemplate.current = true;
 
-        // Templates
-        const { data } = await urqlClient.query(TEMPLATE_BY_ID_QUERY, { templateId: selectedTemplate.id }).toPromise();
-        const { id, ...template }: Insight = data.template;
-
-        if (template) {
-          // Retain name/description/itemType when changing templates
-          const { name, description, itemType } = form.getValues();
-          const newReadme = {
-            id: nanoid(),
-            action: InsightFileAction.MODIFY,
-            name: 'README.md',
-            path: 'README.md',
-            mimeType: 'text/markdown',
-            contents: template.readme?.contents
-          };
-
-          const metadata = { team: userInfo?.team };
-
-          reset({ ...template, initializedTemplate: true, name, description, itemType, metadata } as any, {
-            keepDirty: true
-          });
-          setValue('creation.template', selectedTemplate.fullName);
-          setValue('tags', template.tags);
-
-          // Update file tree
-          fileTree.addItem(newReadme);
-          setFileTree(fileTree);
-          setValue('files', fileTree.flatten());
-
-          // Update selected file id
-          setSelectedFileId(newReadme.id);
-        }
-
-        loadingTemplate.current = false;
+        setApplyingTemplate(true);
+        onApplyTemplate(selectedTemplate.id);
       },
-      [fileTree, form, reset, setValue, userInfo?.team]
+      [onApplyTemplate]
     );
 
     useEffect(() => {
+      // TODO: Do this in the backend
       const f = async () => {
         if (
           !initDefaultTemplate.current &&
@@ -285,7 +236,6 @@ export const InsightEditor = memo(
           userInfo?.defaultTemplateId &&
           !form.getValues('initializedTemplate')
         ) {
-          loadingTemplate.current = true;
           const defaultTemplate = templatesData.templates.find(
             (template) => template.id === userInfo.defaultTemplateId
           );
@@ -404,7 +354,8 @@ export const InsightEditor = memo(
 
             <TabPanels display="flex" flexGrow={1}>
               <TabPanel display="flex" flexDirection="column" flexGrow={1}>
-                {loadingTemplate.current && <Progress size="xs" isIndeterminate />}
+                {isApplyingTemplate && <Progress size="xs" isIndeterminate />}
+
                 <InsightMetadataEditor
                   insight={insight}
                   isNewInsight={isNewInsight}

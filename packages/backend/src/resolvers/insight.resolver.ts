@@ -28,6 +28,7 @@ import { getInsight } from '../lib/elasticsearch';
 import { Activity, ActivityType, IndexedActivityDetails } from '../models/activity';
 import { CommentConnection } from '../models/comment';
 import { Context } from '../models/context';
+import { DraftKey } from '../models/draft';
 import { Insight, DbInsight, ValidateInsightName, InsightChangeConnection } from '../models/insight';
 import { Permission } from '../models/permission';
 import { Repository } from '../models/repository';
@@ -310,7 +311,7 @@ export class InsightResolver {
 
   @Authorized<Permission>({ user: true, github: true })
   @Mutation(() => Insight)
-  async publishDraft(@Arg('draftKey') draftKey: string, @Ctx() ctx: Context): Promise<Insight> {
+  async publishDraft(@Arg('draftKey') draftKey: DraftKey, @Ctx() ctx: Context): Promise<Insight> {
     logger.debug('Publishing Draft Key', draftKey);
 
     try {

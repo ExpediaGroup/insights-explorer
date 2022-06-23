@@ -26,6 +26,7 @@ import * as turndownPluginGfm from 'turndown-plugin-gfm';
 import { DraftDataInput, DraftKey } from '../models/draft';
 import { AttachmentService } from '../services/attachment.service';
 import { DraftService } from '../services/draft.service';
+import { TemplateService } from '../services/template.service';
 
 const logger = getLogger('import');
 
@@ -190,7 +191,7 @@ export function convertToDraft(request: ImportRequest): DraftDataInput {
 export async function importToNewDraft(request: ImportRequest): Promise<DraftKey> {
   logger.info(`Importing web page ${request.url}`);
 
-  const draftService = new DraftService(new AttachmentService());
+  const draftService = new DraftService(new AttachmentService(), new TemplateService());
   const draftKey = draftService.newDraftKey();
 
   const draftData = convertToDraft(request);

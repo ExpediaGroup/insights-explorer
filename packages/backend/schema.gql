@@ -356,6 +356,7 @@ type Mutation {
   addCollaborator(insightId: ID!, permission: String, userId: ID!): Insight!
   addComment(comment: CommentInput!): Comment!
   addNews(news: NewsInput!): News!
+  applyTemplateToDraft(draftKey: String!, templateId: ID!): Draft!
   cloneInsight(insightId: ID!): Draft!
   createDraft(draftKey: String, itemType: String!): Draft!
   deleteComment(commentId: ID!): Comment!

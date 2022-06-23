@@ -14,14 +14,13 @@
  * limitations under the License.
  */
 
-import { Flex, Spinner } from '@chakra-ui/react';
+import { Flex, Spinner, useToast } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { gql, useMutation } from 'urql';
 
-import { InsightFileAction } from '../../models/file-tree';
 import type { Insight } from '../../models/generated/graphql';
 import type { ItemType } from '../../shared/item-type';
 import type { RootState } from '../../store/store';
@@ -52,6 +51,17 @@ const CREATE_DRAFT_MUTATION = gql`
   }
 `;
 
+const APPLY_TEMPLATE_MUTATION = gql`
+  mutation ApplyTemplateToDraft($draftKey: String!, $templateId: ID!) {
+    applyTemplateToDraft(draftKey: $draftKey, templateId: $templateId) {
+      draftKey
+      createdAt
+      updatedAt
+      draftData
+    }
+  }
+`;
+
 interface Props {
   insight: Insight;
   draftKey: string;
@@ -70,11 +80,17 @@ interface Props {
  */
 export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: Props) => {
   const navigate = useNavigate();
+  const toast = useToast();
+
+  // This key can be updated to force a remount of the editor components
+  const remountKey = useRef(nanoid());
+
   const [draft, setDraft] = useState<DraftDataInput | undefined>(undefined);
 
   const { appSettings } = useSelector((state: RootState) => state.app);
 
   const [, createDraft] = useMutation(CREATE_DRAFT_MUTATION);
+  const [, applyTemplateToDraft] = useMutation(APPLY_TEMPLATE_MUTATION);
 
   useEffect(() => {
     let cancelled = false;
@@ -114,17 +130,54 @@ export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: P
     };
   }, [appSettings, createDraft, draft, draftKey, itemType, navigate]);
 
+  const onApplyTemplate = async (templateId: string) => {
+    const { data, error } = await applyTemplateToDraft({
+      draftKey,
+      templateId
+    });
+
+    if (error) {
+      toast({
+        position: 'bottom-right',
+        title: 'Unable to apply template.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true
+      });
+
+      return;
+    }
+
+    remountKey.current = nanoid();
+    setDraft(data.applyTemplateToDraft.draftData);
+
+    toast({
+      position: 'bottom-right',
+      title: 'Template applied.',
+      status: 'success',
+      duration: 2000,
+      isClosable: true
+    });
+  };
+
   // Merge draft changes (if any) with Insight
   const mergedInsight = {
     ...insight,
     ...draft
-  };
+  } as Insight;
 
   return (
     <Flex mt="0" direction="column" justify="stretch" flexGrow={2}>
       {!draft && <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />}
       {draft && (
-        <InsightDraftContainer insight={mergedInsight} draft={draft} draftKey={draftKey} onRefresh={onRefresh} />
+        <InsightDraftContainer
+          key={remountKey.current}
+          insight={mergedInsight}
+          draft={draft}
+          draftKey={draftKey}
+          onApplyTemplate={onApplyTemplate}
+          onRefresh={onRefresh}
+        />
       )}
     </Flex>
   );

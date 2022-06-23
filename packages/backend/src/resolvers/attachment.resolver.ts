@@ -23,6 +23,7 @@ import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
 import { Service } from 'typedi';
 
 import { Context } from '../models/context';
+import { DraftKey } from '../models/draft';
 import { InsightFile, InsightFileUploadInput } from '../models/insight-file';
 import { Permission } from '../models/permission';
 import { AvatarUploadResult } from '../models/user';
@@ -41,7 +42,7 @@ export class AttachmentResolver {
   @Authorized<Permission>({ user: true })
   @Mutation(() => InsightFile)
   async uploadSingleFile(
-    @Arg('draftKey') draftKey: string,
+    @Arg('draftKey') draftKey: DraftKey,
     @Arg('attachment') attachment: InsightFileUploadInput,
     @Arg('file', () => GraphQLUpload) file: FileUpload
   ): Promise<InsightFile> {

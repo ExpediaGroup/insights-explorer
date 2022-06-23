@@ -23,16 +23,21 @@ import pMap from 'p-map';
 import { Service } from 'typedi';
 
 import { streamFromS3 } from '../lib/storage';
-import { Draft, DraftInput, DraftKey } from '../models/draft';
+import { DraftKey } from '../models/draft';
+import { Draft, DraftInput } from '../models/draft';
 import { User } from '../models/user';
 import { AttachmentService } from '../services/attachment.service';
+import { TemplateService } from '../services/template.service';
 import { fromGlobalId } from '../shared/resolver-utils';
 
 const logger = getLogger('draft.service');
 
 @Service()
 export class DraftService {
-  constructor(private readonly attachmentService: AttachmentService) {
+  constructor(
+    private readonly attachmentService: AttachmentService,
+    private readonly templateService: TemplateService
+  ) {
     logger.trace('[DRAFT.SERVICE] Constructing New Draft Service');
   }
 
@@ -164,6 +169,71 @@ export class DraftService {
         ]
       }
     };
+
+    const upserted = await this.upsertDraft(draft, user);
+
+    if (upserted.updatedAt == null) {
+      upserted.updatedAt = new Date();
+    }
+
+    return upserted;
+  }
+
+  /**
+   * Updates a draft with the contents of a template.
+   *
+   * @param draftKey Draft key
+   * @param templateId Template ID
+   * @param user User
+   */
+  async applyTemplateToDraft(draft: DraftInput, templateId: number, user: User): Promise<Draft> {
+    if (draft == null) {
+      throw new Error('Draft not found');
+    }
+
+    logger.info(`Applying template to Draft (${draft.draftKey})`);
+
+    // Load Template
+    const template = await this.templateService.getTemplate(templateId);
+
+    if (template == null) {
+      throw new Error('Template not found');
+    }
+
+    // Copy template metadata to draft
+    draft.draftData = {
+      ...draft.draftData,
+      tags: template.tags,
+      creation: {
+        template: template.fullName
+      }
+    };
+
+    if (template.files) {
+      draft.draftData.files = await pMap(
+        template.files,
+        async (file) => {
+          // Copy each file from the template
+          // and upload to the draft
+          const key = `insights/${template.fullName}/files/${file.path}`;
+          const readable = await streamFromS3(key);
+
+          // Duplicate file with new ID and 'add' action
+          const newFile = {
+            ...file,
+            action: InsightFileAction.ADD,
+            originalPath: file.path,
+            id: nanoid()
+          };
+
+          // Upload original file into the draft
+          await this.attachmentService.uploadToDraft(draft.draftKey, newFile, readable);
+
+          return newFile;
+        },
+        { concurrency: 5 }
+      );
+    }
 
     const upserted = await this.upsertDraft(draft, user);
 

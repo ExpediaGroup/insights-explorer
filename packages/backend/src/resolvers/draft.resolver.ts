@@ -20,7 +20,8 @@ import { Arg, Authorized, Ctx, FieldResolver, ID, Mutation, Query, Resolver, Roo
 import { Service } from 'typedi';
 
 import { Context } from '../models/context';
-import { Draft, DraftKey, DraftInput } from '../models/draft';
+import { DraftKey } from '../models/draft';
+import { Draft, DraftInput } from '../models/draft';
 import { Insight } from '../models/insight';
 import { Permission } from '../models/permission';
 import { User } from '../models/user';
@@ -163,6 +164,33 @@ export class DraftResolver {
       }
 
       return await this.draftService.cloneInsight(sourceInsight, ctx.user!);
+    } catch (error: any) {
+      logger.error(error.message);
+      logger.error(JSON.stringify(error, null, 2));
+      throw error;
+    }
+  }
+
+  @Authorized<Permission>({ user: true, github: true })
+  @Mutation(() => Draft)
+  async applyTemplateToDraft(
+    @Arg('draftKey') draftKey: DraftKey,
+    @Arg('templateId', () => ID) templateId: string,
+    @Ctx() ctx: Context
+  ): Promise<Draft> {
+    logger.debug('Applying template to Draft', draftKey);
+
+    try {
+      const [, dbTemplateId] = fromGlobalId(templateId);
+
+      // Load Draft and convert to DraftInput
+      const { draftData } = await Draft.query().where('draftKey', draftKey).first();
+      const draft: DraftInput = {
+        draftKey,
+        draftData
+      };
+
+      return await this.draftService.applyTemplateToDraft(draft, dbTemplateId, ctx.user!);
     } catch (error: any) {
       logger.error(error.message);
       logger.error(JSON.stringify(error, null, 2));

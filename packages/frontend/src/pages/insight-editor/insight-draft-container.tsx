@@ -84,13 +84,21 @@ const UPLOAD_SINGLE_FILE_MUTATION = gql`
   }
 `;
 
+interface Props {
+  insight: Insight;
+  draft: DraftDataInput;
+  draftKey: string;
+  onApplyTemplate: (templateId: string) => Promise<void>;
+  onRefresh: () => void;
+}
+
 /**
  * This component is rendered only after the following are available:
  *   - Insight
  *   - DraftKey
  *   - Draft (defaults to an empty object)
  */
-export const InsightDraftContainer = ({ insight, draft, draftKey, onRefresh }) => {
+export const InsightDraftContainer = ({ insight, draft, draftKey, onApplyTemplate, onRefresh }: Props) => {
   const toast = useToast();
 
   // Store copy of last saved draft for comparisons
@@ -217,6 +225,7 @@ export const InsightDraftContainer = ({ insight, draft, draftKey, onRefresh }) =
         publish={publish}
         isSavingDraft={isSavingDraft}
         isPublishing={isPublishing}
+        onApplyTemplate={onApplyTemplate}
         onRefresh={onRefresh}
         uploadFile={uploadFile}
       />
