@@ -16,6 +16,9 @@
 
 import { convertToDraft, ImportRequest } from '../../src/lib/import';
 
+// Disabled these tests since they cause `elasticsearch.ts` to load and attempt initialization
+// Need to refactor `elasticsearch.ts` to avoid initializing a Client on load
+
 describe('import', () => {
   describe('convertToMarkdown', () => {
     test('Simple HTML', () => {
