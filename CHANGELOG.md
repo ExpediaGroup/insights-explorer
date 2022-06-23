@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.20.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.19.0...v3.20.0) (2022-06-23)
+
+
+### Features
+
+* Apply Templates to Drafts via the backend ([1d34102](https://github.com/ExpediaGroup/insights-explorer/commit/1d341024ca54f1916d443c7dd8388881026bd22a))
+* Apply user's default template to new Drafts in the backend ([070e436](https://github.com/ExpediaGroup/insights-explorer/commit/070e436e6bb90df5a1bcc49d4731fdce62dd7992))
+* Create new drafts via the API instead of the frontend ([34b7a23](https://github.com/ExpediaGroup/insights-explorer/commit/34b7a2310d8a4d4253189d1c7d621241d5c58102))
+
 ## [3.19.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.18.3...v3.19.0) (2022-06-22)
 
 
