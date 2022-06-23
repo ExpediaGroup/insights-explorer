@@ -101,10 +101,7 @@ export const InsightEditor = memo(
     const navigate = useNavigate();
     const toast = useToast();
 
-    const { userInfo } = useSelector((state: RootState) => state.user);
-
     const ignoreDirtyCheck = useRef(false);
-    const initDefaultTemplate = useRef(false);
 
     const [isApplyingTemplate, setApplyingTemplate] = useState(false);
 
@@ -112,7 +109,6 @@ export const InsightEditor = memo(
     const color = useColorModeValue('gray.700', 'gray.200');
 
     const isNewInsight = insight.id === undefined;
-    const isCloned = insight.creation?.clonedFrom != null;
 
     const readmeFile = insight.files?.find((f) => f.path === 'README.md');
 
@@ -224,27 +220,6 @@ export const InsightEditor = memo(
       },
       [onApplyTemplate]
     );
-
-    useEffect(() => {
-      // TODO: Do this in the backend
-      const f = async () => {
-        if (
-          !initDefaultTemplate.current &&
-          isNewInsight &&
-          !isCloned &&
-          templatesData &&
-          userInfo?.defaultTemplateId &&
-          !form.getValues('initializedTemplate')
-        ) {
-          const defaultTemplate = templatesData.templates.find(
-            (template) => template.id === userInfo.defaultTemplateId
-          );
-          initDefaultTemplate.current = true;
-          await templateChange(defaultTemplate);
-        }
-      };
-      f();
-    }, [form, isCloned, isNewInsight, templateChange, templatesData, userInfo]);
 
     const fileTreeChange = (updatedTree: InsightFileTree): void => {
       setFileTree(updatedTree);

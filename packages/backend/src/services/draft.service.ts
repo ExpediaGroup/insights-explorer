@@ -170,13 +170,18 @@ export class DraftService {
       }
     };
 
-    const upserted = await this.upsertDraft(draft, user);
+    if (user.defaultTemplate) {
+      // Apply user's default template to the draft initially
+      return this.applyTemplateToDraft(draft, user.defaultTemplate, user);
+    } else {
+      const upserted = await this.upsertDraft(draft, user);
 
-    if (upserted.updatedAt == null) {
-      upserted.updatedAt = new Date();
+      if (upserted.updatedAt == null) {
+        upserted.updatedAt = new Date();
+      }
+
+      return upserted;
     }
-
-    return upserted;
   }
 
   /**
