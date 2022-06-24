@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.0...v3.20.1) (2022-06-24)
+
+
+### Bug Fixes
+
+* **deps:** bump @emotion/react from 11.9.0 to 11.9.3 ([2b363b7](https://github.com/ExpediaGroup/insights-explorer/commit/2b363b7cfb96979faef81894fb374279fcc47632))
+* **deps:** bump react-select from 4.3.1 to 5.3.2 ([2983240](https://github.com/ExpediaGroup/insights-explorer/commit/29832406146f070911b46ec7fe74c08a4955e0d2))
+* Upgrade usage of React-Select to support 5.x version ([3dd1481](https://github.com/ExpediaGroup/insights-explorer/commit/3dd1481d5b564e4ef13aacc891239092d389d655))
+
 ## [3.20.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.19.0...v3.20.0) (2022-06-23)
 
 
