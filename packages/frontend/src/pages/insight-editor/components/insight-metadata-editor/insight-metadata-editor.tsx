@@ -137,7 +137,9 @@ export const InsightMetadataEditor = ({ insight, isNewInsight, form, templates, 
                 inputId="insight-item-type"
                 options={itemTypeOptions}
                 onChange={(e) => {
-                  onChange(e.value);
+                  if (e) {
+                    onChange(e.value);
+                  }
                 }}
                 value={itemTypeOptions && value && itemTypeOptions.find((type) => type.name === value)}
                 styles={{

@@ -80,10 +80,10 @@ export const InsightsSettings = ({ user, onSubmit, isSubmitting }: Props) => {
             render={({ field: { onChange, value } }) => (
               <Select
                 inputId="defaultTemplateId"
-                defaultValue={templateOptions.find((t) => t.value === defaultTemplateId)}
+                defaultValue={templateOptions.find((t) => t.value === defaultTemplateId) ?? { value: '' }}
                 options={templateOptions}
-                onChange={(e) => (e === null ? onChange('') : onChange(e.value))}
-                value={templateOptions && value && templateOptions.find((t) => t.value === value)}
+                onChange={(e) => (e == null || e == '' ? onChange('') : onChange(e.value))}
+                value={(templateOptions && value && templateOptions.find((t) => t.value === value)) ?? { value: '' }}
                 isClearable={true}
                 styles={{
                   menu: (base) => ({ ...base, zIndex: 11 }),

@@ -93,12 +93,15 @@ export const FilterStack = ({
       {!showAllFilters && (
         <CreatableSelect
           name="tags"
-          value=""
+          value={null}
           options={selectOptions}
-          onChange={(e) => addFilter(filterKey, e.value)}
+          onChange={(e) => {
+            if (e) {
+              addFilter(filterKey, e.value);
+            }
+          }}
           placeholder={`Select ${filterKey}...`}
           aria-label={`Select ${filterKey}...`}
-          formatCreateLabel={(input) => getLabel(input)}
         />
       )}
     </SidebarStack>

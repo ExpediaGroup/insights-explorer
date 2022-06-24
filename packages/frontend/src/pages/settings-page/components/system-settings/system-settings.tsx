@@ -69,7 +69,11 @@ export const SystemSettings = ({ user, onSubmit, isSubmitting }: Props) => {
                     inputId="locale"
                     defaultValue={{ value: detectedLocale, label: `Detected (${detectedLocale})` }}
                     options={localeOptions}
-                    onChange={(e) => onChange(e.value)}
+                    onChange={(e) => {
+                      if (e) {
+                        onChange(e.value);
+                      }
+                    }}
                     value={localeOptions && value && localeOptions.find((l) => l.value === value)}
                     placeholder={`Detected (${detectedLocale})`}
                     styles={{

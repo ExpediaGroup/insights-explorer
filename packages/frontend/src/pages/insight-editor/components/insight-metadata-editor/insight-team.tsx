@@ -69,7 +69,11 @@ export const InsightTeam = ({ insight, form }) => {
             <CreatableSelect
               inputId="team"
               options={availableTeams}
-              onChange={(e) => onChange(e.value)}
+              onChange={(e) => {
+                if (e) {
+                  onChange(e.value);
+                }
+              }}
               value={{ value, label: value }}
               styles={{
                 menu: (base) => ({ ...base, zIndex: 11 }),

@@ -269,7 +269,11 @@ export const ProfileSettings = ({ user, onSubmit, isSubmitting }: Props) => {
                     <CreatableSelect
                       inputId="team"
                       options={availableTeams}
-                      onChange={(e) => onChange(e.value)}
+                      onChange={(e) => {
+                        if (e) {
+                          onChange(e.value);
+                        }
+                      }}
                       value={{ value, label: value }}
                       styles={{
                         menu: (base) => ({ ...base, zIndex: 11 }),
@@ -336,10 +340,10 @@ export const ProfileSettings = ({ user, onSubmit, isSubmitting }: Props) => {
                       isMulti
                       isClearable
                       options={availableSkills}
-                      onChange={(event: { value: string }[]) => {
+                      onChange={(e) => {
                         let skills: string[] = [];
-                        if (event != null) {
-                          skills = event.map((e) => e.value.trim().toLowerCase().replace(/\s/g, '-'));
+                        if (e != null) {
+                          skills = e.map((v) => v.value.trim().toLowerCase().replace(/\s/g, '-'));
                         }
                         setValue('skills', skills);
                       }}
