@@ -22,7 +22,7 @@
     "chart.xkcd-react": "0.0.6",
     "framer-motion": "6.3.11",
     "graphql": "15.8.0",
-    "immer": "9.0.14",
+    "immer": "9.0.15",
     "katex": "0.15.6",
     "lodash": "4.17.21",
     "luxon": "2.4.0",
