@@ -89,6 +89,8 @@ export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: P
 
   const { appSettings } = useSelector((state: RootState) => state.app);
 
+  const isNew = insight == null;
+
   const [, createDraft] = useMutation(CREATE_DRAFT_MUTATION);
   const [, applyTemplateToDraft] = useMutation(APPLY_TEMPLATE_MUTATION);
 
@@ -107,15 +109,22 @@ export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: P
         setDraft(data?.draftByKey.draftData);
       } else {
         // No existing draft found, create a new one
-        const { data } = await createDraft({
-          itemType,
-          draftKey
-        });
+        if (isNew) {
+          // Create a new draft server-side
+          const { data } = await createDraft({
+            itemType,
+            draftKey
+          });
 
-        // Avoid changing state if already unmounted
-        if (cancelled) return;
+          // Avoid changing state if already unmounted
+          if (cancelled) return;
 
-        setDraft(data.createDraft.draftData);
+          setDraft(data.createDraft.draftData);
+        } else {
+          // Editing an existing Insight, we can let the editor initialize the draft
+          // TODO: We can extend the backend to create a new draft editing another Insight
+          setDraft({});
+        }
       }
     };
 
@@ -128,7 +137,7 @@ export const InsightDraftEditor = ({ insight, draftKey, itemType, onRefresh }: P
       cancelled = true;
       return;
     };
-  }, [appSettings, createDraft, draft, draftKey, itemType, navigate]);
+  }, [appSettings, createDraft, draft, draftKey, isNew, itemType, navigate]);
 
   const onApplyTemplate = async (templateId: string) => {
     const { data, error } = await applyTemplateToDraft({

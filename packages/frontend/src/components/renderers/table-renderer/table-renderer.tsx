@@ -93,7 +93,6 @@ export const TableRenderer = ({ columns, data }) => {
               return (
                 <Tr {...row.getRowProps()}>
                   {row.cells.map((cell) => {
-                    console.log('cell', cell);
                     return <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>;
                   })}
                 </Tr>
