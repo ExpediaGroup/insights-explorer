@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.2...v3.20.3) (2022-06-28)
+
+
+### Bug Fixes
+
+* **deps:** bump @emotion/styled from 11.8.1 to 11.9.3 ([560375c](https://github.com/ExpediaGroup/insights-explorer/commit/560375c000334c82c05a9718676534a2b138a59f))
+* **deps:** bump framer-motion from 6.3.11 to 6.3.16 ([8cd1001](https://github.com/ExpediaGroup/insights-explorer/commit/8cd10013d091e3af0b290bc39c206129e937b4b9))
+* **deps:** bump isomorphic-git from 1.17.2 to 1.18.3 ([a180175](https://github.com/ExpediaGroup/insights-explorer/commit/a18017540a18345f8be32fee0bad7d268060659a))
+* **deps:** bump pino from 7.11.0 to 8.1.0 ([c087baa](https://github.com/ExpediaGroup/insights-explorer/commit/c087baa40caaa7b1754a38392c1a294783fe2e93))
+* **deps:** bump pino-pretty from 7.6.1 to 8.1.0 ([cc3cd31](https://github.com/ExpediaGroup/insights-explorer/commit/cc3cd317e2db31208d3a6da55f6908f3033d6f76))
+
 ### [3.20.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.1...v3.20.2) (2022-06-24)
 
 
