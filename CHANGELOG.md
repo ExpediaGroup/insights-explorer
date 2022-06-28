@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.4...v3.20.5) (2022-06-28)
+
+
+### Bug Fixes
+
+* Fix editing Insight issue caused by server-side drafts ([f90511d](https://github.com/ExpediaGroup/insights-explorer/commit/f90511d7194cb0276751d135013ba50d2f68178e))
+
 ### [3.20.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.3...v3.20.4) (2022-06-28)
 
 
