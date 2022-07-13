@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.5...v3.20.6) (2022-07-13)
+
+
+### Bug Fixes
+
+* **deps:** bump @urql/core from 2.4.4 to 2.6.0 ([2fac384](https://github.com/ExpediaGroup/insights-explorer/commit/2fac384e5f50fa1640c17409d15fc49a2ceb2b13))
+* **deps:** bump @urql/exchange-graphcache from 4.3.6 to 4.4.3 ([a7f73f7](https://github.com/ExpediaGroup/insights-explorer/commit/a7f73f780044eb8eace51b844c6a01de92ccca94))
+* **deps:** bump urql from 2.2.0 to 2.2.2 ([473ee51](https://github.com/ExpediaGroup/insights-explorer/commit/473ee51c3c251c8eccf3e87bb87920b545f7f671))
+
 ### [3.20.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.4...v3.20.5) (2022-06-28)
 
 
