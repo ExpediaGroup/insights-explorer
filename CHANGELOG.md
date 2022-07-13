@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.6...v3.20.7) (2022-07-13)
+
+
+### Bug Fixes
+
+* **deps:** bump ace-builds from 1.6.0 to 1.7.1 ([c523f50](https://github.com/ExpediaGroup/insights-explorer/commit/c523f50f3122872b748a8ff3c3dd8634306737f6))
+
 ### [3.20.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.5...v3.20.6) (2022-07-13)
 
 
