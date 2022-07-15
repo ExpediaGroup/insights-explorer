@@ -98,7 +98,7 @@
     "@types/supertest": "2.0.12",
     "@types/tmp": "0.2.3",
     "@types/turndown": "5.0.1",
-    "@types/validator": "13.7.3",
+    "@types/validator": "13.7.4",
     "@typescript-eslint/eslint-plugin": "5.30.6",
     "@typescript-eslint/parser": "5.30.0",
     "eslint": "8.18.0",
