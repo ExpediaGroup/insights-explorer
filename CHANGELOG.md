@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.7...v3.20.8) (2022-08-29)
+
+
+### Bug Fixes
+
+* **deps:** bump @slack/bolt from 3.11.1 to 3.12.1 ([0496396](https://github.com/ExpediaGroup/insights-explorer/commit/0496396be666ce8140cc3626e322aea50d90c9f3))
+
 ### [3.20.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.6...v3.20.7) (2022-07-13)
 
 
