@@ -93,7 +93,7 @@
     "@types/luxon": "2.3.2",
     "@types/mime": "2.0.3",
     "@types/module-alias": "2.0.1",
-    "@types/node": "16.11.36",
+    "@types/node": "18.8.5",
     "@types/parsimmon": "1.10.6",
     "@types/supertest": "2.0.12",
     "@types/tmp": "0.2.3",
