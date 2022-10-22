@@ -22,7 +22,7 @@ Insights Explorer requires the following dependencies:
 * [PostgreSQL](https://www.postgresql.org/) 10+
 * AWS S3 bucket (or compatible API)
 * AWS SQS queues
-* [Okta](https://www.okta.com/) application for authentication
+* OAuth provider (Support for [GitHub](https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps#about-oauth-apps) or [Okta](https://www.okta.com/) included)
 * GitHub.com or GitHub Enterprise account & organization
 
 ## Local Development
