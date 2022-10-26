@@ -26,7 +26,8 @@ export const importToDraft = async (req: Request, res: Response): Promise<void> 
     title: req.body.title,
     url: req.body.url,
     contents: req.body.contents,
-    format: req.body.format
+    format: req.body.format,
+    itemType: req.body.itemType
   });
 
   res.send({
