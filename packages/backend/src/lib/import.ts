@@ -15,6 +15,7 @@
  */
 
 import { InsightFileAction } from '@iex/models/insight-file-action';
+import { ItemType } from '@iex/models/item-type';
 import { getLogger } from '@iex/shared/logger';
 import isArray from 'lodash/isArray';
 import mergeWith from 'lodash/mergeWith';
@@ -37,6 +38,7 @@ export interface ImportRequest {
   url: string;
   contents: string;
   format?: ImportFormat;
+  itemType?: ItemType;
   htmlElement?: HTMLElement;
 }
 
@@ -168,7 +170,8 @@ export function convertToDraft(request: ImportRequest): DraftDataInput {
       importedFrom: request.url
     },
     commitMessage: 'Imported from ' + request.url,
-    initializedTemplate: true
+    initializedTemplate: true,
+    itemType: request.itemType || ItemType.INSIGHT
   };
 
   // Merge converted draft contents with the default metadata
