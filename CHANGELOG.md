@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.8...v3.20.9) (2022-10-27)
+
+
+### Bug Fixes
+
+* Add itemType as part of defaultDraftData when importing insight ([676459b](https://github.com/ExpediaGroup/insights-explorer/commit/676459b1ea77879a1e4c43969aaa7a86fc72226f))
+
 ### [3.20.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.7...v3.20.8) (2022-08-29)
 
 
