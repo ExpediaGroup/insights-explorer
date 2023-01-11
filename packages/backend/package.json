@@ -33,7 +33,7 @@
     "axios": "0.27.2",
     "better-queue": "3.8.10",
     "chardet": "1.4.0",
-    "class-validator": "0.13.2",
+    "class-validator": "0.14.0",
     "compression": "1.7.4",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
