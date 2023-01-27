@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.9...v3.20.10) (2023-01-27)
+
+
+### Bug Fixes
+
+* **deps:** bump cookiejar from 2.1.3 to 2.1.4 ([7cec3dd](https://github.com/ExpediaGroup/insights-explorer/commit/7cec3dd94937403061b3fd30a768e3d070a9dce7))
+* **deps:** bump p-retry from 4.6.1 to 4.6.2 ([a188d63](https://github.com/ExpediaGroup/insights-explorer/commit/a188d635d39393258ae6d01748e698ed5d3515b1))
+
 ### [3.20.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.8...v3.20.9) (2022-10-27)
 
 
