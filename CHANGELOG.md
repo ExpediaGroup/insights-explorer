@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.11](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.10...v3.20.11) (2023-01-27)
+
+
+### Bug Fixes
+
+* **deps:** bump aws-sdk from 2.1113.0 to 2.1304.0 ([7bf3118](https://github.com/ExpediaGroup/insights-explorer/commit/7bf3118754ff3f316615e1530d7a7eb937f2eca0))
+* **deps:** bump decode-uri-component from 0.2.0 to 0.2.2 ([fc2afdd](https://github.com/ExpediaGroup/insights-explorer/commit/fc2afddc20b02e65dff04cf2526656c2badb4f2a))
+* **deps:** bump fast-json-patch from 3.1.0 to 3.1.1 ([b833ac4](https://github.com/ExpediaGroup/insights-explorer/commit/b833ac46f6468ec038df40d4554051b13f63784d))
+* **deps:** bump json5 from 1.0.1 to 1.0.2 ([0e36a83](https://github.com/ExpediaGroup/insights-explorer/commit/0e36a83f1f38049182a6969fbc421cfe3f5f2c29))
+* **deps:** bump ua-parser-js from 0.7.31 to 0.7.33 ([3cd221e](https://github.com/ExpediaGroup/insights-explorer/commit/3cd221e246d876814aae8205069da3b4ef4d43f3))
+* **deps:** bump vite from 2.8.6 to 4.0.4 ([131e9d5](https://github.com/ExpediaGroup/insights-explorer/commit/131e9d55d0f0fcac026db73c1ebf90b044644ba1))
+
 ### [3.20.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.9...v3.20.10) (2023-01-27)
 
 
