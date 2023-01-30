@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.13](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.12...v3.20.13) (2023-01-30)
+
+
+### Bug Fixes
+
+* **deps:** bump katex from 0.15.6 to 0.16.4 ([e3e3053](https://github.com/ExpediaGroup/insights-explorer/commit/e3e30535e433b9ee0d9a66991b5222ebc2a9729a))
+* **deps:** bump vega-lite from 5.2.0 to 5.6.0 ([cece792](https://github.com/ExpediaGroup/insights-explorer/commit/cece79248f71fd126bd496e97496413b4b6455ef))
+
 ### [3.20.12](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.11...v3.20.12) (2023-01-30)
 
 
