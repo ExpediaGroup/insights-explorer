@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.12](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.11...v3.20.12) (2023-01-30)
+
+
+### Bug Fixes
+
+* **deps:** bump luxon and @types/luxon ([318e035](https://github.com/ExpediaGroup/insights-explorer/commit/318e035e362a3a5caa13259aeb4d3cbc80a088c2))
+
 ### [3.20.11](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.10...v3.20.11) (2023-01-27)
 
 
