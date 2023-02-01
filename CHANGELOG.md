@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.14](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.13...v3.20.14) (2023-02-01)
+
+
+### Bug Fixes
+
+* **deps:** bump pino from 8.1.0 to 8.8.0 ([d5b2ada](https://github.com/ExpediaGroup/insights-explorer/commit/d5b2adaaebcc55cc7b0abe64424f77f759e6dc40))
+
 ### [3.20.13](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.12...v3.20.13) (2023-01-30)
 
 
