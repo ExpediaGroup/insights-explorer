@@ -286,11 +286,15 @@ export const ChakraUIRenderer = (
       return <Tr>{children}</Tr>;
     },
     th: ({ node, children, ...props }) => {
-      return <Th textAlign={props?.style?.textAlign}>{children}</Th>;
+      return (
+        <Th {...(props as any)} textAlign={props?.style?.textAlign}>
+          {children}
+        </Th>
+      );
     },
     td: ({ node, children, ...props }) => {
       return (
-        <Td textAlign={props?.style?.textAlign} {...getDataAttributes(props)}>
+        <Td {...(props as any)} textAlign={props?.style?.textAlign}>
           {children}
         </Td>
       );
