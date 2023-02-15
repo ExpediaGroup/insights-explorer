@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.20.16](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.15...v3.20.16) (2023-02-15)
+
+
+### Bug Fixes
+
+* Allow `colspan`/`rowspan` options in `<td>`/`<th>` tags ([05a96bc](https://github.com/ExpediaGroup/insights-explorer/commit/05a96bc01803056fabefbe775cc5fdf7fcb09b0d))
+
 ### [3.20.15](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.14...v3.20.15) (2023-02-13)
 
 
