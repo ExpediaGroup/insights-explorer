@@ -50,7 +50,7 @@ import {
 } from '../lib/elasticsearch';
 import { GitInstance } from '../lib/git-instance';
 import { streamFromS3 } from '../lib/storage';
-import { ActivityType } from '../models/activity';
+import { Activity, ActivityType, IndexedInsightActivityDetails } from '../models/activity';
 import { GitHubRepository, RepositoryVisibility } from '../models/backends/github';
 import { Comment } from '../models/comment';
 import { Draft } from '../models/draft';
@@ -620,7 +620,48 @@ export class InsightService {
       insightName: existingInsight.insightName
     });
 
+    // Increment `likeCount` for the Insight
+    await defaultElasticsearchClient.update({
+      id: insightId.toString(),
+      index: ElasticIndex.INSIGHTS,
+      body: {
+        script: {
+          source: 'ctx._source.likeCount += params.count',
+          params: {
+            count: liked ? 1 : -1
+          }
+        }
+      }
+    });
+
     return existingInsight;
+  }
+
+  /**
+   * Records a view of an Insight
+   *
+   * @param insightId Insight ID
+   * @param user User making the change
+   */
+  async viewInsight(details: IndexedInsightActivityDetails, user: User): Promise<Activity> {
+    const activityId = await this.activityService.recordActivity(ActivityType.VIEW_INSIGHT, user, details);
+
+    // Increment `viewCount` for the Insight
+    await defaultElasticsearchClient.update({
+      id: details.insightId.toString(),
+      index: ElasticIndex.INSIGHTS,
+      body: {
+        script: {
+          source: 'ctx._source.viewCount += params.count',
+          params: {
+            count: 1
+          }
+        }
+      }
+    });
+
+    const activity = await this.activityService.getActivity(activityId!);
+    return activity;
   }
 
   /**

@@ -56,5 +56,11 @@ export class Repository implements IndexedRepository {
   @Field()
   isReadOnly!: boolean;
 
+  @Field()
+  forks!: number;
+
+  @Field()
+  stars!: number;
+
   collaborators?: IndexedInsightUser[];
 }

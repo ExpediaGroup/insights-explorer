@@ -56,7 +56,7 @@ export class AdminResolver {
           return error;
         }
       },
-      { concurrency: 5 }
+      { concurrency: 2 }
     );
 
     return dbInsights.length;

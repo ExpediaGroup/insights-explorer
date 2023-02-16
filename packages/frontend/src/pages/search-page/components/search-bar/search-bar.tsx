@@ -44,7 +44,10 @@ const availableSortFields = [
   { value: 'createdAt', label: 'Created Date' },
   { value: 'updatedAt', label: 'Last Updated Date' },
   { value: 'publishedDate', label: 'Published Date' },
-  { value: 'name', label: 'Name' }
+  { value: 'name', label: 'Name' },
+  { value: 'likeCount', label: 'Likes' },
+  { value: 'viewCount', label: 'Views' },
+  { value: 'commentCount', label: 'Comments' }
 ];
 
 export const SearchBar = (): ReactElement => {

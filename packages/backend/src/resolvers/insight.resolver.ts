@@ -25,7 +25,7 @@ import { Service } from 'typedi';
 import { getCollaborators } from '../lib/backends/github';
 import { syncInsight } from '../lib/backends/sync';
 import { getInsight } from '../lib/elasticsearch';
-import { Activity, ActivityType, IndexedActivityDetails } from '../models/activity';
+import { Activity, ActivityType, IndexedInsightActivityDetails } from '../models/activity';
 import { CommentConnection } from '../models/comment';
 import { Context } from '../models/context';
 import { DraftKey } from '../models/draft';
@@ -414,11 +414,9 @@ export class InsightResolver {
       const details = {
         insightId: dbInsightId,
         insightName: insightName
-      } as IndexedActivityDetails;
+      } as IndexedInsightActivityDetails;
 
-      const activityId = await this.activityService.recordActivity(ActivityType.VIEW_INSIGHT, ctx.user!, details);
-      const activity = await this.activityService.getActivity(activityId!);
-      return activity;
+      return this.insightService.viewInsight(details, ctx.user!);
     } catch (error: any) {
       logger.error(error.message);
       throw error;

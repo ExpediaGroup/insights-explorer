@@ -152,12 +152,6 @@ export class Insight implements IndexedInsight {
   @Field()
   syncedAt!: string;
 
-  @Field()
-  stars!: number;
-
-  @Field()
-  forks!: number;
-
   @Field(() => [String])
   tags!: string[];
 

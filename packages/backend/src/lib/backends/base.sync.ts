@@ -55,14 +55,25 @@ export const INDEXABLE_MIME_TYPES = new Set([
 ]);
 
 export abstract class BaseSync {
-  private insightService = new InsightService(new ActivityService());
+  protected insightService = new InsightService(new ActivityService());
 
   async publishInsight(insight: IndexedInsight, refresh?: boolean): Promise<IndexedInsight> {
     const documentType = insight.itemType;
     const index = ElasticIndex.INSIGHTS;
 
+    // Calculate dynamic values and store with the Insight
+    const [commentCount, likeCount, viewCount] = await Promise.all([
+      this.insightService.commentCount(insight.insightId!),
+      this.insightService.likeCount(insight.insightId!),
+      this.insightService.getViewCount(insight.insightId!)
+    ]);
+
+    insight.commentCount = commentCount;
+    insight.likeCount = likeCount;
+    insight.viewCount = viewCount;
+
     logger.info(`Publishing ${documentType} to Elasticsearch: ${insight.fullName}`);
-    logger.trace(JSON.stringify(insight, null, 2));
+    //logger.trace(JSON.stringify(insight, null, 2));
 
     try {
       const result = await defaultElasticsearchClient.index({
@@ -86,7 +97,7 @@ export abstract class BaseSync {
     return insight;
   }
 
-  async updateDatabase(insightSyncTask: InsightSyncTask, insight: IndexedInsight): Promise<void> {
+  async updateDatabase(insightSyncTask: InsightSyncTask, insight: IndexedInsight): Promise<IndexedInsight> {
     const externalId = insight.repository.externalId;
     const { repositoryType, ...repositoryData } = insightSyncTask;
 
@@ -137,6 +148,8 @@ export abstract class BaseSync {
 
     // Use the Database ID as the document ID in Elasticsearch
     insight.insightId = existingDbInsight.insightId!;
+
+    return insight;
   }
 
   async getPreviouslySyncedInsight(fullName: string): Promise<IndexedInsight | null> {

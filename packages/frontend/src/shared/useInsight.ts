@@ -52,7 +52,6 @@ const INSIGHT_FRAGMENT = gql`
       }
     }
     tags
-    forks
     viewCount
     likeCount
     commentCount

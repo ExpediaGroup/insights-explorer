@@ -81,6 +81,9 @@ export const searchSlice = createSlice({
         case 'createdAt':
         case 'updatedAt':
         case 'publishedDate':
+        case 'commentCount':
+        case 'likeCount':
+        case 'viewCount':
           state.sort.direction = 'desc';
           break;
       }

@@ -30,4 +30,7 @@ export interface IndexedRepository {
   isMissing: boolean;
   isArchived?: boolean;
   isReadOnly: boolean;
+
+  stars: number;
+  forks: number;
 }

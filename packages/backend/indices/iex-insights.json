@@ -1,6 +1,9 @@
 {
   "mappings": {
     "properties": {
+      "commentCount": {
+        "type": "integer"
+      },
       "contributors": {
         "properties": {
           "userName": {
@@ -44,9 +47,6 @@
           }
         }
       },
-      "forks": {
-        "type": "integer"
-      },
       "fullName": {
         "type": "text",
         "fields": {
@@ -63,11 +63,8 @@
       "itemType": {
         "type": "keyword"
       },
-      "syncedAt": {
-        "type": "date"
-      },
-      "updatedAt": {
-        "type": "date"
+      "likeCount": {
+        "type": "integer"
       },
       "metadata": {
         "properties": {
@@ -155,6 +152,9 @@
               }
             }
           },
+          "forks": {
+            "type": "integer"
+          },
           "isArchived": {
             "type": "boolean"
           },
@@ -190,6 +190,9 @@
               }
             }
           },
+          "stars": {
+            "type": "integer"
+          },
           "type": {
             "type": "keyword"
           },
@@ -204,8 +207,8 @@
           }
         }
       },
-      "stars": {
-        "type": "integer"
+      "syncedAt": {
+        "type": "date"
       },
       "tags": {
         "type": "text",
@@ -216,6 +219,12 @@
             "normalizer": "lowercase_normalizer"
           }
         }
+      },
+      "updatedAt": {
+        "type": "date"
+      },
+      "viewCount": {
+        "type": "integer"
       }
     }
   },

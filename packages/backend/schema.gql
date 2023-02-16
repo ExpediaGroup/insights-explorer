@@ -176,7 +176,6 @@ type Insight {
   creation: InsightCreation
   description: String!
   files: [InsightFile!]
-  forks: Float!
   fullName: String!
   id: ID!
   itemType: String!
@@ -188,7 +187,6 @@ type Insight {
   namespace: String!
   readme: InsightReadme
   repository: Repository!
-  stars: Float!
   syncedAt: String!
   tags: [String!]!
   thumbnailUrl: String
@@ -475,10 +473,12 @@ type Repository {
   externalFullName: String!
   externalId: String!
   externalName: String!
+  forks: Float!
   isArchived: Boolean!
   isMissing: Boolean!
   isReadOnly: Boolean!
   owner: RepositoryPerson!
+  stars: Float!
   type: String!
   url: String!
 }

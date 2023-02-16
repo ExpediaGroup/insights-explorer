@@ -88,8 +88,6 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
     createdAt: repository.createdAt!,
     updatedAt: repository.updatedAt!,
     syncedAt: new Date().toISOString(),
-    stars: repository.stargazers!.totalCount,
-    forks: repository.forkCount!,
     tags: repository.repositoryTopics!.edges.map(({ node }: any) => node.topic.name),
     contributors: [],
     repository: {
@@ -108,7 +106,9 @@ export async function getInsightFromRepository(owner: string, repo: string): Pro
       },
       isMissing: false,
       isArchived: repository.isArchived,
-      isReadOnly: repository.isArchived
+      isReadOnly: repository.isArchived,
+      forks: repository.forkCount!,
+      stars: repository.stargazers!.totalCount
     }
   };
 

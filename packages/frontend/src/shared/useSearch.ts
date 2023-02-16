@@ -36,7 +36,6 @@ const INSIGHTS_QUERY = gql`
           tags
           likeCount
           commentCount
-          forks
           authors {
             edges {
               node {

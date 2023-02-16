@@ -125,8 +125,6 @@ export const getInsight = async (
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     syncedAt: new Date().toISOString(),
-    stars: 0,
-    forks: 0,
     tags: [],
     contributors: [],
     repository: {
@@ -145,8 +143,13 @@ export const getInsight = async (
       isMissing: false,
       isArchived: false,
       // File Insights are always read-only (for now)
-      isReadOnly: true
-    }
+      isReadOnly: true,
+      forks: 0,
+      stars: 0
+    },
+    commentCount: 0,
+    likeCount: 0,
+    viewCount: 0
   };
 
   // Clone the repository locally
@@ -183,7 +186,7 @@ export const getInsight = async (
   }
 
   // Done!
-  logger.debug(JSON.stringify(insight, null, 2));
+  logger.trace(JSON.stringify(insight, null, 2));
 
   return insight;
 };

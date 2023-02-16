@@ -21,6 +21,7 @@ import { raw, ref } from 'objection';
 import { Service } from 'typedi';
 
 import { defaultKnex } from '../lib/db';
+import { defaultElasticsearchClient, ElasticIndex } from '../lib/elasticsearch';
 import { ActivityType } from '../models/activity';
 import { Comment } from '../models/comment';
 import { User } from '../models/user';
@@ -151,6 +152,20 @@ export class CommentService {
       insightId
     });
 
+    // Increment `commentCount` for the Insight
+    await defaultElasticsearchClient.update({
+      id: insightId.toString(),
+      index: ElasticIndex.INSIGHTS,
+      body: {
+        script: {
+          source: 'ctx._source.commentCount += params.count',
+          params: {
+            count: 1
+          }
+        }
+      }
+    });
+
     return newComment;
   }
 
@@ -207,6 +222,20 @@ export class CommentService {
       commentId,
       commentText,
       insightId
+    });
+
+    // Decrememt `commentCount` for the Insight
+    await defaultElasticsearchClient.update({
+      id: insightId.toString(),
+      index: ElasticIndex.INSIGHTS,
+      body: {
+        script: {
+          source: 'ctx._source.commentCount += params.count',
+          params: {
+            count: -1
+          }
+        }
+      }
     });
 
     return deletedComment;

@@ -50,8 +50,9 @@ export interface IndexedInsight {
   updatedAt: string;
   syncedAt: string;
 
-  stars: number;
-  forks: number;
+  commentCount?: number;
+  likeCount?: number;
+  viewCount?: number;
 
   readme?: IndexedInsightReadme;
 
