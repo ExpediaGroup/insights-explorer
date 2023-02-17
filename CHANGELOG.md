@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.21.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.21.0...v3.21.1) (2023-02-17)
+
+
+### Bug Fixes
+
+* **deps:** bump aws-sdk from 2.1304.0 to 2.1317.0 ([6159403](https://github.com/ExpediaGroup/insights-explorer/commit/615940366c5a951ab7c2a6dcf38cee45b15f81e6))
+* **deps:** bump http-cache-semantics from 4.1.0 to 4.1.1 ([eee92c4](https://github.com/ExpediaGroup/insights-explorer/commit/eee92c4ac12c788227fe17e903da343e3ecd9211))
+* **deps:** bump react and @types/react ([4c1a5fe](https://github.com/ExpediaGroup/insights-explorer/commit/4c1a5fecc602a047efd202218ba4d76aa168c339))
+* **deps:** bump rehype-slug from 5.0.1 to 5.1.0 ([b592185](https://github.com/ExpediaGroup/insights-explorer/commit/b592185078dcda9b0bf5612144d5d0eeb754b1ae))
+
 ## [3.21.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.16...v3.21.0) (2023-02-17)
 
 
