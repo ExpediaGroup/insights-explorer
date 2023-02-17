@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.21.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.16...v3.21.0) (2023-02-17)
+
+
+### Features
+
+* Add Insight search sort options for view/like/comment count ([e36ab39](https://github.com/ExpediaGroup/insights-explorer/commit/e36ab399e43d0238b92b5f74f030bf7d6e5a7cc0))
+
 ### [3.20.16](https://github.com/ExpediaGroup/insights-explorer/compare/v3.20.15...v3.20.16) (2023-02-15)
 
 
