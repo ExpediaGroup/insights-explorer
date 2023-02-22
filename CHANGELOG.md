@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.21.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.21.2...v3.21.3) (2023-02-22)
+
+
+### Bug Fixes
+
+* **deps:** bump class-validator from 0.13.2 to 0.14.0 ([d9d5a6a](https://github.com/ExpediaGroup/insights-explorer/commit/d9d5a6ac0104d338de5ce675842433032b7dce2b))
+
 ### [3.21.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.21.1...v3.21.2) (2023-02-22)
 
 
