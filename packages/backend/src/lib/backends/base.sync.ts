@@ -16,12 +16,12 @@
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { getLogger } from '@iex/shared/logger';
+import Container from 'typedi';
 
 import { defaultElasticsearchClient, ElasticIndex } from '../../lib/elasticsearch';
 import { DbInsight } from '../../models/insight';
 import { DbRepositoryType } from '../../models/repository-type';
 import { InsightSyncTask } from '../../models/tasks';
-import { ActivityService } from '../../services/activity.service';
 import { InsightService } from '../../services/insight.service';
 
 const logger = getLogger('base.sync');
@@ -55,7 +55,7 @@ export const INDEXABLE_MIME_TYPES = new Set([
 ]);
 
 export abstract class BaseSync {
-  protected insightService = new InsightService(new ActivityService());
+  protected insightService = Container.get(InsightService);
 
   async publishInsight(insight: IndexedInsight, refresh?: boolean): Promise<IndexedInsight> {
     const documentType = insight.itemType;

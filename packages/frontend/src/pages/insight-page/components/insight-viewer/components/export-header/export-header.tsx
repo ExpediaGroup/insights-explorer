@@ -38,6 +38,15 @@ export const ExportHeader = ({ insight, ...props }: { insight: Insight } & BoxPr
           <SidebarHeading mr="0.5rem">About</SidebarHeading>
           <Text>
             <Linkify>{insight.description}</Linkify>
+
+            {insight.isUnlisted === true && (
+              <Tooltip placement="bottom" label={`Unlisted from search results`} aria-label="Unlisted">
+                <Badge variant="frost" ml="0.5rem">
+                  Unlisted
+                </Badge>
+              </Tooltip>
+            )}
+
             {insight.metadata?.publishedDate != null && (
               <Tooltip
                 placement="bottom"

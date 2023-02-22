@@ -1,6 +1,44 @@
 {
   "mappings": {
     "properties": {
+      "_collaborators": {
+        "properties": {
+          "user": {
+            "properties": {
+              "userName": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "displayName": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              },
+              "email": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 256
+                  }
+                }
+              }
+            }
+          },
+          "permission": {
+            "type": "keyword"
+          }
+        }
+      },
       "commentCount": {
         "type": "integer"
       },
@@ -59,6 +97,9 @@
       },
       "insightId": {
         "type": "integer"
+      },
+      "isUnlisted": {
+        "type": "boolean"
       },
       "itemType": {
         "type": "keyword"

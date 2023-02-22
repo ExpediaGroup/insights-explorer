@@ -16,6 +16,7 @@
 
 import type { ItemType } from '../item-type';
 
+import type { IndexedInsightCollaborator } from './indexed-insight-collaborator';
 import type { IndexedInsightConfig } from './indexed-insight-config';
 import type { IndexedInsightCreation } from './indexed-insight-creation';
 import type { IndexedInsightFile } from './indexed-insight-file';
@@ -46,6 +47,8 @@ export interface IndexedInsight {
 
   contributors: IndexedInsightUser[];
 
+  _collaborators?: IndexedInsightCollaborator[];
+
   createdAt: string;
   updatedAt: string;
   syncedAt: string;
@@ -65,4 +68,6 @@ export interface IndexedInsight {
   config?: IndexedInsightConfig;
 
   links?: IndexedInsightLink[];
+
+  isUnlisted?: boolean;
 }

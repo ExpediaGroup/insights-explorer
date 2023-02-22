@@ -36,7 +36,7 @@ import { PageViewer } from './page-viewer';
 /**
  * Main pane of content---shared with normal/export view
  */
-const MainView = ({ insight, isExport, onClone, onDelete, onFetchLikedBy, onLike }: ItemTypeViewerProps) => {
+const MainView = ({ insight, isExport }: ItemTypeViewerProps) => {
   return (
     <>
       {insight.repository.isMissing && (

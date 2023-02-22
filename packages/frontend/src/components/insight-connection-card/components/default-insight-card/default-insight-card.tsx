@@ -53,6 +53,14 @@ export const DefaultInsightCard = ({ insightEdge, options, ...props }: InsightCo
             </Heading>
           </LinkOverlay>
 
+          {insight.isUnlisted === true && (
+            <Tooltip placement="bottom" label={`Unlisted from search results`} aria-label="Unlisted">
+              <Badge variant="frost" m="0.5rem">
+                Unlisted
+              </Badge>
+            </Tooltip>
+          )}
+
           <InsightStats
             insightId={insight.id}
             commentCount={insight.commentCount}

@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2023 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,11 @@
  * limitations under the License.
  */
 
-import type {
-  InsightCreationInput,
-  InsightFileInput,
-  InsightMetadataInput,
-  UpdatedReadme
-} from '../../models/generated/graphql';
+import type { RepositoryPermission } from '../repository-permission';
 
-export interface DraftForm {
-  commitMessage: string;
-  initializedTemplate: boolean;
+import type { IndexedInsightUser } from './indexed-insight-user';
 
-  creation: InsightCreationInput;
-  description: string;
-  files: InsightFileInput[];
-  itemType: string;
-  metadata: InsightMetadataInput;
-  name: string;
-  namespace: string;
-  readme: UpdatedReadme;
-  tags: string[];
-  isUnlisted: boolean;
+export interface IndexedInsightCollaborator {
+  user: IndexedInsightUser;
+  permission: RepositoryPermission;
 }

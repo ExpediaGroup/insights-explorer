@@ -87,6 +87,13 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
               <Badge colorScheme="green">Published</Badge>
             </Tooltip>
           )}
+          {insight.isUnlisted === true && (
+            <Tooltip placement="bottom" label={`Unlisted from search results`} aria-label="Unlisted">
+              <Badge variant="frost" m="0.5rem">
+                Unlisted
+              </Badge>
+            </Tooltip>
+          )}
         </HStack>
         {insight.readme?.readingTime && (
           <Flex align="center">

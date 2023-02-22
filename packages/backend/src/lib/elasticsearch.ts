@@ -21,7 +21,7 @@ import { GetResponse, MgetResponse, SearchBody, SearchResponse } from '@iex/mode
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { ItemType } from '@iex/models/item-type';
 import { getLogger } from '@iex/shared/logger';
-import { parseToElasticsearch, SearchMultiTerm, SearchTerm } from '@iex/shared/search';
+import { parseToElasticsearch, SearchMultiTerm, SearchNestedOrFilter, SearchTerm } from '@iex/shared/search';
 import { detailedDiff } from 'deep-object-diff';
 import { DateTime } from 'luxon';
 
@@ -29,6 +29,7 @@ import { UniqueValue } from '../models/autocomplete';
 import { ConnectionArgs, Edge, Sort } from '../models/connection';
 import { Insight, InsightConnection } from '../models/insight';
 import { InsightSearch, InsightSearchResults, SearchResult } from '../models/insight-search';
+import { User } from '../models/user';
 import { fromElasticsearchCursor, toElasticsearchCursor } from '../shared/resolver-utils';
 
 const logger = getLogger('elasticsearch');
@@ -278,6 +279,7 @@ function getSortField(field: string | undefined): string {
 
 export async function searchInsights(
   search?: InsightSearch,
+  user?: User,
   _source?: string[],
   index = ElasticIndex.INSIGHTS
 ): Promise<InsightSearchResults> {
@@ -323,6 +325,46 @@ export async function searchInsights(
 
       if (itemTypeClause === undefined) {
         clauses.push(new SearchMultiTerm('itemType', [ItemType.INSIGHT, ItemType.PAGE]));
+      }
+
+      // Only show listed insights
+      // If unlisted, the user must be a collaborator
+      // If `isUnlisted` is missing, assume it's false
+      // This uses `filter` so it doesn't affect the score
+      if (user) {
+        clauses.push(
+          new SearchNestedOrFilter([
+            {
+              bool: {
+                should: [
+                  {
+                    term: {
+                      isUnlisted: false
+                    }
+                  },
+                  {
+                    bool: {
+                      must_not: [
+                        {
+                          exists: {
+                            field: 'isUnlisted'
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              term: {
+                '_collaborators.user.userName': {
+                  value: user.userName
+                }
+              }
+            }
+          ])
+        );
       }
 
       return clauses;

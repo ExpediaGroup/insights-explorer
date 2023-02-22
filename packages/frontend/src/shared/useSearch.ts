@@ -54,6 +54,7 @@ const INSIGHTS_QUERY = gql`
           }
           viewerHasLiked
           updatedAt
+          isUnlisted
         }
       }
       pageInfo {

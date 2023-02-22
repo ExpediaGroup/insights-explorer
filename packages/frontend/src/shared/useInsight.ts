@@ -32,6 +32,7 @@ const INSIGHT_FRAGMENT = gql`
     createdAt
     updatedAt
     syncedAt
+    isUnlisted
     authors {
       edges {
         node {

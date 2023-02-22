@@ -81,6 +81,13 @@ export const SquareInsightCard = ({ insightEdge, options, ...props }: InsightCon
 
         <VStack flexGrow={2} align="stretch" justify="flex-end">
           <Wrap spacing="0.25rem" align="flex-start">
+            {insight.isUnlisted === true && (
+              <Tooltip placement="bottom" label={`Unlisted from search results`} aria-label="Unlisted">
+                <Badge variant="frost">Unlisted</Badge>
+              </Tooltip>
+            )}
+          </Wrap>
+          <Wrap spacing="0.25rem" align="flex-start">
             {insight.authors.edges.slice(0, 5).map(({ node: author }) => {
               return (
                 <WrapItem key={author.userName}>

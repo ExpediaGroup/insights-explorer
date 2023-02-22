@@ -271,6 +271,28 @@ export class SearchCompoundRange implements SearchClause {
   }
 }
 
+export class SearchNestedOrFilter implements SearchClause {
+  constructor(protected clauses: any[]) {}
+
+  toElasticsearch() {
+    return {
+      bool: {
+        filter: [
+          {
+            bool: {
+              should: this.clauses
+            }
+          }
+        ]
+      }
+    };
+  }
+
+  toString(): string {
+    throw new Error('Method not implemented.');
+  }
+}
+
 //
 // Parsimmon language
 //

@@ -18,7 +18,9 @@ import fs from 'fs';
 
 import { CountResponse, SearchResponse, SearchBody } from '@iex/models/elasticsearch';
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
+import { IndexedInsightCollaborator } from '@iex/models/indexed/indexed-insight-collaborator';
 import { InsightFileAction } from '@iex/models/insight-file-action';
+import { PersonType } from '@iex/models/person-type';
 import { RepositoryPermission } from '@iex/models/repository-permission';
 import { RepositoryType } from '@iex/models/repository-type';
 import { sort } from '@iex/shared/dataloader-util';
@@ -34,6 +36,7 @@ import {
   createIexWebhook,
   createRepository,
   doesRepositoryExist,
+  getCollaborators,
   getRepositoryOwner,
   getRepositoryPermissions,
   removeCollaborator,
@@ -62,6 +65,7 @@ import { slugifyInsightName, incrementInsightName } from '../shared/slugify';
 import { sleep } from '../shared/util';
 
 import { ActivityService } from './activity.service';
+import { UserService } from './user.service';
 
 const logger = getLogger('insight.service');
 
@@ -129,7 +133,7 @@ export class InsightService {
     return sort(insightIds, result, 'insightId').map((row) => row?.userIds || []);
   });
 
-  constructor(private readonly activityService: ActivityService) {
+  constructor(private readonly activityService: ActivityService, private readonly userService: UserService) {
     logger.trace('Constructing New Insight Service');
   }
 
@@ -511,8 +515,18 @@ export class InsightService {
             // Merge the existing data with any fields specified in the update
             // This variable is hoisted so the merged version can be used to update
             // the GitHub API as well.
-            const { authors, creation, description, excludedAuthors, itemType, links, metadata, name, tags } =
-              updatedYaml;
+            const {
+              authors,
+              creation,
+              description,
+              excludedAuthors,
+              itemType,
+              links,
+              metadata,
+              name,
+              tags,
+              isUnlisted
+            } = updatedYaml;
             mergedYaml = {
               ...insightYaml,
               name,
@@ -521,7 +535,8 @@ export class InsightService {
               links,
               tags,
               authors,
-              excludedAuthors
+              excludedAuthors,
+              isUnlisted
             };
 
             if (creation != null) {
@@ -702,6 +717,70 @@ export class InsightService {
     });
 
     return dbInsight;
+  }
+
+  /**
+   * Gets Collaborators for an Insight
+   */
+  async getCollaborators(insight: Insight): Promise<IndexedInsightCollaborator[]> {
+    if (insight.repository.type === RepositoryType.FILE) {
+      return [];
+    }
+
+    const gitHubCollaborators = await getCollaborators(insight.repository.owner.login, insight.repository.externalName);
+    if (gitHubCollaborators == null || gitHubCollaborators.length === 0) {
+      return [];
+    }
+
+    return await Promise.all(
+      gitHubCollaborators
+        .filter((edge) => {
+          // Ignore the IEX Service Account
+          return edge.node.login !== process.env.GITHUB_SERVICE_ACCOUNT;
+        })
+        .filter((edge) => {
+          // Ignore READ permissions
+          return edge.permission !== 'READ';
+        })
+        .map(async ({ node, permission }) => {
+          const user = await this.userService.getUserByGitHubLogin(node.login);
+          if (user === null) {
+            // This means we detected a GitHub user who isn't an IEX user.
+            // Make do with what we have
+            return {
+              user: {
+                userId: `unknown:${node.login}`,
+                userName: node.login,
+                displayName: node.login,
+                email: 'unknown',
+                gitHubUser: {
+                  login: node.login,
+                  type: PersonType.USER,
+                  externalId: node.id
+                }
+              } as unknown as User,
+              permission: permission as RepositoryPermission
+            };
+          }
+
+          return {
+            user: {
+              userId: user.userId,
+              userName: user.userName,
+              email: user.email,
+              displayName: user.displayName,
+              avatar: user.avatar,
+              gitHubUser: {
+                login: node.login,
+                type: PersonType.USER,
+                avatarUrl: node.avatarUrl,
+                externalId: node.id
+              }
+            },
+            permission: permission as RepositoryPermission
+          };
+        })
+    );
   }
 
   /**

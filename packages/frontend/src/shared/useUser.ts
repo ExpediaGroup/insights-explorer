@@ -74,6 +74,7 @@ const PROFILE_FRAGMENT = gql`
           likeCount
           commentCount
           viewerHasLiked
+          isUnlisted
         }
       }
     }
@@ -108,6 +109,7 @@ const PROFILE_FRAGMENT = gql`
           likeCount
           commentCount
           viewerHasLiked
+          isUnlisted
         }
       }
     }

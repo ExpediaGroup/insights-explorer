@@ -16,10 +16,11 @@
 
 import { getLogger } from '@iex/shared/logger';
 import { ResolveTree } from 'graphql-parse-resolve-info';
-import { Arg, Authorized, Query, Resolver } from 'type-graphql';
+import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql';
 import { Service } from 'typedi';
 
 import { searchInsights } from '../lib/elasticsearch';
+import { Context } from '../models/context';
 import { InsightSearch, InsightSearchResults } from '../models/insight-search';
 import { Permission } from '../models/permission';
 import { Fields } from '../shared/field-parameter-decorator';
@@ -32,11 +33,12 @@ export class InsightsResolver {
   @Authorized<Permission>({ user: true })
   @Query(() => InsightSearchResults)
   async insights(
+    @Ctx() ctx: Context,
     @Fields() fields: { InsightSearchResults: any },
     @Arg('search', { nullable: true }) search?: InsightSearch
   ): Promise<InsightSearchResults> {
     try {
-      return await searchInsights(search, this.getElasticsearchFields(fields));
+      return await searchInsights(search, ctx.user, this.getElasticsearchFields(fields));
     } catch (error: any) {
       logger.error(error);
       return error;

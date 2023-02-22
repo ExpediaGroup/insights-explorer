@@ -15,6 +15,7 @@
  */
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
+import { IndexedInsightCollaborator } from '@iex/models/indexed/indexed-insight-collaborator';
 import { IndexedInsightUser } from '@iex/models/indexed/indexed-insight-user';
 import { ItemType } from '@iex/models/item-type';
 import { PersonType } from '@iex/models/person-type';
@@ -24,14 +25,15 @@ import { getLogger } from '@iex/shared/logger';
 import { nanoid } from 'nanoid';
 import pMap from 'p-map';
 import readingTime from 'reading-time';
-
-import { InsightYaml } from '@iex/backend/models/insight-yaml';
+import Container from 'typedi';
 
 import { GitInstance, INSIGHT_YAML_FILE } from '../../lib/git-instance';
 import { writeToS3 } from '../../lib/storage';
+import { Insight } from '../../models/insight';
 import { InsightFile, InsightFileConversion } from '../../models/insight-file';
+import { InsightYaml } from '../../models/insight-yaml';
 import { InsightSyncTask } from '../../models/tasks';
-import { ActivityService } from '../../services/activity.service';
+import { InsightService } from '../../services/insight.service';
 import { UserService } from '../../services/user.service';
 import { getTypeAsync } from '../../shared/mime';
 
@@ -153,12 +155,12 @@ function excludeContributors(contributors: IndexedInsightUser[], yaml: InsightYa
 }
 
 async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml): Promise<IndexedInsightUser[]> {
-  const userServices = new UserService(new ActivityService());
+  const userService = Container.get(UserService);
 
   // If authors is manually specified in the YAML, use that instead of the GitHub API
   if (yaml.authors && yaml.authors.length > 0) {
     const contributors = await pMap(yaml.authors, async (author) => {
-      const user = await userServices.getUserByEmail(author);
+      const user = await userService.getUserByEmail(author);
 
       return user === null
         ? {
@@ -190,7 +192,7 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
   logger.debug('Retrieved Contributor details from GitHub API ' + insight.repository.externalFullName);
 
   const contributors = await pMap(contributorsResult, async ({ author }: any): Promise<IndexedInsightUser> => {
-    const user = await userServices.getUserByGitHubLogin(author.login);
+    const user = await userService.getUserByGitHubLogin(author.login);
     if (user === null) {
       // This means we detected a GitHub user who isn't an IEX user.
       // Make do with what we have
@@ -224,6 +226,12 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
 
   // Filter for contributors to to be excluded
   return excludeContributors(contributors, yaml);
+}
+
+async function getInsightCollaborators(insight: IndexedInsight): Promise<IndexedInsightCollaborator[]> {
+  const insightService = Container.get(InsightService);
+
+  return await insightService.getCollaborators(insight as Insight);
 }
 
 /**
@@ -282,6 +290,7 @@ export const githubRepositorySync = async (
     await syncFiles(gitInstance, insight, previousInsight);
 
     insight.contributors = await getInsightContributors(insight, yaml);
+    insight._collaborators = await getInsightCollaborators(insight);
 
     // Determine thumbnail
     // TODO: support insight.yml configuration
@@ -374,6 +383,8 @@ const applyInsightYaml = async (yaml: any, insight: IndexedInsight): Promise<voi
   if (yaml.links != null) {
     insight.links = yaml.links;
   }
+
+  insight.isUnlisted = yaml.isUnlisted ?? false;
 
   // Default to Insight if not set
   insight.itemType = yaml.itemType ?? ItemType.INSIGHT;

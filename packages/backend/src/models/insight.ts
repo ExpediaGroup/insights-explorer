@@ -15,6 +15,7 @@
  */
 
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
+import { IndexedInsightCollaborator } from '@iex/models/indexed/indexed-insight-collaborator';
 import { IndexedInsightConfig } from '@iex/models/indexed/indexed-insight-config';
 import { IndexedInsightCreation } from '@iex/models/indexed/indexed-insight-creation';
 import { IndexedInsightLink } from '@iex/models/indexed/indexed-insight-link';
@@ -200,9 +201,14 @@ export class Insight implements IndexedInsight {
   @Field()
   itemType!: ItemType;
 
+  @Field()
+  isUnlisted!: boolean;
+
   insightId!: number;
 
   contributors!: User[];
+
+  _collaborators?: IndexedInsightCollaborator[];
 }
 
 @ObjectType()
@@ -274,6 +280,9 @@ export class UpdatedInsight {
 
   @Field(() => [InsightLinkInput], { nullable: true })
   links?: InsightLinkInput[];
+
+  @Field({ nullable: true })
+  isUnlisted?: boolean;
 }
 
 export class DbInsight extends BaseModel {

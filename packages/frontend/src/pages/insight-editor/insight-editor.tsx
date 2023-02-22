@@ -143,6 +143,7 @@ export const InsightEditor = memo(
           (file): InsightFileInput => ({ ...file, action: 'none' as InsightFileAction })
         ),
         links: (insight.links ?? []).map(({ __typename, ...link }) => link),
+        isUnlisted: insight.isUnlisted ?? false,
         ...draft
       }
     });

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { PersonType } from '@iex/models/person-type';
 import { RepositoryPermission } from '@iex/models/repository-permission';
 import { RepositoryType } from '@iex/models/repository-type';
 import { getLogger } from '@iex/shared/logger';
@@ -22,7 +21,6 @@ import { ResolveTree } from 'graphql-parse-resolve-info';
 import { Arg, Authorized, Ctx, ID, FieldResolver, Mutation, Query, Resolver, Root } from 'type-graphql';
 import { Service } from 'typedi';
 
-import { getCollaborators } from '../lib/backends/github';
 import { syncInsight } from '../lib/backends/sync';
 import { getInsight } from '../lib/elasticsearch';
 import { Activity, ActivityType, IndexedInsightActivityDetails } from '../models/activity';
@@ -181,54 +179,12 @@ export class InsightResolver {
 
   @FieldResolver()
   async collaborators(@Root() insight: Insight): Promise<UserPermissionConnection> {
-    if (insight.repository.type === RepositoryType.FILE) {
-      return { edges: [] };
-    }
-
-    const gitHubCollaborators = await getCollaborators(insight.repository.owner.login, insight.repository.externalName);
-    if (gitHubCollaborators == null || gitHubCollaborators.length === 0) {
-      return { edges: [] };
-    }
-
-    const users = await Promise.all(
-      gitHubCollaborators
-        .filter((edge) => {
-          // Ignore the IEX Service Account
-          return edge.node.login !== process.env.GITHUB_SERVICE_ACCOUNT;
-        })
-        .filter((edge) => {
-          // Ignore READ permissions
-          return edge.permission !== 'READ';
-        })
-        .map(async ({ node, permission }) => {
-          const user = await this.userService.getUserByGitHubLogin(node.login);
-          if (user === null) {
-            // This means we detected a GitHub user who isn't an IEX user.
-            // Make do with what we have
-            return {
-              user: {
-                userId: `unknown:${node.login}`,
-                userName: node.login,
-                displayName: node.login,
-                email: 'unknown',
-                gitHubUser: {
-                  login: node.login,
-                  type: PersonType.USER,
-                  externalId: node.id
-                }
-              } as unknown as User,
-              permission: permission as RepositoryPermission
-            };
-          }
-
-          return { user, permission: permission as RepositoryPermission };
-        })
-    );
+    const users = await this.insightService.getCollaborators(insight);
 
     return {
       edges: users.map(({ user, permission }, i) => ({
         cursor: toCursor('User', i),
-        node: user,
+        node: user as User,
         permission
       }))
     };
@@ -307,6 +263,11 @@ export class InsightResolver {
         node: c
       }))
     };
+  }
+
+  @FieldResolver()
+  async isUnlisted(@Root() insight: Insight): Promise<boolean> {
+    return insight.isUnlisted ?? false;
   }
 
   @Authorized<Permission>({ user: true, github: true })

@@ -178,6 +178,7 @@ type Insight {
   files: [InsightFile!]
   fullName: String!
   id: ID!
+  isUnlisted: Boolean!
   itemType: String!
   likeCount: Float!
   likedBy: UserConnection!
@@ -531,6 +532,7 @@ input UpdatedInsight {
   creation: InsightCreationInput
   description: String
   files: [InsightFileInput!]
+  isUnlisted: Boolean
   itemType: String!
   links: [InsightLinkInput!]
   metadata: InsightMetadataInput

@@ -104,6 +104,14 @@ export const InsightInfobar = ({ insight, ...props }: { insight: Insight } & Sta
                   </Tooltip>
                 )}
 
+                {insight.isUnlisted === true && (
+                  <Tooltip placement="bottom" label={`Unlisted from search results`} aria-label="Unlisted">
+                    <Badge variant="frost" m="0.5rem">
+                      Unlisted
+                    </Badge>
+                  </Tooltip>
+                )}
+
                 {insight.readme?.readingTime && (
                   <Flex align="center">
                     <Icon as={iconFactory('time')} mr="0.5rem" /> Est. time to read:{' '}

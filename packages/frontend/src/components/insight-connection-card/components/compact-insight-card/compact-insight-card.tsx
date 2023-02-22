@@ -15,6 +15,7 @@
  */
 
 import type { BoxProps } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { Badge, Heading, HStack, LinkBox, Tooltip, useColorModeValue, Wrap, WrapItem } from '@chakra-ui/react';
 
 import { InsightTag } from '../../../insight-tag/insight-tag';
@@ -40,12 +41,21 @@ export const CompactInsightCard = ({ insightEdge, options, ...props }: InsightCo
       <HStack spacing="0.5rem" p="0.5rem">
         <ItemTypeIcon itemType={insight.itemType} />
 
-        <LinkOverlay to={`/${insight.itemType}/${insight.fullName}`} flexGrow={2} noOfLines={2}>
+        <LinkOverlay to={`/${insight.itemType}/${insight.fullName}`} noOfLines={2}>
           <Heading as="h2" fontSize={{ base: 'md', lg: 'lg', '2xl': 'xl' }}>
             {insight.name}
           </Heading>
         </LinkOverlay>
-        <Wrap spacing={0} justify="flex-end" display={{ base: 'none', md: 'flex' }}>
+
+        <Flex flexGrow={2}>
+          {insight.isUnlisted === true && (
+            <Tooltip placement="bottom" label={`Unlisted from search results`} aria-label="Unlisted">
+              <Badge variant="frost">Unlisted</Badge>
+            </Tooltip>
+          )}
+        </Flex>
+
+        <Wrap spacing={0} justifyContent="flex-end" position="relative" display={{ base: 'none', md: 'flex' }}>
           {insight.tags.slice(0, 5).map((tag) => {
             return (
               <WrapItem key={tag}>

@@ -17,6 +17,7 @@
 import {
   Collapse,
   Divider,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormHelperText,
@@ -28,6 +29,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Switch,
   Text,
   useDisclosure,
   VStack
@@ -203,6 +205,25 @@ export const InsightMetadataEditor = ({ insight, isNewInsight, form, templates, 
       {itemType === 'insight' && <PublishedDate insight={insight} form={form} />}
 
       <InsightLinks insight={insight} form={form} />
+
+      <FormControl>
+        <Flex display="flex" alignItems="center">
+          <FormLabel htmlFor="unlisted-toggle" mb="0">
+            Unlisted
+          </FormLabel>
+          <Controller
+            control={control}
+            name="isUnlisted"
+            render={({ field: { onChange, value } }) => (
+              <Switch id="unlisted-toggle" colorScheme="nord8" isChecked={value ?? false} onChange={onChange} />
+            )}
+          />
+        </Flex>
+        <FormHelperText>
+          Unlisted {titleize(itemType)}s will not appear in search results, except for collaborators. Anyone with the
+          link can view the {titleize(itemType)}.
+        </FormHelperText>
+      </FormControl>
 
       <Divider />
 

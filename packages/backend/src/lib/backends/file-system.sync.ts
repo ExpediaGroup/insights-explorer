@@ -127,6 +127,7 @@ export const getInsight = async (
     syncedAt: new Date().toISOString(),
     tags: [],
     contributors: [],
+    _collaborators: [],
     repository: {
       externalId: path,
       externalFullName: `${namespace}/${name}`,
@@ -269,6 +270,7 @@ const applyInsightYaml = async (yaml: any, insight: IndexedInsight): Promise<voi
 
   // Default to Insight if not set
   insight.itemType = yaml.itemType ?? ItemType.INSIGHT;
+  insight.isUnlisted = false;
 };
 
 const applyReadme = async (readme: string | null, insight: IndexedInsight): Promise<void> => {
