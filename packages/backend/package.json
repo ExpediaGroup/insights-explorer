@@ -27,7 +27,7 @@
     "@elastic/elasticsearch": "7.13.0",
     "@octokit/graphql": "4.8.0",
     "@octokit/rest": "19.0.7",
-    "apollo-server-core": "3.8.1",
+    "apollo-server-core": "3.11.1",
     "apollo-server-express": "3.7.0",
     "aws-sdk": "2.1317.0",
     "axios": "0.27.2",
