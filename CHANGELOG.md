@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.21.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.21.1...v3.21.2) (2023-02-22)
+
+
+### Bug Fixes
+
+* **deps:** bump @octokit/rest from 18.12.0 to 19.0.7 ([4574025](https://github.com/ExpediaGroup/insights-explorer/commit/4574025e64c8a872a602050e5e82d0651e412e24))
+* **deps:** bump react-vega from 7.5.1 to 7.6.0 ([a20d8e1](https://github.com/ExpediaGroup/insights-explorer/commit/a20d8e171e639926534a114991632890eb3f9c5d))
+
 ### [3.21.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.21.0...v3.21.1) (2023-02-17)
 
 
