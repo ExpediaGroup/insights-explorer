@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.22.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.21.3...v3.22.0) (2023-02-23)
+
+
+### Features
+
+* Add Unlisted Insights ([ca752f0](https://github.com/ExpediaGroup/insights-explorer/commit/ca752f02be1db9ac1d29ccb3be87ebefd2c56889))
+
 ### [3.21.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.21.2...v3.21.3) (2023-02-22)
 
 
