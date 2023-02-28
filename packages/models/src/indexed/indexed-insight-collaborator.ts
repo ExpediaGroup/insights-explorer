@@ -19,6 +19,6 @@ import type { RepositoryPermission } from '../repository-permission';
 import type { IndexedInsightUser } from './indexed-insight-user';
 
 export interface IndexedInsightCollaborator {
-  user: IndexedInsightUser;
+  user: Pick<IndexedInsightUser, 'userName' | 'displayName' | 'email'>;
   permission: RepositoryPermission;
 }

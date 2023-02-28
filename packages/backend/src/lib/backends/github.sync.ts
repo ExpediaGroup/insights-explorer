@@ -231,7 +231,17 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
 async function getInsightCollaborators(insight: IndexedInsight): Promise<IndexedInsightCollaborator[]> {
   const insightService = Container.get(InsightService);
 
-  return await insightService.getCollaborators(insight as Insight);
+  const collaborators = await insightService.getCollaborators(insight as Insight);
+
+  // Return only the fields we need
+  return collaborators.map(({ permission, user }) => ({
+    permission,
+    user: {
+      userName: user.userName,
+      displayName: user.displayName,
+      email: user.email
+    }
+  }));
 }
 
 /**
