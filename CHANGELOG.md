@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.22.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.0...v3.22.1) (2023-02-28)
+
+
+### Bug Fixes
+
+* Limit the collaborator fields stored in Elasticsearch ([49b5ce1](https://github.com/ExpediaGroup/insights-explorer/commit/49b5ce1a1f2dadea82796049243a9e151fbf90eb))
+
 ## [3.22.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.21.3...v3.22.0) (2023-02-23)
 
 
