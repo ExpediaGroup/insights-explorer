@@ -70,7 +70,7 @@
     "urql": "2.2.2",
     "use-file-picker": "1.4.2",
     "use-trace-update": "1.3.2",
-    "vega": "5.22.1",
+    "vega": "5.23.0",
     "vega-lite": "5.6.0"
   },
   "devDependencies": {
