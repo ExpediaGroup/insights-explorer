@@ -16,7 +16,7 @@
 
 import { ChakraProvider, ColorModeScript, createStandaloneToast, useColorMode } from '@chakra-ui/react';
 import type { DOMAttributes } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Helmet } from 'react-helmet';
 import { Provider as Redux } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -67,10 +67,11 @@ const App = () => {
 
 const { ToastContainer } = createStandaloneToast();
 
-ReactDOM.render(
+const container = document.querySelector('#root') as Element;
+const root = createRoot(container);
+root.render(
   <>
     <App />
     <ToastContainer />
-  </>,
-  document.querySelector('#root')
+  </>
 );
