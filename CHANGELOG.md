@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.22.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.1...v3.22.2) (2023-03-10)
+
+
+### Bug Fixes
+
+* Migrate to React 18 APIs ([3d54896](https://github.com/ExpediaGroup/insights-explorer/commit/3d54896c6c40f280333928cf213bf320b12dbfd4))
+
 ### [3.22.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.0...v3.22.1) (2023-02-28)
 
 
