@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.22.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.2...v3.22.3) (2023-03-16)
+
+
+### Bug Fixes
+
+* **deps:** bump vega-functions from 5.13.0 to 5.13.1 ([cec8045](https://github.com/ExpediaGroup/insights-explorer/commit/cec8045c3f6fa8f86bc9b5642e198073f764dc08))
+
 ### [3.22.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.1...v3.22.2) (2023-03-10)
 
 
