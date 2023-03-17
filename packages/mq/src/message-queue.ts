@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+import type { Message } from '@aws-sdk/client-sqs';
+import { SendMessageCommand, SQSClient } from '@aws-sdk/client-sqs';
 import { getLogger } from '@iex/shared/logger';
-import { SQS } from 'aws-sdk';
 import { Consumer } from 'sqs-consumer';
 
 const logger = getLogger('message-queue');
@@ -25,25 +26,25 @@ export interface SQSMessageQueueOptions {
   queueUrl: string;
 }
 export class MessageQueue {
-  private sqsClient: SQS;
+  private sqsClient: SQSClient;
 
   constructor(readonly options: SQSMessageQueueOptions) {
-    this.sqsClient = new SQS({
+    this.sqsClient = new SQSClient({
       region: options.region
     });
   }
 
   async sendMessage(body: Record<string, any>): Promise<string | undefined> {
-    const response = await this.sqsClient
-      .sendMessage({
+    const response = await this.sqsClient.send(
+      new SendMessageCommand({
         MessageBody: JSON.stringify(body),
         QueueUrl: this.options.queueUrl
       })
-      .promise();
+    );
     return response.MessageId;
   }
 
-  consumeMessages<T extends Record<string, any>>(handler: (body: T, message: SQS.Message) => Promise<void>): Consumer {
+  consumeMessages<T extends Record<string, any>>(handler: (body: T, message: Message) => Promise<void>): Consumer {
     const consumer = Consumer.create({
       queueUrl: this.options.queueUrl,
       region: this.options.region,

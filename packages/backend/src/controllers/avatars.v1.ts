@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import { NoSuchKey } from '@aws-sdk/client-s3';
 import { getLogger } from '@iex/shared/logger';
-import { AWSError } from 'aws-sdk';
 import { Response, Request } from 'express';
 
 import { streamFromS3 } from '../lib/storage';
@@ -31,20 +31,21 @@ export const getAvatar = async (req: Request, res: Response): Promise<void> => {
   const path = `avatars/${key}`;
   logger.debug(`Attempting to load avatar: ${path}`);
 
-  const readable = await streamFromS3(path);
-  readable.on('error', (error: AWSError) => {
-    if (error.code == 'NoSuchKey') {
+  try {
+    const readable = await streamFromS3(path);
+
+    if (req.query['content-type']) {
+      res.contentType(req.query['content-type'] as string);
+    } else {
+      res.contentType(getType(key));
+    }
+
+    readable.pipe(res);
+  } catch (error) {
+    if (error instanceof NoSuchKey) {
       res.status(404).send();
     } else {
       res.status(500).send(error);
     }
-  });
-
-  if (req.query['content-type']) {
-    res.contentType(req.query['content-type'] as string);
-  } else {
-    res.contentType(getType(key));
   }
-
-  readable.pipe(res);
 };

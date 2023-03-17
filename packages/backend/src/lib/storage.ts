@@ -14,27 +14,34 @@
  * limitations under the License.
  */
 
+import {
+  GetObjectCommand,
+  GetObjectCommandOutput,
+  HeadObjectCommand,
+  HeadObjectCommandOutput,
+  NotFound,
+  PutObjectCommand,
+  S3Client,
+  S3ClientConfig
+} from '@aws-sdk/client-s3';
 import { getLogger } from '@iex/shared/logger';
-import { S3 } from 'aws-sdk';
-import type { AWSError, Request } from 'aws-sdk';
-import type { HeadObjectOutput } from 'aws-sdk/clients/s3';
 import type { ReadStream } from 'fs-extra';
 
 const logger = getLogger('storage');
 
-const defaultOptions: S3.Types.ClientConfiguration = {
+const defaultOptions: S3ClientConfig = {
   region: process.env.S3_REGION,
-  maxRetries: 3,
+  maxAttempts: 4,
 
   endpoint: process.env.S3_ENDPOINT !== '' ? process.env.S3_ENDPOINT : undefined,
 
   // S3 Path-style requests are deprecated
   // But some S3-compatible APIs may use them (e.g. Minio)
-  s3ForcePathStyle: process.env.S3_FORCE_PATH_STYLE === 'true' ? true : undefined
+  forcePathStyle: process.env.S3_FORCE_PATH_STYLE === 'true' ? true : undefined
 };
 
-export function createS3Client(options: S3.Types.ClientConfiguration = defaultOptions): S3 {
-  return new S3({ ...defaultOptions, ...options });
+export function createS3Client(options: S3ClientConfig = defaultOptions): S3Client {
+  return new S3Client({ ...defaultOptions, ...options });
 }
 
 export const defaultS3Client = createS3Client();
@@ -46,12 +53,12 @@ export const defaultS3Client = createS3Client();
  * @param {Buffer | String} body file content to write to S3
  * @param {string} key S3 bucket key to write to
  * @returns {string} S3 bucket URI to the uploaded file
- * @throws {AWSError} If putobject request fails
+ * @throws {Error} If putobject request fails
  */
 export async function writeToS3(body: Buffer | string, key: string): Promise<string> {
   const bucket = process.env.S3_BUCKET!;
 
-  const response = await defaultS3Client.putObject({ Body: body, Bucket: bucket, Key: key }).promise();
+  const response = await defaultS3Client.send(new PutObjectCommand({ Body: body, Bucket: bucket, Key: key }));
   const uri = `s3://${bucket}/${key}`;
 
   logger.info(`S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
@@ -66,34 +73,18 @@ export async function writeToS3(body: Buffer | string, key: string): Promise<str
  * @param {number} fileSize Size of the file
  * @param {string} key S3 bucket key to write to
  * @returns {string} S3 bucket URI to the uploaded file
- * @throws {AWSError} If putobject request fails
+ * @throws {Error} If putobject request fails
  */
 export async function streamToS3(stream: ReadStream, fileSize: number, key: string): Promise<string> {
   const bucket = process.env.S3_BUCKET!;
 
-  const response = await defaultS3Client
-    .upload({ Body: stream, Bucket: bucket, ContentLength: fileSize, Key: key })
-    .promise();
+  const response = await defaultS3Client.send(
+    new PutObjectCommand({ Body: stream, Bucket: bucket, ContentLength: fileSize, Key: key })
+  );
   const uri = `s3://${bucket}/${key}`;
 
   logger.info(`S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
   return uri;
-}
-
-/**
- * Reads data from the Insights Explorer S3 bucket.
- *
- * @note The function executes a getObject() request
- * @param {string} key Key to get file from bucket
- * @returns {Promise<Buffer>} Returns requested S3 buffer
- */
-export async function readFromS3(key: string): Promise<Buffer> {
-  const bucket = process.env.S3_BUCKET!;
-
-  logger.info(`Streaming from s3://${bucket}/${key}`);
-  const file = await defaultS3Client.getObject({ Bucket: bucket, Key: key }).promise();
-
-  return Buffer.from(file.Body as Buffer);
 }
 
 /**
@@ -109,9 +100,9 @@ export async function streamFromS3(key: string, range?: string): Promise<ReadStr
 
   logger.info(`Streaming from s3://${bucket}/${key}`);
 
-  const response = defaultS3Client.getObject({ Bucket: bucket, Key: key, Range: range });
+  const response = await defaultS3Client.send(new GetObjectCommand({ Bucket: bucket, Key: key, Range: range }));
 
-  return response.createReadStream() as ReadStream;
+  return response.Body as unknown as ReadStream;
 }
 
 /**
@@ -120,14 +111,14 @@ export async function streamFromS3(key: string, range?: string): Promise<ReadStr
  * @note The function executes a getObject() request
  * @param {string} key Key to get file from bucket
  * @range {string} range Optional range to retrieve
- * @returns {Request<S3.Types.GetObjectOutput, AWSError>} Returns requested S3 GetObject response
+ * @returns {GetObjectCommandOutput} Returns requested S3 GetObject response
  */
-export function getFromS3(key: string, range?: string): Request<S3.Types.GetObjectOutput, AWSError> {
+export function getFromS3(key: string, range?: string): Promise<GetObjectCommandOutput> {
   const bucket = process.env.S3_BUCKET!;
 
   logger.info(`Streaming from s3://${bucket}/${key}`);
 
-  return defaultS3Client.getObject({ Bucket: bucket, Key: key, Range: range });
+  return defaultS3Client.send(new GetObjectCommand({ Bucket: bucket, Key: key, Range: range }));
 }
 
 /**
@@ -137,14 +128,16 @@ export function getFromS3(key: string, range?: string): Request<S3.Types.GetObje
  * @param {string} key Key of file to check in bucket
  * @returns {Request<S3.Types.HeadObjectOutput, AWSError>} Returns requested S3 HeadObject response
  */
-export async function headFromS3(key: string): Promise<HeadObjectOutput | undefined> {
+export async function headFromS3(key: string): Promise<HeadObjectCommandOutput | undefined> {
   const bucket = process.env.S3_BUCKET!;
 
   logger.info(`Checking existance of s3://${bucket}/${key}`);
   try {
-    return await defaultS3Client.headObject({ Bucket: bucket, Key: key }).promise();
+    return await defaultS3Client.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
   } catch (error: any) {
-    if (error.code == 'NotFound') return undefined;
+    if (error instanceof NotFound) return undefined;
+
+    logger.error(JSON.stringify(error, null, 2));
     throw error;
   }
 }
@@ -161,10 +154,10 @@ export async function existsInS3(key: string): Promise<boolean> {
 
   logger.info(`Checking existance of s3://${bucket}/${key}`);
   try {
-    await defaultS3Client.headObject({ Bucket: bucket, Key: key }).promise();
+    await defaultS3Client.send(new HeadObjectCommand({ Bucket: bucket, Key: key }));
     return true;
   } catch (error: any) {
-    if (error.code == 'NotFound') return false;
+    if (error instanceof NotFound) return false;
     throw error;
   }
 }

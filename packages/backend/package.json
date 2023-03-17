@@ -24,12 +24,13 @@
     "lint:fix": "eslint  . --fix"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "3.292.0",
+    "@aws-sdk/client-sqs": "3.292.0",
     "@elastic/elasticsearch": "7.13.0",
     "@octokit/graphql": "4.8.0",
     "@octokit/rest": "19.0.7",
     "apollo-server-core": "3.8.1",
     "apollo-server-express": "3.7.0",
-    "aws-sdk": "2.1317.0",
     "axios": "0.27.2",
     "better-queue": "3.8.10",
     "chardet": "1.4.0",

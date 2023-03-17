@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import { NoSuchKey } from '@aws-sdk/client-s3';
 import { getLogger } from '@iex/shared/logger';
-import { AWSError } from 'aws-sdk';
 import { Response, Request } from 'express';
 
 import { streamFromS3 } from '../lib/storage';
@@ -29,18 +29,19 @@ export const getDraftAttachment = async (req: Request, res: Response): Promise<v
   const draftKey = `drafts/${req.params.draftKey}/files/${req.params.attachmentKey}`;
   logger.debug(`Attempting to load draft attachment: ${draftKey}, ${req.params.attachmentKey}`);
 
-  const readable = await streamFromS3(draftKey);
-  readable.on('error', (error: AWSError) => {
-    if (error.code == 'NoSuchKey') {
+  try {
+    const readable = await streamFromS3(draftKey);
+
+    if (req.query['content-type']) {
+      res.contentType(req.query['content-type'] as string);
+    }
+
+    readable.pipe(res);
+  } catch (error) {
+    if (error instanceof NoSuchKey) {
       res.status(404).send();
     } else {
       res.status(500).send(error);
     }
-  });
-
-  if (req.query['content-type']) {
-    res.contentType(req.query['content-type'] as string);
   }
-
-  readable.pipe(res);
 };

@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
+import { Readable } from 'node:stream';
+
+import { NoSuchKey } from '@aws-sdk/client-s3';
 import { getLogger } from '@iex/shared/logger';
-import { AWSError } from 'aws-sdk';
 import { Response, Request } from 'express';
 
 import { getFromS3, headFromS3 } from '../lib/storage';
@@ -59,31 +61,32 @@ export const getInsightFile = async (req: Request, res: Response): Promise<void>
 
   const range = Array.isArray(req.headers['range']) ? req.headers['range'][0] : req.headers['range'];
 
-  const response = getFromS3(key, range);
+  try {
+    const response = await getFromS3(key, range);
 
-  response
-    .on('httpHeaders', function (code, headers) {
-      if (code < 300) {
-        res.set('Accept-Ranges', headers['accept-ranges']);
-        res.set('Content-Length', headers['content-length']);
+    if (response.AcceptRanges) {
+      res.set('Accept-Ranges', response.AcceptRanges);
+    }
+    if (response.ContentLength) {
+      res.set('Content-Length', response.ContentLength.toString());
+    }
 
-        // res.set('Content-Type', headers['content-type']);
-        res.contentType(getType(filePath));
+    //res.set('Content-Type', response.ContentType);
+    res.contentType(getType(filePath));
 
-        if (range) {
-          res.set('Content-Range', headers['content-range']);
-          res.status(206); // Partial Content success
-        }
-      }
-    })
-    .createReadStream()
-    .on('error', (error: AWSError) => {
-      if (error.code == 'NoSuchKey') {
-        res.status(404).send();
-      } else {
-        logger.error('S3 error: ' + error);
-        res.status(500).send(error);
-      }
-    })
-    .pipe(res);
+    if (range) {
+      res.set('Content-Range', response.ContentRange);
+      res.status(206);
+    }
+
+    if (response.Body) {
+      (response.Body as Readable).pipe(res);
+    }
+  } catch (error) {
+    if (error instanceof NoSuchKey) {
+      res.status(404).send();
+    } else {
+      res.status(500).send(error);
+    }
+  }
 };
