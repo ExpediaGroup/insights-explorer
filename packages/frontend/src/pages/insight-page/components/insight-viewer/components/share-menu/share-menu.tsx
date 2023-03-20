@@ -29,7 +29,7 @@ import {
 
 import { IconButtonMenu } from '../../../../../../components/icon-button-menu/icon-button-menu';
 import { IexMenuItem } from '../../../../../../components/iex-menu-item/iex-menu-item';
-import { CodeRenderer } from '../../../../../../components/renderers/code-renderer/code-renderer';
+import { CodeRendererAsync } from '../../../../../../components/renderers/code-renderer/code-renderer-async';
 import type { Insight } from '../../../../../../models/generated/graphql';
 import { iconFactory } from '../../../../../../shared/icon-factory';
 
@@ -55,7 +55,7 @@ const EmbedModal = ({ insight }: { insight: Insight }) => {
           <ModalCloseButton />
           <ModalBody>
             <Text>Use the following HTML to embed this Insight in another web site:</Text>
-            <CodeRenderer contents={embedCode} copyButton={true} />
+            <CodeRendererAsync contents={embedCode} copyButton={true} />
           </ModalBody>
         </ModalContent>
       </Modal>

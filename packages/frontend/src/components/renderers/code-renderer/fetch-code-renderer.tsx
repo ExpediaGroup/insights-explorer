@@ -23,7 +23,7 @@ import { useFetch } from '../../../shared/useFetch';
 import { Alert } from '../../alert/alert';
 
 import type { CodeRendererProps } from './code-renderer';
-import { CodeRenderer } from './code-renderer';
+import { CodeRendererAsync } from './code-renderer-async';
 
 type Props = CodeRendererProps & {
   url: string;
@@ -44,7 +44,7 @@ export const FetchCodeRenderer = memo(({ url, lines, ...props }: Props & BoxProp
   return (
     <>
       {error && <Alert error={error} />}
-      {data && <CodeRenderer contents={filteredData} startingLineNumber={startingLineNumber} {...props} />}
+      {data && <CodeRendererAsync contents={filteredData} startingLineNumber={startingLineNumber} {...props} />}
     </>
   );
 });

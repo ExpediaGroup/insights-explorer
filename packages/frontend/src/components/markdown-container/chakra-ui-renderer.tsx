@@ -49,7 +49,7 @@ import { BlockQuote } from '../blockquote/blockquote';
 import { FetchInsightConnectionCard } from '../insight-connection-card/fetch-insight-connection-card';
 import { FetchInsightList } from '../insight-list/fetch-insight-list';
 import { Link } from '../link/link';
-import { CodeRenderer } from '../renderers/code-renderer/code-renderer';
+import { CodeRendererAsync as CodeRenderer } from '../renderers/code-renderer/code-renderer-async';
 import { FetchCodeRenderer } from '../renderers/code-renderer/fetch-code-renderer';
 import { KaTeXRendererAsync } from '../renderers/katex-renderer/katex-renderer-async';
 import { VegaRendererAsync } from '../renderers/vega-renderer/vega-renderer-async';

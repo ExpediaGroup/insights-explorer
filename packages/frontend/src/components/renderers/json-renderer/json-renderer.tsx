@@ -16,8 +16,7 @@
 
 import { useMemo, useState } from 'react';
 
-import { Alert } from '../../alert/alert';
-import { CodeRenderer } from '../code-renderer/code-renderer';
+import { CodeRendererAsync } from '../code-renderer/code-renderer-async';
 import { TableRenderer } from '../table-renderer/table-renderer';
 
 export const JsonRenderer = ({ contents }) => {
@@ -47,7 +46,7 @@ export const JsonRenderer = ({ contents }) => {
 
   if (error) {
     // Fallback to displaying the contents as a code snippet
-    return <CodeRenderer contents={contents} language="json" />;
+    return <CodeRendererAsync contents={contents} language="json" />;
   }
   if (results === undefined) {
     return null;

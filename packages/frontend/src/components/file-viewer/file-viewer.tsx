@@ -29,7 +29,7 @@ import { getCompletePath } from '../../shared/url-utils';
 import { useScrollToLocation } from '../../shared/use-scroll-to-location';
 import { useFetch } from '../../shared/useFetch';
 import { MarkdownContainer } from '../markdown-container/markdown-container';
-import { CodeRenderer } from '../renderers/code-renderer/code-renderer';
+import { CodeRendererAsync as CodeRenderer } from '../renderers/code-renderer/code-renderer-async';
 import { CsvRenderer } from '../renderers/csv-renderer/csv-renderer';
 import { HtmlRenderer } from '../renderers/html-renderer/html-renderer';
 import { ImageRenderer } from '../renderers/image-renderer/image-renderer';

@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2023 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-import type { BoxProps } from '@chakra-ui/react';
 import { Progress } from '@chakra-ui/react';
 import { lazy, Suspense } from 'react';
 
-const VegaRenderer = lazy(() => import('./vega-renderer'));
+const CodeRenderer = lazy(() => import('./code-renderer'));
 
-export const VegaRendererAsync = (
-  props: { specString: string; transformAssetUri: (uri: string) => string } & BoxProps
-) => {
+export const CodeRendererAsync = (props: any) => {
   return (
-    <div>
-      <Suspense fallback={<Progress size="xs" isIndeterminate />}>
-        <VegaRenderer {...props} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<Progress size="xs" isIndeterminate />}>
+      <CodeRenderer {...props} />
+    </Suspense>
   );
 };

@@ -17,7 +17,7 @@
 import { Progress } from '@chakra-ui/react';
 import { lazy, Suspense } from 'react';
 
-const KaTeX = lazy(() => import(/* webpackChunkName: "katex" */ './katex-renderer'));
+const KaTeX = lazy(() => import('./katex-renderer'));
 
 export const KaTeXRendererAsync = (props: any) => {
   return (

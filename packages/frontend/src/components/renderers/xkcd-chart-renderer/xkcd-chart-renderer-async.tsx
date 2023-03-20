@@ -18,7 +18,7 @@ import type { BoxProps } from '@chakra-ui/react';
 import { Progress } from '@chakra-ui/react';
 import { lazy, Suspense } from 'react';
 
-const XkcdChartRenderer = lazy(() => import(/* webpackChunkName: "xkcd-chart-renderer" */ './xkcd-chart-renderer'));
+const XkcdChartRenderer = lazy(() => import('./xkcd-chart-renderer'));
 
 export const XkcdChartRendererAsync = (props: { type: string; configString: string } & BoxProps) => {
   return (

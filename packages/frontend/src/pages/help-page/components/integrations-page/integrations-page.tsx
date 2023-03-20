@@ -23,7 +23,7 @@ import { Crumbs } from '../../../../components/crumbs/crumbs';
 import { ExternalLink } from '../../../../components/external-link/external-link';
 import { IexHeading } from '../../../../components/iex-heading/iex-heading';
 import { Link } from '../../../../components/link/link';
-import { CodeRenderer } from '../../../../components/renderers/code-renderer/code-renderer';
+import { CodeRendererAsync } from '../../../../components/renderers/code-renderer/code-renderer-async';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
 import { HelpSidebar } from '../help-sidebar/help-sidebar';
 
@@ -52,7 +52,7 @@ const Bookmarklet = ({ name, contents }) => {
         </Button>
       </HStack>
       <Collapse in={isOpen} animateOpacity>
-        <CodeRenderer contents={contents} copyButton={true} />
+        <CodeRendererAsync contents={contents} copyButton={true} />
       </Collapse>
     </>
   );
