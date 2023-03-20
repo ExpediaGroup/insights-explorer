@@ -38,19 +38,10 @@ export default defineConfig({
   // Fixes a known Vite issue
   // https://github.com/vitejs/vite/discussions/5079
   css: {
-    postcss: {
-      plugins: [
-        {
-          postcssPlugin: 'internal:charset-removal',
-          AtRule: {
-            charset: (atRule) => {
-              if (atRule.name === 'charset') {
-                atRule.remove();
-              }
-            }
-          }
-        }
-      ]
+    preprocessorOptions: {
+      scss: {
+        charset: false
+      }
     }
   },
   preview: {
