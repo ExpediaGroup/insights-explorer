@@ -53,14 +53,14 @@ export const CodeRenderer = memo(
 
     useEffect(() => {
       // If the default changes, apply the change
-      if (defaultIsOpen) {
+      if (defaultIsOpen && !isOpen) {
         onOpen();
-      } else {
+      } else if (!defaultIsOpen && isOpen) {
         onClose();
       }
-    }, [defaultIsOpen, onClose, onOpen]);
+    }, [defaultIsOpen, isOpen, onClose, onOpen]);
 
-    if (unstyled)
+    if (unstyled) {
       return (
         <Box as="pre" width="100%" {...boxProps}>
           <Code bg="gray.50" width="100%" p="1rem" overflowX="auto" verticalAlign="top">
@@ -68,6 +68,7 @@ export const CodeRenderer = memo(
           </Code>
         </Box>
       );
+    }
 
     return (
       <Box position="relative" fontSize={{ base: 'sm', md: 'md' }} {...boxProps}>
