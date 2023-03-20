@@ -18,7 +18,7 @@ import { useState, useEffect } from 'react';
 
 interface Props {
   url: string;
-  contents?: string | null | undefined;
+  contents?: string | undefined;
   method?: 'GET' | 'HEAD';
   paused?: boolean;
 }
@@ -35,7 +35,7 @@ interface Props {
  */
 export const useFetch = ({ url, contents, method = 'GET', paused = false }: Props) => {
   const [fetching, setFetching] = useState(false);
-  const [data, setData] = useState<string | undefined>(undefined);
+  const [data, setData] = useState<string | undefined>(contents);
   const [error, setError] = useState<any>(undefined);
 
   useEffect(() => {
@@ -49,7 +49,6 @@ export const useFetch = ({ url, contents, method = 'GET', paused = false }: Prop
 
     // Already pre-fetched?  Let's use it!
     if (contents != null) {
-      setData(contents);
       return;
     }
 
