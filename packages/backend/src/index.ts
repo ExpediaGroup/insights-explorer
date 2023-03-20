@@ -37,6 +37,8 @@ import { deployMappings } from './lib/elasticsearch';
 import { createServer } from './server';
 import { syncExampleInsights } from './lib/init';
 import { getLogger } from '@iex/shared/logger';
+import { Storage } from '@iex/shared/storage';
+import Container from 'typedi';
 
 const logger = getLogger('index');
 
@@ -53,6 +55,9 @@ process.on('uncaughtException', (uncaughtException) => {
 });
 
 const startup = async (): Promise<Server> => {
+  // Add storage class to the Container since it doesn't use an annotation
+  Container.set(Storage, new Storage());
+
   // Deploy Elasticsearch Index mappings
   logger.debug('Deploying elasticsearch indices');
   await pRetry(() => deployMappings(), {

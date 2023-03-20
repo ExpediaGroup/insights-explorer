@@ -21,9 +21,11 @@ import { PersonType } from '@iex/models/person-type';
 import { RepositoryType } from '@iex/models/repository-type';
 import { MessageQueue } from '@iex/mq/message-queue';
 import { getLogger } from '@iex/shared/logger';
+import { Storage } from '@iex/shared/storage';
 import { nanoid } from 'nanoid';
 import pMap from 'p-map';
 import readingTime from 'reading-time';
+import Container from 'typedi';
 
 import { InsightYaml } from '@iex/backend/models/insight-yaml';
 
@@ -33,7 +35,6 @@ import { ActivityService } from '../../services/activity.service';
 import { UserService } from '../../services/user.service';
 import { getTypeAsync } from '../../shared/mime';
 import { GitInstance, INSIGHT_YAML_FILE } from '../git-instance';
-import { writeToS3 } from '../storage';
 
 import { BaseSync, INDEXABLE_MIME_TYPES, READONLY_FILES, THUMBNAIL_LOCATIONS } from './base.sync';
 
@@ -325,6 +326,8 @@ const syncFiles = async (
   insight: IndexedInsight,
   previousInsight: IndexedInsight | null
 ): Promise<void> => {
+  const storage = Container.get(Storage);
+
   // Message Queue for converting files
   const conversionMq = new MessageQueue({ region: process.env.S3_REGION, queueUrl: process.env.CONVERSION_SQS_URL });
 
@@ -362,7 +365,7 @@ const syncFiles = async (
 
         const targetS3Path = `insights/${insight.fullName}/files/${wf.path}`;
 
-        await writeToS3(contents!, targetS3Path);
+        await storage.writeFile({ body: contents!, path: targetS3Path });
 
         if (file.conversions !== undefined) {
           // Submit a conversion request for this file

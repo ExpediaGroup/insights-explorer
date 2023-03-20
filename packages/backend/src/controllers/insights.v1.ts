@@ -18,9 +18,10 @@ import { Readable } from 'node:stream';
 
 import { NoSuchKey } from '@aws-sdk/client-s3';
 import { getLogger } from '@iex/shared/logger';
+import { Storage } from '@iex/shared/storage';
 import { Response, Request } from 'express';
+import Container from 'typedi';
 
-import { getFromS3, headFromS3 } from '../lib/storage';
 import { getType } from '../shared/mime';
 
 const logger = getLogger('insights.v1');
@@ -30,11 +31,12 @@ const logger = getLogger('insights.v1');
  */
 export const headInsightFile = async (req: Request, res: Response): Promise<void> => {
   const filePath = req.params.filepath + req.params[0];
-  const key = `insights/${req.params.namespace}/${req.params.name}/files/${filePath}`;
+  const path = `insights/${req.params.namespace}/${req.params.name}/files/${filePath}`;
 
   logger.debug(`Attempting to HEAD insight attachment: ${filePath}`);
 
-  const headObject = await headFromS3(key);
+  const storage = Container.get(Storage);
+  const headObject = await storage.rawHead({ path });
 
   if (headObject === undefined) {
     res.status(404);
@@ -55,14 +57,15 @@ export const headInsightFile = async (req: Request, res: Response): Promise<void
  */
 export const getInsightFile = async (req: Request, res: Response): Promise<void> => {
   const filePath = req.params.filepath + req.params[0];
-  const key = `insights/${req.params.namespace}/${req.params.name}/files/${filePath}`;
+  const path = `insights/${req.params.namespace}/${req.params.name}/files/${filePath}`;
 
   logger.debug(`Attempting to load insight attachment: ${filePath}`);
 
   const range = Array.isArray(req.headers['range']) ? req.headers['range'][0] : req.headers['range'];
 
   try {
-    const response = await getFromS3(key, range);
+    const storage = Container.get(Storage);
+    const response = await storage.rawGet({ path, range });
 
     if (response.AcceptRanges) {
       res.set('Accept-Ranges', response.AcceptRanges);

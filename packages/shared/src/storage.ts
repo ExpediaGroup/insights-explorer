@@ -16,32 +16,49 @@
 
 import type { Readable } from 'stream';
 
-import { S3 } from 'aws-sdk';
-import type { ReadStream } from 'fs-extra';
+import type {
+  S3ClientConfig,
+  GetObjectCommandOutput,
+  PutObjectCommandInput,
+  HeadObjectCommandOutput
+} from '@aws-sdk/client-s3';
+import { GetObjectCommand, HeadObjectCommand, NotFound, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 import { getLogger } from '@iex/shared/logger';
 
-const logger = getLogger('storage');
+export type StorageOptions = S3ClientConfig;
 
-export type StorageOptions = S3.Types.ClientConfiguration;
-
-export interface StorageUriOptions {
-  uri?: string;
-  bucket?: string;
-  path?: string;
+export interface RequiredStorageUriOptions {
+  uri: string;
+  bucket: string;
+  path: string;
 }
+
+export interface OptionalStorageUriOptions {
+  range?: string;
+}
+
+export type StorageUriOptions = Partial<RequiredStorageUriOptions> & OptionalStorageUriOptions;
 
 export type StorageWriteOptions = StorageUriOptions & {
   body?: Buffer | string;
   fileSize?: number;
-  stream?: ReadStream;
+  stream?: Readable;
 };
 
 export type StorageReadOptions = StorageUriOptions;
 
-const defaultOptions: S3.Types.ClientConfiguration = {
+export type NormalizedStorageUriOptions = StorageUriOptions & RequiredStorageUriOptions;
+
+const defaultOptions: S3ClientConfig = {
   region: process.env.S3_REGION,
-  maxRetries: 3
+  maxAttempts: 4,
+
+  endpoint: process.env.S3_ENDPOINT !== '' ? process.env.S3_ENDPOINT : undefined,
+
+  // S3 Path-style requests are deprecated
+  // But some S3-compatible APIs may use them (e.g. Minio)
+  forcePathStyle: process.env.S3_FORCE_PATH_STYLE === 'true' ? true : undefined
 };
 
 /**
@@ -50,10 +67,12 @@ const defaultOptions: S3.Types.ClientConfiguration = {
  * abstraction layer across multiple storage engines, if needed.
  */
 export class Storage {
-  private s3: S3;
+  private logger = getLogger('storage');
 
-  constructor(readonly options: StorageOptions = defaultOptions) {
-    this.s3 = new S3({ ...defaultOptions, ...options });
+  private s3Client: S3Client;
+
+  constructor(readonly options: StorageOptions = {}) {
+    this.s3Client = new S3Client({ ...defaultOptions, ...options });
   }
 
   static toUri(bucket: string, path: string): string {
@@ -71,7 +90,7 @@ export class Storage {
     throw new Error('Unable to parse URI: ' + uri);
   }
 
-  static normalizeUriOptions(options: StorageUriOptions): Required<StorageUriOptions> {
+  static normalizeUriOptions(options: StorageUriOptions): NormalizedStorageUriOptions {
     let { bucket, path, uri } = options;
     if (uri === undefined) {
       if (bucket === undefined) {
@@ -89,7 +108,7 @@ export class Storage {
       path = parsed.path;
     }
 
-    return { bucket, path, uri };
+    return { ...options, bucket, path, uri };
   }
 
   /**
@@ -100,17 +119,18 @@ export class Storage {
     const { body, fileSize, stream } = options;
 
     if (body !== undefined) {
-      const response = await this.s3.putObject({ Body: body, Bucket: bucket, Key: path }).promise();
-      logger.debug(`S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
+      const response = await this.s3Client.send(new PutObjectCommand({ Body: body, Bucket: bucket, Key: path }));
+
+      this.logger.debug(`S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
     } else if (stream !== undefined) {
-      const uploadOptions: S3.PutObjectRequest = { Body: stream, Bucket: bucket, Key: path };
+      const uploadOptions: PutObjectCommandInput = { Body: stream, Bucket: bucket, Key: path };
 
       if (fileSize !== undefined) {
         uploadOptions.ContentLength = fileSize;
       }
 
-      const response = await this.s3.upload(uploadOptions).promise();
-      logger.debug(`S3 file successfully streamed with Etag: ${response.ETag} and URI: ${uri}`);
+      const response = await this.s3Client.send(new PutObjectCommand(uploadOptions));
+      this.logger.debug(`S3 file successfully streamed with Etag: ${response.ETag} and URI: ${uri}`);
     } else {
       throw new Error('Either body or stream options must be set.');
     }
@@ -119,15 +139,15 @@ export class Storage {
   }
 
   /**
-   * Returns a data stream of a file
+   * Returns a data stream of a file.
    */
   async streamFile(options: StorageReadOptions): Promise<Readable> {
-    const { bucket, path, uri } = Storage.normalizeUriOptions(options);
+    const { bucket, path, uri, range } = Storage.normalizeUriOptions(options);
 
-    logger.debug(`Streaming from ${uri}`);
-    const response = this.s3.getObject({ Bucket: bucket, Key: path }).createReadStream();
+    this.logger.debug(`Streaming from ${uri}`);
 
-    return response;
+    const response = await this.s3Client.send(new GetObjectCommand({ Bucket: bucket, Key: path, Range: range }));
+    return response.Body as unknown as Readable;
   }
 
   /**
@@ -136,12 +156,43 @@ export class Storage {
   async exists(options: StorageReadOptions): Promise<boolean> {
     const { bucket, path, uri } = Storage.normalizeUriOptions(options);
 
-    logger.debug(`Checking existance of ${uri}`);
+    this.logger.debug(`Checking existance of ${uri}`);
     try {
-      await this.s3.headObject({ Bucket: bucket, Key: path }).promise();
+      await this.s3Client.send(new HeadObjectCommand({ Bucket: bucket, Key: path }));
       return true;
     } catch (error: any) {
-      if (error.code == 'NotFound') return false;
+      if (error instanceof NotFound) return false;
+      throw error;
+    }
+  }
+
+  /**
+   * Returns the raw response from the storage backend.
+   *
+   * @note The function executes a getObject() request
+   * @param {string} key Key to get file from bucket
+   * @range {string} range Optional range to retrieve
+   * @returns {GetObjectCommandOutput} Returns requested S3 GetObject response
+   */
+  async rawGet(options: StorageReadOptions): Promise<GetObjectCommandOutput> {
+    const { bucket, path, uri, range } = Storage.normalizeUriOptions(options);
+
+    this.logger.debug(`Streaming from ${uri}`);
+
+    return this.s3Client.send(new GetObjectCommand({ Bucket: bucket, Key: path, Range: range }));
+  }
+
+  /**
+   * Checks if a file exists and returns the raw HEAD response
+   */
+  async rawHead(options: StorageReadOptions): Promise<HeadObjectCommandOutput | undefined> {
+    const { bucket, path, uri } = Storage.normalizeUriOptions(options);
+
+    this.logger.debug(`Checking existance of ${uri}`);
+    try {
+      return await this.s3Client.send(new HeadObjectCommand({ Bucket: bucket, Key: path }));
+    } catch (error: any) {
+      if (error instanceof NotFound) return undefined;
       throw error;
     }
   }

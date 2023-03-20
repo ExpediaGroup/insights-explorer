@@ -16,9 +16,9 @@
 
 import { NoSuchKey } from '@aws-sdk/client-s3';
 import { getLogger } from '@iex/shared/logger';
+import { Storage } from '@iex/shared/storage';
 import { Response, Request } from 'express';
-
-import { streamFromS3 } from '../lib/storage';
+import Container from 'typedi';
 
 const logger = getLogger('drafts.v1');
 
@@ -30,7 +30,8 @@ export const getDraftAttachment = async (req: Request, res: Response): Promise<v
   logger.debug(`Attempting to load draft attachment: ${draftKey}, ${req.params.attachmentKey}`);
 
   try {
-    const readable = await streamFromS3(draftKey);
+    const storage = Container.get(Storage);
+    const readable = await storage.streamFile({ path: draftKey });
 
     if (req.query['content-type']) {
       res.contentType(req.query['content-type'] as string);

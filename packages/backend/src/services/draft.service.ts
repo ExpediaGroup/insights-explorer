@@ -18,11 +18,11 @@ import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { InsightFileAction } from '@iex/models/insight-file-action';
 import { ItemType } from '@iex/models/item-type';
 import { getLogger } from '@iex/shared/logger';
+import { Storage } from '@iex/shared/storage';
 import { nanoid } from 'nanoid';
 import pMap from 'p-map';
 import { Service } from 'typedi';
 
-import { streamFromS3 } from '../lib/storage';
 import { DraftKey } from '../models/draft';
 import { Draft, DraftInput } from '../models/draft';
 import { User } from '../models/user';
@@ -36,6 +36,7 @@ const logger = getLogger('draft.service');
 export class DraftService {
   constructor(
     private readonly attachmentService: AttachmentService,
+    private readonly storage: Storage,
     private readonly templateService: TemplateService
   ) {
     logger.trace('[DRAFT.SERVICE] Constructing New Draft Service');
@@ -220,8 +221,8 @@ export class DraftService {
         async (file) => {
           // Copy each file from the template
           // and upload to the draft
-          const key = `insights/${template.fullName}/files/${file.path}`;
-          const readable = await streamFromS3(key);
+          const path = `insights/${template.fullName}/files/${file.path}`;
+          const readable = await this.storage.streamFile({ path });
 
           // Duplicate file with new ID and 'add' action
           const newFile = {
@@ -280,8 +281,8 @@ export class DraftService {
         async (file) => {
           // Copy each file from the source insight
           // and upload to the draft
-          const key = `insights/${sourceInsight.fullName}/files/${file.path}`;
-          const readable = await streamFromS3(key);
+          const path = `insights/${sourceInsight.fullName}/files/${file.path}`;
+          const readable = await this.storage.streamFile({ path });
 
           // Duplicate file with new ID and 'add' action
           const newFile = {

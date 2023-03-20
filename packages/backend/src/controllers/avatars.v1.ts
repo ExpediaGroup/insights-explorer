@@ -16,9 +16,10 @@
 
 import { NoSuchKey } from '@aws-sdk/client-s3';
 import { getLogger } from '@iex/shared/logger';
+import { Storage } from '@iex/shared/storage';
 import { Response, Request } from 'express';
+import Container from 'typedi';
 
-import { streamFromS3 } from '../lib/storage';
 import { getType } from '../shared/mime';
 
 const logger = getLogger('avatars.v1');
@@ -32,7 +33,8 @@ export const getAvatar = async (req: Request, res: Response): Promise<void> => {
   logger.debug(`Attempting to load avatar: ${path}`);
 
   try {
-    const readable = await streamFromS3(path);
+    const storage = Container.get(Storage);
+    const readable = await storage.streamFile({ path });
 
     if (req.query['content-type']) {
       res.contentType(req.query['content-type'] as string);

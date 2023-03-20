@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+import { Readable } from 'node:stream';
+
 import * as fileType from 'file-type';
-import { ReadStream } from 'fs-extra';
 import * as mime from 'mime';
 
 const fileNameOverrides: Record<string, string> = {
@@ -68,7 +69,7 @@ export async function getTypeAsync({
 }: {
   fileName?: string;
   buffer?: Buffer | null;
-  stream?: ReadStream;
+  stream?: Readable;
 }): Promise<string> {
   if (fileName !== undefined) {
     const type = mime.getType(fileName);

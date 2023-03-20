@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-import { ReadStream } from 'fs';
+import { Readable } from 'stream';
 
+import { Storage } from '@iex/shared/storage';
 import { Service } from 'typedi';
 
-import { streamFromS3, streamToS3 } from '../lib/storage';
 import { InsightFile } from '../models/insight-file';
 
 @Service()
 export class AttachmentService {
+  constructor(private storage: Storage) {}
+
   getAvatarPath(avatarKey: string): string {
     return `avatars/${avatarKey}`;
   }
@@ -31,15 +33,19 @@ export class AttachmentService {
     return `drafts/${draftKey}/files/${attachment.id}`;
   }
 
-  uploadAvatar(avatarKey: string, size: number, readStream: ReadStream): Promise<string> {
-    return streamToS3(readStream, size, this.getAvatarPath(avatarKey));
+  uploadAvatar(avatarKey: string, size: number, stream: Readable): Promise<string> {
+    return this.storage.writeFile({ stream, fileSize: size, path: this.getAvatarPath(avatarKey) });
   }
 
-  uploadToDraft(draftKey: string, attachment: Partial<InsightFile>, readStream: ReadStream): Promise<string> {
-    return streamToS3(readStream, attachment.size!, this.getDraftAttachmentPath(draftKey, attachment));
+  uploadToDraft(draftKey: string, attachment: Partial<InsightFile>, stream: Readable): Promise<string> {
+    return this.storage.writeFile({
+      stream,
+      fileSize: attachment.size!,
+      path: this.getDraftAttachmentPath(draftKey, attachment)
+    });
   }
 
-  streamFromDraft(draftKey: string, attachment: Partial<InsightFile>): Promise<ReadStream> {
-    return streamFromS3(this.getDraftAttachmentPath(draftKey, attachment));
+  streamFromDraft(draftKey: string, attachment: Partial<InsightFile>): Promise<Readable> {
+    return this.storage.streamFile({ path: this.getDraftAttachmentPath(draftKey, attachment) });
   }
 }

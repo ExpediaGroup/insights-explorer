@@ -25,6 +25,7 @@ import { RepositoryPermission } from '@iex/models/repository-permission';
 import { RepositoryType } from '@iex/models/repository-type';
 import { sort } from '@iex/shared/dataloader-util';
 import { getLogger } from '@iex/shared/logger';
+import { Storage } from '@iex/shared/storage';
 import { ApolloError } from 'apollo-server-express';
 import DataLoader from 'dataloader';
 import { raw } from 'objection';
@@ -52,7 +53,6 @@ import {
   ElasticIndex
 } from '../lib/elasticsearch';
 import { GitInstance } from '../lib/git-instance';
-import { streamFromS3 } from '../lib/storage';
 import { Activity, ActivityType, IndexedInsightActivityDetails } from '../models/activity';
 import { GitHubRepository, RepositoryVisibility } from '../models/backends/github';
 import { Comment } from '../models/comment';
@@ -133,7 +133,11 @@ export class InsightService {
     return sort(insightIds, result, 'insightId').map((row) => row?.userIds || []);
   });
 
-  constructor(private readonly activityService: ActivityService, private readonly userService: UserService) {
+  constructor(
+    private readonly activityService: ActivityService,
+    private readonly storage: Storage,
+    private readonly userService: UserService
+  ) {
     logger.trace('Constructing New Insight Service');
   }
 
@@ -466,8 +470,9 @@ export class InsightService {
                     // Add newly uploaded files
                     case InsightFileAction.ADD: {
                       logger.debug(`Adding new file: ${file.path}`);
-                      const fileObjectKey = `drafts/${draftKey}/files/${file.id}`;
-                      const readable = await streamFromS3(fileObjectKey);
+                      const path = `drafts/${draftKey}/files/${file.id}`;
+                      const readable = await this.storage.streamFile({ path });
+
                       return gitInstance.putFileFromStream(file.path!, readable);
                     }
 
