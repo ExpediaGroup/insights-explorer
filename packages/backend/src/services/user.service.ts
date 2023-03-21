@@ -98,8 +98,8 @@ export class UserService {
    *
    * @param email User email
    */
-  async getUserByEmail(email: string): Promise<User | null> {
-    return await User.query().where('email', 'ILIKE', email).first();
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return User.query().where('email', 'ILIKE', email).first();
   }
 
   /**

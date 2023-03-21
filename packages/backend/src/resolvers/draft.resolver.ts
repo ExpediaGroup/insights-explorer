@@ -184,7 +184,7 @@ export class DraftResolver {
       const [, dbTemplateId] = fromGlobalId(templateId);
 
       // Load Draft and convert to DraftInput
-      const { draftData } = await Draft.query().where('draftKey', draftKey).first();
+      const { draftData } = await Draft.query().where('draftKey', draftKey).first().throwIfNotFound();
       const draft: DraftInput = {
         draftKey,
         draftData

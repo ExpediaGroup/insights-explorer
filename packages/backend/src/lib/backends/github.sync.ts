@@ -162,7 +162,7 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
     const contributors = await pMap(yaml.authors, async (author) => {
       const user = await userService.getUserByEmail(author);
 
-      return user === null
+      return user === undefined
         ? {
             userName: author,
             displayName: author,

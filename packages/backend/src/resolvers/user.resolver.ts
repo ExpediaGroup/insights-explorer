@@ -49,7 +49,7 @@ export class UserResolver {
   @Query(() => User, { nullable: true })
   async user(@Arg('userName') userName: string, @Ctx() ctx: Context): Promise<User | null> {
     try {
-      const user = await User.query().where('userName', 'ILIKE', userName).first();
+      const user = await User.query().where('userName', 'ILIKE', userName).first().throwIfNotFound();
 
       // Store this for authorization checks later
       ctx.retrievedUserId = user?.userId;
@@ -164,6 +164,10 @@ export class UserResolver {
       process.env.OAUTH_PROVIDER === 'okta'
         ? await User.query().where('email', userInfo.email!).first()
         : await User.query().where('user_name', userInfo.username).first();
+
+    if (user === undefined) {
+      throw new Error('User not found');
+    }
 
     // Determine if user is an admin or not
     user.isAdmin = ctx.user?.isAdmin ?? false;
