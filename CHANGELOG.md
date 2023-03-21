@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.23.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.4...v3.23.0) (2023-03-21)
+
+
+### Features
+
+* Lazy load CodeRenderer with full Prism syntax highlighter ([5c2027d](https://github.com/ExpediaGroup/insights-explorer/commit/5c2027d350eeeb334b0c41a4d4d6dba27c23391c))
+
+
+### Bug Fixes
+
+* **deps:** Re-add esbuild to frontend package to support test cases ([5ed5fe5](https://github.com/ExpediaGroup/insights-explorer/commit/5ed5fe5998e2b89c58e3da120f9a9ee0189d2b2a))
+* Optimize code renderer to reduce redraws ([3062fb7](https://github.com/ExpediaGroup/insights-explorer/commit/3062fb7dac5b3e0ce3b5a3005b4fdc9a79ba275d))
+* Optimize useFetch to reduce redraws ([4139dc4](https://github.com/ExpediaGroup/insights-explorer/commit/4139dc4f7adb1e0c8e62b54b9d62c293b7048062))
+* Set `GITHUB_USE_WEBHOOK` false to match `PUBLIC_URL` ([5b1df76](https://github.com/ExpediaGroup/insights-explorer/commit/5b1df760bc9bc8e4e857863856b7e726f3245be1))
+
 ### [3.22.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.3...v3.22.4) (2023-03-21)
 
 
