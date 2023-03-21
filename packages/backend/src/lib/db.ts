@@ -15,7 +15,7 @@
  */
 
 import { getLogger } from '@iex/shared/logger';
-import Knex from 'knex';
+import knex, { Knex } from 'knex';
 import { Model, knexSnakeCaseMappers } from 'objection';
 
 const logger = getLogger('db');
@@ -66,7 +66,7 @@ const defaultOptions: Knex.Config = {
 
 export function createDb(options: Knex.Config = defaultOptions): Knex {
   const mergedOptions = { ...defaultOptions, ...options };
-  const instance: Knex = Knex(mergedOptions);
+  const instance = knex(mergedOptions);
   return instance;
 }
 
@@ -78,9 +78,9 @@ export async function bootstrap(knex: Knex): Promise<void> {
   await knex.migrate.latest();
 }
 
-const knex = createDb();
+const knexInstance = createDb();
 
 // Bind models to Knex
-Model.knex(knex);
+Model.knex(knexInstance);
 
-export const defaultKnex = knex;
+export const defaultKnex = knexInstance;
