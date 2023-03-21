@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.22.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.3...v3.22.4) (2023-03-21)
+
+
+### Bug Fixes
+
+* Adopt shared storage class and consolidate usage ([b677dfa](https://github.com/ExpediaGroup/insights-explorer/commit/b677dfa10c3e514d236fb23009fa37e8f722cc33))
+* Migrate to AWS SDK v3 ([f4f16e4](https://github.com/ExpediaGroup/insights-explorer/commit/f4f16e45cdc32a3cc6885c5891dea3f452658aa8))
+
 ### [3.22.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.2...v3.22.3) (2023-03-16)
 
 
