@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.23.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.0...v3.23.1) (2023-03-22)
+
+
+### Bug Fixes
+
+* **deps:** bump knex from 0.21.19 to 2.4.2 ([0fb8893](https://github.com/ExpediaGroup/insights-explorer/commit/0fb889372d89eb796e077b9494cad860411907bd))
+* **deps:** bump objection from 2.2.18 to 3.0.1 ([1e4b101](https://github.com/ExpediaGroup/insights-explorer/commit/1e4b101a616446fb54367022cb2fe8adc61d4d16))
+
 ## [3.23.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.22.4...v3.23.0) (2023-03-21)
 
 
