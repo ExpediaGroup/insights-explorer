@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.23.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.1...v3.23.2) (2023-03-23)
+
+
+### Bug Fixes
+
+* **deps:** bump deep-object-diff from 1.1.0 to 1.1.9 ([5838a22](https://github.com/ExpediaGroup/insights-explorer/commit/5838a2212255313ab5edfa328ce4dcab7108455c))
+
 ### [3.23.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.0...v3.23.1) (2023-03-22)
 
 
