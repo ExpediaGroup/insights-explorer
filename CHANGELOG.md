@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.23.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.2...v3.23.3) (2023-03-23)
+
+
+### Bug Fixes
+
+* **deps:** bump @chakra-ui/react from 2.5.0 to 2.5.2 ([04f2ab0](https://github.com/ExpediaGroup/insights-explorer/commit/04f2ab0cc0b0d786ed7db12e33ae5dbecd4980d7))
+* **deps:** bump vega from 5.22.1 to 5.24.0 ([f4094ad](https://github.com/ExpediaGroup/insights-explorer/commit/f4094ad84fcbc70337b609ff0b69e85fc1102338))
+
 ### [3.23.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.1...v3.23.2) (2023-03-23)
 
 
