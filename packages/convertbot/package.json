@@ -42,7 +42,7 @@
     "@types/node": "16.11.36",
     "@types/tmp": "0.2.3",
     "@typescript-eslint/eslint-plugin": "5.30.6",
-    "@typescript-eslint/parser": "5.30.0",
+    "@typescript-eslint/parser": "5.56.0",
     "eslint": "8.18.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-import-resolver-typescript": "3.5.3",
