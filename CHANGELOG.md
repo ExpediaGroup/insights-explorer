@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.23.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.3...v3.23.4) (2023-03-23)
+
+
+### Bug Fixes
+
+* **deps:** bump pino-pretty from 8.1.0 to 10.0.0 ([b372a06](https://github.com/ExpediaGroup/insights-explorer/commit/b372a06d48f9da98083447a743777bc56dea04c6))
+
 ### [3.23.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.2...v3.23.3) (2023-03-23)
 
 
