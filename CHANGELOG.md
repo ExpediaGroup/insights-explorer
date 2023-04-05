@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.23.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.4...v3.23.5) (2023-04-05)
+
+
+### Bug Fixes
+
+* **deps:** bump react-markdown from 8.0.3 to 8.0.6 ([6f20c3b](https://github.com/ExpediaGroup/insights-explorer/commit/6f20c3bee27432aee0a25cdf0ffdf7ee39f036c7))
+
 ### [3.23.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.3...v3.23.4) (2023-03-23)
 
 
