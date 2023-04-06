@@ -342,7 +342,14 @@ describe('search', () => {
         bool: {
           filter: [
             { term: { 'tags.keyword': { value: 'demo' } } },
-            { term: { 'contributors.userName.keyword': { value: 'username' } } }
+            {
+              bool: {
+                should: [
+                  { term: { 'contributors.userName.keyword': { value: 'username' } } },
+                  { term: { 'contributors.displayName.keyword': { value: 'username' } } }
+                ]
+              }
+            }
           ],
           should: [
             {
@@ -394,7 +401,16 @@ describe('search', () => {
       const es = parseToElasticsearch('author:username');
       expect(es).toMatchObject({
         bool: {
-          filter: [{ term: { 'contributors.userName.keyword': { value: 'username' } } }]
+          filter: [
+            {
+              bool: {
+                should: [
+                  { term: { 'contributors.userName.keyword': { value: 'username' } } },
+                  { term: { 'contributors.displayName.keyword': { value: 'username' } } }
+                ]
+              }
+            }
+          ]
         }
       });
     });
@@ -450,6 +466,11 @@ describe('search', () => {
       const clauses: any[] = parseSearchQuery('updatedDate:>=2020-03-01 updatedDate:<=2020-10-01');
       const query = toSearchQuery(clauses);
       expect(query).toBe('updatedDate:>=2020-03-01 updatedDate:<=2020-10-01');
+    });
+    test('author full name', () => {
+      const clauses: any[] = parseSearchQuery('author:"John Doe"');
+      const query = toSearchQuery(clauses);
+      expect(query).toBe('author:"John Doe"');
     });
   });
 });

@@ -151,6 +151,36 @@ export class SearchTerm implements SearchClause {
       return {};
     }
 
+    if (this.key === 'author') {
+      // Special case for supporting either username or display name
+      return {
+        bool: {
+          filter: [
+            {
+              bool: {
+                should: [
+                  {
+                    term: {
+                      'contributors.userName.keyword': {
+                        value: this.value
+                      }
+                    }
+                  },
+                  {
+                    term: {
+                      'contributors.displayName.keyword': {
+                        value: this.value
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      };
+    }
+
     return {
       bool: {
         filter: [
@@ -169,7 +199,7 @@ export class SearchTerm implements SearchClause {
   toString(): string {
     switch (this.key) {
       case 'author':
-        return `@${this.value}`;
+        return this.value.includes(' ') ? `author:"${this.value}"` : `@${this.value}`;
       case 'tag':
         return `#${this.value}`;
       default:

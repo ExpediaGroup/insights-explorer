@@ -47,7 +47,7 @@ export const SearchSyntax = () => {
           </Tooltip>
         </Box>
       </PopoverTrigger>
-      <PopoverContent zIndex={9000} {...useBreakpointValue({ base: {}, lg: { width: 'auto', maxWidth: '3xl' } })}>
+      <PopoverContent zIndex={9000} {...useBreakpointValue({ base: {}, lg: { width: 'auto', maxWidth: '4xl' } })}>
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverHeader>
@@ -109,6 +109,8 @@ export const SearchSyntax = () => {
               <Box>
                 <HStack>
                   <Code>author:username</Code>
+                  <Text>/</Text>
+                  <Code whiteSpace="nowrap">author:"Full Name"</Code>
                   <Text>/</Text>
                   <Code>@username</Code>
                 </HStack>
