@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.24.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.6...v3.24.0) (2023-04-06)
+
+
+### Features
+
+* Authors filter shows display names for users ([8438b81](https://github.com/ExpediaGroup/insights-explorer/commit/8438b81fff383fd7a29f54be56bc2ebb8bce785a))
+* Search authors by username or display name ([687bf1f](https://github.com/ExpediaGroup/insights-explorer/commit/687bf1f0f1ec3868449dc441652645c91e591d78))
+
 ### [3.23.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.5...v3.23.6) (2023-04-06)
 
 
