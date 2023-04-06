@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.24.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.0...v3.24.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **deps:** bump papaparse from 5.3.2 to 5.4.1 ([4beed9b](https://github.com/ExpediaGroup/insights-explorer/commit/4beed9bc576de66e28c76b779b6d08fabac0e3f1))
+
 ## [3.24.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.23.6...v3.24.0) (2023-04-06)
 
 
