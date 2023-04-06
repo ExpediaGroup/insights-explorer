@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.24.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.1...v3.24.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **deps:** bump react-error-boundary from 3.1.4 to 4.0.3 ([731f3e5](https://github.com/ExpediaGroup/insights-explorer/commit/731f3e5ab6364055959bf0a37edfe12290421030))
+* **deps:** bump use-file-picker from 1.4.2 to 1.6.0 ([f965053](https://github.com/ExpediaGroup/insights-explorer/commit/f96505343f1d716b6d170e3c7395d2b1e5eaec9d))
+
 ### [3.24.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.0...v3.24.1) (2023-04-06)
 
 
