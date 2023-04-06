@@ -505,6 +505,7 @@ input Sort {
 }
 
 type UniqueValue {
+  label: String
   occurrences: Float!
   value: String!
 }

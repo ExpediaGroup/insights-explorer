@@ -48,6 +48,7 @@ const AUTOCOMPLETE_QUERY = gql`
       }
       authors {
         value
+        label
         occurrences
       }
       teams {

@@ -15,6 +15,7 @@
  */
 
 import { getLogger } from '@iex/shared/logger';
+import pMap from 'p-map';
 import { Authorized, FieldResolver, Query, Resolver } from 'type-graphql';
 import { Service } from 'typedi';
 
@@ -74,7 +75,19 @@ export class AutocompleteResolver {
   @FieldResolver(() => [UniqueValue])
   async authors(): Promise<UniqueValue[]> {
     try {
-      return await uniqueTerms('contributors.userName.keyword');
+      const authors = await uniqueTerms('contributors.userName.keyword');
+
+      // Get the display name for each author
+      return Promise.all(
+        authors.map(async (author) => {
+          const user = await this.userService.getUserByUserName(author.value);
+
+          return {
+            ...author,
+            label: user?.displayName
+          };
+        })
+      );
     } catch (error: any) {
       logger.error(error);
       return error;

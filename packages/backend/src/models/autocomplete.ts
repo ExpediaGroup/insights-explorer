@@ -23,6 +23,9 @@ export class UniqueValue {
 
   @Field()
   occurrences!: number;
+
+  @Field({ nullable: true })
+  label?: string;
 }
 
 @ObjectType()

@@ -48,6 +48,13 @@ export class UserService {
     return sort(userIds, users, 'userId');
   });
 
+  private usernameLoader: DataLoader<string, User> = new DataLoader(async (usernames) => {
+    logger.trace('usernameLoader');
+    const users = await User.query().whereIn('userName', usernames as string[]);
+
+    return sort(usernames, users, 'userName');
+  });
+
   private commentCountLoader: DataLoader<number, number> = new DataLoader(async (userIds) => {
     logger.trace('commentCountLoader');
 
@@ -82,6 +89,15 @@ export class UserService {
    */
   async getUser(userId: number): Promise<User> {
     return this.userLoader.load(userId);
+  }
+
+  /**
+   * Fetches a User by username.
+   *
+   * @param username User name
+   */
+  async getUserByUserName(username: string): Promise<User> {
+    return this.usernameLoader.load(username);
   }
 
   /**

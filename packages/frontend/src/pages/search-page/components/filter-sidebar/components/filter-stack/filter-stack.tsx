@@ -55,17 +55,19 @@ export const FilterStack = ({
   const selectOptions = allFilters
     .filter((filter) => !filterExists(filterKey, filter.value))
     .map((filter) => {
-      return { label: filter.value, value: filter.value };
+      return { label: filter.label ?? filter.value, value: filter.value };
     });
 
   const getLabel = (item: { value: string; label?: string }): string => {
     if (item.label) {
       return item.label;
     }
-    // const filter = allFilters.find((f) => f.value === item.value);
-    // if (filter && filter.label) {
-    //   return filter.label;
-    // }
+
+    const filter = allFilters.find((f) => f.value === item.value);
+    if (filter && filter.label) {
+      return filter.label;
+    }
+
     return item.value;
   };
 

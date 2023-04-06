@@ -65,6 +65,7 @@ const INSIGHTS_QUERY = gql`
       suggestedFilters {
         authors {
           value
+          label
         }
         tags {
           value
