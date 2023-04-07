@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.24.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.4...v3.24.5) (2023-04-07)
+
+
+### Bug Fixes
+
+* **deps:** Upgrade node from 16.13.1 to 19.8.1 ([2515444](https://github.com/ExpediaGroup/insights-explorer/commit/251544432949d4ab18447b25ccd6fe104e9c6c5b))
+
 ### [3.24.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.3...v3.24.4) (2023-04-07)
 
 
