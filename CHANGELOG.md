@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.24.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.2...v3.24.3) (2023-04-07)
+
+
+### Bug Fixes
+
+* **deps:** bump pg from 8.7.3 to 8.10.0 ([fca6ebc](https://github.com/ExpediaGroup/insights-explorer/commit/fca6ebcdb03c9bd0e2a3ef26f5c9ec30f311c2e3))
+* **deps:** bump undici, @graphql-tools/apollo-engine-loader, @graphql-tools/github-loader and cross-undici-fetch ([48df958](https://github.com/ExpediaGroup/insights-explorer/commit/48df958aac9792819bb38b34157fd69fe9f87c7a))
+
 ### [3.24.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.1...v3.24.2) (2023-04-06)
 
 
