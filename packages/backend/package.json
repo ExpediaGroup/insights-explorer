@@ -53,7 +53,7 @@
     "isomorphic-git": "1.18.3",
     "js-yaml": "4.1.0",
     "knex": "2.4.2",
-    "knex-migrate-sql-file": "1.0.3",
+    "knex-migrate-sql-file": "2.0.0",
     "lodash": "4.17.21",
     "luxon": "3.2.1",
     "mime": "3.0.0",
