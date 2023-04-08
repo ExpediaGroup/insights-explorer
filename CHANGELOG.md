@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.24.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.5...v3.24.6) (2023-04-08)
+
+
+### Bug Fixes
+
+* **deps:** bump @emotion/react from 11.10.5 to 11.10.6 ([dfc6161](https://github.com/ExpediaGroup/insights-explorer/commit/dfc6161f0d89861be4f1b50eec9a13f985b1e91a))
+
 ### [3.24.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.4...v3.24.5) (2023-04-07)
 
 
