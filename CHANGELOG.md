@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.24.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.7...v3.24.8) (2023-04-10)
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-core from 3.8.1 to 3.12.0 ([68ba1f8](https://github.com/ExpediaGroup/insights-explorer/commit/68ba1f81e7506b1f4f80f230e6d027d6dfc1cbfc))
+* **deps:** bump apollo-server-express from 3.7.0 to 3.12.0 ([97c6b7d](https://github.com/ExpediaGroup/insights-explorer/commit/97c6b7d372edb2f06f0b4fac69a5879650bfebda))
+* **deps:** bump framer-motion from 9.0.2 to 10.11.2 ([8c137a1](https://github.com/ExpediaGroup/insights-explorer/commit/8c137a1512d49307d655c9c04fd56e01e2f86c7a))
+
 ### [3.24.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.6...v3.24.7) (2023-04-10)
 
 
