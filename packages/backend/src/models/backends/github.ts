@@ -105,6 +105,8 @@ export type GitHubRepositoryHistoryEdge = { node: GitHubCommit };
 
 export type GitHubRepositoryPermission = 'ADMIN' | 'MAINTAIN' | 'READ' | 'TRIAGE' | 'WRITE' | 'NONE';
 
+export type GitHubCollaboratorAffiliation = 'OUTSIDE' | 'DIRECT' | 'ALL';
+
 export interface GitHubOrganization {
   id: string;
   name: string;

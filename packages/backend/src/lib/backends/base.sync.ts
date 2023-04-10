@@ -86,7 +86,7 @@ export abstract class BaseSync {
         refresh
       });
 
-      logger.trace(JSON.stringify(result));
+      //logger.trace(JSON.stringify(result));
       logger.info(`Successfully published ${documentType}: ${insight.fullName}`);
     } catch (error: any) {
       logger.error(`Error publishing ${documentType} to Elasticsearch`);

@@ -44,6 +44,7 @@ import { iconFactoryAs } from '../../shared/icon-factory';
 import type { RootState } from '../../store/store';
 import { Alert } from '../alert/alert';
 import { DeleteIconButton } from '../delete-icon-button/delete-icon-button';
+import { ExternalLink } from '../external-link/external-link';
 import { Link as RouterLink } from '../link/link';
 
 import { PermissionMenu } from './permission-menu';
@@ -51,6 +52,9 @@ import { PermissionMenu } from './permission-menu';
 const COLLABORATORS_FRAGMENT = gql`
   fragment CollaboratorFields on Insight {
     id
+    repository {
+      url
+    }
     collaborators {
       edges {
         permission
@@ -127,7 +131,8 @@ const InsightCollaboratorsModalInternal = ({ insightId }) => {
     variables: { id: insightId }
   });
 
-  const edges = data?.insight.collaborators?.edges;
+  const insight = data?.insight;
+  const edges = insight?.collaborators?.edges;
 
   const [{ data: usersData }] = useQuery({
     query: USERS_QUERY
@@ -262,7 +267,17 @@ const InsightCollaboratorsModalInternal = ({ insightId }) => {
       <Divider />
 
       <Text fontSize="xs">
-        Collaborators with access through GitHub Teams or Organization permissions are not shown.
+        Collaborators with access through GitHub Teams or Organization permissions are not shown. Manage GitHub Teams
+        permissions for the repository{' '}
+        <ExternalLink
+          href={insight?.repository.url + '/settings/access'}
+          isExternal={true}
+          showIcon={true}
+          display="inline-block"
+        >
+          here
+        </ExternalLink>
+        .
       </Text>
     </VStack>
   );

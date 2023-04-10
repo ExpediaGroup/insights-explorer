@@ -179,7 +179,7 @@ export class InsightResolver {
 
   @FieldResolver()
   async collaborators(@Root() insight: Insight): Promise<UserPermissionConnection> {
-    const users = await this.insightService.getCollaborators(insight);
+    const users = await this.insightService.getCollaborators(insight, 'DIRECT');
 
     return {
       edges: users.map(({ user, permission }, i) => ({

@@ -54,7 +54,7 @@ import {
 } from '../lib/elasticsearch';
 import { GitInstance } from '../lib/git-instance';
 import { Activity, ActivityType, IndexedInsightActivityDetails } from '../models/activity';
-import { GitHubRepository, RepositoryVisibility } from '../models/backends/github';
+import { GitHubCollaboratorAffiliation, GitHubRepository, RepositoryVisibility } from '../models/backends/github';
 import { Comment } from '../models/comment';
 import { Draft } from '../models/draft';
 import { DbInsight, Insight, ValidateInsightName } from '../models/insight';
@@ -727,15 +727,26 @@ export class InsightService {
   /**
    * Gets Collaborators for an Insight
    */
-  async getCollaborators(insight: Insight): Promise<IndexedInsightCollaborator[]> {
+  async getCollaborators(
+    insight: Insight,
+    affiliation: GitHubCollaboratorAffiliation = 'DIRECT'
+  ): Promise<IndexedInsightCollaborator[]> {
     if (insight.repository.type === RepositoryType.FILE) {
       return [];
     }
 
-    const gitHubCollaborators = await getCollaborators(insight.repository.owner.login, insight.repository.externalName);
+    const gitHubCollaborators = await getCollaborators(
+      insight.repository.owner.login,
+      insight.repository.externalName,
+      affiliation
+    );
     if (gitHubCollaborators == null || gitHubCollaborators.length === 0) {
       return [];
     }
+
+    gitHubCollaborators.forEach((collaborator: any) => {
+      logger.debug(`Collaborator: ${JSON.stringify(collaborator, null, 2)}`);
+    });
 
     return await Promise.all(
       gitHubCollaborators

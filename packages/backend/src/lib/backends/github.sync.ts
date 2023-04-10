@@ -231,7 +231,9 @@ async function getInsightContributors(insight: IndexedInsight, yaml: InsightYaml
 async function getInsightCollaborators(insight: IndexedInsight): Promise<IndexedInsightCollaborator[]> {
   const insightService = Container.get(InsightService);
 
-  const collaborators = await insightService.getCollaborators(insight as Insight);
+  // Get all collaborators for the insight -- this includes Orgs, Teams and Users
+  // These are stored in Elasticsearch only for the purpose of searching for unlisted Insights
+  const collaborators = await insightService.getCollaborators(insight as Insight, 'ALL');
 
   // Return only the fields we need
   return collaborators.map(({ permission, user }) => ({

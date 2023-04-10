@@ -33,7 +33,8 @@ import {
   GitHubTokenMetadata,
   GitHubRepositoryPermission,
   GitHubRepositoryCollaboratorEdge,
-  GitHubRepositoryHistoryEdge
+  GitHubRepositoryHistoryEdge,
+  GitHubCollaboratorAffiliation
 } from '../../models/backends/github';
 import { sleep } from '../../shared/util';
 
@@ -548,7 +549,11 @@ export async function getCommitList(owner: string, repo: string): Promise<GitHub
   return edges;
 }
 
-export async function getCollaborators(owner: string, repo: string): Promise<GitHubRepositoryCollaboratorEdge[]> {
+export async function getCollaborators(
+  owner: string,
+  repo: string,
+  affiliation: GitHubCollaboratorAffiliation = 'DIRECT'
+): Promise<GitHubRepositoryCollaboratorEdge[]> {
   let hasNextPage = true;
   let endCursor: string | undefined;
   const edges: GitHubRepositoryCollaboratorEdge[] = [];
@@ -558,7 +563,7 @@ export async function getCollaborators(owner: string, repo: string): Promise<Git
       const { repository }: { repository: GitHubRepository } = await makeGraphql()({
         query: `query collaborators($owner: String!, $repo: String!${endCursor ? ', $after: String!' : ''}) {
           repository(owner: $owner, name: $repo${endCursor ? ', after: $after' : ''}) {
-            collaborators(first: 100, affiliation: DIRECT) {
+            collaborators(first: 100, affiliation: ${affiliation}) {
               pageInfo {
                 endCursor
                 hasNextPage
@@ -584,7 +589,7 @@ export async function getCollaborators(owner: string, repo: string): Promise<Git
       hasNextPage = collaborators.pageInfo!.hasNextPage;
       endCursor = collaborators.pageInfo!.endCursor;
       logger.info(`Retrieved ${collaborators.edges.length} collaborators...`);
-      edges.push(...collaborators.edges);
+      edges.push(...collaborators.edges.filter((edge: GitHubRepositoryCollaboratorEdge) => edge.permission !== 'READ'));
     } catch (error: any) {
       hasNextPage = false;
       logger.debug(`Unable to retrieve Repository collaborators: ${error}`);
