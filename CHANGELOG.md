@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.25.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.8...v3.25.0) (2023-04-10)
+
+
+### Features
+
+* Sync all collaborators to allow teams to view unlisted Insights ([2ba3078](https://github.com/ExpediaGroup/insights-explorer/commit/2ba3078b4df2cfb223ca8362363ae51b0b661873))
+
 ### [3.24.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.7...v3.24.8) (2023-04-10)
 
 
