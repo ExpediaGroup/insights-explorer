@@ -15,7 +15,6 @@
  */
 
 import { getLogger } from '@iex/shared/logger';
-import pMap from 'p-map';
 import { Authorized, FieldResolver, Query, Resolver } from 'type-graphql';
 import { Service } from 'typedi';
 
