@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.24.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.6...v3.24.7) (2023-04-10)
+
+
+### Bug Fixes
+
+* **deps:** bump @emotion/styled from 11.10.5 to 11.10.6 ([7714df7](https://github.com/ExpediaGroup/insights-explorer/commit/7714df7155378a5f5cdb732f5b507f032c1fc834))
+
 ### [3.24.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.5...v3.24.6) (2023-04-08)
 
 
