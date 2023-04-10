@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.0...v3.25.1) (2023-04-10)
+
+
+### Bug Fixes
+
+* Remove unused import ([2a1a163](https://github.com/ExpediaGroup/insights-explorer/commit/2a1a163b1e8f779baaed62cbfc480d5661bef9ac))
+
 ## [3.25.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.24.8...v3.25.0) (2023-04-10)
 
 
