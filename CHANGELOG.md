@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.2...v3.25.3) (2023-04-11)
+
+
+### Bug Fixes
+
+* **deps:** bump dataloader from 2.1.0 to 2.2.2 ([6c0579b](https://github.com/ExpediaGroup/insights-explorer/commit/6c0579bc986fd603f9e26dc37ffa8cefb4cef0a2))
+
 ### [3.25.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.1...v3.25.2) (2023-04-11)
 
 
