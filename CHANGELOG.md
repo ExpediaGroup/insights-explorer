@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.1...v3.25.2) (2023-04-11)
+
+
+### Bug Fixes
+
+* **deps:** bump ansi-regex from 3.0.0 to 5.0.1 ([6ba884b](https://github.com/ExpediaGroup/insights-explorer/commit/6ba884b14e1993631644825b5d7b43890864dbdb))
+* **deps:** bump pino-http from 8.1.0 to 8.3.3 ([e135707](https://github.com/ExpediaGroup/insights-explorer/commit/e135707046a75189280fe6f3f9d9a11218df5ab5))
+
 ### [3.25.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.0...v3.25.1) (2023-04-10)
 
 
