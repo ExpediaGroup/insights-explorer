@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.3...v3.25.4) (2023-04-12)
+
+
+### Bug Fixes
+
+* **deps:** bump sqs-consumer from 7.0.2 to 7.0.3 ([da0ed95](https://github.com/ExpediaGroup/insights-explorer/commit/da0ed9515f24b9cb473bc9f9f803cf987cd7bfec))
+
 ### [3.25.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.2...v3.25.3) (2023-04-11)
 
 
