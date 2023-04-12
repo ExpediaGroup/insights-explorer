@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.5...v3.25.6) (2023-04-12)
+
+
+### Bug Fixes
+
+* **deps:** bump turndown from 7.1.1 to 7.1.2 ([770a20d](https://github.com/ExpediaGroup/insights-explorer/commit/770a20da503996b50fca9676e1c01ac8d24d79c3))
+
 ### [3.25.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.4...v3.25.5) (2023-04-12)
 
 
