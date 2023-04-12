@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.5](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.4...v3.25.5) (2023-04-12)
+
+
+### Bug Fixes
+
+* **deps:** bump fs-extra and @types/fs-extra ([618c368](https://github.com/ExpediaGroup/insights-explorer/commit/618c36804662c436436e22afbd4849beda1bb8d0))
+
 ### [3.25.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.3...v3.25.4) (2023-04-12)
 
 
