@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.7...v3.25.8) (2023-04-13)
+
+
+### Bug Fixes
+
+* **deps:** bump @aws-sdk/client-sqs from 3.292.0 to 3.312.0 ([29bc82c](https://github.com/ExpediaGroup/insights-explorer/commit/29bc82cf0ffe894ae955b201fcbfdb1a3e1fc164))
+
 ### [3.25.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.6...v3.25.7) (2023-04-13)
 
 
