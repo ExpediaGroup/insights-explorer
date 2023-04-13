@@ -91,7 +91,7 @@
     "@types/jsonfile": "6.1.1",
     "@types/lodash": "4.14.192",
     "@types/luxon": "3.2.0",
-    "@types/mime": "2.0.3",
+    "@types/mime": "3.0.1",
     "@types/module-alias": "2.0.1",
     "@types/node": "18.15.11",
     "@types/parsimmon": "1.10.6",
