@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.7](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.6...v3.25.7) (2023-04-13)
+
+
+### Bug Fixes
+
+* **deps:** bump vega-lite from 5.6.0 to 5.6.1 ([62b4c1d](https://github.com/ExpediaGroup/insights-explorer/commit/62b4c1d0b9d9655cb12d424c3f6379c21bd87780))
+
 ### [3.25.6](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.5...v3.25.6) (2023-04-12)
 
 
