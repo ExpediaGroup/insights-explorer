@@ -275,6 +275,7 @@ export class GitInstance {
     }
 
     await git.remove({ fs, dir: this.localPath, filepath: originalFilePath });
+    await fs.ensureDir(path.dirname(path.join(this.localPath, newFilePath)));
     await fs.promises.rename(path.join(this.localPath, originalFilePath), path.join(this.localPath, newFilePath));
     await git.add({ fs, dir: this.localPath, filepath: newFilePath });
   }
