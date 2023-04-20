@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.8...v3.25.9) (2023-04-20)
+
+
+### Bug Fixes
+
+* Ensure new folders are created before renaming files ([4b7a07c](https://github.com/ExpediaGroup/insights-explorer/commit/4b7a07c8139f0a8e677efad72aac84e6a301c137))
+
 ### [3.25.8](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.7...v3.25.8) (2023-04-13)
 
 
