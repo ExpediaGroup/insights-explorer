@@ -562,8 +562,8 @@ export async function getCollaborators(
     try {
       const { repository }: { repository: GitHubRepository } = await makeGraphql()({
         query: `query collaborators($owner: String!, $repo: String!${endCursor ? ', $after: String!' : ''}) {
-          repository(owner: $owner, name: $repo${endCursor ? ', after: $after' : ''}) {
-            collaborators(first: 100, affiliation: ${affiliation}) {
+          repository(owner: $owner, name: $repo) {
+            collaborators(first: 100, affiliation: ${affiliation}${endCursor ? ', after: $after' : ''}) {
               pageInfo {
                 endCursor
                 hasNextPage
