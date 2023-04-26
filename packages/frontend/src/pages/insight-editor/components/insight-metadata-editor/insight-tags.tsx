@@ -76,9 +76,8 @@ export const InsightTags = ({ insight, form }) => {
                 onChange(tags);
               }}
               value={value.map((tag: string) => ({ value: tag, label: tag }))}
+              menuPortalTarget={document.body}
               styles={{
-                menu: (base) => ({ ...base, zIndex: 11 }),
-                menuPortal: (base) => ({ ...base, zIndex: 11 }),
                 container: (base) => ({ ...base, width: '100%' }),
                 valueContainer: (base) => ({ ...base, paddingLeft: '40px' })
               }}

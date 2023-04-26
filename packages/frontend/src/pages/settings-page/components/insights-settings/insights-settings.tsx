@@ -85,11 +85,10 @@ export const InsightsSettings = ({ user, onSubmit, isSubmitting }: Props) => {
                 onChange={(e) => (e == null || e == '' ? onChange('') : onChange(e.value))}
                 value={(templateOptions && value && templateOptions.find((t) => t.value === value)) ?? { value: '' }}
                 isClearable={true}
+                menuPortalTarget={document.body}
                 styles={{
-                  menu: (base) => ({ ...base, zIndex: 11 }),
                   container: (base) => ({ ...base, width: '100%' }),
-                  valueContainer: (base) => ({ ...base, paddingLeft: '10px' }),
-                  menuPortal: (base) => ({ ...base, zIndex: 9999 })
+                  valueContainer: (base) => ({ ...base, paddingLeft: '10px' })
                 }}
               />
             )}

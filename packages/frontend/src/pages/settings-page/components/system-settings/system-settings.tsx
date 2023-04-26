@@ -76,11 +76,10 @@ export const SystemSettings = ({ user, onSubmit, isSubmitting }: Props) => {
                     }}
                     value={localeOptions && value && localeOptions.find((l) => l.value === value)}
                     placeholder={`Detected (${detectedLocale})`}
+                    menuPortalTarget={document.body}
                     styles={{
-                      menu: (base) => ({ ...base, zIndex: 11 }),
                       container: (base) => ({ ...base, width: '100%' }),
-                      valueContainer: (base) => ({ ...base, paddingLeft: '10px' }),
-                      menuPortal: (base) => ({ ...base, zIndex: 9999 })
+                      valueContainer: (base) => ({ ...base, paddingLeft: '10px' })
                     }}
                   />
                 )}

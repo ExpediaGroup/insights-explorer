@@ -69,9 +69,8 @@ export const InsightAuthors = ({ insight, form }) => {
                   onChange(values);
                 }}
                 value={value?.map((author: string) => ({ value: author, label: author }))}
+                menuPortalTarget={document.body}
                 styles={{
-                  menu: (base) => ({ ...base, zIndex: 11 }),
-                  menuPortal: (base) => ({ ...base, zIndex: 11 }),
                   container: (base) => ({ ...base, width: '100%' }),
                   valueContainer: (base) => ({ ...base, paddingLeft: '40px' })
                 }}
@@ -108,9 +107,8 @@ export const InsightAuthors = ({ insight, form }) => {
                   onChange(values);
                 }}
                 value={value?.map((author: string) => ({ value: author, label: author }))}
+                menuPortalTarget={document.body}
                 styles={{
-                  menu: (base) => ({ ...base, zIndex: 11 }),
-                  menuPortal: (base) => ({ ...base, zIndex: 11 }),
                   container: (base) => ({ ...base, width: '100%' }),
                   valueContainer: (base) => ({ ...base, paddingLeft: '40px' })
                 }}

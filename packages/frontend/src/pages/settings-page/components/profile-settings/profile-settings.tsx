@@ -275,8 +275,8 @@ export const ProfileSettings = ({ user, onSubmit, isSubmitting }: Props) => {
                         }
                       }}
                       value={{ value, label: value }}
+                      menuPortalTarget={document.body}
                       styles={{
-                        menu: (base) => ({ ...base, zIndex: 11 }),
                         container: (base) => ({ ...base, width: '100%' }),
                         valueContainer: (base) => ({ ...base, paddingLeft: '40px' })
                       }}

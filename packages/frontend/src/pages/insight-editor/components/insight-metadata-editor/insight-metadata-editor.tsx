@@ -144,11 +144,10 @@ export const InsightMetadataEditor = ({ insight, isNewInsight, form, templates, 
                   }
                 }}
                 value={itemTypeOptions && value && itemTypeOptions.find((type) => type.name === value)}
+                menuPortalTarget={document.body}
                 styles={{
-                  menu: (base) => ({ ...base, zIndex: 11 }),
                   container: (base) => ({ ...base, width: '100%' }),
-                  valueContainer: (base) => ({ ...base, paddingLeft: '10px' }),
-                  menuPortal: (base) => ({ ...base, zIndex: 9999 })
+                  valueContainer: (base) => ({ ...base, paddingLeft: '10px' })
                 }}
               />
             )}
