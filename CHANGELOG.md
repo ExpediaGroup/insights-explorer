@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.10](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.9...v3.25.10) (2023-04-26)
+
+
+### Bug Fixes
+
+* Fix `after` argument for collaborators request ([8d8d747](https://github.com/ExpediaGroup/insights-explorer/commit/8d8d747df1379a17631592ac84e517daa29070f8))
+* Fix Select z-index issues ([a95401b](https://github.com/ExpediaGroup/insights-explorer/commit/a95401b1ca3d075ef284fbf72eec508e72234dc6))
+
 ### [3.25.9](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.8...v3.25.9) (2023-04-20)
 
 
