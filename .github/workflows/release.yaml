@@ -60,7 +60,7 @@ jobs:
       # Release the next version
       - name: Semantic Release
         id: semantic
-        uses: cycjimmy/semantic-release-action@v3.4.2
+        uses: cycjimmy/semantic-release-action@v4.0.0
         env:
           GH_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
