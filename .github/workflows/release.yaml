@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3.8.1
         with:
           node-version-file: '.nvmrc'
@@ -39,7 +39,7 @@ jobs:
       new_release_minor_version: ${{ steps.semantic.outputs.new_release_minor_version }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
