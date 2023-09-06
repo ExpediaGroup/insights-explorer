@@ -63,7 +63,7 @@ The `backend` service starts on port 3000, and `frontend` launches on port 3001.
 
 ### Docker
 
-Pre-built Docker images are available in the GitHub container registery:
+Pre-built Docker images are available in the GitHub container registry:
 
 ```sh
 docker pull ghcr.io/expediagroup/insights-explorer:1
@@ -134,4 +134,4 @@ npm run license:thirdparty
 
 This project is available under the Apache 2.0 License.
 
-Copyright 2020-2022 Expedia, Inc.
+Copyright 2020-2023 Expedia, Inc.
