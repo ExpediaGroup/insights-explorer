@@ -1,5 +1,5 @@
 # Build Stage
-FROM node:19.8.1-buster as build
+FROM node:20.6.1-buster as build
 
 WORKDIR /opt/iex
 COPY . /opt/iex
@@ -15,7 +15,7 @@ RUN npm run build --prefix packages/convertbot && \
 RUN find . -name ".npmrc" -type f -delete
 
 # Production Stage
-FROM node:19.8.1-buster
+FROM node:20.6.1-buster
 
 # Use testing to get the latest version of pandoc
 # RUN echo 'deb http://http.us.debian.org/debian/ testing non-free contrib main' >> /etc/apt/sources.list
