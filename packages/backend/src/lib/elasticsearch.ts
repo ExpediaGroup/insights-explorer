@@ -375,6 +375,7 @@ export async function searchInsights(
 
       return clauses;
     });
+    logger.debug(`Elasticsearch Query: ${JSON.stringify(query.body!.query, null, 2)}`);
 
     // If sort isn't provided, default to relevance (AKA _score)
     if (search.sort === undefined || search.sort.length === 0) {

@@ -82,7 +82,7 @@ export const SearchBar = (): ReactElement => {
         previousQueryRef.current = internalQuery;
       }
     },
-    250,
+    100,
     [internalQuery]
   );
 
