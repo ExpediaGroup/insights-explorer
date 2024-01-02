@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.13](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.12...v3.25.13) (2024-01-02)
+
+
+### Bug Fixes
+
+* **deps:** bump ace-builds from 1.7.1 to 1.31.2 ([4c4a114](https://github.com/ExpediaGroup/insights-explorer/commit/4c4a1140ea20a65aabe0fddd6f160031af79ec74))
+* **deps:** bump chardet from 1.4.0 to 2.0.0 ([a63ecc4](https://github.com/ExpediaGroup/insights-explorer/commit/a63ecc4f34e853c357edb58d6be6b24319cbf73c))
+
 ### [3.25.12](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.11...v3.25.12) (2024-01-02)
 
 
