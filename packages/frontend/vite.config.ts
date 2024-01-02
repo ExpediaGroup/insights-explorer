@@ -35,15 +35,6 @@ export default defineConfig({
     // Avoid warnings from the oversized vendor.js
     chunkSizeWarningLimit: 3500
   },
-  // Fixes a known Vite issue
-  // https://github.com/vitejs/vite/discussions/5079
-  css: {
-    preprocessorOptions: {
-      scss: {
-        charset: false
-      }
-    }
-  },
   preview: {
     // Use same port for preview to facilitate OAuth callbacks
     port: 3000
