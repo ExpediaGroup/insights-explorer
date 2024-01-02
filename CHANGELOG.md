@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.12](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.11...v3.25.12) (2024-01-02)
+
+
+### Bug Fixes
+
+* **deps:** bump tough-cookie from 4.0.0 to 4.1.3 ([7b0ee6d](https://github.com/ExpediaGroup/insights-explorer/commit/7b0ee6d0a7f16b3ea9033626a5d46277f59eeb82))
+
 ### [3.25.11](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.10...v3.25.11) (2023-08-21)
 
 
