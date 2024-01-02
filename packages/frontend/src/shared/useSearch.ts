@@ -85,12 +85,45 @@ export interface UseSearchProps {
   paused?: boolean;
 }
 
-// https://github.com/typescript-eslint/typescript-eslint/issues/2446
-// type PaginationReturn = [{}, () => void];
+export type SearchResultState = {
+  data: {
+    insights: {
+      suggestedFilters?: AutocompleteResults;
+      results: SearchResult[];
+    };
+  };
+  error?: CombinedError | string;
+  fetching: boolean;
+  from: React.MutableRefObject<number>;
+  hasMore: boolean;
+  total: number;
+};
 
-export function useSearch({ query, sort, paused = false }: UseSearchProps): any {
+export type UseSearchReturnType = [SearchResultState, () => Promise<void>];
+
+/**
+ * Custom hook for performing a search.
+ *
+ * This hook is designed to be used with an infinite scroll component,
+ * so it returns both the search result state and a function to fetch more results.
+ * The search results include the aggregated results from all pages that have been
+ * loaded so far.
+ *
+ * Any changes to the query or sort options will reset the infinite scroll state
+ * back to the first page of results.
+ *
+ * If multiple requests are made before the first one finishes, only the latest
+ * request will be used.  Urql does not support cancelling requests, so this
+ * is the best we can do.
+ *
+ * @param {UseSearchProps} options - The search options.
+ * @param {string} options.query - The search query.
+ * @param {string} options.sort - The sort option.
+ * @param {boolean} [options.paused=false] - Whether the search is paused.
+ * @returns {UseSearchReturnType} - The search result state and a function to fetch more results.
+ */
+export function useSearch({ query, sort, paused = false }: UseSearchProps): UseSearchReturnType {
   const [fetching, setFetching] = useState(true);
-  const loadingNextPage = useRef(false);
 
   const [suggestedFilters, setSuggestedFilters] = useState<AutocompleteResults | undefined>();
   const [error, setError] = useState<CombinedError | string | undefined>();
@@ -99,7 +132,8 @@ export function useSearch({ query, sort, paused = false }: UseSearchProps): any 
   const size = 20; // Fixed value for now
   const from = useRef<number>(0);
   const [results, setResults] = useState<SearchResult[]>([]);
-  const pending = useRef(false);
+
+  const latestRequest = useRef<string | undefined>();
 
   const fetchMore = useCallback(async () => {
     if (paused) {
@@ -107,61 +141,57 @@ export function useSearch({ query, sort, paused = false }: UseSearchProps): any 
       return;
     }
 
-    if (!loadingNextPage.current) {
-      // console.log(`Loading next page (from = ${from.current})`);
-      loadingNextPage.current = true;
-
-      const { data: nextPage, error } = await urqlClient
-        .query(INSIGHTS_QUERY, {
-          search: {
-            query: query || '',
-            sort: sort && [sort],
-            paging: {
-              from: from.current,
-              size
-            }
-          }
-        })
-        .toPromise();
-
-      setError(error);
-
-      if (nextPage != null) {
-        if (from.current === 0) {
-          // Replace results with the first page of a new search
-          setResults(nextPage.insights.results);
-
-          // Only use total and suggested filters from the first page of results
-          total.current = nextPage.insights.pageInfo.total;
-          setSuggestedFilters(nextPage.insights.suggestedFilters);
-        } else {
-          setResults((existing) => [...existing, ...nextPage.insights.results]);
-        }
-
-        // console.log('Finished loading page ' + from.current);
-        from.current += size;
-      }
-
-      // Done!
-      loadingNextPage.current = false;
-      setFetching(false);
-
-      // If a request is pending, process it now
-      if (pending.current) {
-        pending.current = false;
-        fetchMore();
-      }
-    } else {
-      // If a fetchMore request came while we were loading, pending is set true
-      // This is here to trigger a subsequent page load to avoid cases where the
-      // front-end component already triggered fetchMore(), but it was already loading.
-      pending.current = true;
+    // Generate a unique ID for this request so we can ignore old responses
+    const requestId = `r||${query}||${sort}||${from.current}`;
+    if (latestRequest.current === requestId) {
+      // Ignore duplicate requests
+      // The infinite scroll component may trigger multiple requests for the same page
+      return;
     }
+
+    latestRequest.current = requestId;
+
+    const { data: nextPage, error } = await urqlClient
+      .query(INSIGHTS_QUERY, {
+        search: {
+          query: query || '',
+          sort: sort && [sort],
+          paging: {
+            from: from.current,
+            size
+          }
+        }
+      })
+      .toPromise();
+
+    if (latestRequest.current !== requestId) {
+      // Ignore this response, it's for an old request
+      return;
+    }
+
+    setError(error);
+
+    if (nextPage != null) {
+      if (from.current === 0) {
+        // Replace results with the first page of a new search
+        setResults(nextPage.insights.results);
+
+        // Only use total and suggested filters from the first page of results
+        total.current = nextPage.insights.pageInfo.total;
+        setSuggestedFilters(nextPage.insights.suggestedFilters);
+      } else {
+        setResults((existing) => [...existing, ...nextPage.insights.results]);
+      }
+
+      from.current += size;
+    }
+
+    // Done!
+    setFetching(false);
   }, [paused, query, sort]);
 
   useEffect(() => {
     // Reset the scroll state whenever query/sort changes
-    // console.log('Resetting infinite scroll');
     from.current = 0;
     setResults([]);
     setFetching(true);
