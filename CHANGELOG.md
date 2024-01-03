@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.16](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.15...v3.25.16) (2024-01-03)
+
+
+### Bug Fixes
+
+* **deps:** bump fs-extra and @types/fs-extra ([dc0d48f](https://github.com/ExpediaGroup/insights-explorer/commit/dc0d48f83cb59a68ebe8a636d9b51ed234a4fb93))
+* **deps:** bump react-dom and @types/react-dom ([057fda1](https://github.com/ExpediaGroup/insights-explorer/commit/057fda1871b359939e26236b7e82b51b59b2c293))
+
 ### [3.25.15](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.14...v3.25.15) (2024-01-03)
 
 
