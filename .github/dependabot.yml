@@ -22,7 +22,7 @@ updates:
     commit-message:
       prefix: fix(deps)
       prefix-development: chore(deps)
-    open-pull-requests-limit: 30
+    open-pull-requests-limit: 50
 
   # Maintain dependencies for docker
   - package-ecosystem: docker
