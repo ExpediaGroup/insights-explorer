@@ -167,7 +167,12 @@ export const DateRange = ({
                 <Text as="strong" fontSize="sm">
                   Absolute Dates
                 </Text>
-                <HStack spacing="0.5rem" align="flex-start" className={isLight ? 'light-theme' : 'dark-theme'}>
+                <HStack
+                  spacing="0.5rem"
+                  align="flex-start"
+                  justify="space-between"
+                  className={isLight ? 'light-theme' : 'dark-theme'}
+                >
                   <ReactDatePicker selected={startAsDate} onChange={(date) => onChangeStart(date)} inline />
                   <ReactDatePicker selected={endAsDate} onChange={(date) => onChangeEnd(date)} inline />
                 </HStack>
