@@ -95,7 +95,7 @@
     "@types/module-alias": "2.0.1",
     "@types/node": "18.15.11",
     "@types/parsimmon": "1.10.6",
-    "@types/supertest": "2.0.12",
+    "@types/supertest": "6.0.2",
     "@types/tmp": "0.2.3",
     "@types/turndown": "5.0.1",
     "@types/validator": "13.11.7",
