@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.18](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.17...v3.25.18) (2024-01-03)
+
+
+### Bug Fixes
+
+* **deps:** bump react-dropzone from 12.1.0 to 14.2.3 ([903b41d](https://github.com/ExpediaGroup/insights-explorer/commit/903b41d3e3cc557d21ecf61a34e326018415ce6c))
+
 ### [3.25.17](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.16...v3.25.17) (2024-01-03)
 
 
