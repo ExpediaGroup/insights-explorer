@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.19](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.18...v3.25.19) (2024-01-03)
+
+
+### Bug Fixes
+
+* **deps:** bump react-datepicker and @types/react-datepicker ([3258b79](https://github.com/ExpediaGroup/insights-explorer/commit/3258b79baf78042848e7977a033a1ad6656c149a))
+
 ### [3.25.18](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.17...v3.25.18) (2024-01-03)
 
 
