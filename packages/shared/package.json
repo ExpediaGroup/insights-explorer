@@ -21,7 +21,7 @@
   ],
   "dependencies": {
     "@aws-sdk/client-s3": "3.292.0",
-    "fs-extra": "11.1.1",
+    "fs-extra": "11.2.0",
     "lodash": "4.17.21",
     "parsimmon": "1.18.1",
     "pino": "8.8.0",
@@ -29,7 +29,7 @@
     "pino-pretty": "10.0.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "11.0.1",
+    "@types/fs-extra": "11.0.4",
     "@types/jest": "27.4.1",
     "@types/lodash": "4.14.202",
     "@types/node": "18.15.11",
