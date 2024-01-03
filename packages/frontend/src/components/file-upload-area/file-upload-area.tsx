@@ -16,15 +16,16 @@
 
 import type { BoxProps } from '@chakra-ui/react';
 import { Box, Button, Icon } from '@chakra-ui/react';
+import type { Accept } from 'react-dropzone';
 import { useDropzone } from 'react-dropzone';
 
 import { iconFactory } from '../../shared/icon-factory';
 
-export const DROPZONE_ACCEPT_ALL_FILES = '';
+export const DROPZONE_ACCEPT_ALL_FILES = {};
 
 interface Props {
   onDrop: any;
-  accept?: string;
+  accept?: Accept;
   element?: any;
   dragElement?: any;
 }
