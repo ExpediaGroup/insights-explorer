@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.14](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.13...v3.25.14) (2024-01-03)
+
+
+### Bug Fixes
+
+* Ignore old requests in useActivities hook ([7eb0a18](https://github.com/ExpediaGroup/insights-explorer/commit/7eb0a18492770c5dba4ef2cbe9cfeed8672e088f))
+* Ignore old requests in useSearch hook ([97ceec5](https://github.com/ExpediaGroup/insights-explorer/commit/97ceec5a6827262b7e0aa043f539772874b6561b))
+
 ### [3.25.13](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.12...v3.25.13) (2024-01-02)
 
 
