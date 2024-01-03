@@ -81,7 +81,7 @@
     "@types/luxon": "3.2.0",
     "@types/node-emoji": "1.8.2",
     "@types/papaparse": "5.3.14",
-    "@types/parsimmon": "1.10.6",
+    "@types/parsimmon": "1.10.9",
     "@types/react": "18.0.28",
     "@types/react-datepicker": "4.19.5",
     "@types/react-dom": "18.2.18",
