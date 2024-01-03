@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.15](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.14...v3.25.15) (2024-01-03)
+
+
+### Bug Fixes
+
+* **deps:** bump axios from 1.3.4 to 1.6.3 ([b105765](https://github.com/ExpediaGroup/insights-explorer/commit/b105765b0612923c4bc4e41112a7f4a4e51b9f5d))
+* **deps:** bump katex from 0.16.4 to 0.16.9 ([dbff1cf](https://github.com/ExpediaGroup/insights-explorer/commit/dbff1cf13fa0e47e6cac7a7e4b7e7a28c21b4519))
+* **deps:** bump titleize from 3.0.0 to 4.0.0 ([d12e409](https://github.com/ExpediaGroup/insights-explorer/commit/d12e4097d1d4bf41fe377673d562a1ca3fd69480))
+* **deps:** bump vega-lite from 5.6.1 to 5.16.3 ([9f99c82](https://github.com/ExpediaGroup/insights-explorer/commit/9f99c82f27bc7fdbce31d400b8066353c086f761))
+
 ### [3.25.14](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.13...v3.25.14) (2024-01-03)
 
 
