@@ -182,12 +182,55 @@ export interface UseActivitiesProps {
   paused?: boolean;
 }
 
-// https://github.com/typescript-eslint/typescript-eslint/issues/2446
-// type PaginationReturn = [{}, () => void];
+export type ActivityResultState = {
+  data: {
+    activityConnection?: ActivityConnection;
+    suggestedFilters?: AutocompleteResults;
+  };
+  error?: CombinedError | string;
+  fetching: boolean;
+  after?: string | null;
+  hasMore: boolean;
+  total: number;
+};
 
-export function useActivities({ query = '', first = 10, after = null, sort, paused = false }: UseActivitiesProps): any {
+export type UseActivitiesReturnType = [
+  ActivityResultState,
+  () => Promise<void>,
+  ({ activityId: string, liked: boolean }) => Promise<any>
+];
+
+/**
+ * Custom hook for performing a search for activities.
+ *
+ * This hook is designed to be used with an infinite scroll component,
+ * so it returns both the search result state and a function to fetch more results.
+ * The search results include the aggregated results from all pages that have been
+ * loaded so far.
+ *
+ * Any changes to the query or sort options will reset the infinite scroll state
+ * back to the first page of results.
+ *
+ * If multiple requests are made before the first one finishes, only the latest
+ * request will be used.  Urql does not support cancelling requests, so this
+ * is the best we can do.
+ *
+ * @param {UseActivitiesProps} options - The search options.
+ * @param {string} options.query - The search query.
+ * @param {number} options.first - The number of results to fetch per page.
+ * @param {string} options.after - The cursor to start fetching results from.
+ * @param {string} options.sort - The sort option.
+ * @param {boolean} [options.paused=false] - Whether the search is paused.
+ * @returns {UseActivitiesReturnType} - The search result state and a function to fetch more results.
+ */
+export function useActivities({
+  query = '',
+  first = 10,
+  after = null,
+  sort,
+  paused = false
+}: UseActivitiesProps): UseActivitiesReturnType {
   const [fetching, setFetching] = useState(true);
-  const loadingNextPage = useRef(false);
 
   const [error, setError] = useState<CombinedError | string | undefined>();
   const total = useRef(0);
@@ -196,7 +239,8 @@ export function useActivities({ query = '', first = 10, after = null, sort, paus
   const afterRef = useRef<string | null>(after);
   const hasMoreRef = useRef<boolean>(true);
   const [edges, setEdges] = useState<ActivityEdge[]>([]);
-  const pending = useRef(false);
+
+  const latestRequest = useRef<string | undefined>();
 
   const [, onLikeActivity] = useMutation(LIKE_ACTIVITY_MUTATION);
 
@@ -211,61 +255,60 @@ export function useActivities({ query = '', first = 10, after = null, sort, paus
       return;
     }
 
-    if (!loadingNextPage.current) {
-      //console.log(`Loading next page (after = ${afterRef.current})`);
-      loadingNextPage.current = true;
-
-      const { data, error } = await urqlClient
-        .query(ACTIVITIES_QUERY, {
-          search: query,
-          first,
-          after: afterRef.current,
-          sort: sort && [sort]
-        })
-        .toPromise();
-
-      setError(error);
-
-      const nextPage = data?.activities;
-
-      if (nextPage != null) {
-        if (afterRef.current === null) {
-          // Replace edges with the first page of a new search
-          setEdges(nextPage.edges);
-
-          // Only use total and suggested filters from the first page of results
-          total.current = nextPage.pageInfo.total;
-          setSuggestedFilters(nextPage.suggestedFilters);
-        } else {
-          setEdges((existing) => [...existing, ...nextPage.edges]);
-        }
-
-        //console.log('Finished loading page ', nextPage.pageInfo);
-        afterRef.current = nextPage.pageInfo.endCursor;
-
-        // If the endCursor is null, there are no results after the previous cursor
-        hasMoreRef.current = nextPage.pageInfo.endCursor !== null;
-      }
-
-      // Done!
-      loadingNextPage.current = false;
-      setFetching(false);
-
-      // If a request is pending, process it now
-      if (pending.current) {
-        pending.current = false;
-        fetchMore();
-      }
-    } else {
-      // If a fetchMore request came while we were loading, pending is set true
-      // This is here to trigger a subsequent page load to avoid cases where the
-      // front-end component already triggered fetchMore(), but it was already loading.
-      pending.current = true;
+    // Generate a unique ID for this request so we can ignore old responses
+    const requestId = `r||${query}||${sort}||${first}||${afterRef.current}`;
+    if (latestRequest.current === requestId) {
+      // Ignore duplicate requests
+      // The infinite scroll component may trigger multiple requests for the same page
+      return;
     }
+
+    latestRequest.current = requestId;
+
+    const { data, error } = await urqlClient
+      .query(ACTIVITIES_QUERY, {
+        search: query,
+        first,
+        after: afterRef.current,
+        sort: sort && [sort]
+      })
+      .toPromise();
+
+    if (latestRequest.current !== requestId) {
+      // Ignore this response, it's for an old request
+      return;
+    }
+
+    setError(error);
+
+    const nextPage = data?.activities;
+
+    if (nextPage != null) {
+      if (afterRef.current === null) {
+        // Replace edges with the first page of a new search
+        setEdges(nextPage.edges);
+
+        // Only use total and suggested filters from the first page of results
+        total.current = nextPage.pageInfo.total;
+        setSuggestedFilters(nextPage.suggestedFilters);
+      } else {
+        setEdges((existing) => [...existing, ...nextPage.edges]);
+      }
+
+      //console.log('Finished loading page ', nextPage.pageInfo);
+      afterRef.current = nextPage.pageInfo.endCursor;
+
+      // If the endCursor is null, there are no results after the previous cursor
+      hasMoreRef.current = nextPage.pageInfo.endCursor !== null;
+    }
+
+    // Done!
+
+    setFetching(false);
   }, [paused, query, sort, first]);
 
   useEffect(() => {
-    //console.log('Resetting infinite scroll');
+    // Reset the scroll state whenever query/sort changes
     afterRef.current = null;
     hasMoreRef.current = true;
     setEdges([]);
