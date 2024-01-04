@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@elastic/elasticsearch": "7.13.0",
-    "@slack/bolt": "3.12.1",
+    "@slack/bolt": "3.17.0",
     "dotenv-flow": "3.2.0",
     "express": "4.18.1",
     "module-alias": "2.2.2",
