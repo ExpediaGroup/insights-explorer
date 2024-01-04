@@ -33,7 +33,10 @@ const logger = getLogger('change-history.service');
 
 @Service()
 export class ChangeHistoryService {
-  constructor(private readonly userService: UserService, private readonly activityService: ActivityService) {
+  constructor(
+    private readonly userService: UserService,
+    private readonly activityService: ActivityService
+  ) {
     logger.trace('Constructing New Change History Service');
   }
 

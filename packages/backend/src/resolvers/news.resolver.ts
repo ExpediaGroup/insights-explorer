@@ -31,7 +31,10 @@ const logger = getLogger('news.resolver');
 @Service()
 @Resolver(() => News)
 export class NewsResolver {
-  constructor(private readonly newsService: NewsService, private readonly userService: UserService) {}
+  constructor(
+    private readonly newsService: NewsService,
+    private readonly userService: UserService
+  ) {}
 
   @Authorized<Permission>({ user: true })
   @Query(() => NewsConnection)

@@ -54,24 +54,22 @@ export const login = createAsyncThunk<User, string, { rejectValue: string }>(
       enableAuthorization(oidcAccessToken);
 
       const response = await urqlClient
-        .mutation(
-          gql`
-            mutation login {
-              login {
-                id
-                userName
-                email
-                displayName
-                locale
-                defaultTemplateId
-                avatarUrl
-                team
-                isAdmin
-                featureFlags
-              }
+        .mutation(gql`
+          mutation login {
+            login {
+              id
+              userName
+              email
+              displayName
+              locale
+              defaultTemplateId
+              avatarUrl
+              team
+              isAdmin
+              featureFlags
             }
-          `
-        )
+          }
+        `)
         .toPromise();
       return response.error ? thunkApi.rejectWithValue(response.error.message) : response.data.login;
     } catch (error: any) {

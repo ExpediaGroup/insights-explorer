@@ -24,7 +24,10 @@ export class KeyAttribute implements Attribute {
 }
 
 export class KeyValueAttribute implements Attribute {
-  constructor(public key: string, public value: string) {}
+  constructor(
+    public key: string,
+    public value: string
+  ) {}
 }
 
 const lang = Parsimmon.createLanguage({
