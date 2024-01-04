@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.20](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.19...v3.25.20) (2024-01-04)
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-core from 3.12.0 to 3.13.0 ([bc8e899](https://github.com/ExpediaGroup/insights-explorer/commit/bc8e899d8f69834de4bcd0bb812d2c9ad03e37ae))
+* **deps:** bump isomorphic-git from 1.24.4 to 1.25.2 ([e91003d](https://github.com/ExpediaGroup/insights-explorer/commit/e91003d11e67b020f89e4de3cb1f9c18717373cd))
+
 ### [3.25.19](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.18...v3.25.19) (2024-01-03)
 
 
