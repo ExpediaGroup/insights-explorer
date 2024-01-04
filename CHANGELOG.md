@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.22](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.21...v3.25.22) (2024-01-04)
+
+
+### Bug Fixes
+
+* **deps:** bump react-icons from 4.4.0 to 4.12.0 ([e195225](https://github.com/ExpediaGroup/insights-explorer/commit/e195225d58da09e3489a1bff7f4f7b1412c00cf4))
+* Replace deprecated icons ([eadf16e](https://github.com/ExpediaGroup/insights-explorer/commit/eadf16ea7c79aec09b338cfb8d198a044a74acd9))
+
 ### [3.25.21](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.20...v3.25.21) (2024-01-04)
 
 
