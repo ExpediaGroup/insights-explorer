@@ -27,15 +27,15 @@ import {
 } from 'react-icons/ai';
 import { BsImage } from 'react-icons/bs';
 import { DiDatabase } from 'react-icons/di';
+import { FaJava } from 'react-icons/fa';
 import { GiHouseKeys, GiZipper } from 'react-icons/gi';
-import { GoMarkGithub } from 'react-icons/go';
 import {
   SiApachegroovy,
   SiClojure,
+  SiGithub,
   SiGnubash,
   SiGo,
   SiHtml5,
-  SiJava,
   SiJavascript,
   SiJenkins,
   SiJson,
@@ -182,7 +182,7 @@ const icons: Record<string, FileIcon> = {
     color: COLORS.blue
   },
   'text/x-java-source': {
-    icon: SiJava,
+    icon: FaJava,
     color: COLORS.red
   },
   'text/x-python': {
@@ -224,7 +224,7 @@ const icons: Record<string, FileIcon> = {
     color: COLORS.yellow
   },
   '.gitignore': {
-    icon: GoMarkGithub,
+    icon: SiGithub,
     color: COLORS.ignore
   },
 

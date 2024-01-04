@@ -63,17 +63,14 @@ import {
   GoChevronRight,
   GoChevronUp,
   GoCircleSlash,
-  GoClippy,
   GoCommentDiscussion,
   GoGitCommit,
   GoLinkExternal,
   GoLocation,
-  GoMarkGithub,
   GoReply,
   GoRss,
   GoSearch,
   GoSync,
-  GoTrashcan,
   GoX
 } from 'react-icons/go';
 import {
@@ -89,8 +86,18 @@ import {
   GrTemplate,
   GrUndo
 } from 'react-icons/gr';
-import { MdAdd, MdFileDownload, MdOndemandVideo, MdPrint, MdSchedule, MdShare, MdUpdate } from 'react-icons/md';
+import {
+  MdAdd,
+  MdContentCopy,
+  MdFileDownload,
+  MdOndemandVideo,
+  MdPrint,
+  MdSchedule,
+  MdShare,
+  MdUpdate
+} from 'react-icons/md';
 import { RiVipCrownLine } from 'react-icons/ri';
+import { SiGithub } from 'react-icons/si';
 import {
   VscBriefcase,
   VscCalendar,
@@ -113,6 +120,7 @@ import {
   VscPreview,
   VscRocket,
   VscSettingsGear,
+  VscTrash,
   VscWarning
 } from 'react-icons/vsc';
 
@@ -134,7 +142,7 @@ const icons = {
   chevronUp: GoChevronUp,
   clone: GrClone,
   close: GoX,
-  clipboard: GoClippy,
+  clipboard: MdContentCopy,
   code: VscCode,
   comments: GoCommentDiscussion,
   commit: GoGitCommit,
@@ -149,7 +157,7 @@ const icons = {
   fileChange: FiFileText,
   filter: FaFilter,
   folderOpened: VscFolderOpened,
-  github: GoMarkGithub,
+  github: SiGithub,
   graphql: GrGraphQl,
   heart: FaRegHeart,
   heartFilled: FaHeart,
@@ -202,7 +210,7 @@ const icons = {
   team: FaUsers,
   template: GrTemplate,
   time: AiOutlineFieldTime,
-  trash: GoTrashcan,
+  trash: VscTrash,
   unlike: FaHeartBroken,
   video: MdOndemandVideo,
   views: GrOverview,
