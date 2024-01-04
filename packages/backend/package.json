@@ -96,7 +96,7 @@
     "@types/node": "18.15.11",
     "@types/parsimmon": "1.10.9",
     "@types/supertest": "6.0.2",
-    "@types/tmp": "0.2.3",
+    "@types/tmp": "0.2.6",
     "@types/turndown": "5.0.1",
     "@types/validator": "13.11.7",
     "@typescript-eslint/eslint-plugin": "5.30.6",
