@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.21](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.20...v3.25.21) (2024-01-04)
+
+
+### Bug Fixes
+
+* **deps:** bump apollo-server-express from 3.12.0 to 3.13.0 ([9852406](https://github.com/ExpediaGroup/insights-explorer/commit/9852406ba7758ee07f2da384403d81ed19137127))
+
 ### [3.25.20](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.19...v3.25.20) (2024-01-04)
 
 
