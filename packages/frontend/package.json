@@ -76,7 +76,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",
-    "@testing-library/user-event": "14.4.3",
+    "@testing-library/user-event": "14.5.2",
     "@types/jest": "27.4.1",
     "@types/luxon": "3.2.0",
     "@types/node-emoji": "1.8.2",
