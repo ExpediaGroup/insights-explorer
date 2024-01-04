@@ -29,7 +29,7 @@
     "express-async-errors": "3.1.1",
     "helmet": "5.1.0",
     "http-status-codes": "2.2.0",
-    "module-alias": "2.2.2",
+    "module-alias": "2.2.3",
     "reflect-metadata": "0.1.13",
     "tmp-promise": "3.0.3"
   },
@@ -38,7 +38,7 @@
     "@types/dotenv-flow": "3.2.0",
     "@types/express": "4.17.13",
     "@types/jest": "27.4.1",
-    "@types/module-alias": "2.0.1",
+    "@types/module-alias": "2.0.4",
     "@types/node": "18.15.11",
     "@types/tmp": "0.2.6",
     "@typescript-eslint/eslint-plugin": "5.30.6",
