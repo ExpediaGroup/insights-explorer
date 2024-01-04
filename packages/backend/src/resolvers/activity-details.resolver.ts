@@ -88,7 +88,10 @@ export class InsightActivityDetailsResolver {
 @Service()
 @Resolver(() => InsightCollaboratorActivityDetails)
 export class InsightCollaboratorActivityDetailsResolver {
-  constructor(private readonly insightService: InsightService, private readonly userService: UserService) {}
+  constructor(
+    private readonly insightService: InsightService,
+    private readonly userService: UserService
+  ) {}
 
   @FieldResolver(() => Insight, { nullable: true })
   async insight(@Root() activityDetails: IndexedCollaboratorActivityDetails): Promise<Insight | undefined> {

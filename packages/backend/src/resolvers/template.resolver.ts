@@ -30,7 +30,10 @@ const logger = getLogger('template.resolver');
 @Service()
 @Resolver()
 export class TemplateResolver {
-  constructor(private readonly insightService: InsightService, private readonly templateService: TemplateService) {}
+  constructor(
+    private readonly insightService: InsightService,
+    private readonly templateService: TemplateService
+  ) {}
 
   @Authorized<Permission>({ user: true })
   @Query(() => [Insight])
