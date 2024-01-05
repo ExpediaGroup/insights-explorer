@@ -50,7 +50,7 @@
     "graphql-type-json": "0.3.2",
     "graphql-upload": "13.0.0",
     "helmet": "5.1.0",
-    "http-status-codes": "2.2.0",
+    "http-status-codes": "2.3.0",
     "isomorphic-git": "1.25.2",
     "js-yaml": "4.1.0",
     "knex": "2.4.2",
