@@ -18,7 +18,7 @@
     "@urql/exchange-multipart-fetch": "0.1.14",
     "@urql/exchange-retry": "0.3.3",
     "ace-builds": "1.32.3",
-    "chart.xkcd": "1.1.13",
+    "chart.xkcd": "1.1.15",
     "chart.xkcd-react": "0.0.6",
     "framer-motion": "10.11.2",
     "graphql": "15.8.0",
