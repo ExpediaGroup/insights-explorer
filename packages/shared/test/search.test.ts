@@ -15,6 +15,9 @@
  */
 
 /* eslint-disable no-console */
+
+import { describe, expect, test } from 'vitest';
+
 import {
   parseSearchQuery,
   parseToElasticsearch,

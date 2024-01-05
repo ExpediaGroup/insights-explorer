@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { describe, expect, test } from 'vitest';
 
 import { generateKey, encrypt, decrypt } from '../../src/shared/crypto';
 
@@ -20,7 +21,6 @@ describe('crypto', () => {
   const key = generateKey();
 
   describe('encrypt/decrypt', () => {
-    jest.setTimeout(200);
     test('Small value', () => {
       const secretValue = 'nuclear_codes';
       const buffer: Buffer = encrypt(secretValue, key);

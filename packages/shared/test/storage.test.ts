@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
+import { describe, expect, test } from 'vitest';
+
 import { Storage } from '../src/storage';
 
 describe('storage', () => {
   describe('parseUri', () => {
-    it('should parse an S3 URI', () => {
+    test('parse an S3 URI', () => {
       const uri = 's3://bucket/path';
       const parts = Storage.parseUri(uri);
       expect(parts).toMatchObject({

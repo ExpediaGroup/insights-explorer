@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { describe, expect, test } from 'vitest';
+
 import { parseAttributes } from './generic-attrs';
 
 describe('generic-attrs', () => {

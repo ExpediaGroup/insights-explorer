@@ -15,25 +15,26 @@
  */
 
 import { DateTime } from 'luxon';
+import { describe, expect, test } from 'vitest';
 
 import { formatDateIntl } from './date-utils';
 
 describe('date-utils', () => {
   describe('formatDateIntl', () => {
     const dateString = DateTime.local(2020, 9, 30).toISO();
-    it('should format with current locale', () => {
+    test('format with current locale', () => {
       const actual = formatDateIntl(dateString, DateTime.DATE_MED);
       expect(actual).toBe('Sep 30, 2020');
     });
-    it('should format with fr locale', () => {
+    test('format with fr locale', () => {
       const actual = formatDateIntl(dateString, DateTime.DATE_MED, 'fr');
       expect(actual).toBe('30 sept. 2020');
     });
-    it('should format with current locale and custom format', () => {
+    test('format with current locale and custom format', () => {
       const actual = formatDateIntl(dateString, 'MMM yyyy');
       expect(actual).toBe('Sep 2020');
     });
-    it('should format with fr locale and custom format', () => {
+    test('format with fr locale and custom format', () => {
       const actual = formatDateIntl(dateString, 'MMM yyyy', 'fr');
       expect(actual).toBe('sept. 2020');
     });

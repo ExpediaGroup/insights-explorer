@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
+import { describe, expect, test } from 'vitest';
+
 import { sort } from '../src/dataloader-util';
 
 describe('dataloader-util', () => {
   describe('sort', () => {
-    it('should sort the data based on id field by default using number keys', () => {
+    test('sort the data based on id field by default using number keys', () => {
       const keys = [1, 2, 3];
       const data = [
         { id: 3, value: 'three' },
@@ -36,7 +38,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it('should be able to handle keys which are strings', () => {
+    test('be able to handle keys which are strings', () => {
       const keys = ['1', '2', '3'];
       const data = [
         { id: '3', value: 'three' },
@@ -54,7 +56,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it('should be able to handle repeated keys', () => {
+    test('be able to handle repeated keys', () => {
       const keys = [1, 1, 2, 3];
       const data = [
         { id: 3, value: 'three' },
@@ -73,7 +75,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it('should sort the data based on the the provided field', () => {
+    test('sort the data based on the the provided field', () => {
       const keys = [1, 2, 3];
       const data = [
         { other: 3, value: 'three' },
@@ -91,7 +93,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it('should sort and match based on object keys', () => {
+    test('sort and match based on object keys', () => {
       const keys = [
         { userId: 1, messageId: 3 },
         { userId: 2, messageId: 4 },
@@ -121,7 +123,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it('should skip any null objects', () => {
+    test('skip any null objects', () => {
       const keys = [1, 2, 3];
       const data = [{ id: 1, value: 'one' }, null, { id: 3, value: 'three' }];
       const sortedData = [{ id: 1, value: 'one' }, null, { id: 3, value: 'three' }];
@@ -131,7 +133,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it("should return null for any keys which don't have matching data 2", () => {
+    test("return null for any keys which don't have matching data 2", () => {
       const keys = [1, 2, 3];
       const data = [
         { id: 3, value: 'three' },
@@ -144,7 +146,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it('should return null for all if data is empty', () => {
+    test('return null for all if data is empty', () => {
       const keys = [1, 2, 3];
       const data: any[] = [];
       const sortedData = [null, null, null];
@@ -154,7 +156,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it('should return empty array if keys is empty', () => {
+    test('return empty array if keys is empty', () => {
       const keys: any[] = [];
       const data = [{ id: 1 }];
       const sortedData: any[] = [];
@@ -164,7 +166,7 @@ describe('dataloader-util', () => {
       expect(sortedData).toMatchObject(result);
     });
 
-    it('should throw an error if multiple results match a single key', () => {
+    test('throw an error if multiple results match a single key', () => {
       const keys = [1, 2, 3];
       const data = [
         { id: 1, value: 'three' },

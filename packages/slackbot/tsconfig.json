@@ -4,8 +4,7 @@
     "outDir": "./dist",
     "rootDir": ".",
     "types": [
-      "node",
-      "@types/jest"
+      "node"
     ]
   },
   "include": [

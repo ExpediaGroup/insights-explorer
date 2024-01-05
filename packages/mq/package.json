@@ -10,8 +10,9 @@
     "build:tsc": "tsc --build --incremental",
     "build:tsc:watch": "tsc --build -w",
     "-------": "-----------------------------------",
-    "test": "jest --coverage --verbose --detectOpenHandles --passWithNoTests",
-    "test:watch": "npm run test -- --watch",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch",
     "------": "------------------------------------",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"

@@ -16,6 +16,8 @@
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+import { describe, expect, test } from 'vitest';
+
 import type { InsightFile, InsightFileAction, InsightFolder } from '../models/file-tree';
 
 import { convertFilesIntoTree, InsightFileTree, isFile, isFolder } from './file-tree';
@@ -40,7 +42,7 @@ describe('file-tree', () => {
   ];
 
   describe('isFolder/isFile', () => {
-    it('should detect a folder', () => {
+    test('detect a folder', () => {
       const item = {
         id: 'a',
         name: 'a',
@@ -51,7 +53,7 @@ describe('file-tree', () => {
       expect(isFile(item)).toBeFalsy();
       expect(isFolder(item)).toBeTruthy();
     });
-    it('should detect a file', () => {
+    test('detect a file', () => {
       const item = {
         id: 'a',
         name: 'a.pdf',
@@ -64,7 +66,7 @@ describe('file-tree', () => {
   });
 
   describe('convertFilesIntoTree', () => {
-    it('should convert a few flat files', () => {
+    test('convert a few flat files', () => {
       const files = [
         {
           id: 'a',
@@ -85,7 +87,7 @@ describe('file-tree', () => {
         { id: 'b', name: 'b.pdf', path: 'b.pdf' }
       ]);
     });
-    it('should convert a few flat files and one subfolder', () => {
+    test('convert a few flat files and one subfolder', () => {
       const tree = convertFilesIntoTree(filesA());
 
       expect(tree).toMatchObject([
@@ -104,7 +106,7 @@ describe('file-tree', () => {
         }
       ]);
     });
-    it('should convert files in separate subfolders', () => {
+    test('convert files in separate subfolders', () => {
       const files = [
         {
           id: 'a',
@@ -145,7 +147,7 @@ describe('file-tree', () => {
         }
       ]);
     });
-    it('should convert multiple files in the multiple subfolders', () => {
+    test('convert multiple files in the multiple subfolders', () => {
       const files = [
         {
           id: 'a',
@@ -206,7 +208,7 @@ describe('file-tree', () => {
         }
       ]);
     });
-    it('should convert deeply nested subfolders', () => {
+    test('convert deeply nested subfolders', () => {
       const files = [
         {
           id: 'a',
@@ -279,7 +281,7 @@ describe('file-tree', () => {
 
   describe('InsightFileTree', () => {
     describe('constructor', () => {
-      it('should construct itself', () => {
+      test('construct itself', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         expect(tree.getFiles()).toMatchObject([
@@ -300,7 +302,7 @@ describe('file-tree', () => {
       });
     });
     describe('addItem', () => {
-      it('should add a file', () => {
+      test('add a file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const newItem = {
@@ -313,7 +315,7 @@ describe('file-tree', () => {
 
         expect(tree.getFiles().find((f) => f.id === 'z')).toEqual(newItem);
       });
-      it('should add a file in a subfolder', () => {
+      test('add a file in a subfolder', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const newItem = {
@@ -328,7 +330,7 @@ describe('file-tree', () => {
           newItem
         );
       });
-      it('should add a deeply nested file', () => {
+      test('add a deeply nested file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const newItem = {
@@ -350,7 +352,7 @@ describe('file-tree', () => {
         expect(z).not.toBeUndefined();
         expect(isFile(z!)).toBeTruthy();
       });
-      it('should add a nested tree', () => {
+      test('add a nested tree', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         tree.addItem({
@@ -382,7 +384,7 @@ describe('file-tree', () => {
         expect(z).not.toBeUndefined();
         expect(isFile(z!)).toBeTruthy();
       });
-      it('should replace an existing file', () => {
+      test('replace an existing file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const replacementItem = {
@@ -398,7 +400,7 @@ describe('file-tree', () => {
       });
     });
     describe('updateItemById', () => {
-      it('should update a file', () => {
+      test('update a file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const updatedItem = {
@@ -412,7 +414,7 @@ describe('file-tree', () => {
 
         expect(tree.getFileById('a')?.path).toEqual(updatedItem.path);
       });
-      it('should update a file in a subfolder', () => {
+      test('update a file in a subfolder', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const updatedItem = {
@@ -433,14 +435,14 @@ describe('file-tree', () => {
           ).contents
         ).toEqual(updatedItem.contents);
       });
-      it('should rename a file', () => {
+      test('rename a file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         tree.updateItemById({ id: 'a', name: 'a-2.pdf' });
 
         expect(tree.getFileById('a')).toEqual({ id: 'a', name: 'a-2.pdf', originalPath: 'a.pdf', path: 'a-2.pdf' });
       });
-      it('should rename a nested file', () => {
+      test('rename a nested file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         tree.updateItemById({ id: 'c', name: 'c-2.pdf' });
@@ -452,7 +454,7 @@ describe('file-tree', () => {
           path: 'subfolder/c-2.pdf'
         });
       });
-      it('should rename a folder', () => {
+      test('rename a folder', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const subfolder = tree.getFileByPath('subfolder');
@@ -467,7 +469,7 @@ describe('file-tree', () => {
       });
     });
     describe('flatten', () => {
-      it('should flatten a tree', () => {
+      test('flatten a tree', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const flat = tree.flatten();
@@ -479,7 +481,7 @@ describe('file-tree', () => {
           { id: 'c', name: 'c.pdf', path: 'subfolder/c.pdf', originalPath: 'subfolder/c.pdf' }
         ]);
       });
-      it('should flatten a tree with updated paths', () => {
+      test('flatten a tree with updated paths', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const updatedItem = {
@@ -497,7 +499,7 @@ describe('file-tree', () => {
           { id: 'b', name: 'b.pdf', path: 'b.pdf', originalPath: 'b.pdf' }
         ]);
       });
-      it('should flatten a tree without empty-name files', () => {
+      test('flatten a tree without empty-name files', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const newItem = {
@@ -518,14 +520,14 @@ describe('file-tree', () => {
       });
     });
     describe('getFileByPath', () => {
-      it('should get a top-level file', () => {
+      test('get a top-level file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const file = tree.getFileByPath('a.pdf');
         expect(file).not.toBeUndefined();
         expect(file?.name).toBe('a.pdf');
       });
-      it('should get a nested file', () => {
+      test('get a nested file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const file = tree.getFileByPath('subfolder/c.pdf');
@@ -534,14 +536,14 @@ describe('file-tree', () => {
       });
     });
     describe('getFileById', () => {
-      it('should get a top-level file', () => {
+      test('get a top-level file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const file = tree.getFileById('a');
         expect(file).not.toBeUndefined();
         expect(file?.name).toBe('a.pdf');
       });
-      it('should get a nested file', () => {
+      test('get a nested file', () => {
         const tree = InsightFileTree.fromInsightFiles(filesA());
 
         const file = tree.getFileById('c');

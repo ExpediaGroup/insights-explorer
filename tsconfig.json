@@ -34,8 +34,7 @@
     "strict": true,
     "target": "ES2020",
     "types": [
-      "node",
-      "@types/jest"
+      "node"
     ],
     "typeRoots": [
       "node_modules/@types",
@@ -59,10 +58,5 @@
     }, {
       "path": "./packages/slackbot"
     }
-  ],
-  "typeAcquisition": {
-      "include": [
-          "jest"
-      ]
-  }
+  ]
 }

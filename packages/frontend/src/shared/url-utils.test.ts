@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { describe, expect, test } from 'vitest';
+
 import { isHashUrl } from './url-utils';
 
 describe('url-utils', () => {

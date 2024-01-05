@@ -7,7 +7,8 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Validate package.json
         uses: ExpediaGroup/package-json-validator@v1
@@ -23,8 +24,15 @@ jobs:
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
-      - name: Validate Copyright Headers
-        run: npm ci && npm run verify:headers
+      - name: Install Dependencies
+        run: npm ci
 
-      - name: Run ESLint
-        run: npm ci && npm run build:backend && npm run generate && npm run lint
+      - name: Validate Copyright Headers
+        run: npm run verify:headers
+
+      - name: Build and Lint
+        run: |
+          npm run generate
+          npm run build:backend
+          npm run lint
+

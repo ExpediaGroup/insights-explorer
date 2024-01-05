@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { describe, expect, test } from 'vitest';
 
 import { slugifyInsightName, incrementInsightName } from '../../src/shared/slugify';
 
@@ -60,7 +61,7 @@ describe('slugify', () => {
     });
   });
 
-  describe.only('incrementInsightName', () => {
+  describe('incrementInsightName', () => {
     test('first increment', () => {
       const incrementalName = incrementInsightName('test');
       expect(incrementalName).toBe('test_1');

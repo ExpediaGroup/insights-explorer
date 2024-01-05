@@ -26,7 +26,6 @@
     "@graphql-codegen/typescript": "2.5.1",
     "@graphql-codegen/typescript-operations": "2.4.2",
     "@types/fs-extra": "11.0.4",
-    "@types/jest": "27.4.1",
     "@types/lodash": "4.14.202",
     "@types/node": "18.15.11",
     "@types/npm-license-crawler": "0.2.3",
@@ -41,15 +40,14 @@
     "fs-extra": "11.2.0",
     "globby": "11.0.4",
     "graphql": "15.8.0",
-    "jest": "27.5.1",
     "lodash": "4.17.21",
     "npm-license-crawler": "0.2.1",
     "npm-run-all": "4.1.5",
     "prettier": "3.1.1",
     "reflect-metadata": "0.1.13",
-    "ts-jest": "27.1.4",
     "ts-node": "10.9.2",
-    "typescript": "4.6.4"
+    "typescript": "4.6.4",
+    "vitest": "1.1.3"
   },
   "scripts": {
     "license:thirdparty": "ts-node scripts/third-party.ts",
@@ -79,7 +77,9 @@
     "build:backend": "npm run build --workspace=@iex/backend",
     "build:frontend:react": "npm run build:react --workspace=@iex/frontend",
     "-----": "------------------------------------",
-    "test": "npm run test --workspaces"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch"
   },
   "engines": {
     "node": ">=16.0.0",

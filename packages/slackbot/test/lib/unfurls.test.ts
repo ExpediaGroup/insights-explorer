@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
+import { describe, expect, test } from 'vitest';
+
 import { matchInsightLink } from '../../src/lib/unfurls';
 
 describe('unfurls', () => {
   describe('matchInsightLink', () => {
-    it('should match an Insight URL', () => {
+    test('match an Insight URL', () => {
       const match = matchInsightLink('https://iex/insight/namespace/name');
       expect(match).toMatchObject({
         namespace: 'namespace',
         name: 'name'
       });
     });
-    it('should match an Insight sub-URL', () => {
+    test('match an Insight sub-URL', () => {
       const match = matchInsightLink('https://iex/insight/namespace/name/files/foo.png');
       expect(match).toMatchObject({
         namespace: 'namespace',
         name: 'name'
       });
     });
-    it('should not match other urls', () => {
+    test('not match other urls', () => {
       const match = matchInsightLink('https://iex');
       expect(match).toBeUndefined;
     });

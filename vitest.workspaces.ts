@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2023 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { defineWorkspace } from 'vitest/config';
 
-import baseJest from '../../jest.config';
-
-export default {
-  ...baseJest,
-  moduleNameMapper: {
-    '^@iex/models/(.*)$': '<rootDir>/../models/src/$1',
-    '^@iex/shared/(.*)$': '<rootDir>/../shared/src/$1'
-  },
-  setupFiles: ['<rootDir>/src/environment.ts', '<rootDir>/../../test/jest-setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.test.json'
-    }
-  }
-};
+export default defineWorkspace(['packages/*']);

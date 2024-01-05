@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { describe, expect, test } from 'vitest';
+
 import { filterContentByLines, parseLineFilter } from './lines';
 
 describe('lines', () => {

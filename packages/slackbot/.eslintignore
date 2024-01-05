@@ -1,5 +1,4 @@
 node_modules
 dist
 coverage
-jest.config.ts
 **/generated/graphql.ts

@@ -76,7 +76,7 @@ export abstract class BaseSync {
     //logger.trace(JSON.stringify(insight, null, 2));
 
     try {
-      const result = await defaultElasticsearchClient.index({
+      await defaultElasticsearchClient.index({
         index,
         id: insight.insightId!.toString(),
         body: insight,
