@@ -6,7 +6,7 @@
   "dependencies": {
     "@chakra-ui/react": "2.5.2",
     "@chakra-ui/theme": "2.2.4",
-    "@chakra-ui/theme-tools": "2.0.16",
+    "@chakra-ui/theme-tools": "2.1.2",
     "@emotion/react": "11.11.3",
     "@emotion/styled": "11.10.6",
     "@matejmazur/react-katex": "3.1.3",
