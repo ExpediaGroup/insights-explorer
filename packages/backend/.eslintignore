@@ -1,5 +1,0 @@
-coverage
-dist
-migrations
-node_modules
-**/generated/graphql.ts

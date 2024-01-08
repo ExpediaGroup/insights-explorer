@@ -47,4 +47,5 @@ async function verifyFileHeaders() {
   console.info('All files contain a valid copyright header!');
 }
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
 verifyFileHeaders();

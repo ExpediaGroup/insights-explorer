@@ -1,4 +1,0 @@
-# Please note this file is not inherited by sub-packages!
-
-scripts/*.js
-node_modules

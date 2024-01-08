@@ -1,11 +1,18 @@
 root: true
 env:
-  es6: true
+  node: true
+  es2022: true
+ignorePatterns:
+  - '**/coverage/'
+  - '**/dist/'
+  - '**/generated/graphql.ts'
+  - '**/node_modules/'
 parser: '@typescript-eslint/parser'
 parserOptions:
-  ecmaVersion: 2020
+  ecmaVersion: 2022
+  project: './tsconfig.eslint.json' #['./packages/*/tsconfig.json']
   sourceType: module
-  warnOnUnsupportedTypeScriptVersion: false
+  warnOnUnsupportedTypeScriptVersion: false,
 plugins:
   - '@typescript-eslint'
   - unicorn
@@ -16,6 +23,7 @@ extends:
   - plugin:@typescript-eslint/recommended
   - plugin:prettier/recommended
   - plugin:unicorn/recommended
+overrides: [{ files: ['*.js'], extends: ['plugin:@typescript-eslint/disable-type-checked'] }]
 settings:
   import/resolver:
     typescript:
@@ -27,8 +35,7 @@ rules:
   no-console: ['error']
   '@typescript-eslint/consistent-type-imports':
     - error
-    -
-      prefer: type-imports
+    - prefer: type-imports
       disallowTypeAnnotations: false
   '@typescript-eslint/no-explicit-any': off
   '@typescript-eslint/no-non-null-assertion': off
@@ -48,8 +55,7 @@ rules:
       newlines-between: always
   unicorn/consistent-function-scoping:
     - error
-    -
-      checkArrowFunctions: false
+    - checkArrowFunctions: false
   unicorn/no-array-for-each: off
   unicorn/no-array-reduce: off
   unicorn/no-null: off
@@ -60,8 +66,7 @@ rules:
   unicorn/prefer-object-from-entries: off
   unicorn/prevent-abbreviations:
     - off
-    -
-      checkFilenames: false
+    - checkFilenames: false
       allowList:
         req: true
         res: true
