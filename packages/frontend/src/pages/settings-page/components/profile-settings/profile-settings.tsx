@@ -76,6 +76,7 @@ const AUTOCOMPLETE_QUERY = gql`
 const AVATAR_UPLOAD_MUTATION = gql`
   mutation AvatarUpload($size: Float!, $file: Upload!) {
     uploadUserAvatar(size: $size, file: $file) {
+      avatar
       avatarUrl
     }
   }
