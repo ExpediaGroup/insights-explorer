@@ -28,28 +28,39 @@ import Parsimmon, { optWhitespace } from 'parsimmon';
  */
 function convertField(key: string): string {
   switch (key) {
-    case 'tag':
+    case 'tag': {
       return 'tags.keyword';
-    case 'author':
+    }
+    case 'author': {
       return 'contributors.userName.keyword';
-    case 'user':
+    }
+    case 'user': {
       return 'user.userName.keyword';
-    case 'targetUser':
+    }
+    case 'targetUser': {
       return 'details.userName.keyword';
-    case 'team':
+    }
+    case 'team': {
       return 'metadata.team.keyword';
-    case 'createdDate':
+    }
+    case 'createdDate': {
       return 'createdAt';
-    case 'updatedDate':
+    }
+    case 'updatedDate': {
       return 'updatedAt';
-    case 'publishedDate':
+    }
+    case 'publishedDate': {
       return 'metadata.publishedDate';
-    case 'itemType':
+    }
+    case 'itemType': {
       return 'itemType';
-    case 'insight':
+    }
+    case 'insight': {
       return 'details.insightName.keyword';
-    default:
+    }
+    default: {
       return key;
+    }
   }
 }
 
@@ -60,16 +71,21 @@ function convertField(key: string): string {
  */
 function convertOperation(operation: string): string {
   switch (operation) {
-    case '>':
+    case '>': {
       return 'gt';
-    case '>=':
+    }
+    case '>=': {
       return 'gte';
-    case '<':
+    }
+    case '<': {
       return 'lt';
-    case '<=':
+    }
+    case '<=': {
       return 'lte';
-    default:
+    }
+    default: {
       return operation;
+    }
   }
 }
 
@@ -162,12 +178,15 @@ export class SearchTerm implements SearchClause {
 
   toString(): string {
     switch (this.key) {
-      case 'author':
+      case 'author': {
         return `@${this.value}`;
-      case 'tag':
+      }
+      case 'tag': {
         return `#${this.value}`;
-      default:
+      }
+      default: {
         return this.value.includes(' ') ? `${this.key}:"${this.value}"` : `${this.key}:${this.value}`;
+      }
     }
   }
 }

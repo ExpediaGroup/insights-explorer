@@ -177,11 +177,8 @@ export const ActivityFilterSidebar = ({ suggestedFilters, ...boxProps }: Props &
     });
 
     if (existingIndex > -1) {
-      if (values.length === 1) {
-        searchClauses[existingIndex] = new SearchTerm(key, values[0]);
-      } else {
-        searchClauses[existingIndex] = new SearchMultiTerm(key, values);
-      }
+      searchClauses[existingIndex] =
+        values.length === 1 ? new SearchTerm(key, values[0]) : new SearchMultiTerm(key, values);
 
       dispatch(activitySlice.actions.setQuery(toSearchQuery(searchClauses)));
     } else {

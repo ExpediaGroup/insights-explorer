@@ -92,14 +92,18 @@ const NEWS_LIKED_BY_QUERY = gql`
 
 const selectQuery = (type: LikedByType): TypedDocumentNode => {
   switch (type) {
-    case 'insight':
+    case 'insight': {
       return INSIGHT_LIKED_BY_QUERY;
-    case 'comment':
+    }
+    case 'comment': {
       return COMMENT_LIKED_BY_QUERY;
-    case 'activity':
+    }
+    case 'activity': {
       return ACTIVITY_LIKED_BY_QUERY;
-    case 'news':
+    }
+    case 'news': {
       return NEWS_LIKED_BY_QUERY;
+    }
   }
 };
 

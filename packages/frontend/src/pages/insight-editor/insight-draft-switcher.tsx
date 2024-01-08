@@ -182,7 +182,7 @@ export const InsightDraftSwitcher = ({ insight, onRefresh }) => {
             {!hasDraftKey && (
               <Text>
                 <strong>Info:</strong> You have {pendingDrafts.length} unpublished draft
-                {pendingDrafts.length > 1 ? 's' : ''} for {insight !== null ? 'this Insight' : 'a new Insight'}; do you
+                {pendingDrafts.length > 1 ? 's' : ''} for {insight === null ? 'a new Insight' : 'this Insight'}; do you
                 want to resume editing an existing draft or create a new draft?
               </Text>
             )}

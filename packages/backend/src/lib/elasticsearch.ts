@@ -262,18 +262,24 @@ export async function getInsightByFullName(
  */
 function getSortField(field: string | undefined): string {
   switch (field) {
-    case undefined:
+    case undefined: {
       return defaultSort.field!;
-    case 'relevance':
+    }
+    case 'relevance': {
       return '_score';
-    case 'name':
+    }
+    case 'name': {
       return 'name.keyword';
-    case 'fullName':
+    }
+    case 'fullName': {
       return 'fullName.keyword';
-    case 'publishedDate':
+    }
+    case 'publishedDate': {
       return 'metadata.publishedDate';
-    default:
+    }
+    default: {
       return field;
+    }
   }
 }
 
@@ -544,7 +550,7 @@ export async function getInsightsByContributor(
       size: insights.length,
       total: elasticResponse.body.hits.total.value,
       startCursor: edges.length > 0 ? edges[0].cursor : undefined,
-      endCursor: edges.length > 0 ? edges[edges.length - 1].cursor : undefined,
+      endCursor: edges.length > 0 ? edges.at(-1)?.cursor : undefined,
       // Unable to determine this
       hasNextPage: true,
       // Backwards cursor isn't supported

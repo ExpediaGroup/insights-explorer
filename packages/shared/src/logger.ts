@@ -35,9 +35,10 @@ export const initializeLogger = (): Logger => {
   };
 
   switch (process.env.LOG_FORMAT) {
-    case 'json':
+    case 'json': {
       // Default
       break;
+    }
 
     case 'pretty':
     case 'default': {

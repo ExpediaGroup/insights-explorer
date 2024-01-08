@@ -31,20 +31,27 @@ interface Props {
 
 const ChartPicker = ({ type, config }) => {
   switch (type.toLowerCase().trim()) {
-    case 'bar':
+    case 'bar': {
       return <Bar config={config} />;
-    case 'line':
+    }
+    case 'line': {
       return <Line config={config} />;
-    case 'pie':
+    }
+    case 'pie': {
       return <Pie config={config} />;
-    case 'radar':
+    }
+    case 'radar': {
       return <Radar config={config} />;
-    case 'stackedbar':
+    }
+    case 'stackedbar': {
       return <StackedBar config={config} />;
-    case 'xy':
+    }
+    case 'xy': {
       return <XY config={config} />;
-    default:
+    }
+    default: {
       return null;
+    }
   }
 };
 

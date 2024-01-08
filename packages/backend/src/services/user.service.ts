@@ -187,15 +187,18 @@ export class UserService {
     };
 
     switch (updatedUser.defaultTemplateId) {
-      case '':
+      case '': {
         // Set the defaultTemplate back to NULL if empty
         userPatch.defaultTemplate = defaultKnex.raw('DEFAULT');
         break;
-      case undefined:
+      }
+      case undefined: {
         break;
-      default:
+      }
+      default: {
         // Convert from global ID to database ID
         userPatch.defaultTemplate = fromGlobalId(updatedUser.defaultTemplateId)[1];
+      }
     }
 
     const updated = await User.query().patchAndFetchById(user.userId, userPatch);

@@ -139,7 +139,7 @@ export const InsightFileEditor = ({
   const mimeTypeDef = getMimeTypeDefinition(mime);
 
   switch (mimeTypeDef?.editor ?? MIME_EDITOR.Code) {
-    case MIME_EDITOR.Markdown:
+    case MIME_EDITOR.Markdown: {
       return (
         <FetchAndRender
           url={fileUrl}
@@ -160,8 +160,9 @@ export const InsightFileEditor = ({
         />
       );
       break;
+    }
 
-    case MIME_EDITOR.Html:
+    case MIME_EDITOR.Html: {
       return (
         <FetchAndRender
           url={fileUrl}
@@ -172,8 +173,9 @@ export const InsightFileEditor = ({
         />
       );
       break;
+    }
 
-    case MIME_EDITOR.Code:
+    case MIME_EDITOR.Code: {
       return (
         <FetchAndRender
           url={fileUrl}
@@ -190,9 +192,10 @@ export const InsightFileEditor = ({
       );
 
       break;
+    }
 
     case MIME_EDITOR.None:
-    default:
+    default: {
       // Can't edit, so just render the file
       return (
         <FileViewer
@@ -207,5 +210,6 @@ export const InsightFileEditor = ({
           {...flexProps}
         />
       );
+    }
   }
 };

@@ -144,8 +144,8 @@ export const ActivitySearchBar = (): ReactElement => {
 
       <Tooltip placement="left" label="Show filter options" aria-label="Show filter options" zIndex="10">
         <IconButton
-          variant={!isFiltered ? 'ghost' : 'solid'}
-          bgColor={!isFiltered ? 'clear' : 'frost.200'}
+          variant={isFiltered ? 'solid' : 'ghost'}
+          bgColor={isFiltered ? 'frost.200' : 'clear'}
           aria-label="Expand filter options"
           icon={iconFactoryAs('filter')}
           onClick={toggleShowFilters}

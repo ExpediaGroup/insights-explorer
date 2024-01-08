@@ -74,18 +74,20 @@ export const searchSlice = createSlice({
 
       // Apply a specific direction for certain fields
       switch (action.payload) {
-        case 'name':
+        case 'name': {
           state.sort.direction = 'asc';
           break;
+        }
         case 'relevance':
         case 'createdAt':
         case 'updatedAt':
         case 'publishedDate':
         case 'commentCount':
         case 'likeCount':
-        case 'viewCount':
+        case 'viewCount': {
           state.sort.direction = 'desc';
           break;
+        }
       }
     },
     setSortDirection(state, action: PayloadAction<'asc' | 'desc'>) {

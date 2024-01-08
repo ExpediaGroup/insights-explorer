@@ -75,7 +75,7 @@ const customComponents: Components = {
       <ListItem
         {...props}
         fontSize="sm"
-        listStyleType={checked !== null ? 'none' : 'inherit'}
+        listStyleType={checked === null ? 'inherit' : 'none'}
         {...(props.className === 'task-list-item' ? { display: 'flex', align: 'center', ml: '-1rem' } : {})}
       >
         {children}

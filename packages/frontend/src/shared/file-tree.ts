@@ -217,10 +217,10 @@ export function addFileToTree(
   if (remainingPathParts.length === 1) {
     // This is a file, push into the tree
     const existingFile = tree.find((f) => f.name === file.name);
-    if (existingFile !== undefined) {
-      Object.assign(existingFile, file);
-    } else {
+    if (existingFile === undefined) {
       tree.push(file);
+    } else {
+      Object.assign(existingFile, file);
     }
 
     // Sort this branch of the tree

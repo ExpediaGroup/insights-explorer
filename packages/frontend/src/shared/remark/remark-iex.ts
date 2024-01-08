@@ -30,12 +30,13 @@ export const remarkIex = (options) => {
 
   function textDirectives(node) {
     switch (node.name) {
-      case 'badge':
+      case 'badge': {
         node.data = {
           hName: 'badge',
           hProperties: node.attributes
         };
         break;
+      }
 
       case 'image': {
         node.data = {
@@ -74,11 +75,12 @@ export const remarkIex = (options) => {
         break;
       }
 
-      default:
+      default: {
         node.data = {
           hName: 'textdirective',
           hProperties: node
         };
+      }
     }
   }
 
@@ -108,11 +110,12 @@ export const remarkIex = (options) => {
         break;
       }
 
-      default:
+      default: {
         node.data = {
           hName: 'leafdirective',
           hProperties: node
         };
+      }
     }
   }
 
@@ -215,11 +218,12 @@ export const remarkIex = (options) => {
         break;
       }
 
-      default:
+      default: {
         node.data = {
           hName: 'containerdirective',
           hProperties: node
         };
+      }
     }
   }
 

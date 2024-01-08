@@ -56,16 +56,16 @@ const AuthWrapper = ({ children }: Props) => {
       return;
     }
 
-    if (!authState.isAuthenticated) {
-      // Trigger Okta Login
-      oktaAuth.signInWithRedirect({ originalUri: window.location.href });
-    } else {
+    if (authState.isAuthenticated) {
       // Okta already logged in
       // Login against the IEX service
       if (authState.accessToken && loggingIn.current === false) {
         loggingIn.current = true;
         dispatch(login(authState.accessToken.accessToken));
       }
+    } else {
+      // Trigger Okta Login
+      oktaAuth.signInWithRedirect({ originalUri: window.location.href });
     }
   }, [authState, dispatch, requestingLogin, oktaAuth]);
 

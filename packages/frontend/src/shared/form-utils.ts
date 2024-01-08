@@ -33,11 +33,14 @@ export const formatFormError = (
   }
 
   switch (error.type) {
-    case 'maxLength':
+    case 'maxLength': {
       return 'This value is too long.';
-    case 'required':
+    }
+    case 'required': {
       return 'This value is required.';
-    default:
+    }
+    default: {
       return 'This field has an error.';
+    }
   }
 };

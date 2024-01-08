@@ -105,31 +105,13 @@ export abstract class BaseSync {
     // This key should be unchanging to avoid creating duplicates
     let existingDbInsight = await DbInsight.query().where('externalId', externalId).first();
 
-    if (existingDbInsight != undefined) {
-      logger.trace('Insight does exist in database');
-      await existingDbInsight.$query().patch({
-        insightName: insight.fullName,
-        itemType: insight.itemType,
-        deletedAt: null,
-        repositoryData
-      });
-    } else {
+    if (existingDbInsight == undefined) {
       logger.trace('Insight does not exist in database');
 
       // Check to see if the fullName already exists, but with a different externalID
       existingDbInsight = await DbInsight.query().where('insightName', insight.fullName).first();
 
-      if (existingDbInsight != undefined) {
-        // Assume the repo was deleted and recreated, and just update the external ID
-        // (We've already checked to ensure the external ID is unique)
-        logger.trace('Insight exists in database, but with a different externalId');
-        await existingDbInsight.$query().patch({
-          externalId,
-          itemType: insight.itemType,
-          deletedAt: null,
-          repositoryData
-        });
-      } else {
+      if (existingDbInsight == undefined) {
         logger.trace('Insight does not exist in database');
         existingDbInsight = await DbInsight.query().insert({
           externalId,
@@ -141,7 +123,25 @@ export abstract class BaseSync {
           repositoryData,
           itemType: insight.itemType
         });
+      } else {
+        // Assume the repo was deleted and recreated, and just update the external ID
+        // (We've already checked to ensure the external ID is unique)
+        logger.trace('Insight exists in database, but with a different externalId');
+        await existingDbInsight.$query().patch({
+          externalId,
+          itemType: insight.itemType,
+          deletedAt: null,
+          repositoryData
+        });
       }
+    } else {
+      logger.trace('Insight does exist in database');
+      await existingDbInsight.$query().patch({
+        insightName: insight.fullName,
+        itemType: insight.itemType,
+        deletedAt: null,
+        repositoryData
+      });
     }
 
     logger.trace(JSON.stringify(existingDbInsight, null, 2));

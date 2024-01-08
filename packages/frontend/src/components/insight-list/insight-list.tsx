@@ -26,7 +26,7 @@ import { InsightListSkeleton } from './components/insight-list-skeleton/insight-
 
 const EdgeContainer = ({ edges, options }) => {
   switch (options.layout) {
-    case 'square':
+    case 'square': {
       return (
         <Wrap
           spacing="1rem"
@@ -46,6 +46,7 @@ const EdgeContainer = ({ edges, options }) => {
           ))}
         </Wrap>
       );
+    }
     default: {
       const marginBottom = options.layout === 'compact' ? '0.5rem' : '1rem';
 

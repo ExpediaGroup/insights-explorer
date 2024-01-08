@@ -234,11 +234,13 @@ export class ActivityService {
       const cursor = toElasticsearchCursor(
         ...sort!.map((s) => {
           switch (s.field) {
-            case 'occurredAt':
+            case 'occurredAt': {
               // Special date handling
               return new Date(activity.occurredAt).getTime();
-            case 'relevance':
+            }
+            case 'relevance': {
               return doc._score;
+            }
           }
         })
       );
@@ -256,7 +258,7 @@ export class ActivityService {
         size: edges.length,
         total: elasticResponse.body.hits.total.value,
         startCursor: edges.length > 0 ? edges[0].cursor : undefined,
-        endCursor: edges.length > 0 ? edges[edges.length - 1].cursor : undefined,
+        endCursor: edges.length > 0 ? edges.at(-1)?.cursor : undefined,
         // Unable to determine this
         hasNextPage: true,
         // Backwards cursor isn't supported
@@ -367,12 +369,15 @@ export class ActivityService {
    */
   getSortField(field: string | undefined): string {
     switch (field) {
-      case undefined:
+      case undefined: {
         return this.defaultSort.field!;
-      case 'relevance':
+      }
+      case 'relevance': {
         return '_score';
-      default:
+      }
+      default: {
         return field;
+      }
     }
   }
 }
