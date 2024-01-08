@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.25.23](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.22...v3.25.23) (2024-01-08)
+
+
+### Bug Fixes
+
+* **deps:** bump @aws-sdk/client-sqs from 3.312.0 to 3.485.0 ([ec78f48](https://github.com/ExpediaGroup/insights-explorer/commit/ec78f4806f6b826cd2f203b7156869f6df862ea0))
+* **deps:** bump @chakra-ui/theme-tools from 2.0.16 to 2.1.2 ([800d58f](https://github.com/ExpediaGroup/insights-explorer/commit/800d58f5d5b54934fcc715b9f85ffcecc2bfb1ef))
+* **deps:** bump @emotion/react from 11.10.6 to 11.11.3 ([88a3730](https://github.com/ExpediaGroup/insights-explorer/commit/88a3730142cce28e0e518099c878ca0f037163ea))
+* **deps:** bump @slack/bolt from 3.12.1 to 3.17.0 ([b4830a6](https://github.com/ExpediaGroup/insights-explorer/commit/b4830a637b4a254110064dd62bec2a6ec84f2236))
+* **deps:** bump ace-builds from 1.31.2 to 1.32.3 ([543d050](https://github.com/ExpediaGroup/insights-explorer/commit/543d050f497b17a00934becd4fcaffe3f2d50705))
+* **deps:** bump better-queue and @types/better-queue ([5150b77](https://github.com/ExpediaGroup/insights-explorer/commit/5150b777e7ea8a8a8a801a214617b9b50be7daa4))
+* **deps:** bump chart.xkcd from 1.1.13 to 1.1.15 ([9516fc6](https://github.com/ExpediaGroup/insights-explorer/commit/9516fc6ff82c03a814a88f9fbd1a71011ae82815))
+* **deps:** bump graphql-parse-resolve-info from 4.12.0 to 4.13.0 ([df38d72](https://github.com/ExpediaGroup/insights-explorer/commit/df38d721988a4205f8cb0bebfce484cbae7a4dd8))
+* **deps:** bump http-status-codes from 2.2.0 to 2.3.0 ([5de5f5a](https://github.com/ExpediaGroup/insights-explorer/commit/5de5f5a177ee0bfba1795f14461e3c647809be4a))
+* **deps:** bump module-alias and @types/module-alias ([d48605a](https://github.com/ExpediaGroup/insights-explorer/commit/d48605a252f61ae435558aba3857c78f0c3be2e7))
+* **deps:** bump node-emoji and remove @types/node-emoji ([007ac36](https://github.com/ExpediaGroup/insights-explorer/commit/007ac362b26fc12abd52d1cc411b5ce439293469))
+* **deps:** bump pg from 8.10.0 to 8.11.3 ([2d65462](https://github.com/ExpediaGroup/insights-explorer/commit/2d65462158d90ba2a7aa6be06b9988a272af10dc))
+* **deps:** bump pino from 8.8.0 to 8.17.2 ([7925d91](https://github.com/ExpediaGroup/insights-explorer/commit/7925d91df9829ed822b0d46385547f9ed61223fb))
+* **deps:** bump pino-pretty from 10.0.0 to 10.3.1 ([353ce1a](https://github.com/ExpediaGroup/insights-explorer/commit/353ce1a9b21b258456eaa3560d5f6ca172e7d0ac))
+* **deps:** bump react-error-boundary from 4.0.3 to 4.0.12 ([5c1acf5](https://github.com/ExpediaGroup/insights-explorer/commit/5c1acf54419652c80ccec544b2f6052461834a16))
+* **deps:** bump react-select from 5.3.2 to 5.8.0 ([36e23e8](https://github.com/ExpediaGroup/insights-explorer/commit/36e23e8e21a31a8582de5b1df09d5f6c11ea45ca))
+* Update emoji list in markdown editor for node-emoji 2.x ([0049d49](https://github.com/ExpediaGroup/insights-explorer/commit/0049d4932ee33cb7e1024057441d59f7fbb1dee0))
+
 ### [3.25.22](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.21...v3.25.22) (2024-01-04)
 
 
