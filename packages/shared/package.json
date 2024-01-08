@@ -26,7 +26,7 @@
     "lodash": "4.17.21",
     "parsimmon": "1.18.1",
     "pino": "8.17.2",
-    "pino-http": "8.3.3",
+    "pino-http": "9.0.0",
     "pino-pretty": "10.3.1"
   },
   "devDependencies": {
