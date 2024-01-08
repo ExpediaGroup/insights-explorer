@@ -113,11 +113,7 @@ export class AutocompleteResolver {
 
       // Combine both teams on Insights and Users
       const combined = [...publishedTeams, ...userTeams].reduce<Record<string, number>>((acc, v) => {
-        if (acc[v.value]) {
-          acc[v.value] = acc[v.value] + v.occurrences;
-        } else {
-          acc[v.value] = v.occurrences;
-        }
+        acc[v.value] = acc[v.value] ? acc[v.value] + v.occurrences : v.occurrences;
         return acc;
       }, {});
 

@@ -19,9 +19,11 @@ import { FaSlack } from 'react-icons/fa';
 
 export const chatIcon = (provider: string) => {
   switch (provider) {
-    case 'slack':
+    case 'slack': {
       return FaSlack;
-    default:
+    }
+    default: {
       return BsChatDots;
+    }
   }
 };

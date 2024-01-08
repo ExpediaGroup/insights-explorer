@@ -298,14 +298,15 @@ const getConversions = (insightFile: Omit<InsightFile, 'id'>): undefined | Insig
   switch (insightFile.mimeType) {
     case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
     case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': {
       return [
         {
           mimeType: 'application/pdf',
           path: `.converted/${insightFile.path}.pdf`
         }
       ];
-    case 'application/x-ipynb+json':
+    }
+    case 'application/x-ipynb+json': {
       return [
         {
           mimeType: 'application/pdf',
@@ -316,8 +317,10 @@ const getConversions = (insightFile: Omit<InsightFile, 'id'>): undefined | Insig
           path: `.converted/${insightFile.path}.html`
         }
       ];
-    default:
+    }
+    default: {
       return undefined;
+    }
   }
 };
 

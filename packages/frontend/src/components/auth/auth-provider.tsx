@@ -28,15 +28,18 @@ export const AUTH_ERROR_PATH = '/auth/error';
 
 const getAuthProviderComponent = (authProvider: string | undefined, children: any) => {
   switch (authProvider) {
-    case 'github':
+    case 'github': {
       return <GitHubAuthProvider children={children} />;
+    }
 
-    case 'okta':
+    case 'okta': {
       return <OktaAuthProvider children={children} />;
+    }
 
-    default:
+    default: {
       // TODO: Handle other auth strategies
       return null;
+    }
   }
 };
 

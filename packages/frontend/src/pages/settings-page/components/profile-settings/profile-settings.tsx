@@ -343,7 +343,7 @@ export const ProfileSettings = ({ user, onSubmit, isSubmitting }: Props) => {
                       onChange={(e) => {
                         let skills: string[] = [];
                         if (e != null) {
-                          skills = e.map((v) => v.value.trim().toLowerCase().replace(/\s/g, '-'));
+                          skills = e.map((v) => v.value.trim().toLowerCase().replaceAll(/\s/g, '-'));
                         }
                         setValue('skills', skills);
                       }}

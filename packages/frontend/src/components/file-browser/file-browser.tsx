@@ -140,20 +140,22 @@ const FolderRenderer = ({
         }
 
         switch (monitor.getItemType()) {
-          case NativeTypes.FILE:
+          case NativeTypes.FILE: {
             // Upload file and add to tree
             if (actions.onUpload) {
               actions.onUpload(droppedItem.files, item);
               onOpen();
             }
             break;
+          }
 
-          case 'file':
+          case 'file': {
             // Move file to new location in tree
             if (actions.onMove) {
               actions.onMove(droppedItem, `${item.path}/${droppedItem.name}`);
               onOpen();
             }
+          }
         }
       },
       collect: (monitor) => ({

@@ -28,7 +28,7 @@ const logger = getLogger('slugify');
  */
 export function slugifyInsightName(name: string): string {
   const v1 = deburr(kebabCase(name.trim()));
-  const slug = v1.replace(/--/g, '-').replace(/'/g, '');
+  const slug = v1.replaceAll('--', '-').replaceAll("'", '');
 
   return slug;
 }

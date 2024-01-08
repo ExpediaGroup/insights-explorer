@@ -50,7 +50,7 @@ export function makeGraphql(token: string = process.env.GITHUB_ACCESS_TOKEN!): g
   }
 
   return GQ.defaults({
-    baseUrl: process.env.GITHUB_GRAPHQL_API_URL !== '' ? process.env.GITHUB_GRAPHQL_API_URL : undefined,
+    baseUrl: process.env.GITHUB_GRAPHQL_API_URL === '' ? undefined : process.env.GITHUB_GRAPHQL_API_URL,
     mediaType: {
       previews: ['bane']
     },
@@ -72,7 +72,7 @@ export function makeOctokit(token: string = process.env.GITHUB_ACCESS_TOKEN!): O
   return new Octokit({
     auth: token,
     userAgent: `iex ${process.env.IEX_VERSION || '0.0.0'}`,
-    baseUrl: process.env.GITHUB_REST_API_URL !== '' ? process.env.GITHUB_REST_API_URL : undefined,
+    baseUrl: process.env.GITHUB_REST_API_URL === '' ? undefined : process.env.GITHUB_REST_API_URL,
     log: {
       debug: logger.debug.bind(logger),
       info: logger.info.bind(logger),

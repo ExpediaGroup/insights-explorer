@@ -103,15 +103,15 @@ export class DraftService {
       draftRemains.insightId = dbInsightId;
     }
 
-    if (existingDraft != undefined) {
-      logger.trace('Draft does exist in database');
-      return await existingDraft.$query().patchAndFetch(draftRemains);
-    } else {
+    if (existingDraft == undefined) {
       logger.trace('Draft does not exist in database');
       return await Draft.query().insert({
         ...draftRemains,
         createdByUserId: user?.userId
       });
+    } else {
+      logger.trace('Draft does exist in database');
+      return await existingDraft.$query().patchAndFetch(draftRemains);
     }
   }
 
@@ -124,7 +124,9 @@ export class DraftService {
   async deleteDraft(draftKey: DraftKey, user: User): Promise<Draft> {
     const existingDraft = await Draft.query().where('draftKey', draftKey).first();
 
-    if (existingDraft != undefined) {
+    if (existingDraft == undefined) {
+      throw new Error('Draft not found by key: ' + draftKey);
+    } else {
       if (existingDraft.createdByUserId != user.userId && existingDraft.createdByUserId != null) {
         throw new Error('Not allowed');
       }
@@ -135,8 +137,6 @@ export class DraftService {
         throw new Error('Unexpectedly, Draft not deleted');
       }
       return existingDraft;
-    } else {
-      throw new Error('Draft not found by key: ' + draftKey);
     }
   }
 

@@ -184,7 +184,7 @@ export function convertToDraft(request: ImportRequest): DraftDataInput {
       `<!-- Please review it for any conversion errors. -->\n\n` +
       readmeFile.contents;
 
-    readmeFile.contents = readmeFile.contents.replace(/\u00A0/g, ' ');
+    readmeFile.contents = readmeFile.contents.replaceAll('\u00A0', ' ');
   }
 
   return combinedDraftData;

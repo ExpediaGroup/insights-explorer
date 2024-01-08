@@ -71,7 +71,7 @@ export const InsightTags = ({ insight, form }) => {
               onChange={(event) => {
                 let tags: string[] = [];
                 if (event != null) {
-                  tags = event.map((e) => e.value.trim().toLowerCase().replace(/\s/g, '-'));
+                  tags = event.map((e) => e.value.trim().toLowerCase().replaceAll(/\s/g, '-'));
                 }
                 onChange(tags);
               }}
