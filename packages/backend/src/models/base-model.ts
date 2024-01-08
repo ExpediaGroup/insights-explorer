@@ -16,9 +16,9 @@
 
 import { Model } from 'objection';
 
-export class BaseModel extends Model {
-  createdAt!: Date;
-  updatedAt!: Date;
+export abstract class BaseModel extends Model {
+  abstract createdAt: Date;
+  abstract updatedAt: Date;
 
   $beforeInsert(): void {
     this.createdAt = new Date();
