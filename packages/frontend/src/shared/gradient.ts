@@ -24,9 +24,9 @@ export const getInsightGradient = (insight: Insight): string => {
 
   // Use a separate gradient color set for Pages
   if (insight.itemType === 'page') {
-    i = insight.id !== undefined ? (hashCode(insight.id) % 5) + 11 : getRandomInt(12, 15);
+    i = insight.id === undefined ? getRandomInt(12, 15) : (hashCode(insight.id) % 5) + 11;
   } else {
-    i = insight.id !== undefined ? (hashCode(insight.id) % 4) + 7 : getRandomInt(7, 11);
+    i = insight.id === undefined ? getRandomInt(7, 11) : (hashCode(insight.id) % 4) + 7;
   }
 
   return `linear(to-tr, nord${i}.100 0%, nord${i}.400 100%)`;

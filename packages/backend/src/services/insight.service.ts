@@ -183,13 +183,16 @@ export class InsightService {
     );
 
     switch (permission) {
-      case 'ADMIN':
+      case 'ADMIN': {
         return RepositoryPermission.ADMIN;
+      }
       case 'MAINTAIN':
-      case 'WRITE':
+      case 'WRITE': {
         return RepositoryPermission.WRITE;
-      default:
+      }
+      default: {
         return RepositoryPermission.READ;
+      }
     }
   }
 
@@ -448,7 +451,7 @@ export class InsightService {
     logger.info(`Updating Insight: ${insight.fullName}`);
 
     // Convert all tags to lower case
-    updatedYaml.tags = updatedYaml.tags?.map((tag) => tag.trim().toLowerCase().replace(/\s/g, '-'));
+    updatedYaml.tags = updatedYaml.tags?.map((tag) => tag.trim().toLowerCase().replaceAll(/\s/g, '-'));
 
     try {
       // Push changes to the git repository
@@ -477,7 +480,7 @@ export class InsightService {
                     }
 
                     // Add/modify existing file with inline content
-                    case InsightFileAction.MODIFY:
+                    case InsightFileAction.MODIFY: {
                       logger.debug(`Modifying file: ${file.path}`);
 
                       if (
@@ -490,23 +493,27 @@ export class InsightService {
                       }
 
                       return gitInstance.putFile(file.path!, file.contents!);
+                    }
 
                     // Rename file only
-                    case InsightFileAction.RENAME:
+                    case InsightFileAction.RENAME: {
                       logger.debug(`Renaming file: ${file.path}`);
                       if (file.originalPath) {
                         return gitInstance.renameFile(file.originalPath, file.path);
                       }
                       return;
+                    }
 
                     // Delete file
-                    case InsightFileAction.DELETE:
+                    case InsightFileAction.DELETE: {
                       logger.debug(`Deleting file: ${file.path}`);
                       return gitInstance.deleteFile(file.path);
+                    }
 
                     case InsightFileAction.NONE:
-                    default:
+                    default: {
                       return;
+                    }
                   }
                 })
               );
@@ -818,14 +825,18 @@ export class InsightService {
 
     const perm = (() => {
       switch (permission) {
-        case undefined:
+        case undefined: {
           return;
-        case 'ADMIN':
+        }
+        case 'ADMIN': {
           return 'admin';
-        case 'READ':
+        }
+        case 'READ': {
           return 'pull';
-        default:
+        }
+        default: {
           return 'push';
+        }
       }
     })();
 

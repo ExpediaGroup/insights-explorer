@@ -31,14 +31,17 @@ export async function syncInsight(insightSyncTask: InsightSyncTask): Promise<Ind
 
   let syncer: BaseSync;
   switch (insightSyncTask.repositoryType) {
-    case RepositoryType.GITHUB:
+    case RepositoryType.GITHUB: {
       syncer = new GitHubRepositorySync();
       break;
-    case RepositoryType.FILE:
+    }
+    case RepositoryType.FILE: {
       syncer = new FileSystemSync();
       break;
-    default:
+    }
+    default: {
       throw new Error('Unknown Repository Type');
+    }
   }
 
   return syncer.sync(insightSyncTask);

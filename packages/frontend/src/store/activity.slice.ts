@@ -68,13 +68,15 @@ export const activitySlice = createSlice({
 
       // Apply a specific direction for certain fields
       switch (action.payload) {
-        case 'name':
+        case 'name': {
           state.sort.direction = 'asc';
           break;
+        }
         case 'relevance':
-        case 'occurredAt':
+        case 'occurredAt': {
           state.sort.direction = 'desc';
           break;
+        }
       }
     },
     setSortDirection(state, action: PayloadAction<'asc' | 'desc'>) {

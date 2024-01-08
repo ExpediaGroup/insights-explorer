@@ -54,7 +54,7 @@ const defaultOptions: S3ClientConfig = {
   region: process.env.S3_REGION,
   maxAttempts: 4,
 
-  endpoint: process.env.S3_ENDPOINT !== '' ? process.env.S3_ENDPOINT : undefined,
+  endpoint: process.env.S3_ENDPOINT === '' ? undefined : process.env.S3_ENDPOINT,
 
   // S3 Path-style requests are deprecated
   // But some S3-compatible APIs may use them (e.g. Minio)
@@ -122,7 +122,9 @@ export class Storage {
       const response = await this.s3Client.send(new PutObjectCommand({ Body: body, Bucket: bucket, Key: path }));
 
       this.logger.debug(`S3 file successfully uploaded with Etag: ${response.ETag} and URI: ${uri}`);
-    } else if (stream !== undefined) {
+    } else if (stream === undefined) {
+      throw new Error('Either body or stream options must be set.');
+    } else {
       const uploadOptions: PutObjectCommandInput = { Body: stream, Bucket: bucket, Key: path };
 
       if (fileSize !== undefined) {
@@ -131,8 +133,6 @@ export class Storage {
 
       const response = await this.s3Client.send(new PutObjectCommand(uploadOptions));
       this.logger.debug(`S3 file successfully streamed with Etag: ${response.ETag} and URI: ${uri}`);
-    } else {
-      throw new Error('Either body or stream options must be set.');
     }
 
     return uri;

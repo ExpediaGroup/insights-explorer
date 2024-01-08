@@ -39,16 +39,19 @@ export async function createServer(): Promise<express.Express> {
 
   // Show routes called in console during development
   switch (process.env.NODE_ENV) {
-    case 'development':
+    case 'development': {
       logger.info('Loading development middleware');
       app.use(security);
       break;
-    case 'production':
+    }
+    case 'production': {
       logger.info('Loading production middleware');
       app.use(security);
       break;
-    default:
+    }
+    default: {
       logger.info('Actually ' + process.env.NODE_ENV);
+    }
   }
 
   app.use(compression());

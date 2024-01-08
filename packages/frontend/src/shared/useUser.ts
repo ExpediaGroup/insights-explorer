@@ -160,10 +160,12 @@ const PROFILE_USER_QUERY = gql`
 
 const getQuery = (query: UserQuery) => {
   switch (query) {
-    case 'basic':
+    case 'basic': {
       return BASIC_USER_QUERY;
-    case 'profile':
+    }
+    case 'profile': {
       return PROFILE_USER_QUERY;
+    }
   }
 };
 

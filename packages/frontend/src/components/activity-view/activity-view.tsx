@@ -41,7 +41,7 @@ const DeletedBadge = () => <Badge colorScheme="red">deleted</Badge>;
 
 const getActivityParts = (activity: Activity) => {
   switch (activity.activityType) {
-    case ActivityType.Login:
+    case ActivityType.Login: {
       return {
         icon: 'login',
         lead: (
@@ -52,6 +52,7 @@ const getActivityParts = (activity: Activity) => {
         ),
         details: null
       };
+    }
 
     case ActivityType.CreateInsight: {
       const details = activity.details as InsightActivityDetails;
@@ -60,7 +61,11 @@ const getActivityParts = (activity: Activity) => {
         lead: (
           <Box>
             <UserTag user={activity.user} mr="0.25rem" />
-            {details.insight != null ? (
+            {details.insight == null ? (
+              <Text as="span">
+                created a new <DeletedBadge />
+              </Text>
+            ) : (
               <Text as="span">
                 created a new {details.insight.itemType}{' '}
                 <Link to={`/${details.insight.itemType}/${details.insight.fullName}`} display="inline-block">
@@ -69,10 +74,6 @@ const getActivityParts = (activity: Activity) => {
                   </Text>
                 </Link>
                 {details.commitMessage && `: "${details.commitMessage}"`}
-              </Text>
-            ) : (
-              <Text as="span">
-                created a new <DeletedBadge />
               </Text>
             )}
           </Box>
@@ -90,7 +91,11 @@ const getActivityParts = (activity: Activity) => {
         lead: (
           <Box>
             <UserTag user={activity.user} mr="0.25rem" />
-            {details.insight != null ? (
+            {details.insight == null ? (
+              <Text as="span">
+                edited <DeletedBadge />
+              </Text>
+            ) : (
               <Text as="span">
                 edited{' '}
                 <Link to={`/${details.insight.itemType}/${details.insight.fullName}`} display="inline-block">
@@ -99,10 +104,6 @@ const getActivityParts = (activity: Activity) => {
                   </Text>
                 </Link>
                 {details.commitMessage && `: "${details.commitMessage}"`}
-              </Text>
-            ) : (
-              <Text as="span">
-                edited <DeletedBadge />
               </Text>
             )}
           </Box>
@@ -120,7 +121,11 @@ const getActivityParts = (activity: Activity) => {
         lead: (
           <Box>
             <UserTag user={activity.user} mr="0.25rem" />
-            {details.insight != null ? (
+            {details.insight == null ? (
+              <Text as="span">
+                deleted <DeletedBadge />
+              </Text>
+            ) : (
               <Text as="span">
                 deleted{' '}
                 <Link to={`/${details.insight.itemType}/${details.insight.fullName}`} display="inline-block">
@@ -128,10 +133,6 @@ const getActivityParts = (activity: Activity) => {
                     {details.insight.name}
                   </Text>
                 </Link>
-              </Text>
-            ) : (
-              <Text as="span">
-                deleted <DeletedBadge />
               </Text>
             )}
           </Box>
@@ -161,14 +162,14 @@ const getActivityParts = (activity: Activity) => {
             <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb}{' '}
-              {details.insight != null ? (
+              {details.insight == null ? (
+                <DeletedBadge />
+              ) : (
                 <Link to={`/${details.insight.itemType}/${details.insight.fullName}`} display="inline-block">
                   <Text as="span" fontWeight="bold">
                     {details.insight.name}
                   </Text>
                 </Link>
-              ) : (
-                <DeletedBadge />
               )}
             </Text>
           </Box>
@@ -191,14 +192,14 @@ const getActivityParts = (activity: Activity) => {
             <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb}{' '}
-              {details.insight != null ? (
+              {details.insight == null ? (
+                <DeletedBadge />
+              ) : (
                 <Link to={`/${details.insight.itemType}/${details.insight.fullName}`} display="inline-block">
                   <Text as="span" fontWeight="bold">
                     {details.insight.name}
                   </Text>
                 </Link>
-              ) : (
-                <DeletedBadge />
               )}
             </Text>
           </Box>
@@ -216,26 +217,31 @@ const getActivityParts = (activity: Activity) => {
       let verb = 'verb';
 
       switch (activity.activityType) {
-        case ActivityType.CreateComment:
+        case ActivityType.CreateComment: {
           icon = 'comments';
           verb = 'commented on';
           break;
-        case ActivityType.EditComment:
+        }
+        case ActivityType.EditComment: {
           icon = 'comments';
           verb = 'edited a comment on';
           break;
-        case ActivityType.LikeComment:
+        }
+        case ActivityType.LikeComment: {
           icon = 'heartFilled';
           verb = 'liked a comment on';
           break;
-        case ActivityType.UnlikeComment:
+        }
+        case ActivityType.UnlikeComment: {
           icon = 'unlike';
           verb = 'unliked a comment on';
           break;
-        case ActivityType.DeleteComment:
+        }
+        case ActivityType.DeleteComment: {
           icon = 'trash';
           verb = 'deleted a comment on';
           break;
+        }
       }
 
       return {
@@ -245,7 +251,9 @@ const getActivityParts = (activity: Activity) => {
             <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb}{' '}
-              {details?.comment != null ? (
+              {details?.comment == null ? (
+                <DeletedBadge />
+              ) : (
                 <Link
                   to={`/${details.comment.insight.itemType}/${details.comment.insight.fullName}`}
                   display="inline-block"
@@ -254,8 +262,6 @@ const getActivityParts = (activity: Activity) => {
                     {details.comment.insight.name}
                   </Text>
                 </Link>
-              ) : (
-                <DeletedBadge />
               )}
             </Text>
           </Box>
@@ -264,7 +270,7 @@ const getActivityParts = (activity: Activity) => {
       };
     }
 
-    case ActivityType.UpdateProfile:
+    case ActivityType.UpdateProfile: {
       return {
         icon: 'profile',
         lead: (
@@ -279,6 +285,7 @@ const getActivityParts = (activity: Activity) => {
           </Box>
         )
       };
+    }
 
     case ActivityType.AddCollaborator:
     case ActivityType.RemoveCollaborator: {
@@ -294,14 +301,14 @@ const getActivityParts = (activity: Activity) => {
               {added ? <Text as="span">added </Text> : <Text as="span">removed </Text>}
               <UserTag user={details.user} mr="0.25rem" />
               {added ? ' to ' : ' from '}
-              {details.insight != null ? (
+              {details.insight == null ? (
+                <DeletedBadge />
+              ) : (
                 <Link to={`/${details.insight.itemType}/${details.insight.fullName}`} display="inline-block">
                   <Text as="span" fontWeight="bold">
                     {details.insight.name}
                   </Text>
                 </Link>
-              ) : (
-                <DeletedBadge />
               )}
             </Text>
           </Box>
@@ -331,12 +338,12 @@ const getActivityParts = (activity: Activity) => {
             <UserTag user={activity.user} mr="0.25rem" />
             <Text as="span">
               {verb} <Text as="span">a news item: </Text>
-              {details.news !== null ? (
+              {details.news === null ? (
+                <DeletedBadge />
+              ) : (
                 <Text as="span" fontWeight="bold">
                   {details.news.summary}
                 </Text>
-              ) : (
-                <DeletedBadge />
               )}
             </Text>
           </Box>
@@ -345,8 +352,9 @@ const getActivityParts = (activity: Activity) => {
       };
     }
 
-    default:
+    default: {
       return null;
+    }
   }
 };
 

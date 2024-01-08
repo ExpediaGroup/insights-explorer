@@ -242,7 +242,7 @@ export const ChakraUIRenderer = (
       return (
         <ListItem
           {...props}
-          listStyleType={checked !== null ? 'none' : 'inherit'}
+          listStyleType={checked === null ? 'inherit' : 'none'}
           {...(props.className === 'task-list-item' ? { display: 'flex', align: 'center', ml: '-1rem' } : {})}
         >
           {children}

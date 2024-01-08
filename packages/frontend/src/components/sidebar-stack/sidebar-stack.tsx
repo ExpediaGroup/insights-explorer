@@ -26,7 +26,14 @@ interface SidebarStackProps {
 }
 
 export const SidebarStack = ({ children, heading, tooltip, ...boxProps }: SidebarStackProps & BoxProps) => {
-  if (tooltip != null) {
+  if (tooltip == null) {
+    return (
+      <VStack spacing="0.5rem" align="stretch" {...boxProps}>
+        {heading && <SidebarHeading>{heading}</SidebarHeading>}
+        {children}
+      </VStack>
+    );
+  } else {
     return (
       <Tooltip label={tooltip} aria-label={tooltip} placement="left">
         <VStack spacing="0.5rem" align="stretch" {...boxProps}>
@@ -34,13 +41,6 @@ export const SidebarStack = ({ children, heading, tooltip, ...boxProps }: Sideba
           {children}
         </VStack>
       </Tooltip>
-    );
-  } else {
-    return (
-      <VStack spacing="0.5rem" align="stretch" {...boxProps}>
-        {heading && <SidebarHeading>{heading}</SidebarHeading>}
-        {children}
-      </VStack>
     );
   }
 };

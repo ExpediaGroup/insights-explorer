@@ -56,9 +56,7 @@ export const Alert = ({
   if (status === 'secure') {
     icon = iconFactory('secure');
     derivedStatus = 'info';
-  } else if (status != null) {
-    derivedStatus = status;
-  } else {
+  } else if (status == null) {
     // Auto-detect status from which variable was used
     if (error != null) {
       derivedMessage = getMessage(error);
@@ -69,12 +67,14 @@ export const Alert = ({
     } else if (info != null) {
       derivedMessage = getMessage(info);
       derivedStatus = 'info';
-    } else if (success != null) {
+    } else if (success == null) {
+      derivedStatus = 'error';
+    } else {
       derivedMessage = getMessage(success);
       derivedStatus = 'success';
-    } else {
-      derivedStatus = 'error';
     }
+  } else {
+    derivedStatus = status;
   }
 
   return (

@@ -218,7 +218,7 @@ export class GitInstance {
 
   async retrieveFileUtf8(filePath: string): Promise<string | null> {
     const buffer = await this.retrieveFile(filePath);
-    return buffer != null ? buffer.toString('utf8') : null;
+    return buffer == null ? null : buffer.toString('utf8');
   }
 
   // TODO: Only works for UTF-8 based-files

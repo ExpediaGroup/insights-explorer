@@ -16,15 +16,18 @@
 
 export const getItemType = (itemType: string) => {
   switch ((itemType ?? 'insight').toLowerCase()) {
-    case 'template':
+    case 'template': {
       return { iconKey: 'template', color: 'nord15.500' };
+    }
 
-    case 'page':
+    case 'page': {
       return { iconKey: 'page', color: 'nord12.500' };
+    }
 
     case 'insight':
-    default:
+    default: {
       return { iconKey: 'insight', color: 'nord14.500' };
+    }
   }
 };
 

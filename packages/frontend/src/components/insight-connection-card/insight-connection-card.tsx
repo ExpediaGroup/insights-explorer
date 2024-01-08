@@ -30,12 +30,15 @@ export interface InsightConnectionCardProps {
 
 export const InsightConnectionCard = ({ insightEdge, options, ...props }: InsightConnectionCardProps & BoxProps) => {
   switch (options.layout) {
-    case 'square':
+    case 'square': {
       return <SquareInsightCard insightEdge={insightEdge} options={options} {...props} />;
-    case 'compact':
+    }
+    case 'compact': {
       return <CompactInsightCard insightEdge={insightEdge} options={options} {...props} />;
+    }
     case 'default':
-    default:
+    default: {
       return <DefaultInsightCard insightEdge={insightEdge} options={options} {...props} />;
+    }
   }
 };

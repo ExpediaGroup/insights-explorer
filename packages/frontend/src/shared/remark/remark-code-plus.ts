@@ -57,7 +57,7 @@ export const remarkCodePlus = ({ baseUrl = '', transformAssetUri }: Props) => {
         attributes.forEach((attribute) => {
           if (attribute instanceof KeyValueAttribute) {
             switch (attribute.key) {
-              case 'file':
+              case 'file': {
                 if (isAbsoluteUrl(attribute.value)) {
                   node.data.hProperties.uri = attribute.value;
                 } else {
@@ -66,16 +66,19 @@ export const remarkCodePlus = ({ baseUrl = '', transformAssetUri }: Props) => {
                     : urljoin(baseUrl, attribute.value);
                 }
                 break;
+              }
 
-              case 'lines':
+              case 'lines': {
                 node.data.hProperties.lines = attribute.value;
                 break;
+              }
             }
           } else if (attribute instanceof KeyAttribute) {
             switch (attribute.key) {
-              case 'collapse':
+              case 'collapse': {
                 node.data.hProperties.collapse = 'true';
                 break;
+              }
             }
           }
         });

@@ -193,14 +193,16 @@ export const SidebarFiles = ({
         }
 
         switch (monitor.getItemType()) {
-          case NativeTypes.FILE:
+          case NativeTypes.FILE: {
             // Upload file and add to tree
             onUploadFile(droppedItem.files, undefined);
             break;
+          }
 
-          case 'file':
+          case 'file': {
             // Move file to new location in tree
             onMove(droppedItem, droppedItem.name);
+          }
         }
       },
       collect: (monitor) => ({

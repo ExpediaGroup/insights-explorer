@@ -39,7 +39,7 @@ import { VideoRenderer } from '../renderers/video-renderer/video-renderer';
 
 const getHeaderStyles = (header: 'normal' | 'stealth' | 'none') => {
   switch (header) {
-    case 'normal':
+    case 'normal': {
       return [
         {
           bg: 'gray.100',
@@ -52,9 +52,11 @@ const getHeaderStyles = (header: 'normal' | 'stealth' | 'none') => {
           borderBottomRadius: '0.5rem'
         }
       ];
-    case 'stealth':
+    }
+    case 'stealth': {
       return [{}, { borderRadius: '0.5rem' }];
-    case 'none':
+    }
+    case 'none': {
       return [
         {
           display: 'none'
@@ -63,6 +65,7 @@ const getHeaderStyles = (header: 'normal' | 'stealth' | 'none') => {
           borderRadius: '0.5rem'
         }
       ];
+    }
   }
 };
 
@@ -183,7 +186,7 @@ export const FileViewer = ({
 
     if (mimeTypeDef) {
       switch (mimeTypeDef.viewer) {
-        case MIME_VIEWER.Markdown:
+        case MIME_VIEWER.Markdown: {
           unpause();
           if (mode === 'rendered') {
             renderer = (
@@ -201,32 +204,37 @@ export const FileViewer = ({
           canDisplayRaw = mode === 'rendered';
           canDisplayRendered = !canDisplayRaw;
           break;
+        }
 
-        case MIME_VIEWER.PDF:
+        case MIME_VIEWER.PDF: {
           pause();
           renderer = <PdfRenderer url={fileUrl} />;
           canDisplayRaw = canDisplayRendered = false;
           break;
+        }
 
-        case MIME_VIEWER.Code:
+        case MIME_VIEWER.Code: {
           unpause();
           renderer = <CodeRenderer contents={fetchedContents} language={mimeTypeDef?.editorLanguage} />;
           canDisplayRaw = canDisplayRendered = false;
           break;
+        }
 
-        case MIME_VIEWER.Image:
+        case MIME_VIEWER.Image: {
           pause();
           renderer = <ImageRenderer url={fileUrl} />;
           canDisplayRaw = canDisplayRendered = false;
           break;
+        }
 
-        case MIME_VIEWER.Video:
+        case MIME_VIEWER.Video: {
           pause();
           renderer = <VideoRenderer url={fileUrl} mimeType={mimeTypeDef.mimeType} />;
           canDisplayRaw = canDisplayRendered = false;
           break;
+        }
 
-        case MIME_VIEWER.Html:
+        case MIME_VIEWER.Html: {
           unpause();
           if (mode === 'rendered') {
             renderer = <HtmlRenderer url={convertedDownloadUrl ?? downloadUrl} />;
@@ -236,8 +244,9 @@ export const FileViewer = ({
           canDisplayRaw = mode === 'rendered';
           canDisplayRendered = !canDisplayRaw;
           break;
+        }
 
-        case MIME_VIEWER.Csv:
+        case MIME_VIEWER.Csv: {
           unpause();
           if (mode === 'rendered') {
             renderer = <CsvRenderer contents={fetchedContents} />;
@@ -247,8 +256,9 @@ export const FileViewer = ({
           canDisplayRaw = mode === 'rendered';
           canDisplayRendered = !canDisplayRaw;
           break;
+        }
 
-        case MIME_VIEWER.Json:
+        case MIME_VIEWER.Json: {
           unpause();
           if (mode === 'rendered') {
             renderer = <JsonRenderer contents={fetchedContents} />;
@@ -258,16 +268,19 @@ export const FileViewer = ({
           canDisplayRaw = mode === 'rendered';
           canDisplayRendered = !canDisplayRaw;
           break;
+        }
 
-        case MIME_VIEWER.None:
+        case MIME_VIEWER.None: {
           pause();
           renderer = <Alert warning="File type not cannot be previewed." />;
           break;
+        }
 
-        default:
+        default: {
           unpause();
           renderer = <CodeRenderer contents={fetchedContents} />;
           canDisplayRaw = canDisplayRendered = false;
+        }
       }
     } else {
       console.log(`Viewing unknown MIME type: ${mime}`);

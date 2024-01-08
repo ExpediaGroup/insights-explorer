@@ -42,8 +42,9 @@ export class OAuthService {
 
         return response.data.access_token;
       }
-      default:
+      default: {
         throw new Error('OAuth provider not supported');
+      }
     }
   }
 }

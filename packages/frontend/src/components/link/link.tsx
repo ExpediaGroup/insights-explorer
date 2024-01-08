@@ -30,6 +30,6 @@ export const Link = forwardRef(
     { underline = true, ...props }: { underline?: boolean } & RouterLinkProps & ChakraLinkProps,
     ref: React.Ref<any>
   ) => (
-    <ChakraLink ref={ref} as={RouterLink} {...(!underline ? { _hover: { textDecoration: 'none' } } : {})} {...props} />
+    <ChakraLink ref={ref} as={RouterLink} {...(underline ? {} : { _hover: { textDecoration: 'none' } })} {...props} />
   )
 );

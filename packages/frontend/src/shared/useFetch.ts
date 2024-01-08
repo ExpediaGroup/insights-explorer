@@ -62,12 +62,12 @@ export const useFetch = ({ url, contents, method = 'GET', paused = false }: Prop
         const response = await fetch(url, { method, signal });
         const data = await response.text();
 
-        if (!response.ok) {
-          setError(response.statusText);
-          setData(undefined);
-        } else {
+        if (response.ok) {
           setData(data);
           setError(undefined);
+        } else {
+          setError(response.statusText);
+          setData(undefined);
         }
         setFetching(false);
       } catch (error: any) {

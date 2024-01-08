@@ -28,5 +28,5 @@ export const LinkOverlay = ({
   underline = true,
   ...props
 }: { underline?: boolean } & RouterLinkProps & ChakraLinkOverlayProps) => (
-  <ChakraLinkOverlay as={RouterLink} {...(!underline ? { _hover: { textDecoration: 'none' } } : {})} {...props} />
+  <ChakraLinkOverlay as={RouterLink} {...(underline ? {} : { _hover: { textDecoration: 'none' } })} {...props} />
 );

@@ -32,11 +32,13 @@ export interface ItemTypeViewerProps {
 
 export const ItemTypeViewer = ({ ...props }: ItemTypeViewerProps) => {
   switch (props.insight.itemType) {
-    case 'page':
+    case 'page': {
       return <PageViewer {...props} />;
+    }
     case 'insight':
     case 'template':
-    default:
+    default: {
       return <InsightViewer {...props} />;
+    }
   }
 };

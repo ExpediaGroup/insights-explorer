@@ -44,7 +44,7 @@ export const InsightListSkeleton = ({ count = 3, options }) => {
 
   let layoutProps = {};
   switch (options.layout) {
-    case 'square':
+    case 'square': {
       layoutProps = {
         height: { base: '16rem', md: '17rem', lg: '18rem', '2xl': '20rem' },
         width: { base: '16rem', md: '17rem', lg: '18rem', '2xl': '20rem' },
@@ -52,16 +52,19 @@ export const InsightListSkeleton = ({ count = 3, options }) => {
         marginRight: '1rem'
       };
       break;
-    case 'compact':
+    }
+    case 'compact': {
       layoutProps = {
         height: '3.1rem'
       };
       break;
+    }
     case 'default':
-    default:
+    default: {
       layoutProps = {
         height: '7rem'
       };
+    }
   }
 
   return (
