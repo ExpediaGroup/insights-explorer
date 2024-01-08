@@ -17,7 +17,7 @@
 import { useBreakpointValue } from '@chakra-ui/media-query';
 import { useColorModeValue } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
-import { emoji } from 'node-emoji';
+import * as emoji from 'node-emoji';
 import { useEffect, useRef, useState } from 'react';
 import AceEditor from 'react-ace';
 import { gql } from 'urql';
@@ -53,12 +53,12 @@ const emojiCompleter = {
     }
 
     if (emojiList === undefined) {
-      emojiList = Object.keys(emoji).map((key) => {
-        const shortcode = `:${key}:`;
+      emojiList = emoji.search('').map((results) => {
+        const shortcode = `:${results.name}:`;
         return {
           name: shortcode,
           value: shortcode,
-          caption: `${emoji[key]} ${shortcode}`,
+          caption: `${results.emoji} ${shortcode}`,
           meta: 'emoji',
           score: 1000
         };
