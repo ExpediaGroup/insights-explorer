@@ -59,10 +59,10 @@ export class AttachmentResolver {
       const mimeType = await getTypeAsync({ fileName: file.filename, stream });
 
       return {
-        name: file.filename,
-        path: file.filename,
+        ...attachment,
         mimeType,
-        ...attachment
+        name: attachment.name ?? file.filename,
+        path: attachment.path ?? file.filename
       };
     } catch (error: any) {
       logger.error(error);
