@@ -20,7 +20,6 @@
     "./packages/*"
   ],
   "devDependencies": {
-    "@ampproject/remapping": "2.2.0",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/introspection": "2.1.1",
     "@graphql-codegen/typescript": "2.5.1",
