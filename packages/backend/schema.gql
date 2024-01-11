@@ -332,6 +332,7 @@ input InsightSearch {
   paging: Paging
   query: String!
   sort: [Sort!]
+  useNewSearch: Boolean!
 }
 
 type InsightSearchResults {

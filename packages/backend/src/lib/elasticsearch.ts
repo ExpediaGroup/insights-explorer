@@ -21,7 +21,18 @@ import { GetResponse, MgetResponse, SearchBody, SearchResponse } from '@iex/mode
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { ItemType } from '@iex/models/item-type';
 import { getLogger } from '@iex/shared/logger';
-import { parseToElasticsearch, SearchMultiTerm, SearchNestedOrFilter, SearchTerm } from '@iex/shared/search';
+import {
+  parseToElasticsearch as parseToElasticsearchOld,
+  SearchMultiTerm as SearchMultiTermOld,
+  SearchNestedOrFilter as SearchNestedOrFilterOld,
+  SearchTerm as SearchTermOld
+} from '@iex/shared/search';
+import {
+  parseToElasticsearch as parseToElasticsearchNew,
+  SearchMultiTerm as SearchMultiTermNew,
+  SearchNestedOrFilter as SearchNestedOrFilterNew,
+  SearchTerm as SearchTermNew
+} from '@iex/shared/search2';
 import { detailedDiff } from 'deep-object-diff';
 import { DateTime } from 'luxon';
 
@@ -33,6 +44,18 @@ import { User } from '../models/user';
 import { fromElasticsearchCursor, toElasticsearchCursor } from '../shared/resolver-utils';
 
 const logger = getLogger('elasticsearch');
+
+// let useNewSearch = true;
+
+// export function toggleUseNewSearch() {
+//   useNewSearch = !useNewSearch;
+//   logger.debug(`useNewSearch is now ${useNewSearch}`);
+// }
+
+// const parseToElasticsearch = useNewSearch ? parseToElasticsearchNew : parseToElasticsearchOld;
+// const SearchMultiTerm = useNewSearch ? SearchMultiTermNew : SearchMultiTermOld;
+// const SearchNestedOrFilter = useNewSearch ? SearchNestedOrFilterNew : SearchNestedOrFilterOld;
+// const SearchTerm = useNewSearch ? SearchTermNew : SearchTermOld;
 
 // TODO: Provide index generation strategies (e.g. monthly, per org, etc)
 
@@ -321,6 +344,18 @@ export async function searchInsights(
 
   if (search != null) {
     // Parse an IEX search into Elasticsearch query
+    logger.info(
+      `I'm doing a new search! query is ${search.query} I have access to useNewSearch: ${search.useNewSearch}`
+    );
+    // based on the search-bar.tsx useNewSearch state, we can choose which parseToElasticsearch to use
+    // if useNewSearch is true, use the new parseToElasticsearch
+    // if useNewSearch is false, use the old parseToElasticsearch
+
+    // access useNewSearch
+    const parseToElasticsearch = search.useNewSearch ? parseToElasticsearchNew : parseToElasticsearchOld;
+    const SearchMultiTerm = search.useNewSearch ? SearchMultiTermNew : SearchMultiTermOld;
+    const SearchNestedOrFilter = search.useNewSearch ? SearchNestedOrFilterNew : SearchNestedOrFilterOld;
+    const SearchTerm = search.useNewSearch ? SearchTermNew : SearchTermOld;
     query.body!.query = parseToElasticsearch(search.query, (clauses) => {
       // This modifier function runs after parsing but before converting to Elasticsearch
 

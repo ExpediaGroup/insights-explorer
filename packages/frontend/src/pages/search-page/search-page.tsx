@@ -35,7 +35,7 @@ import { SearchBar } from './components/search-bar/search-bar';
 export const SearchPage = () => {
   const initialized = useRef(false);
   const dispatch = useDispatch<AppDispatch>();
-  const { query, sort, showFilters, options } = useSelector((state: RootState) => state.search);
+  const { query, useNewSearch, sort, showFilters, options } = useSelector((state: RootState) => state.search);
 
   // Load query from params
   const { query: queryFromUrl } = useParams();
@@ -45,7 +45,8 @@ export const SearchPage = () => {
   const [{ data, error, fetching, hasMore, total }, fetchMore] = useSearch({
     query,
     sort,
-    paused: !initialized.current
+    paused: !initialized.current,
+    useNewSearch
   });
 
   const insightResults = data.insights.results.map(({ insight }) => {
@@ -74,9 +75,9 @@ export const SearchPage = () => {
       }
     }
 
-    const url = '/search' + generateSearchUrl(query, sort);
+    const url = '/search' + generateSearchUrl(query, sort, useNewSearch);
     navigate(url, { replace: true });
-  }, [dispatch, navigate, query, queryFromUrl, searchParams, sort]);
+  }, [dispatch, navigate, query, useNewSearch, queryFromUrl, searchParams, sort]);
 
   useDebounce(
     () => {

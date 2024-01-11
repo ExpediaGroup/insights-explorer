@@ -53,11 +53,11 @@ describe('search', () => {
     });
     test('two words', () => {
       const clauses: any[] = parseSearchQuery('avocado toast');
-      expect(clauses).toHaveLength(2);
+      expect(clauses).toHaveLength(1);
       expect(clauses[0]).toBeInstanceOf(SearchMatch);
-      expect(clauses[1]).toBeInstanceOf(SearchMatch);
-      expect(clauses[0].value).toBe('avocado');
-      expect(clauses[1].value).toBe('toast');
+      // expect(clauses[1]).toBeInstanceOf(SearchMatch);
+      expect(clauses[0].value).toBe('avocado toast');
+      // expect(clauses[1].value).toBe('toast');
     });
     test('number as word', () => {
       const clauses: any[] = parseSearchQuery('42');
@@ -67,13 +67,13 @@ describe('search', () => {
     });
     test('symbols in words', () => {
       const clauses: any[] = parseSearchQuery("1st Bank's $50");
-      expect(clauses).toHaveLength(3);
+      expect(clauses).toHaveLength(1);
       expect(clauses[0]).toBeInstanceOf(SearchMatch);
-      expect(clauses[0].value).toBe('1st');
-      expect(clauses[1]).toBeInstanceOf(SearchMatch);
-      expect(clauses[1].value).toBe("Bank's");
-      expect(clauses[2]).toBeInstanceOf(SearchMatch);
-      expect(clauses[2].value).toBe('$50');
+      expect(clauses[0].value).toBe("1st Bank's $50");
+      // expect(clauses[1]).toBeInstanceOf(SearchMatch);
+      // expect(clauses[1].value).toBe("Bank's");
+      // expect(clauses[2]).toBeInstanceOf(SearchMatch);
+      // expect(clauses[2].value).toBe('$50');
     });
     test('single term', () => {
       const clauses: any[] = parseSearchQuery('tag:hotels');

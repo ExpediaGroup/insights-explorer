@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/switch-case-braces */
 /**
  * Copyright 2021 Expedia, Inc.
  *
@@ -30,39 +31,28 @@ const logger = getLogger('search');
  */
 function convertField(key: string): string {
   switch (key) {
-    case 'tag': {
+    case 'tag':
       return 'tags.keyword';
-    }
-    case 'author': {
+    case 'author':
       return 'contributors.userName.keyword';
-    }
-    case 'user': {
+    case 'user':
       return 'user.userName.keyword';
-    }
-    case 'targetUser': {
+    case 'targetUser':
       return 'details.userName.keyword';
-    }
-    case 'team': {
+    case 'team':
       return 'metadata.team.keyword';
-    }
-    case 'createdDate': {
+    case 'createdDate':
       return 'createdAt';
-    }
-    case 'updatedDate': {
+    case 'updatedDate':
       return 'updatedAt';
-    }
-    case 'publishedDate': {
+    case 'publishedDate':
       return 'metadata.publishedDate';
-    }
-    case 'itemType': {
+    case 'itemType':
       return 'itemType';
-    }
-    case 'insight': {
+    case 'insight':
       return 'details.insightName.keyword';
-    }
-    default: {
+    default:
       return key;
-    }
   }
 }
 
@@ -73,21 +63,16 @@ function convertField(key: string): string {
  */
 function convertOperation(operation: string): string {
   switch (operation) {
-    case '>': {
+    case '>':
       return 'gt';
-    }
-    case '>=': {
+    case '>=':
       return 'gte';
-    }
-    case '<': {
+    case '<':
       return 'lt';
-    }
-    case '<=': {
+    case '<=':
       return 'lte';
-    }
-    default: {
+    default:
       return operation;
-    }
   }
 }
 
@@ -104,7 +89,7 @@ export class SearchMatch implements SearchClause {
   }
 
   toElasticsearch(): any {
-    logger.debug(`Match option in OLD SEARCH`);
+    logger.debug(`Match option in NEW SEARCH`);
     return {
       bool: {
         minimum_should_match: 1,
@@ -112,9 +97,38 @@ export class SearchMatch implements SearchClause {
           {
             multi_match: {
               query: this.value,
-              fields: '*',
-              type: 'most_fields',
-              fuzziness: 'AUTO'
+              fields: [
+                'description',
+                'name^3',
+                'fullName', // (index with simple analyzer?)
+                'tags',
+                'readme.contents', // (index with english analyzer?)
+                '_collaborators.user.userName',
+                '_collaborators.user.displayName',
+                'contributors.userName',
+                'contributors.displayName'
+              ],
+              type: 'best_fields',
+              fuzziness: 'AUTO',
+              analyzer: 'simple'
+            }
+          },
+          {
+            multi_match: {
+              query: this.value,
+              fields: [
+                'description',
+                'name^3',
+                'fullName', // (index with simple analyzer?)
+                'tags',
+                'readme.contents', // (index with english analyzer?)
+                '_collaborators.user.userName',
+                '_collaborators.user.displayName',
+                'contributors.userName',
+                'contributors.displayName'
+              ],
+              type: 'phrase_prefix',
+              analyzer: 'standard'
             }
           }
         ]
@@ -218,15 +232,12 @@ export class SearchTerm implements SearchClause {
 
   toString(): string {
     switch (this.key) {
-      case 'author': {
+      case 'author':
         return this.value.includes(' ') ? `author:"${this.value}"` : `@${this.value}`;
-      }
-      case 'tag': {
+      case 'tag':
         return `#${this.value}`;
-      }
-      default: {
+      default:
         return this.value.includes(' ') ? `${this.key}:"${this.value}"` : `${this.key}:${this.value}`;
-      }
     }
   }
 }
@@ -369,6 +380,24 @@ const lang = Parsimmon.createLanguage({
     //   Parsimmon.regexp(/[^\s:]+/i)
     // );
   },
+  Words: (r) => {
+    return (
+      r.Word
+        // Skip words immediately followed by a filter separator
+        // These are a type of Term
+        .notFollowedBy(r.FilterSeparator)
+        // Combine multiple words into one, separated by whitespace
+        // Must have at least one word
+        .sepBy1(
+          Parsimmon.whitespace.notFollowedBy(
+            // Stop combining words if we see any of these terms
+            // It will be parsed as a separate Token
+            Parsimmon.alt(r.String, r.AuthorTerm, r.TagTerm)
+          )
+        )
+        .map((words) => words.join(' '))
+    );
+  },
   CompoundRangeWord: () => {
     return Parsimmon.regexp(/[^\s:[\]]+/i).fallback('');
   },
@@ -389,7 +418,7 @@ const lang = Parsimmon.createLanguage({
     });
   },
   Match: (r) => {
-    return r.Word.map((value) => new SearchMatch(value));
+    return r.Words.map((value) => new SearchMatch(value));
   },
   Phrase: (r) => {
     return r.String.map((s) => new SearchPhrase(s));
@@ -521,7 +550,7 @@ export function parseToElasticsearch(
   searchQuery: string,
   modifier?: (clauses: SearchClause[]) => SearchClause[]
 ): SearchQuery {
-  logger.debug(`In parsetoElasticsearch OLD, the searchQuery is ${searchQuery}`);
+  logger.debug(`In parsetoElasticsearchNEW, the searchQuery is ${searchQuery}`);
   let clauses = parseSearchQuery(searchQuery);
 
   if (modifier) {
@@ -529,6 +558,6 @@ export function parseToElasticsearch(
     clauses = modifier([...clauses]);
   }
 
-  logger.debug(`parseToElasticsearch OLD is going to return ${JSON.stringify(toElasticsearch(clauses), null, 2)}`);
+  logger.debug(`parseToElasticsearchNEW is going to return ${JSON.stringify(toElasticsearch(clauses), null, 2)}`);
   return toElasticsearch(clauses);
 }

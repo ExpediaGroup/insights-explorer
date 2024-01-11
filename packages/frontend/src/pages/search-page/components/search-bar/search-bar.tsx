@@ -24,6 +24,7 @@ import {
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
+  Switch,
   Tooltip
 } from '@chakra-ui/react';
 import type { ReactElement } from 'react';
@@ -31,6 +32,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
+// import { toggleUseNewSearch } from '../../../../../../backend/src/lib/elasticsearch';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
 import { useDebounce } from '../../../../shared/useDebounce';
 import { searchSlice } from '../../../../store/search.slice';
@@ -52,11 +54,19 @@ const availableSortFields = [
 
 export const SearchBar = (): ReactElement => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { query, sort, showFilters, isFiltered, options } = useSelector((state: RootState) => state.search);
+  const { query, useNewSearch, sort, showFilters, isFiltered, options } = useSelector(
+    (state: RootState) => state.search
+  );
 
   const [internalQuery, setInternalQuery] = useState(query);
+
   const previousQueryRef = useRef(query);
+
+  const setUseNewSearch = (value: boolean) => {
+    dispatch(searchSlice.actions.setUseNewSearch(value));
+
+    //trigger a new search, how to do this well?
+  };
 
   const toggleShowFilters = () => {
     dispatch(searchSlice.actions.setShowFilters(!showFilters));
@@ -124,6 +134,16 @@ export const SearchBar = (): ReactElement => {
         canClear={query.length > 0 || sort !== undefined}
       />
 
+      <Tooltip placement="left" label="Use new search" aria-label="Use new search" zIndex="10">
+        <Switch
+          id="enable-new-search"
+          colorScheme="nord8"
+          aria-label="Use New Search"
+          isChecked={useNewSearch}
+          onChange={(event) => setUseNewSearch(event?.target.checked)}
+        />
+      </Tooltip>
+
       <SearchSyntax />
 
       <Menu>
@@ -132,7 +152,7 @@ export const SearchBar = (): ReactElement => {
             <IconButton
               variant={sort === undefined ? 'ghost' : 'solid'}
               bgColor={sort === undefined ? 'clear' : 'frost.200'}
-              aria-label="Show sort options"
+              aria-label="stupid sort options"
               icon={sort?.direction === 'asc' ? iconFactoryAs('sortUp') : iconFactoryAs('sortDown')}
             />
           </MenuButton>
