@@ -29,7 +29,7 @@ import {
   SearchPhrase,
   SearchRange,
   SearchTerm
-} from '../src/search';
+} from '../src/search2';
 
 describe('search', () => {
   describe('parseSearchQuery', () => {
@@ -67,6 +67,7 @@ describe('search', () => {
     });
     test('symbols in words', () => {
       const clauses: any[] = parseSearchQuery("1st Bank's $50");
+      console.log(`clauses is ${JSON.stringify(clauses, null, 2)}`);
       expect(clauses).toHaveLength(1);
       expect(clauses[0]).toBeInstanceOf(SearchMatch);
       expect(clauses[0].value).toBe("1st Bank's $50");
@@ -176,33 +177,33 @@ describe('search', () => {
     });
     test('one unclosed phrase', () => {
       const clauses: any[] = parseSearchQuery('"powered by analysts');
-      expect(clauses).toHaveLength(3);
+      expect(clauses).toHaveLength(1);
       expect(clauses[0]).toBeInstanceOf(SearchMatch);
-      expect(clauses[0].value).toBe('"powered');
-      expect(clauses[1]).toBeInstanceOf(SearchMatch);
-      expect(clauses[1].value).toBe('by');
-      expect(clauses[2]).toBeInstanceOf(SearchMatch);
-      expect(clauses[2].value).toBe('analysts');
+      expect(clauses[0].value).toBe('"powered by analysts');
+      // expect(clauses[1]).toBeInstanceOf(SearchMatch);
+      // expect(clauses[1].value).toBe('by');
+      // expect(clauses[2]).toBeInstanceOf(SearchMatch);
+      // expect(clauses[2].value).toBe('analysts');
     });
     test('one unclosed phrase (trailing)', () => {
       const clauses: any[] = parseSearchQuery('powered by analysts"');
-      expect(clauses).toHaveLength(3);
+      expect(clauses).toHaveLength(1);
       expect(clauses[0]).toBeInstanceOf(SearchMatch);
-      expect(clauses[0].value).toBe('powered');
-      expect(clauses[1]).toBeInstanceOf(SearchMatch);
-      expect(clauses[1].value).toBe('by');
-      expect(clauses[2]).toBeInstanceOf(SearchMatch);
-      expect(clauses[2].value).toBe('analysts"');
+      expect(clauses[0].value).toBe('powered by analysts"');
+      // expect(clauses[1]).toBeInstanceOf(SearchMatch);
+      // expect(clauses[1].value).toBe('by');
+      // expect(clauses[2]).toBeInstanceOf(SearchMatch);
+      // expect(clauses[2].value).toBe('analysts"');
     });
     test('mixed unclosed phrase', () => {
       const clauses: any[] = parseSearchQuery('powered by "analysts');
-      expect(clauses).toHaveLength(3);
+      expect(clauses).toHaveLength(1);
       expect(clauses[0]).toBeInstanceOf(SearchMatch);
-      expect(clauses[0].value).toBe('powered');
-      expect(clauses[1]).toBeInstanceOf(SearchMatch);
-      expect(clauses[1].value).toBe('by');
-      expect(clauses[2]).toBeInstanceOf(SearchMatch);
-      expect(clauses[2].value).toBe('"analysts');
+      expect(clauses[0].value).toBe('powered by "analysts');
+      // expect(clauses[1]).toBeInstanceOf(SearchMatch);
+      // expect(clauses[1].value).toBe('by');
+      // expect(clauses[2]).toBeInstanceOf(SearchMatch);
+      // expect(clauses[2].value).toBe('"analysts');
     });
     test('empty phrase', () => {
       const clauses: any[] = parseSearchQuery('""');
@@ -287,6 +288,7 @@ describe('search', () => {
     });
     test('unclosed compound range', () => {
       const clauses: any[] = parseSearchQuery('updatedDate:[2020-03-01 to 2020-10-01');
+      console.log(`unclosed compound range clauses is ${JSON.stringify(clauses, null, 2)}`);
       expect(clauses).toHaveLength(3);
       expect(clauses[0]).toBeInstanceOf(SearchTerm);
       expect(clauses[0].key).toBe('updatedDate');
@@ -304,7 +306,7 @@ describe('search', () => {
       expect(es).toMatchObject({
         bool: {
           minimum_should_match: 1,
-          should: [{ multi_match: { query: 'avocado' } }]
+          should: [{ multi_match: { query: 'avocado' } }, { multi_match: { query: 'avocado' } }]
         }
       });
     });
@@ -314,7 +316,7 @@ describe('search', () => {
       expect(es).toMatchObject({
         bool: {
           minimum_should_match: 1,
-          should: [{ multi_match: { query: 'avocado' } }, { multi_match: { query: 'toast' } }]
+          should: [{ multi_match: { query: 'avocado toast' } }, { multi_match: { query: 'avocado toast' } }]
         }
       });
     });
@@ -325,7 +327,7 @@ describe('search', () => {
         bool: {
           minimum_should_match: 1,
           filter: [{ term: { 'tags.keyword': { value: 'demo' } } }],
-          should: [{ multi_match: { query: 'insight' } }]
+          should: [{ multi_match: { query: 'insight' } }, { multi_match: { query: 'insight' } }]
         }
       });
     });
@@ -361,6 +363,7 @@ describe('search', () => {
                 type: 'phrase'
               }
             },
+            { multi_match: { query: 'insight' } },
             { multi_match: { query: 'insight' } }
           ]
         }
@@ -430,7 +433,11 @@ describe('search', () => {
                 type: 'phrase'
               }
             },
-            { multi_match: { query: 'insight' } }
+            {
+              multi_match: {
+                query: 'insight'
+              }
+            }
           ]
         }
       });

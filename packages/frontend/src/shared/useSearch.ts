@@ -143,7 +143,7 @@ export function useSearch({ query, useNewSearch = true, sort, paused = false }: 
     }
 
     // Generate a unique ID for this request so we can ignore old responses
-    const requestId = `r||${query}||${sort}||${from.current}`;
+    const requestId = `r||${query}||${sort}||${from.current}||${useNewSearch}`;
     if (latestRequest.current === requestId) {
       // Ignore duplicate requests
       // The infinite scroll component may trigger multiple requests for the same page
