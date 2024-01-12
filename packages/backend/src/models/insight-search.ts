@@ -38,6 +38,9 @@ export class InsightSearch {
   @Field()
   query!: string;
 
+  @Field()
+  useNewSearch!: boolean;
+
   @Field(() => [Sort], { nullable: true })
   sort?: Sort[];
 

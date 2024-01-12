@@ -24,6 +24,7 @@ import {
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
+  Switch,
   Tooltip
 } from '@chakra-ui/react';
 import type { ReactElement } from 'react';
@@ -52,11 +53,17 @@ const availableSortFields = [
 
 export const SearchBar = (): ReactElement => {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { query, sort, showFilters, isFiltered, options } = useSelector((state: RootState) => state.search);
+  const { query, useNewSearch, sort, showFilters, isFiltered, options } = useSelector(
+    (state: RootState) => state.search
+  );
 
   const [internalQuery, setInternalQuery] = useState(query);
+
   const previousQueryRef = useRef(query);
+
+  const setUseNewSearch = (value: boolean) => {
+    dispatch(searchSlice.actions.setUseNewSearch(value));
+  };
 
   const toggleShowFilters = () => {
     dispatch(searchSlice.actions.setShowFilters(!showFilters));
@@ -123,6 +130,16 @@ export const SearchBar = (): ReactElement => {
         onClear={onClear}
         canClear={query.length > 0 || sort !== undefined}
       />
+
+      <Tooltip placement="left" label="Use new search" aria-label="Use new search" zIndex="10">
+        <Switch
+          id="enable-new-search"
+          colorScheme="nord8"
+          aria-label="Use New Search"
+          isChecked={useNewSearch}
+          onChange={(event) => setUseNewSearch(event?.target.checked)}
+        />
+      </Tooltip>
 
       <SearchSyntax />
 

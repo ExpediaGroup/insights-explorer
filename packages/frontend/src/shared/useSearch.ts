@@ -81,6 +81,7 @@ const INSIGHTS_QUERY = gql`
 
 export interface UseSearchProps {
   query?: string;
+  useNewSearch?: boolean;
   sort?: Sort;
   paused?: boolean;
 }
@@ -122,7 +123,7 @@ export type UseSearchReturnType = [SearchResultState, () => Promise<void>];
  * @param {boolean} [options.paused=false] - Whether the search is paused.
  * @returns {UseSearchReturnType} - The search result state and a function to fetch more results.
  */
-export function useSearch({ query, sort, paused = false }: UseSearchProps): UseSearchReturnType {
+export function useSearch({ query, useNewSearch = true, sort, paused = false }: UseSearchProps): UseSearchReturnType {
   const [fetching, setFetching] = useState(true);
 
   const [suggestedFilters, setSuggestedFilters] = useState<AutocompleteResults | undefined>();
@@ -142,7 +143,7 @@ export function useSearch({ query, sort, paused = false }: UseSearchProps): UseS
     }
 
     // Generate a unique ID for this request so we can ignore old responses
-    const requestId = `r||${query}||${sort}||${from.current}`;
+    const requestId = `r||${query}||${sort}||${from.current}||${useNewSearch}`;
     if (latestRequest.current === requestId) {
       // Ignore duplicate requests
       // The infinite scroll component may trigger multiple requests for the same page
@@ -155,6 +156,7 @@ export function useSearch({ query, sort, paused = false }: UseSearchProps): UseS
       .query(INSIGHTS_QUERY, {
         search: {
           query: query || '',
+          useNewSearch,
           sort: sort && [sort],
           paging: {
             from: from.current,
@@ -188,7 +190,7 @@ export function useSearch({ query, sort, paused = false }: UseSearchProps): UseS
 
     // Done!
     setFetching(false);
-  }, [paused, query, sort]);
+  }, [paused, query, useNewSearch, sort]);
 
   useEffect(() => {
     // Reset the scroll state whenever query/sort changes

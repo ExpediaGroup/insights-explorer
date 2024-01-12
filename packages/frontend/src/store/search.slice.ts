@@ -28,6 +28,7 @@ export interface SearchOptions {
 
 export interface SearchState {
   query: string;
+  useNewSearch: boolean;
   sort?: Sort;
   paging?: Paging;
 
@@ -43,6 +44,7 @@ export interface SearchState {
 
 const initialState: SearchState = {
   query: '',
+  useNewSearch: true,
   sort: undefined,
   paging: undefined,
   isFiltered: false,
@@ -61,6 +63,9 @@ export const searchSlice = createSlice({
   reducers: {
     setQuery(state, action: PayloadAction<string>) {
       state.query = action.payload;
+    },
+    setUseNewSearch(state, action: PayloadAction<boolean>) {
+      state.useNewSearch = action.payload;
     },
     setSort(state, action: PayloadAction<Sort | undefined>) {
       state.sort = action.payload;
@@ -105,7 +110,10 @@ export const searchSlice = createSlice({
     },
     parseUrlIntoState(
       state,
-      action: PayloadAction<{ query: string | undefined; searchParams: { sort?: string; dir?: string } }>
+      action: PayloadAction<{
+        query: string | undefined;
+        searchParams: { sort?: string; dir?: string; legacySearch?: boolean };
+      }>
     ) {
       const { query, searchParams } = action.payload;
       // Take URL only if not empty
@@ -124,6 +132,11 @@ export const searchSlice = createSlice({
           state.sort = {};
         }
         state.sort.direction = searchParams.dir as 'asc' | 'desc';
+        modified = true;
+      }
+
+      if (searchParams.legacySearch) {
+        state.useNewSearch = false;
         modified = true;
       }
 
