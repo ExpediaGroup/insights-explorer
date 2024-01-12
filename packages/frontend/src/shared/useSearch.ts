@@ -152,7 +152,6 @@ export function useSearch({ query, useNewSearch = true, sort, paused = false }: 
 
     latestRequest.current = requestId;
 
-    console.log(`In useSearch, the current value of useNewSearch is ${useNewSearch}`);
     const { data: nextPage, error } = await urqlClient
       .query(INSIGHTS_QUERY, {
         search: {

@@ -20,9 +20,6 @@ import isArray from 'lodash/isArray';
 import mergeWith from 'lodash/mergeWith';
 import Parsimmon, { optWhitespace } from 'parsimmon';
 
-import { getLogger } from './logger';
-
-const logger = getLogger('search');
 /**
  * Translates from user-facing search keys to Elasticsearch fields.
  *
@@ -104,7 +101,6 @@ export class SearchMatch implements SearchClause {
   }
 
   toElasticsearch(): any {
-    logger.debug(`Match option in OLD SEARCH`);
     return {
       bool: {
         minimum_should_match: 1,
@@ -351,23 +347,7 @@ export class SearchNestedOrFilter implements SearchClause {
 //
 const lang = Parsimmon.createLanguage({
   Word: () => {
-    // TODO: if(legacySearch) { old version } else { new version }
-    // old Word is just Parsimmon.regexp(/[^\s:]+/i)
     return Parsimmon.regexp(/[^\s:]+/i);
-    // new version combines multiple words found next to each other into one word
-    // return Parsimmon.alt(
-    //   Parsimmon.seq(
-    //     Parsimmon.regexp(/[^\s:]+/i),
-    //     Parsimmon.optWhitespace,
-    //     Parsimmon.regexp(/[^\s:]+/i),
-    //     Parsimmon.optWhitespace,
-    //     Parsimmon.regexp(/[^\s:]+/i)
-    //   ).map(([first, , second, , third]) => first + ' ' + second + ' ' + third),
-    //   Parsimmon.seq(Parsimmon.regexp(/[^\s:]+/i), Parsimmon.optWhitespace, Parsimmon.regexp(/[^\s:]+/i)).map(
-    //     ([first, , second]) => first + ' ' + second
-    //   ),
-    //   Parsimmon.regexp(/[^\s:]+/i)
-    // );
   },
   CompoundRangeWord: () => {
     return Parsimmon.regexp(/[^\s:[\]]+/i).fallback('');
@@ -476,11 +456,7 @@ const lang = Parsimmon.createLanguage({
  * @param searchQuery Query text
  */
 export function parseSearchQuery(searchQuery: string): SearchClause[] {
-  logger.debug('Parsing search query ' + searchQuery);
   const clauses: SearchClause[] = lang.Query.tryParse(searchQuery);
-  logger.debug(`tryParse values would be ${lang.Query.tryParse(searchQuery)}`);
-
-  logger.debug('Parsed clauses ' + JSON.stringify(clauses));
   return clauses;
 }
 
@@ -521,7 +497,6 @@ export function parseToElasticsearch(
   searchQuery: string,
   modifier?: (clauses: SearchClause[]) => SearchClause[]
 ): SearchQuery {
-  logger.debug(`In parsetoElasticsearch OLD, the searchQuery is ${searchQuery}`);
   let clauses = parseSearchQuery(searchQuery);
 
   if (modifier) {
@@ -529,6 +504,5 @@ export function parseToElasticsearch(
     clauses = modifier([...clauses]);
   }
 
-  logger.debug(`parseToElasticsearch OLD is going to return ${JSON.stringify(toElasticsearch(clauses), null, 2)}`);
   return toElasticsearch(clauses);
 }

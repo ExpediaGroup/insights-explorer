@@ -287,7 +287,6 @@ describe('search', () => {
     });
     test('unclosed compound range', () => {
       const clauses: any[] = parseSearchQuery('updatedDate:[2020-03-01 to 2020-10-01');
-      console.log(`unclosed compound range clauses is ${JSON.stringify(clauses, null, 2)}`);
       expect(clauses).toHaveLength(3);
       expect(clauses[0]).toBeInstanceOf(SearchTerm);
       expect(clauses[0].key).toBe('updatedDate');

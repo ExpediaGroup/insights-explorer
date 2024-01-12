@@ -362,23 +362,7 @@ export class SearchNestedOrFilter implements SearchClause {
 //
 const lang = Parsimmon.createLanguage({
   Word: () => {
-    // TODO: if(legacySearch) { old version } else { new version }
-    // old Word is just Parsimmon.regexp(/[^\s:]+/i)
     return Parsimmon.regexp(/[^\s:]+/i);
-    // new version combines multiple words found next to each other into one word
-    // return Parsimmon.alt(
-    //   Parsimmon.seq(
-    //     Parsimmon.regexp(/[^\s:]+/i),
-    //     Parsimmon.optWhitespace,
-    //     Parsimmon.regexp(/[^\s:]+/i),
-    //     Parsimmon.optWhitespace,
-    //     Parsimmon.regexp(/[^\s:]+/i)
-    //   ).map(([first, , second, , third]) => first + ' ' + second + ' ' + third),
-    //   Parsimmon.seq(Parsimmon.regexp(/[^\s:]+/i), Parsimmon.optWhitespace, Parsimmon.regexp(/[^\s:]+/i)).map(
-    //     ([first, , second]) => first + ' ' + second
-    //   ),
-    //   Parsimmon.regexp(/[^\s:]+/i)
-    // );
   },
   Words: (r) => {
     return (

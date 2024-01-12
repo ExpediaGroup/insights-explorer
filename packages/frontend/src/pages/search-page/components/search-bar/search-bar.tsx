@@ -32,7 +32,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-// import { toggleUseNewSearch } from '../../../../../../backend/src/lib/elasticsearch';
 import { iconFactoryAs } from '../../../../shared/icon-factory';
 import { useDebounce } from '../../../../shared/useDebounce';
 import { searchSlice } from '../../../../store/search.slice';
@@ -64,8 +63,6 @@ export const SearchBar = (): ReactElement => {
 
   const setUseNewSearch = (value: boolean) => {
     dispatch(searchSlice.actions.setUseNewSearch(value));
-
-    //trigger a new search, how to do this well?
   };
 
   const toggleShowFilters = () => {
@@ -92,7 +89,7 @@ export const SearchBar = (): ReactElement => {
         previousQueryRef.current = internalQuery;
       }
     },
-    100,
+    250,
     [internalQuery]
   );
 
@@ -152,7 +149,7 @@ export const SearchBar = (): ReactElement => {
             <IconButton
               variant={sort === undefined ? 'ghost' : 'solid'}
               bgColor={sort === undefined ? 'clear' : 'frost.200'}
-              aria-label="stupid sort options"
+              aria-label="Show sort options"
               icon={sort?.direction === 'asc' ? iconFactoryAs('sortUp') : iconFactoryAs('sortDown')}
             />
           </MenuButton>
