@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2024 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -285,7 +285,10 @@ describe('search', () => {
       expect(es).toMatchObject({
         bool: {
           minimum_should_match: 1,
-          should: [{ multi_match: { query: 'avocado' } }, { multi_match: { query: 'avocado' } }]
+          should: [
+            { multi_match: { query: 'avocado', type: 'best_fields' } },
+            { multi_match: { query: 'avocado', type: 'phrase_prefix' } }
+          ]
         }
       });
     });
@@ -295,7 +298,10 @@ describe('search', () => {
       expect(es).toMatchObject({
         bool: {
           minimum_should_match: 1,
-          should: [{ multi_match: { query: 'avocado toast' } }, { multi_match: { query: 'avocado toast' } }]
+          should: [
+            { multi_match: { query: 'avocado toast', type: 'best_fields' } },
+            { multi_match: { query: 'avocado toast', type: 'phrase_prefix' } }
+          ]
         }
       });
     });
@@ -306,7 +312,10 @@ describe('search', () => {
         bool: {
           minimum_should_match: 1,
           filter: [{ term: { 'tags.keyword': { value: 'demo' } } }],
-          should: [{ multi_match: { query: 'insight' } }, { multi_match: { query: 'insight' } }]
+          should: [
+            { multi_match: { query: 'insight', type: 'best_fields' } },
+            { multi_match: { query: 'insight', type: 'phrase_prefix' } }
+          ]
         }
       });
     });
@@ -342,8 +351,8 @@ describe('search', () => {
                 type: 'phrase'
               }
             },
-            { multi_match: { query: 'insight' } },
-            { multi_match: { query: 'insight' } }
+            { multi_match: { query: 'insight', type: 'best_fields' } },
+            { multi_match: { query: 'insight', type: 'phrase_prefix' } }
           ]
         }
       });
@@ -414,12 +423,14 @@ describe('search', () => {
             },
             {
               multi_match: {
-                query: 'insight'
+                query: 'insight',
+                type: 'best_fields'
               }
             },
             {
               multi_match: {
-                query: 'insight'
+                query: 'insight',
+                type: 'phrase_prefix'
               }
             }
           ]
