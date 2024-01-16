@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/switch-case-braces */
 /**
  * Copyright 2024 Expedia, Inc.
  *
@@ -15,6 +14,7 @@
  * limitations under the License.
  */
 
+/* eslint-disable unicorn/switch-case-braces */
 import type { SearchQuery } from '@iex/models/elasticsearch';
 import { isObject } from 'lodash';
 import isArray from 'lodash/isArray';
