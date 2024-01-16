@@ -128,6 +128,7 @@ export class SearchMatch implements SearchClause {
                 'contributors.displayName'
               ],
               type: 'phrase_prefix',
+              slop: 2,
               analyzer: 'standard'
             }
           }
