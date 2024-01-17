@@ -130,6 +130,10 @@
             "type": "keyword",
             "ignore_above": 512,
             "normalizer": "lowercase_normalizer"
+          },
+          "simple": {
+            "type": "text",
+            "analyzer": "simple"
           }
         }
       },
@@ -278,10 +282,7 @@
       "normalizer": {
         "lowercase_normalizer": {
           "type": "custom",
-          "filter": [
-            "lowercase",
-            "trim"
-          ]
+          "filter": ["lowercase", "trim"]
         }
       }
     }

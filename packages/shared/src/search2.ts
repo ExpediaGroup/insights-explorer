@@ -99,14 +99,18 @@ export class SearchMatch implements SearchClause {
               query: this.value,
               fields: [
                 'description',
-                'name^3',
+                'name.simple^3',
                 'fullName', // (index with simple analyzer?)
-                'tags',
+                'tags^2',
                 'readme.contents', // (index with english analyzer?)
                 '_collaborators.user.userName',
                 '_collaborators.user.displayName',
                 'contributors.userName',
-                'contributors.displayName'
+                'contributors.displayName',
+                'files.path',
+                'files.contents',
+                'files.mimeType',
+                'metadata.team'
               ],
               type: 'best_fields',
               fuzziness: 'AUTO',
@@ -118,14 +122,18 @@ export class SearchMatch implements SearchClause {
               query: this.value,
               fields: [
                 'description',
-                'name^3',
+                'name.simple^3',
                 'fullName', // (index with simple analyzer?)
-                'tags',
+                'tags^2',
                 'readme.contents', // (index with english analyzer?)
                 '_collaborators.user.userName',
                 '_collaborators.user.displayName',
                 'contributors.userName',
-                'contributors.displayName'
+                'contributors.displayName',
+                'files.path',
+                'files.contents',
+                'files.mimeType',
+                'metadata.team'
               ],
               type: 'phrase_prefix',
               slop: 2,
