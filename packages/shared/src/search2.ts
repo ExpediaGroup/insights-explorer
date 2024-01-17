@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-/* eslint-disable unicorn/switch-case-braces */
 import type { SearchQuery } from '@iex/models/elasticsearch';
 import { isObject } from 'lodash';
 import isArray from 'lodash/isArray';
 import mergeWith from 'lodash/mergeWith';
 import Parsimmon, { optWhitespace } from 'parsimmon';
 
-import { getLogger } from './logger';
-
-const logger = getLogger('search');
 /**
  * Translates from user-facing search keys to Elasticsearch fields.
  *
@@ -31,28 +27,39 @@ const logger = getLogger('search');
  */
 function convertField(key: string): string {
   switch (key) {
-    case 'tag':
+    case 'tag': {
       return 'tags.keyword';
-    case 'author':
+    }
+    case 'author': {
       return 'contributors.userName.keyword';
-    case 'user':
+    }
+    case 'user': {
       return 'user.userName.keyword';
-    case 'targetUser':
+    }
+    case 'targetUser': {
       return 'details.userName.keyword';
-    case 'team':
+    }
+    case 'team': {
       return 'metadata.team.keyword';
-    case 'createdDate':
+    }
+    case 'createdDate': {
       return 'createdAt';
-    case 'updatedDate':
+    }
+    case 'updatedDate': {
       return 'updatedAt';
-    case 'publishedDate':
+    }
+    case 'publishedDate': {
       return 'metadata.publishedDate';
-    case 'itemType':
+    }
+    case 'itemType': {
       return 'itemType';
-    case 'insight':
+    }
+    case 'insight': {
       return 'details.insightName.keyword';
-    default:
+    }
+    default: {
       return key;
+    }
   }
 }
 
@@ -63,16 +70,21 @@ function convertField(key: string): string {
  */
 function convertOperation(operation: string): string {
   switch (operation) {
-    case '>':
+    case '>': {
       return 'gt';
-    case '>=':
+    }
+    case '>=': {
       return 'gte';
-    case '<':
+    }
+    case '<': {
       return 'lt';
-    case '<=':
+    }
+    case '<=': {
       return 'lte';
-    default:
+    }
+    default: {
       return operation;
+    }
   }
 }
 
@@ -89,7 +101,6 @@ export class SearchMatch implements SearchClause {
   }
 
   toElasticsearch(): any {
-    logger.debug(`Match option in NEW SEARCH`);
     return {
       bool: {
         minimum_should_match: 1,
@@ -100,9 +111,9 @@ export class SearchMatch implements SearchClause {
               fields: [
                 'description',
                 'name.simple^3',
-                'fullName', // (index with simple analyzer?)
+                'fullName',
                 'tags^2',
-                'readme.contents', // (index with english analyzer?)
+                'readme.contents',
                 '_collaborators.user.userName',
                 '_collaborators.user.displayName',
                 'contributors.userName',
@@ -122,10 +133,10 @@ export class SearchMatch implements SearchClause {
               query: this.value,
               fields: [
                 'description',
-                'name.simple^3',
-                'fullName', // (index with simple analyzer?)
+                'name^3',
+                'fullName',
                 'tags^2',
-                'readme.contents', // (index with english analyzer?)
+                'readme.contents',
                 '_collaborators.user.userName',
                 '_collaborators.user.displayName',
                 'contributors.userName',
@@ -241,12 +252,15 @@ export class SearchTerm implements SearchClause {
 
   toString(): string {
     switch (this.key) {
-      case 'author':
+      case 'author': {
         return this.value.includes(' ') ? `author:"${this.value}"` : `@${this.value}`;
-      case 'tag':
+      }
+      case 'tag': {
         return `#${this.value}`;
-      default:
+      }
+      default: {
         return this.value.includes(' ') ? `${this.key}:"${this.value}"` : `${this.key}:${this.value}`;
+      }
     }
   }
 }
@@ -498,11 +512,7 @@ const lang = Parsimmon.createLanguage({
  * @param searchQuery Query text
  */
 export function parseSearchQuery(searchQuery: string): SearchClause[] {
-  logger.debug('Parsing search query ' + searchQuery);
   const clauses: SearchClause[] = lang.Query.tryParse(searchQuery);
-  logger.debug(`tryParse values would be ${lang.Query.tryParse(searchQuery)}`);
-
-  logger.debug('Parsed clauses ' + JSON.stringify(clauses));
   return clauses;
 }
 
@@ -543,7 +553,6 @@ export function parseToElasticsearch(
   searchQuery: string,
   modifier?: (clauses: SearchClause[]) => SearchClause[]
 ): SearchQuery {
-  logger.debug(`In parsetoElasticsearchNEW, the searchQuery is ${searchQuery}`);
   let clauses = parseSearchQuery(searchQuery);
 
   if (modifier) {
@@ -551,6 +560,5 @@ export function parseToElasticsearch(
     clauses = modifier([...clauses]);
   }
 
-  logger.debug(`parseToElasticsearchNEW is going to return ${JSON.stringify(toElasticsearch(clauses), null, 2)}`);
   return toElasticsearch(clauses);
 }
