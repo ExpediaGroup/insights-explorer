@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.26.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.23...v3.26.0) (2024-01-18)
+
+
+### Features
+
+* Add a new search implementation ([#1984](https://github.com/ExpediaGroup/insights-explorer/issues/1984)) ([02bd961](https://github.com/ExpediaGroup/insights-explorer/commit/02bd961c2df0b29409f3b8423579a85d94c508d4))
+
+
+### Bug Fixes
+
+* **deps:** bump @emotion/styled from 11.10.6 to 11.11.0 ([913aa38](https://github.com/ExpediaGroup/insights-explorer/commit/913aa38b794641ca3896e3336df54d5860d8d7da))
+* **deps:** bump follow-redirects from 1.15.2 to 1.15.4 ([570529f](https://github.com/ExpediaGroup/insights-explorer/commit/570529f0f732da734c1eee8539fd8ad4a6af1ca8))
+* **deps:** bump pino-http from 8.3.3 to 9.0.0 ([1884681](https://github.com/ExpediaGroup/insights-explorer/commit/18846810193a22367f30cddccd37250f77f9cf01))
+* Fix attachment uploading issue caused by ES2022 spread operator ([87ae1d3](https://github.com/ExpediaGroup/insights-explorer/commit/87ae1d39c09cf2a55adbe6ea154752d022d11d9a))
+* Fix saving new avatars to a user profile ([420e134](https://github.com/ExpediaGroup/insights-explorer/commit/420e1342c3d42b4e24bb950649ec4025101c35b0))
+
 ### [3.25.23](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.22...v3.25.23) (2024-01-08)
 
 
