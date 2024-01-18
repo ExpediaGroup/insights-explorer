@@ -7,8 +7,8 @@ COPY . /opt/iex
 RUN npm set progress=false && npm set loglevel warn
 RUN npm ci
 
-RUN npm run build --prefix packages/slackbot && \
-  npm run test --prefix packages/slackbot && \
+RUN npm run build --workspace=@iex/slackbot && \
+  npm run test --workspace=@iex/slackbot && \
   npm run prune:production && \
   npm prune --production
 

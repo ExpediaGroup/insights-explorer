@@ -7,8 +7,8 @@ COPY . /opt/iex
 RUN npm set progress=false && npm set loglevel warn
 RUN npm ci
 
-RUN npm run build --prefix packages/convertbot && \
-  npm run test --prefix packages/convertbot && \
+RUN npm run build --workspace=@iex/convertbot && \
+  npm run test --workspace=@iex/convertbot && \
   npm run prune:production && \
   npm prune --production
 
