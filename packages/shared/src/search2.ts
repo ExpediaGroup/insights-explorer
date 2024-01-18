@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 Expedia, Inc.
+ * Copyright 2024 Expedia, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,9 +108,47 @@ export class SearchMatch implements SearchClause {
           {
             multi_match: {
               query: this.value,
-              fields: '*',
-              type: 'most_fields',
-              fuzziness: 'AUTO'
+              fields: [
+                'description',
+                'name.simple^3',
+                'fullName',
+                'tags^2',
+                'readme.contents',
+                '_collaborators.user.userName',
+                '_collaborators.user.displayName',
+                'contributors.userName',
+                'contributors.displayName',
+                'files.path',
+                'files.contents',
+                'files.mimeType',
+                'metadata.team'
+              ],
+              type: 'best_fields',
+              fuzziness: 'AUTO',
+              analyzer: 'simple'
+            }
+          },
+          {
+            multi_match: {
+              query: this.value,
+              fields: [
+                'description',
+                'name^3',
+                'fullName',
+                'tags^2',
+                'readme.contents',
+                '_collaborators.user.userName',
+                '_collaborators.user.displayName',
+                'contributors.userName',
+                'contributors.displayName',
+                'files.path',
+                'files.contents',
+                'files.mimeType',
+                'metadata.team'
+              ],
+              type: 'phrase_prefix',
+              slop: 2,
+              analyzer: 'standard'
             }
           }
         ]
@@ -349,6 +387,24 @@ const lang = Parsimmon.createLanguage({
   Word: () => {
     return Parsimmon.regexp(/[^\s:]+/i);
   },
+  Words: (r) => {
+    return (
+      r.Word
+        // Skip words immediately followed by a filter separator
+        // These are a type of Term
+        .notFollowedBy(r.FilterSeparator)
+        // Combine multiple words into one, separated by whitespace
+        // Must have at least one word
+        .sepBy1(
+          Parsimmon.whitespace.notFollowedBy(
+            // Stop combining words if we see any of these terms
+            // It will be parsed as a separate Token
+            Parsimmon.alt(r.String, r.AuthorTerm, r.TagTerm)
+          )
+        )
+        .map((words) => words.join(' '))
+    );
+  },
   CompoundRangeWord: () => {
     return Parsimmon.regexp(/[^\s:[\]]+/i).fallback('');
   },
@@ -369,7 +425,7 @@ const lang = Parsimmon.createLanguage({
     });
   },
   Match: (r) => {
-    return r.Word.map((value) => new SearchMatch(value));
+    return r.Words.map((value) => new SearchMatch(value));
   },
   Phrase: (r) => {
     return r.String.map((s) => new SearchPhrase(s));

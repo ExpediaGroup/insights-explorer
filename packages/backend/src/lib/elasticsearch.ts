@@ -21,7 +21,18 @@ import { GetResponse, MgetResponse, SearchBody, SearchResponse } from '@iex/mode
 import { IndexedInsight } from '@iex/models/indexed/indexed-insight';
 import { ItemType } from '@iex/models/item-type';
 import { getLogger } from '@iex/shared/logger';
-import { parseToElasticsearch, SearchMultiTerm, SearchNestedOrFilter, SearchTerm } from '@iex/shared/search';
+import {
+  parseToElasticsearch as parseToElasticsearchOld,
+  SearchMultiTerm as SearchMultiTermOld,
+  SearchNestedOrFilter as SearchNestedOrFilterOld,
+  SearchTerm as SearchTermOld
+} from '@iex/shared/search';
+import {
+  parseToElasticsearch as parseToElasticsearchNew,
+  SearchMultiTerm as SearchMultiTermNew,
+  SearchNestedOrFilter as SearchNestedOrFilterNew,
+  SearchTerm as SearchTermNew
+} from '@iex/shared/search2';
 import { detailedDiff } from 'deep-object-diff';
 import { DateTime } from 'luxon';
 
@@ -321,6 +332,10 @@ export async function searchInsights(
 
   if (search != null) {
     // Parse an IEX search into Elasticsearch query
+    const parseToElasticsearch = search.useNewSearch ? parseToElasticsearchNew : parseToElasticsearchOld;
+    const SearchMultiTerm = search.useNewSearch ? SearchMultiTermNew : SearchMultiTermOld;
+    const SearchNestedOrFilter = search.useNewSearch ? SearchNestedOrFilterNew : SearchNestedOrFilterOld;
+    const SearchTerm = search.useNewSearch ? SearchTermNew : SearchTermOld;
     query.body!.query = parseToElasticsearch(search.query, (clauses) => {
       // This modifier function runs after parsing but before converting to Elasticsearch
 

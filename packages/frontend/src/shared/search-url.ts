@@ -16,7 +16,11 @@
 
 import type { Sort } from '../models/generated/graphql';
 
-export const generateSearchUrl = (query: string | undefined, sort: Sort | undefined) => {
+export const generateSearchUrl = (
+  query: string | undefined,
+  sort: Sort | undefined,
+  useNewSearch?: boolean | undefined
+) => {
   const path = `/${encodeURIComponent(query || '')}`;
   const searchParams: string[] = [];
   if (sort != null) {
@@ -26,6 +30,9 @@ export const generateSearchUrl = (query: string | undefined, sort: Sort | undefi
     if (sort.direction !== undefined) {
       searchParams.push(`dir=${sort.direction}`);
     }
+  }
+  if (useNewSearch === false) {
+    searchParams.push(`legacySearch=true`);
   }
 
   return searchParams.length > 0 ? `${path}?${searchParams.join('&')}` : path;
