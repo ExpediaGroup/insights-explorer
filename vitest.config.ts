@@ -20,6 +20,7 @@ export default defineConfig({
     reporters: ['default'],
     alias: {
       '@iex/shared': new URL('packages/shared/src', import.meta.url).pathname
-    }
+    },
+    passWithNoTests: true
   }
 });
