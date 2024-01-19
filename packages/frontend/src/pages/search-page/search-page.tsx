@@ -15,7 +15,7 @@
  */
 
 import { Box, Stack, VStack } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -49,9 +49,11 @@ export const SearchPage = () => {
     useNewSearch
   });
 
-  const insightResults = data.insights.results.map(({ insight }) => {
-    return { id: insight.id, name: insight.name, fullName: insight.fullName, itemType: insight.itemType };
-  });
+  const insightResults = useMemo(() => {
+    return data.insights.results.map(({ insight }) => {
+      return { id: insight.id, name: insight.name, fullName: insight.fullName, itemType: insight.itemType };
+    });
+  }, [data.insights.results]);
 
   useEffect(() => {
     if (!initialized.current) {
