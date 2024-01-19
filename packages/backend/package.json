@@ -97,7 +97,7 @@
     "@types/parsimmon": "1.10.9",
     "@types/supertest": "6.0.2",
     "@types/tmp": "0.2.6",
-    "@types/turndown": "5.0.1",
+    "@types/turndown": "5.0.4",
     "@types/validator": "13.11.7",
     "find": "0.3.0",
     "fs-extra": "11.2.0",
