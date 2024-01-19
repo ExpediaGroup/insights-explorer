@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.26.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.0...v3.26.1) (2024-01-19)
+
+
+### Bug Fixes
+
+* **deps:** bump @octokit/graphql from 4.8.0 to 7.0.2 ([a5191d6](https://github.com/ExpediaGroup/insights-explorer/commit/a5191d681c0b70283b02917395bb208d592e5eaf))
+* **deps:** bump node from 19.8.1 to 21.6.0 ([a459acc](https://github.com/ExpediaGroup/insights-explorer/commit/a459acc0bee570904163493567842b9da816faf3))
+* Prevent continuously dispatching search/setSearchResults action ([811d084](https://github.com/ExpediaGroup/insights-explorer/commit/811d084d54f4259562df57bea7a6c5d3df15e59a))
+
 ## [3.26.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.25.23...v3.26.0) (2024-01-18)
 
 
