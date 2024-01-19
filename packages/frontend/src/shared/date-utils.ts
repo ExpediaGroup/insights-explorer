@@ -35,7 +35,7 @@ export const availableLocales = [
 ];
 
 export function formatDateIntl(
-  dateTimeOrString: Date | DateTime | string,
+  dateTimeOrString: Date | DateTime | string | null | undefined,
   format: DateTimeFormatOptions | string = DateTime.DATETIME_MED,
   locale?: string
 ): string {
