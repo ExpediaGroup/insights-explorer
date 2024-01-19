@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.26.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.1...v3.26.2) (2024-01-19)
+
+
+### Bug Fixes
+
+* **deps:** bump @octokit/rest from 19.0.7 to 20.0.2 ([94caaa5](https://github.com/ExpediaGroup/insights-explorer/commit/94caaa521f463786b6e9b102445e661501538b76))
+* **deps:** bump luxon and @types/luxon ([9994b5f](https://github.com/ExpediaGroup/insights-explorer/commit/9994b5f36a499e50fb729a43417b055f17742569))
+* **deps:** bump react-router-dom from 6.3.0 to 6.21.3 ([008332f](https://github.com/ExpediaGroup/insights-explorer/commit/008332f07221aeb3fc6008fca728c8bba911e39d))
+* Fix formatDateIntl types ([8ab2f94](https://github.com/ExpediaGroup/insights-explorer/commit/8ab2f941c0337d4f45bae102cc2b052b2837e727))
+* Replace texlive-generic-recommended with texlive-fonts-recommended ([1dcac57](https://github.com/ExpediaGroup/insights-explorer/commit/1dcac57750a3f77f8014ddc11c1d4d9a5a48aff3))
+
 ### [3.26.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.0...v3.26.1) (2024-01-19)
 
 
