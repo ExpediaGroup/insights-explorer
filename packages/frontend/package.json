@@ -60,7 +60,7 @@
     "rehype-raw": "6.1.1",
     "rehype-sanitize": "5.0.1",
     "rehype-slug": "5.1.0",
-    "remark-directive": "2.0.1",
+    "remark-directive": "3.0.0",
     "remark-emoji": "3.0.2",
     "remark-gfm": "3.0.1",
     "remark-toc": "8.0.1",
