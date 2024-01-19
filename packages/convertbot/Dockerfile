@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
       python3-pip \
       texlive-latex-recommended \
       texlive-xetex \
-      texlive-generic-recommended \
+      texlive-fonts-recommended \
       unoconv
 
 # Fonts
