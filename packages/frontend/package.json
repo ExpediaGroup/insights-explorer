@@ -84,7 +84,7 @@
     "@types/react-dom": "18.2.18",
     "@types/react-linkify": "1.0.4",
     "@types/react-router-dom": "5.3.3",
-    "@types/react-table": "7.7.14",
+    "@types/react-table": "7.7.19",
     "@vitejs/plugin-react": "4.2.1",
     "esbuild": "0.19.11",
     "eslint-plugin-jsx-a11y": "6.8.0",
