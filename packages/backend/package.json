@@ -90,7 +90,7 @@
     "@types/js-yaml": "4.0.9",
     "@types/jsonfile": "6.1.4",
     "@types/lodash": "4.14.202",
-    "@types/luxon": "3.4.0",
+    "@types/luxon": "3.4.2",
     "@types/mime": "2.0.3",
     "@types/module-alias": "2.0.4",
     "@types/node": "18.15.11",
