@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.26.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.3...v3.26.4) (2024-01-24)
+
+
+### Bug Fixes
+
+* Fix convertbot pythonpath for unoconv ([20d1471](https://github.com/ExpediaGroup/insights-explorer/commit/20d1471f41622341f340af1f47fc74b4f6cd28e3))
+
 ### [3.26.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.2...v3.26.3) (2024-01-24)
 
 
