@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.26.3](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.2...v3.26.3) (2024-01-24)
+
+
+### Bug Fixes
+
+* **deps:** bump @slack/bolt from 3.17.0 to 3.17.1 ([dec3221](https://github.com/ExpediaGroup/insights-explorer/commit/dec3221f4ad5616e1195ca5dbed515d897e6ecbf))
+* **deps:** bump axios from 1.6.3 to 1.6.5 ([2bbf8bf](https://github.com/ExpediaGroup/insights-explorer/commit/2bbf8bfbd9686565e2e8547f142ef276b8e087f2))
+* **deps:** bump class-validator from 0.14.0 to 0.14.1 ([f93a586](https://github.com/ExpediaGroup/insights-explorer/commit/f93a5864a74f5d4edaa084480d30ae8649f5b7ba))
+* **deps:** bump isomorphic-git from 1.25.2 to 1.25.3 ([45580ad](https://github.com/ExpediaGroup/insights-explorer/commit/45580ad7ed736c320b6cf1c6e5cd23fe5b5f2470))
+* **deps:** bump vega from 5.24.0 to 5.27.0 ([fe2ae35](https://github.com/ExpediaGroup/insights-explorer/commit/fe2ae35c883af5e66f21e6732499c3f95c3d1d9f))
+* Fix convertbot build using venv ([075f423](https://github.com/ExpediaGroup/insights-explorer/commit/075f42394bb26cf5863ae928f6a051d0eb8ee360))
+
 ### [3.26.2](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.1...v3.26.2) (2024-01-19)
 
 
