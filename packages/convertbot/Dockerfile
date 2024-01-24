@@ -55,6 +55,7 @@ RUN rm -rf /var/lib/apt/lists/*
 # Setup python virtual environment (requires python3.11-venv)
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
+ENV PYTHONPATH="/usr/lib/python3/dist-packages/:$PYTHONPATH"
 
 RUN pip3 install nbconvert
 
