@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
       nano \
       curl \
       git \
+      python3.11-venv \
       ghostscript \
       libreoffice-common \
       libreoffice-writer \
@@ -50,6 +51,10 @@ RUN apt-get update && apt-get install -y \
       texlive-fonts-recommended
 
 RUN rm -rf /var/lib/apt/lists/*
+
+# Setup python virtual environment (requires python3.11-venv)
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
 RUN pip3 install nbconvert
 
