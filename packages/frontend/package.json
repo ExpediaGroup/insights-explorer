@@ -63,7 +63,7 @@
     "remark-directive": "2.0.1",
     "remark-emoji": "3.0.2",
     "remark-gfm": "3.0.1",
-    "remark-toc": "8.0.1",
+    "remark-toc": "9.0.0",
     "titleize": "4.0.0",
     "unist-util-visit": "4.0.0",
     "url-join": "4.0.1",
