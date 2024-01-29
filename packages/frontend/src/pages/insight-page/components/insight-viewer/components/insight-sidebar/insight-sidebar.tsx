@@ -128,20 +128,28 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
         <ShareMenu insight={insight} />
       </HStack>
 
-      <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
+      {insight.metadata?.team && (
+        <>
+          <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
 
-      <SidebarStack heading="Team" tooltip="Team which owns this Insight">
-        <TeamTag team={insight.metadata?.team ?? 'Unknown'} size="lg" />
-      </SidebarStack>
+          <SidebarStack heading="Team" tooltip="Team which owns this Insight">
+            <TeamTag team={insight.metadata?.team} size="lg" />
+          </SidebarStack>
+        </>
+      )}
 
-      <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
+      {authors && authors.length > 0 && (
+        <>
+          <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
+          <SidebarHeading>Authors</SidebarHeading>
+          <Stack spacing="0.25rem">
+            {authors.map((author) => (
+              <UserTag key={author.userName} user={author} permission={author.permission} size="lg" width="100%" />
+            ))}
+          </Stack>
+        </>
+      )}
 
-      <SidebarHeading>Authors</SidebarHeading>
-      <Stack spacing="0.25rem">
-        {authors.map((author) => (
-          <UserTag key={author.userName} user={author} permission={author.permission} size="lg" width="100%" />
-        ))}
-      </Stack>
       {insight.tags?.length > 0 && (
         <>
           <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
