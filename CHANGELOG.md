@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.27.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.4...v3.27.0) (2024-01-29)
+
+
+### Features
+
+* Enable file icons in the Insight Sidebar ([6614d24](https://github.com/ExpediaGroup/insights-explorer/commit/6614d24a71f406305ea71773eb6ab4d88f302906))
+* Move Insight Files up in the sidebar and auto-collapse ([a7c194d](https://github.com/ExpediaGroup/insights-explorer/commit/a7c194d8a6e8a57f5cccb72f77c8fdc5ab770a45))
+
+
+### Bug Fixes
+
+* **deps:** bump @aws-sdk/client-s3 from 3.292.0 to 3.499.0 ([c8c351d](https://github.com/ExpediaGroup/insights-explorer/commit/c8c351d05a91a6ab1a5231096c8eee76e5b8ae0d))
+* **deps:** bump @aws-sdk/client-s3 from 3.499.0 to 3.501.0 ([32ad3c4](https://github.com/ExpediaGroup/insights-explorer/commit/32ad3c44921aa1f79c775ad01ebc8bc507460356))
+* **deps:** bump axios from 1.6.5 to 1.6.7 ([df5ea15](https://github.com/ExpediaGroup/insights-explorer/commit/df5ea15223e6e79a1ca5d98cad0c86833ed1e78c))
+* Hide empty metadata sections in Insight Sidebar ([e192617](https://github.com/ExpediaGroup/insights-explorer/commit/e192617e7a4ffca6aa8e636a172907f2e9cba313))
+
 ### [3.26.4](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.3...v3.26.4) (2024-01-24)
 
 
