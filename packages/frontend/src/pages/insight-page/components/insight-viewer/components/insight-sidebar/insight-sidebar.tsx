@@ -18,6 +18,7 @@ import type { BoxProps } from '@chakra-ui/react';
 import {
   Badge,
   Box,
+  Button,
   Flex,
   HStack,
   Icon,
@@ -32,6 +33,7 @@ import {
   Heading
 } from '@chakra-ui/react';
 import { DateTime } from 'luxon';
+import { useState } from 'react';
 
 import { ExternalLink } from '../../../../../../components/external-link/external-link';
 import { InsightTag } from '../../../../../../components/insight-tag/insight-tag';
@@ -43,14 +45,19 @@ import { TeamTag } from '../../../../../../components/team-tag/team-tag';
 import { UserTag } from '../../../../../../components/user-tag/user-tag';
 import type { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
-import { iconFactory } from '../../../../../../shared/icon-factory';
 import { fileIconFactoryAs } from '../../../../../../shared/file-icon-factory';
+import { iconFactory } from '../../../../../../shared/icon-factory';
 import { groupInsightLinks } from '../../../../../../shared/insight-utils';
 import { GitHubButton } from '../github-button/github-button';
 import { ShareMenu } from '../share-menu/share-menu';
 
+const SIDEBAR_COLLAPSED_FILE_LENGTH = 5;
+
 export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & BoxProps) => {
   const fileBgColor = useColorModeValue('white', 'gray.700');
+
+  const [isFilesCollapsed, setIsFilesCollapsed] = useState(true);
+  const enableCollapsingFiles = insight.files && insight.files.length > SIDEBAR_COLLAPSED_FILE_LENGTH;
 
   if (insight == null) {
     return <Box></Box>;
@@ -128,10 +135,49 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
         <ShareMenu insight={insight} />
       </HStack>
 
+      {insight.files && insight.files.length > 0 && (
+        <>
+          <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
+          <SidebarHeading>Files</SidebarHeading>
+          <Stack spacing="0.25rem">
+            {/* If collapsed, limit to SIDEBAR_COLLAPSED_FILE_LENGTH files */}
+            {insight.files.slice(0, isFilesCollapsed ? SIDEBAR_COLLAPSED_FILE_LENGTH : undefined).map((file) => {
+              return (
+                <Link to={`/${insight.itemType}/${insight.fullName}/files/${file.path}`} key={file.id}>
+                  <Tag bg={fileBgColor} rounded="full">
+                    {fileIconFactoryAs(
+                      {
+                        mimeType: file.mimeType,
+                        fileName: file.name,
+                        isFolder: false,
+                        isOpen: false,
+                        isSelected: false
+                      },
+                      { fontSize: '1rem', mr: '0.5rem' }
+                    )}
+                    <TagLabel>{file.path}</TagLabel>
+                  </Tag>
+                </Link>
+              );
+            })}
+            (
+            {enableCollapsingFiles && (
+              <Button
+                variant="snowstorm"
+                size="sm"
+                onClick={() => setIsFilesCollapsed(!isFilesCollapsed)}
+                colorScheme="frost"
+                fontWeight="normal"
+              >{`${isFilesCollapsed ? 'Show' : 'Hide'} ${insight.files.length - SIDEBAR_COLLAPSED_FILE_LENGTH} more`}</Button>
+            )}
+            )
+          </Stack>
+        </>
+      )}
+
       {insight.metadata?.team && (
         <>
           <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
-
           <SidebarStack heading="Team" tooltip="Team which owns this Insight">
             <TeamTag team={insight.metadata?.team} size="lg" />
           </SidebarStack>
@@ -183,34 +229,6 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
               ))}
             </Stack>
           ))}
-        </>
-      )}
-
-      {insight.files && insight.files.length > 0 && (
-        <>
-          <StackDivider borderColor="snowstorm.100" borderTopWidth="1px" />
-          <SidebarHeading>Files</SidebarHeading>
-          <Stack spacing="0.25rem">
-            {insight.files.map((file) => {
-              return (
-                <Link to={`/${insight.itemType}/${insight.fullName}/files/${file.path}`} key={file.id}>
-                  <Tag bg={fileBgColor} rounded="full">
-                    {fileIconFactoryAs(
-                      {
-                        mimeType: file.mimeType,
-                        fileName: file.name,
-                        isFolder: false,
-                        isOpen: false,
-                        isSelected: false
-                      },
-                      { fontSize: '1rem', mr: '0.5rem' }
-                    )}
-                    <TagLabel>{file.path}</TagLabel>
-                  </Tag>
-                </Link>
-              );
-            })}
-          </Stack>
         </>
       )}
     </VStack>

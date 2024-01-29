@@ -271,6 +271,13 @@ export const IexTheme = extendTheme({
           _hover: {
             bg: 'polar.500'
           }
+        },
+        snowstorm: {
+          bg: 'snowstorm.300',
+          color: 'polar.600',
+          _hover: {
+            bg: 'snowstorm.200'
+          }
         }
       }
     },
