@@ -44,6 +44,7 @@ import { UserTag } from '../../../../../../components/user-tag/user-tag';
 import type { Insight } from '../../../../../../models/generated/graphql';
 import { formatDateIntl, formatRelativeIntl } from '../../../../../../shared/date-utils';
 import { iconFactory } from '../../../../../../shared/icon-factory';
+import { fileIconFactoryAs } from '../../../../../../shared/file-icon-factory';
 import { groupInsightLinks } from '../../../../../../shared/insight-utils';
 import { GitHubButton } from '../github-button/github-button';
 import { ShareMenu } from '../share-menu/share-menu';
@@ -186,6 +187,16 @@ export const InsightSidebar = ({ insight, ...props }: { insight: Insight } & Box
               return (
                 <Link to={`/${insight.itemType}/${insight.fullName}/files/${file.path}`} key={file.id}>
                   <Tag bg={fileBgColor} rounded="full">
+                    {fileIconFactoryAs(
+                      {
+                        mimeType: file.mimeType,
+                        fileName: file.name,
+                        isFolder: false,
+                        isOpen: false,
+                        isSelected: false
+                      },
+                      { fontSize: '1rem', mr: '0.5rem' }
+                    )}
                     <TagLabel>{file.path}</TagLabel>
                   </Tag>
                 </Link>
