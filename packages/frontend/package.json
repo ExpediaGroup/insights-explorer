@@ -35,7 +35,7 @@
     "react-ace": "10.1.0",
     "react-confetti": "6.1.0",
     "react-container-dimensions": "1.4.1",
-    "react-datepicker": "4.25.0",
+    "react-datepicker": "6.0.0",
     "react-dnd": "16.0.1",
     "react-dnd-html5-backend": "16.0.1",
     "react-dom": "18.2.0",
