@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### [3.27.1](https://github.com/ExpediaGroup/insights-explorer/compare/v3.27.0...v3.27.1) (2024-03-26)
+
+
+### Bug Fixes
+
+* **deps:** bump @aws-sdk/client-s3 from 3.501.0 to 3.511.0 ([bdfd025](https://github.com/ExpediaGroup/insights-explorer/commit/bdfd0255e1f9268e73b3111187bd05858b3abead))
+* **deps:** bump @aws-sdk/client-s3 from 3.511.0 to 3.534.0 ([3f66aab](https://github.com/ExpediaGroup/insights-explorer/commit/3f66aabb97e07ebf1022928fceba62a44f7b2113))
+* **deps:** bump @aws-sdk/client-sqs from 3.485.0 to 3.533.0 ([bb02244](https://github.com/ExpediaGroup/insights-explorer/commit/bb02244fd2356704fc0026ce9e958ddacba028bb))
+* **deps:** bump ace-builds from 1.32.3 to 1.32.6 ([678d180](https://github.com/ExpediaGroup/insights-explorer/commit/678d180b62acf81347149f031ed00bc42802ffa2))
+* **deps:** bump isomorphic-git from 1.25.3 to 1.25.6 ([91c85bc](https://github.com/ExpediaGroup/insights-explorer/commit/91c85bc9b109af93d5474c6eaf1e5d215cb71ea6))
+* **deps:** bump pino from 8.17.2 to 8.18.0 ([4b68450](https://github.com/ExpediaGroup/insights-explorer/commit/4b68450201b818a98902dcfdb44598c14217ffd5))
+* **deps:** bump react-icons from 4.12.0 to 5.0.1 ([fcb9871](https://github.com/ExpediaGroup/insights-explorer/commit/fcb9871356b298860251bba13a07e400b0e601ac))
+* **deps:** bump react-router-dom from 6.21.3 to 6.22.0 ([9809948](https://github.com/ExpediaGroup/insights-explorer/commit/9809948d180a466fa5699313693a7461889d5295))
+* Reduce iex-webhooks index size to critical fields only ([ffea2d3](https://github.com/ExpediaGroup/insights-explorer/commit/ffea2d3decc54452d482a1654812c3c556066545))
+
 ## [3.27.0](https://github.com/ExpediaGroup/insights-explorer/compare/v3.26.4...v3.27.0) (2024-01-29)
 
 
