@@ -65,7 +65,7 @@
     "remark-gfm": "3.0.1",
     "remark-toc": "8.0.1",
     "titleize": "4.0.0",
-    "unist-util-visit": "4.0.0",
+    "unist-util-visit": "5.0.0",
     "url-join": "4.0.1",
     "urql": "2.2.2",
     "use-file-picker": "1.6.0",
