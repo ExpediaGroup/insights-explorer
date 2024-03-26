@@ -41,12 +41,13 @@ export const hook = (req: Request, res: Response): void => {
     }
   };
 
-  // Remove some un-needed fields
-  delete webhook.enterprise;
-  delete webhook.master_branch;
-  delete webhook.sender;
-  delete webhook.team;
-  delete webhook.zen;
+  // Create a slim version with whitelisted fields only
+  const allowedFields = new Set(['action', 'headers', 'ref', 'ref_type', 'repository']);
+  for (const key in webhook) {
+    if (!allowedFields.has(key)) {
+      delete webhook[key];
+    }
+  }
 
   // Track webhooks in Elasticsearch
   defaultElasticsearchClient.index({
