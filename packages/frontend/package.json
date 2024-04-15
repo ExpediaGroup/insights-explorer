@@ -74,7 +74,7 @@
     "vega-lite": "5.16.3"
   },
   "devDependencies": {
-    "@testing-library/react": "14.0.0",
+    "@testing-library/react": "15.0.2",
     "@testing-library/user-event": "14.5.2",
     "@types/luxon": "3.4.2",
     "@types/papaparse": "5.3.14",
