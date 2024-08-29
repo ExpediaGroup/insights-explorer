@@ -482,7 +482,12 @@ const syncFiles = async (
       };
 
       // Include the contents of text-based files
-      if (INDEXABLE_MIME_TYPES.has(file.mimeType) || file.mimeType.startsWith('text/')) {
+      if (
+        INDEXABLE_MIME_TYPES.has(file.mimeType) ||
+        (file.mimeType.startsWith('text/') &&
+          // Ensure the file is less than 1MB
+          file.size < 1024 * 1024)
+      ) {
         file.contents = contents?.toString('utf8');
       }
 
