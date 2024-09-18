@@ -1,5 +1,5 @@
 # Build Stage
-FROM node:21.6.0-bookworm as build
+FROM node:22.9.0-bookworm as build
 
 RUN git config --global url."https://".insteadOf ssh://
 
@@ -16,7 +16,7 @@ RUN npm run build && \
 RUN find . -name ".npmrc" -type f -delete
 
 # Production Stage
-FROM node:21.6.0-alpine
+FROM node:22.9.0-alpine
 
 WORKDIR /opt/iex
 COPY --from=build /opt/iex .
