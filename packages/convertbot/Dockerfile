@@ -1,5 +1,5 @@
 # Build Stage
-FROM node:21.6.0-bookworm as build
+FROM node:22.9.0-bookworm as build
 
 WORKDIR /opt/iex
 COPY . /opt/iex
@@ -15,7 +15,7 @@ RUN npm run build --workspace=@iex/convertbot && \
 RUN find . -name ".npmrc" -type f -delete
 
 # Production Stage
-FROM node:21.6.0-bookworm
+FROM node:22.9.0-bookworm
 
 # Use testing to get the latest version of pandoc
 # RUN echo 'deb http://http.us.debian.org/debian/ testing non-free contrib main' >> /etc/apt/sources.list
