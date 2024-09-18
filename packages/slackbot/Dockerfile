@@ -1,5 +1,5 @@
 # Build Stage
-FROM node:21.6.0-bookworm as build
+FROM node:22.9.0-bookworm as build
 
 WORKDIR /opt/iex
 COPY . /opt/iex
@@ -15,7 +15,7 @@ RUN npm run build --workspace=@iex/slackbot && \
 RUN find . -name ".npmrc" -type f -delete
 
 # Production Stage
-FROM node:21.6.0-alpine
+FROM node:22.9.0-alpine
 
 WORKDIR /opt/iex
 COPY --from=build /opt/iex .
