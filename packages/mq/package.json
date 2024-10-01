@@ -22,6 +22,6 @@
   ],
   "dependencies": {
     "@aws-sdk/client-sqs": "3.533.0",
-    "sqs-consumer": "7.0.3"
+    "sqs-consumer": "11.1.0"
   }
 }
