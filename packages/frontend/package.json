@@ -14,7 +14,7 @@
     "@okta/okta-react": "6.4.3",
     "@reduxjs/toolkit": "1.8.1",
     "@urql/core": "2.6.0",
-    "@urql/exchange-graphcache": "4.4.3",
+    "@urql/exchange-graphcache": "7.2.0",
     "@urql/exchange-multipart-fetch": "0.1.14",
     "@urql/exchange-retry": "0.3.3",
     "ace-builds": "1.32.6",
